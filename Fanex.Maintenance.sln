@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Site", "Fanex.Maintenance.Site\Fanex.Maintenance.Site.csproj", "{D4312B0D-CC74-4AA1-979A-AF26702808A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Core", "Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj", "{60BC3FA8-DF7C-4024-B469-4ED110420143}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0CF3D4F1-7F6A-4D7E-936C-4991B2BF3451}"
+	ProjectSection(SolutionItems) = preProject
+		Settings.StyleCop = Settings.StyleCop
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://10.18.200.210:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Fanex.Maintenance.Core\\Fanex.Maintenance.Core.csproj
+		SccProjectName1 = Fanex.Maintenance.Core
+		SccLocalPath1 = Fanex.Maintenance.Core
+		SccProjectUniqueName2 = Fanex.Maintenance.Site\\Fanex.Maintenance.Site.csproj
+		SccProjectName2 = Fanex.Maintenance.Site
+		SccLocalPath2 = Fanex.Maintenance.Site
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4312B0D-CC74-4AA1-979A-AF26702808A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4312B0D-CC74-4AA1-979A-AF26702808A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4312B0D-CC74-4AA1-979A-AF26702808A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4312B0D-CC74-4AA1-979A-AF26702808A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60BC3FA8-DF7C-4024-B469-4ED110420143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60BC3FA8-DF7C-4024-B469-4ED110420143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60BC3FA8-DF7C-4024-B469-4ED110420143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60BC3FA8-DF7C-4024-B469-4ED110420143}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
