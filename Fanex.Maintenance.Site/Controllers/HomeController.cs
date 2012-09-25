@@ -16,6 +16,7 @@ namespace Fanex.Maintenance.Site.Controllers
     {        
         public ActionResult Index()
         {
+            //home
             return View();
         }
     }
