@@ -20,5 +20,7 @@
         <Setting Key="GET_DepositDataToValidate_LicenseeWL" SpName="GET_DepositDataToValidate_LicenseeWL" DbName="licensee" />
         <Setting Key="GET_DepositDataToValidate_Betting" SpName="GET_DepositDataToValidate_Betting" DbName="licensee" />
         <Setting Key="GET_DepositDataToValidate_DW" SpName="GET_DepositDataToValidate_DW" DbName="licensee" />
+        <Setting Key="GET_CreditDataToValidate_Betting" SpName="GET_CreditDataToValidate_Betting" DbName="licensee" />
+        <Setting Key="GET_CreditDataToValidate_DW" SpName="GET_CreditDataToValidate_DW" DbName="licensee" />
     </Function>
 </Functions>

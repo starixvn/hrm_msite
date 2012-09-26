@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Criteria\Category\GetAllCategoryCritria.cs" />
+    <Compile Include="Criteria\Credit\GetCreditDataToValidateCriteria.cs" />
     <Compile Include="Criteria\Licensee\GetBalanceUpDayCriteria.cs" />
     <Compile Include="Criteria\Licensee\GetDepositDataToValidateCriteria.cs" />
     <Compile Include="Criteria\Log\GetLogCriteria.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Criteria\User\UserLoginCriteria.cs" />
     <Compile Include="Model\Categorys.cs" />
     <Compile Include="Model\CommandResult.cs" />
+    <Compile Include="Model\DataIntegrityViewModel.cs" />
     <Compile Include="Model\MailFunctionViewModel.cs" />
     <Compile Include="Model\MailConfigViewModel.cs" />
     <Compile Include="Model\Logs.cs" />
@@ -106,6 +108,10 @@
     <Compile Include="Service\Interface\ILogService.cs" />
     <Compile Include="Service\Interface\IMailService.cs" />
     <Compile Include="Service\Interface\IUserService.cs" />
+    <Compile Include="TemplateReport\Block.cs" />
+    <Compile Include="TemplateReport\BlockCredit.cs" />
+    <Compile Include="TemplateReport\CreditdataTemplate.cs" />
+    <Compile Include="TemplateReport\LicenseedataTemplate.cs" />
     <Compile Include="ViewResource.Designer.cs">
       <DependentUpon>ViewResource.resx</DependentUpon>
       <AutoGen>True</AutoGen>

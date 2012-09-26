@@ -44,7 +44,13 @@
                 <li>@Html.ActionLink(@ViewResource.Mail_Config, "MailConfig", "Mail")</li>	
                 <li>@Html.ActionLink("Mail Function", "MailFunction", "Mail")</li>	
 			</ul>
-		</li>		
+		</li>	
+        	<li class="has-kids">
+            <a href="javascript:;">Datebase Report</a>
+            <ul>
+                <li>@Html.ActionLink("Data Integrity", "DataIntegrity", "DatabaseReport")</li>
+            </ul>
+            </li>	
 	</ul>
 </nav>
 		<div class="user-info">

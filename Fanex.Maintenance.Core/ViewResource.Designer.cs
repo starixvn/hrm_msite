@@ -88,6 +88,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bet Count.
+        /// </summary>
+        public static string Bet_Count {
+            get {
+                return ResourceManager.GetString("Bet_Count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Body.
         /// </summary>
         public static string Body {
@@ -142,11 +151,47 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CREDIT SITES.
+        /// </summary>
+        public static string CREDIT_SITES {
+            get {
+                return ResourceManager.GetString("CREDIT_SITES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer Win Loss.
+        /// </summary>
+        public static string Customer_Win_Loss {
+            get {
+                return ResourceManager.GetString("Customer_Win_Loss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DEPOSIT SITES.
+        /// </summary>
+        public static string DEPOSIT_SITES {
+            get {
+                return ResourceManager.GetString("DEPOSIT_SITES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DW.
+        /// </summary>
+        public static string DW {
+            get {
+                return ResourceManager.GetString("DW", resourceCulture);
             }
         }
         
@@ -349,6 +394,24 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to rpt_betting.
+        /// </summary>
+        public static string rpt_betting {
+            get {
+                return ResourceManager.GetString("rpt_betting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to rptLicWinLoss.
+        /// </summary>
+        public static string rptLicWinLoss {
+            get {
+                return ResourceManager.GetString("rptLicWinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -421,11 +484,29 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to sum_winloss.
+        /// </summary>
+        public static string sum_winloss {
+            get {
+                return ResourceManager.GetString("sum_winloss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turnover.
+        /// </summary>
+        public static string Turnover {
+            get {
+                return ResourceManager.GetString("Turnover", resourceCulture);
             }
         }
         

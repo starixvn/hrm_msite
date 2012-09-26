@@ -756,6 +756,8 @@
     <Content Include="themes\nap_old\img\textures\scratches.png" />
     <Content Include="themes\nap_old\img\tick-ico-16.png" />
     <Content Include="themes\nap_old\img\tree-view.png" />
+    <Content Include="themes\report\CreditStyle.css" />
+    <Content Include="themes\report\LicenseedataStyle.css" />
     <Content Include="themes\reset.css" />
     <Content Include="themes\style.css" />
     <Content Include="Web.config" />
@@ -881,7 +883,7 @@
     <Content Include="Views\Mail\AddMailSettingPopUp.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Mail\GetMessage.cshtml" />
-    <Content Include="Views\DatabaseReport\LicenseeData.cshtml" />
+    <Content Include="Views\DatabaseReport\DataIntegrity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">
