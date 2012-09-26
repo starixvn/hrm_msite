@@ -1,0 +1,62 @@
+﻿@using Fanex.Maintenance.Core.Model
+@model DataIntegrityViewModel
+@{
+    ViewBag.Title = "Data Integrity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = string.Format("{0}", "Data Integrity");
+}
+@section Headline {
+    <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css"></link>
+    <link href="~/themes/report/CreditStyle.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/report/LicenseedataStyle.css" rel="stylesheet" type="text/css" />
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+@using (Html.BeginForm())
+{ 
+    <section id="filter-bar">  
+			<div class="filter-form">	            
+            <div class="lbl-field width-auto">
+				@Html.LabelFor(m => m.DrawFilter)
+			</div>
+            <div class="edit-field">		              
+                @Html.DropDownListFor(m => m.DrawFilter,(List<SelectListItem>) ViewBag.ListDrawFilter)
+			</div>				            
+            <div class="lbl-field width-auto">
+				@Html.LabelFor(m => m.Date)
+			</div>
+            <div class="edit-field">				                
+                @Html.TextBoxFor(m => m.Date, (string)ViewBag.MaxDate, new { @style = "width:90px;margin-right:5px;" })
+			</div>					                                              
+            <div class="submit">
+					<input type="submit" value="Submit" />                  
+		    </div>                                           
+			</div>            
+       
+    </section>      
+}
+@Html.Raw(ViewBag.BodyLicenseeData)
+@Html.Raw(ViewBag.BodyCreditData)
+<input type="hidden" value="@ViewBag.MinDate" id="minDate" />
+<input type="hidden" value="@ViewBag.MaxDate" id="maxDate" />
+@section Foot {
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#Date").datepicker({
+                showOn: "button",
+                buttonImage: location.protocol + "//" + location.host + "/images/calendar.gif",
+                buttonImageOnly: true,
+                dateFormat: "dd/mm/yy",
+                minDate: $('#minDate').val(),
+                maxDate: $('#maxDate').val(),
+                defaultDate: $('#maxDate').val()
+            });
+
+        });        
+    </script>
+}
