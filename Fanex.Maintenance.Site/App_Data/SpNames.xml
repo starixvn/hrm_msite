@@ -1,16 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Functions>
-  <Function>
-    <Setting Key="Logging_Category_SelAll" SpName="IS_SelLogCategory_ALL" DbName="customer_log"  Plain="1"/>
-    <Setting Key="Logging_Sel_Padding" SpName="IS_SelLogPadding_All" DbName="customer_log" Plain="1" />
-    <Setting Key="Logging_Del" SpName="IS_DeleteLog" DbName="customer_log" Plain="1" />
+    <Function>
+        <Setting Key="Logging_Category_SelAll" SpName="IS_SelLogCategory_ALL" DbName="customer_log"  Plain="1"/>
+        <Setting Key="Logging_Sel_Padding" SpName="IS_SelLogPadding_All" DbName="customer_log" Plain="1" />
+        <Setting Key="Logging_Del" SpName="IS_DeleteLog" DbName="customer_log" Plain="1" />
 
-    <Setting Key="lrf_GetLicenseeStatistic" SpName="lrf_GetLicenseeStatistic" DbName="Licensee" />
-    <Setting Key="Lrf_GetFunctionStatistic" SpName="Lrf_GetFunctionStatistic" DbName="Licensee" />
-    <Setting Key="Lrf_BrowserStatistic" SpName="Lrf_BrowserStatistic" DbName="Licensee" />
-    <Setting Key="Lrf_GetSystemNameStatistic" SpName="Lrf_GetSystemNameStatistic" DbName="Licensee" />
-    <Setting Key="Lrf_GetNonFunctionStatistic" SpName="Lrf_GetNonFunctionStatistic" DbName="Licensee" />
+        <Setting Key="lrf_GetLicenseeStatistic" SpName="lrf_GetLicenseeStatistic" DbName="Licensee" />
+        <Setting Key="Lrf_GetFunctionStatistic" SpName="Lrf_GetFunctionStatistic" DbName="Licensee" />
+        <Setting Key="Lrf_BrowserStatistic" SpName="Lrf_BrowserStatistic" DbName="Licensee" />
+        <Setting Key="Lrf_GetSystemNameStatistic" SpName="Lrf_GetSystemNameStatistic" DbName="Licensee" />
+        <Setting Key="Lrf_GetNonFunctionStatistic" SpName="Lrf_GetNonFunctionStatistic" DbName="Licensee" />
 
-    <Setting Key="Acc_LoginAdmin" SpName="Acc_LoginAdmin" DbName="main" />
-  </Function>
+        <Setting Key="Acc_LoginAdmin" SpName="Acc_LoginAdmin" DbName="main" />
+    </Function>
+    <Function>
+        <Setting Key="Lrf_SelBalanceUpDay" SpName="Lrf_SelBalanceUpDay" DbName="licensee_archive" />
+        <Setting Key="GET_DepositDataToValidate_SumWL" SpName="GET_DepositDataToValidate_SumWL" DbName="licensee" />
+        <Setting Key="GET_DepositDataToValidate_SumWLOld" SpName="GET_DepositDataToValidate_SumWLOld" DbName="licensee" />
+        <Setting Key="GET_DepositDataToValidate_LicenseeWL" SpName="GET_DepositDataToValidate_LicenseeWL" DbName="licensee" />
+        <Setting Key="GET_DepositDataToValidate_Betting" SpName="GET_DepositDataToValidate_Betting" DbName="licensee" />
+        <Setting Key="GET_DepositDataToValidate_DW" SpName="GET_DepositDataToValidate_DW" DbName="licensee" />
+    </Function>
 </Functions>

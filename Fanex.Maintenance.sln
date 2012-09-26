@@ -11,18 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://10.18.200.210:8080/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Fanex.Maintenance.Core\\Fanex.Maintenance.Core.csproj
-		SccProjectName1 = Fanex.Maintenance.Core
-		SccLocalPath1 = Fanex.Maintenance.Core
-		SccProjectUniqueName2 = Fanex.Maintenance.Site\\Fanex.Maintenance.Site.csproj
-		SccProjectName2 = Fanex.Maintenance.Site
-		SccLocalPath2 = Fanex.Maintenance.Site
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

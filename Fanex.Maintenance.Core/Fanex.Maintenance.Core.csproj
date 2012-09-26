@@ -75,6 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Criteria\Category\GetAllCategoryCritria.cs" />
+    <Compile Include="Criteria\Licensee\GetBalanceUpDayCriteria.cs" />
+    <Compile Include="Criteria\Licensee\GetDepositDataToValidateCriteria.cs" />
     <Compile Include="Criteria\Log\GetLogCriteria.cs" />
     <Compile Include="Criteria\ResultCriteria.cs" />
     <Compile Include="Criteria\User\UserLoginCriteria.cs" />
@@ -85,17 +87,22 @@
     <Compile Include="Model\Logs.cs" />
     <Compile Include="Model\MailSettingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Impl\BaseRepository.cs" />
     <Compile Include="Repository\Impl\CategoryRepository.cs" />
+    <Compile Include="Repository\Impl\DatabaseReportRepository.cs" />
     <Compile Include="Repository\Impl\LogRepository.cs" />
     <Compile Include="Repository\Impl\UserRepository.cs" />
     <Compile Include="Repository\Interface\ICategoryRepository.cs" />
+    <Compile Include="Repository\Interface\IDatabaseReportRepository.cs" />
     <Compile Include="Repository\Interface\ILogRepository.cs" />
     <Compile Include="Repository\Interface\IUserRepository.cs" />
     <Compile Include="Service\Impl\CategoryService.cs" />
+    <Compile Include="Service\Impl\DatabaseReportService.cs" />
     <Compile Include="Service\Impl\LogService.cs" />
     <Compile Include="Service\Impl\MailService.cs" />
     <Compile Include="Service\Impl\UserService.cs" />
     <Compile Include="Service\Interface\ICategoryService.cs" />
+    <Compile Include="Service\Interface\IDatabaseReportService.cs" />
     <Compile Include="Service\Interface\ILogService.cs" />
     <Compile Include="Service\Interface\IMailService.cs" />
     <Compile Include="Service\Interface\IUserService.cs" />
@@ -112,6 +119,7 @@
       <LastGenOutput>ViewResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
