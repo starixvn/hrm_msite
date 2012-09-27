@@ -210,7 +210,8 @@
     <script type="text/javascript">
         var dateFrom = $("#dateFrom").val();
         var dateTo = $("#dateTo").val();
-
+        var buttonFromImage = '@Url.Content("~/images/calendar.gif")';
+        var buttonToImage = '@Url.Content("~/images/calendar.gif")';
         $(function () {
 
             $("#From").val(dateFrom);
@@ -218,14 +219,14 @@
 
             $("#From").datepicker({
                 showOn: "button",
-                buttonImage: location.protocol + "//" + location.host + "/images/calendar.gif",
+                buttonImage: buttonFromImage,
                 buttonImageOnly: true,
                 dateFormat: "dd/mm/yy"
             });
 
             $("#To").datepicker({
                 showOn: "button",
-                buttonImage: location.protocol + "//" + location.host + "/images/calendar.gif",
+                buttonImage: buttonToImage,
                 buttonImageOnly: true,
                 dateFormat: "dd/mm/yy"
             });
