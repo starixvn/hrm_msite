@@ -7,10 +7,13 @@
 @{
     ViewBag.Title = string.Format("{0}", "Data Integrity");
 }
+@section Head
+{
+    <link href="~/themes/nap/report/dataintegry.less" rel="stylesheet" type="text/css"></link>  
+}
 @section Headline {
-    <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css"></link>
-    <link href="~/themes/report/CreditStyle.css" rel="stylesheet" type="text/css" />
-    <link href="~/themes/report/LicenseedataStyle.css" rel="stylesheet" type="text/css" />
+    @*  <link href="~/themes/report/CreditStyle.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/report/LicenseedataStyle.css" rel="stylesheet" type="text/css" />*@
     <h1>
         <span class="title">@ViewBag.Title</span>
     </h1>
@@ -23,7 +26,7 @@
 				@Html.LabelFor(m => m.DrawFilter)
 			</div>
             <div class="edit-field">		              
-                @Html.DropDownListFor(m => m.DrawFilter,(List<SelectListItem>) ViewBag.ListDrawFilter)
+                @Html.DropDownListFor(m => m.DrawFilter, (List<SelectListItem>)ViewBag.ListDrawFilter)
 			</div>				            
             <div class="lbl-field width-auto">
 				@Html.LabelFor(m => m.Date)
@@ -39,6 +42,8 @@
     </section>      
 }
 @Html.Raw(ViewBag.BodyLicenseeData)
+<br />
+<br />
 @Html.Raw(ViewBag.BodyCreditData)
 <input type="hidden" value="@ViewBag.MinDate" id="minDate" />
 <input type="hidden" value="@ViewBag.MaxDate" id="maxDate" />

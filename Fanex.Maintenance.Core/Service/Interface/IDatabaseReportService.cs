@@ -42,5 +42,7 @@ namespace Fanex.Maintenance.Core.Service.Interface
         string GenerateTemplateUserDaily(DataTable data);
 
         string GenerateTemplateUser(DataTable data,int show);
+
+        string GenerateDataChart(DataTable dtb, int show);
     }
 }

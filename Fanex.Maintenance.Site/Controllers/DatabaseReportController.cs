@@ -127,5 +127,42 @@
             ViewBag.DateNow = DateTime.Now.ToString("dd/MM/yyyy");
             return View();
         }
+
+        [HttpGet]
+        public ActionResult UserOnline()
+        {
+            DataTable dtUserOnline = _databaseReportService.GetUserOnline(30);
+            ViewBag.UserOnlineData = _databaseReportService.GenerateTemplateUser(dtUserOnline, 30);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserOnline(int size)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                DataTable dtUserOnline = _databaseReportService.GetUserOnline(size);
+                return Json(_databaseReportService.GenerateTemplateUser(dtUserOnline, size));
+            }
+            return Json(null);
+        }
+
+        [HttpGet]
+        public ActionResult UserOnlineChart()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserOnlineChart(int size)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                DataTable dtUserOnline = _databaseReportService.GetUserOnline(size);
+                return Json(_databaseReportService.GenerateDataChart(dtUserOnline, size));
+
+            }
+            return Json(null);
+        }
     }
 }

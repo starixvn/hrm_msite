@@ -5,7 +5,8 @@ namespace Fanex.Maintenance.Core.TemplateReport
     public class LicenseedataTemplate
     {
         StringBuilder bd = new StringBuilder();
-        protected static string s0 = "<table class=\"grid\" cellspacing=\"0px\"><tr><td colspan=\"2\" style=\"background-color: #B64926; text-align:center; color:WHITE;font-weight: bold\">DEPOSIT SITES</td><td class=\"tblHeader\">sum_winloss</td><td class=\"tblHeader\">rptLicWinLoss</td><td class=\"tblHeader\">rpt_betting</td><td class=\"tblHeader\">DW</td></tr>";
+        //protected static StringBuilder s0 = new StringBuilder();        
+        //"<table class=\"gridContent\" cellspacing=\"0px\"><tr><td colspan=\"2\" style=\"background-color: #B64926; text-align:center; color:WHITE;font-weight: bold\">DEPOSIT SITES</td><td class=\"tblHeader\">sum_winloss</td><td class=\"tblHeader\">rptLicWinLoss</td><td class=\"tblHeader\">rpt_betting</td><td class=\"tblHeader\">DW</td></tr>";
         public LicenseedataTemplate_Turnover_Block Turnover = new LicenseedataTemplate_Turnover_Block();
         public LicenseedataTemplate_Winloss_Block Winloss = new LicenseedataTemplate_Winloss_Block();
         public LicenseedataTemplate_BetCount_Block BetCount = new LicenseedataTemplate_BetCount_Block();
@@ -13,7 +14,14 @@ namespace Fanex.Maintenance.Core.TemplateReport
 
         public void ToString(ref StringBuilder bd)
         {
-            bd.Append(s0);
+            bd.Append("<table class='tblLicenseedata' >");
+            bd.Append("<thead><tr>");
+            bd.Append("<th colspan='2'>DEPOSIT SITES</th>");
+            bd.Append("<th>sum_winloss</th>");
+            bd.Append("<th>rptLicWinLoss</th>");
+            bd.Append("<th>rptLicWinLoss</th>");
+            bd.Append("<th>sum_winloss</th>");   
+            bd.Append("</tr></thead>");            
             if (null != Turnover) Turnover.ToString(ref bd);
             if (null != Winloss) Winloss.ToString(ref bd);
             if (null != BetCount) BetCount.ToString(ref bd);
@@ -137,7 +145,7 @@ namespace Fanex.Maintenance.Core.TemplateReport
     public class DataBind_Template
     {
         StringBuilder bd = new StringBuilder();
-        protected static string s0 = "<table class=\"grid\" cellpadding=\"0px\" cellspacing=\"0px\">";
+        protected static string s0 = "<table class=\"tblData\" cellpadding=\"0px\" cellspacing=\"0px\">";
         public string BindData = "{BindData}";
         protected static string s1 = "</table>";
         public override string ToString()
@@ -155,7 +163,7 @@ namespace Fanex.Maintenance.Core.TemplateReport
     public class DataBindContent
     {
         StringBuilder bd = new StringBuilder();
-        protected static string s0 = "<tr><td class=\"";
+        protected static string s0 = "<tr><td class=\"number ";
         public string NoBorder = string.Empty;
         protected static string s1 = " ";
         public string WeightBoder = string.Empty;

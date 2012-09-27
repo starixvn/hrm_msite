@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "UserOnline";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Headline {
+    <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css"></link>
+    <script src="~/scripts/DatabaseReport/RefreshTime.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            setInterval("CountDown(false)", 1000);
+        };
+    </script>
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+<div class="pagesize" style="width: 200px">
+    Page Size :
+    <select id="pageSize" onchange="showOption();">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30" selected="selected">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+    </select>
+    <div id="refreshtime" onclick="ShowTime(true);">
+    </div>
+    <div id="optime" style="float: right; display: none;">
+        <select id="seltime" onchange="ShowTime(false);">
+            <option value="60">1 mins</option>
+            <option value="300">5 mins</option>
+            <option value="600">10 mins</option>
+            <option value="900">15 mins</option>
+            <option value="1200">20 mins</option>
+            <option value="1500">30 mins</option>
+        </select>
+    </div>
+    <div id="dvtime">
+        10:59</div>
+</div>
+<table class="grid" border="0" cellpadding="0" cellspacing="1" width="800px" id="myTable">
+    <thead>
+        <tr>
+            <th rowspan="2">
+                Time
+            </th>
+            <th colspan="4">
+                Agency
+            </th>
+            <th rowspan="2">
+                Accounting
+            </th>
+            <th rowspan="2">
+                Affiliate
+            </th>
+        </tr>
+        <tr>
+            <th>
+                Total
+            </th>
+            <th>
+                Super
+            </th>
+            <th>
+                Master
+            </th>
+            <th>
+                Agent
+            </th>
+        </tr>
+    </thead>
+    <tbody id="contentUserOnline">
+        @Html.Raw(ViewBag.UserOnlineData)
+    </tbody>
+</table>

@@ -39,16 +39,7 @@ namespace Fanex.Maintenance.Core.Service.Impl
             {"BgBA","bgBA"},
             {"BgRacing","bgRacing"},
             {"BgNumberGame","bgNumberGame"},
-        };
-
-        private static readonly Dictionary<string, string> bgColorCredit = new Dictionary<string, string>()
-        {
-            {"BgSBBA","bgSBBA"},
-            {"BgSportsbook","bgSportsbook"},
-            {"BgBA","bgBA"},
-            {"BgRacing","bgRacing"},
-            {"BgNumberGame","bgNumberGame"},
-        };
+        };        
 
         #endregion
 
@@ -99,7 +90,6 @@ namespace Fanex.Maintenance.Core.Service.Impl
             return null;
         }
 
-
         public DataTable GetLicenseeWinloss(DateTime date, int drawFilter)
         {
             var criteria = new GetDepositDataToValidateLicenseeWLCriteria
@@ -129,7 +119,6 @@ namespace Fanex.Maintenance.Core.Service.Impl
             };
             return _databaseReportRepository.GetDataTable(criteria);
         }
-
 
         public string GenerateTemplateHtmlLicensee(DateTime date, int drawFilter)
         {
@@ -372,12 +361,6 @@ namespace Fanex.Maintenance.Core.Service.Impl
             return (decimal)value == 0 ? "0" : string.Format(formatThounsand, Math.Round((decimal)value, 0, MidpointRounding.AwayFromZero));
         }
 
-        protected static string FormatCreditThounsand(object value)
-        {
-            string formatThounsand = "{0:#,###,###}";
-            return Convert.ToDecimal(value) == 0 || Math.Round(Convert.ToDecimal(value)) == 0 ? "0" : string.Format(formatThounsand, Math.Round(Convert.ToDecimal(value)));
-        }
-
         public IList<bool> CompareValues(DataTable dtBetting, DataTable dtDW, int rowIndex)
         {
             var chkAllValues = new List<bool>();
@@ -390,7 +373,6 @@ namespace Fanex.Maintenance.Core.Service.Impl
 
             return chkAllValues;
         }
-
 
         public DataTable CreditDataBetting(DateTime date, int drawFilter)
         {
@@ -456,14 +438,14 @@ namespace Fanex.Maintenance.Core.Service.Impl
 
         protected string SetData(DataTable dtBetting, DataTable dtDW, BlockCredit block, int rowIndex)
         {
-            block.SBBetting = FormatCreditThounsand(dtBetting.Rows[rowIndex][1]);
-            block.SBDW = FormatCreditThounsand(dtDW.Rows[rowIndex][1]);
+            block.SBBetting = FormatThounsand(dtBetting.Rows[rowIndex][1]);
+            block.SBDW = FormatThounsand(dtDW.Rows[rowIndex][1]);
 
-            block.RacingBetting = FormatCreditThounsand(dtBetting.Rows[rowIndex][2]);
-            block.RacingDW = FormatCreditThounsand(dtDW.Rows[rowIndex][2]);
+            block.RacingBetting = FormatThounsand(dtBetting.Rows[rowIndex][2]);
+            block.RacingDW = FormatThounsand(dtDW.Rows[rowIndex][2]);
 
-            block.NGBetting = FormatCreditThounsand(dtBetting.Rows[rowIndex][3]);
-            block.NGDW = FormatCreditThounsand(dtDW.Rows[rowIndex][3]);
+            block.NGBetting = FormatThounsand(dtBetting.Rows[rowIndex][3]);
+            block.NGDW = FormatThounsand(dtDW.Rows[rowIndex][3]);
 
             return block.ToString();
         }
@@ -491,15 +473,14 @@ namespace Fanex.Maintenance.Core.Service.Impl
         {
             var checkValues = CompareValues(dtBetting, dtDW, rowIndex);
 
-            block.BgSportsbook = checkValues[0] ? string.Empty : bgColorCredit["BgSportsbook"].ToString();
-            block.BgRacing = checkValues[1] ? string.Empty : bgColorCredit["BgRacing"].ToString();
-            block.BgNumberGame = checkValues[2] ? string.Empty : bgColorCredit["BgNumberGame"].ToString();
+            block.BgSportsbook = checkValues[0] ? string.Empty : bgColorCss["BgSportsbook"].ToString();
+            block.BgRacing = checkValues[1] ? string.Empty : bgColorCss["BgRacing"].ToString();
+            block.BgNumberGame = checkValues[2] ? string.Empty : bgColorCss["BgNumberGame"].ToString();
 
             return checkValues.Contains(false) ? false : true;
         }
 
         #endregion
-
 
         public DataTable GetUserOnlineDaily(DateTime date)
         {
@@ -532,7 +513,6 @@ namespace Fanex.Maintenance.Core.Service.Impl
             return _s.ToString();
         }
 
-
         public DataTable GetUserOnline(int top)
         {
             var criteria = new GetUserOnlineCriteria
@@ -560,7 +540,7 @@ namespace Fanex.Maintenance.Core.Service.Impl
             return _s.ToString();
         }
 
-        private static DataTable GenDataTable(DataTable dtb, int RowNumber)
+        private static DataTable GenerateDataTable(DataTable dtb, int RowNumber)
         {
             string _datetime = dtb.Rows[0]["logdate"].ToString();
             for (int i = 0; i < RowNumber; i++)
@@ -593,7 +573,7 @@ namespace Fanex.Maintenance.Core.Service.Impl
             return dtb;
         }
 
-        public static string GenDataChart(DataTable dtb, int show)
+        public string GenerateDataChart(DataTable dtb, int show)
         {
             string data = "";
             if (dtb.Rows.Count > 0)
@@ -601,7 +581,7 @@ namespace Fanex.Maintenance.Core.Service.Impl
                 if (show > dtb.Rows.Count)
                 {
                     int addRow = show - dtb.Rows.Count;
-                    dtb = GenDataTable(dtb, addRow);
+                    dtb = GenerateDataTable(dtb, addRow);
                 }
                 DataRow[] drs = dtb.Select(null, "logdate desc");
 
@@ -614,6 +594,7 @@ namespace Fanex.Maintenance.Core.Service.Impl
             }
             return data;
         }
+
         public static string ChangeHourToMinute(string _DateTime)
         {
             string ngay = _DateTime.Substring(0, _DateTime.IndexOf(" "));
@@ -622,10 +603,12 @@ namespace Fanex.Maintenance.Core.Service.Impl
             int minute = (Convert.ToInt32(arrList[0]) * 60) + Convert.ToInt32(arrList[1]);
             return minute.ToString();
         }
+
         public static string SplitDateToHour(string date)
         {
             return date = date.Substring(date.Length - 5, 5);
         }
+
         public static string ChangeMinuteToHour(int minute)
         {
             int hour = minute / 60;
