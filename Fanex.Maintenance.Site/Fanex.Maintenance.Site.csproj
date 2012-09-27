@@ -858,6 +858,7 @@
     <None Include="themes\nap\common.less" />
     <None Include="themes\nap\function.less" />
     <None Include="themes\nap\index.less" />
+    <None Include="themes\nap\report\dataintegry.less" />
     <None Include="themes\nap\site\manage.less" />
     <None Include="themes\nap\style.less" />
     <None Include="themes\nap\themes.less" />
