@@ -10,6 +10,7 @@
     using System.Data;
     using Fanex.Maintenance.Core.Criteria.Licensee;
     using Fanex.Maintenance.Core.Model;
+    using System.Globalization;
 
     public class DatabaseReportController : Controller
     {
@@ -106,6 +107,25 @@
             ViewBag.ListDrawFilter = listDrawFilter;
 
             return View(modelView);
+        }
+
+        [HttpGet]
+        public ActionResult UserOnlineDaily()
+        {
+            DataTable dtUserDaily = _databaseReportService.GetUserOnlineDaily(DateTime.Now);
+            ViewBag.UserDailyData = _databaseReportService.GenerateTemplateUserDaily(dtUserDaily);
+            ViewBag.DateNow = DateTime.Now.ToString("dd/MM/yyyy");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserOnlineDaily(string date)
+        {
+            DateTime dateTime = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DataTable dtUserDaily = _databaseReportService.GetUserOnlineDaily(dateTime);
+            ViewBag.UserDailyData = _databaseReportService.GenerateTemplateUserDaily(dtUserDaily);
+            ViewBag.DateNow = DateTime.Now.ToString("dd/MM/yyyy");
+            return View();
         }
     }
 }

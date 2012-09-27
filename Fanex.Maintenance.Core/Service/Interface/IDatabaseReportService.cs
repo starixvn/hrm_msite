@@ -31,8 +31,16 @@ namespace Fanex.Maintenance.Core.Service.Interface
 
         DataTable CreditDataDW(DateTime date, int drawFilter);
 
+        DataTable GetUserOnlineDaily(DateTime date);
+
+        DataTable GetUserOnline(int top);
+
         string GenerateTemplateHtmlLicensee(DateTime date, int drawFilter);
 
         string GenerateTemplateHtmlCredit(DateTime date, int drawFilter);
+
+        string GenerateTemplateUserDaily(DataTable data);
+
+        string GenerateTemplateUser(DataTable data,int show);
     }
 }

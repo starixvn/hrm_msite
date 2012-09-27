@@ -884,6 +884,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Mail\GetMessage.cshtml" />
     <Content Include="Views\DatabaseReport\DataIntegrity.cshtml" />
+    <Content Include="Views\DatabaseReport\UserOnlineDaily.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">

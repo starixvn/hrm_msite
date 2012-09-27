@@ -22,5 +22,7 @@
         <Setting Key="GET_DepositDataToValidate_DW" SpName="GET_DepositDataToValidate_DW" DbName="licensee" />
         <Setting Key="GET_CreditDataToValidate_Betting" SpName="GET_CreditDataToValidate_Betting" DbName="licensee" />
         <Setting Key="GET_CreditDataToValidate_DW" SpName="GET_CreditDataToValidate_DW" DbName="licensee" />
+        <Setting Key="Is_SelTotalOnlineUser" SpName="Is_SelTotalOnlineUser" DbName="on_user" />
+        <Setting Key="Is_OnlineReportDaily" SpName="Is_OnlineReportDaily" DbName="on_user" />
     </Function>
 </Functions>
