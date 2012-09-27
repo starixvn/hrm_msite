@@ -2,7 +2,7 @@
     ViewBag.Title = "UserOnlineChart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Headline {
+@section Head{
     <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css"></link>
     <script src="~/scripts/DatabaseReport/RefreshTime.js" type="text/javascript"></script>
     <script src="~/scripts/lib/jscharts.js" type="text/javascript"></script>
@@ -13,6 +13,8 @@
             setInterval("CountDown(false)", 1000);
         };
     </script>
+}
+@section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
     </h1>

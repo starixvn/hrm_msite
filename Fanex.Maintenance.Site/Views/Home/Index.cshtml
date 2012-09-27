@@ -5,9 +5,11 @@
 @{
     ViewBag.Title = string.Format("{0}", "Home");
 }
-@section Headline {
-    <link href="~/themes/nap1/style.less" rel="stylesheet" type="text/css">
+@section Head{
+    <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css">
     </link>
+}
+@section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
     </h1>
