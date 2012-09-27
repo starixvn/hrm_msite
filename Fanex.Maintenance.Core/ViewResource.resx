@@ -252,4 +252,31 @@
   <data name="Latest_Send_Date" xml:space="preserve">
     <value>Latest Send Date</value>
   </data>
+  <data name="Bet_Count" xml:space="preserve">
+    <value>Bet Count</value>
+  </data>
+  <data name="CREDIT_SITES" xml:space="preserve">
+    <value>CREDIT SITES</value>
+  </data>
+  <data name="Customer_Win_Loss" xml:space="preserve">
+    <value>Customer Win Loss</value>
+  </data>
+  <data name="DEPOSIT_SITES" xml:space="preserve">
+    <value>DEPOSIT SITES</value>
+  </data>
+  <data name="DW" xml:space="preserve">
+    <value>DW</value>
+  </data>
+  <data name="rptLicWinLoss" xml:space="preserve">
+    <value>rptLicWinLoss</value>
+  </data>
+  <data name="rpt_betting" xml:space="preserve">
+    <value>rpt_betting</value>
+  </data>
+  <data name="sum_winloss" xml:space="preserve">
+    <value>sum_winloss</value>
+  </data>
+  <data name="Turnover" xml:space="preserve">
+    <value>Turnover</value>
+  </data>
 </root>

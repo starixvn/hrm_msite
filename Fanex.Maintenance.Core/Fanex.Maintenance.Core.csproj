@@ -61,6 +61,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -75,35 +76,50 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Criteria\Category\GetAllCategoryCritria.cs" />
+    <Compile Include="Criteria\Credit\GetCreditDataToValidateCriteria.cs" />
+    <Compile Include="Criteria\Licensee\GetBalanceUpDayCriteria.cs" />
+    <Compile Include="Criteria\Licensee\GetDepositDataToValidateCriteria.cs" />
     <Compile Include="Criteria\Log\GetLogCriteria.cs" />
     <Compile Include="Criteria\ResultCriteria.cs" />
+    <Compile Include="Criteria\User\GetUserOnlineCriteria.cs" />
     <Compile Include="Criteria\User\UserLoginCriteria.cs" />
     <Compile Include="Model\Categorys.cs" />
     <Compile Include="Model\CommandResult.cs" />
+    <Compile Include="Model\DataIntegrityViewModel.cs" />
     <Compile Include="Model\MailFunctionViewModel.cs" />
     <Compile Include="Model\MailConfigViewModel.cs" />
     <Compile Include="Model\Logs.cs" />
     <Compile Include="Model\MailSettingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Impl\BaseRepository.cs" />
     <Compile Include="Repository\Impl\CategoryRepository.cs" />
+    <Compile Include="Repository\Impl\DatabaseReportRepository.cs" />
     <Compile Include="Repository\Impl\LogRepository.cs" />
     <Compile Include="Repository\Impl\UserRepository.cs" />
     <Compile Include="Repository\Interface\ICategoryRepository.cs" />
+    <Compile Include="Repository\Interface\IDatabaseReportRepository.cs" />
     <Compile Include="Repository\Interface\ILogRepository.cs" />
     <Compile Include="Repository\Interface\IUserRepository.cs" />
     <Compile Include="Service\Impl\CategoryService.cs" />
+    <Compile Include="Service\Impl\DatabaseReportService.cs" />
     <Compile Include="Service\Impl\LogService.cs" />
     <Compile Include="Service\Impl\MailService.cs" />
     <Compile Include="Service\Impl\UserService.cs" />
     <Compile Include="Service\Interface\ICategoryService.cs" />
+    <Compile Include="Service\Interface\IDatabaseReportService.cs" />
     <Compile Include="Service\Interface\ILogService.cs" />
     <Compile Include="Service\Interface\IMailService.cs" />
     <Compile Include="Service\Interface\IUserService.cs" />
+    <Compile Include="TemplateReport\Block.cs" />
+    <Compile Include="TemplateReport\BlockCredit.cs" />
+    <Compile Include="TemplateReport\CreditdataTemplate.cs" />
+    <Compile Include="TemplateReport\LicenseedataTemplate.cs" />
     <Compile Include="ViewResource.Designer.cs">
       <DependentUpon>ViewResource.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Web\AppSetting.cs" />
     <Compile Include="Web\HtmlHelperExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +128,7 @@
       <LastGenOutput>ViewResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
