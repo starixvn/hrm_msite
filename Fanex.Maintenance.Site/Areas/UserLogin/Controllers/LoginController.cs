@@ -144,7 +144,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             FormsAuthentication.SignOut();
             _currentSession.ClearAll();
 
-            return RedirectToAction(string.Empty);
+            return Redirect(FormsAuthentication.LoginUrl);
         }
 
         [HttpPost]

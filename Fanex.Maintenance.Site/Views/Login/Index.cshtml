@@ -1,5 +1,5 @@
 ﻿@using Fanex.Maintenance.Core.Criteria.User
-@model UserLoginCriteria
+@*@model UserLoginCriteria*@
 @{
     Layout = null;
     var success = ViewBag.Success != null ? ViewBag.Success : false;
@@ -37,7 +37,7 @@
                                 <span class="log_text">@ViewResource.Username</span>
                             </td>
                             <td width="220">
-                                @Html.TextBoxFor(m => m.Username)
+                                @Html.TextBox("username")
                             </td>
                         </tr>
                         <tr>
@@ -48,7 +48,7 @@
                                 <span class="log_text">@ViewResource.Password</span>
                             </td>
                             <td>
-                                @Html.PasswordFor(m => m.UserPwd)
+                                @Html.Password("password")
                             </td>
                         </tr>
                         <tr>

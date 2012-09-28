@@ -109,7 +109,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             criteria.OnUserId = _currentSession.OnUserId;
             _userService.UserLogOut(criteria);
             _currentSession.ClearAll();
-            return RedirectToAction("Index", "~/Home");
+            return Redirect(FormsAuthentication.LoginUrl);
         }
     }
 }
