@@ -19,8 +19,8 @@ namespace Fanex.Maintenance.Core.TemplateReport
             bd.Append("<th colspan='2'>DEPOSIT SITES</th>");
             bd.Append("<th>sum_winloss</th>");
             bd.Append("<th>rptLicWinLoss</th>");
-            bd.Append("<th>rptLicWinLoss</th>");
-            bd.Append("<th>sum_winloss</th>");   
+            bd.Append("<th>rpt_betting</th>");
+            bd.Append("<th>DW</th>");   
             bd.Append("</tr></thead>");            
             if (null != Turnover) Turnover.ToString(ref bd);
             if (null != Winloss) Winloss.ToString(ref bd);
