@@ -1,0 +1,152 @@
+﻿@using Fanex.NAP.Core.Criteria.Function
+@using Fanex.NAP.Core.Business
+@model UpdateFunctionCriteria
+@{
+	ViewBag.Title = string.Format("{0} {1}", ViewResources.Update, ViewResources.Function);
+	bool success = ViewBag.Success != null && ViewBag.Success;
+
+	var viewFlags = (ViewFlags)ViewBag.ViewFlags;
+}
+@section Head {
+	<link href="~/Areas/UserControl/themes/nap/style.less" rel="stylesheet" type="text/css" />
+	<script src="~/Areas/UserControl/scripts/lib/jsrender.js" type="text/javascript"></script>
+	<script type="text/x-jsrender" id="templateDropdownList">
+		<option value="{{:Id}}">{{:Name}}</option>
+	</script>
+}
+@section Headline {
+	<h1>
+		<span class="title">
+			<span class="first">@ViewResources.Function @ViewResources.Management /</span>
+			@ViewBag.Title
+		</span>
+		@Html.ActionLink("← " + ViewResources.Back_To_List, "Manage", "Function", null, new { @class = "lnk" })
+	</h1>
+}
+@using (Html.BeginForm())
+{
+	@Html.HiddenFor(m => m.FunctionId, Model.FunctionId)
+	<div class="form">
+		<div class="form-row">
+			<div class="lbl-field"></div>
+			<div class="edit-field">
+				@Html.ValidationSummary()
+			</div>
+		</div>
+		<div class="form-row required">
+			<div class="lbl-field">
+				@Html.LabelFor(m => m.FunctionName, ViewResources.Function_Name)
+			</div>
+			<div class="edit-field">
+				@Html.TextBoxFor(m => m.FunctionName)
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="lbl-field">
+				@Html.LabelFor(m => m.SiteId, ViewResources.Site)
+			</div>
+			<div class="edit-field rdo-field">
+				@Html.Label(Model.SiteName)
+				@Html.HiddenFor(m => m.SiteId, Model.SiteId)
+				@Html.HiddenFor(m => m.SiteName, Model.SiteName)
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="lbl-field">
+				@Html.LabelFor(m => m.Description)
+			</div>
+			<div class="edit-field">
+				@Html.TextBoxFor(m => m.Description)
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="lbl-field">
+				@Html.LabelFor(m => m.Crud, ViewResources.CRUD)
+			</div>
+			<div class="edit-field rdo-field">
+				@Html.RadioButtonFor(m => m.Crud, (int)Constant.Crud.Read, new { @id = "Crud-Read", @name = "Crud" })
+				@Html.Label(Constant.Crud.Read.ToString())
+				@Html.RadioButtonFor(m => m.Crud, (int)Constant.Crud.Host, new { @id = "Crud-Host", @name = "Crud" })
+				@Html.Label(Constant.Crud.Host.ToString())
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="lbl-field">
+				@Html.LabelFor(m => m.ParentId, ViewResources.Parent)
+			</div>
+			<div class="edit-field">
+				@Html.DropDownListFor(m => m.ParentId, (List<SelectListItem>)ViewBag.ParentFunctionItemList, ViewResources.None)
+				@Html.HiddenFor(m => m.ParentName)
+			</div>
+		</div>
+		<div class="form-row required">
+			<div class="lbl-field">
+				@Html.LabelFor(m => m.DisplayOrder, ViewResources.Display_Order)
+			</div>
+			<div class="edit-field">
+				@Html.TextBoxFor(m => m.DisplayOrder)
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="lbl-field">
+				@Html.LabelFor(m => m.IsActive, ViewResources.Status)
+			</div>
+			<div class="edit-field chk-field">
+				@Html.CheckBoxFor(m => m.IsActive)
+				@Html.LabelFor(m => m.IsActive, ViewResources.Active)
+			</div>
+		</div>
+	@if (viewFlags.IsLive)
+	{
+		@Html.HiddenFor(m => m.Environment)
+	}
+	else
+	{
+		<div class="form-row">
+			<div class="lbl-field">
+				@Html.LabelFor(m => m.Environment)
+			</div>
+			<div class="edit-field rdo-field">
+				@Html.RadioButtonFor(m => m.Environment, "UAT", new { id = "Environment-UAT" })
+				@Html.Label("Environment-UAT", ViewResources.UAT)
+				@Html.RadioButtonFor(m => m.Environment, "LIVE", new { id = "Environment-LIVE" })
+				@Html.Label("Environment-LIVE", ViewResources.LIVE)
+			</div>
+		</div>
+	}
+		<div class="form-row">
+			<div class="lbl-field"></div>
+			<div class="edit-field">
+	@if (!success)
+	{
+				<input type="submit" value="@ViewResources.Save" />
+				<button onclick="NAP.redirect('Function/Manage', 0); return false;">@ViewResources.Cancel</button>
+	}
+			</div>
+		</div>
+	</div>
+}
+@section Foot {
+	<script type="text/javascript">
+		$(function () {
+			$('input[type=reset]').bind('click', function () {
+				window.location.replace(NAP.resolveClientUrl('Function/Manage'));
+			});
+		});
+	</script>
+
+	<script src="~/Areas/UserControl/scripts/Function/Edit.js" type="text/javascript"></script>
+	<script src="~/Areas/UserControl/scripts/lib/jquery.numeric.js" type="text/javascript"></script>
+
+	@if (success)
+	{
+		string dialogMsg = string.Format(ViewResources.EditSuccessMsg, ViewResources.Function 
+			+ " '" + Model.FunctionName + "'", 5);
+
+		<script type="text/javascript">
+			$(function () {
+				NAP.showSuccessMsg('@dialogMsg', 'Function/Manage', 6000);
+			});
+		</script>
+	}
+}

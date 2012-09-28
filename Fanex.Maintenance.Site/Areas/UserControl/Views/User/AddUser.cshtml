@@ -1,0 +1,123 @@
+﻿@using Fanex.NAP.Core.Criteria.User
+@using Fanex.NAP.Core.Model
+@model IEnumerable<IUser>
+@{
+    ViewBag.Title = string.Format("{0} {1}", ViewResources.Add_Existing, ViewResources.User);
+    var viewFlags = (ViewFlags)ViewBag.ViewFlags;
+}
+@section Head {
+    <link href="~/Areas/UserControl/themes/nap/style.less" rel="stylesheet" type="text/css" />
+    <script src="~/Areas/UserControl/scripts/User/AddUser.js" type="text/javascript"></script>
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+        @Html.ActionLink("← " + ViewResources.Back_To_List, "Manage", "User", null, new { @class = "lnk" })
+    </h1>
+}
+<div id="dialog-message" title="@ViewBag.Title" style="display:none">
+    @ViewResources.AddSuccessMsg
+</div>
+<section id="filter-bar">
+    @using (Html.BeginForm())
+    {
+			<div class="filter-form">
+				<div class="lbl-field">
+					@Html.Label(ViewResources.Username)
+				</div>
+				<div class="edit-field">
+					@Html.TextBox("Username", string.Empty)
+				</div>                
+                <div class="lbl-field">&nbsp;</div>
+				<div class="submit">
+					<input type="submit" value="@ViewResources.Search" />
+				</div>
+			</div>
+    }
+	</section>
+<table class="grid">
+    <thead>
+        <tr>
+            <th class="first">
+                @ViewResources.Username
+            </th>
+            <th>
+                @ViewResources.First_Name
+            </th>
+            <th>
+                @ViewResources.Last_Name
+            </th>
+            <th class="cmd nbl last">
+                @ViewResources.Add_New
+            </th>
+        </tr>
+    </thead>
+    @if (!ReferenceEquals(Model, null))
+    { 
+        <tbody>
+            @{
+        int i = 0;
+        foreach (var item in Model)
+        {
+            string row_class = i % 2 == 0 ? "alt" : string.Empty;
+                <tr class="@row_class">
+                    <td>
+                        @item.Username
+                    </td>
+                    <td>
+                        @item.FirstName
+                    </td>
+                    <td>
+                        @item.LastName
+                    </td>
+                    <td class="align-center cmd nbl" id="tdUserId_@item.Id">
+                        @Html.DropDownList("ddlGroupUserId_" + item.Id.ToString(), (List<SelectListItem>)ViewBag.Groups, new { @style = "display:none" })
+                        <a id="hrefUserId_@item.Id" class="btn-edit" title="Add" href="javascript:void(0);">
+                            @ViewResources.Edit</a>
+                    </td>
+                </tr>
+            i++;
+        }
+        if (i == 0)
+        {
+                <tr>
+                    <td colspan="10" class="align-center">
+                        @ViewResources.NoInformationAvailable
+                    </td>
+                </tr>
+        }
+            }
+        </tbody>
+    }
+    else
+    {
+        <tbody>
+            <tr>
+                <td colspan="10" class="align-center">
+                    @ViewResources.NoInformationAvailable
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>
+@section Foot {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#combo-pickr-close').click(function () {
+                var $this = $(this),
+					comboLeft = $('#combo-pickr').css('left');
+
+                if (comboLeft == '0px') {
+                    $('#combo-pickr').animate({ 'left': '-169px' }, 200, function () {
+                        $this.addClass('combo-open');
+                    });
+                } else {
+                    $('#combo-pickr').animate({ 'left': 0 }, 200, function () {
+                        $this.removeClass('combo-open');
+                    });
+                }
+            });
+        });
+    </script>
+}

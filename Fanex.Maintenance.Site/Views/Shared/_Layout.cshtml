@@ -61,7 +61,7 @@
 				<h2>Howdy, @HttpContext.Current.User.Identity.Name</h2>
 				<ul>
 					<li><a href="javascript:;">Profile</a></li>
-					<li>@Html.ActionLink("Sign Out", "LogOut", "Login")</li>
+					<li>@Html.ActionLink("Sign Out", "LogOut", "Login", new { Area = "UserLogin" }, new { })</li>
 				</ul>
 			</div>
 		</div>
