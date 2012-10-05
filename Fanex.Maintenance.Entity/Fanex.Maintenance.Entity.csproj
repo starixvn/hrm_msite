@@ -51,9 +51,6 @@
     <Compile Include="Model\CommandResult.cs" />
     <Compile Include="Model\DataIntegrityViewModel.cs" />
     <Compile Include="Model\Logs.cs" />
-    <Compile Include="Model\MailConfigViewModel.cs" />
-    <Compile Include="Model\MailFunctionViewModel.cs" />
-    <Compile Include="Model\MailSettingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

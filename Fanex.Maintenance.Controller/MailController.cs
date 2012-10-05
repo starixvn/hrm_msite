@@ -15,9 +15,9 @@ namespace Fanex.Maintenance.Controller
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.MailDeliver.Model;
-    using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;
+    using Fanex.Maintenance.Criteria.MailService;
 
     [Authorize]
     public class MailController : Controller

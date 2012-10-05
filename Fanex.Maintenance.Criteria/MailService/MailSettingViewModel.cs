@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Maintenance.Entity.Model
+namespace Fanex.Maintenance.Criteria.MailService
 {
     using System;
     using System.Collections.Generic;

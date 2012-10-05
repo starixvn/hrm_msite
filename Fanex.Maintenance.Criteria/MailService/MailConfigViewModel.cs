@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Maintenance.Entity.Model
+namespace Fanex.Maintenance.Criteria.MailService
 {
     using System;
     using System.Collections.Generic;
@@ -17,57 +17,53 @@ namespace Fanex.Maintenance.Entity.Model
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class MailFunctionViewModel
+    public class MailConfigViewModel
     {
-        public int FunctionId { get; set; }
+        public int AppId { get; set; }
 
         [Required]
         [Display(Name = "Setting", ResourceType = typeof(ViewResource))]
         public int SettingId { get; set; }
 
         [Required]
-        [Display(Name = "Config", ResourceType = typeof(ViewResource))]
-        public int ConfigId { get; set; }
-
-        [Required]
-        [Display(Name = "Function_Name", ResourceType = typeof(ViewResource))]
+        [Display(Name = "Application_Name", ResourceType = typeof(ViewResource))]
         [StringLength(50, MinimumLength = 2,
             ErrorMessageResourceName = "InputLengthValidationMsg",
             ErrorMessageResourceType = typeof(ViewResource))]
         [RegularExpression(@"^[\w\s]{1,}$",
             ErrorMessageResourceName = "InvalidNameValidationMsg",
             ErrorMessageResourceType = typeof(ViewResource))]
-        public string FunctionName { get; set; }
+        public string AppName { get; set; }
+                
+        [Display(Name = "Description", ResourceType = typeof(ViewResource))]
+        public string Description { get; set; }
 
-        public MailFunctionViewModel()
+        public MailConfigViewModel()
         {
         }
 
-        public MailFunctionViewModel(MailFunction mailFunction)
+        public MailConfigViewModel(MailConfig mailSetting)
         {
-            this.ConfigId = mailFunction.Config.AppID;
-            this.SettingId = mailFunction.Setting.SettingID;
-            this.FunctionId = mailFunction.FuncID;
-            this.FunctionName = mailFunction.FuncName;
+            this.AppName = mailSetting.AppName;
+            this.Description = mailSetting.Description;
+            this.SettingId = mailSetting.Setting.SettingID;
+            this.AppId = mailSetting.AppID;
         }
 
-        public MailFunction GetMailFunction()
+        public MailConfig GetMailConfig()
         {
-            MailFunction mailFunction = new MailFunction
+            MailConfig mailConfig = new MailConfig
             {
-                Config = new MailConfig
-                {
-                    AppID = this.ConfigId
-                },
+                AppID = this.AppId,
+                AppName = this.AppName,
+                Description = this.Description,
                 Setting = new MailSetting
                 {
                     SettingID = this.SettingId
-                },
-                FuncName = this.FunctionName,
-                FuncID = this.FunctionId
+                }
             };
 
-            return mailFunction;
+            return mailConfig;
         }
     }
 }
