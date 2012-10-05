@@ -9,7 +9,7 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
-    public interface ICategories : IEntity<int, string>
+    public interface IJobCategories : IEntity<int, string>
     {
         int Class { get; set; }
 

@@ -51,6 +51,7 @@
     <Compile Include="Impl\LogService.cs" />
     <Compile Include="Impl\MailService.cs" />
     <Compile Include="Impl\UserService.cs" />
+    <Compile Include="Interface\IJobService.cs" />
     <Compile Include="Interface\ILogCategoryService.cs" />
     <Compile Include="Interface\IDatabaseReportService.cs" />
     <Compile Include="Interface\ILogService.cs" />

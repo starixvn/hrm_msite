@@ -47,16 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\ICategories.cs" />
+    <Compile Include="Domain\IJobCategories.cs" />
     <Compile Include="Domain\IEntity.cs" />
     <Compile Include="Domain\IJobs.cs" />
     <Compile Include="Domain\IOperators.cs" />
     <Compile Include="Domain\IOrinatingServers.cs" />
     <Compile Include="Domain\ISchedules.cs" />
     <Compile Include="Domain\ISteps.cs" />
+    <Compile Include="Model\JobCategories.cs" />
+    <Compile Include="Model\Jobs.cs" />
     <Compile Include="Model\LogCategorys.cs" />
     <Compile Include="Model\CommandResult.cs" />
     <Compile Include="Model\Logs.cs" />
+    <Compile Include="Model\Operators.cs" />
+    <Compile Include="Model\OrinatingServers.cs" />
+    <Compile Include="Model\Schedules.cs" />
+    <Compile Include="Model\Steps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -26,7 +26,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// </summary>
         int StartStepId { get; set; }
 
-        ICategories Category { get; set; }
+        IJobCategories Category { get; set; }
 
         /// <summary>
         /// Security identifier number (SID) of the job owner.
