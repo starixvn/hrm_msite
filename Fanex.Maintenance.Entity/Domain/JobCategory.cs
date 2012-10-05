@@ -9,10 +9,14 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
-    public interface JobCategory : IEntity<int, string>
+    public class JobCategory : IEntity<int, string>
     {
-        int Class { get; set; }
+        public int Class { get; set; }
 
-        int Type { get; set; }
+        public int Type { get; set; }
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

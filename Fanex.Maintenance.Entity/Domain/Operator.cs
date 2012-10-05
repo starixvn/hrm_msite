@@ -10,91 +10,95 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
-    public interface Operator : IEntity<int, string>
+    public class Operator : IEntity<int, string>
     {
         /// <summary>
         /// Status of alert notifications (Boolean). If 1, this operator can receive notifications when an alert occurs.
         /// </summary>
-        int Enable { get; set; }
+        public int Enable { get; set; }
 
         /// <summary>
         /// E-mail address for this operator.
         /// </summary>
-        string Email { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Date this operator last received an e-mail alert notification.
         /// </summary>
-        int LastEmailDate { get; set; }
+        public int LastEmailDate { get; set; }
 
         /// <summary>
         /// Time of day this operator last received an e-mail alert notification.
         /// </summary>
-        int LastEmailTime { get; set; }
+        public int LastEmailTime { get; set; }
 
         /// <summary>
         /// Pager address for this operator.
         /// </summary>
-        string PagerAddress { get; set; }
+        public string PagerAddress { get; set; }
 
         /// <summary>
         /// Date this operator last received a pager alert notification.
         /// </summary>
-        int LastPagerTime { get; set; }
+        public int LastPagerTime { get; set; }
 
         /// <summary>
         /// Time of day this operator last received a pager alert notification.
         /// </summary>
-        int WeekdayPagerStartTime { get; set; }
+        public int WeekdayPagerStartTime { get; set; }
 
         /// <summary>
         /// Time of day on a weekday (Monday through Friday) after which this operator is available to receive a pager alert notification.
         /// </summary>
-        int WeekdayPagerEndTime { get; set; }
+        public int WeekdayPagerEndTime { get; set; }
 
         /// <summary>
         /// Time of day on a weekday (Monday through Friday) after which this operator is not available to receive a pager alert notification.
         /// </summary>
-        int SaturdayPagerStartTime { get; set; }
+        public int SaturdayPagerStartTime { get; set; }
 
         /// <summary>
         /// Time of day on Saturday after which this operator is available to receive a pager alert notification.
         /// </summary>
-        int SaturdayPagerEndTime { get; set; }
+        public int SaturdayPagerEndTime { get; set; }
 
         /// <summary>
         /// Time of day on Sunday after which this operator is available to receive a pager alert notification.
         /// </summary>
-        int SundayPagerStartTime { get; set; }
+        public int SundayPagerStartTime { get; set; }
 
         /// <summary>
         /// Time of day on Sunday after which this operator is available to receive a pager alert notification.
         /// </summary>
-        int SundayPagerEndTime { get; set; }
+        public int SundayPagerEndTime { get; set; }
 
         /// <summary>
         /// Bitmask representing the days of the week during which this operator is available to receive a pager alert notification.
         /// </summary>
-        int PagerDay { get; set; }
+        public int PagerDay { get; set; }
 
         /// <summary>
         /// Identified for informational purposes only. Not supported. Future compatibility is not guaranteed.
         /// </summary>
-        int NetsendAddress { get; set; }
+        public int NetsendAddress { get; set; }
 
         /// <summary>
         /// Date that the most recent network message was last sent to the specified operator ID.
         /// </summary>
-        int LastNetsendDate { get; set; }
+        public int LastNetsendDate { get; set; }
 
         /// <summary>
         /// Time that the most recent network message was last sent to the specified operator ID.
         /// </summary>
-        int LastNetsendTime { get; set; }
+        public int LastNetsendTime { get; set; }
 
         /// <summary>
         /// Identified for informational purposes only. Not supported. Future compatibility is not guaranteed.
         /// </summary>
-        int CategoryId { get; set; }
+        public int CategoryId { get; set; }
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

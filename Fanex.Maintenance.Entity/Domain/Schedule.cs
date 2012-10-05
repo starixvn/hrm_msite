@@ -11,15 +11,15 @@ namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
 
-    public interface Schedule : IEntity<int, string>
+    public class Schedule : IEntity<int, string>
     {
-        int ScheduleUId { get; set; }
+        public int ScheduleUId { get; set; }
 
-        OrinatingServer OrinatingServer { get; set; }
+        public OrinatingServer OrinatingServer { get; set; }
 
-        byte[] OwnerSid { get; set; }
+        public byte[] OwnerSid { get; set; }
 
-        int Enable { get; set; }
+        public int Enable { get; set; }
 
         /// <summary>
         /// How frequently a job runs for this schedule.
@@ -31,7 +31,7 @@ namespace Fanex.Maintenance.Entity.Domain
         ///64 = Runs when the SQL Server Agent service starts
         ///128 = Runs when the computer is idle
         /// </summary>
-        int FregType { get; set; }
+        public int FregType { get; set; }
 
         /// <summary>
         /// Days that the job is executed. Depends on the value of freq_type. 
@@ -68,7 +68,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 64 (starts when SQL Server Agent service starts) freq_interval is unused (0)                                 
         /// 128 (runs when computer is idle) freq_interval is unused (0)                               
         /// </summary>
-        int FregInterval { get; set; }
+        public int FregInterval { get; set; }
 
         /// <summary>
         /// Units for the freq_subday_interval. Can be one of the following values:
@@ -77,12 +77,12 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 4 Minutes
         /// 8 Hours
         /// </summary>
-        int FregSubdayType { get; set; }
+        public int FregSubdayType { get; set; }
 
         /// <summary>
         /// Number of freq_subday_type periods to occur between each execution of the job.
         /// </summary>
-        int FregSubdayInterval { get; set; }
+        public int FregSubdayInterval { get; set; }
 
         /// <summary>
         /// When freq_interval occurs in each month, if freq_interval is 32 (monthly relative).
@@ -94,47 +94,51 @@ namespace Fanex.Maintenance.Entity.Domain
         ///8 = Fourth
         ///16 = Last
         /// </summary>
-        int FregRelativeInterval { get; set; }
+        public int FregRelativeInterval { get; set; }
 
         /// <summary>
         /// Number of weeks or months between the scheduled execution of a job. 
         /// freq_recurrence_factor is used only if freq_type is 8, 16, or 32. 
         /// If this column contains 0, freq_recurrence_factor is unused.
         /// </summary>
-        int FregRecurrenceFactor { get; set; }
+        public int FregRecurrenceFactor { get; set; }
 
         /// <summary>
         /// Date on which execution of a job can begin. 
         /// The date is formatted as YYYYMMDD. NULL indicates today's date.
         /// </summary>
-        int ActiveStartDate { get; set; }
+        public int ActiveStartDate { get; set; }
 
         /// <summary>
         /// Date on which execution of a job can stop. 
         /// The date is formatted YYYYMMDD.
         /// </summary>
-        int ActiveEndDate { get; set; }
+        public int ActiveEndDate { get; set; }
 
         /// <summary>
         /// Time on any day between active_start_date and active_end_date that job begins executing. 
         /// Time is formatted HHMMSS, using a 24-hour clock.
         /// </summary>
-        int ActiveStartTime { get; set; }
+        public int ActiveStartTime { get; set; }
 
         /// <summary>
         /// Time on any day between active_start_date and active_end_date that job stops executing. 
         /// Time is formatted HHMMSS, using a 24-hour clock.
         /// </summary>
-        int ActiveEndTime { get; set; }
+        public int ActiveEndTime { get; set; }
 
-        DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
 
-        DateTime ModifedCreated { get; set; }
+        public DateTime ModifedCreated { get; set; }
 
         /// <summary>
         /// Current version number of the schedule. For example,
         /// if a schedule has been modified 10 times, the version_number is 10.
         /// </summary>
-        int VersionNumber { get; set; }
+        public int VersionNumber { get; set; }
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

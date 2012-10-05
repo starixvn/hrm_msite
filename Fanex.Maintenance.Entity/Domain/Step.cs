@@ -11,92 +11,92 @@ namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
 
-    public interface Step : IEntity<int, string>
+    public class Step : IEntity<int, string>
     {
         /// <summary>
         /// ID of the job.
         /// </summary>
-        Job Job { get; set; }
+        public Job Job { get; set; }
 
         /// <summary>
         /// Name of the subsystem used by SQL Server Agent to execute the job step.
         /// </summary>
-        string SubSystem { get; set; }
+        public string SubSystem { get; set; }
 
         /// <summary>
         /// Command to be executed by subsystem.
         /// </summary>
-        string Command { get; set; }
+        public string Command { get; set; }
 
         /// <summary>
         /// Reserved.
         /// </summary>
-        int Flags { get; set; }
+        public int Flags { get; set; }
 
         /// <summary>
         /// Reserved.
         /// </summary>
-        string AdditionalParameters { get; set; }
+        public string AdditionalParameters { get; set; }
 
         /// <summary>
         /// Error-level value returned by CmdExec subsystem steps to indicate success.
         /// </summary>
-        int CmdExecSuccessCode { get; set; }
+        public int CmdExecSuccessCode { get; set; }
 
         /// <summary>
         /// Action to be performed when a step is executed successfully.
         /// </summary>
-        int OnSuccessAction { get; set; }
+        public int OnSuccessAction { get; set; }
 
         /// <summary>
         /// ID of the next step to execute when a step is executed successfully.
         /// </summary>
-        Step OnSuccessStep { get; set; }
+        public Step OnSuccessStep { get; set; }
 
         /// <summary>
         /// Action to be performed when a step is not executed successfully.
         /// </summary>
-        int OnFailAction { get; set; }
+        public int OnFailAction { get; set; }
 
         /// <summary>
         /// ID of the next step to execute when a step is not executed successfully.
         /// </summary>
-        Step OnFailStep { get; set; }
+        public Step OnFailStep { get; set; }
 
         /// <summary>
         /// Reserved.
         /// </summary>
-        string Server { get; set; }
+        public string Server { get; set; }
 
         /// <summary>
         /// Name of the database in which command is executed if subsystem is TSQL.
         /// </summary>
-        string DatabaseName { get; set; }
+        public string DatabaseName { get; set; }
 
         /// <summary>
         /// Name of the database user whose account will be used when executing the step.
         /// </summary>
-        string DababaseUsername { get; set; }
+        public string DababaseUsername { get; set; }
 
         /// <summary>
         /// Number of retry attempts made if the step fails.
         /// </summary>
-        int RetryAttempts { get; set; }
+        public int RetryAttempts { get; set; }
 
         /// <summary>
         /// Amount of time to wait between retry attempts. 
         /// </summary>
-        int RetryInterval { get; set; }
+        public int RetryInterval { get; set; }
 
         /// <summary>
         /// Reserved.
         /// </summary>
-        int OsRunPriority { get; set; }
+        public int OsRunPriority { get; set; }
 
         /// <summary>
         /// Name of the file in which the step's output is saved when subsystem is TSQL, PowerShell, or CmdExec.
         /// </summary>
-        string OutputFileName { get; set; }
+        public string OutputFileName { get; set; }
 
         /// <summary>
         /// Outcome of the previous execution of the job step.
@@ -106,36 +106,40 @@ namespace Fanex.Maintenance.Entity.Domain
         ///3 = Canceled
         ///5 = Unknown
         /// </summary>
-        int LastRunOutCome { get; set; }
+        public int LastRunOutCome { get; set; }
 
         /// <summary>
         /// Duration (hhmmss) of the step the last time it ran.
         /// </summary>
-        int LastRunDuration { get; set; }
+        public int LastRunDuration { get; set; }
 
         /// <summary>
         /// Number of retry attempts in the last execution of the job step.
         /// </summary>
-        int LastRunRetries { get; set; }
+        public int LastRunRetries { get; set; }
 
         /// <summary>
         /// Date (yyyymmdd) the step last started execution.
         /// </summary>
-        int LastRunDate { get; set; }
+        public int LastRunDate { get; set; }
 
         /// <summary>
         /// Time (hhmmss) the step last started execution.
         /// </summary>
-        int LastRunTime { get; set; }
+        public int LastRunTime { get; set; }
 
         /// <summary>
         /// Proxy for the job step.
         /// </summary>
-        int ProxyId { get; set; }
+        public int ProxyId { get; set; }
 
         /// <summary>
         /// Identifier for the job step. 
         /// </summary>
-        Guid StepId { get; set; }
+        public Guid StepId { get; set; }
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }

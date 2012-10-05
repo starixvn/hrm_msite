@@ -9,8 +9,12 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
-    public interface OrinatingServer : IEntity<int, string>
+    public class OrinatingServer : IEntity<int, string>
     {
-        int MasterServer { get; set; }
+        public int MasterServer { get; set; }
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }
