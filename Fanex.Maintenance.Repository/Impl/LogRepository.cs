@@ -28,9 +28,9 @@ namespace Fanex.Maintenance.Repository.Impl
             {
                 using (var db = new ObjectDb(criteria.GetSettingKey()))
                 {
-                    return db.Query<Logs, Categorys, Logs>((m, c) =>
+                    return db.Query<Logs, LogCategorys, Logs>((m, c) =>
                     {
-                        m.Category = new List<Categorys>();
+                        m.Category = new List<LogCategorys>();
                         m.Category.Add(c);
                         return m;
                     }, "CategoryID,CategoryName", criteria.GetSpParams());

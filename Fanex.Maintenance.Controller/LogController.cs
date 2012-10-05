@@ -110,7 +110,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListSeverity = list;
 
             ////Get Category from DB
-            IEnumerable<Categorys> listCategory = _categoryService.GetAll();
+            IEnumerable<LogCategorys> listCategory = _categoryService.GetAll();
             ViewBag.ListCategory = listCategory.Select(c => new SelectListItem
             {
                 Text = c.CategoryName,

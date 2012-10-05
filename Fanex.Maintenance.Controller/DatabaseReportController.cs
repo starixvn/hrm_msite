@@ -9,6 +9,7 @@
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;
+    using Fanex.Maintenance.Criteria.DatabaseReport;
 
     public class DatabaseReportController : Controller
     {

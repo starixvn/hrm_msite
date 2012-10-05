@@ -47,9 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Categorys.cs" />
+    <Compile Include="Domain\ICategories.cs" />
+    <Compile Include="Domain\IEntity.cs" />
+    <Compile Include="Domain\IJobs.cs" />
+    <Compile Include="Domain\IOperators.cs" />
+    <Compile Include="Domain\IOrinatingServers.cs" />
+    <Compile Include="Domain\ISchedules.cs" />
+    <Compile Include="Domain\ISteps.cs" />
+    <Compile Include="Model\LogCategorys.cs" />
     <Compile Include="Model\CommandResult.cs" />
-    <Compile Include="Model\DataIntegrityViewModel.cs" />
     <Compile Include="Model\Logs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,6 +64,12 @@
       <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Domain\ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ValueObject\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

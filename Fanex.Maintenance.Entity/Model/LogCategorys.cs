@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetAllCategoryCritria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Categorys.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,24 +7,17 @@
 //   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
 // </history>
 
-namespace Fanex.Maintenance.Criteria.Category
+namespace Fanex.Maintenance.Entity.Model
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Fanex.NAP.Framework.Data;
 
-    public class GetAllCategoryCritria : CriteriaBase
+    public class LogCategorys
     {
-        public override bool IsValid()
-        {
-            return true;
-        }
+        public int CategoryID { get; set; }
 
-        public override string GetSettingKey()
-        {
-            return "Logging_Category_SelAll";
-        }
+        public string CategoryName { get; set; }
     }
 }

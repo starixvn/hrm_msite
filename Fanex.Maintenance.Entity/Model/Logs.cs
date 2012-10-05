@@ -42,7 +42,7 @@ namespace Fanex.Maintenance.Entity.Model
 
         public string ThreadName { get; set; }
 
-        public List<Categorys> Category { get; set; }
+        public List<LogCategorys> Category { get; set; }
 
         public string Message { get; set; }
     }

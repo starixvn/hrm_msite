@@ -47,7 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Category\GetAllCategoryCritria.cs" />
+    <Compile Include="DatabaseReport\DataIntegrityViewModel.cs" />
+    <Compile Include="LogCategory\GetAllCategoryCritria.cs" />
     <Compile Include="Credit\GetCreditDataToValidateCriteria.cs" />
     <Compile Include="Licensee\GetBalanceUpDayCriteria.cs" />
     <Compile Include="Licensee\GetDepositDataToValidateCriteria.cs" />

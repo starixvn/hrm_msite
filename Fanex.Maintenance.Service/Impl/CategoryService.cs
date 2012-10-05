@@ -10,7 +10,7 @@
 namespace Fanex.Maintenance.Service.Impl
 {
     using System.Collections.Generic;
-    using Fanex.Maintenance.Criteria.Category;
+    using Fanex.Maintenance.Criteria.LogCategory;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl;
 
@@ -39,7 +39,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// Get all categorys
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Categorys> GetAll()
+        public IEnumerable<LogCategorys> GetAll()
         {
             GetAllCategoryCritria criteria = new GetAllCategoryCritria();
 
