@@ -124,7 +124,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// Get list logs
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Logs> GetLogs()
+        public IEnumerable<Log> GetLogs()
         {
             GetLogCriteria criteria = new GetLogCriteria
             {

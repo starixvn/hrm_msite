@@ -15,22 +15,22 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Entity.Model;
 
-    public class LogRepository : ReadonlyRepository<Logs>
+    public class LogRepository : ReadonlyRepository<Log>
     {
         /// <summary>
         /// Override return Logs
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        public override IEnumerable<Logs> Fetch(ICriteria criteria)
+        public override IEnumerable<Log> Fetch(ICriteria criteria)
         {
             try
             {
                 using (var db = new ObjectDb(criteria.GetSettingKey()))
                 {
-                    return db.Query<Logs, LogCategorys, Logs>((m, c) =>
+                    return db.Query<Log, LogCategory, Log>((m, c) =>
                     {
-                        m.Category = new List<LogCategorys>();
+                        m.Category = new List<LogCategory>();
                         m.Category.Add(c);
                         return m;
                     }, "CategoryID,CategoryName", criteria.GetSpParams());

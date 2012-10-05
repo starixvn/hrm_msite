@@ -784,7 +784,9 @@
     <Content Include="themes\reset.css" />
     <Content Include="themes\style.css" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -110,7 +110,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListSeverity = list;
 
             ////Get Category from DB
-            IEnumerable<LogCategorys> listCategory = _categoryService.GetAll();
+            IEnumerable<LogCategory> listCategory = _categoryService.GetAll();
             ViewBag.ListCategory = listCategory.Select(c => new SelectListItem
             {
                 Text = c.CategoryName,
@@ -134,7 +134,7 @@ namespace Fanex.Maintenance.Controller
             InitPageSize();
 
             ////Get logs by date
-            IEnumerable<Logs> listLogs = _logService.With(0, "All")
+            IEnumerable<Log> listLogs = _logService.With(0, "All")
                 .From(DateTime.Now)
                 .To(DateTime.Now.AddDays(1))
                 .WithPagination(0, 10)
@@ -174,7 +174,7 @@ namespace Fanex.Maintenance.Controller
             criteria.To = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             ////Get logs by date
-            IEnumerable<Logs> listLogs = _logService.With(criteria.CategoryId, criteria.Severity)
+            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)
                 .WithPagination(0, size)

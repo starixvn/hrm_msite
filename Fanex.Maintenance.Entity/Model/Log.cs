@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Entity.Model
     using System;
     using System.Collections.Generic;
 
-    public class Logs
+    public class Log
     {
         public long LogId { get; set; }
 
@@ -40,7 +40,7 @@ namespace Fanex.Maintenance.Entity.Model
 
         public string ThreadName { get; set; }
 
-        public List<LogCategorys> Category { get; set; }
+        public List<LogCategory> Category { get; set; }
 
         public string Message { get; set; }
     }

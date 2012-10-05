@@ -11,12 +11,12 @@ namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
 
-    public interface ISteps : IEntity<int, string>
+    public interface Step : IEntity<int, string>
     {
         /// <summary>
         /// ID of the job.
         /// </summary>
-        IJobs Job { get; set; }
+        Job Job { get; set; }
 
         /// <summary>
         /// Name of the subsystem used by SQL Server Agent to execute the job step.
@@ -51,7 +51,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// <summary>
         /// ID of the next step to execute when a step is executed successfully.
         /// </summary>
-        ISteps OnSuccessStep { get; set; }
+        Step OnSuccessStep { get; set; }
 
         /// <summary>
         /// Action to be performed when a step is not executed successfully.
@@ -61,7 +61,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// <summary>
         /// ID of the next step to execute when a step is not executed successfully.
         /// </summary>
-        ISteps OnFailStep { get; set; }
+        Step OnFailStep { get; set; }
 
         /// <summary>
         /// Reserved.

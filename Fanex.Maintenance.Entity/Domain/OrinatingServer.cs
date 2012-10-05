@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ICategories.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="IOrinatingServers.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,10 +9,8 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
-    public interface IJobCategories : IEntity<int, string>
+    public interface OrinatingServer : IEntity<int, string>
     {
-        int Class { get; set; }
-
-        int Type { get; set; }
+        int MasterServer { get; set; }
     }
 }

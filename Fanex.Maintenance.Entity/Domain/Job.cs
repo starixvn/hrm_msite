@@ -11,11 +11,11 @@ namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
 
-    public interface IJobs : IEntity<int, string>
+    public interface Job : IEntity<int, string>
     {
         Guid JobId { get; set; }
 
-        IOrinatingServers OrinatingServer { get; set; }
+        OrinatingServer OrinatingServer { get; set; }
 
         int Enable { get; set; }
 
@@ -26,7 +26,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// </summary>
         int StartStepId { get; set; }
 
-        IJobCategories Category { get; set; }
+        JobCategory Category { get; set; }
 
         /// <summary>
         /// Security identifier number (SID) of the job owner.
@@ -72,17 +72,17 @@ namespace Fanex.Maintenance.Entity.Domain
         /// <summary>
         /// E-mail name of the operator to notify.
         /// </summary>
-        IOperators NotifyEmailOperator { get; set; }
+        Operator NotifyEmailOperator { get; set; }
 
         /// <summary>
         /// ID of the computer or user used when sending network messages.
         /// </summary>
-        IOperators NotifyNetsendOperator { get; set; }
+        Operator NotifyNetsendOperator { get; set; }
 
         /// <summary>
         /// ID of the computer or user used when sending a page.
         /// </summary>
-        IOperators NotifyPageOperator { get; set; }
+        Operator NotifyPageOperator { get; set; }
 
         /// <summary>
         ///  Bitmask indicating under what circumstances the job should be deleted when a job completes:

@@ -10,7 +10,7 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
-    public interface IOperators : IEntity<int, string>
+    public interface Operator : IEntity<int, string>
     {
         /// <summary>
         /// Status of alert notifications (Boolean). If 1, this operator can receive notifications when an alert occurs.

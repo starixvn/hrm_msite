@@ -11,11 +11,11 @@ namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
 
-    public interface ISchedules : IEntity<int, string>
+    public interface Schedule : IEntity<int, string>
     {
         int ScheduleUId { get; set; }
 
-        IOrinatingServers OrinatingServer { get; set; }
+        OrinatingServer OrinatingServer { get; set; }
 
         byte[] OwnerSid { get; set; }
 
