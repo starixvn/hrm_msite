@@ -22,6 +22,7 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
+
         }
     }
 }
