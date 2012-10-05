@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ICategoryService.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ICategoryRepository.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,9 +7,14 @@
 //   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
 // </history>
 
-namespace Fanex.Maintenance.Service.Interface
+namespace Fanex.Maintenance.Repository.Interface
 {
-    public class ICategoryService
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    public interface IJobCategoryRepository
     {
     }
 }

@@ -10,27 +10,27 @@
 namespace Fanex.Maintenance.Service.Impl
 {
     using System.Collections.Generic;
-    using Fanex.Maintenance.Criteria.LogCategory;
+    using Fanex.Maintenance.Criteria.Log;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl;
 
-    public class CategoryService
+    public class LogCategoryService
     {
         #region Member
 
-        private readonly CategoryRepository _categoryRepository = new CategoryRepository();
+        private readonly LogCategoryRepository _categoryRepository = new LogCategoryRepository();
 
         #endregion Member
 
         #region Ctor
 
-        private CategoryService()
+        private LogCategoryService()
         {
         }
 
-        public static CategoryService Create()
+        public static LogCategoryService Create()
         {
-            return new CategoryService();
+            return new LogCategoryService();
         }
 
         #endregion Ctor

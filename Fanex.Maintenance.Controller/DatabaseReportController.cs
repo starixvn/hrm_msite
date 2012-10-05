@@ -5,7 +5,7 @@
     using System.Data;
     using System.Globalization;
     using System.Web.Mvc;
-    using Fanex.Maintenance.Criteria.Licensee;
+    using Fanex.Maintenance.Criteria.DatabaseReport;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;

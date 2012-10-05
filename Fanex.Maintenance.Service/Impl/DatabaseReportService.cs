@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Service.Impl
     using System.Linq;
     using System.Text;
     using Fanex.Maintenance.Core.TemplateReport;
-    using Fanex.Maintenance.Criteria.Licensee;
+    using Fanex.Maintenance.Criteria.DatabaseReport;
     using Fanex.Maintenance.Repository.Impl;
     using Fanex.Maintenance.Service.Interface;
     using Fanex.NAP.Framework.Data;

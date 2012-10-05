@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-namespace Fanex.Maintenance.Criteria.Licensee
+namespace Fanex.Maintenance.Criteria.DatabaseReport
 {
     using System;
     using System.Collections.Generic;

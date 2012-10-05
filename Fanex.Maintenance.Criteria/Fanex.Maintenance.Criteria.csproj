@@ -48,10 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseReport\DataIntegrityViewModel.cs" />
-    <Compile Include="LogCategory\GetAllCategoryCritria.cs" />
-    <Compile Include="Credit\GetCreditDataToValidateCriteria.cs" />
-    <Compile Include="Licensee\GetBalanceUpDayCriteria.cs" />
-    <Compile Include="Licensee\GetDepositDataToValidateCriteria.cs" />
+    <Compile Include="Log\GetAllCategoryCritria.cs" />
+    <Compile Include="DatabaseReport\GetCreditDataToValidateCriteria.cs" />
+    <Compile Include="DatabaseReport\GetBalanceUpDayCriteria.cs" />
+    <Compile Include="DatabaseReport\GetDepositDataToValidateCriteria.cs" />
     <Compile Include="Log\GetLogCriteria.cs" />
     <Compile Include="MailService\MailConfigViewModel.cs" />
     <Compile Include="MailService\MailFunctionViewModel.cs" />

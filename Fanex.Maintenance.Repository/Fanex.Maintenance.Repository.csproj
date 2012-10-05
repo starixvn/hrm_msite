@@ -47,11 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Impl\BaseRepository.cs" />
-    <Compile Include="Impl\CategoryRepository.cs" />
+    <Compile Include="Impl\LogCategoryRepository.cs" />
     <Compile Include="Impl\DatabaseReportRepository.cs" />
     <Compile Include="Impl\LogRepository.cs" />
     <Compile Include="Impl\UserRepository.cs" />
-    <Compile Include="Interface\ICategoryRepository.cs" />
+    <Compile Include="Interface\IJobCategoryRepository.cs" />
     <Compile Include="Interface\IDatabaseReportRepository.cs" />
     <Compile Include="Interface\ILogRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />

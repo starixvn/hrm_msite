@@ -15,7 +15,7 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Entity.Model;
 
-    public class CategoryRepository : ReadonlyRepository<LogCategorys>
+    public class LogCategoryRepository : ReadonlyRepository<LogCategorys>
     {
         /// <summary>
         /// Override return Categorys
