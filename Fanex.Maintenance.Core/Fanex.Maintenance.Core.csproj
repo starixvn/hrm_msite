@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\DatabaseServersSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateReport\Block.cs" />
     <Compile Include="TemplateReport\BlockCredit.cs" />
