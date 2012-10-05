@@ -45,15 +45,14 @@
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.3.0.5\lib\dotless.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\_Dependencies\Fanex\Release\Fanex.Common.dll</HintPath>
+    <Reference Include="Fanex.Common">
+      <HintPath>..\_Dependencies\Fanex\Fanex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Data, Version=0.5.404.57, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex\Release\Fanex.Data.dll</HintPath>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\_Dependencies\Fanex\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging">
-      <HintPath>..\_Dependencies\Fanex\Release\Fanex.Logging.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\MailService\Fanex.MailDeliver.MailClient.dll</HintPath>
@@ -170,10 +169,6 @@
     <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\UserSiteController.cs" />
     <Compile Include="Areas\UserLogin\UserLogInAreaRegistration.cs" />
-    <Compile Include="Controllers\DatabaseReportController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LogController.cs" />
-    <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1110,9 +1105,17 @@
     <Content Include="Views\DatabaseReport\UserOnlineChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
+      <Project>{E7173CDD-8ECB-4FB6-B585-41BFE941745E}</Project>
+      <Name>Fanex.Maintenance.Controller</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">
       <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.Maintenance.Criteria\Fanex.Maintenance.Criteria.csproj">
+      <Project>{4004F1EE-1FB8-486C-903E-326C360DBD81}</Project>
+      <Name>Fanex.Maintenance.Criteria</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
