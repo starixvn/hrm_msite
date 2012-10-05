@@ -810,6 +810,7 @@
     <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
     <Content Include="Areas\UserLogin\Views\Web.config" />
     <Content Include="Configurations\DatabaseServersSection.config" />
+    <Content Include="Configurations\SpNameSection.config" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\autocomplete\search.php" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\tabs\ajax\content3-slow.php" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\tabs\ajax\content4-broken.php" />
