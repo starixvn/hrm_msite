@@ -659,6 +659,7 @@
     <Content Include="scripts\Plugin\jquery-ui-1.8.23.custom\index.html" />
     <Content Include="scripts\Plugin\jquery-ui-1.8.23.custom\js\jquery-1.8.0.min.js" />
     <Content Include="scripts\Plugin\jquery-ui-1.8.23.custom\js\jquery-ui-1.8.23.custom.min.js" />
+    <Content Include="scripts\SqlJobManagement\LeftMenuPage.js" />
     <Content Include="scripts\_Layout.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />
     <Content Include="themes\assets\css\font-awesome.css" />
@@ -1237,6 +1238,7 @@
     <Content Include="themes\report\CreditStyle.css" />
     <Content Include="themes\report\LicenseedataStyle.css" />
     <Content Include="themes\reset.css" />
+    <Content Include="themes\SqlJobManagement\MainContentPage.css" />
     <Content Include="themes\style.css" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Web.config">
