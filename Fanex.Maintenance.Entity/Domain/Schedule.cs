@@ -14,13 +14,13 @@ namespace Fanex.Maintenance.Entity.Domain
 
     public class Schedule : IEntity<int, string>
     {
-        public int ScheduleUId { get; set; }
+        public string ScheduleUId { get; set; }
 
         public OrinatingServer OrinatingServer { get; set; }
 
         public byte[] OwnerSid { get; set; }
 
-        public int Enable { get; set; }
+        public bool Enable { get; set; }
 
         /// <summary>
         /// How frequently a job runs for this schedule.
@@ -32,7 +32,7 @@ namespace Fanex.Maintenance.Entity.Domain
         ///64 = Runs when the SQL Server Agent service starts
         ///128 = Runs when the computer is idle
         /// </summary>
-        public int FregType { get; set; }
+        public int FreqType { get; set; }
 
         /// <summary>
         /// Days that the job is executed. Depends on the value of freq_type. 
@@ -69,7 +69,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 64 (starts when SQL Server Agent service starts) freq_interval is unused (0)                                 
         /// 128 (runs when computer is idle) freq_interval is unused (0)                               
         /// </summary>
-        public int FregInterval { get; set; }
+        public int FreqInterval { get; set; }
 
         /// <summary>
         /// Units for the freq_subday_interval. Can be one of the following values:
@@ -78,12 +78,12 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 4 Minutes
         /// 8 Hours
         /// </summary>
-        public int FregSubdayType { get; set; }
+        public int FreqSubdayType { get; set; }
 
         /// <summary>
         /// Number of freq_subday_type periods to occur between each execution of the job.
         /// </summary>
-        public int FregSubdayInterval { get; set; }
+        public int FreqSubdayInterval { get; set; }
 
         /// <summary>
         /// When freq_interval occurs in each month, if freq_interval is 32 (monthly relative).
@@ -95,14 +95,14 @@ namespace Fanex.Maintenance.Entity.Domain
         ///8 = Fourth
         ///16 = Last
         /// </summary>
-        public int FregRelativeInterval { get; set; }
+        public int FreqRelativeInterval { get; set; }
 
         /// <summary>
         /// Number of weeks or months between the scheduled execution of a job. 
         /// freq_recurrence_factor is used only if freq_type is 8, 16, or 32. 
         /// If this column contains 0, freq_recurrence_factor is unused.
         /// </summary>
-        public int FregRecurrenceFactor { get; set; }
+        public int FreqRecurrenceFactor { get; set; }
 
         /// <summary>
         /// Date on which execution of a job can begin. 

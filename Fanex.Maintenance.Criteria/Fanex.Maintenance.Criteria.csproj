@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="DatabaseReport\DataIntegrityViewModel.cs" />
     <Compile Include="Job\GetAllJobInScheduleCriteria.cs" />
+    <Compile Include="Job\GetAllScheduleCriteria.cs" />
     <Compile Include="Job\GetListJobCriteria.cs" />
     <Compile Include="Log\GetAllCategoryCritria.cs" />
     <Compile Include="DatabaseReport\GetCreditDataToValidateCriteria.cs" />
