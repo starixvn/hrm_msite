@@ -6,11 +6,226 @@
     ViewBag.Title = string.Format("{0}", "Home");
 }
 @section Head{
-    <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css">
-    </link>
+    <link href="~/themes/nap/job/job.less" rel="stylesheet" type="text/css"></link>
+    <link href="~/themes/nexhrm/Styles/site.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/nexhrm/Styles/style.css" rel="stylesheet" type="text/css" />
 }
-@section Headline {
-    <h1>
-        <span class="title">@ViewBag.Title</span>
-    </h1>
-}
+<div class="column_wrap">
+    <div class="column">
+        <div class="nav_links">
+            <div class="overview_section togglable_section" id="0">
+                <div class="separator first">
+                    <strong>Personal</strong>
+                </div>
+            </div>
+            <div style="display: block;" class="navItem">
+                <div id="employee_myspace" class="el" data-hashovermenu="False">
+                    <span class="xicon news"></span><a href="/">My dashboard</a>
+                </div>
+                <div id="leave_employeeview" class="el" data-hashovermenu="True">
+                    <span class="xicon calendar7"></span><a href="/leave/employeeview">Leave request</a>
+                    <div style="display: none;" class="hoveraction hide">
+                        <a title="Create new leave request" href="/leave/create"><span class="xicon plus"></span>
+                        </a>
+                    </div>
+                </div>
+                <div id="changeshift_employeeview" class="el" data-hashovermenu="True">
+                    <span class="xicon clock3"></span><a href="/changeshift/employeeview">Change shift</a>
+                    <div style="display: none;" class="hoveraction hide">
+                        <a title="Create new change shift" href="/changeshift/create"><span class="xicon plus">
+                        </span></a>
+                    </div>
+                </div>
+                <div id="lateinearlyout_employeeview" class="el" data-hashovermenu="True">
+                    <span class="xicon clock2"></span><a href="/lateinearlyout/employeeview">Late in - Early
+                        out</a>
+                    <div style="display: none;" class="hoveraction hide">
+                        <a title="Create new late in - early out" href="/lateinearlyout/create"><span class="xicon plus">
+                        </span></a>
+                    </div>
+                </div>
+                <div id="checkinout_employeeview" class="el" data-hashovermenu="True">
+                    <span class="xicon clock1"></span><a href="/checkinout/employeeview">Check in - Check
+                        out</a>
+                    <div style="display: none;" class="hoveraction hide">
+                        <a title="Create new check in - check out" href="/checkinout/create"><span class="xicon plus">
+                        </span></a>
+                    </div>
+                </div>
+                <div id="report_timesheet" class="el selected" data-hashovermenu="False">
+                    <span class="xicon calendar8"></span><a href="/report/timesheet">My Timesheet</a>
+                </div>
+                <div id="employee_myworkingschedule" class="el" data-hashovermenu="False">
+                    <span class="xicon calendar"></span><a href="/employee/myworkingschedule">My calendar</a>
+                </div>
+                <div id="account_index" class="el" data-hashovermenu="False">
+                    <span class="xicon user"></span><a href="/account/index">My profile</a>
+                </div>
+            </div>
+            <div class="overview_section togglable_section" id="1">
+                <div class="separator">
+                    <strong>Company space</strong>
+                </div>
+            </div>
+            <div style="display: block;" class="navItem">
+                <div id="employee_index" class="el" data-hashovermenu="False">
+                    <span class="xicon users"></span><a href="/employee/index">Staff info</a>
+                </div>
+                <div id="employee_workingcalendars" class="el" data-hashovermenu="False">
+                    <span class="xicon calendar"></span><a href="/employee/workingcalendars">Working calendars</a>
+                </div>
+                <div id="request_employeeview" class="el" data-hashovermenu="False">
+                    <span class="xicon user1"></span><a href="/request/employeeview">Employees' requests</a>
+                </div>
+                <div id="report_attendance" class="el" data-hashovermenu="False">
+                    <span class="xicon calendar1"></span><a href="/report/attendance">Attendance report</a>
+                </div>
+                <div id="report_leavesummary" class="el" data-hashovermenu="False">
+                    <span class="xicon calendar4"></span><a href="/report/leavesummary">Leave summary</a>
+                </div>
+                <div id="report_totalworkinghours" class="el" data-hashovermenu="False">
+                    <span class="xicon clock"></span><a href="/report/totalworkinghours">Total working hours</a>
+                </div>
+                <div id="holiday_index" class="el" data-hashovermenu="False">
+                    <span class="xicon holiday"></span><a href="/holiday/index">Holiday</a>
+                </div>
+                <div id="shift_index" class="el" data-hashovermenu="False">
+                    <span class="xicon calendar3"></span><a href="/shift/index">Shift info</a>
+                </div>
+                <div id="report_extensionno" class="el" data-hashovermenu="False">
+                    <span class="xicon mobile"></span><a href="/report/extensionno">Extension numbers</a>
+                </div>
+                <div id="memo_index" class="el" data-hashovermenu="False">
+                    <span class="xicon memo"></span><a href="/memo/index">Company memo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="section_content">
+            <div class="content_wrap">
+                <section id="section_breadcrumb">
+                    <div class="separator js-separator">
+                        <div class="js-view-title separator-view-title" id="view_title">                           
+                        </div>
+                        <div class="js-menu separator-menu">
+                            
+                        </div>
+                    </div>
+                </section>
+                <section id="section_body">
+                    <div class="content_scroll">
+                        
+
+
+
+
+<h2>My timesheet</h2>
+<form action="/report/timesheet" method="get">    <div class="container_24">
+        <div class="grid_1 gridlabel">
+            Month
+        </div>
+        <div class="grid_4">            
+            <input id="Year" name="Year" value="2012" type="hidden">
+            <input id="Month" name="Month" value="10" type="hidden">
+            <input data-val="true" data-val-number="The field Emp must be a number." id="EmpId" name="EmpId" value="212" type="hidden">
+        </div>
+        <div class="grid_3 gridlabel">
+            <label for="Type">Request type</label>
+        </div>
+        <div class="grid_4 pull_1">
+
+            <select data-val="true" data-val-number="The field Request type must be a number." data-val-required="The Request type field is required." id="Type" name="Type"><option selected="selected" value="0">All</option>
+<option value="1">Checkin</option>
+<option value="2">Checkout</option>
+<option value="3">Late in</option>
+<option value="4">Early out</option>
+<option value="5">Not working</option>
+</select>
+            <span class="field-validation-valid" data-valmsg-for="Type" data-valmsg-replace="true"></span>
+        </div>
+        <div class="grid_3 pull_1">
+            <input class="" origin-value="Submit" id="view" value="Submit" name="View" type="submit">
+        </div>
+        <div class="clear"></div>
+    </div>
+</form><div class="clear"></div>   
+
+<table id="data" class="data persist-area">
+    <thead>
+        <tr class="persist-header">
+            <th>#</th>
+            <th>
+                Date
+            </th>
+            <th>
+                Nick
+            </th>
+            <th>
+                Team
+            </th>
+            <th>
+                Shift
+            </th>
+            <th>
+                Check In
+            </th>
+            <th>
+                Check out
+            </th>
+            <th>
+                Total hours
+            </th>
+            <th>
+                Late In
+            </th>
+            <th>
+                Early Out
+            </th>
+            <th>
+                Notes
+            </th>
+        </tr><tr style="width: 1068px; visibility: hidden;" class="floatingHeader">
+            <th style="width: 30px; height: 30px;">#</th>
+            <th style="width: 134px;">
+                Date
+            </th>
+            <th style="width: 163px;">
+                Nick
+            </th>
+            <th style="width: 57px;">
+                Team
+            </th>
+            <th style="width: 49px;">
+                Shift
+            </th>
+            <th style="width: 86px;">
+                Check In
+            </th>
+            <th style="width: 102px;">
+                Check out
+            </th>
+            <th style="width: 110px;">
+                Total hours
+            </th>
+            <th style="width: 68px;">
+                Late In
+            </th>
+            <th style="width: 89px;">
+                Early Out
+            </th>
+            <th style="width: 59px;">
+                Notes
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>         <td>1</td>         <td>             05 Oct, 2012         </td>         <td original-title="Nguyễn Trung Tín" class="tooltip">             Edward.Nguyen         </td>         <td class="tooltip" title="Internal">             INT         </td>         <td>             E3         </td>         <td>              07:33         </td>         <td>                      </td>         <td>                      </td>         <td>                      </td>         <td>                      </td>         <td>                      </td>     </tr><tr>         <td>2</td>         <td>             04 Oct, 2012         </td>         <td original-title="Nguyễn Trung Tín" class="tooltip">             Edward.Nguyen         </td>         <td class="tooltip" title="Internal">             INT         </td>         <td>             E3         </td>         <td>              07:37         </td>         <td>              19:07         </td>         <td>                              10h30'                      </td>         <td>                      </td>         <td>                      </td>         <td>                      </td>     </tr><tr>         <td>3</td>         <td>             03 Oct, 2012         </td>         <td original-title="Nguyễn Trung Tín" class="tooltip">             Edward.Nguyen         </td>         <td class="tooltip" title="Internal">             INT         </td>         <td>             E3         </td>         <td>              07:56         </td>         <td>              18:02         </td>         <td>                              09h06'                      </td>         <td>                      </td>         <td>                      </td>         <td>                      </td>     </tr><tr>         <td>4</td>         <td>             02 Oct, 2012         </td>         <td original-title="Nguyễn Trung Tín" class="tooltip">             Edward.Nguyen         </td>         <td class="tooltip" title="Internal">             INT         </td>         <td>             E3         </td>         <td>              07:36         </td>         <td>              18:24         </td>         <td>                              09h48'                      </td>         <td>                      </td>         <td>                      </td>         <td>                      </td>     </tr><tr>         <td>5</td>         <td>             01 Oct, 2012         </td>         <td original-title="Nguyễn Trung Tín" class="tooltip">             Edward.Nguyen         </td>         <td class="tooltip" title="Internal">             INT         </td>         <td>             E3         </td>         <td>              07:36         </td>         <td>              18:41         </td>         <td>                              10h05'                      </td>         <td>                      </td>         <td>                      </td>         <td>                      </td>     </tr></tbody>
+</table>
+
+                    </div>
+                </section>
+            </div>
+        </section>
+<div class="right_wrap">
+</div>
