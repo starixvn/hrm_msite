@@ -59,7 +59,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult JobManagementPage(string job_name, int? enabled, int? execution_status, int? dateType ,string server = "", string from = "", string to = "")
+        public ActionResult JobManagementPage(string job_name, int? enabled, int? execution_status, int? dateType, string server = "", string from = "", string to = "")
         {
             List<JobSchedule> listJob = new List<JobSchedule>();
 
@@ -67,10 +67,10 @@ namespace Fanex.Maintenance.Controller
                 .WithStatus(enabled)
                 .WithCurrentExecuteStatus(execution_status)
                 .FromServer(server)
-                .GetJobs().ToList();            
+                .GetJobs().ToList();
 
             //// check datetype not all
-            if (!ReferenceEquals(dateType,null))
+            if (!ReferenceEquals(dateType, null))
             {
                 DateTime dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1);
@@ -78,11 +78,15 @@ namespace Fanex.Maintenance.Controller
                 //// filter by from date to date
                 if (dateType.Equals(Constans.DateType.Last))
                 {
-                    listJob = listJob.Where(j => j.LastRunDate >= dateFrom && j.LastRunDate <= dateTo).ToList();
+                    listJob = listJob.Where(
+                        j => j.LastRunDate >= dateFrom
+                            && j.LastRunDate <= dateTo).ToList();
                 }
                 else
                 {
-                    listJob = listJob.Where(j => j.NextRunDate >= dateFrom && j.LastRunDate <= dateTo).ToList();
+                    listJob = listJob.Where(
+                        j => j.NextRunDate >= dateFrom
+                            && j.LastRunDate <= dateTo).ToList();
                 }
             }
 
@@ -90,6 +94,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListServer = GetServer();
             ViewBag.DateFrom = from;
             ViewBag.DateTo = to;
+
             return View("~/Views/SqlJobManagement/JobManagement.cshtml");
         }
 

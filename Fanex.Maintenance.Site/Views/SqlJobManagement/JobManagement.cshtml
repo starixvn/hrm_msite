@@ -6,7 +6,7 @@
     var lisJob = ViewBag.ListJob != null ? (List<JobSchedule>)ViewBag.ListJob : new List<JobSchedule>();
 }
 @section Head {
-    <link href="~/themes/nap/site/manage.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
     <script src="~/scripts/Job/JobManagementPage.js" type="text/javascript"></script>
 }
 @section Headline {
@@ -155,16 +155,31 @@
                 <td>
                     @item.NextRunDate
                 </td>
-                <td>
+                <td class="align-center">
                     @item.ExecuteStatus
                 </td>
                 <td>
                     @item.Job.OrinatingServer.Name
                 </td>
-                <td>
+                <td class="align-center">
                     @item.Job.Enable
                 </td>
-                <td>
+                <td class="align-center">
+                    <div class="action-wrp">
+                        <span class="btn-action">Action</span>
+                        <div class="relative">
+                            <ul class="actions" style="visibility: hidden; opacity: 0;">
+                                <li><a href="/NAPAdmin1/Admin/User/Edit/169368" class="dd-edit">Edit 'pgmPhuong' Details</a>
+                                </li>
+                                <li><a href="/NAPAdmin1/Admin/User/ResetPassword/169368" class="dd-chgpwd">Reset 'pgmPhuong'
+                                    Password</a> </li>
+                                <li><a href="/NAPAdmin1/Admin/User/AssignSite/169368" class="dd-site">Assign site to
+                                    'pgmPhuong'</a></li>
+                                <li><a href="/NAPAdmin1/Admin/User/AssignPermission/169368" class="dd-permission">Assign
+                                    permission to 'pgmPhuong'</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </td>
             </tr>
             }
