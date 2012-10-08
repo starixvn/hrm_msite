@@ -169,14 +169,12 @@
                         <span class="btn-action">Action</span>
                         <div class="relative">
                             <ul class="actions" style="visibility: hidden; opacity: 0;">
-                                <li><a href="/NAPAdmin1/Admin/User/Edit/169368" class="dd-edit">Edit 'pgmPhuong' Details</a>
-                                </li>
-                                <li><a href="/NAPAdmin1/Admin/User/ResetPassword/169368" class="dd-chgpwd">Reset 'pgmPhuong'
-                                    Password</a> </li>
-                                <li><a href="/NAPAdmin1/Admin/User/AssignSite/169368" class="dd-site">Assign site to
-                                    'pgmPhuong'</a></li>
-                                <li><a href="/NAPAdmin1/Admin/User/AssignPermission/169368" class="dd-permission">Assign
-                                    permission to 'pgmPhuong'</a></li>
+                                <li><a href="#" class="dd-edit">Edit '@item.Job.Name' Details</a> </li>
+                                <li><a href="#" class="dd-site">View log '@item.Job.Name'</a></li>
+                                <li><a href="#" class="dd-site">View step '@item.Job.Name'</a></li>
+                                <li><a href="#" class="dd-site">View schedule '@item.Job.Name'</a></li>
+                                <li><a href="#" class="dd-site">Run</a></li>
+                                <li><a href="#" class="dd-site">Copy to</a></li>
                             </ul>
                         </div>
                     </div>
@@ -191,10 +189,7 @@
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
     <script type="text/javascript">
-
         $(function () {
-
-
         });        
     </script>
 }
