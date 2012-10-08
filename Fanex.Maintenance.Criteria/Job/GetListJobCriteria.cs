@@ -24,6 +24,15 @@ namespace Fanex.Maintenance.Criteria.Job
         [SpParam(Ignored = true)]
         public string Server { get; set; }
 
+        [SpParam(Ignored = true)]
+        public int? DateType { get; set; }
+
+        [SpParam(Ignored = true)]
+        public DateTime? From { get; set; }
+
+        [SpParam(Ignored = true)]
+        public DateTime? To { get; set; }
+
         public string Job_Name { get; set; }
 
         public int? Enabled { get; set; }

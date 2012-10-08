@@ -39,5 +39,14 @@ namespace Fanex.Maintenance.Core.Web
 
             PerformingCompletionActions = 6
         }
+
+        /// <summary>
+        /// Last run date and next run date
+        /// </summary>
+        public enum DateType
+        {
+            Last = 0,
+            Next = 1
+        }
     }
 }

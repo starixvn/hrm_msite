@@ -6,7 +6,8 @@
     var lisJob = ViewBag.ListJob != null ? (List<JobSchedule>)ViewBag.ListJob : new List<JobSchedule>();
 }
 @section Head {
- <link href="~/themes/nap/site/manage.less" rel="stylesheet" type="text/css" />   
+    <link href="~/themes/nap/site/manage.less" rel="stylesheet" type="text/css" />
+    <script src="~/scripts/Job/JobManagementPage.js" type="text/javascript"></script>
 }
 @section Headline {
     <h1>
@@ -39,8 +40,8 @@
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.Enabled,
                     new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.Enabled,Value=Constans.Status.Enabled.ToString()},
-                        new SelectListItem{ Text=ViewResource.Disabled,Value=Constans.Status.Disabled.ToString()}
+                        new SelectListItem{ Text=ViewResource.Enabled,Value=((int)Constans.Status.Enabled).ToString()},
+                        new SelectListItem{ Text=ViewResource.Disabled,Value=((int)Constans.Status.Disabled).ToString()}
                     }
                 , "All")
 		    </div>					    
@@ -52,16 +53,45 @@
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.Execution_Status,
                     new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.Obsolete,Value=Constans.ExecutionStatus.Obsolete.ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Executing,Value=Constans.ExecutionStatus.Executing.ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Waiting_For_Thread,Value=Constans.ExecutionStatus.WaitingFoThread.ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Between_Retries,Value=Constans.ExecutionStatus.BetweenRtries.ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Idle,Value=Constans.ExecutionStatus.Idle.ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Suspended,Value=Constans.ExecutionStatus.Suspended.ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Performing_Completion_Actions,Value=Constans.ExecutionStatus.PerformingCompletionActions.ToString()}
+                        new SelectListItem{ Text=ViewResource.Obsolete,Value=((int)Constans.ExecutionStatus.Obsolete).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Executing,Value=((int)Constans.ExecutionStatus.Executing).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Waiting_For_Thread,Value=((int)Constans.ExecutionStatus.WaitingFoThread).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Between_Retries,Value=((int)Constans.ExecutionStatus.BetweenRtries).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Idle,Value=((int)Constans.ExecutionStatus.Idle).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Suspended,Value=((int)Constans.ExecutionStatus.Suspended).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Performing_Completion_Actions,Value=((int)Constans.ExecutionStatus.PerformingCompletionActions).ToString()}
                     }
                 , "All")
 		    </div>			  
+        </div> 
+        <div class="filter-form">	
+            <div class="lbl-field ">
+			    @Html.LabelFor(m => m.DateType)
+		    </div>
+            <div class="edit-field">				                
+                @Html.DropDownListFor(m => m.DateType,
+                    new List<SelectListItem> { 
+                        new SelectListItem{ Text=ViewResource.Last_Run_Date,Value=((int)Constans.DateType.Last).ToString()},
+                        new SelectListItem{ Text=ViewResource.Next_Run_Date,Value=((int)Constans.DateType.Next).ToString()}
+                    }
+                , "All")
+		    </div>					    
+        </div>  
+        <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.From)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.From)                
+            </div>
+        </div>  
+         <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.To)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.To)                
+            </div>
         </div>     
         <div class="filter-form">	   
             <div class="submit">
@@ -141,3 +171,15 @@
         }
     </tbody>
 </table>
+@Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
+@Html.Hidden("dateTo", (string)ViewBag.DateTo)
+@Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
+@section Foot {
+    <script type="text/javascript">
+
+        $(function () {
+
+
+        });        
+    </script>
+}

@@ -18,6 +18,9 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;
+    using System.Globalization;
+    using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// TODO: Update summary.
@@ -47,23 +50,46 @@ namespace Fanex.Maintenance.Controller
         public ActionResult JobManagementPage()
         {
             ViewBag.ListServer = GetServer();
-
             ViewBag.ListJob = _jobService.GetJobs();
+
+            ViewBag.DateFrom = DateTime.Now.ToString("dd/MM/yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
 
             return View("~/Views/SqlJobManagement/JobManagement.cshtml");
         }
 
         [HttpPost]
-        public ActionResult JobManagementPage(string job_name, int? enabled, int? execution_tatus, string server = "")
+        public ActionResult JobManagementPage(string job_name, int? enabled, int? execution_status, int? dateType ,string server = "", string from = "", string to = "")
         {
-            ViewBag.ListServer = GetServer();
+            List<JobSchedule> listJob = new List<JobSchedule>();
 
-            ViewBag.ListJob = _jobService.WithJob(job_name)
+            listJob = _jobService.WithJob(job_name)
                 .WithStatus(enabled)
-                .WithCurrentExecuteStatus(execution_tatus)
+                .WithCurrentExecuteStatus(execution_status)
                 .FromServer(server)
-                .GetJobs();
+                .GetJobs().ToList();            
 
+            //// check datetype not all
+            if (!ReferenceEquals(dateType,null))
+            {
+                DateTime dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1);
+
+                //// filter by from date to date
+                if (dateType.Equals(Constans.DateType.Last))
+                {
+                    listJob = listJob.Where(j => j.LastRunDate >= dateFrom && j.LastRunDate <= dateTo).ToList();
+                }
+                else
+                {
+                    listJob = listJob.Where(j => j.NextRunDate >= dateFrom && j.LastRunDate <= dateTo).ToList();
+                }
+            }
+
+            ViewBag.ListJob = listJob;
+            ViewBag.ListServer = GetServer();
+            ViewBag.DateFrom = from;
+            ViewBag.DateTo = to;
             return View("~/Views/SqlJobManagement/JobManagement.cshtml");
         }
 
@@ -86,5 +112,6 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion
+
     }
 }

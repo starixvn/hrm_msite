@@ -188,6 +188,7 @@
     <Content Include="scripts\DatabaseReport\Chart.js" />
     <Content Include="scripts\DatabaseReport\Licenseedata.js" />
     <Content Include="scripts\DatabaseReport\RefreshTime.js" />
+    <Content Include="scripts\Job\JobManagementPage.js" />
     <Content Include="scripts\lib\chosen\chosen-sprite.png" />
     <Content Include="scripts\lib\chosen\chosen.css" />
     <Content Include="scripts\lib\chosen\chosen.jquery.js" />
