@@ -14,7 +14,7 @@ namespace Fanex.Maintenance.Repository.Interface
     using System.Linq;
     using System.Text;
 
-    public interface IJobCategoryRepository
+    public interface ILogCategoryRepository
     {
     }
 }

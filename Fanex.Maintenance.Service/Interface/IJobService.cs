@@ -13,12 +13,27 @@ namespace Fanex.Maintenance.Service.Interface
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface IJobService
     {
+        IJobService WithStatus(bool status);
 
+        IJobService FromServer(string serverName);
+
+        IJobService WithJob(string jobName);
+
+        IJobService WithSchedule(string scheduleName);
+
+        IJobService WithCurrentExecuteStatus(int executeStatus);
+
+        IJobService WithLastRunDate(DateTime lastRunDate);
+
+        IJobService WithNextRunDate(DateTime nextRunDate);   
+     
+        IEnumerable<JobSchedule> GetJobs();
     }
 }

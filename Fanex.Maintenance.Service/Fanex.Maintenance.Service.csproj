@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Impl\JobService.cs" />
     <Compile Include="Impl\LogCategoryService.cs" />
     <Compile Include="Impl\DatabaseReportService.cs" />
     <Compile Include="Impl\LogService.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Interface\IDatabaseReportService.cs" />
     <Compile Include="Interface\ILogService.cs" />
     <Compile Include="Interface\IMailService.cs" />
+    <Compile Include="Interface\IStepService.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

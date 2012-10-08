@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="DatabaseReportController.cs" />
     <Compile Include="HomeController.cs" />
+    <Compile Include="JobController.cs" />
     <Compile Include="LogController.cs" />
     <Compile Include="MailController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

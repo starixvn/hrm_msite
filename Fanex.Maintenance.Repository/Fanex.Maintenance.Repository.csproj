@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Fanex\Fanex.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Data">
       <HintPath>..\_Dependencies\Fanex\Fanex.Data.dll</HintPath>
     </Reference>
@@ -47,11 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Impl\BaseRepository.cs" />
+    <Compile Include="Impl\JobRepository.cs" />
     <Compile Include="Impl\LogCategoryRepository.cs" />
     <Compile Include="Impl\DatabaseReportRepository.cs" />
     <Compile Include="Impl\LogRepository.cs" />
     <Compile Include="Impl\UserRepository.cs" />
-    <Compile Include="Interface\IJobCategoryRepository.cs" />
+    <Compile Include="Interface\IJobRepository.cs" />
+    <Compile Include="Interface\ILogCategoryRepository.cs" />
     <Compile Include="Interface\IDatabaseReportRepository.cs" />
     <Compile Include="Interface\ILogRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />

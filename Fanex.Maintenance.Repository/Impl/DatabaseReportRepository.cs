@@ -14,7 +14,7 @@ namespace Fanex.Maintenance.Repository.Impl
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class DatabaseReportRepository : BaseRepository
+    public class DatabaseReportRepository : BaseRepository<dynamic>
     {
         
     }

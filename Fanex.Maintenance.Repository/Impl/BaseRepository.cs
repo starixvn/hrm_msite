@@ -1,8 +1,11 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BaseRepository.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="BaseRepository.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.10.8">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Repository.Impl
 {
@@ -11,11 +14,12 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.Data;
     using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Core.Helper;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class BaseRepository : ReadonlyRepository<dynamic>
+    public class BaseRepository<T> : ReadonlyRepository<T>
     {
         public virtual DataTable GetDataTable(ICriteria criteria)
         {
@@ -62,6 +66,6 @@ namespace Fanex.Maintenance.Repository.Impl
                 throw ex;
             }
         }
-
+        
     }
 }
