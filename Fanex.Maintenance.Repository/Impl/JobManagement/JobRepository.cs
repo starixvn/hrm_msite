@@ -7,14 +7,14 @@
 //   <change who="Edward.Nguyen" date="2012.10.8">Created</change>
 // </history>
 
-namespace Fanex.Maintenance.Repository.Impl
+namespace Fanex.Maintenance.Repository.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using Fanex.Maintenance.Entity.Domain;
-    using Fanex.Maintenance.Repository.Interface;
+    using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Data;
     using Fanex.Maintenance.Core.Helper;
@@ -26,16 +26,20 @@ namespace Fanex.Maintenance.Repository.Impl
     /// </summary>
     public class JobRepository : BaseRepository<Job>, IJobRepository
     {
-        public IEnumerable<JobSchedule> GetAllJob(string serverName, string jobName, int enabled, int currentExecutionnStaus)
+        public IEnumerable<JobSchedule> GetAllJob(string serverName, string jobName, int? enabled, int? currentExecutionnStaus)
         {
             try
             {
                 var criteria = new GetListJobCriteria
                 {
                     Enabled = enabled,
-                    Execution_Status = currentExecutionnStaus,
-                    Job_Name = jobName
+                    Execution_Status = currentExecutionnStaus
                 };
+
+                if (!jobName.Equals(string.Empty))
+                {
+                    criteria.Job_Name = jobName;
+                }
 
                 //// new dbsetting from server name and setting key
                 DbSetting setting = new DbSetting
@@ -56,12 +60,12 @@ namespace Fanex.Maintenance.Repository.Impl
                             list.Add(new JobSchedule
                             {
                                 ExecuteStatus = reader.ToInt("current_execution_status"),
-                                LastRunDate = DateTime.ParseExact(reader.ToString("last_run_date"), "yyyyMMdd"
+                                LastRunDate = reader.ToString("last_run_date").Length == 8 ? DateTime.ParseExact(reader.ToString("last_run_date"), "yyyyMMdd"
                                         , CultureInfo.InvariantCulture
-                                        , DateTimeStyles.None),
-                                NextRunDate = DateTime.ParseExact(reader.ToString("next_run_date"), "yyyyMMdd"
+                                        , DateTimeStyles.None) : DateTime.MinValue,
+                                NextRunDate = reader.ToString("next_run_date").Length == 8 ? DateTime.ParseExact(reader.ToString("next_run_date"), "yyyyMMdd"
                                         , CultureInfo.InvariantCulture
-                                        , DateTimeStyles.None),
+                                        , DateTimeStyles.None) : DateTime.MinValue,
                                 Job = new Job
                                 {
                                     Category = new JobCategory

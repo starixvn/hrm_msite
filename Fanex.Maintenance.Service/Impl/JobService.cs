@@ -13,10 +13,10 @@ namespace Fanex.Maintenance.Service.Impl
     using System.Collections.Generic;
     using Fanex.Maintenance.Service.Interface;
     using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Repository.Interface;
-    using Fanex.Maintenance.Repository.Impl;
+    using Fanex.Maintenance.Repository.Interface.JobManagement;    
     using Fanex.Maintenance.Core.Configurations;
     using System.Linq;
+    using Fanex.Maintenance.Repository.Impl.JobManagement;
 
     /// <summary>
     /// TODO: Update summary.
@@ -120,35 +120,24 @@ namespace Fanex.Maintenance.Service.Impl
             List<JobSchedule> listJob = new List<JobSchedule>();
             if (!this._server.Equals(string.Empty))
             {
-                // var list = _jobRepository.GetAllJob(this._server, this._schedule);
-                //listJob.AddRange(list);
+                var list = _jobRepository.GetAllJob(this._server, this._jobName, this._status, this._currentExcuteStatus);
+                listJob.AddRange(list);
             }
             else
             {
                 foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                 {
-                    //  var list = _jobRepository.GetAllJob(server.ServerName, this._schedule);
-                    // listJob.AddRange(list);
+                    try
+                    {
+                        var list = _jobRepository.GetAllJob(server.ServerName, this._jobName, this._status, this._currentExcuteStatus);
+                        listJob.AddRange(list);
+                    }
+                    catch (Exception ex) 
+                    {
+                    
+                    }
                 }
-            }
-
-            //// filter by status (enabled,disbaled), if null get all
-            if (!ReferenceEquals(this._status, null))
-            {
-                listJob = listJob.Where(j => j.Job.Enable == this._status).ToList();
-            }
-
-            //// filter by job name
-            if (!this._jobName.Equals(string.Empty))
-            {
-                listJob = listJob.Where(j => j.Job.Name.IndexOf(this._jobName) > 0).ToList();
-            }
-
-            //// filter by current execution status
-            if (!ReferenceEquals(this._currentExcuteStatus, null))
-            {
-                listJob = listJob.Where(j => j.ExecuteStatus == this._currentExcuteStatus).ToList();
-            }
+            }           
 
             return listJob;
         }

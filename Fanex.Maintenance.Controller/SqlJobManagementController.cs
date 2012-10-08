@@ -42,14 +42,47 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ServerName = serverName;
             return View("~/Views/SqlJobManagement/ScheduleManagement.cshtml");
         }
+
+        [HttpGet]
+        public ActionResult JobManagementPage()
+        {
+            ViewBag.ListServer = GetServer();
+
+            ViewBag.ListJob = _jobService.GetJobs();
+
+            return View("~/Views/SqlJobManagement/JobManagement.cshtml");
+        }
+
+        [HttpPost]
+        public ActionResult JobManagementPage(string job_name, int? enabled, int? execution_tatus, string server = "")
+        {
+            ViewBag.ListServer = GetServer();
+
+            ViewBag.ListJob = _jobService.WithJob(job_name)
+                .WithStatus(enabled)
+                .WithCurrentExecuteStatus(execution_tatus)
+                .FromServer(server)
+                .GetJobs();
+
+            return View("~/Views/SqlJobManagement/JobManagement.cshtml");
+        }
+
         #endregion
 
-        #region Action
+        #region Private
 
-        public ActionResult ListJob() 
+        private List<SelectListItem> GetServer()
         {
-            _jobService.FromServer("10.19.10.71").GetJobs();
-            return View();
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (ServerElement item in DatabaseServersSection.Instance.Servers)
+            {
+                list.Add(new SelectListItem
+                {
+                    Text = item.ServerName,
+                    Value = item.ServerName
+                });
+            }
+            return list;
         }
 
         #endregion

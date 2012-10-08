@@ -279,4 +279,52 @@
   <data name="Turnover" xml:space="preserve">
     <value>Turnover</value>
   </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Current_Execution_Status" xml:space="preserve">
+    <value>Current Execution Status</value>
+  </data>
+  <data name="Date_Created" xml:space="preserve">
+    <value>Date Created</value>
+  </data>
+  <data name="Date_Modified" xml:space="preserve">
+    <value>Date Modified</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="Last_Run_Date" xml:space="preserve">
+    <value>Last Run Date</value>
+  </data>
+  <data name="Next_Run_Date" xml:space="preserve">
+    <value>Next Run Date</value>
+  </data>
+  <data name="Between_Retries" xml:space="preserve">
+    <value>Between retries</value>
+  </data>
+  <data name="Executing" xml:space="preserve">
+    <value>Executing</value>
+  </data>
+  <data name="Idle" xml:space="preserve">
+    <value>Idle</value>
+  </data>
+  <data name="Obsolete" xml:space="preserve">
+    <value>Obsolete</value>
+  </data>
+  <data name="Performing_Completion_Actions" xml:space="preserve">
+    <value>Performing completion actions</value>
+  </data>
+  <data name="Suspended" xml:space="preserve">
+    <value>Suspended</value>
+  </data>
+  <data name="Waiting_For_Thread" xml:space="preserve">
+    <value>Waiting for thread</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
 </root>

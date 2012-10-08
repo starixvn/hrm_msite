@@ -1380,6 +1380,8 @@
     <Content Include="Views\SqlJobManagement\MainContentPage.cshtml" />
     <Content Include="Views\SqlJobManagement\LeftMenuPage.cshtml" />
     <Content Include="Views\SqlJobManagement\ScheduleManagement.cshtml" />
+    <Content Include="Views\Shared\_SqlJobManagementLayout.cshtml" />
+    <Content Include="Views\SqlJobManagement\JobManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
