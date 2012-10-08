@@ -58,6 +58,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">
+      <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
+      <Name>Fanex.Maintenance.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.Maintenance.Criteria\Fanex.Maintenance.Criteria.csproj">
       <Project>{4004F1EE-1FB8-486C-903E-326C360DBD81}</Project>
       <Name>Fanex.Maintenance.Criteria</Name>
