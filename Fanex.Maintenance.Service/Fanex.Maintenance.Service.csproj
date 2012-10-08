@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Impl\JobManagement\ScheduleService.cs" />
     <Compile Include="Impl\JobService.cs" />
     <Compile Include="Impl\LogCategoryService.cs" />
     <Compile Include="Impl\DatabaseReportService.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Interface\IMailService.cs" />
     <Compile Include="Interface\IStepService.cs" />
     <Compile Include="Interface\IUserService.cs" />
+    <Compile Include="Interface\JobManagement\IScheduleService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +82,7 @@
       <Name>Fanex.Maintenance.Repository</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
