@@ -67,9 +67,9 @@ namespace Fanex.Maintenance.Repository.Impl
             }
         }
 
-        public virtual IEnumerable<T> Fetch(ICriteria criteria, string serverName, Func<IDataReader, T> mapObjectFunction)
+        public virtual IEnumerable<S> Fetch<S>(ICriteria criteria, string serverName, Func<IDataReader, S> mapObjectFunction) where S : class
         {
-            IList<T> listT = new List<T>();
+            IList<S> listObject = new List<S>();
             //// new dbsetting from server name and setting key
             DbSetting setting = new DbSetting
             {
@@ -84,11 +84,11 @@ namespace Fanex.Maintenance.Repository.Impl
                 {
                     while (reader.Read())
                     {
-                        listT.Add(mapObjectFunction(reader));
+                        listObject.Add(mapObjectFunction(reader));
                     }
                 }
             }
-            return listT;
+            return listObject;
         }
     }
 }
