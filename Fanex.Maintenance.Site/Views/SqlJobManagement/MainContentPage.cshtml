@@ -4,25 +4,7 @@
 }
 @section Head {
     <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        .contentbox
-        {
-            width: 100%;
-            height: 600px;
-        }
-        .leftcontent
-        {
-            float: left;
-            width: 19%;
-            height: 100%;
-        }
-        .rightcontent
-        {
-            width: 81%;
-            height: 100%;
-            float: right;
-        }
-    </style>
+    <link href="~/themes/SqlJobManagement/MainContentPage.css" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
@@ -31,13 +13,12 @@
 }
 <div class="contentbox">
     <div class="leftcontent">
-        <iframe id="leftPanel" name="leftPanel" src="@Url.Action("LeftMenuPage","SqlJobManagement")" marginwidth="0" scrolling="auto"
+        <iframe id="leftPanel" name="leftPanel" src="@Url.Action("LeftMenuPage", "SqlJobManagement")" marginwidth="0" scrolling="auto"
             marginheight="0" frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 100%;">
         </iframe>
     </div>
     <div class="rightcontent">
-        <iframe id="centerFr" name="centerFr" src="" scrolling="auto" marginwidth="0"
-            marginheight="0" frameborder="0" vspace="0" hspace="0" style="width: 100%; height:  100%;">
-        </iframe>
+        <iframe id="centerFr" name="centerFr" src="" scrolling="auto" marginwidth="0" marginheight="0"
+            frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 100%;"></iframe>
     </div>
 </div>

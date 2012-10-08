@@ -8,6 +8,7 @@
     <link type="text/css" rel="Stylesheet" href="~/scripts/lib/treeview/jquery.treeview.css" />
     <script src="~/scripts/lib/jquery-1.8.0.min.js" type="text/javascript"></script>
     <script src="~/scripts/lib/treeview/jquery.treeview.js" type="text/javascript"></script>
+    <script src="~/scripts/SqlJobManagement/LeftMenuPage.js" type="text/javascript"></script>
     <style type="text/css">
         .treeview ul
         {
@@ -18,28 +19,6 @@
             font-size: 14px;
         }
     </style>
-    <script type="text/javascript">
-        $(function () {
-            $("#browser").treeview({
-                animated: "medium"
-            });
-            $("#browser li span").hover(function () {
-                $(this).addClass("hover");
-            }, function () {
-                $(this).removeClass("hover");
-            })
-
-
-        });
-        var LeftMenuPage = function ($) {
-            return {};
-        } (jQuery);
-
-        LeftMenuPage.onRedirect = function (urlRedirect) {
-            parent.$("#centerFr").attr("src", urlRedirect);
-        };
-
-    </script>
 </head>
 <body>
     <ul id="browser" class="treeview">
