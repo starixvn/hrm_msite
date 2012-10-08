@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Sql Job Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+@section Head {
+    <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/SqlJobManagement/MainContentPage.css" rel="stylesheet" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+<div class="contentbox">
+    <div class="leftcontent">
+        <iframe id="leftPanel" name="leftPanel" src="@Url.Action("LeftMenuPage", "SqlJobManagement")" marginwidth="0" scrolling="auto"
+            marginheight="0" frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 100%;">
+        </iframe>
+    </div>
+    <div class="rightcontent">
+        <iframe id="centerFr" name="centerFr" src="" scrolling="auto" marginwidth="0" marginheight="0"
+            frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 100%;"></iframe>
+    </div>
+</div>

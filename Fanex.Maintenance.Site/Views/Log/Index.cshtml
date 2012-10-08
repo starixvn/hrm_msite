@@ -1,10 +1,9 @@
-﻿@using Fanex.Maintenance.Entity.Model
-@using Fanex.Maintenance.Criteria.Log
+﻿@using Fanex.Maintenance.Criteria.Log
 @model GetLogCriteria
 @{
     ViewBag.Title = "Index Logs";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    IEnumerable<Logs> listLog = (IEnumerable<Logs>)ViewBag.ListLog;
+    IEnumerable<Log> listLog = (IEnumerable<Log>)ViewBag.ListLog;
 }
 @section Head {
     <link href="~/themes/nap/site/manage.less" rel="stylesheet" type="text/css" />
@@ -89,7 +88,7 @@
             int i = 0;
             if (!ReferenceEquals(listLog, null))
             {
-                foreach (Logs logitem in listLog)
+                foreach (Log logitem in listLog)
                 {
                     string row_class = i % 2 == 0 ? "alt" : string.Empty;
 					

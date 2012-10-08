@@ -1,0 +1,59 @@
+﻿@using Fanex.Maintenance.Core.Configurations
+@model ServerCollection
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css" />
+    <link type="text/css" rel="Stylesheet" href="~/scripts/lib/treeview/jquery.treeview.css" />
+    <script src="~/scripts/lib/jquery-1.8.0.min.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/treeview/jquery.treeview.js" type="text/javascript"></script>
+    <script src="~/scripts/SqlJobManagement/LeftMenuPage.js" type="text/javascript"></script>
+    <style type="text/css">
+        .treeview ul
+        {
+            background-color: #F9F9F9;
+        }
+        body
+        {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="browser" class="treeview">
+        <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")');" >
+            Server Management</span> </li>
+        <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")');">
+            Schedule Management</span> </li>
+        <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")');">
+            Job Management</span> </li>
+        @{
+            var count = 0;
+            var classClose = string.Empty;
+            foreach (ServerElement server in Model)
+            {
+            <li class="@classClose"><span class="">Server: @server.ServerName</span>
+                <ul>
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                        Windows Event Log</span></li>
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                        Sql Server Log</span></li>
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                        Sql Server Agent Log</span></li>
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                        Schedules</span></li>
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                        Jobs</span></li>
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                        Alerts</span></li>
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                        Operators</span></li>
+                </ul>
+            </li>
+                classClose = "closed";
+            }
+        }
+    </ul>
+</body>
+</html>

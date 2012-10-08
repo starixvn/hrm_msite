@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Edward.Nguyen" date="2012.10.5">Created</change>
+//   <change who="Ricky.Nguyen" date="2012.10.5">Add Property</change>
 // </history>
 
 namespace Fanex.Maintenance.Entity.Domain
@@ -140,5 +141,7 @@ namespace Fanex.Maintenance.Entity.Domain
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public int JobCount { get; set; }
     }
 }

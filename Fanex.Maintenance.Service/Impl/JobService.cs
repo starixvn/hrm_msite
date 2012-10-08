@@ -123,7 +123,7 @@ namespace Fanex.Maintenance.Service.Impl
             }
             else
             {
-                foreach (var server in DatabaseServersSection.Instance.Servers)
+                foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                 {
 
                 }
