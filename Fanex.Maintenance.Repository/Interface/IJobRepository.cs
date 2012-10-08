@@ -17,6 +17,6 @@ namespace Fanex.Maintenance.Repository.Interface
     /// </summary>
     public interface IJobRepository
     {
-        IEnumerable<JobSchedule> GetAllJob(string serverName, string schedule = "");
+        IEnumerable<JobSchedule> GetAllJob(string serverName,string jobName,int enabled,int currentExecutionnStaus);
     }
 }

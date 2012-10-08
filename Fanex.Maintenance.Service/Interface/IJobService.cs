@@ -20,7 +20,7 @@ namespace Fanex.Maintenance.Service.Interface
     /// </summary>
     public interface IJobService
     {
-        IJobService WithStatus(bool status);
+        IJobService WithStatus(int? status);
 
         IJobService FromServer(string serverName);
 
@@ -28,11 +28,11 @@ namespace Fanex.Maintenance.Service.Interface
 
         IJobService WithSchedule(string scheduleName);
 
-        IJobService WithCurrentExecuteStatus(int executeStatus);
+        IJobService WithCurrentExecuteStatus(int? executeStatus);
 
-        IJobService WithLastRunDate(DateTime lastRunDate);
+        IJobService WithLastRunDate(DateTime? lastRunDate);
 
-        IJobService WithNextRunDate(DateTime nextRunDate);   
+        IJobService WithNextRunDate(DateTime? nextRunDate);   
      
         IEnumerable<JobSchedule> GetJobs();
     }

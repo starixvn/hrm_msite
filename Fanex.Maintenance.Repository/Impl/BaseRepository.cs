@@ -67,7 +67,7 @@ namespace Fanex.Maintenance.Repository.Impl
             }
         }
 
-        public virtual IEnumerable<T> GetDataTable(ICriteria criteria, string serverName, Func<IDataReader, T> mapObjectFunction)
+        public virtual IEnumerable<T> Fetch(ICriteria criteria, string serverName, Func<IDataReader, T> mapObjectFunction)
         {
             IList<T> listT = new List<T>();
             //// new dbsetting from server name and setting key

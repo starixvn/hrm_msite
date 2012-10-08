@@ -26,13 +26,15 @@ namespace Fanex.Maintenance.Repository.Impl
     /// </summary>
     public class JobRepository : BaseRepository<Job>, IJobRepository
     {
-        public IEnumerable<JobSchedule> GetAllJob(string serverName, string schedule = "")
+        public IEnumerable<JobSchedule> GetAllJob(string serverName, string jobName, int enabled, int currentExecutionnStaus)
         {
             try
             {
-                var criteria = new GetAllJobInScheduleCriteria
+                var criteria = new GetListJobCriteria
                 {
-                    Schedule_Name = schedule
+                    Enabled = enabled,
+                    Execution_Status = currentExecutionnStaus,
+                    Job_Name = jobName
                 };
 
                 //// new dbsetting from server name and setting key
@@ -74,7 +76,7 @@ namespace Fanex.Maintenance.Repository.Impl
                                     JobId = reader.To<Guid>("job_id"),
                                     Name = reader.ToString("name"),
                                     NotifyEmailOperator = new Operator
-                                    {                                       
+                                    {
                                         Name = reader.ToString("notify_email_operator")
                                     },
                                     NotifyLevelEmail = reader.ToInt("notify_level_email"),

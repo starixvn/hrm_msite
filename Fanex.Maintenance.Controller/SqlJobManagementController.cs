@@ -16,13 +16,15 @@ namespace Fanex.Maintenance.Controller
     using System.Text;
     using System.Web.Mvc;
     using Fanex.Maintenance.Core.Configurations;
+    using Fanex.Maintenance.Service.Impl;
+    using Fanex.Maintenance.Service.Interface;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class SqlJobManagementController : Controller
     {
-
+        private readonly IJobService _jobService = JobService.Create();
 
         #region Pages
         public ActionResult MainContentPage()
@@ -42,6 +44,14 @@ namespace Fanex.Maintenance.Controller
         }
         #endregion
 
+        #region Action
 
+        public ActionResult ListJob() 
+        {
+            _jobService.FromServer("10.19.10.71").GetJobs();
+            return View();
+        }
+
+        #endregion
     }
 }

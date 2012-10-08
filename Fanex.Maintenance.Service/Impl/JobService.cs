@@ -16,6 +16,7 @@ namespace Fanex.Maintenance.Service.Impl
     using Fanex.Maintenance.Repository.Interface;
     using Fanex.Maintenance.Repository.Impl;
     using Fanex.Maintenance.Core.Configurations;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -32,7 +33,7 @@ namespace Fanex.Maintenance.Service.Impl
 
         private DateTime? _lastRunDate;
         private DateTime? _nextRunDate;
-        private bool? _status;
+        private int? _status;
         private string _server;
         private string _schedule;
         private string _jobName;
@@ -72,7 +73,7 @@ namespace Fanex.Maintenance.Service.Impl
             return null;
         }
 
-        public IJobService WithStatus(bool status)
+        public IJobService WithStatus(int? status)
         {
             this._status = status;
             return this;
@@ -96,19 +97,19 @@ namespace Fanex.Maintenance.Service.Impl
             return this;
         }
 
-        public IJobService WithCurrentExecuteStatus(int executeStatus)
+        public IJobService WithCurrentExecuteStatus(int? executeStatus)
         {
             this._currentExcuteStatus = executeStatus;
             return this;
         }
 
-        public IJobService WithLastRunDate(DateTime lastRunDate)
+        public IJobService WithLastRunDate(DateTime? lastRunDate)
         {
             this._lastRunDate = lastRunDate;
             return this;
         }
 
-        public IJobService WithNextRunDate(DateTime nextRunDate)
+        public IJobService WithNextRunDate(DateTime? nextRunDate)
         {
             this._nextRunDate = nextRunDate;
             return this;
@@ -116,20 +117,40 @@ namespace Fanex.Maintenance.Service.Impl
 
         public IEnumerable<JobSchedule> GetJobs()
         {
-            IEnumerable<JobSchedule> listJob;
+            List<JobSchedule> listJob = new List<JobSchedule>();
             if (!this._server.Equals(string.Empty))
             {
-                listJob = _jobRepository.GetAllJob(this._server, this._schedule);
+                // var list = _jobRepository.GetAllJob(this._server, this._schedule);
+                //listJob.AddRange(list);
             }
             else
             {
                 foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                 {
-
+                    //  var list = _jobRepository.GetAllJob(server.ServerName, this._schedule);
+                    // listJob.AddRange(list);
                 }
             }
 
-            return null;
+            //// filter by status (enabled,disbaled), if null get all
+            if (!ReferenceEquals(this._status, null))
+            {
+                listJob = listJob.Where(j => j.Job.Enable == this._status).ToList();
+            }
+
+            //// filter by job name
+            if (!this._jobName.Equals(string.Empty))
+            {
+                listJob = listJob.Where(j => j.Job.Name.IndexOf(this._jobName) > 0).ToList();
+            }
+
+            //// filter by current execution status
+            if (!ReferenceEquals(this._currentExcuteStatus, null))
+            {
+                listJob = listJob.Where(j => j.ExecuteStatus == this._currentExcuteStatus).ToList();
+            }
+
+            return listJob;
         }
     }
 }
