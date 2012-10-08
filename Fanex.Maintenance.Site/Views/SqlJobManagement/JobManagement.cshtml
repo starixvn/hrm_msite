@@ -1,0 +1,143 @@
+﻿@using Fanex.Maintenance.Criteria.Job
+@model GetListJobCriteria
+@{
+    ViewBag.Title = "Job Management";
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
+    var lisJob = ViewBag.ListJob != null ? (List<JobSchedule>)ViewBag.ListJob : new List<JobSchedule>();
+}
+@section Head {
+ <link href="~/themes/nap/site/manage.less" rel="stylesheet" type="text/css" />   
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+@using (Html.BeginForm())
+{ 
+    <section id="filter-bar">    
+         <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.Job_Name)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.Job_Name)                
+            </div>
+        </div>     
+		<div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.Server)
+		    </div>   
+            <div class="edit-field">	
+                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
+            </div>
+        </div>        
+        <div class="filter-form">	
+            <div class="lbl-field ">
+			    @Html.LabelFor(m => m.Enabled)
+		    </div>
+            <div class="edit-field">				                
+                @Html.DropDownListFor(m => m.Enabled,
+                    new List<SelectListItem> { 
+                        new SelectListItem{ Text=ViewResource.Enabled,Value=Constans.Status.Enabled.ToString()},
+                        new SelectListItem{ Text=ViewResource.Disabled,Value=Constans.Status.Disabled.ToString()}
+                    }
+                , "All")
+		    </div>					    
+        </div> 
+        <div class="filter-form">	                              
+             <div class="lbl-field ">
+			    @Html.LabelFor(m => m.Execution_Status)
+		    </div>
+            <div class="edit-field">				                
+                @Html.DropDownListFor(m => m.Execution_Status,
+                    new List<SelectListItem> { 
+                        new SelectListItem{ Text=ViewResource.Obsolete,Value=Constans.ExecutionStatus.Obsolete.ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Executing,Value=Constans.ExecutionStatus.Executing.ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Waiting_For_Thread,Value=Constans.ExecutionStatus.WaitingFoThread.ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Between_Retries,Value=Constans.ExecutionStatus.BetweenRtries.ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Idle,Value=Constans.ExecutionStatus.Idle.ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Suspended,Value=Constans.ExecutionStatus.Suspended.ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Performing_Completion_Actions,Value=Constans.ExecutionStatus.PerformingCompletionActions.ToString()}
+                    }
+                , "All")
+		    </div>			  
+        </div>     
+        <div class="filter-form">	   
+            <div class="submit">
+		        <input type="submit" value="Submit" /> 
+            </div>    
+        </div>             		   
+    </section>
+}
+<table class="grid">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @ViewResource.Job
+            </th>
+            <th>
+                @ViewResource.Date_Modified
+            </th>
+            <th>
+                @ViewResource.Last_Run_Date
+            </th>
+            <th>
+                @ViewResource.Next_Run_Date
+            </th>
+            <th>
+                @ViewResource.Current_Execution_Status
+            </th>
+            <th>
+                @ViewResource.Server
+            </th>
+            <th>
+                @ViewResource.Enabled
+            </th>
+            <th>
+                @ViewResource.Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            foreach (var item in lisJob)
+            {
+                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                i++;
+            <tr @Html.Raw(rowCss)>
+                <td class="align-center">
+                    @(i)
+                </td>
+                <td>
+                    @item.Job.Name
+                </td>
+                <td>
+                    @item.Job.DateModified
+                </td>
+                <td>
+                    @item.LastRunDate
+                </td>
+                <td>
+                    @item.NextRunDate
+                </td>
+                <td>
+                    @item.ExecuteStatus
+                </td>
+                <td>
+                    @item.Job.OrinatingServer.Name
+                </td>
+                <td>
+                    @item.Job.Enable
+                </td>
+                <td>
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>

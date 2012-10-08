@@ -14,17 +14,21 @@ namespace Fanex.Maintenance.Criteria.Job
     using System.Linq;
     using System.Text;
     using Fanex.NAP.Framework.Data;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class GetListJobCriteria : CriteriaBase
     {
+        [SpParam(Ignored = true)]
+        public string Server { get; set; }
+
         public string Job_Name { get; set; }
 
-        public int Enabled { get; set; }
+        public int? Enabled { get; set; }
 
-        public int Execution_Status { get; set; }
+        public int? Execution_Status { get; set; }
 
         public override bool IsValid()
         {

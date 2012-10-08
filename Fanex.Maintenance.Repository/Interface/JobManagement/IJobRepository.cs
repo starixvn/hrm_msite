@@ -7,7 +7,7 @@
 //   <change who="Edward.Nguyen" date="2012.10.8">Created</change>
 // </history>
 
-namespace Fanex.Maintenance.Repository.Interface
+namespace Fanex.Maintenance.Repository.Interface.JobManagement
 {
     using System.Collections.Generic;
     using Fanex.Maintenance.Entity.Model;
@@ -17,6 +17,6 @@ namespace Fanex.Maintenance.Repository.Interface
     /// </summary>
     public interface IJobRepository
     {
-        IEnumerable<JobSchedule> GetAllJob(string serverName,string jobName,int enabled,int currentExecutionnStaus);
+        IEnumerable<JobSchedule> GetAllJob(string serverName,string jobName,int? enabled,int? currentExecutionnStaus);
     }
 }
