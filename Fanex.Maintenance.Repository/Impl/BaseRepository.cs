@@ -66,6 +66,29 @@ namespace Fanex.Maintenance.Repository.Impl
                 throw ex;
             }
         }
-        
+
+        public virtual IEnumerable<T> GetDataTable(ICriteria criteria, string serverName, Func<IDataReader, T> mapObjectFunction)
+        {
+            IList<T> listT = new List<T>();
+            //// new dbsetting from server name and setting key
+            DbSetting setting = new DbSetting
+            {
+                //// get connection string from servername
+                ConnectionString = SectionHelper.GetConnectionStringFromServerName(serverName),
+                SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
+            };
+
+            using (var db = new ObjectDb(setting))
+            {
+                using (var reader = db.ExecuteReader(criteria.GetSpParams()))
+                {
+                    while (reader.Read())
+                    {
+                        listT.Add(mapObjectFunction(reader));
+                    }
+                }
+            }
+            return listT;
+        }
     }
 }
