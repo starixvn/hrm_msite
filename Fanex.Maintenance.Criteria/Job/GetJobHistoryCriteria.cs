@@ -30,6 +30,8 @@ namespace Fanex.Maintenance.Criteria.Job
 
         public int? End_Run_Date { get; set; }
 
+        public string Mode { get; set; }
+        
         public override bool IsValid()
         {
             return true;

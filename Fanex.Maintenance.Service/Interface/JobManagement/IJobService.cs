@@ -32,8 +32,12 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
 
         IJobService WithLastRunDate(DateTime? lastRunDate);
 
-        IJobService WithNextRunDate(DateTime? nextRunDate);   
-     
+        IJobService WithNextRunDate(DateTime? nextRunDate);
+
+        IJobService WithStartRunDate(DateTime startRunDate);
+
+        IJobService WithEndRunDate(DateTime endRunDate);
+
         IEnumerable<JobSchedule> GetJobs();
 
         IEnumerable<JobLog> GetJobLogs();

@@ -19,7 +19,8 @@ namespace Fanex.Maintenance.Core.Web
         public const string JOB = "JOB";
         public const string STEPS = "STEPS";
         public const string SCEDULES = "SCEDULES";
-        public const string TARGETS = "TARGETS";        
+        public const string TARGETS = "TARGETS";
+        public const string FULL = "FULL";        
 
         /// <summary>
         /// Status job

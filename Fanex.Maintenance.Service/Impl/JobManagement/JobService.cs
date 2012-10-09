@@ -19,6 +19,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Common;
+    using Fanex.Maintenance.Core.Web;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -171,12 +172,12 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             //// create criteria get job history
             var criteria = new GetJobHistoryCriteria
-            {
-                Job_Id = this._jobId,
+            {                
                 Job_Name = this._jobName,
                 Run_Status = this._currentExcuteStatus,
                 Start_Run_Date = this._startRunDate,
-                End_Run_Date = this._endRunDate
+                End_Run_Date = this._endRunDate,
+                Mode=Constans.FULL
             };
 
             try

@@ -117,11 +117,11 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                             RunDate = reader.ToInt("run_date"),
                             RunTime = reader.ToInt("run_time"),
                             RunDuration = reader.ToInt("run_duration"),
-                            OperatorIdEmailed = reader.IsDBNull("operator_emailed") ?
+                            OperatorIdEmailed = !reader.IsDBNull("operator_emailed") ?
                                                     reader.ToInt("operator_emailed") : 0,
-                            OperatorIdNetsend = reader.IsDBNull("operator_netsend") ?
-                                                    reader.ToInt("operator_netsend") : 0,
-                            OperatorIdPaged = reader.IsDBNull("operator_paged") ?
+                            OperatorIdNetsend = !reader.IsDBNull("operator_netsent") ?
+                                                    reader.ToInt("operator_netsent") : 0,
+                            OperatorIdPaged = !reader.IsDBNull("operator_paged") ?
                                                     reader.ToInt("operator_paged") : 0,
                             RetriesAttempted = reader.ToInt("retries_attempted"),
                             Server = reader.ToString("server")
