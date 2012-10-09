@@ -12,7 +12,7 @@
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
-        @Html.ActionLink("+ " + ViewResource.Create_Job, "JobManagementPage", "SqlJobManagement", null, new { @class = "lnk" })
+        @Html.ActionLink("+ " + ViewResource.Create_Job, "JobManagement", "SqlJobManagement", null, new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm())
@@ -173,7 +173,9 @@
                         <div class="relative">
                             <ul class="actions" style="visibility: hidden; opacity: 0;">
                                 <li><a href="#" class="dd-edit">Edit '@item.Job.Name' Details</a> </li>
-                                <li><a href="#" class="dd-site">View log '@item.Job.Name'</a></li>
+                                 <li>@Html.ActionLink("View log" + item.Job.Name, "JobLogManagement"
+                                        , new { job = item.Job.Name, server = item.Job.OrinatingServer.Name }
+                                        , new { @class = "dd-edit" })
                                 <li>@Html.ActionLink("View step" + item.Job.Name, "StepManagement"
                                         , new { job = item.Job.Name, server = item.Job.OrinatingServer.Name }
                                         , new { @class = "dd-edit" })

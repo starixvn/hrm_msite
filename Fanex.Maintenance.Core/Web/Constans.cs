@@ -20,7 +20,7 @@ namespace Fanex.Maintenance.Core.Web
         public const string STEPS = "STEPS";
         public const string SCEDULES = "SCEDULES";
         public const string TARGETS = "TARGETS";
-        public const string FULL = "FULL";        
+        public const string FULL = "FULL";
 
         /// <summary>
         /// Status job
@@ -88,5 +88,12 @@ namespace Fanex.Maintenance.Core.Web
         All = 0,
         StartDate = 1,
         EndDate = 2
+        }
+
+        public enum StepRunStatus
+        {
+            Success = 1,
+            Fail = 0
+        }
     }
 }

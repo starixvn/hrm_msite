@@ -394,6 +394,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fail.
+        /// </summary>
+        public static string Fail {
+            get {
+                return ResourceManager.GetString("Fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         public static string From {
@@ -471,6 +480,15 @@ namespace Fanex.Maintenance.Core {
         public static string Job {
             get {
                 return ResourceManager.GetString("Job", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Log Management.
+        /// </summary>
+        public static string Job_Log_Management {
+            get {
+                return ResourceManager.GetString("Job_Log_Management", resourceCulture);
             }
         }
         
@@ -1002,6 +1020,15 @@ namespace Fanex.Maintenance.Core {
         public static string Subject {
             get {
                 return ResourceManager.GetString("Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         

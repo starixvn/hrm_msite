@@ -119,16 +119,27 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return this;
         }
 
-        public IJobService WithStartRunDate(DateTime startRunDate)
+        public IJobService WithStartRunDate(DateTime? startRunDate)
         {
-            string date = startRunDate.ToString("yyyyMMdd");
+            if (ReferenceEquals(startRunDate, null))
+            {
+                startRunDate = DateTime.Now;
+            }
+
+            string date = ((DateTime)startRunDate).ToString("yyyyMMdd");
             this._startRunDate = Convert.ToInt32(date);
+
             return this;
         }
 
-        public IJobService WithEndRunDate(DateTime endRunDate)
+        public IJobService WithEndRunDate(DateTime? endRunDate)
         {
-            string date = endRunDate.ToString("yyyyMMdd");
+            if (ReferenceEquals(endRunDate, null))
+            {
+                endRunDate = DateTime.Now;
+            }
+
+            string date = ((DateTime)endRunDate).ToString("yyyyMMdd");
             this._endRunDate = Convert.ToInt32(date);
             return this;
         }
@@ -172,12 +183,12 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             //// create criteria get job history
             var criteria = new GetJobHistoryCriteria
-            {                
+            {
                 Job_Name = this._jobName,
                 Run_Status = this._currentExcuteStatus,
                 Start_Run_Date = this._startRunDate,
                 End_Run_Date = this._endRunDate,
-                Mode=Constans.FULL
+                Mode = Constans.FULL
             };
 
             try
