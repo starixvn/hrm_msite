@@ -117,6 +117,9 @@ namespace Fanex.Maintenance.Controller
                                 .WithJob(job)
                                 .FromServer(server)
                                 .GetSteps().ToList();
+
+            ViewBag.JobName = job;
+
             return View(listStep);
         }
 
@@ -132,7 +135,7 @@ namespace Fanex.Maintenance.Controller
             {
                 list.Add(new SelectListItem
                 {
-                    Text = item.ServerName,
+                    Text = item.ServerIp,
                     Value = item.ServerName
                 });
             }

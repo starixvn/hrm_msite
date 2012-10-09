@@ -12,6 +12,7 @@
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
+        @Html.ActionLink("+ " + ViewResource.Create_Job, "JobManagementPage", "SqlJobManagement", null, new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm())
@@ -172,7 +173,7 @@
                                 <li><a href="#" class="dd-edit">Edit '@item.Job.Name' Details</a> </li>
                                 <li><a href="#" class="dd-site">View log '@item.Job.Name'</a></li>
                                 <li>@Html.ActionLink("View step" + item.Job.Name, "StepManagement"
-                                        , new { job = item.Job.Name, server = "10.19.10.71" }
+                                        , new { job = item.Job.Name, server = item.Job.OrinatingServer.Name }
                                         , new { @class = "dd-edit" })
                                 </li>
                                 <li><a href="#" class="dd-site">View schedule '@item.Job.Name'</a></li>

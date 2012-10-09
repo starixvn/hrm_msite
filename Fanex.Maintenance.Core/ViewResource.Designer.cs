@@ -187,11 +187,29 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Job.
+        /// </summary>
+        public static string Create_Job {
+            get {
+                return ResourceManager.GetString("Create_Job", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create New.
         /// </summary>
         public static string Create_New {
             get {
                 return ResourceManager.GetString("Create_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Step.
+        /// </summary>
+        public static string Create_Step {
+            get {
+                return ResourceManager.GetString("Create_Step", resourceCulture);
             }
         }
         
@@ -912,6 +930,15 @@ namespace Fanex.Maintenance.Core {
         public static string Step_Id {
             get {
                 return ResourceManager.GetString("Step_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step Management.
+        /// </summary>
+        public static string Step_Management {
+            get {
+                return ResourceManager.GetString("Step_Management", resourceCulture);
             }
         }
         
