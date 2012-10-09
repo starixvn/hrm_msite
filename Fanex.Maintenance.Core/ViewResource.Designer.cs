@@ -142,6 +142,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Computer is idle.
+        /// </summary>
+        public static string ComputerIdle {
+            get {
+                return ResourceManager.GetString("ComputerIdle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Config.
         /// </summary>
         public static string Config {
@@ -201,6 +210,15 @@ namespace Fanex.Maintenance.Core {
         public static string Customer_Win_Loss {
             get {
                 return ResourceManager.GetString("Customer_Win_Loss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily.
+        /// </summary>
+        public static string Daily {
+            get {
+                return ResourceManager.GetString("Daily", resourceCulture);
             }
         }
         
@@ -318,6 +336,15 @@ namespace Fanex.Maintenance.Core {
         public static string Function_Name {
             get {
                 return ResourceManager.GetString("Function_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hours.
+        /// </summary>
+        public static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
             }
         }
         
@@ -502,6 +529,33 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minutes.
+        /// </summary>
+        public static string Minutes {
+            get {
+                return ResourceManager.GetString("Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly.
+        /// </summary>
+        public static string Monthly {
+            get {
+                return ResourceManager.GetString("Monthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly Relative.
+        /// </summary>
+        public static string MonthlyRelative {
+            get {
+                return ResourceManager.GetString("MonthlyRelative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {
@@ -525,6 +579,15 @@ namespace Fanex.Maintenance.Core {
         public static string Obsolete {
             get {
                 return ResourceManager.GetString("Obsolete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One time only.
+        /// </summary>
+        public static string OneTime {
+            get {
+                return ResourceManager.GetString("OneTime", resourceCulture);
             }
         }
         
@@ -646,7 +709,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Schedule Name.
+        ///   Looks up a localized string similar to Schedule.
         /// </summary>
         public static string ScheduleName {
             get {
@@ -669,6 +732,15 @@ namespace Fanex.Maintenance.Core {
         public static string ScheduleTotalJob {
             get {
                 return ResourceManager.GetString("ScheduleTotalJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seconds.
+        /// </summary>
+        public static string Seconds {
+            get {
+                return ResourceManager.GetString("Seconds", resourceCulture);
             }
         }
         
@@ -736,11 +808,29 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to At the specified time.
+        /// </summary>
+        public static string SpecifedTime {
+            get {
+                return ResourceManager.GetString("SpecifedTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sql Server Agent Log.
         /// </summary>
         public static string SqlAgentLog {
             get {
                 return ResourceManager.GetString("SqlAgentLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SQL Server Agent service starts.
+        /// </summary>
+        public static string SqlAgentStarts {
+            get {
+                return ResourceManager.GetString("SqlAgentStarts", resourceCulture);
             }
         }
         
@@ -858,6 +948,15 @@ namespace Fanex.Maintenance.Core {
         public static string Waiting_For_Thread {
             get {
                 return ResourceManager.GetString("Waiting_For_Thread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekly.
+        /// </summary>
+        public static string Weekly {
+            get {
+                return ResourceManager.GetString("Weekly", resourceCulture);
             }
         }
         

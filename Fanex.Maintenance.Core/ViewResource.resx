@@ -352,7 +352,7 @@
     <value>FreqSub (Type : Interval)</value>
   </data>
   <data name="ScheduleName" xml:space="preserve">
-    <value>Schedule Name</value>
+    <value>Schedule</value>
   </data>
   <data name="ScheduleTotalJob" xml:space="preserve">
     <value>Total Job</value>
@@ -386,5 +386,38 @@
   </data>
   <data name="WindowsEventLog" xml:space="preserve">
     <value>Windows Event Log</value>
+  </data>
+  <data name="ComputerIdle" xml:space="preserve">
+    <value>Computer is idle</value>
+  </data>
+  <data name="Daily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Hours</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Minutes</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="MonthlyRelative" xml:space="preserve">
+    <value>Monthly Relative</value>
+  </data>
+  <data name="OneTime" xml:space="preserve">
+    <value>One time only</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>Seconds</value>
+  </data>
+  <data name="SpecifedTime" xml:space="preserve">
+    <value>At the specified time</value>
+  </data>
+  <data name="SqlAgentStarts" xml:space="preserve">
+    <value>SQL Server Agent service starts</value>
+  </data>
+  <data name="Weekly" xml:space="preserve">
+    <value>Weekly</value>
   </data>
 </root>

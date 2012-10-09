@@ -70,11 +70,9 @@ namespace Fanex.Maintenance.Core.Web
 
         public enum SearchDate : int
         {
-            All = -1,
-            None = 0,
+            All = 0,
             StartDate = 1,
             EndDate = 2
         }
-
     }
 }
