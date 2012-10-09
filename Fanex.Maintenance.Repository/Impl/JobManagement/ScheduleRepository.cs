@@ -61,7 +61,11 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 
                 if(!string.IsNullOrEmpty(serverName))
                 {
-                    return Fetch<Schedule>(scheduleCriteria, serverName, mapObjectFunc);
+                    IEnumerable<Schedule> schedules = Fetch<Schedule>(scheduleCriteria, serverName, mapObjectFunc);
+                    schedules.ForEach(schedule => {
+                        schedule.ServerIp = serverName;
+                    });
+                    return schedules;
                 }
             }
             catch (Exception ex)

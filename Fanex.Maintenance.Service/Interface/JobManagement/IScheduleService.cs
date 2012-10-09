@@ -23,15 +23,15 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
     {
         IScheduleService WithServer(string serverName);
 
-        IScheduleService WithFreqType(int freqType);
+        IScheduleService WithFreqType(int? freqType);
 
-        IScheduleService WithFreqSubType(int freqSubType);
+        IScheduleService WithFreqSubType(int? freqSubType);
 
         IScheduleService WithScheduleName(string scheduleName);
 
-        IScheduleService WithActiveStartDateRange(DateTime fromStartDate, DateTime toStartDate);
+        IScheduleService WithSearchDateType(int? searchDateType);
 
-        IScheduleService WithActiveEndDateRange(DateTime fromEndDate, DateTime toEndDate);
+        IScheduleService WithDateRange(DateTime? fromDate, DateTime? toDate);
 
         IEnumerable<Schedule> GetSchedules();
     }

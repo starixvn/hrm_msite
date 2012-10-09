@@ -444,4 +444,7 @@
   <data name="Step_Name" xml:space="preserve">
     <value>Step Name</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
 </root>

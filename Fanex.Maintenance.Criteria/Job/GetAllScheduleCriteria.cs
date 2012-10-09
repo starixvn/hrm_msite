@@ -21,22 +21,19 @@ namespace Fanex.Maintenance.Criteria.Job
         public string Server { get; set; }
 
         [SpParam(Ignored = true)]
-        public int FreqType { get; set; }
+        public int? FreqType { get; set; }
 
         [SpParam(Ignored = true)]
-        public int FreqSubType { get; set; }
+        public int? FreqSubType { get; set; }
 
         [SpParam(Ignored = true)]
-        public DateTime StartFromDate { get; set; }
+        public DateTime From { get; set; }
 
         [SpParam(Ignored = true)]
-        public DateTime StartToDate { get; set; }
+        public DateTime To { get; set; }
 
         [SpParam(Ignored = true)]
-        public DateTime EndFromDate { get; set; }
-
-        [SpParam(Ignored = true)]
-        public DateTime EndToDate { get; set; }
+        public int? SearchDateType { get; set; }
 
         public int? Schedule_Id { get; set; }
 

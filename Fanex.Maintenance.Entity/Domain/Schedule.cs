@@ -143,5 +143,10 @@ namespace Fanex.Maintenance.Entity.Domain
         public string Name { get; set; }
 
         public int JobCount { get; set; }
+
+        public string ServerIp { get; set; }
+
+        public string FreqIntervalCombine { get; set; }
+        public string FreqSubIntervalCombine { get; set; }
     }
 }
