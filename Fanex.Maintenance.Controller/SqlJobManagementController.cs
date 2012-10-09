@@ -21,8 +21,7 @@ namespace Fanex.Maintenance.Controller
     using System.Globalization;
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Service.Interface.JobManagement;
-    using Fanex.Maintenance.Service.Impl.JobManagement;
+    
 
     /// <summary>
     /// TODO: Update summary.
@@ -31,7 +30,7 @@ namespace Fanex.Maintenance.Controller
     {
         private readonly IJobService _jobService = JobService.Create();
         private readonly IScheduleService _scheduleService = ScheduleService.Create();
-
+        private readonly IStepService _stepService = StepService.Create();
         #region Pages
         public ActionResult MainContentPage()
         {

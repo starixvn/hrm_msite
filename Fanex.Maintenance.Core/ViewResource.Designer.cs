@@ -223,6 +223,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Database Name.
+        /// </summary>
+        public static string Database_Name {
+            get {
+                return ResourceManager.GetString("Database_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date Created.
         /// </summary>
         public static string Date_Created {
@@ -592,6 +601,24 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to On Fail Action.
+        /// </summary>
+        public static string On_Fail_Action {
+            get {
+                return ResourceManager.GetString("On_Fail_Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On Success Action.
+        /// </summary>
+        public static string On_Success_Action {
+            get {
+                return ResourceManager.GetString("On_Success_Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One time only.
         /// </summary>
         public static string OneTime {
@@ -876,15 +903,6 @@ namespace Fanex.Maintenance.Core {
         public static string Step_Name {
             get {
                 return ResourceManager.GetString("Step_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sub System.
-        /// </summary>
-        public static string Sub_System {
-            get {
-                return ResourceManager.GetString("Sub_System", resourceCulture);
             }
         }
         
