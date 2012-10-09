@@ -339,4 +339,22 @@
   <data name="To" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="ScheduleAcEndDate" xml:space="preserve">
+    <value>Active End Date</value>
+  </data>
+  <data name="ScheduleAcStartDate" xml:space="preserve">
+    <value>Active Start Date</value>
+  </data>
+  <data name="ScheduleFreq" xml:space="preserve">
+    <value>Freq (Type : Interval)</value>
+  </data>
+  <data name="ScheduleFreqSub" xml:space="preserve">
+    <value>FreqSub (Type : Interval)</value>
+  </data>
+  <data name="ScheduleName" xml:space="preserve">
+    <value>Schedule Name</value>
+  </data>
+  <data name="ScheduleTotalJob" xml:space="preserve">
+    <value>Total Job</value>
+  </data>
 </root>

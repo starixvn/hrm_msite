@@ -565,6 +565,60 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active End Date.
+        /// </summary>
+        public static string ScheduleAcEndDate {
+            get {
+                return ResourceManager.GetString("ScheduleAcEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Start Date.
+        /// </summary>
+        public static string ScheduleAcStartDate {
+            get {
+                return ResourceManager.GetString("ScheduleAcStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Freq (Type : Interval).
+        /// </summary>
+        public static string ScheduleFreq {
+            get {
+                return ResourceManager.GetString("ScheduleFreq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FreqSub (Type : Interval).
+        /// </summary>
+        public static string ScheduleFreqSub {
+            get {
+                return ResourceManager.GetString("ScheduleFreqSub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedule Name.
+        /// </summary>
+        public static string ScheduleName {
+            get {
+                return ResourceManager.GetString("ScheduleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Job.
+        /// </summary>
+        public static string ScheduleTotalJob {
+            get {
+                return ResourceManager.GetString("ScheduleTotalJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fail.
         /// </summary>
         public static string Send_Fail {
