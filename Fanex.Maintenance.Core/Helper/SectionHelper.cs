@@ -33,7 +33,14 @@ namespace Fanex.Maintenance.Core.Helper
             {
                 if (server.ServerName == serverName)
                 {
-                    connectionString = server.ConnectionString;
+                    if (server.Plain == "1")
+                    {
+                        connectionString = server.ConnectionString;
+                    }
+                    else
+                    {
+                        connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
+                    }
                     break;
                 }
             }
@@ -52,7 +59,14 @@ namespace Fanex.Maintenance.Core.Helper
             {
                 if (server.ServerIp == serverIp)
                 {
-                    connectionString = server.ConnectionString;
+                    if (server.Plain == "1")
+                    {
+                        connectionString = server.ConnectionString;
+                    }
+                    else
+                    {
+                        connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
+                    }
                     break;
                 }
             }

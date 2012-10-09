@@ -131,5 +131,18 @@ namespace Fanex.Maintenance.Core.Configurations
                 this["ServerIp"] = value;
             }
         }
+
+        [ConfigurationProperty("Plain", IsRequired = true)]
+        public string Plain
+        {
+            get
+            {
+                return (string)this["Plain"];
+            }
+            set
+            {
+                this["Plain"] = value;
+            }
+        }
     }
 }
