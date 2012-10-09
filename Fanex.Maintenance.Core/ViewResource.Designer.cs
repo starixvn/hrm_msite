@@ -70,6 +70,24 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active End Date.
+        /// </summary>
+        public static string ActiveEndDate {
+            get {
+                return ResourceManager.GetString("ActiveEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Start Date.
+        /// </summary>
+        public static string ActiveStartDate {
+            get {
+                return ResourceManager.GetString("ActiveStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} has been added successfully. You will be redirected in &lt;span class=&apos;msec&apos;&gt;{1}&lt;/span&gt; seconds..
         /// </summary>
         public static string AddSuccessMsg {

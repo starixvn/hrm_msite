@@ -387,6 +387,12 @@
   <data name="WindowsEventLog" xml:space="preserve">
     <value>Windows Event Log</value>
   </data>
+  <data name="ActiveEndDate" xml:space="preserve">
+    <value>Active End Date</value>
+  </data>
+  <data name="ActiveStartDate" xml:space="preserve">
+    <value>Active Start Date</value>
+  </data>
   <data name="ComputerIdle" xml:space="preserve">
     <value>Computer is idle</value>
   </data>
