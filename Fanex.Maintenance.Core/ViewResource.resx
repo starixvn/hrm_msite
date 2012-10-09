@@ -327,4 +327,16 @@
   <data name="Disabled" xml:space="preserve">
     <value>Disabled</value>
   </data>
+  <data name="Execution_Status" xml:space="preserve">
+    <value>Execution Status</value>
+  </data>
+  <data name="Date_Type" xml:space="preserve">
+    <value>Date Type</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
 </root>

@@ -1,0 +1,28 @@
+﻿@import "../style.less";
+
+.site-url {
+	position: relative;
+	padding-right: 20px;
+
+	.url-toggle {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 15px;
+		height: 15px;
+		background: url(../img/sprites.png) no-repeat;
+	}
+
+	.alt-urls {
+		background-color: @white;
+		border: 1px solid @border;
+		.box_shadow(0 0 3px 1px rgba(0,0,0,0.2) inset);
+		margin: 10px 0 0 0;
+		padding: 5px 0;
+		display: none;
+
+		li {
+			padding: 5px 10px;
+		}
+	}
+}

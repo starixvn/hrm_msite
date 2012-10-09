@@ -214,6 +214,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date Type.
+        /// </summary>
+        public static string Date_Type {
+            get {
+                return ResourceManager.GetString("Date_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DEPOSIT SITES.
         /// </summary>
         public static string DEPOSIT_SITES {
@@ -273,6 +282,15 @@ namespace Fanex.Maintenance.Core {
         public static string Executing {
             get {
                 return ResourceManager.GetString("Executing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Execution Status.
+        /// </summary>
+        public static string Execution_Status {
+            get {
+                return ResourceManager.GetString("Execution_Status", resourceCulture);
             }
         }
         
@@ -601,6 +619,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subject.
         /// </summary>
         public static string Subject {
@@ -633,6 +660,15 @@ namespace Fanex.Maintenance.Core {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
             }
         }
         

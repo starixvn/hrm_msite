@@ -57,4 +57,20 @@ $(document).ready(function () {
     $('#DateType').bind('change', function () {
         JobManagementPage.SelectDateType();
     });
+
+    // #region actions dropdownlist
+    var event = NAP.agentIsOldIe || NAP.agentIsApple ? 'click' : 'hover';
+
+    $('.action-wrp').bind(event, function () {
+        var $this = $(this),
+			dropdown = $this.find('.actions');
+
+        if (dropdown.css('visibility') == 'hidden') {
+            $('.actions').css({ visibility: 'hidden', opacity: 0 });
+            $this.find('.actions').css({ visibility: 'visible', opacity: 1 });
+        } else {
+            $this.find('.actions').css({ visibility: 'hidden', opacity: 0 });
+        }
+    });
+    // #endregion
 });
