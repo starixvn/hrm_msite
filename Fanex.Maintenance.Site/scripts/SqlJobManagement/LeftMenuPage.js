@@ -7,9 +7,10 @@ $(function () {
         $(this).addClass("hover");
     }, function () {
         $(this).removeClass("hover");
-    })
-
-
+    }).click(function () {
+        $("#browser li span.choosen").removeClass("choosen");
+        $(this).not(":has(ul)").addClass("choosen");
+    });
 });
 var LeftMenuPage = function ($) {
     return {};
