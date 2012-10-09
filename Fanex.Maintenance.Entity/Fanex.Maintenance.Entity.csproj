@@ -54,6 +54,7 @@
     <Compile Include="Domain\OrinatingServer.cs" />
     <Compile Include="Domain\Schedule.cs" />
     <Compile Include="Domain\Step.cs" />
+    <Compile Include="Model\JobLog.cs" />
     <Compile Include="Model\JobSchedule.cs" />
     <Compile Include="Model\LogCategory.cs" />
     <Compile Include="Model\CommandResult.cs" />
