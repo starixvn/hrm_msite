@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Entity.Model
 
         public int SqlMessageId { get; set; }
 
-        public int SqlSeverityId { get; set; }
+        public int SqlSeverity { get; set; }
 
         public string Message { get; set; }
 

@@ -22,71 +22,113 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.Common.Extensions;
     using System.Globalization;
     using System.Data;
+    using Fanex.NAP.Framework.Data;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class JobRepository : BaseRepository<Job>, IJobRepository
     {
-        public IEnumerable<JobSchedule> GetAllJob(string serverName, string jobName, int? enabled, int? currentExecutionnStaus)
+        public IEnumerable<JobSchedule> GetAllJob(ICriteria criteria, string serverName)
         {
             try
             {
-                var criteria = new GetListJobCriteria
+                if (criteria.IsValid())
                 {
-                    Enabled = enabled,
-                    Execution_Status = currentExecutionnStaus
-                };
 
-                if (!jobName.Equals(string.Empty))
-                {
-                    criteria.Job_Name = jobName;
+                    Func<IDataReader, JobSchedule> objMapFunc = (reader) =>
+                    {
+                        return new JobSchedule
+                                {
+                                    ExecuteStatus = reader.ToInt("current_execution_status"),
+                                    LastRunDate = reader.ToString("last_run_date").Length == 8 ? DateTime.ParseExact(reader.ToString("last_run_date"), "yyyyMMdd"
+                                            , CultureInfo.InvariantCulture
+                                            , DateTimeStyles.None) : DateTime.MinValue,
+                                    NextRunDate = reader.ToString("next_run_date").Length == 8 ? DateTime.ParseExact(reader.ToString("next_run_date"), "yyyyMMdd"
+                                            , CultureInfo.InvariantCulture
+                                            , DateTimeStyles.None) : DateTime.MinValue,
+                                    Job = new Job
+                                    {
+                                        Category = new JobCategory
+                                        {
+                                            Name = reader.ToString("category")
+                                        },
+                                        DateCreated = reader.ToDateTime("date_created"),
+                                        DateModified = reader.ToDateTime("date_modified"),
+                                        DeleteLevel = reader.ToInt("delete_level"),
+                                        Description = reader.ToString("description"),
+                                        Enable = reader.ToInt("enabled"),
+                                        JobId = reader.To<Guid>("job_id"),
+                                        Name = reader.ToString("name"),
+                                        NotifyEmailOperator = new Operator
+                                        {
+                                            Name = reader.ToString("notify_email_operator")
+                                        },
+                                        NotifyLevelEmail = reader.ToInt("notify_level_email"),
+                                        NotifyLevelEventLog = reader.ToInt("notify_level_eventlog"),
+                                        NotifyLevelNetsend = reader.ToInt("notify_level_netsend"),
+                                        NotifyLevelPage = reader.ToInt("notify_level_page"),
+                                        OrinatingServer = new OrinatingServer
+                                        {
+                                            Name = reader.ToString("originating_server")
+                                        },
+                                        StartStepId = reader.ToInt("start_step_id"),
+                                        VersionNumber = reader.ToInt("version_number")
+                                    }
+                                };
+                    };
+
+                    return Fetch<JobSchedule>(criteria, serverName, objMapFunc);
                 }
 
-                Func<IDataReader, JobSchedule> objMapFunc = (reader) =>
-                {
-                    return new JobSchedule
-                            {
-                                ExecuteStatus = reader.ToInt("current_execution_status"),
-                                LastRunDate = reader.ToString("last_run_date").Length == 8 ? DateTime.ParseExact(reader.ToString("last_run_date"), "yyyyMMdd"
-                                        , CultureInfo.InvariantCulture
-                                        , DateTimeStyles.None) : DateTime.MinValue,
-                                NextRunDate = reader.ToString("next_run_date").Length == 8 ? DateTime.ParseExact(reader.ToString("next_run_date"), "yyyyMMdd"
-                                        , CultureInfo.InvariantCulture
-                                        , DateTimeStyles.None) : DateTime.MinValue,
-                                Job = new Job
-                                {
-                                    Category = new JobCategory
-                                    {
-                                        Name = reader.ToString("category")
-                                    },
-                                    DateCreated = reader.ToDateTime("date_created"),
-                                    DateModified = reader.ToDateTime("date_modified"),
-                                    DeleteLevel = reader.ToInt("delete_level"),
-                                    Description = reader.ToString("description"),
-                                    Enable = reader.ToInt("enabled"),
-                                    JobId = reader.To<Guid>("job_id"),
-                                    Name = reader.ToString("name"),
-                                    NotifyEmailOperator = new Operator
-                                    {
-                                        Name = reader.ToString("notify_email_operator")
-                                    },
-                                    NotifyLevelEmail = reader.ToInt("notify_level_email"),
-                                    NotifyLevelEventLog = reader.ToInt("notify_level_eventlog"),
-                                    NotifyLevelNetsend = reader.ToInt("notify_level_netsend"),
-                                    NotifyLevelPage = reader.ToInt("notify_level_page"),
-                                    OrinatingServer = new OrinatingServer
-                                    {
-                                        Name = reader.ToString("originating_server")
-                                    },
-                                    StartStepId = reader.ToInt("start_step_id"),
-                                    VersionNumber = reader.ToInt("version_number")
-                                }
-                            };
-                };
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-                if (criteria.IsValid()) 
+
+        public IEnumerable<JobLog> GetJobLog(ICriteria criteria, string serverName)
+        {
+            try
+            {
+                if (criteria.IsValid())
                 {
-                    return Fetch<JobSchedule>(criteria, serverName, objMapFunc);
+                    Func<IDataReader, JobLog> objMapFunc = (reader) =>
+                    {
+                        return new JobLog
+                        {
+                            InstanceId = reader.ToInt("instance_id"),
+                            Job = !reader.IsDBNull("job_id") ? new Job
+                            {
+                                JobId = reader.To<Guid>("job_id"),
+                                Name = reader.ToString("job_name")
+                            } : new Job(),
+                            Step = !reader.IsDBNull("step_id") ? new Step
+                            {
+                                Id = reader.ToInt("step_id"),
+                                Name = reader.ToString("step_name")
+                            } : new Step(),
+                            SqlMessageId = reader.ToInt("sql_message_id"),
+                            SqlSeverity = reader.ToInt("sql_severity"),
+                            Message = reader.ToString("message"),
+                            RunSatus = reader.ToInt("run_status"),
+                            RunDate = reader.ToInt("run_date"),
+                            RunTime = reader.ToInt("run_time"),
+                            RunDuration = reader.ToInt("run_duration"),
+                            OperatorIdEmailed = reader.IsDBNull("operator_emailed") ?
+                                                    reader.ToInt("operator_emailed") : 0,
+                            OperatorIdNetsend = reader.IsDBNull("operator_netsend") ?
+                                                    reader.ToInt("operator_netsend") : 0,
+                            OperatorIdPaged = reader.IsDBNull("operator_paged") ?
+                                                    reader.ToInt("operator_paged") : 0,
+                            RetriesAttempted = reader.ToInt("retries_attempted"),
+                            Server = reader.ToString("server")
+                        };
+                    };
+
+                    return Fetch<JobLog>(criteria, serverName, objMapFunc);
                 }
 
                 return null;

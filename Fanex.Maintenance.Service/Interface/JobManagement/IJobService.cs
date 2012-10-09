@@ -35,5 +35,7 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
         IJobService WithNextRunDate(DateTime? nextRunDate);   
      
         IEnumerable<JobSchedule> GetJobs();
+
+        IEnumerable<JobLog> GetJobLogs();
     }
 }
