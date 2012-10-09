@@ -116,7 +116,7 @@ namespace Fanex.Maintenance.Controller
                 DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1);
 
                 //// filter by from date to date
-                if (dateType.Equals(Constans.DateType.Last))
+                if (dateType.Equals(Constants.DateType.Last))
                 {
                     listJob = listJob.Where(
                         j => j.LastRunDate >= dateFrom
