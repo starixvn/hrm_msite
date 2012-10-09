@@ -20,7 +20,7 @@ namespace Fanex.Maintenance.Entity.Domain
 
         public byte[] OwnerSid { get; set; }
 
-        public bool Enable { get; set; }
+        public int Enable { get; set; }
 
         /// <summary>
         /// How frequently a job runs for this schedule.

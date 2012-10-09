@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Edward.Nguyen" date="2012.10.8">Created</change>
+//   <change who="Ricky.Nguyen" date="2012.10.9">Add Fetchm, Get Datatable Function</change>
 // </history>
 
 namespace Fanex.Maintenance.Repository.Impl
@@ -21,6 +22,11 @@ namespace Fanex.Maintenance.Repository.Impl
     /// </summary>
     public class BaseRepository<T> : ReadonlyRepository<T>
     {
+        /// <summary>
+        /// Get Data table from Criteria
+        /// </summary>
+        /// <param name="criteria">A Criteria</param>
+        /// <returns>A table contains information</returns>
         public virtual DataTable GetDataTable(ICriteria criteria)
         {
             try
@@ -67,6 +73,14 @@ namespace Fanex.Maintenance.Repository.Impl
             }
         }
 
+        /// <summary>
+        /// Fetch Data from Criteria
+        /// </summary>
+        /// <typeparam name="S">Class</typeparam>
+        /// <param name="criteria">Criteria</param>
+        /// <param name="serverName">Server Name will be executed sp</param>
+        /// <param name="mapObjectFunction">Read datareader and pass object</param>
+        /// <returns>Collection of object</returns>
         public virtual IEnumerable<S> Fetch<S>(ICriteria criteria, string serverName, Func<IDataReader, S> mapObjectFunction) where S : class
         {
             IList<S> listObject = new List<S>();

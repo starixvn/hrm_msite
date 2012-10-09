@@ -60,6 +60,30 @@ namespace Fanex.Maintenance.Core.Web
             Next = 1
         }
 
-        
+        public enum FrequentTime : int
+        {
+            OneTimeOnly = 1,
+            Daily = 4,
+            Weekly = 8,
+            Monthly = 16,
+            MonlyRelative = 32,
+            SqlAgentStart = 64,
+            ComputerIdle = 128
+        }
+
+        public enum FrequentSubTime : int
+        {
+            SpecificTime = 1,
+            Second = 2,
+            Minute = 4,
+            Hour = 8
+        }
+
+        public enum SearchDate : int
+        {
+            All = 0,
+            StartDate = 1,
+            EndDate = 2
+        }
     }
 }

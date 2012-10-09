@@ -32,8 +32,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         public string ServerName { get; set; }
         public string ScheduleName { get; set; }
-        public int? FreqType { get; set; }
-        public int? FreSubType { get; set; }
+        public int FreqType { get; set; }
+        public int FreSubType { get; set; }
         public DateTime ActiveStartFromDate { get; set; }
         public DateTime ActiveStartToDate { get; set; }
         public DateTime ActiveEndFromDate { get; set; }

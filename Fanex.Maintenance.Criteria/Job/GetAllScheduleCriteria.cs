@@ -10,12 +10,34 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using Fanex.NAP.Framework.Data;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class GetAllScheduleCriteria : CriteriaBase
     {
+        [SpParam(Ignored=true)]
+        public string Server { get; set; }
+
+        [SpParam(Ignored = true)]
+        public int FreqType { get; set; }
+
+        [SpParam(Ignored = true)]
+        public int FreqSubType { get; set; }
+
+        [SpParam(Ignored = true)]
+        public DateTime StartFromDate { get; set; }
+
+        [SpParam(Ignored = true)]
+        public DateTime StartToDate { get; set; }
+
+        [SpParam(Ignored = true)]
+        public DateTime EndFromDate { get; set; }
+
+        [SpParam(Ignored = true)]
+        public DateTime EndToDate { get; set; }
+
         public int? Schedule_Id { get; set; }
 
         public string Schedule_Name { get; set; }
@@ -31,7 +53,7 @@ namespace Fanex.Maintenance.Criteria.Job
 
         public override string GetSettingKey()
         {
-            return "sp_help_job";
+            return "sp_help_schedule";
         }
     }
 }
