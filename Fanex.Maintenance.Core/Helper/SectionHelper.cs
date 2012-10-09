@@ -21,6 +21,11 @@ namespace Fanex.Maintenance.Core.Helper
     /// </summary>
     public class SectionHelper
     {
+        /// <summary>
+        /// Get Connection String From Server Name
+        /// </summary>
+        /// <param name="serverName">Server Name</param>
+        /// <returns>Connection String maps with server name</returns>
         public static string GetConnectionStringFromServerName(string serverName)
         {
             string connectionString = string.Empty;
@@ -35,7 +40,30 @@ namespace Fanex.Maintenance.Core.Helper
             return connectionString;
         }
 
+        /// <summary>
+        /// Get Connection String From Server Name
+        /// </summary>
+        /// <param name="serverName">Server Name</param>
+        /// <returns>Connection String maps with server name</returns>
+        public static string GetConnectionStringFromServerIp(string serverIp)
+        {
+            string connectionString = string.Empty;
+            foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+            {
+                if (server.ServerIp == serverIp)
+                {
+                    connectionString = server.ConnectionString;
+                    break;
+                }
+            }
+            return connectionString;
+        }
 
+        /// <summary>
+        /// Get Sp Name From SpKey
+        /// </summary>
+        /// <param name="spKey">Sp Key</param>
+        /// <returns>Sp Name Map with sp Key</returns>
         public static string GetSpNameFromSpKey(string spKey)
         {
             string spName = string.Empty;

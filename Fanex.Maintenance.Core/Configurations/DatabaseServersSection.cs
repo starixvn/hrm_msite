@@ -71,7 +71,7 @@ namespace Fanex.Maintenance.Core.Configurations
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((ServerElement)element).ServerName + ((ServerElement)element).ConnectionString;
+            return ((ServerElement)element).ServerIp + ((ServerElement)element).ServerName + ((ServerElement)element).ConnectionString;
         }
 
         public ServerElement this[int index]
@@ -116,6 +116,19 @@ namespace Fanex.Maintenance.Core.Configurations
             set
             {
                 this["ServerName"] = value;
+            }
+        }
+
+        [ConfigurationProperty("ServerIp", IsRequired = true)]
+        public string ServerIp
+        {
+            get
+            {
+                return (string)this["ServerIp"];
+            }
+            set
+            {
+                this["ServerIp"] = value;
             }
         }
     }
