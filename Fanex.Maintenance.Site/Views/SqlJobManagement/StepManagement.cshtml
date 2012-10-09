@@ -1,0 +1,90 @@
+﻿@using Fanex.Maintenance.Criteria.Job
+@model List<StepDetail>
+@{
+    ViewBag.Title = "Step Management";
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml"; 
+}
+@section Head {
+    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+<table class="grid">
+    <thead>
+        <tr>
+            <th>
+                @ViewResource.Step_Id
+            </th>
+            <th>
+                @ViewResource.Step_Name
+            </th>
+            <th>
+                @ViewResource.Database_Name
+            </th>
+            <th>
+                @ViewResource.Last_Run_Date
+            </th>
+            <th>
+                @ViewResource.On_Fail_Action
+            </th>
+            <th>
+                @ViewResource.On_Success_Action
+            </th>
+            <th>
+                @ViewResource.Last_Run_Outcome
+            </th>
+            <th>
+                @ViewResource.Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                i++;
+            <tr @Html.Raw(rowCss)>
+                <td class="align-center">
+                    @item.Id
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.DatabaseName
+                </td>
+                <td>
+                    @item.LastRunDate
+                </td>
+                <td>
+                    @item.OnFailAction
+                </td>
+                <td class="align-center">
+                    @item.OnSuccessAction
+                </td>
+                <td>
+                    @item.LastRunOutCome
+                </td>
+                <td class="align-center">
+                    <div class="action-wrp">
+                        <span class="btn-action">Action</span>
+                        <div class="relative">
+                            <ul class="actions" style="visibility: hidden; opacity: 0;">
+                                <li><a href="#" class="dd-site">Run</a></li>
+                                <li><a href="#" class="dd-site">Copy to</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+@section Foot {
+}

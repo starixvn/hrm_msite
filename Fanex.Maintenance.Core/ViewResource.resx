@@ -339,4 +339,25 @@
   <data name="To" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="Database_Name" xml:space="preserve">
+    <value>Database Name</value>
+  </data>
+  <data name="Last_Run_Outcome" xml:space="preserve">
+    <value>Last Run Outcome</value>
+  </data>
+  <data name="On_Fail_Action" xml:space="preserve">
+    <value>On Fail Action</value>
+  </data>
+  <data name="On_Success_Action" xml:space="preserve">
+    <value>On Success Action</value>
+  </data>
+  <data name="Step_Name" xml:space="preserve">
+    <value>Step Name</value>
+  </data>
+  <data name="Sub_System" xml:space="preserve">
+    <value>Sub System</value>
+  </data>
+  <data name="Step_Id" xml:space="preserve">
+    <value>Step ID</value>
+  </data>
 </root>

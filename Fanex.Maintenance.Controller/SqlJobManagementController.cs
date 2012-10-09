@@ -16,11 +16,12 @@ namespace Fanex.Maintenance.Controller
     using System.Text;
     using System.Web.Mvc;
     using Fanex.Maintenance.Core.Configurations;
-    using Fanex.Maintenance.Service.Impl;
-    using Fanex.Maintenance.Service.Interface;
+    using Fanex.Maintenance.Service.Impl.JobManagement;
+    using Fanex.Maintenance.Service.Interface.JobManagement;
     using System.Globalization;
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Criteria.Job;
 
     /// <summary>
     /// TODO: Update summary.
@@ -28,6 +29,7 @@ namespace Fanex.Maintenance.Controller
     public class SqlJobManagementController : Controller
     {
         private readonly IJobService _jobService = JobService.Create();
+        private readonly IStepService _stepService = StepService.Create();
 
         #region Pages
         public ActionResult MainContentPage()
@@ -46,6 +48,8 @@ namespace Fanex.Maintenance.Controller
             return View("~/Views/SqlJobManagement/ScheduleManagement.cshtml");
         }
 
+        #region JobManagement
+
         [HttpGet]
         public ActionResult JobManagementPage()
         {
@@ -53,7 +57,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListJob = _jobService.GetJobs();
 
             ViewBag.DateFrom = DateTime.Now.ToString("dd/MM/yyyy");
-            ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");            
 
             return View("~/Views/SqlJobManagement/JobManagement.cshtml");
         }
@@ -98,6 +102,22 @@ namespace Fanex.Maintenance.Controller
             return View("~/Views/SqlJobManagement/JobManagement.cshtml");
         }
 
+
+        #endregion
+
+        #region StepManagement
+
+        [HttpGet]
+        public ActionResult StepManagement(string job, string server)
+        {
+            List<StepDetail> listStep = _stepService
+                                .WithJob(job)
+                                .FromServer(server)
+                                .GetSteps().ToList();
+            return View(listStep);
+        }
+
+        #endregion
         #endregion
 
         #region Private

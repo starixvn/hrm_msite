@@ -16,6 +16,14 @@ namespace Fanex.Maintenance.Core.Web
     /// </summary>
     public static class Constans
     {
+        public const string JOB = "JOB";
+        public const string STEPS = "STEPS";
+        public const string SCEDULES = "SCEDULES";
+        public const string TARGETS = "TARGETS";        
+
+        /// <summary>
+        /// Status job
+        /// </summary>
         public enum Status
         {
             Enabled = 1,
@@ -23,6 +31,9 @@ namespace Fanex.Maintenance.Core.Web
             Disabled = 0
         }
 
+        /// <summary>
+        /// Current execution status of job
+        /// </summary>
         public enum ExecutionStatus
         {
             Obsolete = 0,
@@ -48,5 +59,7 @@ namespace Fanex.Maintenance.Core.Web
             Last = 0,
             Next = 1
         }
+
+        
     }
 }
