@@ -1,11 +1,134 @@
-﻿@{
-    ViewBag.Title = "Schedule Management"; 
-    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";    
+﻿@using Fanex.Maintenance.Criteria.Job
+@using Fanex.Maintenance.Entity.Domain
+@model GetAllScheduleCriteria
+@{
+    ViewBag.Title = "Schedule Management";
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
+    var schedules = ViewBag.ListSchedule != null ? (IEnumerable<Schedule>)ViewBag.ListSchedule : new List<Schedule>();
 }
 @section Head {
+    <link href="~/themes/nap/site/manage.less" rel="stylesheet" type="text/css" />
+    <script src="~/scripts/Job/JobManagementPage.js" type="text/javascript"></script>
 }
-<div style="width: 1000px;">
-    Server Name: @ViewBag.ServerName
-    <br />
-    ScheduleManagement
-</div>
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}
+@using (Html.BeginForm())
+{ 
+    <section id="filter-bar">    
+         <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.Schedule_Name)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.Schedule_Name)                
+            </div>
+        </div>     
+		<div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.Server)
+		    </div>   
+            <div class="edit-field">	
+                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
+            </div>
+        </div>        
+        <div class="filter-form">	                              
+             <div class="lbl-field ">
+			    @Html.LabelFor(m => m.FreqType)
+		    </div>
+            <div class="edit-field">				                
+                @Html.DropDownListFor(m => m.FreqType,
+                    new List<SelectListItem> { 
+                        new SelectListItem{ Text="1",Value=((int)Constans.FrequentTime.OneTimeOnly).ToString()},                        
+                        new SelectListItem{ Text="2",Value=((int)Constans.FrequentTime.Daily).ToString()},                        
+                        new SelectListItem{ Text="3",Value=((int)Constans.FrequentTime.Weekly).ToString()},                        
+                        new SelectListItem{ Text="4",Value=((int)Constans.FrequentTime.Monthly).ToString()},                        
+                        new SelectListItem{ Text="5",Value=((int)Constans.FrequentTime.MonlyRelative).ToString()},                        
+                        new SelectListItem{ Text="6",Value=((int)Constans.FrequentTime.SqlAgentStart).ToString()},                        
+                        new SelectListItem{ Text="7",Value=((int)Constans.FrequentTime.ComputerIdle).ToString()}
+                    }
+                , "All")
+		    </div>			  
+        </div> 
+        <div class="filter-form">	   
+            <div class="submit">
+		        <input type="submit" value="Submit" /> 
+            </div>    
+        </div>             		   
+    </section>
+}
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Schedule Name
+            </th>
+            <th>
+                Freq (Type : Interval)
+            </th>
+            <th>
+                FreqSub (Type : Interval)
+            </th>
+            <th>
+               Active Start Date
+            </th>
+            <th>
+                Active End Date
+            </th>
+            <th>
+                Total Job
+            </th>
+            <th>
+                Enable 
+            </th>
+            <th>
+                Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            foreach (var schedule in schedules)
+            {
+                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                i++;
+            <tr @Html.Raw(rowCss)>
+                <td class="align-center">
+                    @(i)
+                </td>
+                   <td>
+                    @schedule.Name
+                </td>
+                <td>
+                    @schedule.FreqType
+                </td>
+                <td>
+                    @schedule.FreqSubdayType
+                </td>
+                <td>
+                    @schedule.ActiveStartDate.ToString()
+                </td>
+                <td>
+                    @schedule.ActiveEndDate.ToString()
+                </td>
+                <td>
+                    @schedule.JobCount
+                </td>
+                <td>
+                    @schedule.Enable
+                </td>
+                <td>
+                   edit
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>

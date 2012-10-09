@@ -43,7 +43,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                                 Id = reader.ToInt("schedule_id"),
                                 ScheduleUId = reader.ToString("schedule_uid"),
                                 Name = reader.ToString("schedule_name"),
-                                Enable = reader.ToBool("enabled"),
+                                Enable = reader.ToInt("enabled"),
                                 FreqType = reader.ToInt("freq_type"),
                                 FreqInterval = reader.ToInt("freq_interval"),
                                 FreqSubdayType = reader.ToInt("freq_subday_type"),
