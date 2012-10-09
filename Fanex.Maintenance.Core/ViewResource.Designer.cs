@@ -79,6 +79,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alerts.
+        /// </summary>
+        public static string Alerts {
+            get {
+                return ResourceManager.GetString("Alerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Application.
         /// </summary>
         public static string Application_Name {
@@ -367,6 +376,24 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Job Management.
+        /// </summary>
+        public static string JobManagement {
+            get {
+                return ResourceManager.GetString("JobManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jobs.
+        /// </summary>
+        public static string Jobs {
+            get {
+                return ResourceManager.GetString("Jobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Run Date.
         /// </summary>
         public static string Last_Run_Date {
@@ -502,6 +529,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operators.
+        /// </summary>
+        public static string Operators {
+            get {
+                return ResourceManager.GetString("Operators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -601,11 +637,29 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Schedule Management.
+        /// </summary>
+        public static string ScheduleManagement {
+            get {
+                return ResourceManager.GetString("ScheduleManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Schedule Name.
         /// </summary>
         public static string ScheduleName {
             get {
                 return ResourceManager.GetString("ScheduleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedules.
+        /// </summary>
+        public static string Schedules {
+            get {
+                return ResourceManager.GetString("Schedules", resourceCulture);
             }
         }
         
@@ -655,6 +709,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server Management.
+        /// </summary>
+        public static string ServerManagement {
+            get {
+                return ResourceManager.GetString("ServerManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Smtp Servers.
         /// </summary>
         public static string Setting {
@@ -669,6 +732,24 @@ namespace Fanex.Maintenance.Core {
         public static string Setting_Name {
             get {
                 return ResourceManager.GetString("Setting_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sql Server Agent Log.
+        /// </summary>
+        public static string SqlAgentLog {
+            get {
+                return ResourceManager.GetString("SqlAgentLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sql Server Log.
+        /// </summary>
+        public static string SqlServerLog {
+            get {
+                return ResourceManager.GetString("SqlServerLog", resourceCulture);
             }
         }
         
@@ -777,6 +858,15 @@ namespace Fanex.Maintenance.Core {
         public static string Waiting_For_Thread {
             get {
                 return ResourceManager.GetString("Waiting_For_Thread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Event Log.
+        /// </summary>
+        public static string WindowsEventLog {
+            get {
+                return ResourceManager.GetString("WindowsEventLog", resourceCulture);
             }
         }
     }
