@@ -77,7 +77,13 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         public IEnumerable<StepDetail> GetSteps()
         {
-            return _stepRepository.GetStepByJob(this._serverName, this._jobName);
+            var criteria = new GetListJobCriteria
+            {
+                Job_Name = this._jobName,
+                Job_Aspect = Constans.STEPS
+            };
+
+            return _stepRepository.GetStepByJob(criteria, this._serverName);
         }
     }
 }

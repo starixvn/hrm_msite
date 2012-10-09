@@ -21,60 +21,54 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Entity.Domain;
     using System.Globalization;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class StepRepository : BaseRepository<Step>, IStepRepository
     {
-        public IEnumerable<StepDetail> GetStepByJob(string serverName, string jobName)
+        public IEnumerable<StepDetail> GetStepByJob(ICriteria criteria, string serverName)
         {
-            var criteria = new GetListJobCriteria
-            {
-                Job_Name = jobName,
-                Job_Aspect = Constans.STEPS
-            };
-
-            Func<IDataReader, StepDetail> objMapFunc = (reader) =>
-            {
-                return new StepDetail
-                {
-                    Id = reader.ToInt("step_id"),
-                    Name = reader.ToString("step_name"),
-                    SubSystem = reader.ToString("subsystem"),
-                    Command = reader.ToString("command"),
-                    Flags = reader.ToString("flags"),
-                    CmdExecSuccessCode = reader.ToInt("cmdexec_success_code"),
-                    OnSuccessAction = reader.ToString("on_success_action"),
-                    OnSuccessStep = !reader.IsDBNull("on_success_step_id") ? new Step
-                    {
-                        Id = reader.ToInt("on_success_step_id")
-                    } : new Step(),
-                    OnFailAction = reader.ToString("on_fail_action"),
-                    OnFailStep = !reader.IsDBNull("on_fail_step_id") ? new Step
-                    {
-                        Id = reader.ToInt("on_fail_step_id")
-                    } : new Step(),
-                    Server = reader.ToString("server"),
-                    DatabaseName = reader.ToString("database_user_name"),
-                    RetryAttempts = reader.ToInt("retry_attempts"),
-                    RetryInterval = reader.ToInt("retry_interval"),
-                    OsRunPriority = reader.ToString("os_run_priority"),
-                    OutputFileName = reader.ToString("output_file_name"),
-                    LastRunOutCome = reader.ToInt("last_run_outcome"),
-                    LastRunDuration = reader.ToInt("last_run_duration"),
-                    LastRunRetries = reader.ToInt("last_run_retries"),
-                    LastRunDate = reader.ToInt("last_run_date"),
-                    LastRunTime = reader.ToInt("last_run_time"),
-                    ProxyId = reader.ToInt("proxy_id")
-                };
-            };
-
             if (criteria.IsValid())
             {
+                Func<IDataReader, StepDetail> objMapFunc = (reader) =>
+                {
+                    return new StepDetail
+                    {
+                        Id = reader.ToInt("step_id"),
+                        Name = reader.ToString("step_name"),
+                        SubSystem = reader.ToString("subsystem"),
+                        Command = reader.ToString("command"),
+                        Flags = reader.ToString("flags"),
+                        CmdExecSuccessCode = reader.ToInt("cmdexec_success_code"),
+                        OnSuccessAction = reader.ToString("on_success_action"),
+                        OnSuccessStep = !reader.IsDBNull("on_success_step_id") ? new Step
+                        {
+                            Id = reader.ToInt("on_success_step_id")
+                        } : new Step(),
+                        OnFailAction = reader.ToString("on_fail_action"),
+                        OnFailStep = !reader.IsDBNull("on_fail_step_id") ? new Step
+                        {
+                            Id = reader.ToInt("on_fail_step_id")
+                        } : new Step(),
+                        Server = reader.ToString("server"),
+                        DatabaseName = reader.ToString("database_user_name"),
+                        RetryAttempts = reader.ToInt("retry_attempts"),
+                        RetryInterval = reader.ToInt("retry_interval"),
+                        OsRunPriority = reader.ToString("os_run_priority"),
+                        OutputFileName = reader.ToString("output_file_name"),
+                        LastRunOutCome = reader.ToInt("last_run_outcome"),
+                        LastRunDuration = reader.ToInt("last_run_duration"),
+                        LastRunRetries = reader.ToInt("last_run_retries"),
+                        LastRunDate = reader.ToInt("last_run_date"),
+                        LastRunTime = reader.ToInt("last_run_time"),
+                        ProxyId = reader.ToInt("proxy_id")
+                    };
+                };
+
                 return Fetch<StepDetail>(criteria, serverName, objMapFunc);
             }
-
             return null;
         }
     }

@@ -1,0 +1,126 @@
+﻿@using Fanex.Maintenance.Criteria.Job
+@model GetListJobCriteria
+@{
+    ViewBag.Title = "Job Management";
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
+    var lisJobLog = ViewBag.ListLogJob != null ? (List<JobLog>)ViewBag.ListLogJob : new List<JobLog>();
+}
+@section Head {
+    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    <script src="~/scripts/Job/JobManagementPage.js" type="text/javascript"></script>
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+        @Html.ActionLink("+ " + ViewResource.Create_Job, "JobManagementPage", "SqlJobManagement", null, new { @class = "lnk" })
+    </h1>
+}
+@using (Html.BeginForm())
+{ 
+    <section id="filter-bar">    
+         <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.Job_Name)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob, "All")			                
+            </div>
+        </div>     		                        
+        <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.From)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.From)                
+            </div>
+        </div>  
+         <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.To)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.To)                
+            </div>
+        </div>     
+        <div class="filter-form">	
+         <div class="lbl-field">
+         </div>   
+            <div class="submit">
+		        <input type="submit" value="Submit" /> 
+            </div>    
+        </div>             		   
+    </section>
+}
+<table class="grid">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @ViewResource.Status
+            </th>
+            <th>
+                @ViewResource.Date
+            </th>
+            <th>
+                @ViewResource.Message
+            </th>
+            <th>
+                @ViewResource.Duration
+            </th>
+            <th>
+                @ViewResource.Retries_Attempted
+            </th>
+            <th>
+                @ViewResource.Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            foreach (var item in lisJobLog)
+            {
+                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                i++;
+            <tr @Html.Raw(rowCss)>
+                <td class="align-center">
+                    @(i)
+                </td>
+                <td>
+                    @item.RunSatus
+                </td>
+                <td>
+                    @item.RunDate
+                </td>
+                <td>
+                    @item.Message
+                </td>
+                <td>
+                    @item.RunDuration
+                </td>
+                <td class="align-center">
+                    @item.RetriesAttempted
+                </td>
+                <td class="align-center">
+                    <div class="action-wrp">
+                        <span class="btn-action">Action</span>
+                        <div class="relative">
+                            <ul class="actions" style="visibility: hidden; opacity: 0;">
+                                <li><a href="#" class="dd-site">Run</a></li>
+                                <li><a href="#" class="dd-site">Copy to</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+@Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
+@Html.Hidden("dateTo", (string)ViewBag.DateTo)
+@Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
+@section Foot {
+}

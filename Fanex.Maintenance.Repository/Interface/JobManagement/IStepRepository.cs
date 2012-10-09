@@ -15,12 +15,13 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     using System.Text;
     using Fanex.Maintenance.Entity.Domain;
     using Fanex.Maintenance.Entity.Model;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface IStepRepository
     {
-        IEnumerable<StepDetail> GetStepByJob(string serverName, string jobName);
+        IEnumerable<StepDetail> GetStepByJob(ICriteria criteria, string serverName);
     }
 }

@@ -1,7 +1,7 @@
 ﻿@using Fanex.Maintenance.Criteria.Job
 @model List<StepDetail>
 @{
-    ViewBag.Title = "Step Management";
+    ViewBag.Title = (string)ViewBag.JobName;
     Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml"; 
 }
 @section Head {
@@ -9,7 +9,12 @@
 }
 @section Headline {
     <h1>
-        <span class="title">@ViewBag.Title</span>
+        <span class="title"><span class="first">@ViewResource.Step_Management
+            /</span>
+            @ViewBag.Title
+        </span>
+        @Html.ActionLink("← " + ViewResource.Back_To_List, "JobManagementPage", "SqlJobManagement", null, new { @class = "lnk" })
+        @Html.ActionLink("+ " + ViewResource.Create_Step, "JobManagementPage", "SqlJobManagement", null, new { @class = "lnk" })
     </h1>
 }
 <table class="grid">
@@ -64,10 +69,10 @@
                 <td>
                     @item.OnFailAction
                 </td>
-                <td class="align-center">
+                <td>
                     @item.OnSuccessAction
                 </td>
-                <td>
+                <td class="align-center">
                     @item.LastRunOutCome
                 </td>
                 <td class="align-center">

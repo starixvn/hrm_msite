@@ -13,11 +13,13 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using System.Collections.Generic;
     using Fanex.Maintenance.Service.Interface.JobManagement;
     using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Repository.Interface.JobManagement;    
+    using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Core.Configurations;
     using System.Linq;
     using Fanex.Maintenance.Repository.Impl.JobManagement;
-
+    using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Common;
+    using Fanex.Maintenance.Core.Web;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -38,7 +40,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         private string _schedule;
         private string _jobName;
         private int? _currentExcuteStatus;
-
+        private Guid _jobId;
+        private int _startRunDate;
+        private int _endRunDate;
         #endregion
 
         #region Ctor
@@ -115,12 +119,33 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return this;
         }
 
+        public IJobService WithStartRunDate(DateTime startRunDate)
+        {
+            string date = startRunDate.ToString("yyyyMMdd");
+            this._startRunDate = Convert.ToInt32(date);
+            return this;
+        }
+
+        public IJobService WithEndRunDate(DateTime endRunDate)
+        {
+            string date = endRunDate.ToString("yyyyMMdd");
+            this._endRunDate = Convert.ToInt32(date);
+            return this;
+        }
+
         public IEnumerable<JobSchedule> GetJobs()
         {
+            var criteria = new GetListJobCriteria
+            {
+                Job_Name = this._jobName,
+                Execution_Status = this._currentExcuteStatus,
+                Enabled = this._status
+            };
+
             List<JobSchedule> listJob = new List<JobSchedule>();
             if (!this._server.Equals(string.Empty))
             {
-                var list = _jobRepository.GetAllJob(this._server, this._jobName, this._status, this._currentExcuteStatus);
+                var list = _jobRepository.GetAllJob(criteria, this._server);
                 listJob.AddRange(list);
             }
             else
@@ -129,17 +154,41 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 {
                     try
                     {
-                        var list = _jobRepository.GetAllJob(server.ServerName, this._jobName, this._status, this._currentExcuteStatus);
+                        var list = _jobRepository.GetAllJob(criteria, server.ServerName);
                         listJob.AddRange(list);
                     }
-                    catch (Exception ex) 
+                    catch (Exception ex)
                     {
-                    
+
                     }
                 }
-            }           
+            }
 
             return listJob;
+        }
+
+
+        public IEnumerable<JobLog> GetJobLogs()
+        {
+            //// create criteria get job history
+            var criteria = new GetJobHistoryCriteria
+            {                
+                Job_Name = this._jobName,
+                Run_Status = this._currentExcuteStatus,
+                Start_Run_Date = this._startRunDate,
+                End_Run_Date = this._endRunDate,
+                Mode=Constans.FULL
+            };
+
+            try
+            {
+                return _jobRepository.GetJobLog(criteria, this._server);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return null;
         }
     }
 }

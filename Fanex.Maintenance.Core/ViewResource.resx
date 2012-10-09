@@ -444,7 +444,27 @@
   <data name="Step_Name" xml:space="preserve">
     <value>Step Name</value>
   </data>
-  <data name="All" xml:space="preserve">
+  <data name="Step_Management" xml:space="preserve">
+    <value>Step Management</value>
+     <data name="All" xml:space="preserve">
     <value>All</value>
+  </data>
+  <data name="Create_Step" xml:space="preserve">
+    <value>Create Step</value>
+  </data>
+  <data name="Create_Job" xml:space="preserve">
+    <value>Create Job</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Retries_Attempted" xml:space="preserve">
+    <value>Retries Attempted</value>
   </data>
 </root>

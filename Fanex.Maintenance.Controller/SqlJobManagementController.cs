@@ -51,6 +51,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListSchedule = _scheduleService.GetSchedules();
             ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
+
             return View("~/Views/SqlJobManagement/ScheduleManagement.cshtml");
         }
 
@@ -85,7 +86,7 @@ namespace Fanex.Maintenance.Controller
         #region JobManagement
 
         [HttpGet]
-        public ActionResult JobManagementPage()
+        public ActionResult JobManagement()
         {
             ViewBag.ListServer = GetServer();
             ViewBag.ListJob = _jobService.GetJobs();
@@ -93,11 +94,11 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = DateTime.Now.ToString("dd/MM/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
 
-            return View("~/Views/SqlJobManagement/JobManagement.cshtml");
+            return View();
         }
 
         [HttpPost]
-        public ActionResult JobManagementPage(string job_name, int? enabled, int? execution_status, int? dateType, string server = "", string from = "", string to = "")
+        public ActionResult JobManagement(string job_name, int? enabled, int? execution_status, int? dateType, string server = "", string from = "", string to = "")
         {
             List<JobSchedule> listJob = new List<JobSchedule>();
 
@@ -133,7 +134,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = from;
             ViewBag.DateTo = to;
 
-            return View("~/Views/SqlJobManagement/JobManagement.cshtml");
+            return View();
         }
 
 
@@ -148,10 +149,53 @@ namespace Fanex.Maintenance.Controller
                                 .WithJob(job)
                                 .FromServer(server)
                                 .GetSteps().ToList();
+
+            ViewBag.JobName = job;
+
             return View(listStep);
         }
 
         #endregion
+
+        #region Job Log
+
+        [HttpGet]
+        public ActionResult JobLogManagement(string job, string server)
+        {
+            //// get log history 
+            List<JobLog> listJobLog = _jobService
+                               .WithJob(job)
+                               .WithStartRunDate(DateTime.Now)
+                               .WithEndRunDate(DateTime.Now.AddDays(1))
+                               .FromServer(server)
+                               .GetJobLogs().ToList();
+
+            ViewBag.ListLogJob = listJobLog;
+
+            //// get list job
+
+            List<JobSchedule> listJob = _jobService
+                                        .FromServer(server)
+                                        .GetJobs().ToList();
+
+            ViewBag.ListJob = listJob.Select(j => new SelectListItem
+            {
+                Text = j.Job.Name,
+                Value = j.Job.Name
+            }).ToList();
+
+            var criteria = new GetListJobCriteria
+            {
+                Job_Name = job,                
+                From = DateTime.Now,
+                To = DateTime.Now.AddDays(1)
+            };
+
+            return View(criteria);
+        }
+
+        #endregion
+
         #endregion
 
         #region Private
@@ -163,7 +207,7 @@ namespace Fanex.Maintenance.Controller
             {
                 list.Add(new SelectListItem
                 {
-                    Text = item.ServerName,
+                    Text = item.ServerIp,
                     Value = item.ServerName
                 });
             }
