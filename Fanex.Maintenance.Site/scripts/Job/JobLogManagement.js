@@ -2,12 +2,11 @@
 var JobLogManagement = function ($) {
 
     return {
-        date: null,
         buttonImage: null,
 
         InitData: function () {
             JobLogManagement.buttonImage = $('#imagePath').val();
-            JobLogManagement.date = $('#dateTime').val();
+
         },
 
         //disbaled when datetype is all
@@ -26,21 +25,23 @@ var JobLogManagement = function ($) {
         },
 
         InitDatetimePicker: function () {
-            $("#From").val(JobLogManagement.date);
-            $("#To").val(JobLogManagement.date);
 
-            $("#From").datepicker({
+            var dates = $("#From, #To").datepicker({
+                changeMonth: true,
+                numberOfMonths: 1,
+                dateFormat: "MM dd,yy",
                 showOn: "button",
                 buttonImage: JobLogManagement.buttonImage,
                 buttonImageOnly: true,
-                dateFormat: "dd/mm/yy"
-            });
-
-            $("#To").datepicker({
-                showOn: "button",
-                buttonImage: JobLogManagement.buttonImage,
-                buttonImageOnly: true,
-                dateFormat: "dd/mm/yy"
+                onSelect: function (selectedDate) {
+                    var option = this.id == "From" ? "minDate" : "maxDate",
+					instance = $(this).data("datepicker"),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings);
+                    dates.not(this).datepicker("option", option, date);
+                }
             });
         }
     };
@@ -50,13 +51,8 @@ var JobLogManagement = function ($) {
 $(document).ready(function () {
     JobLogManagement.InitData();
     JobLogManagement.InitDatetimePicker();
-    JobLogManagement.SelectDateType();
 
     $('.chosen').chosen();
-
-    $('#DateType').bind('change', function () {
-        JobLogManagement.SelectDateType();
-    });
 
     // #region actions dropdownlist
     var event = NAP.agentIsOldIe || NAP.agentIsApple ? 'click' : 'hover';

@@ -34,9 +34,9 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
 
         IJobService WithNextRunDate(DateTime? nextRunDate);
 
-        IJobService WithStartRunDate(DateTime startRunDate);
+        IJobService WithStartRunDate(DateTime? startRunDate);
 
-        IJobService WithEndRunDate(DateTime endRunDate);
+        IJobService WithEndRunDate(DateTime? endRunDate);
 
         IEnumerable<JobSchedule> GetJobs();
 

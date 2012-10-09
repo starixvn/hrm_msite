@@ -151,20 +151,50 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListJob = listJob.Select(j => new SelectListItem
             {
                 Text = j.Job.Name,
-                Value = j.Job.Name                
+                Value = j.Job.Name
             }).ToList();
 
             var criteria = new GetListJobCriteria
             {
-                Job_Name = job,                
+                Job_Name = job,
                 From = DateTime.Now,
-                To = DateTime.Now.AddDays(1)
+                To = DateTime.Now.AddDays(1),
+                Server = server
             };
-
-            ViewBag.Date = DateTime.Now.ToString("MMMM dd,yyyy");
 
             return View(criteria);
         }
+
+        [HttpPost]
+        public ActionResult JobLogManagement(GetListJobCriteria criteria)
+        {
+            //// get log history 
+            List<JobLog> listJobLog = _jobService
+                               .WithJob(criteria.Job_Name)
+                               .WithStartRunDate(criteria.From)
+                               .WithEndRunDate(criteria.To)
+                               .WithCurrentExecuteStatus(criteria.Execution_Status)
+                               .FromServer(criteria.Server)
+                               .GetJobLogs().ToList();
+
+            ViewBag.ListLogJob = listJobLog;
+
+            //// get list job
+
+            List<JobSchedule> listJob = _jobService
+                                        .WithJob(null)
+                                        .FromServer(criteria.Server)
+                                        .GetJobs().ToList();
+
+            ViewBag.ListJob = listJob.Select(j => new SelectListItem
+            {
+                Text = j.Job.Name,
+                Value = j.Job.Name
+            }).ToList();
+
+            return View(criteria);
+        }
+
 
         #endregion
 

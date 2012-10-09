@@ -32,10 +32,14 @@ namespace Fanex.Maintenance.Criteria.Job
 
         [SpParam(Ignored = true)]
         [Display(Name = "From", ResourceType = typeof(ViewResource))]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MMMM dd,yyyy}")]
         public DateTime? From { get; set; }
 
         [SpParam(Ignored = true)]
         [Display(Name = "To", ResourceType = typeof(ViewResource))]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MMMM dd,yyyy}")]
         public DateTime? To { get; set; }
 
         [Display(Name = "Job", ResourceType = typeof(ViewResource))]
