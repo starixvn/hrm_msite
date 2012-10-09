@@ -241,6 +241,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Database Name.
+        /// </summary>
+        public static string Database_Name {
+            get {
+                return ResourceManager.GetString("Database_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date Created.
         /// </summary>
         public static string Date_Created {
@@ -448,6 +457,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Run Outcome.
+        /// </summary>
+        public static string Last_Run_Outcome {
+            get {
+                return ResourceManager.GetString("Last_Run_Outcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Latest Send Date.
         /// </summary>
         public static string Latest_Send_Date {
@@ -597,6 +615,24 @@ namespace Fanex.Maintenance.Core {
         public static string Obsolete {
             get {
                 return ResourceManager.GetString("Obsolete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On Fail Action.
+        /// </summary>
+        public static string On_Fail_Action {
+            get {
+                return ResourceManager.GetString("On_Fail_Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On Success Action.
+        /// </summary>
+        public static string On_Success_Action {
+            get {
+                return ResourceManager.GetString("On_Success_Action", resourceCulture);
             }
         }
         
@@ -867,6 +903,24 @@ namespace Fanex.Maintenance.Core {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step ID.
+        /// </summary>
+        public static string Step_Id {
+            get {
+                return ResourceManager.GetString("Step_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step Name.
+        /// </summary>
+        public static string Step_Name {
+            get {
+                return ResourceManager.GetString("Step_Name", resourceCulture);
             }
         }
         

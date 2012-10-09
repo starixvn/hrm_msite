@@ -48,13 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Impl\JobManagement\ScheduleService.cs" />
-    <Compile Include="Impl\JobService.cs" />
+    <Compile Include="Impl\JobManagement\JobService.cs" />
+    <Compile Include="Impl\JobManagement\StepService.cs" />
     <Compile Include="Impl\LogCategoryService.cs" />
     <Compile Include="Impl\DatabaseReportService.cs" />
     <Compile Include="Impl\LogService.cs" />
     <Compile Include="Impl\MailService.cs" />
     <Compile Include="Impl\UserService.cs" />
-    <Compile Include="Interface\IJobService.cs" />
+    <Compile Include="Interface\JobManagement\IJobService.cs" />
     <Compile Include="Interface\ILogCategoryService.cs" />
     <Compile Include="Interface\IDatabaseReportService.cs" />
     <Compile Include="Interface\ILogService.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Interface\IStepService.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="Interface\JobManagement\IScheduleService.cs" />
+    <Compile Include="Interface\JobManagement\IStepService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

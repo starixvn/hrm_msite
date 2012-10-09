@@ -1439,6 +1439,7 @@
     <Content Include="Views\SqlJobManagement\ScheduleManagement.cshtml" />
     <Content Include="Views\Shared\_SqlJobManagementLayout.cshtml" />
     <Content Include="Views\SqlJobManagement\JobManagement.cshtml" />
+    <Content Include="Views\SqlJobManagement\StepManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

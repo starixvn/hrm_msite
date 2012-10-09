@@ -7,7 +7,7 @@
 //   <change who="Edward.Nguyen" date="2012.10.5">Created</change>
 // </history>
 
-namespace Fanex.Maintenance.Service.Interface
+namespace Fanex.Maintenance.Service.Interface.JobManagement
 {
     using System;
     using System.Collections.Generic;

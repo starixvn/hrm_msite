@@ -21,6 +21,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Common.Extensions;
     using System.Globalization;
+    using System.Data;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -41,23 +42,9 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                     criteria.Job_Name = jobName;
                 }
 
-                //// new dbsetting from server name and setting key
-                DbSetting setting = new DbSetting
+                Func<IDataReader, JobSchedule> objMapFunc = (reader) =>
                 {
-                    //// get connection string from servername
-                    ConnectionString = SectionHelper.GetConnectionStringFromServerName(serverName),
-                    SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
-                };
-
-                var list = new List<JobSchedule>();
-
-                using (var db = new ObjectDb(setting))
-                {
-                    using (var reader = db.ExecuteReader(criteria.GetSpParams()))
-                    {
-                        while (reader.Read())
-                        {
-                            list.Add(new JobSchedule
+                    return new JobSchedule
                             {
                                 ExecuteStatus = reader.ToInt("current_execution_status"),
                                 LastRunDate = reader.ToString("last_run_date").Length == 8 ? DateTime.ParseExact(reader.ToString("last_run_date"), "yyyyMMdd"
@@ -94,12 +81,15 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                                     StartStepId = reader.ToInt("start_step_id"),
                                     VersionNumber = reader.ToInt("version_number")
                                 }
-                            });
-                        }
-                    }
+                            };
+                };
+
+                if (criteria.IsValid()) 
+                {
+                    return Fetch<JobSchedule>(criteria, serverName, objMapFunc);
                 }
 
-                return list;
+                return null;
             }
             catch (Exception ex)
             {

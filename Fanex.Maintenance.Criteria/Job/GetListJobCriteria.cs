@@ -47,6 +47,8 @@ namespace Fanex.Maintenance.Criteria.Job
         [Display(Name = "Execution_Status", ResourceType = typeof(ViewResource))]
         public int? Execution_Status { get; set; }
 
+        public string Job_Aspect { get; set; }
+
         public override bool IsValid()
         {
             return true;
