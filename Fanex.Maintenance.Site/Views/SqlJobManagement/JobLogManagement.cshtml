@@ -1,45 +1,69 @@
 ﻿@using Fanex.Maintenance.Criteria.Job
 @model GetListJobCriteria
 @{
-    ViewBag.Title = "Job Management";
+    ViewBag.Title = Model.Job_Name;
     Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
     var lisJobLog = ViewBag.ListLogJob != null ? (List<JobLog>)ViewBag.ListLogJob : new List<JobLog>();
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
-    <script src="~/scripts/Job/JobManagementPage.js" type="text/javascript"></script>
+    <script src="~/scripts/Job/JobLogManagement.js" type="text/javascript"></script>
 }
 @section Headline {
     <h1>
-        <span class="title">@ViewBag.Title</span>
-        @Html.ActionLink("+ " + ViewResource.Create_Job, "JobManagementPage", "SqlJobManagement", null, new { @class = "lnk" })
+        <span class="title"><span class="first">@ViewResource.Job_Log_Management
+            /</span>
+            @ViewBag.Title
+        </span>
+        @Html.ActionLink("← " + ViewResource.Back_To_List, "JobManagement", "SqlJobManagement", null, new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm())
 { 
     <section id="filter-bar">    
          <div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    @Html.LabelFor(m => m.Job_Name)
 		    </div>   
             <div class="edit-field width-auto">	
-                @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob, "All")			                
+                @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob
+                    , "All"
+             , new { @class = "chosen" })			                
             </div>
-        </div>     		                        
+        </div>   
+          <div class="filter-form">	                              
+             <div class="lbl-field width-auto ">
+			    @Html.LabelFor(m => m.Execution_Status)
+		    </div>
+            <div class="edit-field">				                
+                @Html.DropDownListFor(m => m.Execution_Status,
+                    new List<SelectListItem> { 
+                        new SelectListItem{ Text=ViewResource.Obsolete,Value=((int)Constans.ExecutionStatus.Obsolete).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Executing,Value=((int)Constans.ExecutionStatus.Executing).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Waiting_For_Thread,Value=((int)Constans.ExecutionStatus.WaitingFoThread).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Between_Retries,Value=((int)Constans.ExecutionStatus.BetweenRtries).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Idle,Value=((int)Constans.ExecutionStatus.Idle).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Suspended,Value=((int)Constans.ExecutionStatus.Suspended).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Performing_Completion_Actions,Value=((int)Constans.ExecutionStatus.PerformingCompletionActions).ToString()}
+                    }
+                , "All"
+                , new { @class = "chosen" })
+		    </div>			  
+        </div>   		                        
         <div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    @Html.LabelFor(m => m.From)
 		    </div>   
             <div class="edit-field width-auto">	
-                @Html.TextBoxFor(m => m.From)                
+                @Html.TextBoxFor(m => m.From, new { @style = "width:90px;margin-right:5px;" })                
             </div>
         </div>  
          <div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    @Html.LabelFor(m => m.To)
 		    </div>   
             <div class="edit-field width-auto">	
-                @Html.TextBoxFor(m => m.To)                
+                @Html.TextBoxFor(m => m.To, new { @style = "width:90px;margin-right:5px;" })                
             </div>
         </div>     
         <div class="filter-form">	
@@ -61,6 +85,12 @@
                 @ViewResource.Status
             </th>
             <th>
+                @ViewResource.Step_Id
+            </th>
+            <th>
+                @ViewResource.Step_Name
+            </th>
+            <th>
                 @ViewResource.Date
             </th>
             <th>
@@ -68,9 +98,6 @@
             </th>
             <th>
                 @ViewResource.Duration
-            </th>
-            <th>
-                @ViewResource.Retries_Attempted
             </th>
             <th>
                 @ViewResource.Action
@@ -92,6 +119,12 @@
                     @item.RunSatus
                 </td>
                 <td>
+                    @item.Step.Id
+                </td>
+                <td>
+                    @item.Step.Name
+                </td>
+                <td>
                     @item.RunDate
                 </td>
                 <td>
@@ -99,9 +132,6 @@
                 </td>
                 <td>
                     @item.RunDuration
-                </td>
-                <td class="align-center">
-                    @item.RetriesAttempted
                 </td>
                 <td class="align-center">
                     <div class="action-wrp">
@@ -119,8 +149,7 @@
         }
     </tbody>
 </table>
-@Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
-@Html.Hidden("dateTo", (string)ViewBag.DateTo)
+@Html.Hidden("dateTime", (string)ViewBag.Date)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
 }

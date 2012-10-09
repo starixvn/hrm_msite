@@ -144,13 +144,14 @@ namespace Fanex.Maintenance.Controller
             //// get list job
 
             List<JobSchedule> listJob = _jobService
+                                        .WithJob(null)
                                         .FromServer(server)
                                         .GetJobs().ToList();
 
             ViewBag.ListJob = listJob.Select(j => new SelectListItem
             {
                 Text = j.Job.Name,
-                Value = j.Job.Name
+                Value = j.Job.Name                
             }).ToList();
 
             var criteria = new GetListJobCriteria
@@ -159,6 +160,8 @@ namespace Fanex.Maintenance.Controller
                 From = DateTime.Now,
                 To = DateTime.Now.AddDays(1)
             };
+
+            ViewBag.Date = DateTime.Now.ToString("MMMM dd,yyyy");
 
             return View(criteria);
         }

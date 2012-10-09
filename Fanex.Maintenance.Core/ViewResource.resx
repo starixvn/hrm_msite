@@ -465,4 +465,7 @@
   <data name="Retries_Attempted" xml:space="preserve">
     <value>Retries Attempted</value>
   </data>
+  <data name="Job_Log_Management" xml:space="preserve">
+    <value>Job Log Management</value>
+  </data>
 </root>

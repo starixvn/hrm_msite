@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Criteria.Job
     {
         [SpParam(Ignored = true)]
         [Display(Name = "Server", ResourceType = typeof(ViewResource))]
-        public string Job_NameServer { get; set; }
+        public string Server { get; set; }
 
         [SpParam(Ignored = true)]
         [Display(Name = "Date_Type", ResourceType = typeof(ViewResource))]
