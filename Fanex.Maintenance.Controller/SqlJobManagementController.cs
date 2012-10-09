@@ -183,6 +183,7 @@ namespace Fanex.Maintenance.Controller
 
             List<JobSchedule> listJob = _jobService
                                         .WithJob(null)
+                                        .WithCurrentExecuteStatus(null)
                                         .FromServer(criteria.Server)
                                         .GetJobs().ToList();
 

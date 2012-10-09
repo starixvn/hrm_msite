@@ -7,22 +7,7 @@ var JobLogManagement = function ($) {
         InitData: function () {
             JobLogManagement.buttonImage = $('#imagePath').val();
 
-        },
-
-        //disbaled when datetype is all
-        SelectDateType: function () {
-            var type = $('#DateType').val();
-            if (type == "") {
-                $('#From').attr('disabled', 'disabled');
-                $('#To').attr('disabled', 'disabled');
-                $('.ui-datepicker-trigger').hide();
-            }
-            else {
-                $('#From').removeAttr('disabled', 'disabled');
-                $('#To').removeAttr('disabled', 'disabled');
-                $('.ui-datepicker-trigger').show();
-            }
-        },
+        },       
 
         InitDatetimePicker: function () {
 

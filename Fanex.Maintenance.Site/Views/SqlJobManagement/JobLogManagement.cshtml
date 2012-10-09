@@ -38,13 +38,8 @@
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.Execution_Status,
                     new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.Obsolete,Value=((int)Constans.ExecutionStatus.Obsolete).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Executing,Value=((int)Constans.ExecutionStatus.Executing).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Waiting_For_Thread,Value=((int)Constans.ExecutionStatus.WaitingFoThread).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Between_Retries,Value=((int)Constans.ExecutionStatus.BetweenRtries).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Idle,Value=((int)Constans.ExecutionStatus.Idle).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Suspended,Value=((int)Constans.ExecutionStatus.Suspended).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Performing_Completion_Actions,Value=((int)Constans.ExecutionStatus.PerformingCompletionActions).ToString()}
+                        new SelectListItem{ Text=ViewResource.Success,Value=((int)Constans.StepRunStatus.Success).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Fail,Value=((int)Constans.StepRunStatus.Fail).ToString()},                                              
                     }
                 , "All"
                 , new { @class = "chosen" })
