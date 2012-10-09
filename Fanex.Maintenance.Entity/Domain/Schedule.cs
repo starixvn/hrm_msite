@@ -108,13 +108,13 @@ namespace Fanex.Maintenance.Entity.Domain
         /// Date on which execution of a job can begin. 
         /// The date is formatted as YYYYMMDD. NULL indicates today's date.
         /// </summary>
-        public int ActiveStartDate { get; set; }
+        public DateTime ActiveStartDate { get; set; }
 
         /// <summary>
         /// Date on which execution of a job can stop. 
         /// The date is formatted YYYYMMDD.
         /// </summary>
-        public int ActiveEndDate { get; set; }
+        public DateTime ActiveEndDate { get; set; }
 
         /// <summary>
         /// Time on any day between active_start_date and active_end_date that job begins executing. 

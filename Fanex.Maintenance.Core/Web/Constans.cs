@@ -61,7 +61,7 @@ namespace Fanex.Maintenance.Core.Web
             Next = 1
         }
 
-       
+
     }
 
     public enum FrequentTime : int
@@ -88,12 +88,11 @@ namespace Fanex.Maintenance.Core.Web
         All = 0,
         StartDate = 1,
         EndDate = 2
-        }
+    }
 
-        public enum StepRunStatus
-        {
-            Success = 1,
-            Fail = 0
-        }
+    public enum StepRunStatus
+    {
+        Success = 1,
+        Fail = 0
     }
 }

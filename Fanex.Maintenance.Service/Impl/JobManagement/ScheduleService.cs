@@ -119,8 +119,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
 
             //// Search from result list
-            int fromDate = FromDate != null ? int.Parse(this.FromDate.ToString("yyyyMMdd")) : 0;
-            int toDate = ToDate != null ? int.Parse(this.ToDate.ToString("yyyyMMdd")) : 0;
             return schedules.Where<Schedule>((schedule) =>
                 {
                     bool choose = true;
@@ -144,8 +142,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                             //// Search Active Start Date
                             if (FromDate == null
                                 || ToDate == null
-                                || schedule.ActiveStartDate < fromDate
-                                || schedule.ActiveStartDate > toDate)
+                                || schedule.ActiveStartDate < FromDate
+                                || schedule.ActiveStartDate > ToDate)
                             {
                                 choose = false;
                             }
@@ -154,8 +152,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                             //// Search Active End Date
                             if (FromDate == null
                                 || ToDate == null
-                                || schedule.ActiveEndDate < fromDate
-                                || schedule.ActiveEndDate > toDate)
+                                || schedule.ActiveEndDate < FromDate
+                                || schedule.ActiveEndDate > ToDate)
                             {
                                 choose = false;
                             }
