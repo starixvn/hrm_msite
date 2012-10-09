@@ -22,6 +22,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Common;
+    using Fanex.Maintenance.Criteria.Job;
 
 
     /// <summary>

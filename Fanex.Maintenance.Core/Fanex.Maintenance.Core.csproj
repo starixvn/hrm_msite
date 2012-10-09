@@ -76,6 +76,7 @@
     <EmbeddedResource Include="ViewResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ViewResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
