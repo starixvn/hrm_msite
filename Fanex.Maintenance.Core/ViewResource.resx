@@ -328,7 +328,6 @@
     <value>Disabled</value>
   </data>
   <data name="Execution_Status" xml:space="preserve">
-    <value>Execution</value>
     <value>Execution Status</value>
   </data>
   <data name="Date_Type" xml:space="preserve">
@@ -501,5 +500,8 @@
   </data>
   <data name="Create_Schedule" xml:space="preserve">
     <value>Create Schedule</value>
+  </data>
+  <data name="Run_Time" xml:space="preserve">
+    <value>Run Time</value>
   </data>
 </root>

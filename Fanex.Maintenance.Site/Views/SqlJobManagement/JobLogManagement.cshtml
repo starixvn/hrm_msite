@@ -88,9 +88,10 @@
         </div>             		   
     </section>
 }
+<div class="content_scroll">
 <table class="grid">
-    <thead>
-        <tr>
+    <thead >
+        <tr class="persist-header">
             <th>
                 #
             </th>
@@ -105,7 +106,7 @@
             </th>
             <th>
                 @ViewResource.Date
-            </th>
+            </th>           
             <th>
                 @ViewResource.Message
             </th>
@@ -115,7 +116,7 @@
             <th>
                 @ViewResource.Action
             </th>
-        </tr>
+        </tr>    
     </thead>
     <tbody>
         @{
@@ -124,12 +125,31 @@
             {
                 string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
                 i++;
-            <tr @Html.Raw(rowCss)>
-                <td class="align-center">
-                    @(i)
-                </td>
+            <tr @Html.Raw(rowCss) @(item.Step.Id != 0 ? "style=display:none" : "")>
+                <td class="align-center">                 
+                 @if (item.Step.Id == 0)
+                 { 
+                    <a href="#" instanceid="@item.InstanceId" class="stepOutcome">
+                        <img src="~/themes/job/img/plus.png" />
+                    </a>                 
+                 }
+                </td>             
                 <td>
-                    @item.RunSatus
+                    @if (item.Step.Id != 0)
+                    {
+                        if (item.RunSatus == 1)
+                        {
+                            <img src="~/themes/job/img/tick.png" /> 
+                        }
+                        else
+                        {
+                            <img src="~/themes/job/img/error.png" />
+                        }
+                    }
+                    else
+                    {
+                        <img src="~/themes/job/img/warning.png" />
+                    }                   
                 </td>
                 <td>
                     @item.Step.Id
@@ -138,8 +158,8 @@
                     @item.Step.Name
                 </td>
                 <td>
-                    @item.RunDate
-                </td>
+                    @item.RunDate.ToFullDateString(item.RunTime)
+                </td>               
                 <td>
                     @item.Message
                 </td>
@@ -162,6 +182,7 @@
         }
     </tbody>
 </table>
+</div>
 </div>
 </div>
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))

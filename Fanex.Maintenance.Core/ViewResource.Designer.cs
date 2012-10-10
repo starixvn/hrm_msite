@@ -394,7 +394,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Execution.
+        ///   Looks up a localized string similar to Execution Status.
         /// </summary>
         public static string Execution_Status {
             get {
@@ -849,6 +849,15 @@ namespace Fanex.Maintenance.Core {
         public static string rptLicWinLoss {
             get {
                 return ResourceManager.GetString("rptLicWinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run Time.
+        /// </summary>
+        public static string Run_Time {
+            get {
+                return ResourceManager.GetString("Run_Time", resourceCulture);
             }
         }
         
