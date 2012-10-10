@@ -12,7 +12,7 @@
 @section LeftMenu{
     @Html.Action("LeftMenuPage", "SqlJobManagement")
 }
-<div class="content_wrap" style="overflow: auto;">
+<div class="content_wrap">
     <section id="section_breadcrumb">
                 <div class="separator js-separator">
                     <div class="js-view-title separator-view-title" id="view_title">                           
@@ -26,6 +26,7 @@
         <span class="title">@ViewBag.Title</span>
     </h1>
     	</section>
+
     <section id="body">
 		<div class="content">
 @using (Html.BeginForm())
@@ -77,6 +78,8 @@
         </div>             	       		   
     </section>
 }
+
+<div class="content_scroll">
 <table class="grid" >
     <thead>
         <tr>
@@ -133,6 +136,8 @@
     </tbody>
 </table>
 </div>
+</div>
+    </section>
 </div>
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
