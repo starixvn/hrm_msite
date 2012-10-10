@@ -20,6 +20,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Common;
     using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Entity.Domain;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -153,12 +154,37 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 Enabled = this._status
             };
 
-            List<JobSchedule> listJob = new List<JobSchedule>();
-            if (!this._server.Equals(string.Empty))
+            var listJob = new List<JobSchedule>();
+
+            //// get job with current server ip
+            if (!ReferenceEquals(this._server, null) && !this._server.Equals(string.Empty))
             {
-                var list = _jobRepository.GetAllJob(criteria, this._server);
-                listJob.AddRange(list);
+                try
+                {
+                    var list = _jobRepository.GetAllJob(criteria, this._server);
+
+                    listJob.AddRange(list);
+
+                    //// check filter by schedule
+                    if (!ReferenceEquals(this._schedule, null) && !this._schedule.Equals(string.Empty))
+                    {
+                        var listTemp = new List<JobSchedule>();
+                        List<JobSchedule> listJobSchedule = GetJobBySchedule(this._schedule, this._server).ToList();
+
+                        //// get job filter by schedule name
+                        foreach (var item in listJobSchedule)
+                        {
+                            listTemp.AddRange(list.Where(j => j.Job.JobId == item.Job.JobId).ToList());
+                        }
+                        return listTemp;
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
+            //// get job all server
             else
             {
                 foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
@@ -200,6 +226,23 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
 
             return null;
+        }
+
+        private IEnumerable<JobSchedule> GetJobBySchedule(string schedule, string server)
+        {
+            try
+            {
+                var criteria = new GetAllJobInScheduleCriteria
+                {
+                    Schedule_Name = schedule
+                };
+
+                return _jobRepository.GetAllJob(criteria, server);
+            }
+            catch (Exception ex) 
+            {            
+            }
+            return new List<JobSchedule>();
         }
     }
 }

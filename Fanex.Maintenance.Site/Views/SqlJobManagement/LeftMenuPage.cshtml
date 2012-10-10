@@ -45,7 +45,9 @@
                         <span class="xicon calendar1"></span><a href="#">@ViewResource.Schedules</a>
                     </div>
                     <div id="report_leavesummary" class="el" data-hashovermenu="False">
-                        <span class="xicon calendar4"></span><a href="#">@ViewResource.Jobs</a>
+                        <span class="xicon calendar4"></span>
+                        @Html.ActionLink(ViewResource.Jobs, "JobManagement"
+                            , new { server = server.ServerIp })
                     </div>
                     <div id="report_totalworkinghours" class="el" data-hashovermenu="False">
                         <span class="xicon clock"></span><a href="#">@ViewResource.Alerts</a>

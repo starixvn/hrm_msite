@@ -385,7 +385,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Execution Status.
+        ///   Looks up a localized string similar to Execution.
         /// </summary>
         public static string Execution_Status {
             get {
@@ -727,6 +727,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Information Available.
+        /// </summary>
+        public static string NoInformationAvailable {
+            get {
+                return ResourceManager.GetString("NoInformationAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obsolete.
         /// </summary>
         public static string Obsolete {
@@ -840,6 +849,15 @@ namespace Fanex.Maintenance.Core {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedule.
+        /// </summary>
+        public static string Schedule {
+            get {
+                return ResourceManager.GetString("Schedule", resourceCulture);
             }
         }
         

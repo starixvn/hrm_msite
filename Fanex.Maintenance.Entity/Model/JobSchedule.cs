@@ -23,6 +23,8 @@ namespace Fanex.Maintenance.Entity.Model
 
         public DateTime NextRunDate { get; set; }
 
-        public int ExecuteStatus { get; set; }            
+        public int ExecuteStatus { get; set; }
+
+        public string ServerIp { get; set; }
     }
 }
