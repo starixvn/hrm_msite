@@ -1452,8 +1452,6 @@
     <Content Include="Views\SqlJobManagement\JobLogManagement.cshtml" />
     <Content Include="Views\SqlJobManagement\SqlServerLogManagement.cshtml" />
     <Content Include="Views\SqlJobManagement\SqlAgentLogManagement.cshtml" />
-        <Content Include="Views\SqlJobManagement\SqlAgentLogManagement.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
