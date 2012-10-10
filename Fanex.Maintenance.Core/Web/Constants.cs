@@ -24,8 +24,7 @@ namespace Fanex.Maintenance.Core.Web
 
         public const string TARGETS = "TARGETS";
 
-        public const string FULL = "FULL";      
-    }
+        public const string FULL = "FULL";
 
         public static string[] FreqIntervalValues = new string[]
         {
@@ -40,6 +39,9 @@ namespace Fanex.Maintenance.Core.Web
             "Weekday",
             "Weekend day"
         };
+    }
+
+       
 
     /// <summary>
     /// Status job

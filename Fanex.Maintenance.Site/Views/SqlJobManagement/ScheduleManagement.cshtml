@@ -5,13 +5,16 @@
     ViewBag.Title = "Schedule Management";
     Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
     var schedules = ViewBag.ListSchedule != null ? (IEnumerable<Schedule>)ViewBag.ListSchedule : new List<Schedule>();
+    
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+     <script src="~/scripts/Job/ScheduleManagementPage.js" type="text/javascript"></script>
 }
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
+          @Html.ActionLink("+ Create Schedule", "ScheduleManagement", "SqlJobManagement", null, new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm())
@@ -193,84 +196,6 @@
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
     <script type="text/javascript">
-        var ScheduleManagementPage = function ($) {
-
-            return {
-                dateFrom: null,
-                dateTo: null,
-                buttonImage: null,
-
-                InitData: function () {
-                    ScheduleManagementPage.dateFrom = $("#dateFrom").val();
-                    ScheduleManagementPage.dateTo = $("#dateTo").val();
-                    ScheduleManagementPage.buttonImage = $('#imagePath').val();
-                },
-
-                //disbaled when datetype is all
-                SelectDateType: function () {
-                    var type = $('#SearchDateType').val();
-                    if (type == "") {
-                        $('#From').attr('disabled', 'disabled');
-                        $('#To').attr('disabled', 'disabled');
-                        $('.ui-datepicker-trigger').hide();
-                    }
-                    else {
-                        $('#From').removeAttr('disabled', 'disabled');
-                        $('#To').removeAttr('disabled', 'disabled');
-                        $('.ui-datepicker-trigger').show();
-                    }
-                },
-
-                InitDatetimePicker: function () {
-                    $("#From").val(ScheduleManagementPage.dateFrom);
-                    $("#To").val(ScheduleManagementPage.dateTo);
-
-                    $("#From").datepicker({
-                        showOn: "button",
-                        buttonImage: ScheduleManagementPage.buttonImage,
-                        buttonImageOnly: true,
-                        dateFormat: "mm/dd/yy"
-                    });
-
-                    $("#To").datepicker({
-                        showOn: "button",
-                        buttonImage: ScheduleManagementPage.buttonImage,
-                        buttonImageOnly: true,
-                        dateFormat: "mm/dd/yy"
-                    });
-                }
-            };
-
-        } (jQuery);
-
-        $(document).ready(function () {
-            ScheduleManagementPage.InitData();
-            ScheduleManagementPage.InitDatetimePicker();
-            ScheduleManagementPage.SelectDateType();
-
-            $('#SearchDateType').bind('change', function () {
-                ScheduleManagementPage.SelectDateType();
-            });
-
-            // #region actions dropdownlist
-            var event = NAP.agentIsOldIe || NAP.agentIsApple ? 'click' : 'hover';
-
-            $('.action-wrp').bind(event, function () {
-                var $this = $(this),
-			dropdown = $this.find('.actions');
-
-                if (dropdown.css('visibility') == 'hidden') {
-                    $('.actions').css({ visibility: 'hidden', opacity: 0 });
-                    $this.find('.actions').css({ visibility: 'visible', opacity: 1 });
-                } else {
-                    $this.find('.actions').css({ visibility: 'hidden', opacity: 0 });
-                }
-            });
-
-//            $('#submitbutton').click(function () {
-//                $('#formsubmit').submit();
-//            });
-            // #endregion
-        });     
+ 
     </script>
 }
