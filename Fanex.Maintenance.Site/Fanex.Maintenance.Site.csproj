@@ -188,6 +188,8 @@
     <Content Include="scripts\DatabaseReport\Chart.js" />
     <Content Include="scripts\DatabaseReport\Licenseedata.js" />
     <Content Include="scripts\DatabaseReport\RefreshTime.js" />
+    <Content Include="scripts\Job\SqlServerLogManagement.js" />
+    <Content Include="scripts\Job\ScheduleManagement.js" />
     <Content Include="scripts\Job\ScheduleManagementPage.js" />
     <Content Include="scripts\Job\JobLogManagement.js" />
     <Content Include="scripts\Job\JobManagementPage.js" />
@@ -695,11 +697,6 @@
     <Content Include="themes\Authentication\_images\icUser.jpg" />
     <Content Include="themes\Authentication\_images\logo.jpg" />
     <Content Include="themes\fonts.css" />
-    <Content Include="themes\job\img\minus.png" />
-    <Content Include="themes\job\img\plus.png" />
-    <Content Include="themes\job\img\warning.png" />
-    <Content Include="themes\job\img\error.png" />
-    <Content Include="themes\job\img\tick.png" />
     <Content Include="themes\job\img\actions\add-user.png" />
     <Content Include="themes\job\img\actions\chgpwd-ico.png" />
     <Content Include="themes\job\img\actions\dd\action-ico.png" />
@@ -1449,6 +1446,7 @@
     <Content Include="Views\SqlJobManagement\StepManagement.cshtml" />
     <Content Include="Views\SqlJobManagement\JobLogManagement.cshtml" />
     <Content Include="Views\SqlJobManagement\SqlServerLogManagement.cshtml" />
+    <Content Include="Views\SqlJobManagement\SqlAgentLogManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

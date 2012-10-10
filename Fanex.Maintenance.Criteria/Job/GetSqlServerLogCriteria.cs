@@ -30,6 +30,10 @@ namespace Fanex.Maintenance.Criteria.Job
         [SpParam(Ignored = true)]
         public DateTime To { get; set; }
 
+
+        [SpParam(Ignored = true)]
+        public int? ErrorLevel { get; set; }
+
         /// <summary>
         /// Value of error log file you want to read: 0 = current, 1 = Archive #1, 2 = Archive #2, etc... 
         /// </summary>

@@ -23,6 +23,8 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
 
         ISqlServerLogService WithServer(string serverIp);
 
-        IEnumerable<SqlServerLog> GetSqlServerLogs();
+        ISqlServerLogService WithErrorLevel(int? errorLevel);
+
+        IEnumerable<SqlServerLog> GetSqlServerLogs(int logType = 1);
     }
 }

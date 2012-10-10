@@ -23,5 +23,6 @@ using Fanex.NAP.Framework.Data;
     public interface ISqlServerLogRepository
     {
         IEnumerable<SqlServerLog> GetAllSqlServerLogOnDate(ICriteria sqlServerLogCriteria, string serverIp);
+        IEnumerable<SqlServerLog> GetAllSqlAgentLogOnDate(ICriteria sqlAgentLogCriteria, string serverIp);
     }
 }

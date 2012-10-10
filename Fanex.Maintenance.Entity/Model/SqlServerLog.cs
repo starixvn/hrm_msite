@@ -22,5 +22,6 @@ namespace Fanex.Maintenance.Entity.Model
     {
         public DateTime LogDate { get; set; }
         public string LogMessage { get; set; }
+        public int ErrorLevel { get; set; }
     }
 }

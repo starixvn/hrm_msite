@@ -1,0 +1,142 @@
+﻿@model Fanex.Maintenance.Criteria.Job.GetSqlServerLogCriteria
+@{
+    ViewBag.Title = "Sql Agent Log Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
+}
+@section Head {
+    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/nexhrm/Styles/site.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/nexhrm/Styles/style.css" rel="stylesheet" type="text/css" />
+}
+@section LeftMenu{
+    @Html.Action("LeftMenuPage", "SqlJobManagement")
+}
+<div class="content_wrap" style="overflow: auto;">
+    <section id="section_breadcrumb">
+                <div class="separator js-separator">
+                    <div class="js-view-title separator-view-title" id="view_title">                           
+                    </div>
+                    <div class="js-menu separator-menu">                            
+                    </div>
+                </div>
+        </section>
+    <section id="headline">
+           <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+    	</section>
+    <section id="body">
+		<div class="content">
+@using (Html.BeginForm())
+{ 
+    <section id="filter-bar">      
+		<div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.Server)
+		    </div>   
+            <div class="edit-field">	
+                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
+            </div>
+        </div>        
+        <div class="filter-form">	                              
+            <div class="lbl-field ">
+			    @ViewResource.Status
+		    </div>
+            <div class="edit-field">				                
+                @Html.DropDownListFor(m => m.ErrorLevel,
+                    new List<SelectListItem> { 
+                        new SelectListItem{ Text=ViewResource.Error,Value=((int)ErrorType.Error).ToString()}, 
+                        new SelectListItem{ Text=ViewResource.Warning,Value=((int)ErrorType.Warning).ToString()},   
+                        new SelectListItem{ Text=ViewResource.Information,Value=((int)ErrorType.Infomation).ToString()}                      
+                    }
+                , "All")
+		    </div>	
+            </div>		  
+        <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.From)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.From)                
+            </div>
+        </div>  
+         <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.To)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.To)                
+            </div>
+        </div>     
+        <div class="filter-form">	 
+            <div class="lbl-field"> </div>  
+            <div class="submit">
+		        <input id="submitbutton" type="submit" value="Submit" /> 
+            </div>    
+        </div>             	       		   
+    </section>
+}
+<table class="grid" >
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+              <th>
+                Status
+            </th>
+            <th>
+                @ViewResource.Date
+            </th>
+            <th>
+                Text
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody class="align-center">
+        @{
+            int i = 0;
+            foreach (var sqlServerLog in sqlServerLogs)
+            {
+                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                i++;
+            <tr @Html.Raw(rowCss)>
+                <td class="align-center">
+                    @(i)
+                </td>
+                 <td>
+                    @switch (sqlServerLog.ErrorLevel)
+                    {
+                        case (int)ErrorType.Error:
+                            <img src="~/themes/job/img/error.png" />
+                            break;
+                        case (int)ErrorType.Warning:
+                        <img src="~/themes/job/img/warning.png" />
+                            break;
+                        case (int)ErrorType.Infomation:
+                         <img src="~/themes/job/img/tick.png" /> 
+                            break;
+                    }          
+                </td>
+                <td>
+                    @sqlServerLog.LogDate
+                </td>
+                <td>
+                    @sqlServerLog.LogMessage
+                </td>
+               
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+</div>
+</div>
+@Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
+@Html.Hidden("dateTo", (string)ViewBag.DateTo)
+@Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
+@section Foot {
+    <script src="~/scripts/Job/SqlServerLogManagement.js" type="text/javascript"></script>
+}

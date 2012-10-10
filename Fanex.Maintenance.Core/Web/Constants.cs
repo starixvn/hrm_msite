@@ -126,4 +126,17 @@ namespace Fanex.Maintenance.Core.Web
         Success = 1,
         Fail = 0
     }
+
+    public enum LogType : int
+    {
+        SqlServerLog = 1,
+        SqlAgentLog = 2
+    }
+
+    public enum ErrorType : int
+    {
+        Error = 1,
+        Warning = 2,
+        Infomation = 3
+    }
 }

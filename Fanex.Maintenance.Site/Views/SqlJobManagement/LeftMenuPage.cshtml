@@ -41,7 +41,9 @@
                             , new { server = server.ServerIp })
                     </div>
                     <div id="request_employeeview" class="el" data-hashovermenu="False">
-                        <span class="xicon user1"></span><a href="#">@ViewResource.SqlAgentLog</a>
+                        <span class="xicon user1"></span>
+                          @Html.ActionLink(ViewResource.SqlAgentLog, "SqlAgentLogManagement"
+                            , new { server = server.ServerIp })
                     </div>
                     <div id="report_attendance" class="el" data-hashovermenu="False">
                         <span class="xicon calendar1"></span><a href="#">@ViewResource.Schedules</a>

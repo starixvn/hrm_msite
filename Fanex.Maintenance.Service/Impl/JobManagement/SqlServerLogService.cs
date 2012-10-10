@@ -16,6 +16,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Maintenance.Core.Web;
 
     /// <summary>
     /// TODO: Update summary.
@@ -48,6 +49,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public DateTime From { get; set; }
         public DateTime To { get; set; }
         public string ServerIp { get; set; }
+        public int? ErrorLevel { get; set; }
 
         #endregion
 
@@ -73,20 +75,33 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// 
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<SqlServerLog> GetSqlServerLogs()
+        public IEnumerable<SqlServerLog> GetSqlServerLogs(int logType = 1)
         {
             List<SqlServerLog> sqlServerLogs = new List<SqlServerLog>();
             //// Get All Schedule from Database
             if (!string.IsNullOrEmpty(ServerIp))
             {
-                sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(ServerIp));
+                sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(logType, ServerIp));
             }
             else
             {
                 foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                 {
-                    sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(server.ServerIp));
+                    sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(logType, server.ServerIp));
                 }
+            }
+
+            //// Filter with log status
+            if (logType == (int)LogType.SqlAgentLog && this.ErrorLevel != null)
+            {
+                sqlServerLogs = sqlServerLogs.Where<SqlServerLog>((sqlServerLog) =>
+                    {
+                        if (sqlServerLog.ErrorLevel == this.ErrorLevel)
+                        {
+                            return true;
+                        }
+                        return false;
+                    }).ToList();
             }
 
             //// Order Result Data
@@ -100,7 +115,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// </summary>
         /// <param name="serverIp"></param>
         /// <returns></returns>
-        private IEnumerable<SqlServerLog> GetLogBySpecificDateAndServerIp(string serverIp)
+        private IEnumerable<SqlServerLog> GetLogBySpecificDateAndServerIp(int logType, string serverIp)
         {
             List<SqlServerLog> sqlServerLogs = new List<SqlServerLog>();
             TimeSpan maxQueryTimeSpan = DateTime.Now - From;
@@ -113,17 +128,38 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             {
                 try
                 {
-                    sqlServerLogs.AddRange(_sqlServerLogRepository.GetAllSqlServerLogOnDate(
-                        new GetSqlServerLogCriteria
-                        {
-                            p1 = i
-                        }, serverIp));
+                    switch (logType)
+                    {
+                        case (int) LogType.SqlServerLog:
+                            sqlServerLogs.AddRange(_sqlServerLogRepository.GetAllSqlServerLogOnDate(
+                               new GetSqlServerLogCriteria
+                               {
+                                   p1 = i
+                               }, serverIp));
+                            break;
+                        case (int)LogType.SqlAgentLog:
+                            sqlServerLogs.AddRange(_sqlServerLogRepository.GetAllSqlAgentLogOnDate(
+                              new GetSqlServerLogCriteria
+                              {
+                                  p1 = i,
+                                  p2 = 2
+                              }, serverIp));
+                            break;
+                    }
+                   
                 }
                 catch (Exception ex)
                 {
                 }
             }
             return sqlServerLogs;
+        }
+
+
+        public ISqlServerLogService WithErrorLevel(int? errorLevel)
+        {
+            this.ErrorLevel = errorLevel;
+            return this;
         }
     }
 }

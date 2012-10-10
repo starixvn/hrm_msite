@@ -20,7 +20,8 @@ namespace Fanex.Maintenance.Controller
     using System.Globalization;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Criteria.Job;
-    using Fanex.Maintenance.Entity.Domain;    
+    using Fanex.Maintenance.Entity.Domain;
+    using Fanex.Maintenance.Core.Web;    
 
     /// <summary>
     /// TODO: Update summary.
@@ -269,6 +270,36 @@ namespace Fanex.Maintenance.Controller
         }
         #endregion
 
+        #region Sql Agent Log Management
+        [HttpGet]
+        public ActionResult SqlAgentLogManagement(string serverIp)
+        {
+            ViewBag.ListServer = GetServer();
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
+                .FromDate(DateTime.Now)
+                .ToDate(DateTime.Now)
+                .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
+            ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SqlAgentLogManagement(GetSqlServerLogCriteria criteria)
+        {
+            ViewBag.ListServer = GetServer();
+            ViewBag.DateFrom = criteria.From.ToShortDateString();
+            ViewBag.DateTo = criteria.To.ToShortDateString();
+
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(criteria.Server)
+                .FromDate(criteria.From)
+                .ToDate(criteria.To)
+                .WithErrorLevel(criteria.ErrorLevel)
+                .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
+            return View();
+        }
+        #endregion
 
         #endregion
 
