@@ -28,7 +28,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     /// </summary>
     public class JobRepository : BaseRepository<Job>, IJobRepository
     {
-        public IEnumerable<JobSchedule> GetAllJob(ICriteria criteria, string serverName)
+        public IEnumerable<JobSchedule> GetAllJob(ICriteria criteria, string serverIp)
         {
             try
             {
@@ -73,11 +73,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                                         },
                                         StartStepId = reader.ToInt("start_step_id"),
                                         VersionNumber = reader.ToInt("version_number")
-                                    }
+                                    },
+                                    ServerIp = serverIp
                                 };
                     };
 
-                    return Fetch<JobSchedule>(criteria, serverName, objMapFunc);
+                    return Fetch<JobSchedule>(criteria, serverIp, objMapFunc);
                 }
 
                 return null;
@@ -89,7 +90,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
 
-        public IEnumerable<JobLog> GetJobLog(ICriteria criteria, string serverName)
+        public IEnumerable<JobLog> GetJobLog(ICriteria criteria, string serverIp)
         {
             try
             {
@@ -128,7 +129,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                         };
                     };
 
-                    return Fetch<JobLog>(criteria, serverName, objMapFunc);
+                    return Fetch<JobLog>(criteria, serverIp, objMapFunc);
                 }
 
                 return null;

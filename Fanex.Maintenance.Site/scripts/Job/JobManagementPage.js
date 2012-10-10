@@ -2,47 +2,28 @@
 var JobManagementPage = function ($) {
 
     return {
-        dateFrom: null,
-        dateTo: null,
-        buttonImage: null,
 
-        InitData: function () {
-            JobManagementPage.dateFrom = $("#dateFrom").val();
-            JobManagementPage.dateTo = $("#dateTo").val();
-            JobManagementPage.buttonImage = $('#imagePath').val() ;
-        },
-
-        //disbaled when datetype is all
-        SelectDateType: function () {
-            var type = $('#DateType').val();
-            if (type == "") {
-                $('#From').attr('disabled', 'disabled');
-                $('#To').attr('disabled', 'disabled');
-                $('.ui-datepicker-trigger').hide();
-            }
-            else {
-                $('#From').removeAttr('disabled', 'disabled');
-                $('#To').removeAttr('disabled', 'disabled');
-                $('.ui-datepicker-trigger').show();
-            }
-        },
-
-        InitDatetimePicker: function () {
-            $("#From").val(JobManagementPage.dateFrom);
-            $("#To").val(JobManagementPage.dateTo);
-
-            $("#From").datepicker({
-                showOn: "button",
-                buttonImage: JobManagementPage.buttonImage,
-                buttonImageOnly: true,
-                dateFormat: "dd/mm/yy"
-            });
-
-            $("#To").datepicker({
-                showOn: "button",
-                buttonImage: JobManagementPage.buttonImage,
-                buttonImageOnly: true,
-                dateFormat: "dd/mm/yy"
+        GetSchedule: function (server) {
+            $.ajax({
+                url: NAP.resolveClientUrl("SqlJobManagement/GetSchedule"),
+                data: { server: server },
+                type: 'POST',
+                dataType: 'JSON',
+                cache: false,
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    NAP.loadingBox.close();
+                },
+                success: function (result) {
+                    $("#Schedule").html("");
+                    $("#Schedule").append("<option value=''>All</option>");
+                    $("#Schedule").append($("#templateSchedule").render(result));
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
             });
         }
     };
@@ -50,12 +31,26 @@ var JobManagementPage = function ($) {
 } (jQuery);
 
 $(document).ready(function () {
-    JobManagementPage.InitData();
-    JobManagementPage.InitDatetimePicker();
-    JobManagementPage.SelectDateType();
 
-    $('#DateType').bind('change', function () {
-        JobManagementPage.SelectDateType();
+    //disabled when server is all
+    if ($('#Server').val() == '') {
+        $('#Schedule').attr('disabled', 'disabled');
+    }
+    else {
+        $('#Schedule').removeAttr('disabled', 'disabled');
+    }
+
+    $('#Server').bind('change', function () {
+        var server = $(this).val();
+        JobManagementPage.GetSchedule(server);
+
+        //disabled when server is all
+        if (server == '') {
+            $('#Schedule').attr('disabled', 'disabled');
+        }
+        else {
+            $('#Schedule').removeAttr('disabled', 'disabled');
+        }
     });
 
     // #region actions dropdownlist

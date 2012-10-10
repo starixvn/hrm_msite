@@ -328,6 +328,7 @@
     <value>Disabled</value>
   </data>
   <data name="Execution_Status" xml:space="preserve">
+    <value>Execution</value>
     <value>Execution Status</value>
   </data>
   <data name="Date_Type" xml:space="preserve">
@@ -491,6 +492,12 @@
   </data>
   <data name="FreqSubSpecificTime" xml:space="preserve">
     <value>At the specified time</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="NoInformationAvailable" xml:space="preserve">
+    <value>No Information Available</value>
   </data>
   <data name="Create_Schedule" xml:space="preserve">
     <value>Create Schedule</value>

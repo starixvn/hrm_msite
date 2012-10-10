@@ -1,4 +1,5 @@
-﻿.xicon {
+﻿.xicon
+{
     width: 24px;
     height: 24px;
     padding: 0 !important;
@@ -7,77 +8,129 @@
     background-repeat: no-repeat;
     display: inline-block;
     zoom: 1;
-    display: inline;    
-    left:12px;
-    position:absolute;
-    top:1px;
+    display: inline;
+    left: 12px;
+    position: absolute;
+    top: 1px;
 }
-.xicon.mobile {
+.xicon.mobile
+{
     background-position: 0px 0px;
 }
-.xicon.plus {
+.xicon.plus
+{
     background-position: 0px -72px;
 }
-.xicon.news {
+.xicon.news
+{
     background-position: -168px 0px;
 }
-.xicon.user {
+.xicon.user
+{
     background-position: -72px -48px;
 }
-.xicon.user1 {
+.xicon.user1
+{
     background-position: -96px -216px;
 }
-.xicon.users {
+.xicon.users
+{
     background-position: -24px 0px;
 }
-.xicon.calendar {
+.xicon.calendar
+{
     background-position: -192px 0px;
 }
-.xicon.calendar1 {
+.xicon.calendar1
+{
     background-position: -192px -192px;
 }
-.xicon.calendar3 {
+.xicon.calendar3
+{
     background-position: 0px -240px;
 }
-.xicon.calendar4 {
+.xicon.calendar4
+{
     background-position: -192px -216px;
 }
-.xicon.calendar5 {
+.xicon.calendar5
+{
     background-position: -144px -216px;
 }
-.xicon.calendar6 {
+.xicon.calendar6
+{
     background-position: -120px -216px;
 }
-.xicon.calendar7 {
+.xicon.calendar7
+{
     background-position: -24px -216px;
 }
-.xicon.calendar8 {
+.xicon.calendar8
+{
     background-position: 0px -216px;
 }
-.xicon.holiday {
+.xicon.holiday
+{
     background-position: -216px -192px;
 }
-.xicon.memo {
+.xicon.memo
+{
     background-position: -24px -240px;
 }
-.xicon.adduser {
+.xicon.adduser
+{
     background-position: -216px -216px;
 }
-.xicon.setting {
+.xicon.setting
+{
     background-position: -96px 0px;
 }
-.xicon.clock {
+.xicon.clock
+{
     background-position: -168px -216px;
 }
-.xicon.clock1 {
+.xicon.clock1
+{
     background-position: -144px -48px;
 }
-.xicon.clock2 {
+.xicon.clock2
+{
     background-position: -72px -216px;
 }
-.xicon.clock3 {
+.xicon.clock3
+{
     background-position: -48px -216px;
 }
-.xicon.search {
+.xicon.search
+{
     background-position: 0px -96px;
+}
+
+.BetweenRtries
+{
+    color:#FF0000;
+}
+.Executing
+{
+    color:#00FFFF;
+}
+.Idle
+{
+    color:#0000FF;
+}
+.Obsolete
+{
+    color:#ADD8E6;
+}
+.PerformingCompletionActions
+{
+    color:#800080;
+}
+.Suspended
+{
+    color:#FFFF00;
+}
+.WaitingFoThread
+{
+    color:#00FF00;
 }

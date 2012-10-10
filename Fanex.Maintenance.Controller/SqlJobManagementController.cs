@@ -23,6 +23,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Common;
     using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Maintenance.Entity.Domain;
 
 
     /// <summary>
@@ -87,56 +88,62 @@ namespace Fanex.Maintenance.Controller
             return View("~/Views/SqlJobManagement/ScheduleManagement.cshtml");
         }
         #endregion
+
         #region JobManagement
 
         [HttpGet]
-        public ActionResult JobManagement()
+        public ActionResult JobManagement(string server = "", string schedule = "")
         {
             ViewBag.ListServer = GetServer();
-            ViewBag.ListJob = _jobService.GetJobs();
 
-            ViewBag.DateFrom = DateTime.Now.ToString("dd/MM/yyyy");
-            ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
+            List<Schedule> listSchedule = _scheduleService             
+                .WithServer(server)
+                .GetSchedules().ToList();
+            ViewBag.ListSchedule = listSchedule.Select(s => new SelectListItem
+            {
+                Text = s.Name,
+                Value = s.Name
+            }).ToList();
 
-            return View();
+            ViewBag.ListJob = _jobService
+                .FromServer(server)
+                .GetJobs();
+
+            var criteria = new GetListJobCriteria
+            {
+                From = DateTime.Now,
+                To = DateTime.Now.AddDays(1),
+                Server = server,
+                Schedule = schedule
+            };
+
+            return View(criteria);
         }
 
         [HttpPost]
-        public ActionResult JobManagement(string job_name, int? enabled, int? execution_status, int? dateType, string server = "", string from = "", string to = "")
+        public ActionResult JobManagement(GetListJobCriteria criteria)
         {
             List<JobSchedule> listJob = new List<JobSchedule>();
 
-            listJob = _jobService.WithJob(job_name)
-                .WithStatus(enabled)
-                .WithCurrentExecuteStatus(execution_status)
-                .FromServer(server)
+            listJob = _jobService.WithJob(criteria.Job_Name)
+                .WithSchedule(criteria.Schedule)
+                .WithStatus(criteria.Enabled)
+                .WithCurrentExecuteStatus(criteria.Execution_Status)
+                .FromServer(criteria.Server)
                 .GetJobs().ToList();
 
-            //// check datetype not all
-            if (!ReferenceEquals(dateType, null))
+            List<Schedule> listSchedule = _scheduleService
+              .WithServer(criteria.Server)
+              .GetSchedules().ToList();
+            ViewBag.ListSchedule = listSchedule.Select(s => new SelectListItem
             {
-                DateTime dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1);
+                Text = s.Name,
+                Value = s.Name
+            }).ToList();
 
-                //// filter by from date to date
-                if (dateType.Equals(DateType.Last))
-                {
-                    listJob = listJob.Where(
-                        j => j.LastRunDate >= dateFrom
-                            && j.LastRunDate <= dateTo).ToList();
-                }
-                else
-                {
-                    listJob = listJob.Where(
-                        j => j.NextRunDate >= dateFrom
-                            && j.LastRunDate <= dateTo).ToList();
-                }
-            }
 
             ViewBag.ListJob = listJob;
             ViewBag.ListServer = GetServer();
-            ViewBag.DateFrom = from;
-            ViewBag.DateTo = to;
 
             return View();
         }
@@ -288,5 +295,23 @@ namespace Fanex.Maintenance.Controller
 
         #endregion
 
+        #region Ajax
+
+        [HttpPost]
+        public ActionResult GetSchedule(string server)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                IEnumerable<Schedule> list = _scheduleService
+                    .WithServer(server)
+                    .GetSchedules();
+
+                return Json(list);
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }
