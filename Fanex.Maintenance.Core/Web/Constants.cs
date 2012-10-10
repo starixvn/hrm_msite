@@ -17,10 +17,15 @@ namespace Fanex.Maintenance.Core.Web
     public static class Constants
     {
         public const string JOB = "JOB";
+
         public const string STEPS = "STEPS";
+
         public const string SCEDULES = "SCEDULES";
+
         public const string TARGETS = "TARGETS";
-        public const string FULL = "FULL";
+
+        public const string FULL = "FULL";      
+    }
 
         public static string[] FreqIntervalValues = new string[]
         {
@@ -36,46 +41,43 @@ namespace Fanex.Maintenance.Core.Web
             "Weekend day"
         };
 
-        /// <summary>
-        /// Status job
-        /// </summary>
-        public enum Status
-        {
-            Enabled = 1,
+    /// <summary>
+    /// Status job
+    /// </summary>
+    public enum Status
+    {
+        Enabled = 1,
 
-            Disabled = 0
-        }
+        Disabled = 0
+    }
 
-        /// <summary>
-        /// Current execution status of job
-        /// </summary>
-        public enum ExecutionStatus
-        {
-            Obsolete = 0,
+    /// <summary>
+    /// Current execution status of job
+    /// </summary>
+    public enum ExecutionStatus
+    {
+        Obsolete = 0,
 
-            Executing = 1,
+        Executing = 1,
 
-            WaitingFoThread = 2,
+        WaitingFoThread = 2,
 
-            BetweenRtries = 3,
+        BetweenRtries = 3,
 
-            Idle = 4,
+        Idle = 4,
 
-            Suspended = 5,
+        Suspended = 5,
 
-            PerformingCompletionActions = 6
-        }
+        PerformingCompletionActions = 6
+    }
 
-        /// <summary>
-        /// Last run date and next run date
-        /// </summary>
-        public enum DateType
-        {
-            Last = 0,
-            Next = 1
-        }
-
-
+    /// <summary>
+    /// Last run date and next run date
+    /// </summary>
+    public enum DateType
+    {
+        Last = 0,
+        Next = 1
     }
 
     public enum FrequentTime : int

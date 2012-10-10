@@ -22,11 +22,12 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Model;
 <<<<<<< HEAD
+    using Fanex.Maintenance.Criteria.Job;
     using Fanex.Common;
 =======
-    using Fanex.Maintenance.Criteria.Job;
->>>>>>> c2056fd0c521b8491a965bf4a339bdf6dbcf658f
-
+    using Fanex.Maintenance.Service.Interface.JobManagement;
+    using Fanex.Maintenance.Service.Impl.JobManagement;
+>>>>>>> 1fb4614686c377d9aef2b77588adb297ddb91897
 
     /// <summary>
     /// TODO: Update summary.
@@ -34,6 +35,9 @@ namespace Fanex.Maintenance.Controller
     public class SqlJobManagementController : Controller
     {
         private readonly IJobService _jobService = JobService.Create();
+<<<<<<< HEAD
+        private readonly IStepService _stepService = StepService.Create();
+=======
         private readonly IScheduleService _scheduleService = ScheduleService.Create();
         private readonly IStepService _stepService = StepService.Create();
         #region Pages

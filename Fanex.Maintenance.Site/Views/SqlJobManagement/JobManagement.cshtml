@@ -41,8 +41,8 @@
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.Enabled,
                     new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.Enabled,Value=((int)Constants.Status.Enabled).ToString()},
-                        new SelectListItem{ Text=ViewResource.Disabled,Value=((int)Constants.Status.Disabled).ToString()}
+                        new SelectListItem{ Text=ViewResource.Enabled,Value=((int)Status.Enabled).ToString()},
+                        new SelectListItem{ Text=ViewResource.Disabled,Value=((int)Status.Disabled).ToString()}
                     }
                 , "All")
 		    </div>					    
@@ -54,13 +54,13 @@
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.Execution_Status,
                     new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.Obsolete,Value=((int)Constants.ExecutionStatus.Obsolete).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Executing,Value=((int)Constants.ExecutionStatus.Executing).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Waiting_For_Thread,Value=((int)Constants.ExecutionStatus.WaitingFoThread).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Between_Retries,Value=((int)Constants.ExecutionStatus.BetweenRtries).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Idle,Value=((int)Constants.ExecutionStatus.Idle).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Suspended,Value=((int)Constants.ExecutionStatus.Suspended).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Performing_Completion_Actions,Value=((int)Constants.ExecutionStatus.PerformingCompletionActions).ToString()}
+                        new SelectListItem{ Text=ViewResource.Obsolete,Value=((int)ExecutionStatus.Obsolete).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Executing,Value=((int)ExecutionStatus.Executing).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Waiting_For_Thread,Value=((int)ExecutionStatus.WaitingFoThread).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Between_Retries,Value=((int)ExecutionStatus.BetweenRtries).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Idle,Value=((int)ExecutionStatus.Idle).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Suspended,Value=((int)ExecutionStatus.Suspended).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Performing_Completion_Actions,Value=((int)ExecutionStatus.PerformingCompletionActions).ToString()}
                     }
                 , "All")
 		    </div>			  
@@ -72,8 +72,8 @@
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.DateType,
                     new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.Last_Run_Date,Value=((int)Constants.DateType.Last).ToString()},
-                        new SelectListItem{ Text=ViewResource.Next_Run_Date,Value=((int)Constants.DateType.Next).ToString()}
+                        new SelectListItem{ Text=ViewResource.Last_Run_Date,Value=((int)DateType.Last).ToString()},
+                        new SelectListItem{ Text=ViewResource.Next_Run_Date,Value=((int)DateType.Next).ToString()}
                     }
                 , "All")
 		    </div>					    
