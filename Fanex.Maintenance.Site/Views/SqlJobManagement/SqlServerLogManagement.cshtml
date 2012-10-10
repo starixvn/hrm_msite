@@ -1,0 +1,154 @@
+﻿@model Fanex.Maintenance.Criteria.Job.GetSqlServerLogCriteria
+@{
+    ViewBag.Title = "Sql Server Log Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
+}
+
+@section Head {
+    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/nexhrm/Styles/site.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/nexhrm/Styles/style.css" rel="stylesheet" type="text/css" />
+}
+@section LeftMenu{
+    @Html.Action("LeftMenuPage", "SqlJobManagement")
+}
+<div class="content_wrap" style="overflow:auto;">
+    <section id="section_breadcrumb">
+                <div class="separator js-separator">
+                    <div class="js-view-title separator-view-title" id="view_title">                           
+                    </div>
+                    <div class="js-menu separator-menu">                            
+                    </div>
+                </div>
+        </section>
+    <section id="headline">
+           <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+    	</section>
+    <section id="body">
+		<div class="content">
+@using (Html.BeginForm())
+{ 
+    <section id="filter-bar">      
+		<div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.Server)
+		    </div>   
+            <div class="edit-field">	
+                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
+            </div>
+        </div>        
+        <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.From)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.From)                
+            </div>
+        </div>  
+         <div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.To)
+		    </div>   
+            <div class="edit-field width-auto">	
+                @Html.TextBoxFor(m => m.To)                
+            </div>
+        </div>     
+        <div class="filter-form">	 
+            <div class="lbl-field"> </div>  
+            <div class="submit">
+		        <input id="submitbutton" type="submit" value="Submit" /> 
+            </div>    
+        </div>             	       		   
+    </section>
+}
+<table class="grid" >
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @ViewResource.Date
+            </th>
+            <th>
+                Text
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody class="align-center">
+        @{
+            int i = 0;
+            foreach (var sqlServerLog in sqlServerLogs)
+            {
+                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                i++;
+            <tr @Html.Raw(rowCss)>
+                <td class="align-center">
+                    @(i)
+                </td>
+                <td>
+                    @sqlServerLog.LogDate
+                </td>
+                <td>
+                    @sqlServerLog.LogMessage
+                </td>
+               
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+</div>
+</div>
+@Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
+@Html.Hidden("dateTo", (string)ViewBag.DateTo)
+@Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
+@section Foot {
+    <script type="text/javascript">
+
+        var SqlServerLogManagement = function ($) {
+
+            return {
+                dateFrom: null,
+                dateTo: null,
+                buttonImage: null,
+
+                InitData: function () {
+                    SqlServerLogManagement.dateFrom = $("#dateFrom").val();
+                    SqlServerLogManagement.dateTo = $("#dateTo").val();
+                    SqlServerLogManagement.buttonImage = $('#imagePath').val();
+                },
+
+                InitDatetimePicker: function () {
+                    $("#From").val(SqlServerLogManagement.dateFrom);
+                    $("#To").val(SqlServerLogManagement.dateTo);
+
+                    $("#From").datepicker({
+                        showOn: "button",
+                        buttonImage: SqlServerLogManagement.buttonImage,
+                        buttonImageOnly: true,
+                        dateFormat: "mm/dd/yy"
+                    });
+
+                    $("#To").datepicker({
+                        showOn: "button",
+                        buttonImage: SqlServerLogManagement.buttonImage,
+                        buttonImageOnly: true,
+                        dateFormat: "mm/dd/yy"
+                    });
+                }
+            };
+
+        } (jQuery);
+
+        $(document).ready(function () {
+            SqlServerLogManagement.InitData();
+            SqlServerLogManagement.InitDatetimePicker();
+        });     
+    </script>
+}
+

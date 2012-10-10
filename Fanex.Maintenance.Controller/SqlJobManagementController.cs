@@ -33,6 +33,8 @@ namespace Fanex.Maintenance.Controller
         private readonly IJobService _jobService = JobService.Create();
         private readonly IScheduleService _scheduleService = ScheduleService.Create();
         private readonly IStepService _stepService = StepService.Create();
+        private readonly ISqlServerLogService _sqlServerLogService = SqlServerLogService.Create();
+        
         #region Pages
         public ActionResult MainContentPage()
         {
@@ -231,6 +233,40 @@ namespace Fanex.Maintenance.Controller
 
 
         #endregion
+
+
+        #region Sql Server Log Management
+        [HttpGet]
+        public ActionResult SqlServerLogManagement(string serverIp)
+        {
+            ViewBag.ListServer = GetServer();
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
+                .FromDate(DateTime.Now)
+                .ToDate(DateTime.Now)
+                .GetSqlServerLogs().Take(100);
+            ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SqlServerLogManagement(GetSqlServerLogCriteria criteria)
+        {
+            ViewBag.ListServer = GetServer();
+            ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
+
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(criteria.Server)
+                .FromDate(criteria.From)
+                .ToDate(criteria.To)
+                .GetSqlServerLogs().Take(100);
+           
+
+            return View();
+        }
+        #endregion
+
 
         #endregion
 
