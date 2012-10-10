@@ -36,7 +36,9 @@
                         <span class="xicon users"></span><a href="#">@ViewResource.WindowsEventLog</a>
                     </div>
                     <div id="employee_workingcalendars" class="el" data-hashovermenu="False">
-                        <span class="xicon calendar"></span><a href="#">@ViewResource.SqlServerLog</a>
+                        <span class="xicon calendar"></span>
+                         @Html.ActionLink(ViewResource.SqlServerLog, "SqlServerLogManagement"
+                            , new { server = server.ServerIp })
                     </div>
                     <div id="request_employeeview" class="el" data-hashovermenu="False">
                         <span class="xicon user1"></span><a href="#">@ViewResource.SqlAgentLog</a>

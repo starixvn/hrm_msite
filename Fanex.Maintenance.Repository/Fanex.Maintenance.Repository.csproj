@@ -52,6 +52,7 @@
     <Compile Include="Impl\BaseRepository.cs" />
     <Compile Include="Impl\JobManagement\ScheduleRepository.cs" />
     <Compile Include="Impl\JobManagement\JobRepository.cs" />
+    <Compile Include="Impl\JobManagement\SqlServerLogRepository.cs" />
     <Compile Include="Impl\JobManagement\StepRepository.cs" />
     <Compile Include="Impl\LogCategoryRepository.cs" />
     <Compile Include="Impl\DatabaseReportRepository.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Interface\JobManagement\IScheduleRepository.cs" />
     <Compile Include="Interface\JobManagement\IStepRepository.cs" />
+    <Compile Include="Interface\JobManagement\ISqlServerLogRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
