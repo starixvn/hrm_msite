@@ -74,7 +74,8 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             }
             catch (Exception ex)
             {
-                throw ex;
+                //Log here
+                //throw ex;
             }
             return new List<ScheduleDetail>();
         }

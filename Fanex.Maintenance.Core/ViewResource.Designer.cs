@@ -214,6 +214,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Schedule.
+        /// </summary>
+        public static string Create_Schedule {
+            get {
+                return ResourceManager.GetString("Create_Schedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Step.
         /// </summary>
         public static string Create_Step {

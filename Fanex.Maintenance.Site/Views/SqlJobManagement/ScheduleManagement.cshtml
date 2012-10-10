@@ -27,7 +27,7 @@
     <section id="headline">
            <h1>
         <span class="title">@ViewBag.Title</span>
-          @Html.ActionLink("+ Create Schedule", "ScheduleManagement", "SqlJobManagement", null, new { @class = "lnk" })
+          @Html.ActionLink("+ " + ViewResource.Create_Schedule, "ScheduleManagement", "SqlJobManagement", null, new { @class = "lnk" })
     </h1>
     	</section>
     <section id="body">
@@ -182,7 +182,7 @@
                     @schedule.ActiveEndDate.ToShortDateString()
                 </td>
                 <td>
-                    @schedule.JobCount
+                    @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "SqlJobManagement", new { serverIp = schedule.ServerIp}, null)
                 </td>
                 <td>
                     <input type="checkbox"
@@ -198,7 +198,9 @@
                     @schedule.ServerIp
                 </td>
                 <td>
-                    edit
+                <div class="action-wrp">
+                    <a href="#" class="btn-edit">Action</a>
+                    </div>
                 </td>
             </tr>
             }
@@ -212,7 +214,7 @@
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
     <script type="text/javascript">
- 
+
         var ScheduleManagementPage = function ($) {
 
             return {
