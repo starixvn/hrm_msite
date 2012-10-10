@@ -165,7 +165,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 {
                     try
                     {
-                        var list = _jobRepository.GetAllJob(criteria, server.ServerName);
+                        var list = _jobRepository.GetAllJob(criteria, server.ServerIp);
                         listJob.AddRange(list);
                     }
                     catch (Exception ex)
