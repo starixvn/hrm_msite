@@ -35,14 +35,14 @@ namespace Fanex.Maintenance.Entity.Domain
         public int FreqType { get; set; }
 
         /// <summary>
-        /// Days that the job is executed. Depends on the value of freq_type. 
+        /// Days that the job is executed. Depends on the value of freq_type.
         /// The default value is 0, which indicates that freq_interval is unused.
         /// Value of freq_type              Effect on freq_interval
-        /// 
+        ///
         /// 1 (once)                        freq_interval is unused (0)
-        /// 
+        ///
         /// 4 (daily)                       Every freq_interval days
-        /// 
+        ///
         /// 8 (weekly)                      freq_interval is one or more of the following:
         ///                                 1 = Sunday
         ///                                 2 = Monday
@@ -50,10 +50,10 @@ namespace Fanex.Maintenance.Entity.Domain
         ///                                 8 = Wednesday
         ///                                 16 = Thursday
         ///                                 32 = Friday
-        ///                                 64 = Saturday     
-        ///                                 
-        /// 16 (monthly)                    On the freq_interval day of the month   
-        /// 
+        ///                                 64 = Saturday
+        ///
+        /// 16 (monthly)                    On the freq_interval day of the month
+        ///
         /// 32 (monthly, relative)          freq_interval is one of the following:
         ///                                 1 = Sunday
         ///                                 2 = Monday
@@ -65,9 +65,9 @@ namespace Fanex.Maintenance.Entity.Domain
         ///                                 8 = Day
         ///                                 9 = Weekday
         ///                                 10 = Weekend day
-        ///                                 
-        /// 64 (starts when SQL Server Agent service starts) freq_interval is unused (0)                                 
-        /// 128 (runs when computer is idle) freq_interval is unused (0)                               
+        ///
+        /// 64 (starts when SQL Server Agent service starts) freq_interval is unused (0)
+        /// 128 (runs when computer is idle) freq_interval is unused (0)
         /// </summary>
         public int FreqInterval { get; set; }
 
@@ -98,32 +98,32 @@ namespace Fanex.Maintenance.Entity.Domain
         public int FreqRelativeInterval { get; set; }
 
         /// <summary>
-        /// Number of weeks or months between the scheduled execution of a job. 
-        /// freq_recurrence_factor is used only if freq_type is 8, 16, or 32. 
+        /// Number of weeks or months between the scheduled execution of a job.
+        /// freq_recurrence_factor is used only if freq_type is 8, 16, or 32.
         /// If this column contains 0, freq_recurrence_factor is unused.
         /// </summary>
         public int FreqRecurrenceFactor { get; set; }
 
         /// <summary>
-        /// Date on which execution of a job can begin. 
+        /// Date on which execution of a job can begin.
         /// The date is formatted as YYYYMMDD. NULL indicates today's date.
         /// </summary>
         public DateTime ActiveStartDate { get; set; }
 
         /// <summary>
-        /// Date on which execution of a job can stop. 
+        /// Date on which execution of a job can stop.
         /// The date is formatted YYYYMMDD.
         /// </summary>
         public DateTime ActiveEndDate { get; set; }
 
         /// <summary>
-        /// Time on any day between active_start_date and active_end_date that job begins executing. 
+        /// Time on any day between active_start_date and active_end_date that job begins executing.
         /// Time is formatted HHMMSS, using a 24-hour clock.
         /// </summary>
         public int ActiveStartTime { get; set; }
 
         /// <summary>
-        /// Time on any day between active_start_date and active_end_date that job stops executing. 
+        /// Time on any day between active_start_date and active_end_date that job stops executing.
         /// Time is formatted HHMMSS, using a 24-hour clock.
         /// </summary>
         public int ActiveEndTime { get; set; }
@@ -141,12 +141,5 @@ namespace Fanex.Maintenance.Entity.Domain
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public int JobCount { get; set; }
-
-        public string ServerIp { get; set; }
-
-        public string FreqIntervalCombine { get; set; }
-        public string FreqSubIntervalCombine { get; set; }
     }
 }

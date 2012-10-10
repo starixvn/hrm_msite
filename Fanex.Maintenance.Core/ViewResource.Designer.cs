@@ -403,6 +403,51 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SQL Server Agent service starts.
+        /// </summary>
+        public static string FreqAgentStart {
+            get {
+                return ResourceManager.GetString("FreqAgentStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Computer is idle.
+        /// </summary>
+        public static string FreqComputerIdle {
+            get {
+                return ResourceManager.GetString("FreqComputerIdle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly Relative.
+        /// </summary>
+        public static string FreqMonthlyRelative {
+            get {
+                return ResourceManager.GetString("FreqMonthlyRelative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One time only.
+        /// </summary>
+        public static string FreqOneTime {
+            get {
+                return ResourceManager.GetString("FreqOneTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At the specified time.
+        /// </summary>
+        public static string FreqSubSpecificTime {
+            get {
+                return ResourceManager.GetString("FreqSubSpecificTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         public static string From {

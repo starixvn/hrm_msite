@@ -7,39 +7,37 @@
 //   <change who="Ricky.Nguyen" date="2012.10.8">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Repository.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Data;
+    using System.Globalization;
+    using Fanex.Common.Extensions;
     using Fanex.Maintenance.Entity.Domain;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
-    using System.Data;
-    using Fanex.Common.Extensions;
-    using System.Globalization;
+    using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class ScheduleRepository : BaseRepository<Schedule>, IScheduleRepository
+    public class ScheduleRepository : BaseRepository<ScheduleDetail>, IScheduleRepository
     {
         /// <summary>
-        /// Read Schedules from Database 
+        /// Read Schedules from Database
         /// </summary>
         /// <param name="scheduleCriteria"></param>
         /// <param name="serverName"></param>
         /// <returns></returns>
-        public IEnumerable<Schedule> GetAllSchedule(ICriteria scheduleCriteria, string serverName)
+        public IEnumerable<ScheduleDetail> GetAllSchedule(ICriteria scheduleCriteria, string serverIp)
         {
             try
             {
                 //// Create Function will map Data from DataReader to Schedule Object
-                Func<IDataReader, Schedule> mapObjectFunc = (reader) =>
+                Func<IDataReader, ScheduleDetail> mapObjectFunc = (reader) =>
                     {
-                        return new Schedule
+                        return new ScheduleDetail
                             {
                                 Id = reader.ToInt("schedule_id"),
                                 ScheduleUId = reader.ToString("schedule_uid"),
@@ -63,12 +61,13 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                                 JobCount = reader.ToInt("job_count")
                             };
                     };
-                
-                if(!string.IsNullOrEmpty(serverName))
+
+                if (!string.IsNullOrEmpty(serverIp))
                 {
-                    IEnumerable<Schedule> schedules = Fetch<Schedule>(scheduleCriteria, serverName, mapObjectFunc);
-                    schedules.ForEach(schedule => {
-                        schedule.ServerIp = serverName;
+                    IEnumerable<ScheduleDetail> schedules = Fetch<ScheduleDetail>(scheduleCriteria, serverIp, mapObjectFunc);
+                    schedules.ForEach(schedule =>
+                    {
+                        schedule.ServerIp = serverIp;
                     });
                     return schedules;
                 }
@@ -77,7 +76,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             {
                 throw ex;
             }
-            return new List<Schedule>();
+            return new List<ScheduleDetail>();
         }
     }
 }

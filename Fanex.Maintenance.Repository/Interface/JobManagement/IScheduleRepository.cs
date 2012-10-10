@@ -7,21 +7,17 @@
 //   <change who="Ricky.Nguyen" date="2012.10.8">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Repository.Interface.JobManagement
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-using Fanex.Maintenance.Entity.Domain;
-using Fanex.NAP.Framework.Data;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface IScheduleRepository
     {
-        IEnumerable<Schedule> GetAllSchedule(ICriteria scheduleCriteria, string serverName);
+        IEnumerable<ScheduleDetail> GetAllSchedule(ICriteria scheduleCriteria, string serverIp);
     }
 }

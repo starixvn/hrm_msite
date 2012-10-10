@@ -1,8 +1,12 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Contains.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="Constants.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Ricky.Nguyen" date="2012.10.10">Created</change>
+// </history>
+
 
 namespace Fanex.Maintenance.Core.Web
 {
@@ -24,8 +28,24 @@ namespace Fanex.Maintenance.Core.Web
 
         public const string TARGETS = "TARGETS";
 
-        public const string FULL = "FULL";      
+        public const string FULL = "FULL";
+
+        public static string[] FreqIntervalValues = new string[]
+        {
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Day",
+            "Weekday",
+            "Weekend day"
+        };
     }
+
+       
 
     /// <summary>
     /// Status job
@@ -66,6 +86,9 @@ namespace Fanex.Maintenance.Core.Web
         Next = 1
     }
 
+    /// <summary>
+    /// Frequent Time to of Schedule
+    /// </summary>
     public enum FrequentTime : int
     {
         OneTimeOnly = 1,
@@ -77,14 +100,20 @@ namespace Fanex.Maintenance.Core.Web
         ComputerIdle = 128
     }
 
+    /// <summary>
+    /// Frequen Sub Time of Schedule
+    /// </summary>
     public enum FrequentSubTime : int
     {
         SpecificTime = 1,
-        Second = 2,
-        Minute = 4,
-        Hour = 8
+        Seconds = 2,
+        Minutes = 4,
+        Hours = 8
     }
 
+    /// <summary>
+    /// Search schedule by Date Type
+    /// </summary>
     public enum SearchDate : int
     {
         All = 0,

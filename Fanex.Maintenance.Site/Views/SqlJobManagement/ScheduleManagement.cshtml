@@ -4,7 +4,8 @@
 @{
     ViewBag.Title = "Schedule Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var schedules = ViewBag.ListSchedule != null ? (IEnumerable<Schedule>)ViewBag.ListSchedule : new List<Schedule>();
+    var schedules = ViewBag.ListSchedule != null ? (IEnumerable<ScheduleDetail>)ViewBag.ListSchedule : new List<ScheduleDetail>();
+    
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
@@ -26,6 +27,7 @@
     <section id="headline">
            <h1>
         <span class="title">@ViewBag.Title</span>
+          @Html.ActionLink("+ Create Schedule", "ScheduleManagement", "SqlJobManagement", null, new { @class = "lnk" })
     </h1>
     	</section>
     <section id="body">
@@ -75,9 +77,9 @@
                 @Html.DropDownListFor(m => m.FreqSubType,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.SpecifedTime,Value=((int)FrequentSubTime.SpecificTime).ToString()}, 
-                        new SelectListItem{ Text=ViewResource.Seconds,Value=((int)FrequentSubTime.Second).ToString()}, 
-                        new SelectListItem{ Text=ViewResource.Minutes,Value=((int)FrequentSubTime.Minute).ToString()}, 
-                        new SelectListItem{ Text=ViewResource.Hours,Value=((int)FrequentSubTime.Hour).ToString()}                       
+                        new SelectListItem{ Text=ViewResource.Seconds,Value=((int)FrequentSubTime.Seconds).ToString()}, 
+                        new SelectListItem{ Text=ViewResource.Minutes,Value=((int)FrequentSubTime.Minutes).ToString()}, 
+                        new SelectListItem{ Text=ViewResource.Hours,Value=((int)FrequentSubTime.Hours).ToString()}                       
                     }
                 , "All")
 		    </div>			  
@@ -168,10 +170,10 @@
                     @schedule.Name
                 </td>
                 <td>
-                    @schedule.FreqType
+                    @schedule.FreqIntervalCombine
                 </td>
                 <td>
-                    @schedule.FreqSubdayType
+                    @schedule.FreqSubIntervalCombine
                 </td>
                 <td>
                     @schedule.ActiveStartDate.ToShortDateString()
@@ -210,6 +212,7 @@
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
     <script type="text/javascript">
+ 
         var ScheduleManagementPage = function ($) {
 
             return {

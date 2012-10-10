@@ -446,8 +446,8 @@
   </data>
   <data name="Step_Management" xml:space="preserve">
     <value>Step Management</value>
-    </data>
-     <data name="All" xml:space="preserve">
+  </data>
+  <data name="All" xml:space="preserve">
     <value>All</value>
   </data>
   <data name="Create_Step" xml:space="preserve">
@@ -476,5 +476,20 @@
   </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
+  </data>
+  <data name="FreqAgentStart" xml:space="preserve">
+    <value>SQL Server Agent service starts</value>
+  </data>
+  <data name="FreqComputerIdle" xml:space="preserve">
+    <value>Computer is idle</value>
+  </data>
+  <data name="FreqMonthlyRelative" xml:space="preserve">
+    <value>Monthly Relative</value>
+  </data>
+  <data name="FreqOneTime" xml:space="preserve">
+    <value>One time only</value>
+  </data>
+  <data name="FreqSubSpecificTime" xml:space="preserve">
+    <value>At the specified time</value>
   </data>
 </root>

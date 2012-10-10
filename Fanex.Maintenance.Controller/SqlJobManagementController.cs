@@ -46,10 +46,11 @@ namespace Fanex.Maintenance.Controller
 
         #region ScheduleManagement
         [HttpGet]
-        public ActionResult ScheduleManagementPage()
+        public ActionResult ScheduleManagementPage(string server)
         {
             ViewBag.ListServer = GetServer();
-            ViewBag.ListSchedule = _scheduleService.GetSchedules();
+            ViewBag.ListSchedule = _scheduleService.WithServer(server)
+                .GetSchedules();
             ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
 
@@ -243,7 +244,7 @@ namespace Fanex.Maintenance.Controller
                 list.Add(new SelectListItem
                 {
                     Text = item.ServerIp,
-                    Value = item.ServerName
+                    Value = item.ServerIp
                 });
             }
             return list;
