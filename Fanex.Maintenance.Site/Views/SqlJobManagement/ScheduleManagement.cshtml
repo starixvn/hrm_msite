@@ -182,7 +182,7 @@
                     @schedule.ActiveEndDate.ToShortDateString()
                 </td>
                 <td>
-                    @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "SqlJobManagement")
+                    @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "SqlJobManagement", new { serverIp = schedule.ServerIp}, null)
                 </td>
                 <td>
                     <input type="checkbox"
