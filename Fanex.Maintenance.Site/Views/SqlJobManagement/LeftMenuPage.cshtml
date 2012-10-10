@@ -1,59 +1,61 @@
 ﻿@using Fanex.Maintenance.Core.Configurations
 @model ServerCollection
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <link href="~/themes/nap/style.less" rel="stylesheet" type="text/css" />
-    <link type="text/css" rel="Stylesheet" href="~/scripts/lib/treeview/jquery.treeview.css" />
-    <script src="~/scripts/lib/jquery-1.8.0.min.js" type="text/javascript"></script>
-    <script src="~/scripts/lib/treeview/jquery.treeview.js" type="text/javascript"></script>
-    <script src="~/scripts/SqlJobManagement/LeftMenuPage.js" type="text/javascript"></script>
-    <style type="text/css">
-        .treeview ul
-        {
-            background-color: #F9F9F9;
-        }
-        body
-        {
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-    <ul id="browser" class="treeview">
-        <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")');" >
-            @ViewResource.ServerManagement</span> </li>
-        <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")');">
-            @ViewResource.ScheduleManagement</span> </li>
-        <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("JobManagement", "SqlJobManagement")');">
-            @ViewResource.JobManagement</span> </li>
-        @{
-            var count = 0;
-            var classClose = string.Empty;
-            foreach (ServerElement server in Model)
-            {
-            <li class="@classClose"><span class="">Server: @server.ServerName</span>
-                <ul>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
-                        @ViewResource.WindowsEventLog</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
-                        @ViewResource.SqlServerLog</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
-                        @ViewResource.SqlAgentLog</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
-                        @ViewResource.Schedules</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
-                        @ViewResource.Jobs</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
-                        @ViewResource.Alerts</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
-                        @ViewResource.Operators</span></li>
-                </ul>
-            </li>
-                classClose = "closed";
+<div class="column_wrap">
+    <div class="column">
+        <div class="nav_links">
+            <div class="overview_section togglable_section" id="0">
+                <div class="separator first">
+                    <strong>Sql Job Management</strong>
+                </div>
+            </div>
+            <div style="display: block;" class="navItem">
+                <div id="employee_myspace" class="el" data-hashovermenu="False">
+                    <span class="xicon news"></span>
+                    @Html.ActionLink(ViewResource.ServerManagement, "ScheduleManagementPage", "SqlJobManagement")
+                </div>
+                <div id="changeshift_employeeview" class="el" data-hashovermenu="True">
+                    <span class="xicon clock3"></span>
+                    @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagementPage", "SqlJobManagement")
+                </div>
+                <div id="report_timesheet" class="el selected" data-hashovermenu="False">
+                    <span class="xicon calendar8"></span>
+                    @Html.ActionLink(ViewResource.JobManagement, "JobManagement", "SqlJobManagement")
+                </div>
+            </div>
+            @{                
+                var classClose = string.Empty;
+                foreach (ServerElement server in Model)
+                {
+                <div class="overview_section togglable_section" id="1">
+                    <div class="separator">
+                        <strong>Server :@server.ServerIp</strong>
+                    </div>
+                </div>
+                <div style="display: block;" class="navItem">
+                    <div id="employee_index" class="el" data-hashovermenu="False">
+                        <span class="xicon users"></span><a href="#">@ViewResource.WindowsEventLog</a>
+                    </div>
+                    <div id="employee_workingcalendars" class="el" data-hashovermenu="False">
+                        <span class="xicon calendar"></span><a href="#">@ViewResource.SqlServerLog</a>
+                    </div>
+                    <div id="request_employeeview" class="el" data-hashovermenu="False">
+                        <span class="xicon user1"></span><a href="#">@ViewResource.SqlAgentLog</a>
+                    </div>
+                    <div id="report_attendance" class="el" data-hashovermenu="False">
+                        <span class="xicon calendar1"></span><a href="#">@ViewResource.Schedules</a>
+                    </div>
+                    <div id="report_leavesummary" class="el" data-hashovermenu="False">
+                        <span class="xicon calendar4"></span><a href="#">@ViewResource.Jobs</a>
+                    </div>
+                    <div id="report_totalworkinghours" class="el" data-hashovermenu="False">
+                        <span class="xicon clock"></span><a href="#">@ViewResource.Alerts</a>
+                    </div>
+                    <div id="holiday_index" class="el" data-hashovermenu="False">
+                        <span class="xicon holiday"></span><a href="#">@ViewResource.Operators</a>
+                    </div>
+                </div>
+                }
             }
-        }
-    </ul>
-</body>
-</html>
+        </div>
+    </div>
+</div>

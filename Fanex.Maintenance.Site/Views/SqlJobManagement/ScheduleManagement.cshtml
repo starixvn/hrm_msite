@@ -3,17 +3,33 @@
 @model GetAllScheduleCriteria
 @{
     ViewBag.Title = "Schedule Management";
-    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var schedules = ViewBag.ListSchedule != null ? (IEnumerable<Schedule>)ViewBag.ListSchedule : new List<Schedule>();
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/nexhrm/Styles/site.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/nexhrm/Styles/style.css" rel="stylesheet" type="text/css" />
 }
-@section Headline {
-    <h1>
+@section LeftMenu{
+    @Html.Action("LeftMenuPage", "SqlJobManagement")
+}
+<div class="content_wrap">
+    <section id="section_breadcrumb">
+                <div class="separator js-separator">
+                    <div class="js-view-title separator-view-title" id="view_title">                           
+                    </div>
+                    <div class="js-menu separator-menu">                            
+                    </div>
+                </div>
+        </section>
+    <section id="headline">
+           <h1>
         <span class="title">@ViewBag.Title</span>
     </h1>
-}
+    	</section>
+    <section id="body">
+		<div class="content">
 @using (Html.BeginForm())
 { 
     <section id="filter-bar">    
@@ -129,7 +145,7 @@
             <th>
                 @ViewResource.Enabled
             </th>
-             <th>
+            <th>
                 @ViewResource.Server
             </th>
             <th>
@@ -169,15 +185,14 @@
                 <td>
                     <input type="checkbox"
                     @{
-                       if(schedule.Enable > 0)
-                       {
+                if (schedule.Enable > 0)
+                {
                            @: checked="checked"
                        }
                        }
                      disabled="disabled" />
-                    
                 </td>
-                 <td>
+                <td>
                     @schedule.ServerIp
                 </td>
                 <td>
@@ -188,6 +203,8 @@
         }
     </tbody>
 </table>
+</div>
+</div>
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
@@ -267,9 +284,9 @@
                 }
             });
 
-//            $('#submitbutton').click(function () {
-//                $('#formsubmit').submit();
-//            });
+            //            $('#submitbutton').click(function () {
+            //                $('#formsubmit').submit();
+            //            });
             // #endregion
         });     
     </script>
