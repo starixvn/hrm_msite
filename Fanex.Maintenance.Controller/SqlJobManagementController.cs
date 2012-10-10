@@ -261,8 +261,8 @@ namespace Fanex.Maintenance.Controller
         public ActionResult SqlServerLogManagement(GetSqlServerLogCriteria criteria)
         {
             ViewBag.ListServer = GetServer();
-            ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
-            ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
+            ViewBag.DateFrom = criteria.From.ToShortDateString();
+            ViewBag.DateTo = criteria.To.ToShortDateString();
 
             ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(criteria.Server)
                 .FromDate(criteria.From)
