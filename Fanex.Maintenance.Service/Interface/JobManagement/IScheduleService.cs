@@ -21,7 +21,7 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
     /// </summary>
     public interface IScheduleService
     {
-        IScheduleService WithServer(string serverName);
+        IScheduleService WithServer(string serverIp);
 
         IScheduleService WithFreqType(int? freqType);
 

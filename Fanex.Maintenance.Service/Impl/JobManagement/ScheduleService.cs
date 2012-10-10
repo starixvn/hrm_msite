@@ -36,7 +36,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #region Properties
 
-        public string ServerName { get; set; }
+        public string ServerIp { get; set; }
 
         public string ScheduleName { get; set; }
 
@@ -74,11 +74,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Search Schedule with Server IP
         /// </summary>
-        /// <param name="serverName"></param>
+        /// <param name="serverIp"></param>
         /// <returns></returns>
-        public IScheduleService WithServer(string serverName)
+        public IScheduleService WithServer(string serverIp)
         {
-            this.ServerName = serverName;
+            this.ServerIp = serverIp;
             return this;
         }
 
@@ -145,15 +145,15 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             List<ScheduleDetail> schedules = new List<ScheduleDetail>();
 
             //// Get All Schedule from Database
-            if (!string.IsNullOrEmpty(ServerName))
+            if (!string.IsNullOrEmpty(ServerIp))
             {
-                schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, ServerName));
+                schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, ServerIp));
             }
             else
             {
                 foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                 {
-                    schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, server.ServerName));
+                    schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, server.ServerIp));
                 }
             }
 

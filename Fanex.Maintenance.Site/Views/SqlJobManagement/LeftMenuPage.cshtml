@@ -33,21 +33,21 @@
             var classClose = string.Empty;
             foreach (ServerElement server in Model)
             {
-            <li class="@classClose"><span class="">Server: @server.ServerName</span>
+            <li class="@classClose"><span class="">Server: @server.ServerIp</span>
                 <ul>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerIp');">
                         @ViewResource.WindowsEventLog</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerIp');">
                         @ViewResource.SqlServerLog</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerIp');">
                         @ViewResource.SqlAgentLog</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerIp');">
                         @ViewResource.Schedules</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerIp');">
                         @ViewResource.Jobs</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerIp');">
                         @ViewResource.Alerts</span></li>
-                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerName');">
+                    <li><span class="" onclick="LeftMenuPage.onRedirect('@Url.Action("ScheduleManagementPage", "SqlJobManagement")?servername=@server.ServerIp');">
                         @ViewResource.Operators</span></li>
                 </ul>
             </li>

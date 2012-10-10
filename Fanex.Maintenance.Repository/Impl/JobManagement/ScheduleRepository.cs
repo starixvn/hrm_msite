@@ -30,7 +30,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// <param name="scheduleCriteria"></param>
         /// <param name="serverName"></param>
         /// <returns></returns>
-        public IEnumerable<ScheduleDetail> GetAllSchedule(ICriteria scheduleCriteria, string serverName)
+        public IEnumerable<ScheduleDetail> GetAllSchedule(ICriteria scheduleCriteria, string serverIp)
         {
             try
             {
@@ -62,12 +62,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                             };
                     };
 
-                if (!string.IsNullOrEmpty(serverName))
+                if (!string.IsNullOrEmpty(serverIp))
                 {
-                    IEnumerable<ScheduleDetail> schedules = Fetch<ScheduleDetail>(scheduleCriteria, serverName, mapObjectFunc);
+                    IEnumerable<ScheduleDetail> schedules = Fetch<ScheduleDetail>(scheduleCriteria, serverIp, mapObjectFunc);
                     schedules.ForEach(schedule =>
                     {
-                        schedule.ServerIp = serverName;
+                        schedule.ServerIp = serverIp;
                     });
                     return schedules;
                 }
