@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Schedule Management";
     Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
-    var schedules = ViewBag.ListSchedule != null ? (IEnumerable<Schedule>)ViewBag.ListSchedule : new List<Schedule>();
+    var schedules = ViewBag.ListSchedule != null ? (IEnumerable<ScheduleDetail>)ViewBag.ListSchedule : new List<ScheduleDetail>();
     
 }
 @section Head {

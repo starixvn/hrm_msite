@@ -17,11 +17,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.Maintenance.Entity.Domain;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
+    using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class ScheduleRepository : BaseRepository<Schedule>, IScheduleRepository
+    public class ScheduleRepository : BaseRepository<ScheduleDetail>, IScheduleRepository
     {
         /// <summary>
         /// Read Schedules from Database
@@ -29,14 +30,14 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// <param name="scheduleCriteria"></param>
         /// <param name="serverName"></param>
         /// <returns></returns>
-        public IEnumerable<Schedule> GetAllSchedule(ICriteria scheduleCriteria, string serverName)
+        public IEnumerable<ScheduleDetail> GetAllSchedule(ICriteria scheduleCriteria, string serverName)
         {
             try
             {
                 //// Create Function will map Data from DataReader to Schedule Object
-                Func<IDataReader, Schedule> mapObjectFunc = (reader) =>
+                Func<IDataReader, ScheduleDetail> mapObjectFunc = (reader) =>
                     {
-                        return new Schedule
+                        return new ScheduleDetail
                             {
                                 Id = reader.ToInt("schedule_id"),
                                 ScheduleUId = reader.ToString("schedule_uid"),
@@ -63,7 +64,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
                 if (!string.IsNullOrEmpty(serverName))
                 {
-                    IEnumerable<Schedule> schedules = Fetch<Schedule>(scheduleCriteria, serverName, mapObjectFunc);
+                    IEnumerable<ScheduleDetail> schedules = Fetch<ScheduleDetail>(scheduleCriteria, serverName, mapObjectFunc);
                     schedules.ForEach(schedule =>
                     {
                         schedule.ServerIp = serverName;
@@ -75,7 +76,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             {
                 throw ex;
             }
-            return new List<Schedule>();
+            return new List<ScheduleDetail>();
         }
     }
 }

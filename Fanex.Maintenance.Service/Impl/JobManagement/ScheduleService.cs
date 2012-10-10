@@ -18,6 +18,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Domain;
+    using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
@@ -141,7 +142,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 Schedule_Name = ScheduleName
             };
 
-            List<Schedule> schedules = new List<Schedule>();
+            List<ScheduleDetail> schedules = new List<ScheduleDetail>();
 
             //// Get All Schedule from Database
             if (!string.IsNullOrEmpty(ServerName))
@@ -157,7 +158,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
 
             //// Search from result list
-            schedules = schedules.Where<Schedule>((schedule) =>
+            schedules = schedules.Where<ScheduleDetail>((schedule) =>
                 {
                     bool choose = true;
                     if (FreqType != 0 && FreqType != schedule.FreqType)
