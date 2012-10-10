@@ -22,6 +22,20 @@ namespace Fanex.Maintenance.Core.Web
         public const string TARGETS = "TARGETS";
         public const string FULL = "FULL";
 
+        public static string[] FreqIntervalValues = new string[]
+        {
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Day",
+            "Weekday",
+            "Weekend day"
+        };
+
         /// <summary>
         /// Status job
         /// </summary>
@@ -78,9 +92,9 @@ namespace Fanex.Maintenance.Core.Web
     public enum FrequentSubTime : int
     {
         SpecificTime = 1,
-        Second = 2,
-        Minute = 4,
-        Hour = 8
+        Seconds = 2,
+        Minutes = 4,
+        Hours = 8
     }
 
     public enum SearchDate : int

@@ -119,7 +119,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
 
             //// Search from result list
-            return schedules.Where<Schedule>((schedule) =>
+            schedules = schedules.Where<Schedule>((schedule) =>
                 {
                     bool choose = true;
                     if (FreqType != 0 && FreqType != schedule.FreqType)
@@ -160,7 +160,16 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                             break;
                     }
                     return choose;
+                }).ToList();
+
+            //// Format Data To Show on View
+            schedules.ForEach((schedule) =>
+                {
+                    schedule.FreqIntervalCombine = CombineFreqAndFreqInterval(schedule.FreqType, schedule.FreqInterval);
+                    schedule.FreqSubIntervalCombine = CombineFreqSubAndFreqSubInterval(schedule.FreqSubdayType, schedule.FreqSubdayInterval);
                 });
+
+            return schedules;
         }
 
 
@@ -170,58 +179,89 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return this;
         }
 
-        private string CombineFreqAndFreqInterval(int freq, int freqInreval)
+        private string CombineFreqAndFreqInterval(int freq, int freqInterval)
         {
             string combinedString = string.Empty;
 
             switch (freq)
             {
                 case (int)FrequentTime.OneTimeOnly:
-                    combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.OneTimeOnly);
+                    combinedString += ViewResource.FreqOneTime;
                     break;
                 case (int)FrequentTime.Daily:
                     combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.Daily);
                     break;
                 case (int)FrequentTime.Weekly:
                     combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.Weekly);
+                    combinedString += GetFreqIntervalValue(freq, freqInterval);
                     break;
                 case (int)FrequentTime.Monthly:
                     combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.Monthly);
                     break;
                 case (int)FrequentTime.MonlyRelative:
-                    combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.MonlyRelative);
+                    combinedString += ViewResource.FreqMonthlyRelative;
+                    combinedString += GetFreqIntervalValue(freq, freqInterval);
                     break;
                 case (int)FrequentTime.SqlAgentStart:
-                    combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.SqlAgentStart);
+                    combinedString += ViewResource.FreqAgentStart;
                     break;
                 case (int)FrequentTime.ComputerIdle:
-                    combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.ComputerIdle);
+                    combinedString += ViewResource.FreqComputerIdle;
                     break;
             }
 
 
             return combinedString;
         }
+                
 
-        private string GetFreqIntervalName(int freqIntreval)
+        private string GetFreqIntervalValue(int freq, int freqInterval)
         {
-            string freqIntealName = string.Empty;
-            string hexValue = freqIntreval.ToString("X");
-            foreach (var charValue in hexValue)
+            string freqIntervalName = string.Empty;
+            int index = 0;
+            switch (freq)
             {
-                if (charValue != '1')
-                {
-
-                }
+                case (int)FrequentTime.Weekly:
+                    string hexValue = Convert.ToString(freqInterval, 2);
+                    foreach (var charValue in hexValue)
+                    {
+                        if (charValue == '1')
+                        {
+                            freqIntervalName += Constants.FreqIntervalValues[index] + ",";
+                        }
+                        index++;
+                    }
+                    break;       
+                case (int)FrequentTime.MonlyRelative:
+                    freqIntervalName = Constants.FreqIntervalValues[freqInterval];
+                    break;       
             }
-            return freqIntealName;
+
+            if (freqIntervalName != string.Empty)
+            {
+                freqIntervalName = " : " + freqIntervalName.Substring(0,freqIntervalName.Length-1);
+            }
+            return freqIntervalName;
         }
 
         private string CombineFreqSubAndFreqSubInterval(int freqSub, int freqSubInreval)
         {
             string combinedString = string.Empty;
-
-
+            switch (freqSub)
+            {
+                case (int)FrequentSubTime.SpecificTime:
+                    combinedString += ViewResource.FreqSubSpecificTime;
+                    break;
+                case (int)FrequentSubTime.Seconds:
+                    combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Seconds);
+                    break;
+                case (int)FrequentSubTime.Minutes:
+                    combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Minutes);
+                    break;
+                case (int)FrequentSubTime.Hours:
+                    combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Hours);
+                    break;
+            }
             return combinedString;
         }
     }
