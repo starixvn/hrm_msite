@@ -1,23 +1,26 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ScheduleService.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="ScheduleService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Ricky.Nguyen" date="2012.10.10">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Service.Interface.JobManagement;
-    using Fanex.Maintenance.Repository.Interface.JobManagement;
-    using Fanex.Maintenance.Repository.Impl.JobManagement;
-    using Fanex.Maintenance.Entity.Domain;
-    using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Core.Web;
-    using Fanex.Maintenance.Core;
+    using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Maintenance.Entity.Domain;
+    using Fanex.Maintenance.Repository.Impl.JobManagement;
+    using Fanex.Maintenance.Repository.Interface.JobManagement;
+    using Fanex.Maintenance.Service.Interface.JobManagement;
 
     /// <summary>
     /// TODO: Update summary.
@@ -28,19 +31,25 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         private readonly IScheduleRepository _scheduleRepository;
 
-        #endregion
+        #endregion Member
 
         #region Properties
 
         public string ServerName { get; set; }
+
         public string ScheduleName { get; set; }
+
         public int FreqType { get; set; }
+
         public int FreSubType { get; set; }
+
         public DateTime FromDate { get; set; }
+
         public DateTime ToDate { get; set; }
+
         public int SearchDateType { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region Ctor
 
@@ -52,7 +61,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         private ScheduleService(IScheduleRepository scheduleRepository)
         {
             _scheduleRepository = scheduleRepository ?? new ScheduleRepository();
-
         }
 
         public static IScheduleService Create()
@@ -60,26 +68,46 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return new ScheduleService();
         }
 
-        #endregion
+        #endregion Ctor
 
+        /// <summary>
+        /// Search Schedule with Server IP
+        /// </summary>
+        /// <param name="serverName"></param>
+        /// <returns></returns>
         public IScheduleService WithServer(string serverName)
         {
             this.ServerName = serverName;
             return this;
         }
 
+        /// <summary>
+        /// Search Schedule with Freq Type
+        /// </summary>
+        /// <param name="freqType"></param>
+        /// <returns></returns>
         public IScheduleService WithFreqType(int? freqType)
         {
             this.FreqType = freqType != null ? (int)freqType : 0;
             return this;
         }
 
+        /// <summary>
+        /// Search Schedule with Freq Sub Type
+        /// </summary>
+        /// <param name="freqSubType"></param>
+        /// <returns></returns>
         public IScheduleService WithFreqSubType(int? freqSubType)
         {
             this.FreSubType = freqSubType != null ? (int)freqSubType : 0;
             return this;
         }
 
+        /// <summary>
+        /// Search Schedule with Schedule Name
+        /// </summary>
+        /// <param name="scheduleName"></param>
+        /// <returns></returns>
         public IScheduleService WithScheduleName(string scheduleName)
         {
             if (!string.IsNullOrEmpty(scheduleName))
@@ -89,6 +117,12 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return this;
         }
 
+        /// <summary>
+        /// Search Schedule with Date Range
+        /// </summary>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <returns></returns>
         public IScheduleService WithDateRange(DateTime? fromDate, DateTime? toDate)
         {
             this.FromDate = fromDate != null ? (DateTime)fromDate : DateTime.Now;
@@ -96,6 +130,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return this;
         }
 
+        /// <summary>
+        /// Get Schedule with filtered
+        /// </summary>
+        /// <returns>List Schedule satisfy filter</returns>
         public IEnumerable<Schedule> GetSchedules()
         {
             GetAllScheduleCriteria getAllSchedule = new GetAllScheduleCriteria
@@ -166,19 +204,29 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             schedules.ForEach((schedule) =>
                 {
                     schedule.FreqIntervalCombine = CombineFreqAndFreqInterval(schedule.FreqType, schedule.FreqInterval);
-                    schedule.FreqSubIntervalCombine = CombineFreqSubAndFreqSubInterval(schedule.FreqSubdayType, schedule.FreqSubdayInterval);
+                    schedule.FreqSubIntervalCombine = CombineFreqSubAndFreqSubInterval(schedule.FreqSubdayType, schedule.FreqSubdayInterval, schedule.ActiveStartTime);
                 });
 
             return schedules;
         }
 
-
+        /// <summary>
+        /// Search Schedule with Date
+        /// </summary>
+        /// <param name="searchDateType">Search Date Type</param>
+        /// <returns></returns>
         public IScheduleService WithSearchDateType(int? searchDateType)
         {
             this.SearchDateType = searchDateType != null ? (int)searchDateType : 0;
             return this;
         }
 
+        /// <summary>
+        /// Combine Freq and Interver to a string
+        /// </summary>
+        /// <param name="freq">Freq Value</param>
+        /// <param name="freqInterval">Freq Interval Value</param>
+        /// <returns>String combined</returns>
         private string CombineFreqAndFreqInterval(int freq, int freqInterval)
         {
             string combinedString = string.Empty;
@@ -209,12 +257,15 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     combinedString += ViewResource.FreqComputerIdle;
                     break;
             }
-
-
             return combinedString;
         }
-                
 
+        /// <summary>
+        /// Get Freq Interval string
+        /// </summary>
+        /// <param name="freq">Freq Value</param>
+        /// <param name="freqInterval">Freq Interval Value</param>
+        /// <returns>String combind Schedule Freq</returns>
         private string GetFreqIntervalValue(int freq, int freqInterval)
         {
             string freqIntervalName = string.Empty;
@@ -231,26 +282,36 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                         }
                         index++;
                     }
-                    break;       
+                    break;
                 case (int)FrequentTime.MonlyRelative:
                     freqIntervalName = Constants.FreqIntervalValues[freqInterval];
-                    break;       
+                    break;
             }
 
             if (freqIntervalName != string.Empty)
             {
-                freqIntervalName = " : " + freqIntervalName.Substring(0,freqIntervalName.Length-1);
+                freqIntervalName = " : " + freqIntervalName.Substring(0, freqIntervalName.Length - 1);
             }
             return freqIntervalName;
         }
 
-        private string CombineFreqSubAndFreqSubInterval(int freqSub, int freqSubInreval)
+        /// <summary>
+        /// Combine FreqSub and Interval To String for showing in View
+        /// </summary>
+        /// <param name="freqSub">Freq Sub Value</param>
+        /// <param name="freqSubInreval">Freq Sub Interval</param>
+        /// <param name="activeStartTime">Active start</param>
+        /// <returns>Combined Freq Name</returns>
+        private string CombineFreqSubAndFreqSubInterval(int freqSub, int freqSubInreval, int activeStartTime)
         {
             string combinedString = string.Empty;
             switch (freqSub)
             {
                 case (int)FrequentSubTime.SpecificTime:
-                    combinedString += ViewResource.FreqSubSpecificTime;
+                    combinedString += ViewResource.FreqSubSpecificTime + " : ";
+                    combinedString += activeStartTime.ToString().Length == 6 ? DateTime.ParseExact(activeStartTime.ToString(), "HHmmss"
+                                            , CultureInfo.InvariantCulture
+                                            , DateTimeStyles.None).ToLongTimeString() : DateTime.MinValue.ToLongTimeString();
                     break;
                 case (int)FrequentSubTime.Seconds:
                     combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Seconds);

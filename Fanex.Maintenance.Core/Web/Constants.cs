@@ -1,8 +1,12 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Contains.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="Constants.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Ricky.Nguyen" date="2012.10.10">Created</change>
+// </history>
+
 
 namespace Fanex.Maintenance.Core.Web
 {
@@ -82,6 +86,9 @@ namespace Fanex.Maintenance.Core.Web
         Next = 1
     }
 
+    /// <summary>
+    /// Frequent Time to of Schedule
+    /// </summary>
     public enum FrequentTime : int
     {
         OneTimeOnly = 1,
@@ -93,6 +100,9 @@ namespace Fanex.Maintenance.Core.Web
         ComputerIdle = 128
     }
 
+    /// <summary>
+    /// Frequen Sub Time of Schedule
+    /// </summary>
     public enum FrequentSubTime : int
     {
         SpecificTime = 1,
@@ -101,6 +111,9 @@ namespace Fanex.Maintenance.Core.Web
         Hours = 8
     }
 
+    /// <summary>
+    /// Search schedule by Date Type
+    /// </summary>
     public enum SearchDate : int
     {
         All = 0,

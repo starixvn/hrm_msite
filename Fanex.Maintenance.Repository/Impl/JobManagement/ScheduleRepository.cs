@@ -7,19 +7,16 @@
 //   <change who="Ricky.Nguyen" date="2012.10.8">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Repository.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Data;
+    using System.Globalization;
+    using Fanex.Common.Extensions;
     using Fanex.Maintenance.Entity.Domain;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
-    using System.Data;
-    using Fanex.Common.Extensions;
-    using System.Globalization;
 
     /// <summary>
     /// TODO: Update summary.
@@ -27,7 +24,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     public class ScheduleRepository : BaseRepository<Schedule>, IScheduleRepository
     {
         /// <summary>
-        /// Read Schedules from Database 
+        /// Read Schedules from Database
         /// </summary>
         /// <param name="scheduleCriteria"></param>
         /// <param name="serverName"></param>
@@ -63,11 +60,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                                 JobCount = reader.ToInt("job_count")
                             };
                     };
-                
-                if(!string.IsNullOrEmpty(serverName))
+
+                if (!string.IsNullOrEmpty(serverName))
                 {
                     IEnumerable<Schedule> schedules = Fetch<Schedule>(scheduleCriteria, serverName, mapObjectFunc);
-                    schedules.ForEach(schedule => {
+                    schedules.ForEach(schedule =>
+                    {
                         schedule.ServerIp = serverName;
                     });
                     return schedules;
