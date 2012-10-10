@@ -492,4 +492,7 @@
   <data name="FreqSubSpecificTime" xml:space="preserve">
     <value>At the specified time</value>
   </data>
+  <data name="Create_Schedule" xml:space="preserve">
+    <value>Create Schedule</value>
+  </data>
 </root>
