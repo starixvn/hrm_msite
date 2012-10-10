@@ -328,7 +328,7 @@
     <value>Disabled</value>
   </data>
   <data name="Execution_Status" xml:space="preserve">
-    <value>Execution Status</value>
+    <value>Execution</value>
   </data>
   <data name="Date_Type" xml:space="preserve">
     <value>Date Type</value>
@@ -339,28 +339,6 @@
   <data name="To" xml:space="preserve">
     <value>To</value>
   </data>
-<<<<<<< HEAD
-  <data name="Database_Name" xml:space="preserve">
-    <value>Database Name</value>
-  </data>
-  <data name="Last_Run_Outcome" xml:space="preserve">
-    <value>Last Run Outcome</value>
-  </data>
-  <data name="On_Fail_Action" xml:space="preserve">
-    <value>On Fail Action</value>
-  </data>
-  <data name="On_Success_Action" xml:space="preserve">
-    <value>On Success Action</value>
-  </data>
-  <data name="Step_Name" xml:space="preserve">
-    <value>Step Name</value>
-  </data>
-  <data name="Sub_System" xml:space="preserve">
-    <value>Sub System</value>
-  </data>
-  <data name="Step_Id" xml:space="preserve">
-    <value>Step ID</value>
-=======
   <data name="ScheduleAcEndDate" xml:space="preserve">
     <value>Active End Date</value>
   </data>
@@ -466,12 +444,11 @@
   <data name="Step_Name" xml:space="preserve">
     <value>Step Name</value>
   </data>
-<<<<<<< HEAD
-  <data name="All" xml:space="preserve">
-    <value>All</value>
-=======
   <data name="Step_Management" xml:space="preserve">
     <value>Step Management</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
   </data>
   <data name="Create_Step" xml:space="preserve">
     <value>Create Step</value>
@@ -490,6 +467,40 @@
   </data>
   <data name="Retries_Attempted" xml:space="preserve">
     <value>Retries Attempted</value>
->>>>>>> c2056fd0c521b8491a965bf4a339bdf6dbcf658f
+  </data>
+  <data name="Job_Log_Management" xml:space="preserve">
+    <value>Job Log Management</value>
+  </data>
+  <data name="Fail" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="FreqAgentStart" xml:space="preserve">
+    <value>SQL Server Agent service starts</value>
+  </data>
+  <data name="FreqComputerIdle" xml:space="preserve">
+    <value>Computer is idle</value>
+  </data>
+  <data name="FreqMonthlyRelative" xml:space="preserve">
+    <value>Monthly Relative</value>
+  </data>
+  <data name="FreqOneTime" xml:space="preserve">
+    <value>One time only</value>
+  </data>
+  <data name="FreqSubSpecificTime" xml:space="preserve">
+    <value>At the specified time</value>
+  </data>
+<<<<<<< HEAD
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="NoInformationAvailable" xml:space="preserve">
+    <value>No Information Available</value>
+=======
+  <data name="Create_Schedule" xml:space="preserve">
+    <value>Create Schedule</value>
+>>>>>>> cdea746b7fa5093f19e5a818fdb08baa4cc33f2a
   </data>
 </root>

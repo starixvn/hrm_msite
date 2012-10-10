@@ -13,18 +13,14 @@ namespace Fanex.Maintenance.Controller
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Web.Mvc;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Service.Impl.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
     using System.Globalization;
-    using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Model;
-    using Fanex.Common;
     using Fanex.Maintenance.Criteria.Job;
-    using Fanex.Maintenance.Entity.Domain;
-
+    using Fanex.Maintenance.Entity.Domain;    
 
     /// <summary>
     /// TODO: Update summary.
@@ -37,7 +33,7 @@ namespace Fanex.Maintenance.Controller
         #region Pages
         public ActionResult MainContentPage()
         {
-            return View("~/Views/SqlJobManagement/MainContentPage.cshtml");
+            return View("~/Views/SqlJobManagement/MainContentPage.cshtml");                     
         }
 
         public ActionResult LeftMenuPage()
@@ -182,7 +178,6 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListLogJob = listJobLog;
 
             //// get list job
-
             List<JobSchedule> listJob = _jobService
                                         .WithJob(null)
                                         .FromServer(server)
@@ -212,7 +207,7 @@ namespace Fanex.Maintenance.Controller
             List<JobLog> listJobLog = _jobService
                                .WithJob(criteria.Job_Name)
                                .WithStartRunDate(criteria.From)
-                               .WithEndRunDate(criteria.To)
+                               .WithEndRunDate(((DateTime)criteria.To).AddDays(1))
                                .WithCurrentExecuteStatus(criteria.Execution_Status)
                                .FromServer(criteria.Server)
                                .GetJobLogs().ToList();

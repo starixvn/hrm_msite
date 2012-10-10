@@ -37,7 +37,7 @@ $(document).ready(function () {
     JobLogManagement.InitData();
     JobLogManagement.InitDatetimePicker();
 
-    $('.chosen').chosen();
+    $('#Job_Name').chosen();
 
     // #region actions dropdownlist
     var event = NAP.agentIsOldIe || NAP.agentIsApple ? 'click' : 'hover';
@@ -52,6 +52,10 @@ $(document).ready(function () {
         } else {
             $this.find('.actions').css({ visibility: 'hidden', opacity: 0 });
         }
+    });
+
+    $('.stepOutcome').live('click', function () {
+        
     });
     // #endregion
 });

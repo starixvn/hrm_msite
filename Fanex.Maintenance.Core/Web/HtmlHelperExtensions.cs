@@ -18,6 +18,7 @@ namespace Fanex.Maintenance.Core.Web
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
     using System.Web;
+    using System.Globalization;
 
     /// <summary>
     /// TODO: Update summary.
@@ -36,6 +37,23 @@ namespace Fanex.Maintenance.Core.Web
         {
             return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='time'>{1}</span></span>",
                 value.ToString(dateFormat), value.ToString(timeFormat)));
+        }
+
+        /// <summary>
+        /// Converts the value of the current System.DateTime object to its equivalent string
+        /// representation using the specified format.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IHtmlString ToFullDateString(this int value, int time,
+            string dateFormat = "MMM dd, yyyy", string timeFormat = "HH:mm:ss tt")
+        {
+            DateTime date = DateTime.ParseExact(value.ToString() + " " + time.ToString(), "yyyyMMdd HHmmss"
+                                            , CultureInfo.InvariantCulture
+                                            , DateTimeStyles.None);
+
+            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='time'>{1}</span></span>",
+                date.ToString(dateFormat), date.ToString(timeFormat)));
         }
         #endregion
 
