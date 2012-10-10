@@ -17,51 +17,53 @@ namespace Fanex.Maintenance.Core.Web
     public static class Constants
     {
         public const string JOB = "JOB";
+
         public const string STEPS = "STEPS";
+
         public const string SCEDULES = "SCEDULES";
+
         public const string TARGETS = "TARGETS";
-        public const string FULL = "FULL";
 
-        /// <summary>
-        /// Status job
-        /// </summary>
-        public enum Status
-        {
-            Enabled = 1,
+        public const string FULL = "FULL";      
+    }
 
-            Disabled = 0
-        }
+    /// <summary>
+    /// Status job
+    /// </summary>
+    public enum Status
+    {
+        Enabled = 1,
 
-        /// <summary>
-        /// Current execution status of job
-        /// </summary>
-        public enum ExecutionStatus
-        {
-            Obsolete = 0,
+        Disabled = 0
+    }
 
-            Executing = 1,
+    /// <summary>
+    /// Current execution status of job
+    /// </summary>
+    public enum ExecutionStatus
+    {
+        Obsolete = 0,
 
-            WaitingFoThread = 2,
+        Executing = 1,
 
-            BetweenRtries = 3,
+        WaitingFoThread = 2,
 
-            Idle = 4,
+        BetweenRtries = 3,
 
-            Suspended = 5,
+        Idle = 4,
 
-            PerformingCompletionActions = 6
-        }
+        Suspended = 5,
 
-        /// <summary>
-        /// Last run date and next run date
-        /// </summary>
-        public enum DateType
-        {
-            Last = 0,
-            Next = 1
-        }
+        PerformingCompletionActions = 6
+    }
 
-
+    /// <summary>
+    /// Last run date and next run date
+    /// </summary>
+    public enum DateType
+    {
+        Last = 0,
+        Next = 1
     }
 
     public enum FrequentTime : int

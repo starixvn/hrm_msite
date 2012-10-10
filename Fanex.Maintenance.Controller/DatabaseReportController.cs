@@ -8,8 +8,7 @@
     using Fanex.Maintenance.Criteria.DatabaseReport;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
-    using Fanex.Maintenance.Service.Interface;
-    using Fanex.Maintenance.Criteria.DatabaseReport;
+    using Fanex.Maintenance.Service.Interface;    
 
     public class DatabaseReportController : Controller
     {
