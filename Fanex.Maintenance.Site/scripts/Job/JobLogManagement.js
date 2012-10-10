@@ -2,12 +2,13 @@
 var JobLogManagement = function ($) {
 
     return {
+        grid: null,
         buttonImage: null,
 
         InitData: function () {
             JobLogManagement.buttonImage = $('#imagePath').val();
-
-        },       
+            JobLogManagement.grid = $('.grid:first');
+        },
 
         InitDatetimePicker: function () {
 
@@ -55,7 +56,29 @@ $(document).ready(function () {
     });
 
     $('.stepOutcome').live('click', function () {
-        
+        var $this = $(this);
+        var instanceId = $($this).attr('instanceid');
+        var $trThis = $this.parents('tr');
+
+        if ($this.hasClass("expand")) {
+            console.log("A");
+            $this.removeClass("expand");
+            $this.addClass("collapse");
+        }
+        else {
+            $this.addClass("expand");
+            $this.removeClass("collapse");
+        }
+
+        var trNext = $trThis.next();
+        while (true) {
+            trNext.toggle();
+            trNext = trNext.next();
+            if (trNext.attr('id') != undefined) {
+                return;
+            }
+        }
+
     });
     // #endregion
 });

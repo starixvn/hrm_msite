@@ -1448,7 +1448,6 @@
     <Content Include="Views\SqlJobManagement\JobManagement.cshtml" />
     <Content Include="Views\SqlJobManagement\StepManagement.cshtml" />
     <Content Include="Views\SqlJobManagement\JobLogManagement.cshtml" />
-    <Content Include="Views\SqlJobManagement\SqlServerLogManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
@@ -1480,7 +1479,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54266</DevelopmentServerPort>
+          <DevelopmentServerPort>60102</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
