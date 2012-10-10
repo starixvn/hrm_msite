@@ -446,6 +446,9 @@
   </data>
   <data name="Step_Management" xml:space="preserve">
     <value>Step Management</value>
+    </data>
+     <data name="All" xml:space="preserve">
+    <value>All</value>
   </data>
   <data name="Create_Step" xml:space="preserve">
     <value>Create Step</value>

@@ -188,7 +188,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 Run_Status = this._currentExcuteStatus,
                 Start_Run_Date = this._startRunDate,
                 End_Run_Date = this._endRunDate,
-                Mode = Constans.FULL
+                Mode = Constants.FULL
             };
 
             try

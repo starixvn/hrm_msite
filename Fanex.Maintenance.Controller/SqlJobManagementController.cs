@@ -21,6 +21,7 @@ namespace Fanex.Maintenance.Controller
     using System.Globalization;
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Model;
+    using Fanex.Common;
     using Fanex.Maintenance.Criteria.Job;
 
 
@@ -43,15 +44,46 @@ namespace Fanex.Maintenance.Controller
             return View("~/Views/SqlJobManagement/LeftMenuPage.cshtml", DatabaseServersSection.Instance.Servers);
         }
 
-        public ActionResult ScheduleManagementPage(string serverName = "")
+        #region ScheduleManagement
+        [HttpGet]
+        public ActionResult ScheduleManagementPage()
         {
             ViewBag.ListServer = GetServer();
             ViewBag.ListSchedule = _scheduleService.GetSchedules();
+            ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
 
-            ViewBag.ServerName = serverName;
             return View("~/Views/SqlJobManagement/ScheduleManagement.cshtml");
         }
 
+        [HttpPost]
+        public ActionResult ScheduleManagementPage(string Schedule_Name,
+            string Server,
+            int? SearchDateType,
+            string From,
+            string To,
+            int? FreqType,
+            int? FreqSubType)
+        {
+            ViewBag.ListServer = GetServer();
+
+            DateTime fromDate = string.IsNullOrEmpty(From) ? DateTime.Now : DateTime.ParseExact(From, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            DateTime toDate = string.IsNullOrEmpty(To) ? DateTime.Now : DateTime.ParseExact(To, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+            ViewBag.DateFrom = fromDate.ToString("MM/dd/yyyy");
+            ViewBag.DateTo = toDate.ToString("MM/dd/yyyy");
+
+            ViewBag.ListSchedule = _scheduleService.WithScheduleName(Schedule_Name)
+                .WithServer(Server)
+                .WithSearchDateType(SearchDateType)
+                .WithDateRange(fromDate, toDate)
+                .WithFreqType(FreqType)
+                .WithFreqSubType(FreqSubType)
+                .GetSchedules();
+
+            return View("~/Views/SqlJobManagement/ScheduleManagement.cshtml");
+        }
+        #endregion
         #region JobManagement
 
         [HttpGet]
@@ -84,7 +116,7 @@ namespace Fanex.Maintenance.Controller
                 DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1);
 
                 //// filter by from date to date
-                if (dateType.Equals(Constans.DateType.Last))
+                if (dateType.Equals(Constants.DateType.Last))
                 {
                     listJob = listJob.Where(
                         j => j.LastRunDate >= dateFrom

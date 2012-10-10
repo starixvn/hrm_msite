@@ -38,8 +38,8 @@
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.Execution_Status,
                     new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.Success,Value=((int)Constans.StepRunStatus.Success).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Fail,Value=((int)Constans.StepRunStatus.Fail).ToString()},                                              
+                        new SelectListItem{ Text=ViewResource.Success,Value=((int)Constants.StepRunStatus.Success).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Fail,Value=((int)Constants.StepRunStatus.Fail).ToString()},                                              
                     }
                 , "All"
                 , new { @class = "chosen" })

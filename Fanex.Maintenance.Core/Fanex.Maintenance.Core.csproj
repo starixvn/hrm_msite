@@ -69,13 +69,14 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Web\AppSetting.cs" />
-    <Compile Include="Web\Constans.cs" />
+    <Compile Include="Web\Constants.cs" />
     <Compile Include="Web\HtmlHelperExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ViewResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

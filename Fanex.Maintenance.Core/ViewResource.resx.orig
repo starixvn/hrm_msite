@@ -409,6 +409,12 @@
   <data name="WindowsEventLog" xml:space="preserve">
     <value>Windows Event Log</value>
   </data>
+  <data name="ActiveEndDate" xml:space="preserve">
+    <value>Active End Date</value>
+  </data>
+  <data name="ActiveStartDate" xml:space="preserve">
+    <value>Active Start Date</value>
+  </data>
   <data name="ComputerIdle" xml:space="preserve">
     <value>Computer is idle</value>
   </data>
@@ -441,6 +447,49 @@
   </data>
   <data name="Weekly" xml:space="preserve">
     <value>Weekly</value>
->>>>>>> 1fb4614686c377d9aef2b77588adb297ddb91897
+  </data>
+  <data name="Database_Name" xml:space="preserve">
+    <value>Database Name</value>
+  </data>
+  <data name="Last_Run_Outcome" xml:space="preserve">
+    <value>Last Run Outcome</value>
+  </data>
+  <data name="On_Fail_Action" xml:space="preserve">
+    <value>On Fail Action</value>
+  </data>
+  <data name="On_Success_Action" xml:space="preserve">
+    <value>On Success Action</value>
+  </data>
+  <data name="Step_Id" xml:space="preserve">
+    <value>Step ID</value>
+  </data>
+  <data name="Step_Name" xml:space="preserve">
+    <value>Step Name</value>
+  </data>
+<<<<<<< HEAD
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+=======
+  <data name="Step_Management" xml:space="preserve">
+    <value>Step Management</value>
+  </data>
+  <data name="Create_Step" xml:space="preserve">
+    <value>Create Step</value>
+  </data>
+  <data name="Create_Job" xml:space="preserve">
+    <value>Create Job</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Retries_Attempted" xml:space="preserve">
+    <value>Retries Attempted</value>
+>>>>>>> c2056fd0c521b8491a965bf4a339bdf6dbcf658f
   </data>
 </root>
