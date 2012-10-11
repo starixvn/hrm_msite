@@ -6,7 +6,8 @@
 }
 
 @section Head {
-    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+   
+    <link href="~/themes/job/site/manage.less" rel="stylesheet" type="text/css" />
     <link href="~/themes/nexhrm/Styles/site.css" rel="stylesheet" type="text/css" />
     <link href="~/themes/nexhrm/Styles/style.css" rel="stylesheet" type="text/css" />
 }
@@ -56,6 +57,8 @@
                 @Html.TextBoxFor(m => m.To)                
             </div>
         </div>     
+        @Html.HiddenFor(m=>m.PageIndex)
+        @Html.HiddenFor(m=>m.PageSize)
         <div class="filter-form">	 
             <div class="lbl-field"> </div>  
             <div class="submit">
@@ -64,7 +67,11 @@
         </div>             	       		   
     </section>
 }
-<table class="grid" >
+ <div class="pagesize">
+        Page Size :
+        @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
+    </div>
+<table class="grid" style="padding-bottom:50px;">
     <thead>
         <tr>
             <th>
@@ -74,14 +81,14 @@
                 @ViewResource.Date
             </th>
             <th>
-                Text
+                @ViewResource.Message
             </th>
            
         </tr>
     </thead>
-    <tbody class="align-center">
+    <tbody>
         @{
-            int i = 0;
+            int i = (int)Model.PageIndex * (int)Model.PageSize;
             foreach (var sqlServerLog in sqlServerLogs)
             {
                 string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
@@ -90,8 +97,8 @@
                 <td class="align-center">
                     @(i)
                 </td>
-                <td>
-                    @sqlServerLog.LogDate
+                <td class="align-center">
+                    @sqlServerLog.LogDate.ToFullDateString();
                 </td>
                 <td>
                     @sqlServerLog.LogMessage
@@ -101,6 +108,16 @@
             }
         }
     </tbody>
+      <tfoot>
+  
+                <tr>
+                    <td class="align-center" colspan="10">
+                        <a href="#" class="pagiPre" style="margin-right: 50px;" onclick="SqlServerLogManagement.OnNextPage(-1);" ><< Pre</a> 
+                        <a href="#" class="pagiNext" onclick="SqlServerLogManagement.OnNextPage(1);">Next >></a>
+                    </td>
+                </tr>
+   
+        </tfoot>
 </table>
 </div>
 </div>

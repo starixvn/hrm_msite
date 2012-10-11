@@ -12,7 +12,7 @@
 @section LeftMenu{
     @Html.Action("LeftMenuPage", "SqlJobManagement")
 }
-<div class="content_wrap">
+<div class="content_wrap" style="overflow:auto;">
     <section id="section_breadcrumb">
                 <div class="separator js-separator">
                     <div class="js-view-title separator-view-title" id="view_title">                           
@@ -70,6 +70,8 @@
                 @Html.TextBoxFor(m => m.To)                
             </div>
         </div>     
+        @Html.HiddenFor(m=>m.PageIndex)
+        @Html.HiddenFor(m=>m.PageSize)
         <div class="filter-form">	 
             <div class="lbl-field"> </div>  
             <div class="submit">
@@ -78,8 +80,10 @@
         </div>             	       		   
     </section>
 }
-
-<div class="content_scroll">
+ <div class="pagesize">
+        Page Size :
+        @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
+    </div>
 <table class="grid" >
     <thead>
         <tr>
@@ -98,9 +102,9 @@
            
         </tr>
     </thead>
-    <tbody class="align-center">
+    <tbody>
         @{
-            int i = 0;
+            int i = (int)Model.PageIndex * (int)Model.PageSize;
             foreach (var sqlServerLog in sqlServerLogs)
             {
                 string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
@@ -109,7 +113,7 @@
                 <td class="align-center">
                     @(i)
                 </td>
-                 <td>
+                 <td class="align-center">
                     @switch (sqlServerLog.ErrorLevel)
                     {
                         case (int)ErrorType.Error:
@@ -123,8 +127,8 @@
                             break;
                     }          
                 </td>
-                <td>
-                    @sqlServerLog.LogDate
+                <td class="align-center">
+                    @sqlServerLog.LogDate.ToFullDateString()
                 </td>
                 <td>
                     @sqlServerLog.LogMessage
@@ -134,6 +138,16 @@
             }
         }
     </tbody>
+     <tfoot>
+          
+                <tr>
+                    <td class="align-center" colspan="10">
+                        <a href="#" class="pagiPre" style="margin-right: 50px;" onclick="SqlServerLogManagement.OnNextPage(-1);" ><< Pre</a> <a href="#" class="pagiNext" onclick="SqlServerLogManagement.OnNextPage(1);">
+                            Next >></a>
+                    </td>
+                </tr>
+
+        </tfoot>
 </table>
 </div>
 </div>

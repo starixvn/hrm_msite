@@ -11,6 +11,7 @@ var SqlServerLogManagement = function ($) {
             SqlServerLogManagement.dateFrom = $("#dateFrom").val();
             SqlServerLogManagement.dateTo = $("#dateTo").val();
             SqlServerLogManagement.buttonImage = $('#imagePath').val();
+            $('#PageSizeSelect').val($('#PageSize').val());
         },
 
         InitDatetimePicker: function () {
@@ -34,6 +35,17 @@ var SqlServerLogManagement = function ($) {
                 buttonImageOnly: true,
                 dateFormat: "mm/dd/yy"
             });
+        },
+        OnNextPage: function (moveIndex) {
+            var currentIndex = parseInt($('#PageIndex').val());
+            if (currentIndex + moveIndex >= 0) {
+                $('#PageIndex').val(currentIndex + moveIndex);
+                $('.content_wrap form').submit();
+            }
+        },
+        OnChangePageSize: function () {
+            $('#PageSize').val($('#PageSizeSelect').val());
+            $('.content_wrap form').submit();
         }
     };
 
