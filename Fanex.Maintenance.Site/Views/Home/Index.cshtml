@@ -6,34 +6,71 @@
     ViewBag.Title = string.Format("{0}", "Home");
 }
 @section Head{
-    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
-    <link href="~/themes/nexhrm/Styles/site.css" rel="stylesheet" type="text/css" />
-    <link href="~/themes/nexhrm/Styles/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/job1/css/ie.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/job1/css/layout.css" rel="stylesheet" type="text/css" />
+    <script src="~/themes/job1/js/hideshow.js" type="text/javascript"></script>
+    <script src="~/themes/job1/js/jquery.equalHeight.js" type="text/javascript"></script>
+    <script src="~/themes/job1/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //When page loads...
+            $(".tab_content").hide(); //Hide all content
+            $("ul.tabs li:first").addClass("active").show(); //Activate first tab
+            $(".tab_content:first").show(); //Show first tab content
+
+            //On Click Event
+            $("ul.tabs li").click(function () {
+
+                $("ul.tabs li").removeClass("active"); //Remove any "active" class
+                $(this).addClass("active"); //Add "active" class to selected tab
+                $(".tab_content").hide(); //Hide all tab content
+
+                var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
+                $(activeTab).fadeIn(); //Fade in the active ID content
+                return false;
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('.column').equalHeight();
+        });
+    </script>
 }
-@section LeftMenu{
-    @Html.Action("LeftMenuPage", "SqlJobManagement")
-}
-<div class="content_wrap">
-    <section id="section_breadcrumb">
-                <div class="separator js-separator">
-                    <div class="js-view-title separator-view-title" id="view_title">                           
-                    </div>
-                    <div class="js-menu separator-menu">                            
-                    </div>
-                </div>
-        </section>
-    <section id="headline">
-            <h1>
-                <span class="title">Job Management</span>                
-                <a href="/SqlJobManagement/JobManagement" class="lnk">+ Create Job</a>
-            </h1>
-    	</section>
-    <section id="body">
-		<div class="content">			
-    <form>    
-<section id="filter-bar">    
+<section id="secondary_bar">
+		<div class="user">
+			<p>SQL Job Management</p>
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+		<div class="breadcrumbs_container">
+			<article class="breadcrumbs"><a href="index.html">Website Admin</a> <div class="breadcrumb_divider"></div> <a class="current">Dashboard</a></article>
+		</div>
+
+</section>
+<aside class="column" id="sidebar" style="height: 1711px;">
+		<form class="quick_search">
+			<input type="text" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" value="Quick Search">
+		</form>
+		<hr>
+		<h3>Content <a class="toggleLink" href="#"></a></h3>
+		<ul class="toggle">
+			<li class="icn_new_article"><a href="#">New Article</a></li>
+			<li class="icn_edit_article"><a href="#">Edit Articles</a></li>
+			<li class="icn_categories"><a href="#">Categories</a></li>
+			<li class="icn_tags"><a href="#">Tags</a></li>
+		</ul>	
+</aside>
+<section class="column" id="main" style="height: 1711px;">				
+		<div class="content">		
+<form method="post" action="/SqlJobManagement/JobManagement">   
+
+ <section id="filter-bar">    
          <div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    <label for="Job_Name">Job</label>
 		    </div>   
             <div class="edit-field width-auto">	
@@ -41,21 +78,37 @@
             </div>
         </div>     
 		<div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    <label for="Server">Server</label>
 		    </div>   
-            <div class="edit-field">	
+            <div class="edit-field width-auto">	
                 <select name="Server" id="Server"><option value="">All</option>
-<option value="CP0069-RICKY">10.19.10.12</option>
-<option value="CP00003-EDWARD">10.19.10.71</option>
+<option value="10.19.10.12">10.19.10.12</option>
+<option value="10.19.10.71">10.19.10.71</option>
+<option value="10.18.200.214">10.18.200.214</option>
+<option value="10.18.200.206">10.18.200.206</option>
+<option value="10.18.200.213">10.18.200.213</option>
+<option value="10.18.200.215">10.18.200.215</option>
+</select>			                
+            </div>
+        </div>     
+        <div class="filter-form">	
+            <div class="lbl-field width-auto">
+			    <label for="Schedule">Schedule</label>
+		    </div>   
+            <div class="edit-field width-auto">	
+                <select name="Schedule" id="Schedule" disabled="disabled"><option value="">All</option>
+<option value="DemoSchedule">DemoSchedule</option>
+<option value="Demo New Schedule">Demo New Schedule</option>
+<option value="time">time</option>
 </select>			                
             </div>
         </div>        
         <div class="filter-form">	
-            <div class="lbl-field ">
+            <div class="lbl-field width-auto">
 			    <label for="Enabled">Status</label>
 		    </div>
-            <div class="edit-field">				                
+            <div class="edit-field width-auto">				                
                 <select name="Enabled" id="Enabled" data-val-number="The field Status must be a number." data-val="true"><option value="">All</option>
 <option value="1">Enabled</option>
 <option value="0">Disabled</option>
@@ -63,11 +116,11 @@
 		    </div>					    
         </div> 
         <div class="filter-form">	                              
-             <div class="lbl-field ">
-			    <label for="Execution_Status">Execution Status</label>
+             <div class="lbl-field width-auto">
+			    <label for="Execution_Status">Execution</label>
 		    </div>
-            <div class="edit-field">				                
-                <select name="Execution_Status" id="Execution_Status" data-val-number="The field Execution Status must be a number." data-val="true"><option value="">All</option>
+            <div class="edit-field width-auto">				                
+                <select name="Execution_Status" id="Execution_Status" data-val-number="The field Execution must be a number." data-val="true"><option value="">All</option>
 <option value="0">Obsolete</option>
 <option value="1">Executing</option>
 <option value="2">Waiting for thread</option>
@@ -77,40 +130,11 @@
 <option value="6">Performing completion actions</option>
 </select>
 		    </div>			  
-        </div> 
-        <div class="filter-form">	
-            <div class="lbl-field ">
-			    <label for="DateType">Date Type</label>
-		    </div>
-            <div class="edit-field">				                
-                <select name="DateType" id="DateType" data-val-number="The field Date Type must be a number." data-val="true"><option value="">All</option>
-<option value="0">Last Run Date</option>
-<option value="1">Next Run Date</option>
-</select>
-		    </div>					    
-        </div>  
-        <div class="filter-form">	
-            <div class="lbl-field">
-			    <label for="From">From</label>
-		    </div>   
-            <div class="edit-field width-auto">	
-                <input type="text" value="" name="From" id="From" data-val-date="The field From must be a date." data-val="true" class="hasDatepicker" disabled="disabled"><img class="ui-datepicker-trigger" src="/images/calendar.gif" alt="..." title="..." style="display: none;">                
-            </div>
-        </div>  
-         <div class="filter-form">	
-            <div class="lbl-field">
-			    <label for="To">To</label>
-		    </div>   
-            <div class="edit-field width-auto">	
-                <input type="text" value="" name="To" id="To" data-val-date="The field To must be a date." data-val="true" class="hasDatepicker" disabled="disabled"><img class="ui-datepicker-trigger" src="/images/calendar.gif" alt="..." title="..." style="display: none;">                
-            </div>
-        </div>     
-        <div class="filter-form">	
-         <div class="lbl-field">
-         </div>   
+        </div>             
+        <div class="filter-form">            	         
             <div class="submit">
-		        <input type="submit" value="Submit"> 
-            </div>    
+		            <input type="submit" value="Submit">                        
+            </div>
         </div>             		   
     </section>
 </form><table class="grid">
@@ -119,24 +143,24 @@
             <th>
                 #
             </th>
+             <th>
+                Server
+            </th>
             <th>
                 Job
             </th>
             <th>
-                Date Modified
+                Current Execution Status
             </th>
-            <th>
+             <th>
                 Last Run Date
-            </th>
+            </th>           
             <th>
                 Next Run Date
             </th>
             <th>
-                Current Execution Status
-            </th>
-            <th>
-                Server
-            </th>
+                Date Modified
+            </th>                     
             <th>
                 Enabled
             </th>
@@ -150,39 +174,37 @@
                 <td class="align-center">
                     1
                 </td>
+                 <td>
+                  10.19.10.12 
+                </td>
                 <td>
                     DemoJob
                 </td>
-                <td>
-                    10/2/2012 1:03:49 PM
-                </td>
-                <td>
-                    10/9/2012 12:00:00 AM
-                </td>
-                <td>
-                    1/1/0001 12:00:00 AM
-                </td>
                 <td class="align-center">
-                    4
-                </td>
+                    <span class="Idle">Idle</span>
+                </td> 
                 <td>
-                    CP0069-RICKY
-                </td>
+<span class="datetime"><span class="date">Oct 10, 2012</span> <span class="time">17:43:00 PM</span></span>                </td>
+                <td>
+N/A                </td>               
+                <td>
+                    <span class="datetime"><span class="date">Oct 02, 2012</span> <span class="time">13:03 PM</span></span>
+                </td>               
+                              
                 <td class="align-center">
-                    1
+                        <img class="ico-tick" alt="" src="/themes/job/img/blank.png">
                 </td>
                 <td class="align-center">
                     <div class="action-wrp">
                         <span class="btn-action">Action</span>
                         <div class="relative">
                             <ul style="visibility: hidden; opacity: 0;" class="actions">
-                                <li><a class="dd-edit" href="#">Edit 'DemoJob' Details</a> </li>
-                                 <li><a href="/SqlJobManagement/JobLogManagement?job=DemoJob&amp;server=CP0069-RICKY" class="dd-edit">View logDemoJob</a>
-                                </li><li><a href="/SqlJobManagement/StepManagement?job=DemoJob&amp;server=CP0069-RICKY" class="dd-edit">View stepDemoJob</a>
+                                
+                                 <li><a href="/SqlJobManagement/JobLogManagement?job=DemoJob&amp;server=10.19.10.12" class="dd-edit">View logDemoJob</a>
+                                </li><li><a href="/SqlJobManagement/StepManagement?job=DemoJob&amp;server=10.19.10.12" class="dd-edit">View stepDemoJob</a>
                                 </li>
                                 <li><a class="dd-site" href="#">View schedule 'DemoJob'</a></li>
-                                <li><a class="dd-site" href="#">Run</a></li>
-                                <li><a class="dd-site" href="#">Copy to</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -192,39 +214,37 @@
                 <td class="align-center">
                     2
                 </td>
+                 <td>
+                  10.19.10.12 
+                </td>
                 <td>
                     DemoJob2
                 </td>
-                <td>
-                    10/5/2012 10:24:03 AM
-                </td>
-                <td>
-                    10/9/2012 12:00:00 AM
-                </td>
-                <td>
-                    1/1/0001 12:00:00 AM
-                </td>
                 <td class="align-center">
-                    4
-                </td>
+                    <span class="Idle">Idle</span>
+                </td> 
                 <td>
-                    CP0069-RICKY
-                </td>
+<span class="datetime"><span class="date">Oct 10, 2012</span> <span class="time">17:43:00 PM</span></span>                </td>
+                <td>
+N/A                </td>               
+                <td>
+                    <span class="datetime"><span class="date">Oct 05, 2012</span> <span class="time">10:24 AM</span></span>
+                </td>               
+                              
                 <td class="align-center">
-                    1
+                        <img class="ico-tick" alt="" src="/themes/job/img/blank.png">
                 </td>
                 <td class="align-center">
                     <div class="action-wrp">
                         <span class="btn-action">Action</span>
                         <div class="relative">
                             <ul style="visibility: hidden; opacity: 0;" class="actions">
-                                <li><a class="dd-edit" href="#">Edit 'DemoJob2' Details</a> </li>
-                                 <li><a href="/SqlJobManagement/JobLogManagement?job=DemoJob2&amp;server=CP0069-RICKY" class="dd-edit">View logDemoJob2</a>
-                                </li><li><a href="/SqlJobManagement/StepManagement?job=DemoJob2&amp;server=CP0069-RICKY" class="dd-edit">View stepDemoJob2</a>
+                                
+                                 <li><a href="/SqlJobManagement/JobLogManagement?job=DemoJob2&amp;server=10.19.10.12" class="dd-edit">View logDemoJob2</a>
+                                </li><li><a href="/SqlJobManagement/StepManagement?job=DemoJob2&amp;server=10.19.10.12" class="dd-edit">View stepDemoJob2</a>
                                 </li>
                                 <li><a class="dd-site" href="#">View schedule 'DemoJob2'</a></li>
-                                <li><a class="dd-site" href="#">Run</a></li>
-                                <li><a class="dd-site" href="#">Copy to</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -234,39 +254,37 @@
                 <td class="align-center">
                     3
                 </td>
+                 <td>
+                  10.19.10.71 
+                </td>
                 <td>
                     Job1
                 </td>
-                <td>
-                    9/28/2012 1:44:55 PM
-                </td>
-                <td>
-                    10/10/2012 12:00:00 AM
-                </td>
-                <td>
-                    10/10/2012 12:00:00 AM
-                </td>
                 <td class="align-center">
-                    4
-                </td>
+                    <span class="Idle">Idle</span>
+                </td> 
                 <td>
-                    CP00003-EDWARD
-                </td>
+<span class="datetime"><span class="date">Oct 11, 2012</span> <span class="time">14:38:00 PM</span></span>                </td>
+                <td>
+<span class="datetime"><span class="date">Oct 11, 2012</span> <span class="time">14:39:00 PM</span></span>                </td>               
+                <td>
+                    <span class="datetime"><span class="date">Sep 28, 2012</span> <span class="time">13:44 PM</span></span>
+                </td>               
+                              
                 <td class="align-center">
-                    1
+                        <img class="ico-tick" alt="" src="/themes/job/img/blank.png">
                 </td>
                 <td class="align-center">
                     <div class="action-wrp">
                         <span class="btn-action">Action</span>
                         <div class="relative">
                             <ul style="visibility: hidden; opacity: 0;" class="actions">
-                                <li><a class="dd-edit" href="#">Edit 'Job1' Details</a> </li>
-                                 <li><a href="/SqlJobManagement/JobLogManagement?job=Job1&amp;server=CP00003-EDWARD" class="dd-edit">View logJob1</a>
-                                </li><li><a href="/SqlJobManagement/StepManagement?job=Job1&amp;server=CP00003-EDWARD" class="dd-edit">View stepJob1</a>
+                                
+                                 <li><a href="/SqlJobManagement/JobLogManagement?job=Job1&amp;server=10.19.10.71" class="dd-edit">View logJob1</a>
+                                </li><li><a href="/SqlJobManagement/StepManagement?job=Job1&amp;server=10.19.10.71" class="dd-edit">View stepJob1</a>
                                 </li>
                                 <li><a class="dd-site" href="#">View schedule 'Job1'</a></li>
-                                <li><a class="dd-site" href="#">Run</a></li>
-                                <li><a class="dd-site" href="#">Copy to</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -276,39 +294,37 @@
                 <td class="align-center">
                     4
                 </td>
+                 <td>
+                  10.19.10.71 
+                </td>
                 <td>
                     Job2
                 </td>
-                <td>
-                    10/5/2012 2:03:44 PM
-                </td>
-                <td>
-                    1/1/0001 12:00:00 AM
-                </td>
-                <td>
-                    1/1/0001 12:00:00 AM
-                </td>
                 <td class="align-center">
-                    4
-                </td>
+                    <span class="Idle">Idle</span>
+                </td> 
                 <td>
-                    CP00003-EDWARD
-                </td>
+N/A                </td>
+                <td>
+N/A                </td>               
+                <td>
+                    <span class="datetime"><span class="date">Oct 05, 2012</span> <span class="time">14:03 PM</span></span>
+                </td>               
+                              
                 <td class="align-center">
-                    1
+                        <img class="ico-tick" alt="" src="/themes/job/img/blank.png">
                 </td>
                 <td class="align-center">
                     <div class="action-wrp">
                         <span class="btn-action">Action</span>
                         <div class="relative">
                             <ul style="visibility: hidden; opacity: 0;" class="actions">
-                                <li><a class="dd-edit" href="#">Edit 'Job2' Details</a> </li>
-                                 <li><a href="/SqlJobManagement/JobLogManagement?job=Job2&amp;server=CP00003-EDWARD" class="dd-edit">View logJob2</a>
-                                </li><li><a href="/SqlJobManagement/StepManagement?job=Job2&amp;server=CP00003-EDWARD" class="dd-edit">View stepJob2</a>
+                                
+                                 <li><a href="/SqlJobManagement/JobLogManagement?job=Job2&amp;server=10.19.10.71" class="dd-edit">View logJob2</a>
+                                </li><li><a href="/SqlJobManagement/StepManagement?job=Job2&amp;server=10.19.10.71" class="dd-edit">View stepJob2</a>
                                 </li>
                                 <li><a class="dd-site" href="#">View schedule 'Job2'</a></li>
-                                <li><a class="dd-site" href="#">Run</a></li>
-                                <li><a class="dd-site" href="#">Copy to</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -317,6 +333,6 @@
 
     </tbody>
 </table>
-		</div>
-	</section>
 </div>
+		<div class="spacer"></div>
+	</section>
