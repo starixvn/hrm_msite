@@ -29,6 +29,8 @@ var JobLogManagement = function ($) {
                     dates.not(this).datepicker("option", option, date);
                 }
             });
+
+            $("img.ui-datepicker-trigger").addClass("datepickerpostion");
         }
     };
 

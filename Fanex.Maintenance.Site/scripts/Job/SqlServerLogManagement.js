@@ -35,6 +35,9 @@ var SqlServerLogManagement = function ($) {
                 buttonImageOnly: true,
                 dateFormat: "mm/dd/yy"
             });
+
+            $("img.ui-datepicker-trigger").addClass("datepickerpostion");
+
         },
         OnNextPage: function (moveIndex) {
             var currentIndex = parseInt($('#PageIndex').val());

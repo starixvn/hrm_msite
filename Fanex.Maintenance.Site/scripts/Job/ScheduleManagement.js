@@ -48,6 +48,8 @@ var ScheduleManagementPage = function ($) {
                 buttonImageOnly: true,
                 dateFormat: "mm/dd/yy"
             });
+
+            $("img.ui-datepicker-trigger").addClass("datepickerpostion");
         }
     };
 

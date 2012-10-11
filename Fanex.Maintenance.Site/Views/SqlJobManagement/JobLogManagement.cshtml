@@ -66,8 +66,8 @@
 			    @Html.LabelFor(m => m.From)
 		    </div>   
             <div class="edit-field width-auto">	                    
-                 @Html.TextBox("From", ((DateTime)Model.To).ToString("MMMM dd, yyyy")
-                 , new { @style = "width:90px;margin-right:5px;" }) 
+                 @Html.TextBox("From", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
+                @* , new { @style = "width:90px;margin-right:5px;" }) *@
             </div>
         </div>  
          <div class="filter-form">	
@@ -75,8 +75,8 @@
 			    @Html.LabelFor(m => m.To)
 		    </div>   
             <div class="edit-field width-auto">	                
-                @Html.TextBox("To", ((DateTime)Model.To).ToString("MMMM dd, yyyy")
-                , new { @style = "width:90px;margin-right:5px;" })
+                @Html.TextBox("To", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
+                @*, new { @style = "width:90px;margin-right:5px;" })*@
             </div>
         </div>     
         <div class="filter-form">	
