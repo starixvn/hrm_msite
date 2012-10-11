@@ -9,15 +9,15 @@
                 </div>
             </div>
             <div style="display: block;" class="navItem">
-                <div id="employee_myspace" class="el" data-hashovermenu="False">
+                <div id="sqljobmanagement_servermanagement_" class="el" data-hashovermenu="False">
                     <span class="xicon news"></span>
-                    @Html.ActionLink(ViewResource.ServerManagement, "ScheduleManagementPage", "SqlJobManagement")
+                    @Html.ActionLink(ViewResource.ServerManagement, "ServerManagement", "SqlJobManagement")
                 </div>
-                <div id="changeshift_employeeview" class="el" data-hashovermenu="True">
+                <div id="sqljobmanagement_schedulemanagementpage_" class="el" data-hashovermenu="True">
                     <span class="xicon clock3"></span>
                     @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagementPage", "SqlJobManagement")
                 </div>
-                <div id="report_timesheet" class="el selected" data-hashovermenu="False">
+                <div id="sqljobmanagement_jobmanagement_" class="el selected" data-hashovermenu="False">
                     <span class="xicon calendar8"></span>
                     @Html.ActionLink(ViewResource.JobManagement, "JobManagement", "SqlJobManagement")
                 </div>
@@ -35,22 +35,22 @@
                     <div id="employee_index" class="el" data-hashovermenu="False">
                         <span class="xicon users"></span><a href="#">@ViewResource.WindowsEventLog</a>
                     </div>
-                    <div id="employee_workingcalendars" class="el" data-hashovermenu="False">
+                    <div id="sqljobmanagement_sqlserverlogmanagement_@(server.ServerIp.Replace('.', '_'))" class="el" data-hashovermenu="False">
                         <span class="xicon calendar"></span>
-                         @Html.ActionLink(ViewResource.SqlServerLog, "SqlServerLogManagement"
+                        @Html.ActionLink(ViewResource.SqlServerLog, "SqlServerLogManagement"
                             , new { server = server.ServerIp })
                     </div>
-                    <div id="request_employeeview" class="el" data-hashovermenu="False">
+                    <div id="sqljobmanagement_sqlagentlogmanagement_@(server.ServerIp.Replace('.', '_'))" class="el" data-hashovermenu="False">
                         <span class="xicon user1"></span>
-                          @Html.ActionLink(ViewResource.SqlAgentLog, "SqlAgentLogManagement"
+                        @Html.ActionLink(ViewResource.SqlAgentLog, "SqlAgentLogManagement"
                             , new { server = server.ServerIp })
                     </div>
-                    <div id="report_attendance" class="el" data-hashovermenu="False">
+                    <div id="sqljobmanagement_schedulemanagementpage_@(server.ServerIp.Replace('.', '_'))" class="el" data-hashovermenu="False">
                         <span class="xicon calendar1"></span>
-                           @Html.ActionLink(ViewResource.Schedule, "SqlServerLogManagement"
+                        @Html.ActionLink(ViewResource.Schedule, "ScheduleManagementPage"
                             , new { server = server.ServerIp })
                     </div>
-                    <div id="report_leavesummary" class="el" data-hashovermenu="False">
+                    <div id="sqljobmanagement_jobmanagement_@(server.ServerIp.Replace('.', '_'))" class="el" data-hashovermenu="False">
                         <span class="xicon calendar4"></span>
                         @Html.ActionLink(ViewResource.Jobs, "JobManagement"
                             , new { server = server.ServerIp })
@@ -67,3 +67,45 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.el').removeClass('selected');
+
+        var currentUrl = '@(ViewBag.Controller.ToString().ToLower() + "_" + ViewBag.Action.ToString().ToLower() + "_" + ViewBag.Server.ToString().Replace('.', '_'))';
+        console.log(currentUrl);
+
+        var selectNavItem = $("#" + currentUrl);
+        if (selectNavItem != undefined) {
+            selectNavItem.addClass("selected");
+        }
+
+        //show/hide navigation secion
+        $("div.togglable_section").bind("click", function () {
+
+            var currentSection = $(this);
+            var divItems = currentSection.next("div.navItem");
+            if (currentSection.hasClass("folded")) {
+                currentSection.removeClass("folded");
+                divItems.show(200);
+            }
+            else {
+
+                currentSection.addClass("folded");
+                divItems.hide(200);
+            }
+        });
+
+        //add style for first item section
+        $("div.togglable_section:first-child").children(":first").addClass("first");
+
+        $('.el[data-hashovermenu=True], .el[data-hashovermenu=data-hashovermenu]').hover(
+        function () {
+            $(this).find('.hoveraction').fadeIn(400);
+        }, function () {
+            $(this).find('.hoveraction').hide();
+        });
+    });
+
+    
+</script>

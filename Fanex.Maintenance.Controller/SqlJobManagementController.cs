@@ -41,7 +41,11 @@ namespace Fanex.Maintenance.Controller
 
         public ActionResult LeftMenuPage()
         {
-            return View("~/Views/SqlJobManagement/LeftMenuPage.cshtml", DatabaseServersSection.Instance.Servers);
+            var routeData = ControllerContext.ParentActionViewContext.RouteData;
+            ViewBag.Controller = routeData.Values["controller"];
+            ViewBag.Action = routeData.Values["action"];
+            ViewBag.Server = Request.QueryString["server"] != null ? Request.QueryString["server"] : string.Empty;
+            return View(DatabaseServersSection.Instance.Servers);
         }
 
         #region ScheduleManagement
@@ -237,7 +241,6 @@ namespace Fanex.Maintenance.Controller
 
         #endregion
 
-
         #region Sql Server Log Management
         [HttpGet]
         public ActionResult SqlServerLogManagement(string serverIp)
@@ -303,6 +306,16 @@ namespace Fanex.Maintenance.Controller
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
             return View();
         }
+        #endregion
+
+        #region Server Management
+
+        [HttpGet]
+        public ActionResult ServerManagement()
+        {
+            return View();
+        }
+
         #endregion
 
         #endregion
