@@ -105,24 +105,24 @@
             <th>
                 #
             </th>
+             <th>
+                @ViewResource.Server
+            </th>
             <th>
                 @ViewResource.Job
             </th>
             <th>
-                @ViewResource.Date_Modified
+                @ViewResource.Current_Execution_Status
             </th>
-            <th>
+             <th>
                 @ViewResource.Last_Run_Date
-            </th>
+            </th>           
             <th>
                 @ViewResource.Next_Run_Date
             </th>
             <th>
-                @ViewResource.Current_Execution_Status
-            </th>
-            <th>
-                @ViewResource.Server
-            </th>
+                @ViewResource.Date_Modified
+            </th>                     
             <th>
                 @ViewResource.Enabled
             </th>
@@ -142,24 +142,39 @@
                 <td class="align-center">
                     @(i)
                 </td>
+                 <td>
+                  @item.ServerIp 
+                </td>
                 <td>
                     @item.Job.Name
                 </td>
-                <td>
-                    @item.Job.DateModified.ToFullDateString()
-                </td>
-                <td>
-                    @item.LastRunDate.ToFullDateString()
-                </td>
-                <td>
-                    @item.NextRunDate.ToFullDateString()
-                </td>
                 <td class="align-center">
                     @item.ExecuteStatus.ToExecutionString()
+                </td> 
+                <td>
+                    @if (item.LastRunDate != 0)
+                    {
+                        @Html.Raw(item.LastRunDate.ToFullDateString(item.LastRunTime))
+                    }
+                    else
+                    {
+                        @ViewResource.N_A
+                    }
                 </td>
                 <td>
-                    @item.ServerIp
-                </td>
+                   @if (item.NextRunDate != 0)
+                   {
+                        @Html.Raw(item.NextRunDate.ToFullDateString(item.NextRunTime))
+                   }
+                   else
+                   {
+                      @ViewResource.N_A
+                   }
+                </td>               
+                <td>
+                    @item.Job.DateModified.ToFullDateString()
+                </td>               
+                              
                 <td class="align-center">
                     @if (item.Job.Enable == 1)
                     {
@@ -171,7 +186,7 @@
                         <span class="btn-action">Action</span>
                         <div class="relative">
                             <ul class="actions" style="visibility: hidden; opacity: 0;">
-                                <li><a href="#" class="dd-edit">Edit '@item.Job.Name' Details</a> </li>
+                                @*<li><a href="#" class="dd-edit">Edit '@item.Job.Name' Details</a> </li>*@
                                  <li>@Html.ActionLink("View log" + item.Job.Name, "JobLogManagement"
                                         , new { job = item.Job.Name, server = item.ServerIp }
                                         , new { @class = "dd-edit" })
@@ -180,8 +195,8 @@
                                         , new { @class = "dd-edit" })
                                 </li>
                                 <li><a href="#" class="dd-site">View schedule '@item.Job.Name'</a></li>
-                                <li><a href="#" class="dd-site">Run</a></li>
-                                <li><a href="#" class="dd-site">Copy to</a></li>
+                                @*<li><a href="#" class="dd-site">Run</a></li>
+                                <li><a href="#" class="dd-site">Copy to</a></li>*@
                             </ul>
                         </div>
                     </div>

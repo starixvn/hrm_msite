@@ -11,10 +11,12 @@ var JobManagementPage = function ($) {
                 dataType: 'JSON',
                 cache: false,
                 beforeSend: function () {
-                    NAP.loadingBox.show();
+                    //                    NAP.loadingBox.show();
+                    $('#Schedule').attr('disabled', 'disabled');
                 },
                 complete: function () {
-                    NAP.loadingBox.close();
+                    //                    NAP.loadingBox.close();
+                    $('#Schedule').removeAttr('disabled', 'disabled');
                 },
                 success: function (result) {
                     $("#Schedule").html("");

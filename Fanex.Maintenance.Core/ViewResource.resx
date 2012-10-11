@@ -513,4 +513,7 @@
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="N_A" xml:space="preserve">
+    <value>N/A</value>
+  </data>
 </root>
