@@ -12,7 +12,7 @@
 @section LeftMenu{
     @Html.Action("LeftMenuPage", "SqlJobManagement")
 }
-<div class="content_wrap" style="overflow:auto;">
+<div class="content_wrap">
     <section id="section_breadcrumb">
                 <div class="separator js-separator">
                     <div class="js-view-title separator-view-title" id="view_title">                           
@@ -26,7 +26,6 @@
         <span class="title">@ViewBag.Title</span>
     </h1>
     	</section>
-
     <section id="body">
 		<div class="content">
 @using (Html.BeginForm())
@@ -70,8 +69,8 @@
                 @Html.TextBoxFor(m => m.To)                
             </div>
         </div>     
-        @Html.HiddenFor(m=>m.PageIndex)
-        @Html.HiddenFor(m=>m.PageSize)
+        @Html.HiddenFor(m => m.PageIndex)
+        @Html.HiddenFor(m => m.PageSize)
         <div class="filter-form">	 
             <div class="lbl-field"> </div>  
             <div class="submit">
@@ -84,6 +83,7 @@
         Page Size :
         @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
     </div>
+    <div class="content_scroll2">
 <table class="grid" >
     <thead>
         <tr>
@@ -151,8 +151,8 @@
 </table>
 </div>
 </div>
-    </section>
 </div>
+</section> </div>
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
