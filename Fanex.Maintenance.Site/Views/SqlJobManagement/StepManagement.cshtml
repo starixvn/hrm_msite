@@ -5,33 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
-    <link href="~/themes/nexhrm/Styles/site.css" rel="stylesheet" type="text/css" />
-    <link href="~/themes/nexhrm/Styles/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />  
 }
-@section LeftMenu{
-    @Html.Action("LeftMenuPage", "SqlJobManagement")
-}
-<div class="content_wrap">
-    <section id="section_breadcrumb">
-                <div class="separator js-separator">
-                    <div class="js-view-title separator-view-title" id="view_title">                           
-                    </div>
-                    <div class="js-menu separator-menu">                            
-                    </div>
-                </div>
-        </section>
-    <section id="headline">
-           <h1>
-        <span class="title"><span class="first">@ViewResource.Step_Management
-            /</span>
-            @ViewBag.Title
-        </span>
-        @Html.ActionLink("← " + ViewResource.Back_To_List, "JobManagement", "SqlJobManagement", null, new { @class = "lnk" })
-        @Html.ActionLink("+ " + ViewResource.Create_Step, "JobManagement", "SqlJobManagement", null, new { @class = "lnk" })
-    </h1>
-    	</section>
-    <section id="body">
+<section id="secondary_bar">
+		<div class="user">
+			<p>SQL Job Management</p>
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+		<div class="breadcrumbs_container">
+			<article class="breadcrumbs"><a href="index.html">Website Admin</a> <div class="breadcrumb_divider"></div> <a class="current">Dashboard</a></article>
+		</div>
+
+</section>
+@Html.Action("LeftMenuPage", "SqlJobManagement")
+<section class="column" id="main" style="height: 1711px;">	
 		<div class="content">	
 <table class="grid">
     <thead>

@@ -5,31 +5,21 @@
     var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
 }
 
-@section Head {
-   
-    <link href="~/themes/job/site/manage.less" rel="stylesheet" type="text/css" />
-    <link href="~/themes/nexhrm/Styles/site.css" rel="stylesheet" type="text/css" />
-    <link href="~/themes/nexhrm/Styles/style.css" rel="stylesheet" type="text/css" />
+@section Head {   
+    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />   
 }
-@section LeftMenu{
-    @Html.Action("LeftMenuPage", "SqlJobManagement")
-}
-<div class="content_wrap">
-    <section id="section_breadcrumb">
-                <div class="separator js-separator">
-                    <div class="js-view-title separator-view-title" id="view_title">                           
-                    </div>
-                    <div class="js-menu separator-menu">                            
-                    </div>
-                </div>
-        </section>
-    <section id="headline">
-           <h1>
-        <span class="title">@ViewBag.Title</span>
-    </h1>
-    	</section>
-    <section id="body">
-		<div class="content">
+<section id="secondary_bar">
+		<div class="user">
+			<p>SQL Job Management</p>
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+		<div class="breadcrumbs_container">
+			<article class="breadcrumbs"><a href="index.html">Website Admin</a> <div class="breadcrumb_divider"></div> <a class="current">Dashboard</a></article>
+		</div>
+
+</section>
+@Html.Action("LeftMenuPage", "SqlJobManagement")
+<section class="column" id="main" style="height: 1711px;">			<div class="content">
 @using (Html.BeginForm())
 { 
     <section id="filter-bar">      
