@@ -242,6 +242,7 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult SqlServerLogManagement(string serverIp)
         {
+            InitPageSize();
             ViewBag.ListServer = GetServer();
             ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
                 .FromDate(DateTime.Now)
@@ -256,6 +257,7 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult SqlServerLogManagement(GetSqlServerLogCriteria criteria)
         {
+            InitPageSize();
             ViewBag.ListServer = GetServer();
             ViewBag.DateFrom = criteria.From.ToShortDateString();
             ViewBag.DateTo = criteria.To.ToShortDateString();
@@ -274,6 +276,7 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult SqlAgentLogManagement(string serverIp)
         {
+            InitPageSize();
             ViewBag.ListServer = GetServer();
             ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
                 .FromDate(DateTime.Now)
@@ -288,6 +291,7 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult SqlAgentLogManagement(GetSqlServerLogCriteria criteria)
         {
+            InitPageSize();
             ViewBag.ListServer = GetServer();
             ViewBag.DateFrom = criteria.From.ToShortDateString();
             ViewBag.DateTo = criteria.To.ToShortDateString();
@@ -317,6 +321,36 @@ namespace Fanex.Maintenance.Controller
                 });
             }
             return list;
+        }
+
+        private void InitPageSize()
+        {
+            List<SelectListItem> listPageSize = new List<SelectListItem>();
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "10",
+                Value = "10"
+            });
+
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "30",
+                Value = "30"
+            });
+
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "50",
+                Value = "50"
+            });
+
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "100",
+                Value = "100"
+            });
+
+            ViewBag.PageSize = listPageSize;
         }
 
         #endregion
