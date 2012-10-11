@@ -14,7 +14,7 @@
 @section LeftMenu{
     @Html.Action("LeftMenuPage", "SqlJobManagement")
 }
-<div class="content_wrap" style="overflow:auto;">
+<div class="content_wrap">
     <section id="section_breadcrumb">
                 <div class="separator js-separator">
                     <div class="js-view-title separator-view-title" id="view_title">                           
@@ -71,7 +71,8 @@
         Page Size :
         @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
     </div>
-<table class="grid" style="padding-bottom:50px;">
+        <div class="content_scroll2" style="top:170px;">
+<table class="grid" style="">
     <thead>
         <tr>
             <th>
@@ -119,6 +120,7 @@
    
         </tfoot>
 </table>
+</div>
 </div>
 </div>
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
