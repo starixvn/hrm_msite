@@ -12,6 +12,12 @@
     <script src="~/themes/job1/js/hideshow.js" type="text/javascript"></script>
     <script src="~/themes/job1/js/jquery.equalHeight.js" type="text/javascript"></script>
     <script src="~/themes/job1/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+    <script src="~/scripts/Plugin/jstree_pre1.0_fix_1/_lib/jquery.cookie.js" type="text/javascript"></script>
+    <script src="~/scripts/Plugin/jstree_pre1.0_fix_1/_lib/jquery.hotkeys.js" type="text/javascript"></script>
+    <script src="~/scripts/Plugin/jstree_pre1.0_fix_1/jquery.jstree.js" type="text/javascript"></script>
+    <script src="~/scripts/Plugin/jstree_pre1.0_fix_1/_docs/syntax/!script.js" type="text/javascript"></script>
+    <link href="~/scripts/Plugin/jstree_pre1.0_fix_1/_docs/syntax/!style.css" rel="stylesheet"
+        type="text/css" />
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -40,6 +46,13 @@
             $('.column').equalHeight();
         });
     </script>
+    <script type="text/javascript" class="source">
+        $(function () {
+            $("#demo1").jstree({
+                "plugins": ["themes", "html_data", "ui", "crrm", "contextmenu"]
+            });
+        });
+    </script>
 }
 <section id="secondary_bar">
 		<div class="user">
@@ -63,6 +76,25 @@
 			<li class="icn_categories"><a href="#">Categories</a></li>
 			<li class="icn_tags"><a href="#">Tags</a></li>
 		</ul>	
+       	<h3>Server <a class="toggleLink" href="#"></a></h3>
+        <div id="demo1" class="demo" style="height:100px;">
+	<ul class="toggle">
+		<li id="phtml_1">
+			<a href="#">Root node 1</a>
+			<ul>
+				<li id="phtml_2">
+					<a href="#">Child node 1</a>
+				</li>
+				<li id="phtml_3">
+					<a href="#">Child node 2</a>
+				</li>
+			</ul>
+		</li>
+		<li id="phtml_4">
+			<a href="#">Root node 2</a>
+		</li>
+	</ul>
+</div>
 </aside>
 <section class="column" id="main" style="height: 1711px;">				
 		<div class="content">		
