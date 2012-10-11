@@ -254,7 +254,11 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
 
-            return View();
+            return View(new GetSqlServerLogCriteria
+                {
+                    PageIndex = 0,
+                    PageSize = 100
+                });
         }
 
         [HttpPost]
@@ -265,13 +269,20 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = criteria.From.ToShortDateString();
             ViewBag.DateTo = criteria.To.ToShortDateString();
 
+            int pageSize = criteria.PageSize == null ? 0 : (int)criteria.PageSize;
+            int pageIndex = criteria.PageIndex == null ? 0 : (int)criteria.PageIndex;
+
             ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(criteria.Server)
                 .FromDate(criteria.From)
                 .ToDate(criteria.To)
-                .GetSqlServerLogs().Take(100);
+                .GetSqlServerLogs().Skip(pageSize * pageIndex).Take(pageSize);
 
 
-            return View();
+            return View(new GetSqlServerLogCriteria
+            {
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            });
         }
         #endregion
 
@@ -288,7 +299,11 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
 
-            return View();
+            return View(new GetSqlServerLogCriteria
+            {
+                PageIndex = 0,
+                PageSize = 100
+            });
         }
 
         [HttpPost]
@@ -299,12 +314,20 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = criteria.From.ToShortDateString();
             ViewBag.DateTo = criteria.To.ToShortDateString();
 
+            int pageSize = criteria.PageSize == null ? 0 : (int)criteria.PageSize;
+            int pageIndex = criteria.PageIndex == null ? 0 : (int)criteria.PageIndex;
+
             ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(criteria.Server)
                 .FromDate(criteria.From)
                 .ToDate(criteria.To)
                 .WithErrorLevel(criteria.ErrorLevel)
-                .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
-            return View();
+                .GetSqlServerLogs((int)LogType.SqlAgentLog).Skip(pageSize * pageIndex).Take(pageSize);
+            
+            return View(new GetSqlServerLogCriteria
+            {
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            });
         }
         #endregion
 
