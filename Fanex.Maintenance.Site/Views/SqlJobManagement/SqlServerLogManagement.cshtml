@@ -97,8 +97,8 @@
                 <td class="align-center">
                     @(i)
                 </td>
-                <td>
-                    @sqlServerLog.LogDate
+                <td class="align-center">
+                    @sqlServerLog.LogDate.ToFullDateString();
                 </td>
                 <td>
                     @sqlServerLog.LogMessage

@@ -177,10 +177,10 @@
                     @schedule.FreqSubIntervalCombine
                 </td>
                 <td>
-                    @schedule.ActiveStartDate.ToShortDateString()
+                    @schedule.ActiveStartDate.ToDateString()
                 </td>
                 <td>
-                    @schedule.ActiveEndDate.ToShortDateString()
+                    @schedule.ActiveEndDate.ToDateString()
                 </td>
                 <td>
                     @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "SqlJobManagement", new { serverIp = schedule.ServerIp}, null)

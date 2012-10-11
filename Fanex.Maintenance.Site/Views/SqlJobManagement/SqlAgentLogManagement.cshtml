@@ -113,7 +113,7 @@
                 <td class="align-center">
                     @(i)
                 </td>
-                 <td>
+                 <td class="align-center">
                     @switch (sqlServerLog.ErrorLevel)
                     {
                         case (int)ErrorType.Error:
@@ -127,8 +127,8 @@
                             break;
                     }          
                 </td>
-                <td>
-                    @sqlServerLog.LogDate
+                <td class="align-center">
+                    @sqlServerLog.LogDate.ToFullDateString()
                 </td>
                 <td>
                     @sqlServerLog.LogMessage
