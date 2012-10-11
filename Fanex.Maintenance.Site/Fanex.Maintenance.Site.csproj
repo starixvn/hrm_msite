@@ -699,6 +699,7 @@
     <Content Include="themes\fonts.css" />
     <Content Include="themes\job\img\minus.png" />
     <Content Include="themes\job\img\plus.png" />
+    <Content Include="themes\job\img\table_left.jpg" />
     <Content Include="themes\job\img\warning.png" />
     <Content Include="themes\job\img\error.png" />
     <Content Include="themes\job\img\tick.png" />
