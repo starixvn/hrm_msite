@@ -21,7 +21,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Domain;
-    using Fanex.Maintenance.Core.Web;    
+    using Fanex.Maintenance.Core.Web;
 
     /// <summary>
     /// TODO: Update summary.
@@ -32,11 +32,11 @@ namespace Fanex.Maintenance.Controller
         private readonly IScheduleService _scheduleService = ScheduleService.Create();
         private readonly IStepService _stepService = StepService.Create();
         private readonly ISqlServerLogService _sqlServerLogService = SqlServerLogService.Create();
-        
+
         #region Pages
         public ActionResult MainContentPage()
         {
-            return View("~/Views/SqlJobManagement/MainContentPage.cshtml");                     
+            return View("~/Views/SqlJobManagement/MainContentPage.cshtml");
         }
 
         public ActionResult LeftMenuPage()
@@ -93,7 +93,7 @@ namespace Fanex.Maintenance.Controller
         {
             ViewBag.ListServer = GetServer();
 
-            List<Schedule> listSchedule = _scheduleService             
+            List<Schedule> listSchedule = _scheduleService
                 .WithServer(server)
                 .GetSchedules().ToList();
             ViewBag.ListSchedule = listSchedule.Select(s => new SelectListItem
@@ -264,7 +264,7 @@ namespace Fanex.Maintenance.Controller
                 .FromDate(criteria.From)
                 .ToDate(criteria.To)
                 .GetSqlServerLogs().Take(100);
-           
+
 
             return View();
         }
