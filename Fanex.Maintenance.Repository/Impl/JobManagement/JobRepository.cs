@@ -40,12 +40,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                         return new JobSchedule
                                 {
                                     ExecuteStatus = reader.ToInt("current_execution_status"),
-                                    LastRunDate = reader.ToString("last_run_date").Length == 8 ? DateTime.ParseExact(reader.ToString("last_run_date"), "yyyyMMdd"
-                                            , CultureInfo.InvariantCulture
-                                            , DateTimeStyles.None) : DateTime.MinValue,
-                                    NextRunDate = reader.ToString("next_run_date").Length == 8 ? DateTime.ParseExact(reader.ToString("next_run_date"), "yyyyMMdd"
-                                            , CultureInfo.InvariantCulture
-                                            , DateTimeStyles.None) : DateTime.MinValue,
+                                    LastRunDate = reader.ToInt("last_run_date"),
+                                    LastRunTime = reader.ToInt("last_run_time"),
+                                    NextRunDate = reader.ToInt("next_run_date"),
+                                    NextRunTime = reader.ToInt("next_run_time"),
                                     Job = new Job
                                     {
                                         Category = new JobCategory

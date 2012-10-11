@@ -19,9 +19,13 @@ namespace Fanex.Maintenance.Entity.Model
     {
         public Job Job { get; set; }
 
-        public DateTime LastRunDate { get; set; }
+        public int LastRunDate { get; set; }
 
-        public DateTime NextRunDate { get; set; }
+        public int LastRunTime { get; set; }
+
+        public int NextRunDate { get; set; }
+
+        public int NextRunTime { get; set; }
 
         public int ExecuteStatus { get; set; }
 
