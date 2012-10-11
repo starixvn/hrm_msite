@@ -60,10 +60,10 @@
     position: absolute;
     xxxbackground: url(/Images/bg_home.jpg) repeat;
     top: 215px;
-    left: 0;   
-    right: 0; 
+    left: 5px;   
+    right: 10px;
     min-height:100px;
-    bottom: 100px; 
+    bottom: 5px;
 }
 
 .content_wrap .content_scroll .content
