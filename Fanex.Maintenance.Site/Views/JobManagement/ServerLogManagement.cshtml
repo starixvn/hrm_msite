@@ -24,15 +24,15 @@
 { 
     <section id="filter-bar">      
 		<div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    @Html.LabelFor(m => m.Server)
 		    </div>   
-            <div class="edit-field">	
+            <div class="edit-field width-auto">	
                 @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
             </div>
         </div>        
         <div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    @Html.LabelFor(m => m.From)
 		    </div>   
             <div class="edit-field width-auto">	
@@ -40,7 +40,7 @@
             </div>
         </div>  
          <div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    @Html.LabelFor(m => m.To)
 		    </div>   
             <div class="edit-field width-auto">	
@@ -49,20 +49,20 @@
         </div>     
         @Html.HiddenFor(m => m.PageIndex)
         @Html.HiddenFor(m => m.PageSize)
-        <div class="filter-form">	 
-            <div class="lbl-field"> </div>  
+        <div class="filter-form">	             
             <div class="submit">
 		        <input id="submitbutton" type="submit" value="Submit" /> 
             </div>    
         </div>             	       		   
     </section>
 }
- <div class="pagesize">
+ 
+        
+<article class="module width_full">
+<div class="pagesize">
         Page Size :
         @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
     </div>
-        
-<article class="module width_full">
 <table class="tablesorter">
     <thead>
         <tr>

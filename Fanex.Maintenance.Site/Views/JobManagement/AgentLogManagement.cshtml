@@ -62,19 +62,19 @@
         </div>     
         @Html.HiddenFor(m => m.PageIndex)
         @Html.HiddenFor(m => m.PageSize)
-        <div class="filter-form">	 
-            <div class="lbl-field"> </div>  
+        <div class="filter-form">	           
             <div class="submit">
 		        <input id="submitbutton" type="submit" value="Submit" /> 
             </div>    
         </div>             	       		   
     </section>
 }
+
+<article class="module width_full">
  <div class="pagesize">
         Page Size :
         @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
     </div>
-<article class="module width_full">
 <table class="tablesorter">
     <thead>
         <tr>
