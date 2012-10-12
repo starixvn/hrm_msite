@@ -11,7 +11,8 @@
     type="text/css" />
 @using Fanex.Maintenance.Core.Configurations
 @model ServerCollection
-<aside class="column" id="sidebar" style="height: 1711px; display:none;">
+<aside class="column" id="sidebar" style="height: 1711px; ">
+    <div id="loaddelay" style="display:none;">
 		<form class="quick_search">
 			<input type="text" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" value="Quick Search">
 		</form>
@@ -83,6 +84,7 @@
         </div>
         }
     }
+    </div>
 </aside>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -129,7 +131,7 @@
         });
 
         setTimeout(function () {
-            $("#sidebar").show();
+            $("#loaddelay").show();
         }, 300);
 
     });
