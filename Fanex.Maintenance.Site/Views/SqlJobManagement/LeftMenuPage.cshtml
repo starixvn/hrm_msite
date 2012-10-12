@@ -15,7 +15,7 @@
                 </div>
                 <div id="sqljobmanagement_schedulemanagementpage_" class="el" data-hashovermenu="True">
                     <span class="xicon clock3"></span>
-                    @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagementPage", "SqlJobManagement")
+                    @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagement", "SqlJobManagement")
                 </div>
                 <div id="sqljobmanagement_jobmanagement_" class="el selected" data-hashovermenu="False">
                     <span class="xicon calendar8"></span>
@@ -47,7 +47,7 @@
                     </div>
                     <div id="sqljobmanagement_schedulemanagementpage_@(server.ServerIp.Replace('.', '_'))" class="el" data-hashovermenu="False">
                         <span class="xicon calendar1"></span>
-                        @Html.ActionLink(ViewResource.Schedule, "ScheduleManagementPage"
+                        @Html.ActionLink(ViewResource.Schedule, "ScheduleManagement"
                             , new { server = server.ServerIp })
                     </div>
                     <div id="sqljobmanagement_jobmanagement_@(server.ServerIp.Replace('.', '_'))" class="el" data-hashovermenu="False">

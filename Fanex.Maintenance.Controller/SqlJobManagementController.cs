@@ -50,7 +50,7 @@ namespace Fanex.Maintenance.Controller
 
         #region ScheduleManagement
         [HttpGet]
-        public ActionResult ScheduleManagementPage(string server)
+        public ActionResult ScheduleManagement(string server)
         {
             ViewBag.ListServer = GetServer();
             ViewBag.ListSchedule = _scheduleService.WithServer(server)
@@ -58,35 +58,29 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
 
-            return View("~/Views/SqlJobManagement/ScheduleManagement.cshtml");
+            return View();
         }
 
         [HttpPost]
-        public ActionResult ScheduleManagementPage(string Schedule_Name,
-            string Server,
-            int? SearchDateType,
-            string From,
-            string To,
-            int? FreqType,
-            int? FreqSubType)
+        public ActionResult ScheduleManagement(GetAllScheduleCriteria getAllScheduleCriteria)
         {
             ViewBag.ListServer = GetServer();
 
-            DateTime fromDate = string.IsNullOrEmpty(From) ? DateTime.Now : DateTime.ParseExact(From, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-            DateTime toDate = string.IsNullOrEmpty(To) ? DateTime.Now : DateTime.ParseExact(To, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            //DateTime fromDate = getAllScheduleCriteria.From == null ? DateTime.Now : getAllScheduleCriteria.From;
+            //DateTime toDate = string.IsNullOrEmpty(To) ? DateTime.Now : DateTime.ParseExact(To, "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
-            ViewBag.DateFrom = fromDate.ToString("MM/dd/yyyy");
-            ViewBag.DateTo = toDate.ToString("MM/dd/yyyy");
+            ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MM/dd/yyyy");
+            ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MM/dd/yyyy");
 
-            ViewBag.ListSchedule = _scheduleService.WithScheduleName(Schedule_Name)
-                .WithServer(Server)
-                .WithSearchDateType(SearchDateType)
-                .WithDateRange(fromDate, toDate)
-                .WithFreqType(FreqType)
-                .WithFreqSubType(FreqSubType)
+            ViewBag.ListSchedule = _scheduleService.WithScheduleName(getAllScheduleCriteria.Schedule_Name)
+                .WithServer(getAllScheduleCriteria.Server)
+                .WithSearchDateType(getAllScheduleCriteria.SearchDateType)
+                .WithDateRange(getAllScheduleCriteria.From, getAllScheduleCriteria.To)
+                .WithFreqType(getAllScheduleCriteria.FreqType)
+                .WithFreqSubType(getAllScheduleCriteria.FreqSubType)
                 .GetSchedules();
 
-            return View("~/Views/SqlJobManagement/ScheduleManagement.cshtml");
+            return View(getAllScheduleCriteria);
         }
         #endregion
 
