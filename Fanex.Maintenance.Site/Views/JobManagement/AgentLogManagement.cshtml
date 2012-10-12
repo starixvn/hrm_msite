@@ -86,13 +86,13 @@
                 @ViewResource.Server
             </th>
               <th>
-                Status
+                @ViewResource.Status
             </th>
             <th>
                 @ViewResource.Date
             </th>
             <th>
-                Text
+                @ViewResource.Message
             </th>
            
         </tr>
@@ -133,6 +133,14 @@
                 </td>
                
             </tr>
+            }
+            if (sqlServerLogs.Count() == 0)
+            {
+                <tr>
+                    <td class="align-center" colspan="10">
+                    @ViewResource.NoInformationAvailable
+                    </td>
+                </tr>
             }
         }
     </tbody>
