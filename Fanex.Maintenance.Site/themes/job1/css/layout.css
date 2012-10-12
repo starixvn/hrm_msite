@@ -111,7 +111,7 @@ section#secondary_bar
 section#secondary_bar .user
 {
     float: left;
-    width: 23%;
+    width: 20%;
     height: 38px;
 }
 
@@ -221,7 +221,7 @@ article.breadcrumbs
 
 aside#sidebar
 {
-    width: 23%;
+    width: 20%;
     background: #E0E0E3 url(../images/sidebar.png) repeat;
     float: left;
     min-height: 500px;
@@ -1036,7 +1036,7 @@ fieldset textarea:focus
 
 #sidebar li a.rootServer
 {
-     -moz-transition: all 0.2s ease-in-out 0s;
+    -moz-transition: all 0.2s ease-in-out 0s;
     color: #666666;
     display: inline-block;
     font-family: Tahoma;
@@ -1053,22 +1053,38 @@ fieldset textarea:focus
 
 #sidebar li a.navChild
 {
-     -moz-transition: all 0.2s ease-in-out 0s;
+    -moz-transition: all 0.2s ease-in-out 0s;
     color: #666666;
     display: inline-block;
     font-family: Tahoma;
     font-size: 1em;
-    font-weight: normal;
+    font-weight: bold;
     height: 17px;
     line-height: 17px;
     margin: 2px 0;
     padding-left: 0;
     text-decoration: none;
-    text-shadow: 0 1px 0 #FFFFFF;  
-    text-transform:none; 
+    text-shadow: 0 1px 0 #FFFFFF;
+    text-transform: none;
 }
 
 #sidebar li a.navChild.selected
 {
+    color: #B64926;
+}
+#sidebar li.icn_categories a.selected
+{
+    background: url(../images/icn_categories.png) no-repeat center left;
+    color: #B64926;
+}
+
+#sidebar li.icn_edit_article a.selected
+{
+    background: url(../images/icn_edit_article.png) no-repeat center left;
+    color: #B64926;
+}
+#sidebar li.icn_new_article a.selected
+{
+    background: url(../images/icn_new_article.png) no-repeat center left;
     color: #B64926;
 }

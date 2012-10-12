@@ -18,9 +18,18 @@
 		<hr>
 		<h3>Content <a class="toggleLink" href="#"></a></h3>
 		<ul class="toggle">
-			<li class="icn_new_article">@Html.ActionLink(ViewResource.ServerManagement, "ServerManagement", "JobManagement")</li>
-			<li class="icn_edit_article"> @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagement", "JobManagement")</li>
-			<li class="icn_categories"> @Html.ActionLink(ViewResource.JobManagement, "JobManagement", "JobManagement")</li>			
+			<li class="icn_new_article">
+                @Html.ActionLink(ViewResource.ServerManagement, "ServerManagement", "JobManagement"
+                                      , new { @id = "jobmanagement_servermanagement_" })
+            </li>
+			<li class="icn_edit_article">
+                @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagement", "JobManagement"
+                         , new { @id = "jobmanagement_schedulemanagement_" })
+            </li>
+			<li class="icn_categories"> 
+                @Html.ActionLink(ViewResource.JobManagement, "JobManagement", "JobManagement"
+                                   , new { @id = "jobmanagement_jobmanagement_" })
+                </li>			
 		</ul>	
        	<h3>Database Servers <a class="toggleLink" href="#"></a></h3>
     @{                
