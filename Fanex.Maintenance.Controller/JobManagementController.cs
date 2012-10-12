@@ -255,8 +255,8 @@ namespace Fanex.Maintenance.Controller
                 .FromDate(DateTime.Now)
                 .ToDate(DateTime.Now)
                 .GetSqlServerLogs().Take(100);
-            ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
-            ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
+            ViewBag.DateFrom = DateTime.Now.ToString("MMMM dd, yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MMMM dd, yyyy");
 
             return View(new GetSqlServerLogCriteria
                 {
@@ -271,8 +271,8 @@ namespace Fanex.Maintenance.Controller
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.DateFrom = criteria.From.ToShortDateString();
-            ViewBag.DateTo = criteria.To.ToShortDateString();
+            ViewBag.DateFrom = criteria.From.ToString("MMMM dd, yyyy");
+            ViewBag.DateTo = criteria.To.ToString("MMMM dd, yyyy");
 
             int pageSize = criteria.PageSize == null ? 0 : (int)criteria.PageSize;
             int pageIndex = criteria.PageIndex == null ? 0 : (int)criteria.PageIndex;
@@ -302,8 +302,8 @@ namespace Fanex.Maintenance.Controller
                 .FromDate(DateTime.Now)
                 .ToDate(DateTime.Now)
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
-            ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
-            ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
+            ViewBag.DateFrom = DateTime.Now.ToString("MMMM dd, yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MMMM dd, yyyy");
 
             return View(new GetSqlServerLogCriteria
             {
@@ -318,8 +318,8 @@ namespace Fanex.Maintenance.Controller
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.DateFrom = criteria.From.ToShortDateString();
-            ViewBag.DateTo = criteria.To.ToShortDateString();
+            ViewBag.DateFrom = criteria.From.ToString("MMMM dd, yyyy");
+            ViewBag.DateTo = criteria.To.ToString("MMMM dd, yyyy");
 
             int pageSize = criteria.PageSize == null ? 0 : (int)criteria.PageSize;
             int pageIndex = criteria.PageIndex == null ? 0 : (int)criteria.PageIndex;

@@ -30,7 +30,6 @@ var JobLogManagement = function ($) {
                 }
             });
 
-            $("img.ui-datepicker-trigger").addClass("datepickerpostion");
         }
     };
 
