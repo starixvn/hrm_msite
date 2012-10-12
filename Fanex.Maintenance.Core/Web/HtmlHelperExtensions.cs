@@ -62,7 +62,15 @@ namespace Fanex.Maintenance.Core.Web
             string dateFormat = "MMM dd, yyyy", string timeFormat = "HH:mm:ss tt")
         {
             //// check format time correct HHmmss
-            string strTime = (time / 100000) < 1 ? "0" + time.ToString() : time.ToString();
+            string strTime = time.ToString();
+            if (strTime.Length < 6) 
+            {
+                int count = 6 - strTime.Length;
+                for (int i = 0; i < count; i++)
+                {
+                    strTime = strTime.Insert(0, "0");
+                }
+            }
 
             DateTime date = DateTime.ParseExact(value.ToString() + " " + strTime, "yyyyMMdd HHmmss"
                                             , CultureInfo.InvariantCulture
