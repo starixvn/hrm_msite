@@ -6,7 +6,7 @@
 @using Fanex.Maintenance.Core.Configurations
 @model ServerCollection
 <aside class="column" id="sidebar" style="height: 1711px;">
-   
+    
 		<form class="quick_search">
 			<input type="text" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" value="Quick Search">
 		</form>
@@ -27,6 +27,7 @@
                 </li>			
 		</ul>	
        	<h3>Database Servers <a class="toggleLink" href="#"></a></h3>
+        <div id="loaddelay" style="display:none;">
     @{                
         var classClose = string.Empty;
         foreach (ServerElement server in Model)

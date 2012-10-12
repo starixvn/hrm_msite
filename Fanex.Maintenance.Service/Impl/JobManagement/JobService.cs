@@ -21,6 +21,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Common;
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Domain;
+    using Fanex.Logging;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -181,7 +182,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 }
                 catch (Exception ex)
                 {
-
+                    Logger.Log.Error(ex.Message, ex);
                 }
             }
             //// get job all server
@@ -196,7 +197,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     }
                     catch (Exception ex)
                     {
-
+                        Logger.Log.Error(ex.Message, ex);
                     }
                 }
             }
@@ -223,6 +224,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
             catch (Exception ex)
             {
+                Logger.Log.Error(ex.Message, ex);
             }
 
             return null;
@@ -240,7 +242,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 return _jobRepository.GetAllJob(criteria, server);
             }
             catch (Exception ex) 
-            {            
+            {
+                Logger.Log.Error(ex.Message, ex);
             }
             return new List<JobSchedule>();
         }

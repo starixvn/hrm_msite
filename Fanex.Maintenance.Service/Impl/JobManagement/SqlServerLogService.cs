@@ -1,22 +1,25 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SqlServerLogService.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="SqlServerLogService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Ricky.Nguyen" date="2012.10.12">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Service.Interface.JobManagement;
-    using Fanex.Maintenance.Repository.Interface.JobManagement;
-    using Fanex.Maintenance.Repository.Impl.JobManagement;
-    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Logging;
     using Fanex.Maintenance.Core.Configurations;
-    using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Repository.Impl.JobManagement;
+    using Fanex.Maintenance.Repository.Interface.JobManagement;
+    using Fanex.Maintenance.Service.Interface.JobManagement;
 
     /// <summary>
     /// TODO: Update summary.
@@ -47,24 +50,42 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #region Properties
 
         public DateTime From { get; set; }
+
         public DateTime To { get; set; }
+
         public string ServerIp { get; set; }
+
         public int? ErrorLevel { get; set; }
 
-        #endregion
+        #endregion Properties
 
+        /// <summary>
+        /// Get Log With Date Range
+        /// </summary>
+        /// <param name="to"></param>
+        /// <returns></returns>
         public ISqlServerLogService FromDate(DateTime from)
         {
             this.From = from;
             return this;
         }
 
+        /// <summary>
+        /// Get Log With Date Range
+        /// </summary>
+        /// <param name="to"></param>
+        /// <returns></returns>
         public ISqlServerLogService ToDate(DateTime to)
         {
             this.To = to;
             return this;
         }
 
+        /// <summary>
+        /// Get Log With Server Ip
+        /// </summary>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
         public ISqlServerLogService WithServer(string serverIp)
         {
             this.ServerIp = serverIp;
@@ -72,40 +93,48 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public IEnumerable<SqlServerLog> GetSqlServerLogs(int logType = 1)
         {
             List<SqlServerLog> sqlServerLogs = new List<SqlServerLog>();
-            //// Get All Schedule from Database
-            if (!string.IsNullOrEmpty(ServerIp))
+            try
             {
-                sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(logType, ServerIp));
-            }
-            else
-            {
-                foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+                //// Get All Schedule from Database
+                if (!string.IsNullOrEmpty(ServerIp))
                 {
-                    sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(logType, server.ServerIp));
+                    sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(logType, ServerIp));
                 }
-            }
-
-            //// Filter with log status
-            if (logType == (int)LogType.SqlAgentLog && this.ErrorLevel != null)
-            {
-                sqlServerLogs = sqlServerLogs.Where<SqlServerLog>((sqlServerLog) =>
+                else
+                {
+                    foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                     {
-                        if (sqlServerLog.ErrorLevel == this.ErrorLevel)
-                        {
-                            return true;
-                        }
-                        return false;
-                    }).ToList();
-            }
+                        sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(logType, server.ServerIp));
+                    }
+                }
 
-            //// Order Result Data
-            sqlServerLogs.Sort((x, y) => DateTime.Compare(y.LogDate, x.LogDate));
+                //// Filter with log status
+                if (logType == (int)LogType.SqlAgentLog && this.ErrorLevel != null)
+                {
+                    sqlServerLogs = sqlServerLogs.Where<SqlServerLog>((sqlServerLog) =>
+                        {
+                            if (sqlServerLog.ErrorLevel == this.ErrorLevel)
+                            {
+                                return true;
+                            }
+
+                            return false;
+                        }).ToList();
+                }
+
+                //// Order Result Data
+                sqlServerLogs.Sort((x, y) => DateTime.Compare(y.LogDate, x.LogDate));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
 
             return sqlServerLogs;
         }
@@ -130,12 +159,14 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 {
                     switch (logType)
                     {
-                        case (int) LogType.SqlServerLog:
+                        case (int)LogType.SqlServerLog:
                             sqlServerLogs.AddRange(_sqlServerLogRepository.GetAllSqlServerLogOnDate(
                                new GetSqlServerLogCriteria
                                {
                                    p1 = i
-                               }, serverIp));
+                               }, 
+                               serverIp));
+
                             break;
                         case (int)LogType.SqlAgentLog:
                             sqlServerLogs.AddRange(_sqlServerLogRepository.GetAllSqlAgentLogOnDate(
@@ -143,19 +174,26 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                               {
                                   p1 = i,
                                   p2 = 2
-                              }, serverIp));
+                              }, 
+                              serverIp));
+
                             break;
                     }
-                   
                 }
                 catch (Exception ex)
                 {
+                    Logger.Log.Error(ex.Message, ex);
                 }
             }
+
             return sqlServerLogs;
         }
 
-
+        /// <summary>
+        /// Get Log with error level: Error, Warning or Information
+        /// </summary>
+        /// <param name="errorLevel"></param>
+        /// <returns></returns>
         public ISqlServerLogService WithErrorLevel(int? errorLevel)
         {
             this.ErrorLevel = errorLevel;
