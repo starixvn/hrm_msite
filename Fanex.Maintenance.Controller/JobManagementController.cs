@@ -34,17 +34,20 @@ namespace Fanex.Maintenance.Controller
         private readonly ISqlServerLogService _sqlServerLogService = SqlServerLogService.Create();
 
         #region Pages
+
+        [HttpGet]
         public ActionResult MainContentPage()
         {
-            return View("~/Views/JobManagement/MainContentPage.cshtml");
+            return View();
         }
 
+        [HttpGet]
         public ActionResult LeftMenuPage()
         {
             var routeData = ControllerContext.ParentActionViewContext.RouteData;
             ViewBag.Controller = routeData.Values["controller"];
             ViewBag.Action = routeData.Values["action"];
-            ViewBag.Server = Request.QueryString["server"] != null ? 
+            ViewBag.Server = Request.QueryString["server"] != null ?
                     Request.QueryString["server"].Replace('.', '_') : string.Empty;
             return View(DatabaseServersSection.Instance.Servers);
         }
