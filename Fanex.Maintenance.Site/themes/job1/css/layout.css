@@ -1042,13 +1042,15 @@ fieldset textarea:focus
     font-family: Tahoma;
     font-size: 1.1em;
     font-weight: bold;
-    height: 17px;
+    height: 22px;
     line-height: 17px;
     margin: 2px 0;
     padding-left: 0;
     text-decoration: none;
-    text-shadow: 0 1px 0 #FFFFFF;
+    text-shadow: 0 1px 0 #FFF;
     text-transform: uppercase;
+    background: url("../images/server.png") no-repeat center left;
+    padding-left: 25px;
 }
 
 #sidebar li a.navChild
@@ -1087,4 +1089,28 @@ fieldset textarea:focus
 {
     background: url(../images/icn_new_article.png) no-repeat center left;
     color: #B64926;
+}
+
+#sidebar li a.shcedule
+{
+    background: url("../images/schedule.png") no-repeat center left;    
+    padding-left: 25px;  
+}
+
+#sidebar li a.job
+{
+    background: url("../images/evolution_tasks.png") no-repeat center left;    
+    padding-left: 25px;
+}
+
+#sidebar li a.serverlog
+{
+    background: url("../images/evolution_tasks.png") no-repeat center left;    
+    padding-left: 25px;
+}
+
+#sidebar li a.agentlog
+{
+    background: url("../images/evolution_tasks.png") no-repeat center left;    
+    padding-left: 25px;
 }
