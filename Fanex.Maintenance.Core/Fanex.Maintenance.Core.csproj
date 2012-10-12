@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Configurations\DatabaseServersSection.cs" />
     <Compile Include="Configurations\SpNameSection.cs" />
+    <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\SectionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateReport\Block.cs" />
