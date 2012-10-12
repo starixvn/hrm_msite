@@ -18,276 +18,60 @@
 		</div>
 
 </section>
-@Html.Action("LeftMenuPage", "SqlJobManagement")
-<section class="column" id="main" style="height: 1711px;">				
-		<div class="content">		
-<form method="post" action="/SqlJobManagement/JobManagement">   
-
- <section id="filter-bar">    
-         <div class="filter-form">	
-            <div class="lbl-field width-auto">
-			    <label for="Job_Name">Job</label>
-		    </div>   
-            <div class="edit-field width-auto">	
-                <input type="text" value="" name="Job_Name" id="Job_Name">                
-            </div>
-        </div>     
-		<div class="filter-form">	
-            <div class="lbl-field width-auto">
-			    <label for="Server">Server</label>
-		    </div>   
-            <div class="edit-field width-auto">	
-                <select name="Server" id="Server"><option value="">All</option>
-<option value="10.19.10.12">10.19.10.12</option>
-<option value="10.19.10.71">10.19.10.71</option>
-<option value="10.18.200.214">10.18.200.214</option>
-<option value="10.18.200.206">10.18.200.206</option>
-<option value="10.18.200.213">10.18.200.213</option>
-<option value="10.18.200.215">10.18.200.215</option>
-</select>			                
-            </div>
-        </div>     
-        <div class="filter-form">	
-            <div class="lbl-field width-auto">
-			    <label for="Schedule">Schedule</label>
-		    </div>   
-            <div class="edit-field width-auto">	
-                <select name="Schedule" id="Schedule" disabled="disabled"><option value="">All</option>
-<option value="DemoSchedule">DemoSchedule</option>
-<option value="Demo New Schedule">Demo New Schedule</option>
-<option value="time">time</option>
-</select>			                
-            </div>
-        </div>        
-        <div class="filter-form">	
-            <div class="lbl-field width-auto">
-			    <label for="Enabled">Status</label>
-		    </div>
-            <div class="edit-field width-auto">				                
-                <select name="Enabled" id="Enabled" data-val-number="The field Status must be a number." data-val="true"><option value="">All</option>
-<option value="1">Enabled</option>
-<option value="0">Disabled</option>
-</select>
-		    </div>					    
-        </div> 
-        <div class="filter-form">	                              
-             <div class="lbl-field width-auto">
-			    <label for="Execution_Status">Execution</label>
-		    </div>
-            <div class="edit-field width-auto">				                
-                <select name="Execution_Status" id="Execution_Status" data-val-number="The field Execution must be a number." data-val="true"><option value="">All</option>
-<option value="0">Obsolete</option>
-<option value="1">Executing</option>
-<option value="2">Waiting for thread</option>
-<option value="3">Between retries</option>
-<option value="4">Idle</option>
-<option value="5">Suspended</option>
-<option value="6">Performing completion actions</option>
-</select>
-		    </div>			  
-        </div>             
-        <div class="filter-form">            	         
-            <div class="submit">
-		            <input type="submit" value="Submit">                        
-            </div>
-        </div>             		   
+@Html.Action("LeftMenuPage", "JobManagement")
+<section class="column" id="main" style="height: 1711px;">	
+    <article class="module width_full">
+        <header>
+            <h3>Stats</h3>
+        </header>
+			    <table cellspacing="0" class="tablesorter"> 
+			                                    <thead> 
+				<tr> 
+   					<th class="header"></th> 
+    				<th class="header">Entry Name</th> 
+    				<th class="header">Category</th> 
+    				<th class="header">Created On</th> 
+    				<th class="header">Actions</th> 
+				</tr> 
+			</thead> 
+			                                                                                                                                                    <tbody> 
+				<tr> 
+   					<td><input type="checkbox"></td> 
+    				<td>Lorem Ipsum Dolor Sit Amet</td> 
+    				<td>Articles</td> 
+    				<td>5th April 2011</td> 
+    				<td><input type="image" title="Edit" src="images/icn_edit.png"><input type="image" title="Trash" src="images/icn_trash.png"></td> 
+				</tr> 
+				<tr> 
+   					<td><input type="checkbox"></td> 
+    				<td>Ipsum Lorem Dolor Sit Amet</td> 
+    				<td>Freebies</td> 
+    				<td>6th April 2011</td> 
+   				 	<td><input type="image" title="Edit" src="images/icn_edit.png"><input type="image" title="Trash" src="images/icn_trash.png"></td> 
+				</tr>
+				<tr> 
+   					<td><input type="checkbox"></td> 
+    				<td>Sit Amet Dolor Ipsum</td> 
+    				<td>Tutorials</td> 
+    				<td>10th April 2011</td> 
+    				<td><input type="image" title="Edit" src="images/icn_edit.png"><input type="image" title="Trash" src="images/icn_trash.png"></td> 
+				</tr> 
+				<tr> 
+   					<td><input type="checkbox"></td> 
+    				<td>Dolor Lorem Amet</td> 
+    				<td>Articles</td> 
+    				<td>16th April 2011</td> 
+   				 	<td><input type="image" title="Edit" src="images/icn_edit.png"><input type="image" title="Trash" src="images/icn_trash.png"></td> 
+				</tr>
+				<tr> 
+   					<td><input type="checkbox"></td> 
+    				<td>Dolor Lorem Amet</td> 
+    				<td>Articles</td> 
+    				<td>16th April 2011</td> 
+   				 	<td><input type="image" title="Edit" src="images/icn_edit.png"><input type="image" title="Trash" src="images/icn_trash.png"></td> 
+				</tr>  
+			</tbody> 
+			    </table>
+        </article>
+	<div class="spacer"></div>
     </section>
-</form><table class="grid">
-    <thead>
-        <tr>
-            <th>
-                #
-            </th>
-             <th>
-                Server
-            </th>
-            <th>
-                Job
-            </th>
-            <th>
-                Current Execution Status
-            </th>
-             <th>
-                Last Run Date
-            </th>           
-            <th>
-                Next Run Date
-            </th>
-            <th>
-                Date Modified
-            </th>                     
-            <th>
-                Enabled
-            </th>
-            <th>
-                Action
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-            <tr>
-                <td class="align-center">
-                    1
-                </td>
-                 <td>
-                  10.19.10.12 
-                </td>
-                <td>
-                    DemoJob
-                </td>
-                <td class="align-center">
-                    <span class="Idle">Idle</span>
-                </td> 
-                <td>
-<span class="datetime"><span class="date">Oct 10, 2012</span> <span class="time">17:43:00 PM</span></span>                </td>
-                <td>
-N/A                </td>               
-                <td>
-                    <span class="datetime"><span class="date">Oct 02, 2012</span> <span class="time">13:03 PM</span></span>
-                </td>               
-                              
-                <td class="align-center">
-                        <img class="ico-tick" alt="" src="/themes/job/img/blank.png">
-                </td>
-                <td class="align-center">
-                    <div class="action-wrp">
-                        <span class="btn-action">Action</span>
-                        <div class="relative">
-                            <ul style="visibility: hidden; opacity: 0;" class="actions">
-                                
-                                 <li><a href="/SqlJobManagement/JobLogManagement?job=DemoJob&amp;server=10.19.10.12" class="dd-edit">View logDemoJob</a>
-                                </li><li><a href="/SqlJobManagement/StepManagement?job=DemoJob&amp;server=10.19.10.12" class="dd-edit">View stepDemoJob</a>
-                                </li>
-                                <li><a class="dd-site" href="#">View schedule 'DemoJob'</a></li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="alt">
-                <td class="align-center">
-                    2
-                </td>
-                 <td>
-                  10.19.10.12 
-                </td>
-                <td>
-                    DemoJob2
-                </td>
-                <td class="align-center">
-                    <span class="Idle">Idle</span>
-                </td> 
-                <td>
-<span class="datetime"><span class="date">Oct 10, 2012</span> <span class="time">17:43:00 PM</span></span>                </td>
-                <td>
-N/A                </td>               
-                <td>
-                    <span class="datetime"><span class="date">Oct 05, 2012</span> <span class="time">10:24 AM</span></span>
-                </td>               
-                              
-                <td class="align-center">
-                        <img class="ico-tick" alt="" src="/themes/job/img/blank.png">
-                </td>
-                <td class="align-center">
-                    <div class="action-wrp">
-                        <span class="btn-action">Action</span>
-                        <div class="relative">
-                            <ul style="visibility: hidden; opacity: 0;" class="actions">
-                                
-                                 <li><a href="/SqlJobManagement/JobLogManagement?job=DemoJob2&amp;server=10.19.10.12" class="dd-edit">View logDemoJob2</a>
-                                </li><li><a href="/SqlJobManagement/StepManagement?job=DemoJob2&amp;server=10.19.10.12" class="dd-edit">View stepDemoJob2</a>
-                                </li>
-                                <li><a class="dd-site" href="#">View schedule 'DemoJob2'</a></li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="align-center">
-                    3
-                </td>
-                 <td>
-                  10.19.10.71 
-                </td>
-                <td>
-                    Job1
-                </td>
-                <td class="align-center">
-                    <span class="Idle">Idle</span>
-                </td> 
-                <td>
-<span class="datetime"><span class="date">Oct 11, 2012</span> <span class="time">14:38:00 PM</span></span>                </td>
-                <td>
-<span class="datetime"><span class="date">Oct 11, 2012</span> <span class="time">14:39:00 PM</span></span>                </td>               
-                <td>
-                    <span class="datetime"><span class="date">Sep 28, 2012</span> <span class="time">13:44 PM</span></span>
-                </td>               
-                              
-                <td class="align-center">
-                        <img class="ico-tick" alt="" src="/themes/job/img/blank.png">
-                </td>
-                <td class="align-center">
-                    <div class="action-wrp">
-                        <span class="btn-action">Action</span>
-                        <div class="relative">
-                            <ul style="visibility: hidden; opacity: 0;" class="actions">
-                                
-                                 <li><a href="/SqlJobManagement/JobLogManagement?job=Job1&amp;server=10.19.10.71" class="dd-edit">View logJob1</a>
-                                </li><li><a href="/SqlJobManagement/StepManagement?job=Job1&amp;server=10.19.10.71" class="dd-edit">View stepJob1</a>
-                                </li>
-                                <li><a class="dd-site" href="#">View schedule 'Job1'</a></li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="alt">
-                <td class="align-center">
-                    4
-                </td>
-                 <td>
-                  10.19.10.71 
-                </td>
-                <td>
-                    Job2
-                </td>
-                <td class="align-center">
-                    <span class="Idle">Idle</span>
-                </td> 
-                <td>
-N/A                </td>
-                <td>
-N/A                </td>               
-                <td>
-                    <span class="datetime"><span class="date">Oct 05, 2012</span> <span class="time">14:03 PM</span></span>
-                </td>               
-                              
-                <td class="align-center">
-                        <img class="ico-tick" alt="" src="/themes/job/img/blank.png">
-                </td>
-                <td class="align-center">
-                    <div class="action-wrp">
-                        <span class="btn-action">Action</span>
-                        <div class="relative">
-                            <ul style="visibility: hidden; opacity: 0;" class="actions">
-                                
-                                 <li><a href="/SqlJobManagement/JobLogManagement?job=Job2&amp;server=10.19.10.71" class="dd-edit">View logJob2</a>
-                                </li><li><a href="/SqlJobManagement/StepManagement?job=Job2&amp;server=10.19.10.71" class="dd-edit">View stepJob2</a>
-                                </li>
-                                <li><a class="dd-site" href="#">View schedule 'Job2'</a></li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-
-    </tbody>
-</table>
-</div>
-		<div class="spacer"></div>
-	</section>

@@ -1033,3 +1033,8 @@ fieldset textarea:focus
     text-indent: 40px;
     font-size: 14px;
 }
+
+#sidebar li a.selected
+{
+    color: #B64926;
+}

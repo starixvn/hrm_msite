@@ -58,7 +58,7 @@
     <Compile Include="LogController.cs" />
     <Compile Include="MailController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlJobManagementController.cs" />
+    <Compile Include="JobManagementController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj">

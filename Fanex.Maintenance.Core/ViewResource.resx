@@ -379,10 +379,10 @@
     <value>Server Management</value>
   </data>
   <data name="SqlAgentLog" xml:space="preserve">
-    <value>Sql Server Agent Log</value>
+    <value>Server Agent Log</value>
   </data>
   <data name="SqlServerLog" xml:space="preserve">
-    <value>Sql Server Log</value>
+    <value>Server Log</value>
   </data>
   <data name="WindowsEventLog" xml:space="preserve">
     <value>Windows Event Log</value>
@@ -421,7 +421,7 @@
     <value>At the specified time</value>
   </data>
   <data name="SqlAgentStarts" xml:space="preserve">
-    <value>SQL Server Agent service starts</value>
+    <value>Server Agent service starts</value>
   </data>
   <data name="Weekly" xml:space="preserve">
     <value>Weekly</value>

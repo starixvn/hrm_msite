@@ -26,7 +26,7 @@ namespace Fanex.Maintenance.Controller
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class SqlJobManagementController : Controller
+    public class JobManagementController : Controller
     {
         private readonly IJobService _jobService = JobService.Create();
         private readonly IScheduleService _scheduleService = ScheduleService.Create();
@@ -36,7 +36,7 @@ namespace Fanex.Maintenance.Controller
         #region Pages
         public ActionResult MainContentPage()
         {
-            return View("~/Views/SqlJobManagement/MainContentPage.cshtml");
+            return View("~/Views/JobManagement/MainContentPage.cshtml");
         }
 
         public ActionResult LeftMenuPage()
@@ -44,7 +44,8 @@ namespace Fanex.Maintenance.Controller
             var routeData = ControllerContext.ParentActionViewContext.RouteData;
             ViewBag.Controller = routeData.Values["controller"];
             ViewBag.Action = routeData.Values["action"];
-            ViewBag.Server = Request.QueryString["server"] != null ? Request.QueryString["server"] : string.Empty;
+            ViewBag.Server = Request.QueryString["server"] != null ? 
+                    Request.QueryString["server"].Replace('.', '_') : string.Empty;
             return View(DatabaseServersSection.Instance.Servers);
         }
 
@@ -244,7 +245,7 @@ namespace Fanex.Maintenance.Controller
 
         #region Sql Server Log Management
         [HttpGet]
-        public ActionResult SqlServerLogManagement(string serverIp)
+        public ActionResult ServerLogManagement(string serverIp)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
@@ -263,7 +264,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult SqlServerLogManagement(GetSqlServerLogCriteria criteria)
+        public ActionResult ServerLogManagement(GetSqlServerLogCriteria criteria)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
@@ -289,7 +290,7 @@ namespace Fanex.Maintenance.Controller
 
         #region Sql Agent Log Management
         [HttpGet]
-        public ActionResult SqlAgentLogManagement(string serverIp)
+        public ActionResult AgentLogManagement(string serverIp)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
@@ -308,7 +309,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult SqlAgentLogManagement(GetSqlServerLogCriteria criteria)
+        public ActionResult AgentLogManagement(GetSqlServerLogCriteria criteria)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
@@ -323,7 +324,7 @@ namespace Fanex.Maintenance.Controller
                 .ToDate(criteria.To)
                 .WithErrorLevel(criteria.ErrorLevel)
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Skip(pageSize * pageIndex).Take(pageSize);
-            
+
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = pageIndex,
