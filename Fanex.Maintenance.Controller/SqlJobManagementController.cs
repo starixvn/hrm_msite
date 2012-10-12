@@ -58,7 +58,11 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
 
-            return View();
+            return View(new GetAllScheduleCriteria
+                {
+                    From = DateTime.Now,
+                    To = DateTime.Now
+                });
         }
 
         [HttpPost]
@@ -68,6 +72,9 @@ namespace Fanex.Maintenance.Controller
 
             //DateTime fromDate = getAllScheduleCriteria.From == null ? DateTime.Now : getAllScheduleCriteria.From;
             //DateTime toDate = string.IsNullOrEmpty(To) ? DateTime.Now : DateTime.ParseExact(To, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+            getAllScheduleCriteria.From = getAllScheduleCriteria.From <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.From;
+            getAllScheduleCriteria.To = getAllScheduleCriteria.To <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.To;
 
             ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MM/dd/yyyy");
             ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MM/dd/yyyy");

@@ -43,12 +43,12 @@ var SqlServerLogManagement = function ($) {
             var currentIndex = parseInt($('#PageIndex').val());
             if (currentIndex + moveIndex >= 0) {
                 $('#PageIndex').val(currentIndex + moveIndex);
-                $('.content_wrap form').submit();
+                $('.content form').submit();
             }
         },
         OnChangePageSize: function () {
             $('#PageSize').val($('#PageSizeSelect').val());
-            $('.content_wrap form').submit();
+            $('.content form').submit();
         }
     };
 

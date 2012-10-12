@@ -174,7 +174,7 @@
                     @schedule.ActiveEndDate.ToDateString()
                 </td>
                 <td>
-                    @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "SqlJobManagement", new { serverIp = schedule.ServerIp }, null)
+                    @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "SqlJobManagement", new { server = schedule.ServerIp }, null)
                 </td>
                 <td>
                  @if (schedule.Enable == 1)
