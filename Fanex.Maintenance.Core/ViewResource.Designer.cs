@@ -250,7 +250,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current Execution Status.
+        ///   Looks up a localized string similar to Execution Status.
         /// </summary>
         public static string Current_Execution_Status {
             get {
