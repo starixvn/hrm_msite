@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Ricky.Nguyen" date="2012.10.8">Created</change>
+//   <change who="Ricky.Nguyen" date="2012.10.12">Update StyleCop</change>
 // </history>
 
 namespace Fanex.Maintenance.Repository.Impl.JobManagement
@@ -14,10 +15,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using System.Data;
     using System.Globalization;
     using Fanex.Common.Extensions;
-    using Fanex.Maintenance.Entity.Domain;
+    using Fanex.Logging;
+    using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// TODO: Update summary.
@@ -49,12 +50,14 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                                 FreqSubdayInterval = reader.ToInt("freq_subday_interval"),
                                 FreqRelativeInterval = reader.ToInt("freq_relative_interval"),
                                 FreqRecurrenceFactor = reader.ToInt("freq_recurrence_factor"),
-                                ActiveStartDate = reader.ToString("active_start_date").Length == 8 ? DateTime.ParseExact(reader.ToString("active_start_date"), "yyyyMMdd"
-                                            , CultureInfo.InvariantCulture
-                                            , DateTimeStyles.None) : DateTime.MinValue,
-                                ActiveEndDate = reader.ToString("active_end_date").Length == 8 ? DateTime.ParseExact(reader.ToString("active_end_date"), "yyyyMMdd"
-                                            , CultureInfo.InvariantCulture
-                                            , DateTimeStyles.None) : DateTime.MinValue,
+                                ActiveStartDate = reader.ToString("active_start_date").Length == 8 ? DateTime.ParseExact(reader.ToString("active_start_date"),
+                                "yyyyMMdd", 
+                                CultureInfo.InvariantCulture, 
+                                DateTimeStyles.None) : DateTime.MinValue,
+                                ActiveEndDate = reader.ToString("active_end_date").Length == 8 ? DateTime.ParseExact(reader.ToString("active_end_date"), 
+                                "yyyyMMdd", 
+                                CultureInfo.InvariantCulture, 
+                                DateTimeStyles.None) : DateTime.MinValue,
                                 ActiveStartTime = reader.ToInt("active_start_time"),
                                 ActiveEndTime = reader.ToInt("active_end_time"),
                                 DateCreated = reader.ToDateTime("date_created"),
@@ -69,14 +72,15 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                     {
                         schedule.ServerIp = serverIp;
                     });
+
                     return schedules;
                 }
             }
             catch (Exception ex)
             {
-                //Log here
-                //throw ex;
+                Logger.Log.Error(ex.Message, ex);
             }
+
             return new List<ScheduleDetail>();
         }
     }

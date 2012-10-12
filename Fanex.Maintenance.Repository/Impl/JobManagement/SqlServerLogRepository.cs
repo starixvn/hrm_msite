@@ -5,18 +5,19 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Ricky.Nguyen" date="2012.10.10">Created</change>
+//   <change who="Ricky.Nguyen" date="2012.10.12">Update StyleCop</change>
 // </history>
 
 namespace Fanex.Maintenance.Repository.Impl.JobManagement
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Data;
+    using Fanex.Common.Extensions;
+    using Fanex.Logging;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Common.Extensions;
 
     /// <summary>
     /// TODO: Update summary.
@@ -55,9 +56,9 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             }
             catch (Exception ex)
             {
-                //Log here
-                //throw ex;
+                Logger.Log.Error(ex.Message, ex);
             }
+
             return new List<SqlServerLog>();
         }
 
@@ -94,9 +95,9 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             }
             catch (Exception ex)
             {
-                //Log here
-                //throw ex;
+                Logger.Log.Error(ex.Message, ex);
             }
+
             return new List<SqlServerLog>();
         }
     }

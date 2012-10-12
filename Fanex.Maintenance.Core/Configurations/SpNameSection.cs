@@ -80,6 +80,7 @@ namespace Fanex.Maintenance.Core.Configurations
             {
                 return (SpNameElement)BaseGet(index);
             }
+
             set
             {
                 if (BaseGet(index) != null)
@@ -100,6 +101,7 @@ namespace Fanex.Maintenance.Core.Configurations
             {
                 return (string)this["Key"];
             }
+
             set
             {
                 this["Key"] = value;
@@ -113,6 +115,7 @@ namespace Fanex.Maintenance.Core.Configurations
             {
                 return (string)this["Name"];
             }
+
             set
             {
                 this["Name"] = value;

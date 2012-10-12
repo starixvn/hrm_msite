@@ -11,11 +11,11 @@
 namespace Fanex.Maintenance.Repository.Impl
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Core.Helper;
-    using System.Collections.Generic;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -47,6 +47,12 @@ namespace Fanex.Maintenance.Repository.Impl
             }
         }
 
+        /// <summary>
+        /// Get Datatable with server Name
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="serverName"></param>
+        /// <returns></returns>
         public virtual DataTable GetDataTable(ICriteria criteria, string serverName)
         {
             try

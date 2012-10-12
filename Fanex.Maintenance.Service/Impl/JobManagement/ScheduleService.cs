@@ -13,6 +13,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using Fanex.Logging;
     using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Core.Web;
@@ -79,6 +80,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public IScheduleService WithServer(string serverIp)
         {
             this.ServerIp = serverIp;
+
             return this;
         }
 
@@ -90,6 +92,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public IScheduleService WithFreqType(int? freqType)
         {
             this.FreqType = freqType != null ? (int)freqType : 0;
+
             return this;
         }
 
@@ -101,6 +104,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public IScheduleService WithFreqSubType(int? freqSubType)
         {
             this.FreSubType = freqSubType != null ? (int)freqSubType : 0;
+
             return this;
         }
 
@@ -115,6 +119,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             {
                 this.ScheduleName = scheduleName;
             }
+
             return this;
         }
 
@@ -128,6 +133,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             this.FromDate = fromDate != null ? (DateTime)fromDate : DateTime.Now;
             this.ToDate = toDate != null ? (DateTime)toDate : DateTime.Now;
+
             return this;
         }
 
@@ -144,69 +150,79 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             List<ScheduleDetail> schedules = new List<ScheduleDetail>();
 
-            //// Get All Schedule from Database
-            if (!string.IsNullOrEmpty(ServerIp))
+            try
             {
-                schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, ServerIp));
-            }
-            else
-            {
-                foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+                //// Get All Schedule from Database
+                if (!string.IsNullOrEmpty(ServerIp))
                 {
-                    schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, server.ServerIp));
+                    schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, ServerIp));
                 }
+                else
+                {
+                    foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+                    {
+                        schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, server.ServerIp));
+                    }
+                }
+
+                //// Search from result list
+                schedules = schedules.Where<ScheduleDetail>((schedule) =>
+                    {
+                        bool choose = true;
+                        if (FreqType != 0 && FreqType != schedule.FreqType)
+                        {
+                            choose = false;
+                        }
+
+                        if (FreSubType != 0 && FreSubType != schedule.FreqSubdayType)
+                        {
+                            choose = false;
+                        }
+
+                        //// Search with Date Type
+                        switch (SearchDateType)
+                        {
+                            case (int)SearchDate.All:
+                                //// Search None
+                                break;
+                            case (int)SearchDate.StartDate:
+                                //// Search Active Start Date
+                                if (FromDate == null
+                                    || ToDate == null
+                                    || schedule.ActiveStartDate < FromDate
+                                    || schedule.ActiveStartDate > ToDate)
+                                {
+                                    choose = false;
+                                }
+
+                                break;
+                            case (int)SearchDate.EndDate:
+                                //// Search Active End Date
+                                if (FromDate == null
+                                    || ToDate == null
+                                    || schedule.ActiveEndDate < FromDate
+                                    || schedule.ActiveEndDate > ToDate)
+                                {
+                                    choose = false;
+                                }
+
+                                break;
+                        }
+
+                        return choose;
+                    }).ToList();
+
+                //// Format Data To Show on View
+                schedules.ForEach((schedule) =>
+                    {
+                        schedule.FreqIntervalCombine = CombineFreqAndFreqInterval(schedule.FreqType, schedule.FreqInterval);
+                        schedule.FreqSubIntervalCombine = CombineFreqSubAndFreqSubInterval(schedule.FreqSubdayType, schedule.FreqSubdayInterval, schedule.ActiveStartTime);
+                    });
             }
-
-            //// Search from result list
-            schedules = schedules.Where<ScheduleDetail>((schedule) =>
-                {
-                    bool choose = true;
-                    if (FreqType != 0 && FreqType != schedule.FreqType)
-                    {
-                        choose = false;
-                    }
-
-                    if (FreSubType != 0 && FreSubType != schedule.FreqSubdayType)
-                    {
-                        choose = false;
-                    }
-
-                    //// Search with Date Type
-                    switch (SearchDateType)
-                    {
-                        case (int)SearchDate.All:
-                            //// Search None
-                            break;
-                        case (int)SearchDate.StartDate:
-                            //// Search Active Start Date
-                            if (FromDate == null
-                                || ToDate == null
-                                || schedule.ActiveStartDate < FromDate
-                                || schedule.ActiveStartDate > ToDate)
-                            {
-                                choose = false;
-                            }
-                            break;
-                        case (int)SearchDate.EndDate:
-                            //// Search Active End Date
-                            if (FromDate == null
-                                || ToDate == null
-                                || schedule.ActiveEndDate < FromDate
-                                || schedule.ActiveEndDate > ToDate)
-                            {
-                                choose = false;
-                            }
-                            break;
-                    }
-                    return choose;
-                }).ToList();
-
-            //// Format Data To Show on View
-            schedules.ForEach((schedule) =>
-                {
-                    schedule.FreqIntervalCombine = CombineFreqAndFreqInterval(schedule.FreqType, schedule.FreqInterval);
-                    schedule.FreqSubIntervalCombine = CombineFreqSubAndFreqSubInterval(schedule.FreqSubdayType, schedule.FreqSubdayInterval, schedule.ActiveStartTime);
-                });
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
 
             return schedules;
         }
@@ -219,6 +235,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public IScheduleService WithSearchDateType(int? searchDateType)
         {
             this.SearchDateType = searchDateType != null ? (int)searchDateType : 0;
+
             return this;
         }
 
@@ -258,6 +275,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     combinedString += ViewResource.FreqComputerIdle;
                     break;
             }
+
             return combinedString;
         }
 
@@ -281,11 +299,14 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                         {
                             freqIntervalName += Constants.FreqIntervalValues[index] + ",";
                         }
+
                         index++;
                     }
+
                     break;
                 case (int)FrequentTime.MonlyRelative:
                     freqIntervalName = Constants.FreqIntervalValues[freqInterval];
+
                     break;
             }
 
@@ -293,6 +314,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             {
                 freqIntervalName = " : " + freqIntervalName.Substring(0, freqIntervalName.Length - 1);
             }
+
             return freqIntervalName;
         }
 
@@ -310,9 +332,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             {
                 case (int)FrequentSubTime.SpecificTime:
                     combinedString += ViewResource.FreqSubSpecificTime + " : ";
-                    combinedString += activeStartTime.ToString().Length == 6 ? DateTime.ParseExact(activeStartTime.ToString(), "HHmmss"
-                                            , CultureInfo.InvariantCulture
-                                            , DateTimeStyles.None).ToLongTimeString() : DateTime.MinValue.ToLongTimeString();
+                    combinedString += activeStartTime.ToString().Length == 6 ? DateTime.ParseExact(activeStartTime.ToString(),
+                        "HHmmss",
+                        CultureInfo.InvariantCulture, 
+                        DateTimeStyles.None).ToLongTimeString() : DateTime.MinValue.ToLongTimeString();
                     break;
                 case (int)FrequentSubTime.Seconds:
                     combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Seconds);
@@ -324,6 +347,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Hours);
                     break;
             }
+
             return combinedString;
         }
     }
