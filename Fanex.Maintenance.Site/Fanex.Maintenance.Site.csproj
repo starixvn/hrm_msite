@@ -786,6 +786,7 @@
     <Content Include="themes\job\img\minus.png" />
     <Content Include="themes\job\img\plus.png" />
     <Content Include="themes\job\img\table_left.jpg" />
+    <Content Include="themes\job\img\table_left.png" />
     <Content Include="themes\job\img\warning.png" />
     <Content Include="themes\job\img\error.png" />
     <Content Include="themes\job\img\tick.png" />
@@ -1405,9 +1406,7 @@
     <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
     <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
     <Content Include="Areas\UserLogin\Views\Web.config" />
-    <Content Include="Configurations\DatabaseServersSection.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Configurations\DatabaseServersSection.config" />
     <Content Include="Configurations\SpNameSection.config" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\autocomplete\search.php" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\tabs\ajax\content3-slow.php" />
