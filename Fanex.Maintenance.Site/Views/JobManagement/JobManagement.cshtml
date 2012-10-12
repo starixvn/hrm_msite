@@ -1,7 +1,7 @@
 ﻿@using Fanex.Maintenance.Criteria.Job
 @model GetListJobCriteria
 @{
-    ViewBag.Title = "Job Management";
+    ViewBag.Title = ViewResource.JobManagement;
     Layout = "~/Views/Shared/_Layout.cshtml";
     var lisJob = ViewBag.ListJob != null ? (List<JobSchedule>)ViewBag.ListJob : new List<JobSchedule>();
 }
@@ -18,7 +18,11 @@
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.html">Website Admin</a> <div class="breadcrumb_divider"></div> <a class="current">Dashboard</a></article>
+			<article class="breadcrumbs">
+                <a href="#">@Model.Server</a> 
+            <div class="breadcrumb_divider"></div> 
+                <a class="current">@ViewResource.JobManagement</a>
+            </article>
 		</div>
 
 </section>
@@ -90,7 +94,12 @@
         </div>             		   
     </section>
 }
-<table class="grid">
+
+<article class="module width_full">
+<header>
+            <h3>Stats</h3>
+        </header>
+<table class="tablesorter">
     <thead>
         <tr>
             <th>
@@ -205,6 +214,7 @@
         }
     </tbody>
 </table>
+</article>
 </div>
 </section>
 @section Foot {

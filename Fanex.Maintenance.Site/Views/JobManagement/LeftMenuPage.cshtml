@@ -26,13 +26,14 @@
                                    , new { @id = "jobmanagement_jobmanagement_" })
                 </li>			
 		</ul>	
-       	<h3>Database Servers <a class="toggleLink" href="#"></a></h3>      
+       	<h3>Database Servers <a class="toggleLink" href="#"></a></h3>   
+        <ul class="toggle">
     @{                
         var classClose = string.Empty;
         foreach (ServerElement server in Model)
         {
-        <div id="demo1" class="demo jstree-default">
-	    <ul>
+        <div id="demo1">
+	    <ul >
 		    <li id="phtml_1">                           
 			    <a href="#" class="rootServer">             
                 @server.ServerIp                
@@ -80,7 +81,7 @@
         </div>
         }
     }
-  
+  </ul>   
 </aside>
 <script type="text/javascript">
     $(document).ready(function () {
