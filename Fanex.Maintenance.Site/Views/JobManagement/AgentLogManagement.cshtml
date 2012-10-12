@@ -1,6 +1,6 @@
 ﻿@model Fanex.Maintenance.Criteria.Job.GetSqlServerLogCriteria
 @{
-    ViewBag.Title = "Sql Agent Log Management";
+    ViewBag.Title = ViewResource.SqlAgentLog;
     Layout = "~/Views/Shared/_Layout.cshtml";
     var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
 }
@@ -13,7 +13,7 @@
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.html">Website Admin</a> <div class="breadcrumb_divider"></div> <a class="current">Dashboard</a></article>
+			<article class="breadcrumbs"><a href="index.html">@Model.Server</a> <div class="breadcrumb_divider"></div> <a class="current">@ViewResource.SqlAgentLog</a></article>
 		</div>
 
 </section>
