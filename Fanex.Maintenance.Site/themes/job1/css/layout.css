@@ -1034,7 +1034,41 @@ fieldset textarea:focus
     font-size: 14px;
 }
 
-#sidebar li a.selected
+#sidebar li a.rootServer
+{
+     -moz-transition: all 0.2s ease-in-out 0s;
+    color: #666666;
+    display: inline-block;
+    font-family: Tahoma;
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 17px;
+    line-height: 17px;
+    margin: 2px 0;
+    padding-left: 0;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;
+    text-transform: uppercase;
+}
+
+#sidebar li a.navChild
+{
+     -moz-transition: all 0.2s ease-in-out 0s;
+    color: #666666;
+    display: inline-block;
+    font-family: Tahoma;
+    font-size: 1em;
+    font-weight: normal;
+    height: 17px;
+    line-height: 17px;
+    margin: 2px 0;
+    padding-left: 0;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #FFFFFF;  
+    text-transform:none; 
+}
+
+#sidebar li a.navChild.selected
 {
     color: #B64926;
 }
