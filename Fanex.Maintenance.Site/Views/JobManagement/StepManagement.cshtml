@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />  
+    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
 }
 <section id="secondary_bar">
 		<div class="user">
@@ -18,9 +18,10 @@
 
 </section>
 @Html.Action("LeftMenuPage", "JobManagement")
-<section class="column" id="main" style="height: 1711px;">	
+<section class="column" id="main">	
 		<div class="content">	
-<table class="grid">
+<article class="module width_full">
+<table class="tablesorter">
     <thead>
         <tr>
             <th>
@@ -94,7 +95,7 @@
         }
     </tbody>
 </table>
-</div>
+</article>
 </div>
 @section Foot {
 }

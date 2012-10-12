@@ -20,7 +20,7 @@
 
 </section>
 @Html.Action("LeftMenuPage", "JobManagement")
-<section class="column" id="main" style="height: 1711px;">	
+<section class="column" id="main">	
 		<div class="content">	
 @using (Html.BeginForm())
 { 
@@ -76,8 +76,8 @@
         </div>             		   
     </section>
 }
-<div class="content_scroll">
-<table class="grid">
+<article class="module width_full">
+<table class="tablesorter">
     <thead >
         <tr class="persist-header">
             <th>
@@ -170,7 +170,7 @@
         }
     </tbody>
 </table>
-</div>
+</article>
 </div>
 </div>
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))

@@ -18,7 +18,8 @@
 
 </section>
 @Html.Action("LeftMenuPage", "JobManagement")
-<section class="column" id="main" style="height: 1711px;">			<div class="content">
+<section class="column" id="main">
+			<div class="content">
 @using (Html.BeginForm())
 { 
     <section id="filter-bar">      
@@ -60,8 +61,9 @@
         Page Size :
         @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
     </div>
-        <div class="content_scroll2" style="top:170px;">
-<table class="grid" style="">
+        
+<article class="module width_full">
+<table class="tablesorter">
     <thead>
         <tr>
             <th>
@@ -124,7 +126,7 @@
    
         </tfoot>
 </table>
-</div>
+</article>
 </div>
 </div>
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
