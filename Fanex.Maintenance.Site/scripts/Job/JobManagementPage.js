@@ -5,7 +5,7 @@ var JobManagementPage = function ($) {
 
         GetSchedule: function (server) {
             $.ajax({
-                url: NAP.resolveClientUrl("SqlJobManagement/GetSchedule"),
+                url: NAP.resolveClientUrl("JobManagement/GetSchedule"),
                 data: { server: server },
                 type: 'POST',
                 dataType: 'JSON',
