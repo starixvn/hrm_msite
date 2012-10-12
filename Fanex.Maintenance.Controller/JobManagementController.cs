@@ -40,8 +40,7 @@ namespace Fanex.Maintenance.Controller
         {
             return View();
         }
-
-        [HttpGet]
+     
         public ActionResult LeftMenuPage()
         {
             var routeData = ControllerContext.ParentActionViewContext.RouteData;
@@ -151,7 +150,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListJob = listJob;
             ViewBag.ListServer = GetServer();
 
-            return View();
+            return View(criteria);
         }
 
 
