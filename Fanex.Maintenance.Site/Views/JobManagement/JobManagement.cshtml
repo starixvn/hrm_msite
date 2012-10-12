@@ -184,10 +184,10 @@
                         <div class="relative">
                             <ul class="actions" style="visibility: hidden; opacity: 0;">
                                 @*<li><a href="#" class="dd-edit">Edit '@item.Job.Name' Details</a> </li>*@
-                                 <li>@Html.ActionLink("View log" + item.Job.Name, "JobLogManagement"
+                                 <li>@Html.ActionLink("View log " + item.Job.Name, "JobLogManagement"
                                         , new { job = item.Job.Name, server = item.ServerIp }
                                         , new { @class = "dd-edit" })
-                                <li>@Html.ActionLink("View step" + item.Job.Name, "StepManagement"
+                                <li>@Html.ActionLink("View step " + item.Job.Name, "StepManagement"
                                         , new { job = item.Job.Name, server = item.ServerIp }
                                         , new { @class = "dd-edit" })
                                 </li>
