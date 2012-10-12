@@ -1,31 +1,4 @@
 ﻿@import "../style.less";
-#filter-bar {
-	.content {
-		.filter-form {
-			/*.username-lbl {
-				.column(2);
-			}
-			.username {
-				.column(5);
-			}
-			.group {
-				.column(3);
-				height: 28px;
-			}
-			.site {
-				.column(3);
-				height: 28px;
-			}
-			.submit {
-				.column(2);
-				
-				input[type=submit] {
-					.button_dark(@filter_submit);
-				}
-			}*/
-		}
-	}
-}
 
 #body .content {
     float: left;
@@ -554,8 +527,7 @@ section#main
 
 .module
 {    
-    width: 100%;
-    margin: 100px 3% 0 3%;
+    width: 100%;    
     margin-top: 20px;
     
 }
@@ -604,7 +576,7 @@ section#main
 
 .width_full
 {
-    width: 95%;
+    width: 100%;
 }
 
 .width_half
@@ -987,68 +959,6 @@ html ul.tabs li:last-child, html ul.tabs li:last-child a
 .message
 {
     border-bottom: 1px dotted #cccccc;
-}
-
-input[type=submit]
-{
-    background: #D0D1D4 url(../images/btn_submit.png) repeat-x;
-    border: 1px solid #A8A9A8;
-    -webkit-box-shadow: 0 1px 0 #fff;
-    -moz-box-shadow: 0 1px 0 #fff;
-    box-shadow: 0 1px 0 #fff;
-    font-weight: bold;
-    height: 22px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    padding: 0 10px;
-    color: #666;
-    text-shadow: 0 1px 0 #fff;
-    cursor: pointer;
-}
-
-input[type=submit]:hover
-{
-    color: #333333;
-}
-
-input[type=submit].alt_btn
-{
-    background: #D0D1D4 url(../images/btn_submit_2.png) repeat-x;
-    border: 1px solid#30B0C8;
-    -webkit-box-shadow: 0 1px 0 #fff;
-    -moz-box-shadow: 0 1px 0 #fff;
-    box-shadow: 0 1px 0 #fff;
-    font-weight: bold;
-    height: 22px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    padding: 0 10px;
-    color: #003E49;
-    text-shadow: 0 1px 0 #6CDCF9;
-    cursor: pointer;
-}
-
-input[type=submit].alt_btn:hover
-{
-    color: #001217;
-}
-
-input[type=submit].btn_post_message
-{
-    background: #D0D1D4 url(../images/post_message.png) no-repeat;
-    display: block;
-    width: 37px;
-    border: none;
-    height: 24px;
-    cursor: pointer;
-    text-indent: -5000px;
-}
-
-input[type=submit].btn_post_message:hover
-{
-    background-position: 0 -24px;
 }
 
 .post_message

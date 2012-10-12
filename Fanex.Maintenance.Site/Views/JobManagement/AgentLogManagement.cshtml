@@ -9,8 +9,7 @@
 }
 <section id="secondary_bar">
 		<div class="user">
-			<p>SQL Job Management</p>
-			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+			<p>SQL Job Management</p>			
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs"><a href="index.html">@Model.Server</a> <div class="breadcrumb_divider"></div> <a class="current">@ViewResource.SqlAgentLog</a></article>
@@ -24,18 +23,18 @@
 { 
     <section id="filter-bar">      
 		<div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    @Html.LabelFor(m => m.Server)
 		    </div>   
-            <div class="edit-field">	
+            <div class="edit-field width-auto">	
                 @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
             </div>
         </div>        
         <div class="filter-form">	                              
-            <div class="lbl-field ">
+            <div class="lbl-field width-auto">
 			    @ViewResource.Status
 		    </div>
-            <div class="edit-field">				                
+            <div class="edit-field width-auto">				                
                 @Html.DropDownListFor(m => m.ErrorLevel,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.Error,Value=((int)ErrorType.Error).ToString()}, 
@@ -46,7 +45,7 @@
 		    </div>	
             </div>		  
         <div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    @Html.LabelFor(m => m.From)
 		    </div>   
             <div class="edit-field width-auto">	
@@ -54,7 +53,7 @@
             </div>
         </div>  
          <div class="filter-form">	
-            <div class="lbl-field">
+            <div class="lbl-field width-auto">
 			    @Html.LabelFor(m => m.To)
 		    </div>   
             <div class="edit-field width-auto">	
@@ -63,8 +62,7 @@
         </div>     
         @Html.HiddenFor(m => m.PageIndex)
         @Html.HiddenFor(m => m.PageSize)
-        <div class="filter-form">	 
-            <div class="lbl-field"> </div>  
+        <div class="filter-form">	           
             <div class="submit">
 		        <input id="submitbutton" type="submit" value="Submit" /> 
             </div>    
