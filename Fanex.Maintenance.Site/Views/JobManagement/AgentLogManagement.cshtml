@@ -18,7 +18,7 @@
 
 </section>
 @Html.Action("LeftMenuPage", "JobManagement")
-<section class="column" id="main" style="height: 1711px;">	
+<section class="column" id="main">	
 		<div class="content">
 @using (Html.BeginForm())
 { 
@@ -75,8 +75,8 @@
         Page Size :
         @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
     </div>
-    <div class="content_scroll2">
-<table class="grid" >
+<article class="module width_full">
+<table class="tablesorter">
     <thead>
         <tr>
             <th>
@@ -155,7 +155,7 @@
 
         </tfoot>
 </table>
-</div>
+</article>
 </div>
 </div>
 </section>

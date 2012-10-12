@@ -21,7 +21,7 @@
 
 </section>
 @Html.Action("LeftMenuPage", "JobManagement")
-<section class="column" id="main" style="height: 1711px;">	
+<section class="column" id="main">	
 		<div class="content">
 @using (Html.BeginForm())
 { 
@@ -112,7 +112,8 @@
         </div>             	       		   
     </section>
 }
-<table class="grid">
+<article class="module width_full">
+<table class="tablesorter">
     <thead>
         <tr>
             <th>
@@ -205,7 +206,7 @@
         }
     </tbody>
 </table>
-</div>
+</article>
 </div>
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
