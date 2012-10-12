@@ -71,11 +71,12 @@
         </div>             	       		   
     </section>
 }
+
+<article class="module width_full">
  <div class="pagesize">
         Page Size :
         @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
     </div>
-<article class="module width_full">
 <table class="tablesorter">
     <thead>
         <tr>
