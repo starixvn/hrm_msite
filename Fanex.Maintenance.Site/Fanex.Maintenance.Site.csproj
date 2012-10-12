@@ -681,6 +681,7 @@
     <Content Include="scripts\Plugin\jstree_pre1.0_fix_1\themes\default-rtl\throbber.gif" />
     <Content Include="scripts\Plugin\jstree_pre1.0_fix_1\themes\default\d.gif" />
     <Content Include="scripts\Plugin\jstree_pre1.0_fix_1\themes\default\d.png" />
+    <Content Include="scripts\Plugin\jstree_pre1.0_fix_1\themes\default\server.png" />
     <Content Include="scripts\Plugin\jstree_pre1.0_fix_1\themes\default\style.css" />
     <Content Include="scripts\Plugin\jstree_pre1.0_fix_1\themes\default\throbber.gif" />
     <Content Include="scripts\Plugin\jstree_pre1.0_fix_1\_demo\file.png" />
@@ -759,6 +760,7 @@
     <Content Include="themes\Authentication\_images\icPass.jpg" />
     <Content Include="themes\Authentication\_images\icUser.jpg" />
     <Content Include="themes\Authentication\_images\logo.jpg" />
+    <Content Include="themes\fonts.css" />
     <Content Include="themes\fonts.css" />
     <Content Include="themes\job1\css\ie.css" />
     <Content Include="themes\job1\css\layout.css" />
@@ -1562,16 +1564,16 @@
     <Content Include="Views\DatabaseReport\UserOnlineDaily.cshtml" />
     <Content Include="Views\DatabaseReport\UserOnline.cshtml" />
     <Content Include="Views\DatabaseReport\UserOnlineChart.cshtml" />
-    <Content Include="Views\SqlJobManagement\MainContentPage.cshtml" />
-    <Content Include="Views\SqlJobManagement\LeftMenuPage.cshtml" />
-    <Content Include="Views\SqlJobManagement\ScheduleManagement.cshtml" />
+    <Content Include="Views\JobManagement\MainContentPage.cshtml" />
+    <Content Include="Views\JobManagement\LeftMenuPage.cshtml" />
+    <Content Include="Views\JobManagement\ScheduleManagement.cshtml" />
     <Content Include="Views\Shared\_SqlJobManagementLayout.cshtml" />
-    <Content Include="Views\SqlJobManagement\JobManagement.cshtml" />
-    <Content Include="Views\SqlJobManagement\StepManagement.cshtml" />
-    <Content Include="Views\SqlJobManagement\JobLogManagement.cshtml" />
-    <Content Include="Views\SqlJobManagement\SqlServerLogManagement.cshtml" />
-    <Content Include="Views\SqlJobManagement\SqlAgentLogManagement.cshtml" />
-    <Content Include="Views\SqlJobManagement\ServerManagement.cshtml" />
+    <Content Include="Views\JobManagement\JobManagement.cshtml" />
+    <Content Include="Views\JobManagement\StepManagement.cshtml" />
+    <Content Include="Views\JobManagement\JobLogManagement.cshtml" />
+    <Content Include="Views\JobManagement\ServerLogManagement.cshtml" />
+    <Content Include="Views\JobManagement\AgentLogManagement.cshtml" />
+    <Content Include="Views\JobManagement\ServerManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

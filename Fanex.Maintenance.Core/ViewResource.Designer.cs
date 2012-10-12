@@ -1060,7 +1060,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sql Server Agent Log.
+        ///   Looks up a localized string similar to Server Agent Log.
         /// </summary>
         public static string SqlAgentLog {
             get {
@@ -1069,7 +1069,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SQL Server Agent service starts.
+        ///   Looks up a localized string similar to Server Agent service starts.
         /// </summary>
         public static string SqlAgentStarts {
             get {
@@ -1078,7 +1078,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sql Server Log.
+        ///   Looks up a localized string similar to Server Log.
         /// </summary>
         public static string SqlServerLog {
             get {
