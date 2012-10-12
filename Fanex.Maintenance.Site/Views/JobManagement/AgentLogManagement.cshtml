@@ -134,6 +134,14 @@
                
             </tr>
             }
+            if (sqlServerLogs.Count() == 0)
+            {
+                <tr>
+                    <td class="align-center" colspan="10">
+                    @ViewResource.NoInformationAvailable
+                    </td>
+                </tr>
+            }
         }
     </tbody>
      <tfoot>
