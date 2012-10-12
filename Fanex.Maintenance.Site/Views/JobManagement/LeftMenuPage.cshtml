@@ -3,25 +3,43 @@
 @model ServerCollection
 @{
     ViewBag.Title = "Sql Job Management";
-    Layout = "~/Views/Shared/_Layout.cshtml";    
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";    
 }
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
 }
+<section id="secondary_bar">
+		<div class="user">
+			<p>SQL Job Management</p>
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+</section>
 <aside class="column" id="sidebar">   	
 		<h3>Content <a class="toggleLink" href="#"></a></h3>
 		<ul class="toggle">
 			<li class="icn_new_article">
                 @Html.ActionLink(ViewResource.ServerManagement, "ServerManagement", "JobManagement"
-                                      , new { @id = "jobmanagement_servermanagement_" })
+                                      , new
+                                      {
+                                          @target = "centerFr",
+                                          @class = "menu"
+                                      })
             </li>
 			<li class="icn_edit_article">
                 @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagement", "JobManagement"
-                         , new { @id = "jobmanagement_schedulemanagement_" })
+                         , new
+                         {
+                             @target = "centerFr",
+                             @class = "menu"
+                         })
             </li>
 			<li class="icn_categories"> 
                 @Html.ActionLink(ViewResource.JobManagement, "JobManagement", "JobManagement"
-                                   , new { @id = "jobmanagement_jobmanagement_" })
+                                   , new
+                                   {
+                                       @target = "centerFr",
+                                       @class = "menu"
+                                   })
                 </li>			
 		</ul>	
        	<h3>Database Servers <a class="toggleLink" href="#"></a></h3>   
@@ -42,8 +60,8 @@
                             , new { server = server.ServerIp }
                                     , new
                                     {
-                                        @id = "jobmanagement_serverlogmanagement_" + server.ServerIp.Replace('.', '_'),
-                                        @class = "navChild serverlog"
+                                        @class = "navChild serverlog",
+                                        @target = "centerFr"
                                     })
 				    </li>
 				    <li id="phtml_3">
@@ -51,8 +69,8 @@
                             , new { server = server.ServerIp }
                                                     , new
                                                     {
-                                                        @id = "jobmanagement_agentlogmanagement_" + server.ServerIp.Replace('.', '_'),
-                                                        @class = "navChild agentlog"
+                                                        @class = "navChild agentlog",
+                                                        @target = "centerFr"
                                                     })
 				    </li>
                     <li id="phtml_4">
@@ -60,8 +78,8 @@
                             , new { server = server.ServerIp }
         , new
         {
-            @id = "jobmanagement_schedulemanagement_" + server.ServerIp.Replace('.', '_'),
-            @class = "navChild shcedule"
+            @class = "navChild shcedule",
+            @target = "centerFr"
         })
                     </li>
                     <li id="phtml_5">
@@ -69,8 +87,8 @@
                             , new { server = server.ServerIp }
          , new
          {
-             @id = "jobmanagement_jobmanagement_" + server.ServerIp.Replace('.', '_'),
-             @class = "navChild job"
+             @class = "navChild job",
+             @target = "centerFr"
          })
                     </li>
 			    </ul>
@@ -81,7 +99,6 @@
     }
   </ul>   
 </aside>
-
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -89,11 +106,17 @@
             var liChildren = $(this).parent().find("ul");
             liChildren.toggle("fast");
         });
-        @*
-        var currentUrl = '@(ViewBag.Controller.ToString().ToLower() + "_" + ViewBag.Action.ToString().ToLower() + "_" + ViewBag.Server.ToString().ToLower())';
-        var selectNavItem = $("#" + currentUrl);
-        if (selectNavItem != undefined) {
-            selectNavItem.addClass("selected");
-        }*@
+
+        $('.menu').live('click', function () {
+            $('.menu').removeClass("selected");
+            $('.navChild').removeClass("selected");
+            $(this).addClass("selected");
+        });
+
+        $('.navChild').live('click', function () {
+            $('.navChild').removeClass("selected");
+            $('.menu').removeClass("selected");
+            $(this).addClass("selected");
+        });
     });
 </script>

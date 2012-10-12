@@ -3,17 +3,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";    
 }
 @section Head {
-    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />    
+    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/SqlJobManagement/MainContentPage.css" rel="stylesheet" type="text/css" />
 }
-
 <div class="contentbox">
     <div class="leftcontent">
         <iframe id="leftPanel" name="leftPanel" marginwidth="0" scrolling="auto" src="@Url.Action("LeftMenuPage", "JobManagement")"
-            marginheight="0" frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 100%;">      
+            marginheight="0" frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 100%; min-height: 888px;">
         </iframe>
     </div>
     <div class="rightcontent">
         <iframe id="centerFr" name="centerFr" src="" scrolling="auto" marginwidth="0" marginheight="0"
-            frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 100%;"></iframe>
+            frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 100%; min-height: 870px;">
+        </iframe>
     </div>
 </div>

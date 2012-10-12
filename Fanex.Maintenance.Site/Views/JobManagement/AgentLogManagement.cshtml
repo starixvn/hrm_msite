@@ -1,22 +1,18 @@
 ﻿@model Fanex.Maintenance.Criteria.Job.GetSqlServerLogCriteria
 @{
     ViewBag.Title = ViewResource.SqlAgentLog;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";    
     var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
 }
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
 }
-<section id="secondary_bar">
-		<div class="user">
-			<p>SQL Job Management</p>			
-		</div>
+<section id="secondary_bar">	
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs"><a href="index.html">@Model.Server</a> <div class="breadcrumb_divider"></div> <a class="current">@ViewResource.SqlAgentLog</a></article>
 		</div>
 
 </section>
-@Html.Action("LeftMenuPage", "JobManagement")
 <section class="column" id="main">	
 		<div class="content">
 @using (Html.BeginForm())
