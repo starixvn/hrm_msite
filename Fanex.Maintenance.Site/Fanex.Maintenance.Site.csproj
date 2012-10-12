@@ -190,7 +190,6 @@
     <Content Include="scripts\DatabaseReport\RefreshTime.js" />
     <Content Include="scripts\Job\SqlServerLogManagement.js" />
     <Content Include="scripts\Job\ScheduleManagement.js" />
-    <Content Include="scripts\Job\ScheduleManagementPage.js" />
     <Content Include="scripts\Job\JobLogManagement.js" />
     <Content Include="scripts\Job\JobManagementPage.js" />
     <Content Include="scripts\lib\chosen\chosen-sprite.png" />

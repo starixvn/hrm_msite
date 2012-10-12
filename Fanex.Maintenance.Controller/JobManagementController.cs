@@ -59,35 +59,36 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
 
-            return View();
+            return View(new GetAllScheduleCriteria
+                {
+                    From = DateTime.Now,
+                    To = DateTime.Now
+                });
         }
 
         [HttpPost]
-        public ActionResult ScheduleManagement(string Schedule_Name,
-            string Server,
-            int? SearchDateType,
-            string From,
-            string To,
-            int? FreqType,
-            int? FreqSubType)
+        public ActionResult ScheduleManagement(GetAllScheduleCriteria getAllScheduleCriteria)
         {
             ViewBag.ListServer = GetServer();
 
-            DateTime fromDate = string.IsNullOrEmpty(From) ? DateTime.Now : DateTime.ParseExact(From, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-            DateTime toDate = string.IsNullOrEmpty(To) ? DateTime.Now : DateTime.ParseExact(To, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            //DateTime fromDate = getAllScheduleCriteria.From == null ? DateTime.Now : getAllScheduleCriteria.From;
+            //DateTime toDate = string.IsNullOrEmpty(To) ? DateTime.Now : DateTime.ParseExact(To, "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
-            ViewBag.DateFrom = fromDate.ToString("MM/dd/yyyy");
-            ViewBag.DateTo = toDate.ToString("MM/dd/yyyy");
+            getAllScheduleCriteria.From = getAllScheduleCriteria.From <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.From;
+            getAllScheduleCriteria.To = getAllScheduleCriteria.To <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.To;
 
-            ViewBag.ListSchedule = _scheduleService.WithScheduleName(Schedule_Name)
-                .WithServer(Server)
-                .WithSearchDateType(SearchDateType)
-                .WithDateRange(fromDate, toDate)
-                .WithFreqType(FreqType)
-                .WithFreqSubType(FreqSubType)
+            ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MM/dd/yyyy");
+            ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MM/dd/yyyy");
+
+            ViewBag.ListSchedule = _scheduleService.WithScheduleName(getAllScheduleCriteria.Schedule_Name)
+                .WithServer(getAllScheduleCriteria.Server)
+                .WithSearchDateType(getAllScheduleCriteria.SearchDateType)
+                .WithDateRange(getAllScheduleCriteria.From, getAllScheduleCriteria.To)
+                .WithFreqType(getAllScheduleCriteria.FreqType)
+                .WithFreqSubType(getAllScheduleCriteria.FreqSubType)
                 .GetSchedules();
 
-            return View();
+            return View(getAllScheduleCriteria);
         }
         #endregion
 
@@ -244,11 +245,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Sql Server Log Management
         [HttpGet]
-        public ActionResult ServerLogManagement(string serverIp)
+        public ActionResult ServerLogManagement(string server)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
                 .FromDate(DateTime.Now)
                 .ToDate(DateTime.Now)
                 .GetSqlServerLogs().Take(100);
@@ -258,7 +259,8 @@ namespace Fanex.Maintenance.Controller
             return View(new GetSqlServerLogCriteria
                 {
                     PageIndex = 0,
-                    PageSize = 100
+                    PageSize = 100,
+                    Server = server
                 });
         }
 
@@ -282,18 +284,19 @@ namespace Fanex.Maintenance.Controller
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = pageIndex,
-                PageSize = pageSize
+                PageSize = pageSize,
+                Server = criteria.Server
             });
         }
         #endregion
 
         #region Sql Agent Log Management
         [HttpGet]
-        public ActionResult AgentLogManagement(string serverIp)
+        public ActionResult AgentLogManagement(string server)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
                 .FromDate(DateTime.Now)
                 .ToDate(DateTime.Now)
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
@@ -303,7 +306,8 @@ namespace Fanex.Maintenance.Controller
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = 0,
-                PageSize = 100
+                PageSize = 100,
+                Server = server
             });
         }
 
@@ -327,7 +331,8 @@ namespace Fanex.Maintenance.Controller
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = pageIndex,
-                PageSize = pageSize
+                PageSize = pageSize,
+                Server = criteria.Server
             });
         }
         #endregion

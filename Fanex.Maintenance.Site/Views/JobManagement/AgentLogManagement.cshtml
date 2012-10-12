@@ -82,6 +82,9 @@
             <th>
                 #
             </th>
+             <th>
+                @ViewResource.Server
+            </th>
               <th>
                 Status
             </th>
@@ -104,6 +107,9 @@
             <tr @Html.Raw(rowCss)>
                 <td class="align-center">
                     @(i)
+                </td>
+                 <td>
+                    @sqlServerLog.ServerIp
                 </td>
                  <td class="align-center">
                     @switch (sqlServerLog.ErrorLevel)
