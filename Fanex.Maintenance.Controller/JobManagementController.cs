@@ -245,11 +245,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Sql Server Log Management
         [HttpGet]
-        public ActionResult ServerLogManagement(string serverIp)
+        public ActionResult ServerLogManagement(string server)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
                 .FromDate(DateTime.Now)
                 .ToDate(DateTime.Now)
                 .GetSqlServerLogs().Take(100);
@@ -259,7 +259,8 @@ namespace Fanex.Maintenance.Controller
             return View(new GetSqlServerLogCriteria
                 {
                     PageIndex = 0,
-                    PageSize = 100
+                    PageSize = 100,
+                    Server = server
                 });
         }
 
@@ -283,18 +284,19 @@ namespace Fanex.Maintenance.Controller
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = pageIndex,
-                PageSize = pageSize
+                PageSize = pageSize,
+                Server = criteria.Server
             });
         }
         #endregion
 
         #region Sql Agent Log Management
         [HttpGet]
-        public ActionResult AgentLogManagement(string serverIp)
+        public ActionResult AgentLogManagement(string server)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
                 .FromDate(DateTime.Now)
                 .ToDate(DateTime.Now)
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
@@ -304,7 +306,8 @@ namespace Fanex.Maintenance.Controller
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = 0,
-                PageSize = 100
+                PageSize = 100,
+                Server = server
             });
         }
 
@@ -328,7 +331,8 @@ namespace Fanex.Maintenance.Controller
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = pageIndex,
-                PageSize = pageSize
+                PageSize = pageSize,
+                Server = criteria.Server
             });
         }
         #endregion

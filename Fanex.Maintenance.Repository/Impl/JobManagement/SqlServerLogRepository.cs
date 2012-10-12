@@ -45,7 +45,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
                 if (!string.IsNullOrEmpty(serverIp))
                 {
-                    return Fetch<SqlServerLog>(sqlServerLogCriteria, serverIp, mapObjectFunc);
+                    IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(sqlServerLogCriteria, serverIp, mapObjectFunc);
+                    serverLogs.ForEach(serverLog =>
+                    {
+                        serverLog.ServerIp = serverIp;
+                    });
+                    return serverLogs;
                 }
             }
             catch (Exception ex)
@@ -79,7 +84,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
                 if (!string.IsNullOrEmpty(serverIp))
                 {
-                    return Fetch<SqlServerLog>(sqlAgentLogCriteria, serverIp, mapObjectFunc);
+                    IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(sqlAgentLogCriteria, serverIp, mapObjectFunc);
+                    serverLogs.ForEach(serverLog =>
+                    {
+                        serverLog.ServerIp = serverIp;
+                    });
+                    return serverLogs;
                 }
             }
             catch (Exception ex)
