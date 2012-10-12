@@ -111,15 +111,17 @@
 
         $('.rootServer').live('click', function () {
 
-            var liParent = $(this).parents('li');
-            if (liParent.hasClass('jstree-closed')) {
-                liParent.removeClass('jstree-closed');
-                liParent.addClass('jstree-open');
-            }
-            else {
-                liParent.removeClass('jstree-open');
-                liParent.addClass('jstree-closed');
-            }
+            //var liParent = $(this).parents('li');
+            var liChildren = $(this).parent().find("ul");
+            liChildren.toggle("slow");
+            //            if (liParent.hasClass('jstree-closed')) {
+            //                liParent.removeClass('jstree-closed');
+            //                liParent.addClass('jstree-open');
+            //            }
+            //            else {
+            //                liParent.removeClass('jstree-open');
+            //                liParent.addClass('jstree-closed');
+            //            }
         });
     });
 </script>
