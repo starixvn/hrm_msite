@@ -18,26 +18,23 @@ var SqlServerLogManagement = function ($) {
             $("#From").val(SqlServerLogManagement.dateFrom);
             $("#To").val(SqlServerLogManagement.dateTo);
 
-            $("#From").datepicker({
+            var dates = $("#From, #To").datepicker({
                 changeMonth: true,
                 numberOfMonths: 1,
+                dateFormat: "MM dd,yy",
                 showOn: "button",
                 buttonImage: SqlServerLogManagement.buttonImage,
                 buttonImageOnly: true,
-                dateFormat: "mm/dd/yy"
+                onSelect: function (selectedDate) {
+                    var option = this.id == "From" ? "minDate" : "maxDate",
+					instance = $(this).data("datepicker"),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings);
+                    dates.not(this).datepicker("option", option, date);
+                }
             });
-
-            $("#To").datepicker({
-                changeMonth: true,
-                numberOfMonths: 1,
-                showOn: "button",
-                buttonImage: SqlServerLogManagement.buttonImage,
-                buttonImageOnly: true,
-                dateFormat: "mm/dd/yy"
-            });
-
-            $("img.ui-datepicker-trigger").addClass("datepickerpostion");
-
         },
         OnNextPage: function (moveIndex) {
             var currentIndex = parseInt($('#PageIndex').val());

@@ -31,25 +31,23 @@ var ScheduleManagementPage = function ($) {
             $("#From").val(ScheduleManagementPage.dateFrom);
             $("#To").val(ScheduleManagementPage.dateTo);
 
-            $("#From").datepicker({
+            var dates = $("#From, #To").datepicker({
                 changeMonth: true,
                 numberOfMonths: 1,
+                dateFormat: "MM dd,yy",
                 showOn: "button",
                 buttonImage: ScheduleManagementPage.buttonImage,
                 buttonImageOnly: true,
-                dateFormat: "mm/dd/yy"
+                onSelect: function (selectedDate) {
+                    var option = this.id == "From" ? "minDate" : "maxDate",
+					instance = $(this).data("datepicker"),
+					date = $.datepicker.parseDate(
+						instance.settings.dateFormat ||
+						$.datepicker._defaults.dateFormat,
+						selectedDate, instance.settings);
+                    dates.not(this).datepicker("option", option, date);
+                }
             });
-
-            $("#To").datepicker({
-                changeMonth: true,
-                numberOfMonths: 1,
-                showOn: "button",
-                buttonImage: ScheduleManagementPage.buttonImage,
-                buttonImageOnly: true,
-                dateFormat: "mm/dd/yy"
-            });
-
-            $("img.ui-datepicker-trigger").addClass("datepickerpostion");
         }
     };
 
