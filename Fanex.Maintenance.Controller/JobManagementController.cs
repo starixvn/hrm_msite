@@ -59,8 +59,8 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListServer = GetServer();
             ViewBag.ListSchedule = _scheduleService.WithServer(server)
                 .GetSchedules();
-            ViewBag.DateFrom = DateTime.Now.ToString("MM/dd/yyyy");
-            ViewBag.DateTo = DateTime.Now.ToString("MM/dd/yyyy");
+            ViewBag.DateFrom = DateTime.Now.ToString("MMMM dd, yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MMMM dd, yyyy");
 
             return View(new GetAllScheduleCriteria
                 {
@@ -80,8 +80,8 @@ namespace Fanex.Maintenance.Controller
             getAllScheduleCriteria.From = getAllScheduleCriteria.From <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.From;
             getAllScheduleCriteria.To = getAllScheduleCriteria.To <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.To;
 
-            ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MM/dd/yyyy");
-            ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MM/dd/yyyy");
+            ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MMMM dd, yyyy");
+            ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MMMM dd, yyyy");
 
             ViewBag.ListSchedule = _scheduleService.WithScheduleName(getAllScheduleCriteria.Schedule_Name)
                 .WithServer(getAllScheduleCriteria.Server)
