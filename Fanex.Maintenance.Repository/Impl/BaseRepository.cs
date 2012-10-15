@@ -16,6 +16,7 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.Data;
     using Fanex.Maintenance.Core.Helper;
     using Fanex.NAP.Framework.Data;
+using System.Collections;
 
     /// <summary>
     /// TODO: Update summary.
@@ -109,6 +110,29 @@ namespace Fanex.Maintenance.Repository.Impl
                 }
             }
             return listObject;
+        }
+
+        /// <summary>
+        /// Execute command to Db
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
+        public virtual Hashtable ExecuteCommand(ICriteria criteria, string serverIp)
+        {
+             //// new dbsetting from server name and setting key
+            DbSetting setting = new DbSetting
+            {
+                //// get connection string from servername
+                ConnectionString = SectionHelper.GetConnectionStringFromServerIp(serverIp),
+                SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
+            };
+
+            using (var db = new ObjectDb(setting))
+            {
+                db.ExecuteNonQuery(criteria.GetSpParams());
+                return db.GetOuputParams();
+            }
         }
     }
 }

@@ -27,6 +27,86 @@ var JobManagementPage = function ($) {
                     NAP.handleAjaxError(xhr, status, err);
                 }
             });
+        },
+        StartJob: function (server, jobName) {
+            $.ajax({
+                url: NAP.resolveClientUrl("JobManagement/StartJob"),
+                data: { server: server, jobName: jobName },
+                type: 'POST',
+                dataType: 'JSON',
+                cache: false,
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    NAP.loadingBox.close();
+                },
+                success: function (result) {
+                    if (result.Status.IsSuccessful) {
+                        NAP.headlineMsgBox.showInfo("Start Job " + jobName + " Successfully !", { closeBtn: false });
+                        setTimeout(function () {
+                            JobManagementPage.UpdateJobInfo(server, jobName);
+                        }, 3000);
+                    }
+                    else {
+                        NAP.headlineMsgBox.showInfo("Start Job " + jobName + " Fail !<br />Message: " + result.Status.Message, { closeBtn: false });
+                    }
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
+        },
+        StopJob: function (server, jobName) {
+            $.ajax({
+                url: NAP.resolveClientUrl("JobManagement/StopJob"),
+                data: { server: server, jobName: jobName },
+                type: 'POST',
+                dataType: 'JSON',
+                cache: false,
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    NAP.loadingBox.close();
+                },
+                success: function (result) {
+                    if (result.Status.IsSuccessful) {
+                        NAP.headlineMsgBox.showInfo("Stop Job " + jobName + " Successfully !", { closeBtn: false });
+                        setTimeout(function () {
+                            JobManagementPage.UpdateJobInfo(server, jobName);
+                        }, 3000);
+                    }
+                    else {
+                        NAP.headlineMsgBox.showInfo("Stop Job " + jobName + " Fail !<br />Message: " + result.Status.Message, { closeBtn: false });
+                    }
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
+        },
+        UpdateJobInfo: function (server, jobName) {
+            $.ajax({
+                url: NAP.resolveClientUrl("JobManagement/GetJob"),
+                data: { server: server, jobName: jobName },
+                type: 'POST',
+                dataType: 'JSON',
+                cache: false,
+                beforeSend: function () {
+                },
+                complete: function () {
+                },
+                success: function (result) {
+                    var jobTR = $("#" + result.JobUpdated.ServerIp + "_" + result.JobUpdated.Job.Name);
+                    jobTR.find("td.executestatus").html(result.ExecuteStatus);
+                    jobTR.find("td.lastrundate").html(result.LastRunDate);
+                    jobTR.find("td.nextrundate").html(result.NextRunDate);
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
         }
     };
 

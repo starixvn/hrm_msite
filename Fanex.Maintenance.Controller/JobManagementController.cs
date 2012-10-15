@@ -22,6 +22,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Domain;
     using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Core;
 
     /// <summary>zz
     /// TODO: Update summary.
@@ -153,6 +154,56 @@ namespace Fanex.Maintenance.Controller
             return View(criteria);
         }
 
+        [HttpPost]
+        public JsonResult StartJob(string server, string jobName)
+        {
+            CommandResult commandResult = _jobService.FromServer(server)
+                .WithJob(jobName)
+                .StartJob();
+            
+            return Json(new
+            {
+                Status = commandResult
+            });
+        }
+
+        [HttpPost]
+        public JsonResult StopJob(string server, string jobName)
+        {
+            CommandResult commandResult = _jobService.FromServer(server)
+                .WithJob(jobName)
+                .StopJob();
+            return Json(new
+            {
+                Status = commandResult
+            });
+        }
+
+        [HttpPost]
+        public JsonResult GetJob(string server, string jobName)
+        {
+            JobSchedule jobSchedule = _jobService.FromServer(server)
+                .WithJob(jobName)
+                .GetJobs()
+                .FirstOrDefault();
+            string executeStatus = string.Empty;
+            string lastRunDate = string.Empty;
+            string nextRunDate = string.Empty;
+            if (jobSchedule != null)
+            {
+                executeStatus = jobSchedule.ExecuteStatus.ToExecutionString().ToHtmlString();
+                lastRunDate = jobSchedule.LastRunDate == 0 ? ViewResource.N_A : jobSchedule.LastRunDate.ToFullDateString(jobSchedule.LastRunTime).ToHtmlString();
+                nextRunDate = jobSchedule.NextRunDate == 0 ? ViewResource.N_A : jobSchedule.NextRunDate.ToFullDateString(jobSchedule.NextRunTime).ToHtmlString();
+                jobSchedule.ServerIp = jobSchedule.ServerIp.Replace('.', '_');
+            }
+            return Json(new
+            {
+                JobUpdated = jobSchedule,
+                ExecuteStatus = executeStatus,
+                LastRunDate = lastRunDate,
+                NextRunDate = nextRunDate
+            });
+        }
 
         #endregion
 

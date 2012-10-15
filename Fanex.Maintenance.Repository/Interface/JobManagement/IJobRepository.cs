@@ -12,6 +12,7 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     using System.Collections.Generic;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.NAP.Framework.Data;
+    using System.Collections;
 
     /// <summary>
     /// TODO: Update summary.
@@ -21,5 +22,9 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
         IEnumerable<JobSchedule> GetAllJob(ICriteria criteria, string serverName);
 
         IEnumerable<JobLog> GetJobLog(ICriteria criteria, string serverName);
+
+        Hashtable StartJob(ICriteria criteria, string serverIp);
+
+        Hashtable StopJob(ICriteria criteria, string serverIp);
     }
 }

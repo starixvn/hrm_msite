@@ -23,6 +23,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using System.Globalization;
     using System.Data;
     using Fanex.NAP.Framework.Data;
+    using System.Collections;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -87,7 +88,6 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             }
         }
 
-
         public IEnumerable<JobLog> GetJobLog(ICriteria criteria, string serverIp)
         {
             try
@@ -136,6 +136,24 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             {
                 throw ex;
             }
+        }
+
+        public Hashtable StartJob(ICriteria criteria, string serverIp)
+        {
+            if (criteria.IsValid())
+            {
+                return ExecuteCommand(criteria, serverIp);
+            }
+            return null;
+        }
+
+        public Hashtable StopJob(ICriteria criteria, string serverIp)
+        {
+            if (criteria.IsValid())
+            {
+                return ExecuteCommand(criteria, serverIp);
+            }
+            return null;
         }
     }
 }

@@ -53,6 +53,9 @@
     <Compile Include="Job\GetJobHistoryCriteria.cs" />
     <Compile Include="Job\GetListJobCriteria.cs" />
     <Compile Include="Job\GetSqlServerLogCriteria.cs" />
+    <Compile Include="Job\ServiceControlCriteria.cs" />
+    <Compile Include="Job\StartJobCriteria.cs" />
+    <Compile Include="Job\StopJobCriteria.cs" />
     <Compile Include="Log\GetAllCategoryCritria.cs" />
     <Compile Include="DatabaseReport\GetCreditDataToValidateCriteria.cs" />
     <Compile Include="DatabaseReport\GetBalanceUpDayCriteria.cs" />

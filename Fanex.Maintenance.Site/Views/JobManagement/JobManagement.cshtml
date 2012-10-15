@@ -130,21 +130,26 @@
             foreach (var item in lisJob)
             {
                 string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                string trId = item.ServerIp.Replace('.', '_') + "_" + item.Job.Name.Replace('.', '_');
+                string startJobId = "startJob_" + trId;
+                string stopJobId = "stopJob_" + trId;
+               
+                
                 i++;
-            <tr @Html.Raw(rowCss)>
+            <tr @Html.Raw(rowCss) id="@trId">
                 <td class="align-center">
                     @(i)
                 </td>
-                 <td>
+                 <td class="align-center">
                   @item.ServerIp 
                 </td>
                 <td>
                     @item.Job.Name
                 </td>
-                <td class="align-center">
+                <td class="align-center executestatus">
                     @item.ExecuteStatus.ToExecutionString()
                 </td> 
-                <td>
+                <td class="align-center lastrundate">
                     @if (item.LastRunDate != 0)
                     {
                         @Html.Raw(item.LastRunDate.ToFullDateString(item.LastRunTime))
@@ -154,7 +159,7 @@
                         @ViewResource.N_A
                     }
                 </td>
-                <td>
+                <td class="align-center nextrundate">
                    @if (item.NextRunDate != 0)
                    {
                         @Html.Raw(item.NextRunDate.ToFullDateString(item.NextRunTime))
@@ -164,7 +169,7 @@
                       @ViewResource.N_A
                    }
                 </td>               
-                <td>
+                <td class="align-center">
                     @item.Job.DateModified.ToFullDateString()
                 </td>               
                               
@@ -188,6 +193,8 @@
                                         , new { @class = "dd-edit" })
                                 </li>
                                 <li><a href="#" class="dd-site">View schedule '@item.Job.Name'</a></li>
+                                <li><a href="#" class="dd-chgpwd @startJobId" onclick="JobManagementPage.StartJob('@item.ServerIp','@item.Job.Name');">Start Job</a></li>
+                                <li><a href="#" class="dd-chgpwd @stopJobId" onclick="JobManagementPage.StopJob('@item.ServerIp','@item.Job.Name');">Stop Job</a></li>
                                 @*<li><a href="#" class="dd-site">Run</a></li>
                                 <li><a href="#" class="dd-site">Copy to</a></li>*@
                             </ul>

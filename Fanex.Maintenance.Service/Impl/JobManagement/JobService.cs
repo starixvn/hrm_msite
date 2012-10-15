@@ -22,6 +22,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Domain;
     using Fanex.Logging;
+    using System.Collections;
+    using System.Threading;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -45,6 +47,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         private Guid _jobId;
         private int _startRunDate;
         private int _endRunDate;
+        private string _stepName;
         #endregion
 
         #region Ctor
@@ -143,6 +146,18 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             string date = ((DateTime)endRunDate).ToString("yyyyMMdd");
             this._endRunDate = Convert.ToInt32(date);
+            return this;
+        }
+
+        public IJobService WithJobId(string guid)
+        {
+            this._jobId = new Guid(guid);
+            return this;
+        }
+
+        public IJobService WithStepName(string stepName)
+        {
+            this._stepName = stepName;
             return this;
         }
 
@@ -246,6 +261,68 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 Logger.Log.Error(ex.Message, ex);
             }
             return new List<JobSchedule>();
+        }
+
+        /// <summary>
+        /// Start Job
+        /// </summary>
+        /// <returns></returns>
+        public CommandResult StartJob()
+        {
+            StartJobCriteria startJobCriteria = new StartJobCriteria
+            {
+                Job_Name = this._jobName,
+                Step_Name = this._stepName
+            };
+
+            CommandResult commandResult = new CommandResult
+            {
+                Code = 0,
+                Message = "Start Job successfully!"
+            };
+
+            try
+            {
+                Hashtable outputParams = _jobRepository.StartJob(startJobCriteria, this._server);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+                commandResult.Code = 1000;
+                commandResult.Message = ex.Message;
+            }
+            return commandResult;
+        }
+
+        /// <summary>
+        /// Stop Job
+        /// </summary>
+        /// <returns></returns>
+        public CommandResult StopJob()
+        {
+            StopJobCriteria stopJobCriteria = new StopJobCriteria
+            {
+                Job_Name = this._jobName
+            };
+
+            CommandResult commandResult = new CommandResult
+            {
+                Code = 0,
+                Message = "Stop Job successfully!"
+            };
+
+            try
+            {
+                Hashtable outputParams = _jobRepository.StartJob(stopJobCriteria, this._server);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+                commandResult.Code = 1000;
+                commandResult.Message = ex.Message;
+            }
+
+            return commandResult;
         }
     }
 }

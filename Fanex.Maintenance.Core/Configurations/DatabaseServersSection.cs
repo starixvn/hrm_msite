@@ -144,5 +144,8 @@ namespace Fanex.Maintenance.Core.Configurations
                 this["Plain"] = value;
             }
         }
+
+        //// These property below not in config file
+        public int SqlServerAgentStatus { get; set; }
     }
 }

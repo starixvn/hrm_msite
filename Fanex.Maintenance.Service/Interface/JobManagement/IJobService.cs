@@ -38,8 +38,16 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
 
         IJobService WithEndRunDate(DateTime? endRunDate);
 
+        IJobService WithJobId(string guid);
+
+        IJobService WithStepName(string stepName);
+
         IEnumerable<JobSchedule> GetJobs();
 
         IEnumerable<JobLog> GetJobLogs();
+
+        CommandResult StartJob();
+
+        CommandResult StopJob();
     }
 }
