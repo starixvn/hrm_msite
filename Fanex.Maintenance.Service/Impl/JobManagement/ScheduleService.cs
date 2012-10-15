@@ -24,6 +24,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
     using Fanex.Maintenance.Core.Helper;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// TODO: Update summary.
@@ -138,6 +139,19 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return this;
         }
 
+
+        /// <summary>
+        /// Search Schedule with Date
+        /// </summary>
+        /// <param name="searchDateType">Search Date Type</param>
+        /// <returns></returns>
+        public IScheduleService WithSearchDateType(int? searchDateType)
+        {
+            this.SearchDateType = searchDateType != null ? (int)searchDateType : 0;
+
+            return this;
+        }
+
         /// <summary>
         /// Get Schedule with filtered
         /// </summary>
@@ -164,54 +178,25 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     {
                         schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, server.ServerIp));
                     }
+                    //Task<IEnumerable<ScheduleDetail>>[] arrayTaskGetSchedule = new Task<IEnumerable<ScheduleDetail>>[DatabaseServersSection.Instance.Servers.Count];
+                    //int indexTask = 0;
+                    //foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+                    //{
+                    //    arrayTaskGetSchedule[indexTask] = Task<IEnumerable<ScheduleDetail>>.Factory.StartNew(() =>
+                    //        {
+                    //            return _scheduleRepository.GetAllSchedule(getAllSchedule, server.ServerIp);
+                    //        });
+                    //    indexTask++;
+                    //}
+                    //Task.WaitAll(arrayTaskGetSchedule);
+                    //foreach (Task<IEnumerable<ScheduleDetail>> taskGetSchedule in arrayTaskGetSchedule)
+                    //{
+                    //    schedules.AddRange(taskGetSchedule.Result.ToList());
+                    //}
                 }
 
                 //// Search from result list
-                schedules = schedules.Where<ScheduleDetail>((schedule) =>
-                    {
-                        bool choose = true;
-                        if (FreqType != 0 && FreqType != schedule.FreqType)
-                        {
-                            choose = false;
-                        }
-
-                        if (FreSubType != 0 && FreSubType != schedule.FreqSubdayType)
-                        {
-                            choose = false;
-                        }
-
-                        //// Search with Date Type
-                        switch (SearchDateType)
-                        {
-                            case (int)SearchDate.All:
-                                //// Search None
-                                break;
-                            case (int)SearchDate.StartDate:
-                                //// Search Active Start Date
-                                if (FromDate == null
-                                    || ToDate == null
-                                    || schedule.ActiveStartDate < FromDate
-                                    || schedule.ActiveStartDate > ToDate)
-                                {
-                                    choose = false;
-                                }
-
-                                break;
-                            case (int)SearchDate.EndDate:
-                                //// Search Active End Date
-                                if (FromDate == null
-                                    || ToDate == null
-                                    || schedule.ActiveEndDate < FromDate
-                                    || schedule.ActiveEndDate > ToDate)
-                                {
-                                    choose = false;
-                                }
-
-                                break;
-                        }
-
-                        return choose;
-                    }).ToList();
+                schedules = schedules.Where<ScheduleDetail>(FilterSchedule).ToList();
 
                 //// Format Data To Show on View
                 schedules.ForEach((schedule) =>
@@ -229,15 +214,54 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Search Schedule with Date
+        /// Filter schedule with conditions
         /// </summary>
-        /// <param name="searchDateType">Search Date Type</param>
-        /// <returns></returns>
-        public IScheduleService WithSearchDateType(int? searchDateType)
+        /// <param name="schedule">Schedule need be filtered</param>
+        /// <returns>Satisfy or not</returns>
+        private bool FilterSchedule(ScheduleDetail schedule)
         {
-            this.SearchDateType = searchDateType != null ? (int)searchDateType : 0;
+            bool choose = true;
+            if (FreqType != 0 && FreqType != schedule.FreqType)
+            {
+                choose = false;
+            }
 
-            return this;
+            if (FreSubType != 0 && FreSubType != schedule.FreqSubdayType)
+            {
+                choose = false;
+            }
+
+            //// Search with Date Type
+            switch (SearchDateType)
+            {
+                case (int)SearchDate.All:
+                    //// Search None
+                    break;
+                case (int)SearchDate.StartDate:
+                    //// Search Active Start Date
+                    if (FromDate == null
+                        || ToDate == null
+                        || schedule.ActiveStartDate < FromDate
+                        || schedule.ActiveStartDate > ToDate)
+                    {
+                        choose = false;
+                    }
+
+                    break;
+                case (int)SearchDate.EndDate:
+                    //// Search Active End Date
+                    if (FromDate == null
+                        || ToDate == null
+                        || schedule.ActiveEndDate < FromDate
+                        || schedule.ActiveEndDate > ToDate)
+                    {
+                        choose = false;
+                    }
+
+                    break;
+            }
+
+            return choose;
         }
 
         /// <summary>

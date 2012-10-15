@@ -2,7 +2,7 @@
 @model GetListJobCriteria
 @{
     ViewBag.Title = Model.Job_Name;
-    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";    
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
     var lisJobLog = ViewBag.ListLogJob != null ? (List<JobLog>)ViewBag.ListLogJob : new List<JobLog>();
 }
 @section Head {
@@ -172,7 +172,7 @@
 </table>
 </article>
 </div>
-</div>
+</section>
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
 }

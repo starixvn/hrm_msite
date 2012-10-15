@@ -12,7 +12,11 @@
 }
 <section id="secondary_bar">	
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.html">Website Admin</a> <div class="breadcrumb_divider"></div> <a class="current">Dashboard</a></article>
+			<article class="breadcrumbs">
+            <a href="index.html">@Model.Server</a>
+             <div class="breadcrumb_divider"></div>
+              <a class="current">@ViewResource.ScheduleManagement</a>
+              </article>
 		</div>
 
 </section>
@@ -107,7 +111,7 @@
         </div>             	       		   
     </section>
 }
-<article class="module width_full">
+<article class="module width_full" style="overflow: auto;">
 <table class="tablesorter">
     <thead>
         <tr>
@@ -203,6 +207,7 @@
 </table>
 </article>
 </div>
+</section>
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
