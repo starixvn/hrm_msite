@@ -98,14 +98,14 @@
             <th>
                 #
             </th>
-             <th>
-                @ViewResource.Server
-            </th>
             <th>
                 @ViewResource.Job
             </th>
+             <th>
+                @ViewResource.Server
+            </th>            
             <th>
-                @ViewResource.Current_Execution_Status
+                @ViewResource.Executing
             </th>
              <th>
                 @ViewResource.Last_Run_Date
@@ -113,9 +113,9 @@
             <th>
                 @ViewResource.Next_Run_Date
             </th>
-            <th>
+            @*<th>
                 @ViewResource.Date_Modified
-            </th>                     
+            </th>      *@               
             <th>
                 @ViewResource.Enabled
             </th>
@@ -140,12 +140,12 @@
                 <td class="align-center">
                     @(i)
                 </td>
-                 <td class="align-center">
-                  @item.ServerIp 
-                </td>
                 <td>
                     @item.Job.Name
                 </td>
+                 <td class="align-center">
+                  @item.ServerIp 
+                </td>                
                 <td class="align-center executestatus">
                     @item.ExecuteStatus.ToExecutionString()
                 </td> 
@@ -169,9 +169,9 @@
                       @ViewResource.N_A
                    }
                 </td>               
-                <td class="align-center">
+              @*  <td class="align-center">
                     @item.Job.DateModified.ToFullDateString()
-                </td>               
+                </td>     *@          
                               
                 <td class="align-center">
                     @if (item.Job.Enable == 1)
@@ -192,7 +192,7 @@
                                         , new { job = item.Job.Name, server = item.ServerIp }
                                         , new { @class = "dd-edit" })
                                 </li>
-                                <li><a href="#" class="dd-site">View schedule '@item.Job.Name'</a></li>
+                              @*  <li><a href="#" class="dd-site">View schedule '@item.Job.Name'</a></li>*@
                                 <li><a href="#" class="dd-chgpwd @startJobId" onclick="JobManagementPage.StartJob('@item.ServerIp','@item.Job.Name');">Start Job</a></li>
                                 <li><a href="#" class="dd-chgpwd @stopJobId" onclick="JobManagementPage.StopJob('@item.ServerIp','@item.Job.Name');">Stop Job</a></li>
                                 @*<li><a href="#" class="dd-site">Run</a></li>
