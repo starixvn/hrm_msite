@@ -63,8 +63,8 @@ namespace Fanex.Maintenance.Core.Web
             DateTime date = DateTime.ParseExact(strTime, 
                 "HHmmss", 
                 CultureInfo.InvariantCulture, 
-                DateTimeStyles.None);
-
+                DateTimeStyles.None);           
+           
             return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='time'>{1}</span></span>",
                 value.ToString(dateFormat), 
                 date.ToString(timeFormat)));

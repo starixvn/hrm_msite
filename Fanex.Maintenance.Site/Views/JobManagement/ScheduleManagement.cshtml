@@ -25,6 +25,14 @@
 @using (Html.BeginForm())
 { 
     <section id="filter-bar">    
+        <div class="filter-form">	
+                <div class="lbl-field">
+			        @Html.LabelFor(m => m.Server)
+		        </div>   
+                <div class="edit-field">	
+                    @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
+                </div>
+        </div>   
          <div class="filter-form">	
             <div class="lbl-field">
 			    @ViewResource.ScheduleName
@@ -32,15 +40,7 @@
             <div class="edit-field width-auto">	
                 @Html.TextBoxFor(m => m.Schedule_Name)                
             </div>
-        </div>     
-		<div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.Server)
-		    </div>   
-            <div class="edit-field">	
-                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
-            </div>
-        </div>        
+        </div>     		     
         <div class="filter-form">	                              
             <div class="lbl-field ">
 			    @Html.LabelFor(m => m.FreqType)
@@ -137,7 +137,7 @@
                 @ViewResource.ScheduleAcEndDate
             </th>
             <th>
-                @ViewResource.ScheduleTotalJob
+                @ViewResource.Job
             </th>
             <th>
                 @ViewResource.Enabled
@@ -175,7 +175,14 @@
                     @schedule.ActiveStartDate.ToFullDateWithTimeAdded(schedule.ActiveStartTime)
                 </td>
                 <td class="width-100">
-                    @schedule.ActiveEndDate.ToDateString()
+                    @if (schedule.ActiveEndDate.Equals(DateTime.MaxValue))
+                    {
+                        @ViewResource.N_A
+                    }
+                    else
+                    {
+                        @schedule.ActiveEndDate.ToDateString()                    
+                    }                    
                 </td>
                 <td>
                     @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "JobManagement",
