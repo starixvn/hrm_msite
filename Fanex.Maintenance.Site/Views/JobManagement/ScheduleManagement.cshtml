@@ -3,7 +3,7 @@
 @model GetAllScheduleCriteria
 @{
     ViewBag.Title = "Schedule Management";
-    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";    
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
     var schedules = ViewBag.ListSchedule != null ? (IEnumerable<ScheduleDetail>)ViewBag.ListSchedule : new List<ScheduleDetail>();
     
 }
@@ -178,7 +178,12 @@
                     @schedule.ActiveEndDate.ToDateString()
                 </td>
                 <td>
-                    @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "JobManagement", new { server = schedule.ServerIp }, null)
+                    @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "JobManagement",
+                        new
+                        {
+                            server = schedule.ServerIp,
+                            schedule = schedule.Name
+                        }, null)
                 </td>
                 <td>
                  @if (schedule.Enable == 1)
