@@ -202,10 +202,13 @@ namespace Fanex.Maintenance.Controller
         /// <param name="jobName"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult StartJob(string server, string jobName)
+        public JsonResult StartJob(string server, 
+            string jobName, 
+            string stepName)
         {
             CommandResult commandResult = _jobService.FromServer(server)
                 .WithJob(jobName)
+                .WithStepName(stepName)
                 .StartJob();
             
             return Json(new

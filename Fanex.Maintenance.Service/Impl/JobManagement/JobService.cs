@@ -244,7 +244,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <returns></returns>
         public IJobService WithStepName(string stepName)
         {
-            this._stepName = stepName;
+            if (!string.IsNullOrEmpty(stepName))
+            {
+                this._stepName = stepName;
+            }
 
             return this;
         }

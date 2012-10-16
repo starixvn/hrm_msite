@@ -30,7 +30,42 @@ var JobLogManagement = function ($) {
                 }
             });
 
-        }
+        },
+         StartJob: function (server, jobName, stepId, stepName) {
+            var stepMessage = "";
+            if(stepId != '0')
+            {
+                stepMessage = " at Step " + stepName;
+            }
+            $.ajax({
+                url: NAP.resolveClientUrl("JobManagement/StartJob"),
+                data: { 
+                        server: server, 
+                        jobName: jobName, 
+                        stepName: stepId != 0 ? stepName : null 
+                        },
+                type: 'POST',
+                dataType: 'JSON',
+                cache: false,
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    NAP.loadingBox.close();
+                },
+                success: function (result) {
+                    if (result.Status.IsSuccessful) {
+                        NAP.headlineMsgBox.showInfo("Start Job " + jobName + stepMessage + " Successfully !", { closeBtn: false });
+                    }
+                    else {
+                        NAP.headlineMsgBox.showInfo("Start Job " + jobName + stepMessage + " Fail !<br />Message: " + result.Status.Message, { closeBtn: false });
+                    }
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
+        },
     };
 
 } (jQuery);
