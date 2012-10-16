@@ -76,7 +76,7 @@ $(document).ready(function () {
             trNext.toggle();
             trNext = trNext.next();
             console.log(trNext);
-            if (trNext != null) {
+            if (trNext.length>0) {
                 if (trNext.attr('id') != undefined) {
                     isLoop = false;
                 }
