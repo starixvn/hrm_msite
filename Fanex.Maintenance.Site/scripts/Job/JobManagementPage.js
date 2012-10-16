@@ -4,29 +4,37 @@ var JobManagementPage = function ($) {
     return {
 
         GetSchedule: function (server) {
-            $.ajax({
-                url: NAP.resolveClientUrl("JobManagement/GetSchedule"),
-                data: { server: server },
-                type: 'POST',
-                dataType: 'JSON',
-                cache: false,
-                beforeSend: function () {
-                    //                    NAP.loadingBox.show();
-                    $('#Schedule').attr('disabled', 'disabled');
-                },
-                complete: function () {
-                    //                    NAP.loadingBox.close();
-                    $('#Schedule').removeAttr('disabled', 'disabled');
-                },
-                success: function (result) {
-                    $("#Schedule").html("");
-                    $("#Schedule").append("<option value=''>All</option>");
-                    $("#Schedule").append($("#templateSchedule").render(result));
-                },
-                error: function (xhr, status, err) {
-                    NAP.handleAjaxError(xhr, status, err);
-                }
-            });
+            //disabled when server is all
+            if (server == '') {
+                $('#Schedule').attr('disabled', 'disabled');
+            }
+            else {
+                $('#Schedule').removeAttr('disabled', 'disabled');
+
+                $.ajax({
+                    url: NAP.resolveClientUrl("JobManagement/GetSchedule"),
+                    data: { server: server },
+                    type: 'POST',
+                    dataType: 'JSON',
+                    cache: false,
+                    beforeSend: function () {
+                        //                    NAP.loadingBox.show();
+                        $('#Schedule').attr('disabled', 'disabled');
+                    },
+                    complete: function () {
+                        //                    NAP.loadingBox.close();
+                        $('#Schedule').removeAttr('disabled', 'disabled');
+                    },
+                    success: function (result) {
+                        $("#Schedule").html("");
+                        $("#Schedule").append("<option value=''>All</option>");
+                        $("#Schedule").append($("#templateSchedule").render(result));
+                    },
+                    error: function (xhr, status, err) {
+                        NAP.handleAjaxError(xhr, status, err);
+                    }
+                });
+            }
         },
         StartJob: function (server, jobName) {
             $.ajax({
@@ -124,15 +132,7 @@ $(document).ready(function () {
 
     $('#Server').bind('change', function () {
         var server = $(this).val();
-        JobManagementPage.GetSchedule(server);
-
-        //disabled when server is all
-        if (server == '') {
-            $('#Schedule').attr('disabled', 'disabled');
-        }
-        else {
-            $('#Schedule').removeAttr('disabled', 'disabled');
-        }
+        JobManagementPage.GetSchedule(server);        
     });
 
     // #region actions dropdownlist

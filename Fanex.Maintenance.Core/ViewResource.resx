@@ -298,10 +298,10 @@
     <value>Job</value>
   </data>
   <data name="Last_Run_Date" xml:space="preserve">
-    <value>Last Run Date</value>
+    <value>Last Run</value>
   </data>
   <data name="Next_Run_Date" xml:space="preserve">
-    <value>Next Run Date</value>
+    <value>Next Run</value>
   </data>
   <data name="Between_Retries" xml:space="preserve">
     <value>Between retries</value>

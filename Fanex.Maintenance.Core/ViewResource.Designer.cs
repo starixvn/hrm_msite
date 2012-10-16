@@ -601,7 +601,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last Run Date.
+        ///   Looks up a localized string similar to Last Run.
         /// </summary>
         public static string Last_Run_Date {
             get {
@@ -772,7 +772,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Next Run Date.
+        ///   Looks up a localized string similar to Next Run.
         /// </summary>
         public static string Next_Run_Date {
             get {
