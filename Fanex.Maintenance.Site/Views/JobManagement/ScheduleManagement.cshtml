@@ -165,16 +165,16 @@
                 <td class="width-140">
                     @schedule.Name
                 </td>
-                <td class="width-200">
+                <td class="width-180">
                     @schedule.FreqIntervalCombine
                 </td>
-                <td class="width-200">
+                <td class="width-180">
                     @schedule.FreqSubIntervalCombine
                 </td>
-                <td>
-                    @schedule.ActiveStartDate.ToDateString()
+                <td class="width-120">
+                    @schedule.ActiveStartDate.ToFullDateWithTimeAdded(schedule.ActiveStartTime)
                 </td>
-                <td>
+                <td class="width-100">
                     @schedule.ActiveEndDate.ToDateString()
                 </td>
                 <td>
