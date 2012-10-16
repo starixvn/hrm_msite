@@ -18,7 +18,7 @@ namespace Fanex.Maintenance.Criteria.Log
 
     public class GetLogCriteria : CriteriaBase
     {
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         public string Severity { get; set; }
 

@@ -19,7 +19,7 @@ namespace Fanex.Maintenance.Service.Impl
     {
         #region Member
 
-        private int _categoryId;
+        private int? _categoryId;
         private string _severity;
         private DateTime _dateFrom;
         private DateTime _dateTo;
@@ -66,7 +66,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <param name="categoryId"></param>
         /// <param name="severity"></param>
         /// <returns></returns>
-        public LogService With(int categoryId, string severity)
+        public LogService With(int? categoryId, string severity)
         {
             this._categoryId = categoryId;
             this._severity = severity;
@@ -128,7 +128,7 @@ namespace Fanex.Maintenance.Service.Impl
         {
             GetLogCriteria criteria = new GetLogCriteria
             {
-                CategoryId = this._categoryId,
+                CategoryId = this._categoryId != null ? this._categoryId : 0,
                 From = this._dateFrom,
                 To = this._dateTo,
                 Page = this._page,
