@@ -25,25 +25,25 @@
 @using (Html.BeginForm())
 { 
     <section id="filter-bar">    
-        <div class="filter-form">	
+    		<div class="filter-form">	
             <div class="lbl-field">
-			    @ViewResource.ScheduleName
+			    @Html.LabelFor(m => m.Server)
 		    </div>   
+            <div class="edit-field">	
+                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
+            </div>
+        </div>  
+         <div class="filter-form">	
+                <div class="lbl-field">
+			    @ViewResource.ScheduleName
+		        </div>   
             <div class="edit-field width-auto">	
                 @Html.TextBoxFor(m => m.Schedule_Name)                
-            </div>
-        </div> 
-        <div class="filter-form">	
-                <div class="lbl-field">
-			        @Html.LabelFor(m => m.Server)
-		        </div>   
-                <div class="edit-field">	
-                    @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
                 </div>
-        </div>                		     
+        </div>        
         <div class="filter-form">	                              
             <div class="lbl-field ">
-			    @Html.LabelFor(m => m.FreqType)
+			    @ViewResource.FrequentType
 		    </div>
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.FreqType,
@@ -61,7 +61,7 @@
         </div> 
           <div class="filter-form">	                              
             <div class="lbl-field ">
-			    @Html.LabelFor(m => m.FreqSubType)
+			    @ViewResource.FrequentSubType
 		    </div>
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.FreqSubType,
@@ -124,10 +124,10 @@
              <th>
                 @ViewResource.Server
             </th>            
-            <th class="width-200">
+            <th class="width-160">
                 @ViewResource.ScheduleFreq
             </th>
-            <th class="width-200">
+            <th class="width-180">
                 @ViewResource.ScheduleFreqSub
             </th>
             <th>
@@ -142,6 +142,7 @@
             <th>
                 @ViewResource.Enabled
             </th>@*           
+          @* 
             <th>
                 @ViewResource.Edit
             </th>*@
@@ -158,10 +159,11 @@
                 <td class="align-center">
                     @(i)
                 </td>
-                <td>
+               
+                <td class="width-140 align-left">
                     @schedule.Name
                 </td>
-                 <td class="align-center">
+                <td>
                     @schedule.ServerIp
                 </td>                
                 <td >
@@ -174,18 +176,18 @@
                     @schedule.ActiveStartDate.ToFullDateWithTimeAdded(schedule.ActiveStartTime)
                 </td>
                 <td class="align-center">
-                    @if (schedule.ActiveEndDate.ToShortDateString() == DateTime.MaxValue.ToShortDateString())
-                    {
-                        @ViewResource.N_A
-                    }
-                    else
-                    {
+                @if (schedule.ActiveEndDate.Year == 9999)
+                {
+                    @ViewResource.N_A
+                }
+                else
+                {
                         @schedule.ActiveEndDate.ToDateString()                    
-                    }                    
+                }
                 </td>
                 <td class="align-center">
-                @if (schedule.JobCount != 0)
-                { 
+                @if (schedule.JobCount > 0)
+                {
                     @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "JobManagement",
                         new
                         {
@@ -193,8 +195,9 @@
                             schedule = schedule.Name
                         }, null)
                 }
-                else 
+                else
                 {
+                    @: 0
                     @schedule.JobCount
                 }
                 </td>

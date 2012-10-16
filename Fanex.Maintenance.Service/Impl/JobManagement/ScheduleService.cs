@@ -191,21 +191,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     {
                         schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, server.ServerIp));
                     }
-                    //Task<IEnumerable<ScheduleDetail>>[] arrayTaskGetSchedule = new Task<IEnumerable<ScheduleDetail>>[DatabaseServersSection.Instance.Servers.Count];
-                    //int indexTask = 0;
-                    //foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
-                    //{
-                    //    arrayTaskGetSchedule[indexTask] = Task<IEnumerable<ScheduleDetail>>.Factory.StartNew(() =>
-                    //        {
-                    //            return _scheduleRepository.GetAllSchedule(getAllSchedule, server.ServerIp);
-                    //        });
-                    //    indexTask++;
-                    //}
-                    //Task.WaitAll(arrayTaskGetSchedule);
-                    //foreach (Task<IEnumerable<ScheduleDetail>> taskGetSchedule in arrayTaskGetSchedule)
-                    //{
-                    //    schedules.AddRange(taskGetSchedule.Result.ToList());
-                    //}
                 }
 
                 //// Search from result list
@@ -341,7 +326,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     {
                         if (charValue == '1')
                         {
-                            freqIntervalName += Constants.FreqIntervalValues[index] + ",";
+                            freqIntervalName += Constants.FreqIntervalValues[index] + ", ";
                         }
 
                         index++;
