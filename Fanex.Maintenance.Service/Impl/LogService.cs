@@ -22,18 +22,27 @@ namespace Fanex.Maintenance.Service.Impl
     {
         #region Member
 
-        private int? _categoryId;
-        private string _severity;
-        private DateTime _dateFrom;
-        private DateTime _dateTo;
-        private int _page;
-        private int _size;
+        private readonly LogRepository _logRepository = new LogRepository();       
 
-        private readonly LogRepository _logRepository = new LogRepository();
+        #region Ctor
+
+        #region Properties
+
+        private int? _categoryId;
+
+        private string _severity;
+
+        private DateTime _dateFrom;
+
+        private DateTime _dateTo;
+
+        private int _page;
+
+        private int _size;
 
         #endregion Member
 
-        #region Ctor
+        #endregion
 
         /// <summary>
         /// Constructor

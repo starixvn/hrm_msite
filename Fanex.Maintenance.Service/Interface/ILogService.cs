@@ -9,6 +9,9 @@
 
 namespace Fanex.Maintenance.Service.Interface
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ILogService
     {
     }

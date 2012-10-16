@@ -42,7 +42,7 @@ namespace Fanex.Maintenance.Service.Impl
         private readonly DatabaseReportRepository _databaseReportRepository = new DatabaseReportRepository();
 
         //This is string use compary values from 4 tables
-        private static string strCompare = "{0},{1},{2},{3}";        
+        private static string strCompare = "{0},{1},{2},{3}";
 
         #endregion Member
 
@@ -172,7 +172,7 @@ namespace Fanex.Maintenance.Service.Impl
             temp.Turnover.DataDW = SetData(dtDW, false);
 
             var turnover = temp.Turnover;
-            var winLoss = temp.Winloss; 
+            var winLoss = temp.Winloss;
             var betCount = temp.BetCount;
 
             SetBackgroundColor(dtSumwinloss, dtRptLicwinloss, dtRptBetting, dtDW, drawFilter, turnover, winLoss, betCount);
@@ -184,7 +184,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// Method use set data for every block data
         /// 4 blocks : sum win loss, licwinloss, betting and dw
         /// </summary>
-        /// <param name="dt">datatable</param>
+        /// <param name="dt">data table</param>
         /// <param name="isTurnOver">use check is turnover</param>
         /// <returns>string with value setted</returns>
         protected static string SetData(DataTable dt, bool isTurnOver)
@@ -269,7 +269,9 @@ namespace Fanex.Maintenance.Service.Impl
                     }
 
                     if (i == dt.Rows.Count - 1 && j == dt.Columns.Count - 1)
+                    {
                         dataBindContent.NoBorder = "noBorder";
+                    }
 
                     dataBindContent.value = "N/A";
                     dataBindContent.Append();
@@ -287,8 +289,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Method use set background color depend compare values from 4 tables
         /// </summary>
-        /// <param name="dtSumWinloss">table sumwinloss</param>
-        /// <param name="dtRptLicWinloss">table licwinloss</param>
+        /// <param name="dtSumWinloss">table sum win loss</param>
+        /// <param name="dtRptLicWinloss">table lic win loss</param>
         /// <param name="dtRptBetting">table betting</param>
         /// <param name="dtDw">table dw</param>
         /// <param name="drawFilter">draw filter consist 3 values 1,2,3</param>
@@ -325,8 +327,11 @@ namespace Fanex.Maintenance.Service.Impl
         /// <param name="dtDw">Datatable Dw</param>
         /// <param name="drawFilter">draw filter</param>
         /// <returns>array values true or false</returns>
-        public static bool[] CheckValuesTurnOver(DataTable dtSumWinloss, DataTable dtRptLicWinloss,
-                                                 DataTable dtRptBetting, DataTable dtDw, int drawFilter)
+        public static bool[] CheckValuesTurnOver(DataTable dtSumWinloss,
+                                                DataTable dtRptLicWinloss,
+                                                DataTable dtRptBetting,
+                                                DataTable dtDw,
+                                                int drawFilter)
         {
             bool[] chkAllValues = new bool[15];
 
@@ -617,7 +622,7 @@ namespace Fanex.Maintenance.Service.Impl
         #endregion Set background
 
         /// <summary>
-        /// Get usr online daily
+        /// Get user online daily
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
@@ -649,28 +654,28 @@ namespace Fanex.Maintenance.Service.Impl
         /// Generate data table
         /// </summary>
         /// <param name="dtb"></param>
-        /// <param name="RowNumber"></param>
+        /// <param name="rowNumber"></param>
         /// <returns></returns>
-        private static DataTable GenerateDataTable(DataTable dtb, int RowNumber)
+        private static DataTable GenerateDataTable(DataTable dtb, int rowNumber)
         {
             string _datetime = dtb.Rows[0]["logdate"].ToString();
-            for (int i = 0; i < RowNumber; i++)
+            for (int i = 0; i < rowNumber; i++)
             {
                 string _date = _datetime.Substring(0, _datetime.IndexOf(" ")).Trim();
                 string _hour = _datetime.Substring(_datetime.IndexOf(" "), _datetime.Length - _datetime.IndexOf(" ")).Trim();
-                string[] Arr = _hour.Split(':');
+                string[] arr = _hour.Split(':');
                 DataRow dr = dtb.NewRow();
-                if (Convert.ToInt32(Arr[1]) == 60)
+                if (Convert.ToInt32(arr[1]) == 60)
                 {
-                    int myhour = Convert.ToInt32(Arr[0]) + AppSetting.Minute;
-                    int myminute = Convert.ToInt32(Arr[1]) / 60;
+                    int myhour = Convert.ToInt32(arr[0]) + AppSetting.Minute;
+                    int myminute = Convert.ToInt32(arr[1]) / 60;
                     _datetime = _date + " " + (myhour < 10 ? "0" + myhour.ToString() : myhour.ToString()) + ":" + (myminute < 10 ? "0" + myminute.ToString() : myminute.ToString());
                 }
                 else
                 {
-                    int _minute = Convert.ToInt32(Arr[1]) + AppSetting.Minute;
+                    int _minute = Convert.ToInt32(arr[1]) + AppSetting.Minute;
 
-                    _datetime = _date + " " + Arr[0] + ":" + (_minute < 10 ? "0" + _minute.ToString() : _minute.ToString());
+                    _datetime = _date + " " + arr[0] + ":" + (_minute < 10 ? "0" + _minute.ToString() : _minute.ToString());
                 }
 
                 dr[0] = _datetime;
@@ -755,7 +760,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Generate templae user list
+        /// Generate template user list
         /// </summary>
         /// <param name="data"></param>
         /// <param name="show"></param>
