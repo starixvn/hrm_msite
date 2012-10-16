@@ -1,4 +1,13 @@
-﻿namespace Fanex.Maintenance.Controller
+﻿// --------------------------------------------------------------------------
+// <copyright file="DatabaseReportController.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Ricky.Nguyen" date="2012.10.16">StyleCop</change>
+// </history>
+
+namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
@@ -6,25 +15,37 @@
     using System.Globalization;
     using System.Web.Mvc;
     using Fanex.Maintenance.Criteria.DatabaseReport;
-    using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
-    using Fanex.Maintenance.Service.Interface;    
+    using Fanex.Maintenance.Service.Interface;
 
+    /// <summary>
+    /// Database report controller
+    /// </summary>
     public class DatabaseReportController : Controller
     {
         #region Member
 
+        /// <summary>
+        /// Database report service
+        /// </summary>
         private readonly IDatabaseReportService _databaseReportService;
 
         #endregion Member
 
         #region Ctor
 
+        /// <summary>
+        /// Parameterless constructor
+        /// </summary>
         public DatabaseReportController()
             : this(null)
         {
         }
 
+        /// <summary>
+        /// Constuctor with service input
+        /// </summary>
+        /// <param name="databaseReportService"></param>
         public DatabaseReportController(IDatabaseReportService databaseReportService)
         {
             _databaseReportService = databaseReportService ?? new DatabaseReportService();
@@ -32,12 +53,16 @@
 
         #endregion Ctor
 
+        /// <summary>
+        /// Data Integrity Return view
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult DataIntegrity()
         {
             var criteria = new GetBalanceUpDayCriteria();
-            DataTable dtBalanceUpDay = _databaseReportService.GetBalanceUpDay(criteria);
-            var moveBetsDay = (DateTime)dtBalanceUpDay.Rows[0][1];
+            DataTable balanceUpDayTable = _databaseReportService.GetBalanceUpDay(criteria);
+            var moveBetsDay = (DateTime)balanceUpDayTable.Rows[0][1];
             var sinceLastMonth = new DateTime(moveBetsDay.AddMonths(-1).Year, moveBetsDay.AddMonths(-1).Month, 1);
             ViewBag.MinDate = string.Format("{0:dd/MM/yyyy}", sinceLastMonth);
             ViewBag.MaxDate = string.Format("{0:dd/MM/yyyy}", moveBetsDay);
@@ -71,12 +96,17 @@
             });
         }
 
+        /// <summary>
+        /// Data Integrity Post return
+        /// </summary>
+        /// <param name="modelView"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult DataIntegrity(DataIntegrityViewModel modelView)
         {
             var criteria = new GetBalanceUpDayCriteria();
-            DataTable dtBalanceUpDay = _databaseReportService.GetBalanceUpDay(criteria);
-            var moveBetsDay = (DateTime)dtBalanceUpDay.Rows[0][1];
+            DataTable balanceUpDayTable = _databaseReportService.GetBalanceUpDay(criteria);
+            var moveBetsDay = (DateTime)balanceUpDayTable.Rows[0][1];
             var sinceLastMonth = new DateTime(moveBetsDay.AddMonths(-1).Year, moveBetsDay.AddMonths(-1).Month, 1);
             ViewBag.MinDate = string.Format("{0:dd/MM/yyyy}", sinceLastMonth);
             ViewBag.MaxDate = string.Format("{0:dd/MM/yyyy}", moveBetsDay);
@@ -107,58 +137,87 @@
             return View(modelView);
         }
 
+        /// <summary>
+        /// User Online Daily
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult UserOnlineDaily()
         {
-            DataTable dtUserDaily = _databaseReportService.GetUserOnlineDaily(DateTime.Now);
-            ViewBag.UserDailyData = _databaseReportService.GenerateTemplateUserDaily(dtUserDaily);
+            DataTable userDailyTable = _databaseReportService.GetUserOnlineDaily(DateTime.Now);
+            ViewBag.UserDailyData = _databaseReportService.GenerateTemplateUserDaily(userDailyTable);
             ViewBag.DateNow = DateTime.Now.ToString("dd/MM/yyyy");
             return View();
         }
 
+        /// <summary>
+        /// User Online Dayli by date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UserOnlineDaily(string date)
         {
             DateTime dateTime = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DataTable dtUserDaily = _databaseReportService.GetUserOnlineDaily(dateTime);
-            ViewBag.UserDailyData = _databaseReportService.GenerateTemplateUserDaily(dtUserDaily);
+            DataTable userDailyTable = _databaseReportService.GetUserOnlineDaily(dateTime);
+            ViewBag.UserDailyData = _databaseReportService.GenerateTemplateUserDaily(userDailyTable);
             ViewBag.DateNow = DateTime.Now.ToString("dd/MM/yyyy");
             return View();
         }
 
+        /// <summary>
+        /// User online
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult UserOnline()
         {
-            DataTable dtUserOnline = _databaseReportService.GetUserOnline(30);
-            ViewBag.UserOnlineData = _databaseReportService.GenerateTemplateUser(dtUserOnline, 30);
+            DataTable userOnlineTable = _databaseReportService.GetUserOnline(30);
+            ViewBag.UserOnlineData = _databaseReportService.GenerateTemplateUser(userOnlineTable, 30);
             return View();
         }
 
+        /// <summary>
+        /// Get list of user online with size
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UserOnline(int size)
         {
             if (Request.IsAjaxRequest())
             {
-                DataTable dtUserOnline = _databaseReportService.GetUserOnline(size);
-                return Json(_databaseReportService.GenerateTemplateUser(dtUserOnline, size));
+                DataTable userOnlineTable = _databaseReportService.GetUserOnline(size);
+                return Json(_databaseReportService.GenerateTemplateUser(userOnlineTable, size));
             }
+
             return Json(null);
         }
 
+        /// <summary>
+        /// User online chart report
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult UserOnlineChart()
         {
             return View();
         }
 
+        /// <summary>
+        /// User online chart report with size
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UserOnlineChart(int size)
         {
             if (Request.IsAjaxRequest())
             {
-                DataTable dtUserOnline = _databaseReportService.GetUserOnline(size);
-                return Json(_databaseReportService.GenerateDataChart(dtUserOnline, size));
+                DataTable userOnlineTable = _databaseReportService.GetUserOnline(size);
+                return Json(_databaseReportService.GenerateDataChart(userOnlineTable, size));
             }
+
             return Json(null);
         }
     }

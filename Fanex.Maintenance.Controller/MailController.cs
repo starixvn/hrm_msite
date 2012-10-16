@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
+//   <change who="Ricky.Nguyen" date="2012.10.16">StyleCop</change>
 // </history>
 
 namespace Fanex.Maintenance.Controller
@@ -19,22 +20,35 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Interface;
     using Fanex.Maintenance.Criteria.MailService;
 
+    /// <summary>
+    /// Mail Controller
+    /// </summary>
     [Authorize]
     public class MailController : Controller
     {
         #region Member
 
+        /// <summary>
+        /// Mail Service
+        /// </summary>
         private readonly IMailService _mailServer;
 
         #endregion
 
         #region Ctor
 
+        /// <summary>
+        /// Mail Service Parameterless controller
+        /// </summary>
         public MailController()
             : this(null)
         {
         }
 
+        /// <summary>
+        /// Mail Controller
+        /// </summary>
+        /// <param name="mailService"></param>
         public MailController(IMailService mailService)
         {
             this._mailServer = mailService ?? MailService.Create();
@@ -44,6 +58,9 @@ namespace Fanex.Maintenance.Controller
 
         #region InitData
 
+        /// <summary>
+        /// Init Page Size
+        /// </summary>
         private void InitPageSize()
         {
             List<SelectListItem> listPageSize = new List<SelectListItem>();

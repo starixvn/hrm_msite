@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
+//   <change who="Ricky.Nguyen" date="2012.10.16">Stylecop</change>
 // </history>
 
 namespace Fanex.Maintenance.Controller
@@ -18,23 +19,40 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
 
+    /// <summary>
+    /// Log Controller
+    /// </summary>
     [Authorize]
     public class LogController : Controller
     {
         #region Member
-
+        /// <summary>
+        /// Log Serivce
+        /// </summary>
         private readonly LogService _logService;
+
+        /// <summary>
+        /// Log Category Service
+        /// </summary>
         private readonly LogCategoryService _categoryService;
 
         #endregion Member
 
         #region Ctor
 
+        /// <summary>
+        /// Parameterless Controller
+        /// </summary>
         public LogController()
             : this(null, null)
         {
         }
 
+        /// <summary>
+        /// Log Controller with services defined
+        /// </summary>
+        /// <param name="logService"></param>
+        /// <param name="categoryService"></param>
         public LogController(LogService logService, LogCategoryService categoryService)
         {
             _logService = logService ?? LogService.Create();
@@ -45,6 +63,9 @@ namespace Fanex.Maintenance.Controller
 
         #region Private
 
+        /// <summary>
+        /// Init Page Size
+        /// </summary>
         private void InitPageSize()
         {
             List<SelectListItem> listPageSize = new List<SelectListItem>();
@@ -207,6 +228,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Ajax
 
+        /// <summary>
+        /// Remove Log
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult RemoveLog()
         {
@@ -214,6 +239,7 @@ namespace Fanex.Maintenance.Controller
             {
                 return Json(_logService.From(DateTime.Now.AddDays(-5)).RemoveLogs());
             }
+
             return Json(0);
         }
 
