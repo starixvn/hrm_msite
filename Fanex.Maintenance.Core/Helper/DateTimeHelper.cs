@@ -5,15 +5,12 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Ricky.Nguyen" date="2012.10.12">Created</change>
+//   <change who="Ricky.Nguyen" date="2012.10.16">Stylecop</change>
 // </history>
-
 
 namespace Fanex.Maintenance.Core.Helper
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Globalization;
 
     /// <summary>
@@ -45,7 +42,7 @@ namespace Fanex.Maintenance.Core.Helper
         }
 
         /// <summary>
-        /// Get Full date time string from 
+        /// Get Full date time string from
         /// </summary>
         /// <param name="dateTimeString">dateTime String from Database, it is </param>
         /// <returns></returns>

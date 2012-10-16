@@ -5,8 +5,8 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Ricky.Nguyen" date="2012.10.10">Created</change>
+//   <change who="Ricky.Nguyen" date="2012.10.16">Stylecop</change>
 // </history>
-
 
 namespace Fanex.Maintenance.Core.Web
 {
@@ -20,16 +20,34 @@ namespace Fanex.Maintenance.Core.Web
     /// </summary>
     public static class Constants
     {
+        /// <summary>
+        /// Job Constant
+        /// </summary>
         public const string JOB = "JOB";
 
+        /// <summary>
+        /// Steps Constant
+        /// </summary>
         public const string STEPS = "STEPS";
 
+        /// <summary>
+        /// SCEDULES
+        /// </summary>
         public const string SCEDULES = "SCEDULES";
 
+        /// <summary>
+        /// Targets Constant
+        /// </summary>
         public const string TARGETS = "TARGETS";
 
+        /// <summary>
+        /// Full Constant
+        /// </summary>
         public const string FULL = "FULL";
 
+        /// <summary>
+        /// Freq Interval Values
+        /// </summary>
         public static string[] FreqIntervalValues = new string[]
         {
             "Sunday",
@@ -44,8 +62,6 @@ namespace Fanex.Maintenance.Core.Web
             "Weekend day"
         };
     }
-
-       
 
     /// <summary>
     /// Status job
@@ -121,18 +137,27 @@ namespace Fanex.Maintenance.Core.Web
         EndDate = 2
     }
 
+    /// <summary>
+    /// Step run status
+    /// </summary>
     public enum StepRunStatus
     {
         Success = 1,
         Fail = 0
     }
 
+    /// <summary>
+    /// Server Log Type
+    /// </summary>
     public enum LogType : int
     {
         SqlServerLog = 1,
         SqlAgentLog = 2
     }
 
+    /// <summary>
+    /// Error Type
+    /// </summary>
     public enum ErrorType : int
     {
         Error = 1,
