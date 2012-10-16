@@ -27,16 +27,16 @@
     @Html.HiddenFor(m => m.Server)    
     <section id="filter-bar">    
          <div class="filter-form">	
-            <div class="lbl-field width-auto">
+            <div class="lbl-field">
 			    @Html.LabelFor(m => m.Job_Name)
 		    </div>   
-            <div class="edit-field width-auto">	
+            <div class="edit-field">	
                 @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob
              , new { @class = "chosen" })			                
             </div>
         </div>   
           <div class="filter-form">	                              
-             <div class="lbl-field width-auto ">
+             <div class="lbl-field">
 			    @Html.LabelFor(m => m.Execution_Status)
 		    </div>
             <div class="edit-field">				                
@@ -50,19 +50,19 @@
 		    </div>			  
         </div>   		                        
         <div class="filter-form">	
-            <div class="lbl-field width-auto">
+            <div class="lbl-field">
 			    @Html.LabelFor(m => m.From)
 		    </div>   
-            <div class="edit-field width-auto">	                    
+            <div class="edit-field">	                    
                  @Html.TextBox("From", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
                 @* , new { @style = "width:90px;margin-right:5px;" }) *@
             </div>
         </div>  
          <div class="filter-form">	
-            <div class="lbl-field width-auto">
+            <div class="lbl-field">
 			    @Html.LabelFor(m => m.To)
 		    </div>   
-            <div class="edit-field width-auto">	                
+            <div class="edit-field">	                
                 @Html.TextBox("To", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
                 @*, new { @style = "width:90px;margin-right:5px;" })*@
             </div>
