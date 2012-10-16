@@ -33,6 +33,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     {
         #region Member
 
+        /// <summary>
+        /// Schedule repository
+        /// </summary>
         private readonly IScheduleRepository _scheduleRepository;
 
         #endregion Member
@@ -57,16 +60,27 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #region Ctor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         private ScheduleService()
             : this(null)
         {
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="scheduleRepository"></param>
         private ScheduleService(IScheduleRepository scheduleRepository)
         {
             _scheduleRepository = scheduleRepository ?? new ScheduleRepository();
         }
 
+        /// <summary>
+        /// Create schedule service
+        /// </summary>
+        /// <returns></returns>
         public static IScheduleService Create()
         {
             return new ScheduleService();
@@ -138,7 +152,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             return this;
         }
-
 
         /// <summary>
         /// Search Schedule with Date
@@ -265,7 +278,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Combine Freq and Interver to a string
+        /// Combine Freq and Interval to a string
         /// </summary>
         /// <param name="freq">Freq Value</param>
         /// <param name="freqInterval">Freq Interval Value</param>
@@ -298,6 +311,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     combinedString += ViewResource.FreqComputerIdle;
                     break;
             }
+
             combinedString += GetFreqIntervalValue(freq, freqInterval, activeStartTime);
             return combinedString;
         }
@@ -307,7 +321,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// </summary>
         /// <param name="freq">Freq Value</param>
         /// <param name="freqInterval">Freq Interval Value</param>
-        /// <returns>String combind Schedule Freq</returns>
+        /// <returns>String combine Schedule Freq</returns>
         private string GetFreqIntervalValue(int freq, int freqInterval, int activeStartTime)
         {
             string freqIntervalName = string.Empty;

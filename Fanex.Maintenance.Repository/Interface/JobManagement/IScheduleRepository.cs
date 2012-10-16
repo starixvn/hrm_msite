@@ -18,6 +18,12 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     /// </summary>
     public interface IScheduleRepository
     {
+        /// <summary>
+        /// Get all schedule
+        /// </summary>
+        /// <param name="scheduleCriteria"></param>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
         IEnumerable<ScheduleDetail> GetAllSchedule(ICriteria scheduleCriteria, string serverIp);
     }
 }

@@ -9,6 +9,9 @@
 
 namespace Fanex.Maintenance.Repository.Interface
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ILogRepository
     {
     }

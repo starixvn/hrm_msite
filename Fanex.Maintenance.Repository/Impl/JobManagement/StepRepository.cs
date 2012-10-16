@@ -28,6 +28,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     /// </summary>
     public class StepRepository : BaseRepository<Step>, IStepRepository
     {
+        /// <summary>
+        /// Get step by job name
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="serverName"></param>
+        /// <returns></returns>
         public IEnumerable<StepDetail> GetStepByJob(ICriteria criteria, string serverName)
         {
             if (criteria.IsValid())
@@ -67,8 +73,9 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                     };
                 };
 
-                return Fetch<StepDetail>(criteria, serverName, objMapFunc);
+                return this.Fetch<StepDetail>(criteria, serverName, objMapFunc);
             }
+
             return null;
         }
     }

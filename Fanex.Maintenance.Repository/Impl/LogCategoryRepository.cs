@@ -15,10 +15,13 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Entity.Model;
 
+    /// <summary>
+    /// Log category
+    /// </summary>
     public class LogCategoryRepository : ReadonlyRepository<LogCategory>
     {
         /// <summary>
-        /// Override return Categorys
+        /// Override return Category
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>

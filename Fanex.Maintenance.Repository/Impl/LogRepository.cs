@@ -15,6 +15,9 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Entity.Model;
 
+    /// <summary>
+    /// Log repository
+    /// </summary>
     public class LogRepository : ReadonlyRepository<Log>
     {
         /// <summary>
@@ -75,6 +78,7 @@ namespace Fanex.Maintenance.Repository.Impl
             {
                 throw e;
             }
+
             return row;
         }
     }

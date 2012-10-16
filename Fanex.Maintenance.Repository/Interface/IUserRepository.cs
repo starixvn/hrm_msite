@@ -16,6 +16,11 @@ namespace Fanex.Maintenance.Repository.Interface
     /// </summary>
     public interface IUserRepository
     {
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
         ICommandResult Login(ICriteria criteria);
     }
 }

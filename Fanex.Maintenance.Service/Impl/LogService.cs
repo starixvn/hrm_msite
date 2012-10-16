@@ -15,6 +15,9 @@ namespace Fanex.Maintenance.Service.Impl
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Criteria.Log;
 
+    /// <summary>
+    /// Log service
+    /// </summary>
     public class LogService
     {
         #region Member
@@ -32,6 +35,9 @@ namespace Fanex.Maintenance.Service.Impl
 
         #region Ctor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         private LogService()
         {
             _categoryId = 0;
@@ -42,6 +48,10 @@ namespace Fanex.Maintenance.Service.Impl
             _size = 100;
         }
 
+        /// <summary>
+        /// Create
+        /// </summary>
+        /// <returns></returns>
         public static LogService Create()
         {
             return new LogService();
@@ -61,7 +71,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// By categoryId and Serverity
+        /// By categoryId and Severity
         /// </summary>
         /// <param name="categoryId"></param>
         /// <param name="severity"></param>
@@ -139,6 +149,10 @@ namespace Fanex.Maintenance.Service.Impl
             return _logRepository.Fetch(criteria);
         }
 
+        /// <summary>
+        /// Remove log before date
+        /// </summary>
+        /// <returns></returns>
         public int RemoveLogs()
         {
             return _logRepository.DeleteLogs(this._dateFrom);

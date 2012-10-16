@@ -11,31 +11,31 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.Maintenance.Entity.Domain;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Entity.Model;
-    using Fanex.Data;
-    using Fanex.Maintenance.Core.Helper;
-    using Fanex.Maintenance.Criteria.Job;
     using Fanex.Common.Extensions;
-    using System.Globalization;
     using System.Data;
     using Fanex.NAP.Framework.Data;
     using System.Collections;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class JobRepository : BaseRepository<Job>, IJobRepository
     {
+        /// <summary>
+        /// Get all job
+        /// </summary>
+        /// <param name="criteria">filter by</param>
+        /// <param name="serverIp">server get job</param>
+        /// <returns></returns>
         public IEnumerable<JobSchedule> GetAllJob(ICriteria criteria, string serverIp)
         {
             try
             {
                 if (criteria.IsValid())
                 {
-
                     Func<IDataReader, JobSchedule> objMapFunc = (reader) =>
                     {
                         return new JobSchedule
@@ -77,7 +77,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                                 };
                     };
 
-                    return Fetch<JobSchedule>(criteria, serverIp, objMapFunc);
+                    return this.Fetch<JobSchedule>(criteria, serverIp, objMapFunc);
                 }
 
                 return null;
@@ -88,6 +88,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             }
         }
 
+        /// <summary>
+        /// Get log of job
+        /// </summary>
+        /// <param name="criteria">filter by</param>
+        /// <param name="serverIp">server</param>
+        /// <returns></returns>
         public IEnumerable<JobLog> GetJobLog(ICriteria criteria, string serverIp)
         {
             try
@@ -127,7 +133,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                         };
                     };
 
-                    return Fetch<JobLog>(criteria, serverIp, objMapFunc);
+                    return this.Fetch<JobLog>(criteria, serverIp, objMapFunc);
                 }
 
                 return null;
@@ -138,21 +144,35 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             }
         }
 
+        /// <summary>
+        /// Start job idle
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
         public Hashtable StartJob(ICriteria criteria, string serverIp)
         {
             if (criteria.IsValid())
             {
-                return ExecuteCommand(criteria, serverIp);
+                return this.ExecuteCommand(criteria, serverIp);
             }
+
             return null;
         }
 
+        /// <summary>
+        /// Stop job executing
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
         public Hashtable StopJob(ICriteria criteria, string serverIp)
         {
             if (criteria.IsValid())
             {
-                return ExecuteCommand(criteria, serverIp);
+                return this.ExecuteCommand(criteria, serverIp);
             }
+
             return null;
         }
     }

@@ -37,7 +37,7 @@ namespace Fanex.Maintenance.Repository.Impl
                 {
                     objectDb.ExecuteNonQuery(hash);
 
-                    return GetCommandResult(hash);
+                    return this.GetCommandResult(hash);
                 }
             }
             catch (Exception ex)

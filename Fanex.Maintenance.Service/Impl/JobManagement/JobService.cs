@@ -18,12 +18,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using System.Linq;
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Fanex.Maintenance.Criteria.Job;
-    using Fanex.Common;
     using Fanex.Maintenance.Core.Web;
-    using Fanex.Maintenance.Entity.Domain;
     using Fanex.Logging;
-    using System.Collections;
-    using System.Threading;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -38,25 +35,43 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #region Properties
 
         private DateTime? _lastRunDate;
+
         private DateTime? _nextRunDate;
+
         private int? _status;
+        
         private string _server;
+        
         private string _schedule;
+        
         private string _jobName;
+        
         private int? _currentExcuteStatus;
+        
         private Guid _jobId;
+        
         private int _startRunDate;
+        
         private int _endRunDate;
+        
         private string _stepName;
+        
         #endregion
 
         #region Ctor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         private JobService()
             : this(null)
         {
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="jobRepository"></param>
         private JobService(IJobRepository jobRepository)
         {
             _jobRepository = jobRepository ?? new JobRepository();
@@ -70,6 +85,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             _currentExcuteStatus = null;
         }
 
+        /// <summary>
+        /// Create job service
+        /// </summary>
+        /// <returns></returns>
         public static IJobService Create()
         {
             return new JobService();
@@ -77,53 +96,104 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #endregion
 
+        /// <summary>
+        /// Get job
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<JobSchedule> GetJob()
         {
             return null;
         }
 
+        /// <summary>
+        /// filter by status of job
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
         public IJobService WithStatus(int? status)
         {
             this._status = status;
+
             return this;
         }
 
+        /// <summary>
+        /// from server
+        /// </summary>
+        /// <param name="serverName"></param>
+        /// <returns></returns>
         public IJobService FromServer(string serverName)
         {
             this._server = serverName;
+
             return this;
         }
 
+        /// <summary>
+        /// filter by job name
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
         public IJobService WithJob(string jobName)
         {
             this._jobName = jobName;
+
             return this;
         }
 
+        /// <summary>
+        /// filter by schedule name
+        /// </summary>
+        /// <param name="scheduleName"></param>
+        /// <returns></returns>
         public IJobService WithSchedule(string scheduleName)
         {
             this._schedule = scheduleName;
+
             return this;
         }
 
+        /// <summary>
+        /// filter by current execution status
+        /// </summary>
+        /// <param name="executeStatus"></param>
+        /// <returns></returns>
         public IJobService WithCurrentExecuteStatus(int? executeStatus)
         {
             this._currentExcuteStatus = executeStatus;
+
             return this;
         }
 
+        /// <summary>
+        /// filter by last run date
+        /// </summary>
+        /// <param name="lastRunDate"></param>
+        /// <returns></returns>
         public IJobService WithLastRunDate(DateTime? lastRunDate)
         {
             this._lastRunDate = lastRunDate;
+
             return this;
         }
 
+        /// <summary>
+        /// filter buy next run date
+        /// </summary>
+        /// <param name="nextRunDate"></param>
+        /// <returns></returns>
         public IJobService WithNextRunDate(DateTime? nextRunDate)
         {
             this._nextRunDate = nextRunDate;
+
             return this;
         }
 
+        /// <summary>
+        /// filter by start run date
+        /// </summary>
+        /// <param name="startRunDate"></param>
+        /// <returns></returns>
         public IJobService WithStartRunDate(DateTime? startRunDate)
         {
             if (ReferenceEquals(startRunDate, null))
@@ -137,6 +207,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return this;
         }
 
+        /// <summary>
+        /// filter by end run date
+        /// </summary>
+        /// <param name="endRunDate"></param>
+        /// <returns></returns>
         public IJobService WithEndRunDate(DateTime? endRunDate)
         {
             if (ReferenceEquals(endRunDate, null))
@@ -146,21 +221,38 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             string date = ((DateTime)endRunDate).ToString("yyyyMMdd");
             this._endRunDate = Convert.ToInt32(date);
+
             return this;
         }
 
+        /// <summary>
+        /// filter by job id
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
         public IJobService WithJobId(string guid)
         {
             this._jobId = new Guid(guid);
+
             return this;
         }
 
+        /// <summary>
+        /// filter by step name
+        /// </summary>
+        /// <param name="stepName"></param>
+        /// <returns></returns>
         public IJobService WithStepName(string stepName)
         {
             this._stepName = stepName;
+
             return this;
         }
 
+        /// <summary>
+        /// get job
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<JobSchedule> GetJobs()
         {
             var criteria = new GetListJobCriteria
@@ -192,6 +284,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                         {
                             listTemp.AddRange(list.Where(j => j.Job.JobId == item.Job.JobId).ToList());
                         }
+
                         return listTemp;
                     }
                 }
@@ -200,8 +293,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     Logger.Log.Error(ex.Message, ex);
                 }
             }
-            //// get job all server
-            else
+            else   //// get job all server
             {
                 foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                 {
@@ -220,7 +312,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return listJob;
         }
 
-
+        /// <summary>
+        /// Get job log
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<JobLog> GetJobLogs()
         {
             //// create criteria get job history
@@ -245,6 +340,12 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return null;
         }
 
+        /// <summary>
+        /// Get job buy schedule name
+        /// </summary>
+        /// <param name="schedule"></param>
+        /// <param name="server"></param>
+        /// <returns></returns>
         private IEnumerable<JobSchedule> GetJobBySchedule(string schedule, string server)
         {
             try
@@ -256,10 +357,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
                 return _jobRepository.GetAllJob(criteria, server);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Logger.Log.Error(ex.Message, ex);
             }
+
             return new List<JobSchedule>();
         }
 
@@ -290,6 +392,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 commandResult.Code = 1000;
                 commandResult.Message = ex.Message;
             }
+
             return commandResult;
         }
 

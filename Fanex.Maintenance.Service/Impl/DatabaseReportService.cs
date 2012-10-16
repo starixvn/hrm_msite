@@ -1,8 +1,11 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="DatabaseReportService.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="DatabaseReportService.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.10.16">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Service.Impl
 {
@@ -26,23 +29,29 @@ namespace Fanex.Maintenance.Service.Impl
     {
         #region Member
 
+        //This is dictionary use add background color dynamic to field depend compary value from 4 table
+        private static readonly Dictionary<string, string> _bgColorCss = new Dictionary<string, string>()
+        {
+            { "BgSBBA" , "bgSBBA" },
+            { "BgSportsbook" , "bgSportsbook" },
+            { "BgBA" , "bgBA" },
+            { "BgRacing" , "bgRacing" },
+            { "BgNumberGame" , "bgNumberGame" },
+        };
+
         private readonly DatabaseReportRepository _databaseReportRepository = new DatabaseReportRepository();
 
         //This is string use compary values from 4 tables
-        private static string strCompare = "{0},{1},{2},{3}";
-
-        //This is dictionary use add background color dynamic to field depend compary value from 4 table
-        private static readonly Dictionary<string, string> bgColorCss = new Dictionary<string, string>()
-        {
-            {"BgSBBA","bgSBBA"},
-            {"BgSportsbook","bgSportsbook"},
-            {"BgBA","bgBA"},
-            {"BgRacing","bgRacing"},
-            {"BgNumberGame","bgNumberGame"},
-        };
+        private static string strCompare = "{0},{1},{2},{3}";        
 
         #endregion Member
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="drawFilter"></param>
+        /// <returns></returns>
         public DataTable GetSumWinloss(DateTime date, int drawFilter)
         {
             DataSet result = new DataSet();
@@ -72,6 +81,7 @@ namespace Fanex.Maintenance.Service.Impl
                 };
                 dtSumwinloss = _databaseReportRepository.GetDataTable(criteriaSumWl);
             }
+
             return dtSumwinloss;
         }
 
@@ -90,6 +100,12 @@ namespace Fanex.Maintenance.Service.Impl
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="drawFilter"></param>
+        /// <returns></returns>
         public DataTable GetLicenseeWinloss(DateTime date, int drawFilter)
         {
             var criteria = new GetDepositDataToValidateLicenseeWLCriteria
@@ -97,9 +113,16 @@ namespace Fanex.Maintenance.Service.Impl
                 Date = date,
                 DrawFilter = drawFilter
             };
+
             return _databaseReportRepository.GetDataTable(criteria);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="drawFilter"></param>
+        /// <returns></returns>
         public DataTable GetBetting(DateTime date, int drawFilter)
         {
             var criteria = new GetDepositDataToValidateBettingCriteria
@@ -107,9 +130,16 @@ namespace Fanex.Maintenance.Service.Impl
                 Date = date,
                 DrawFilter = drawFilter
             };
+
             return _databaseReportRepository.GetDataTable(criteria);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="drawFilter"></param>
+        /// <returns></returns>
         public DataTable GetDW(DateTime date, int drawFilter)
         {
             var criteria = new GetDepositDataToValidateDWCriteria
@@ -117,9 +147,16 @@ namespace Fanex.Maintenance.Service.Impl
                 Date = date,
                 DrawFilter = drawFilter
             };
+
             return _databaseReportRepository.GetDataTable(criteria);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="drawFilter"></param>
+        /// <returns></returns>
         public string GenerateTemplateHtmlLicensee(DateTime date, int drawFilter)
         {
             DataTable dtSumwinloss = GetSumWinloss(date, drawFilter);
@@ -135,7 +172,7 @@ namespace Fanex.Maintenance.Service.Impl
             temp.Turnover.DataDW = SetData(dtDW, false);
 
             var turnover = temp.Turnover;
-            var winLoss = temp.Winloss; ;
+            var winLoss = temp.Winloss; 
             var betCount = temp.BetCount;
 
             SetBackgroundColor(dtSumwinloss, dtRptLicwinloss, dtRptBetting, dtDW, drawFilter, turnover, winLoss, betCount);
@@ -145,7 +182,7 @@ namespace Fanex.Maintenance.Service.Impl
 
         /// <summary>
         /// Method use set data for every block data
-        /// 4 blocks : sumwinloss, licwinloss, betting and dw
+        /// 4 blocks : sum win loss, licwinloss, betting and dw
         /// </summary>
         /// <param name="dt">datatable</param>
         /// <param name="isTurnOver">use check is turnover</param>
@@ -176,7 +213,7 @@ namespace Fanex.Maintenance.Service.Impl
                     }
                     else if (isTurnOver == false && j == 1)
                     {
-                        dataBindContent.value = FormatThounsand(Math.Round((decimal)dt.Rows[i][1], 0, MidpointRounding.AwayFromZero) +
+                        dataBindContent.value = FormatThousand(Math.Round((decimal)dt.Rows[i][1], 0, MidpointRounding.AwayFromZero) +
                                                                 Math.Round((decimal)dt.Rows[i][2], 0, MidpointRounding.AwayFromZero));
                         dataBindContent.Append();
                     }
@@ -193,15 +230,19 @@ namespace Fanex.Maintenance.Service.Impl
 
                     //when value is lastrow in report then add noborder to it
                     if (i == dt.Rows.Count - 1 && j == dt.Columns.Count - 1)
+                    {
                         dataBindContent.NoBorder = "noBorder";
+                    }
 
-                    dataBindContent.value = FormatThounsand(dt.Rows[i][j]);
+                    dataBindContent.value = FormatThousand(dt.Rows[i][j]);
                     dataBindContent.Append();
                     dataBindContent.WeightBoder = string.Empty;
                 }
             }
+
             dataBindTemp.BindData = dataBindContent.ToString();
             dataBindTemp.Append();
+
             return dataBindTemp.ToString();
         }
 
@@ -233,10 +274,13 @@ namespace Fanex.Maintenance.Service.Impl
                     dataBindContent.value = "N/A";
                     dataBindContent.Append();
                 }
+
                 dataBindContent.WeightBoder = string.Empty;
             }
+
             dataBindTemp.BindData = dataBindContent.ToString();
             dataBindTemp.Append();
+
             return dataBindTemp.ToString();
         }
 
@@ -249,8 +293,11 @@ namespace Fanex.Maintenance.Service.Impl
         /// <param name="dtDw">table dw</param>
         /// <param name="drawFilter">draw filter consist 3 values 1,2,3</param>
         /// <param name="blocks">array block</param>
-        public static void SetBackgroundColor(DataTable dtSumWinloss, DataTable dtRptLicWinloss,
-                                              DataTable dtRptBetting, DataTable dtDw, int drawFilter,
+        public static void SetBackgroundColor(DataTable dtSumWinloss,
+                                              DataTable dtRptLicWinloss,
+                                              DataTable dtRptBetting,
+                                              DataTable dtDw,
+                                              int drawFilter,
                                               params Block[] blocks)
         {
             bool[] checkValues = CheckValuesTurnOver(dtSumWinloss, dtRptLicWinloss, dtRptBetting, dtDw, drawFilter);
@@ -259,11 +306,11 @@ namespace Fanex.Maintenance.Service.Impl
 
             foreach (Block block in blocks)
             {
-                block.BgSBBA = checkValues[i] ? bgColorCss["BgSBBA"].ToString() : string.Empty;
-                block.BgSportsbook = checkValues[i + 1] ? bgColorCss["BgSportsbook"].ToString() : string.Empty;
-                block.BgBA = checkValues[i + 2] ? bgColorCss["BgBA"].ToString() : string.Empty;
-                block.BgRacing = checkValues[i + 3] ? bgColorCss["BgRacing"].ToString() : string.Empty;
-                block.BgNumberGame = checkValues[i + 4] ? bgColorCss["BgNumberGame"].ToString() : string.Empty;
+                block.BgSBBA = checkValues[i] ? _bgColorCss["BgSBBA"].ToString() : string.Empty;
+                block.BgSportsbook = checkValues[i + 1] ? _bgColorCss["BgSportsbook"].ToString() : string.Empty;
+                block.BgBA = checkValues[i + 2] ? _bgColorCss["BgBA"].ToString() : string.Empty;
+                block.BgRacing = checkValues[i + 3] ? _bgColorCss["BgRacing"].ToString() : string.Empty;
+                block.BgNumberGame = checkValues[i + 4] ? _bgColorCss["BgNumberGame"].ToString() : string.Empty;
                 i = i + 5;
             }
         }
@@ -300,7 +347,6 @@ namespace Fanex.Maintenance.Service.Impl
                         chkAllValues[i] = IsAnother(dtSumWinloss.Rows[j][1], winLossSBBA,
                                                     bettingSBBA, dWSBBA, drawFilter);
                     }
-
                     else
                     {
                         decimal sumWinlossValue = 0;
@@ -312,6 +358,7 @@ namespace Fanex.Maintenance.Service.Impl
                         {
                             sumWinlossValue = Convert.ToDecimal(dtSumWinloss.Rows[j][k]);
                         }
+
                         chkAllValues[i] = IsAnother(sumWinlossValue, dtRptLicWinloss.Rows[j][k],
                                                     dtRptBetting.Rows[j][k], dtDw.Rows[j][k], drawFilter);
                     }
@@ -319,12 +366,13 @@ namespace Fanex.Maintenance.Service.Impl
                     i++;
                 }
             }
+
             return chkAllValues;
         }
 
         /// <summary>
-        /// Method use compare values in each column, consist sportbook,
-        /// racing, numbergame, and ba
+        /// Method use compare values in each column, consist sport book,
+        /// racing, number game, and ba
         /// </summary>
         /// <param name="sumwinlossValue">value of sumwinloss</param>
         /// <param name="rptLicwinlossValue">value of rptLicwinloss</param>
@@ -336,27 +384,39 @@ namespace Fanex.Maintenance.Service.Impl
         {
             string concat = string.Empty;
             if (drawFilter != 1)
+            {
                 sumwinlossValue = rptLicwinlossValue;
+            }
+
             concat = string.Format(strCompare,
                                          Math.Round((decimal)sumwinlossValue, 0, MidpointRounding.AwayFromZero),
                                          Math.Round((decimal)rptLicwinlossValue, 0, MidpointRounding.AwayFromZero),
                                          Math.Round((decimal)rptBettingValue, 0, MidpointRounding.AwayFromZero),
                                          Math.Round((decimal)dwValue, 0, MidpointRounding.AwayFromZero));
             bool compare = concat.Split(',').Distinct().Count() > 1;
+
             return compare;
         }
 
         /// <summary>
-        /// Method use format object to number thounsand with seperate is comma
+        /// Method use format object to number thousand with seperate is comma
         /// </summary>
         /// <param name="value">object value</param>
         /// <returns>string after format</returns>
-        protected static string FormatThounsand(object value)
+        protected static string FormatThousand(object value)
         {
             string formatThounsand = "{0:#,###,###.#########}";
+
             return (decimal)value == 0 ? "0" : string.Format(formatThounsand, Math.Round((decimal)value, 0, MidpointRounding.AwayFromZero));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dtBetting"></param>
+        /// <param name="dtDW"></param>
+        /// <param name="rowIndex"></param>
+        /// <returns></returns>
         public IList<bool> CompareValues(DataTable dtBetting, DataTable dtDW, int rowIndex)
         {
             var chkAllValues = new List<bool>();
@@ -370,6 +430,12 @@ namespace Fanex.Maintenance.Service.Impl
             return chkAllValues;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="drawFilter"></param>
+        /// <returns></returns>
         public DataTable CreditDataBetting(DateTime date, int drawFilter)
         {
             var criteria = new GetCreditDataToValidateBettingCriteria
@@ -377,9 +443,16 @@ namespace Fanex.Maintenance.Service.Impl
                 Date = date,
                 DrawFilter = drawFilter
             };
+
             return _databaseReportRepository.GetDataTable(criteria);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="drawFilter"></param>
+        /// <returns></returns>
         public DataTable CreditDataDW(DateTime date, int drawFilter)
         {
             var criteria = new GetCreditDataToValidateDWCriteria
@@ -387,9 +460,16 @@ namespace Fanex.Maintenance.Service.Impl
                 Date = date,
                 DrawFilter = drawFilter
             };
+
             return _databaseReportRepository.GetDataTable(criteria);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="drawFilter"></param>
+        /// <returns></returns>
         public string GenerateTemplateHtmlCredit(DateTime date, int drawFilter)
         {
             var temp = new TemplateCredit_Template();
@@ -417,31 +497,60 @@ namespace Fanex.Maintenance.Service.Impl
 
         #region Set Data
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dtBetting"></param>
+        /// <param name="dtDW"></param>
+        /// <param name="block"></param>
+        /// <returns></returns>
         protected string SetDataTurnover(DataTable dtBetting, DataTable dtDW, BlockCredit block)
         {
             return SetData(dtBetting, dtDW, block, 0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dtBetting"></param>
+        /// <param name="dtDW"></param>
+        /// <param name="block"></param>
+        /// <returns></returns>
         protected string SetDataCustomerWL(DataTable dtBetting, DataTable dtDW, BlockCredit block)
         {
             return SetData(dtBetting, dtDW, block, 1);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dtBetting"></param>
+        /// <param name="dtDW"></param>
+        /// <param name="block"></param>
+        /// <returns></returns>
         protected string SetDataBetCount(DataTable dtBetting, DataTable dtDW, BlockCredit block)
         {
             return SetData(dtBetting, dtDW, block, 2);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dtBetting"></param>
+        /// <param name="dtDW"></param>
+        /// <param name="block"></param>
+        /// <param name="rowIndex"></param>
+        /// <returns></returns>
         protected string SetData(DataTable dtBetting, DataTable dtDW, BlockCredit block, int rowIndex)
         {
-            block.SBBetting = FormatThounsand(dtBetting.Rows[rowIndex][1]);
-            block.SBDW = FormatThounsand(dtDW.Rows[rowIndex][1]);
+            block.SBBetting = FormatThousand(dtBetting.Rows[rowIndex][1]);
+            block.SBDW = FormatThousand(dtDW.Rows[rowIndex][1]);
 
-            block.RacingBetting = FormatThounsand(dtBetting.Rows[rowIndex][2]);
-            block.RacingDW = FormatThounsand(dtDW.Rows[rowIndex][2]);
+            block.RacingBetting = FormatThousand(dtBetting.Rows[rowIndex][2]);
+            block.RacingDW = FormatThousand(dtDW.Rows[rowIndex][2]);
 
-            block.NGBetting = FormatThounsand(dtBetting.Rows[rowIndex][3]);
-            block.NGDW = FormatThounsand(dtDW.Rows[rowIndex][3]);
+            block.NGBetting = FormatThousand(dtBetting.Rows[rowIndex][3]);
+            block.NGDW = FormatThousand(dtDW.Rows[rowIndex][3]);
 
             return block.ToString();
         }
@@ -450,51 +559,98 @@ namespace Fanex.Maintenance.Service.Impl
 
         #region Set background
 
+        /// <summary>
+        /// Set background color for turnover
+        /// </summary>
+        /// <param name="dtBetting"></param>
+        /// <param name="dtDW"></param>
+        /// <param name="block"></param>
+        /// <returns></returns>
         protected bool SetBackgroundColorTurnover(DataTable dtBetting, DataTable dtDW, BlockCredit block)
         {
             return SetBackgroundColor(dtBetting, dtDW, block, 0);
         }
 
+        /// <summary>
+        /// Set background color for customer win loss
+        /// </summary>
+        /// <param name="dtBetting"></param>
+        /// <param name="dtDW"></param>
+        /// <param name="block"></param>
+        /// <returns></returns>
         protected bool SetBackgroundColorCustomerWL(DataTable dtBetting, DataTable dtDW, BlockCredit block)
         {
             return SetBackgroundColor(dtBetting, dtDW, block, 1);
         }
 
+        /// <summary>
+        /// Get background color for bet count
+        /// </summary>
+        /// <param name="dtBetting"></param>
+        /// <param name="dtDW"></param>
+        /// <param name="block"></param>
+        /// <returns></returns>
         protected bool SetBackgroundColorBetCount(DataTable dtBetting, DataTable dtDW, BlockCredit block)
         {
             return SetBackgroundColor(dtBetting, dtDW, block, 2);
         }
 
+        /// <summary>
+        /// Set background color
+        /// </summary>
+        /// <param name="dtBetting"></param>
+        /// <param name="dtDW"></param>
+        /// <param name="block"></param>
+        /// <param name="rowIndex"></param>
+        /// <returns></returns>
         public bool SetBackgroundColor(DataTable dtBetting, DataTable dtDW, BlockCredit block, int rowIndex)
         {
             var checkValues = CompareValues(dtBetting, dtDW, rowIndex);
 
-            block.BgSportsbook = checkValues[0] ? string.Empty : bgColorCss["BgSportsbook"].ToString();
-            block.BgRacing = checkValues[1] ? string.Empty : bgColorCss["BgRacing"].ToString();
-            block.BgNumberGame = checkValues[2] ? string.Empty : bgColorCss["BgNumberGame"].ToString();
+            block.BgSportsbook = checkValues[0] ? string.Empty : _bgColorCss["BgSportsbook"].ToString();
+            block.BgRacing = checkValues[1] ? string.Empty : _bgColorCss["BgRacing"].ToString();
+            block.BgNumberGame = checkValues[2] ? string.Empty : _bgColorCss["BgNumberGame"].ToString();
 
             return checkValues.Contains(false) ? false : true;
         }
 
         #endregion Set background
 
+        /// <summary>
+        /// Get usr online daily
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public DataTable GetUserOnlineDaily(DateTime date)
         {
             var criteria = new GetUserOnlineDailyCriteria
             {
                 Date = date
             };
+
             return _databaseReportRepository.GetDataTable(criteria);
         }
 
+        /// <summary>
+        /// Get list user online
+        /// </summary>
+        /// <param name="top"></param>
+        /// <returns></returns>
         public DataTable GetUserOnline(int top)
         {
             var criteria = new GetUserOnlineCriteria
             {
             };
+
             return _databaseReportRepository.GetDataTable(criteria);
         }
 
+        /// <summary>
+        /// Generate data table
+        /// </summary>
+        /// <param name="dtb"></param>
+        /// <param name="RowNumber"></param>
+        /// <returns></returns>
         private static DataTable GenerateDataTable(DataTable dtb, int RowNumber)
         {
             string _datetime = dtb.Rows[0]["logdate"].ToString();
@@ -516,6 +672,7 @@ namespace Fanex.Maintenance.Service.Impl
 
                     _datetime = _date + " " + Arr[0] + ":" + (_minute < 10 ? "0" + _minute.ToString() : _minute.ToString());
                 }
+
                 dr[0] = _datetime;
                 dr[1] = "-1";
                 dr[2] = "-1";
@@ -525,32 +682,55 @@ namespace Fanex.Maintenance.Service.Impl
                 dr[6] = "-1";
                 dtb.Rows.Add(dr);
             }
+
             return dtb;
         }
 
-        public static string ChangeHourToMinute(string _DateTime)
+        /// <summary>
+        /// Change hour to minute
+        /// </summary>
+        /// <param name="_dateTime"></param>
+        /// <returns></returns>
+        public static string ChangeHourToMinute(string _dateTime)
         {
-            string ngay = _DateTime.Substring(0, _DateTime.IndexOf(" "));
-            string hour = _DateTime.Substring(_DateTime.IndexOf(" "), _DateTime.Length - _DateTime.IndexOf(" "));
+            string ngay = _dateTime.Substring(0, _dateTime.IndexOf(" "));
+            string hour = _dateTime.Substring(_dateTime.IndexOf(" "), _dateTime.Length - _dateTime.IndexOf(" "));
             string[] arrList = hour.Split(":".ToCharArray());
             int minute = (Convert.ToInt32(arrList[0]) * 60) + Convert.ToInt32(arrList[1]);
+
             return minute.ToString();
         }
 
+        /// <summary>
+        /// Split date to hour
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public static string SplitDateToHour(string date)
         {
             return date = date.Substring(date.Length - 5, 5);
         }
 
+        /// <summary>
+        /// Change minute to hour
+        /// </summary>
+        /// <param name="minute"></param>
+        /// <returns></returns>
         public static string ChangeMinuteToHour(int minute)
         {
             int hour = minute / 60;
             int min = minute % 60;
+
             return hour.ToString() + ":" + min.ToString();
         }
 
         #region Generate Template
 
+        /// <summary>
+        /// Generate template user daily list
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public string GenerateTemplateUserDaily(DataTable data)
         {
             StringBuilder _s = new StringBuilder();
@@ -570,9 +750,16 @@ namespace Fanex.Maintenance.Service.Impl
                 _s.Append("<td>" + dr["affadmin"].ToString() + "</td>");
                 _s.Append("</tr>");
             }
+
             return _s.ToString();
         }
 
+        /// <summary>
+        /// Generate templae user list
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="show"></param>
+        /// <returns></returns>
         public string GenerateTemplateUser(DataTable data, int show)
         {
             StringBuilder _s = new StringBuilder();
@@ -588,12 +775,19 @@ namespace Fanex.Maintenance.Service.Impl
                 _s.Append("<td>" + i["affiliate"].ToString() + "</td>");
                 _s.Append("</tr>");
             }
+
             return _s.ToString();
         }
 
+        /// <summary>
+        /// Generate chart
+        /// </summary>
+        /// <param name="dtb"></param>
+        /// <param name="show"></param>
+        /// <returns></returns>
         public string GenerateDataChart(DataTable dtb, int show)
         {
-            string data = "";
+            string data = string.Empty;
             if (dtb.Rows.Count > 0)
             {
                 if (show > dtb.Rows.Count)
@@ -601,14 +795,17 @@ namespace Fanex.Maintenance.Service.Impl
                     int addRow = show - dtb.Rows.Count;
                     dtb = GenerateDataTable(dtb, addRow);
                 }
+
                 DataRow[] drs = dtb.Select(null, "logdate desc");
 
                 foreach (DataRow dr in drs)
                 {
                     data += ChangeHourToMinute(dr["logdate"].ToString()) + ";" + dr["super"] + ";" + dr["master"] + ";" + dr["agent"] + ";" + dr["accounting"] + ";" + dr["affiliate"] + "^";
                 }
+
                 data = data.Substring(0, data.Length - 1);
             }
+
             return data;
         }
 

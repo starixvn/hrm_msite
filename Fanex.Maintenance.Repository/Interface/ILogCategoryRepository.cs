@@ -9,11 +9,9 @@
 
 namespace Fanex.Maintenance.Repository.Interface
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ILogCategoryRepository
     {
     }

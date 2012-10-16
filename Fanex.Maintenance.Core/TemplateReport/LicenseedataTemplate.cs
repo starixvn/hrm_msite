@@ -1,15 +1,29 @@
-﻿using System.Text;
+﻿// --------------------------------------------------------------------------
+// <copyright file="LicenseedataTemplate.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.10.16">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Core.TemplateReport
 {
+    using System.Text;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class LicenseedataTemplate
     {
         StringBuilder bd = new StringBuilder();
-        //protected static StringBuilder s0 = new StringBuilder();        
-        //"<table class=\"gridContent\" cellspacing=\"0px\"><tr><td colspan=\"2\" style=\"background-color: #B64926; text-align:center; color:WHITE;font-weight: bold\">DEPOSIT SITES</td><td class=\"tblHeader\">sum_winloss</td><td class=\"tblHeader\">rptLicWinLoss</td><td class=\"tblHeader\">rpt_betting</td><td class=\"tblHeader\">DW</td></tr>";
+
         public LicenseedataTemplate_Turnover_Block Turnover = new LicenseedataTemplate_Turnover_Block();
+
         public LicenseedataTemplate_Winloss_Block Winloss = new LicenseedataTemplate_Winloss_Block();
+
         public LicenseedataTemplate_BetCount_Block BetCount = new LicenseedataTemplate_BetCount_Block();
+
         protected static string s1 = "</table>";
 
         public void ToString(ref StringBuilder bd)
@@ -20,13 +34,18 @@ namespace Fanex.Maintenance.Core.TemplateReport
             bd.Append("<th>sum_winloss</th>");
             bd.Append("<th>rptLicWinLoss</th>");
             bd.Append("<th>rpt_betting</th>");
-            bd.Append("<th>DW</th>");   
-            bd.Append("</tr></thead>");            
+            bd.Append("<th>DW</th>");
+            bd.Append("</tr></thead>");
             if (null != Turnover) Turnover.ToString(ref bd);
             if (null != Winloss) Winloss.ToString(ref bd);
             if (null != BetCount) BetCount.ToString(ref bd);
             bd.Append(s1);
         }
+
+        /// <summary>
+        /// To String
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder bd = new StringBuilder();
@@ -35,27 +54,49 @@ namespace Fanex.Maintenance.Core.TemplateReport
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class LicenseedataTemplate_Turnover_Block : Block
     {
         protected static string s2 = "<tr><td rowspan=\"5\" class=\"b firstCol weightBorderBottom\">Turnover</td><td class=\"l ";
+
         public string BgSBBA = "{BgSBBA}";
+
         protected static string s3 = "\">SB + BA</td><td rowspan=\"15\">";
+
         public string DataSumWinloss = "{DataSumWinloss}";
+
         protected static string s4 = "</td><td rowspan=\"15\">";
+
         public string DataLicWinLoss = "{DataLicWinLoss}";
+
         protected static string s5 = "</td><td rowspan=\"15\">";
+
         public string DataBetting = "{DataBetting}";
+
         protected static string s6 = "</td><td rowspan=\"15\">";
+
         public string DataDW = "{DataDW}";
+
         protected static string s7 = "</td></tr><tr><td class=\"l ";
+
         public string BgSportsbook = "{BgSportsbook}";
+
         protected static string s8 = "\">Sportsbook</td></tr><tr><td class=\"l ";
+
         public string BgBA = "{BgBA}";
+
         protected static string s9 = "\">BA</td></tr><tr><td class=\"l ";
+
         public string BgRacing = "{BgRacing}";
+
         protected static string s10 = "\">Racing</td></tr><tr><td class=\"l ";
+
         public string BgNumberGame = "{BgNumberGame}";
+
         protected static string s11 = " weightBorderBottom\">Number Game</td></tr>";
+
         public void ToString(ref StringBuilder bd)
         {
             SetBackgrounds(ref BgSBBA, ref BgSportsbook, ref BgBA, ref BgRacing, ref BgNumberGame);
@@ -82,19 +123,33 @@ namespace Fanex.Maintenance.Core.TemplateReport
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class LicenseedataTemplate_Winloss_Block : Block
     {
         protected static string s12 = "<tr><td rowspan=\"5\" class=\"b weightBorderBottom\">Customer Win Loss</td><td class=\"l ";
+
         public string BgSBBA = "{BgSBBA}";
+
         protected static string s13 = "\">SB + BA</td></tr><tr><td class=\"l ";
+
         public string BgSportsbook = "{BgSportsbook}";
+
         protected static string s14 = "\">Sportsbook</td></tr><tr><td class=\"l ";
+
         public string BgBA = "{BgBA}";
+
         protected static string s15 = "\">BA</td></tr><tr><td class=\"l ";
+
         public string BgRacing = "{BgRacing}";
+
         protected static string s16 = "\">Racing</td></tr><tr><td class=\"l ";
+
         public string BgNumberGame = "{BgNumberGame}";
+
         protected static string s17 = " weightBorderBottom\">Number Game</td></tr>";
+
         public void ToString(ref StringBuilder bd)
         {
             SetBackgrounds(ref BgSBBA, ref BgSportsbook, ref BgBA, ref BgRacing, ref BgNumberGame);
@@ -112,19 +167,37 @@ namespace Fanex.Maintenance.Core.TemplateReport
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class LicenseedataTemplate_BetCount_Block : Block
     {
         protected static string s18 = "<tr><td rowspan=\"5\" class=\"b\">Bet Count</td><td class=\"l ";
-        public string BgSBBA = "{BgSBBA}";
+
+        protected string BgSBBA = "{BgSBBA}";
+
         protected static string s19 = "\">SB + BA</td></tr><tr><td class=\"l ";
-        public string BgSportsbook = "{BgSportsbook}";
+
+        protected string BgSportsbook = "{BgSportsbook}";
+
         protected static string s20 = "\">Sportsbook</td></tr><tr><td class=\"l ";
-        public string BgBA = "{BgBA}";
+
+        protected string BgBA = "{BgBA}";
+
         protected static string s21 = "\">BA</td></tr><tr><td class=\"l ";
-        public string BgRacing = "{BgRacing}";
+
+        protected string BgRacing = "{BgRacing}";
+
         protected static string s22 = "\">Racing</td></tr><tr><td class=\"l ";
-        public string BgNumberGame = "{BgNumberGame}";
+
+        protected string BgNumberGame = "{BgNumberGame}";
+
         protected static string s23 = "\">Number Game</td></tr>";
+
+        /// <summary>
+        /// To string template
+        /// </summary>
+        /// <param name="bd"></param>
         public void ToString(ref StringBuilder bd)
         {
             SetBackgrounds(ref BgSBBA, ref BgSportsbook, ref BgBA, ref BgRacing, ref BgNumberGame);
@@ -142,16 +215,31 @@ namespace Fanex.Maintenance.Core.TemplateReport
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class DataBind_Template
     {
         StringBuilder bd = new StringBuilder();
+
         protected static string s0 = "<table class=\"tblData\" cellpadding=\"0px\" cellspacing=\"0px\">";
+
         public string BindData = "{BindData}";
+
         protected static string s1 = "</table>";
+
+        /// <summary>
+        /// To string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return bd.ToString();
         }
+
+        /// <summary>
+        /// Append string
+        /// </summary>
         public void Append()
         {
             bd.Append(s0);
@@ -163,19 +251,33 @@ namespace Fanex.Maintenance.Core.TemplateReport
     public class DataBindContent
     {
         StringBuilder bd = new StringBuilder();
+
         protected static string s0 = "<tr><td class=\"number ";
+
         public string NoBorder = string.Empty;
+
         protected static string s1 = " ";
+
         public string WeightBoder = string.Empty;
+
         protected static string s2 = "\">";
+
         public string value;
+
         protected static string s3 = "</td></tr>";
 
+        /// <summary>
+        /// To String
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return bd.ToString();
         }
 
+        /// <summary>
+        /// Append string
+        /// </summary>
         public void Append()
         {
             bd.Append(s0);

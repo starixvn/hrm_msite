@@ -9,11 +9,7 @@
 
 namespace Fanex.Maintenance.Repository.Interface.JobManagement
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Entity.Domain;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.NAP.Framework.Data;
 
@@ -22,6 +18,12 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     /// </summary>
     public interface IStepRepository
     {
+        /// <summary>
+        /// Get all step by job
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="serverName"></param>
+        /// <returns></returns>
         IEnumerable<StepDetail> GetStepByJob(ICriteria criteria, string serverName);
     }
 }

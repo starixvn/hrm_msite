@@ -7,22 +7,31 @@
 //   <change who="Ricky.Nguyen" date="2012.10.10">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Repository.Interface.JobManagement
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-using Fanex.Maintenance.Entity.Model;
-using Fanex.NAP.Framework.Data;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface ISqlServerLogRepository
     {
+        /// <summary>
+        /// Get sql server log by date
+        /// </summary>
+        /// <param name="sqlServerLogCriteria"></param>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
         IEnumerable<SqlServerLog> GetAllSqlServerLogOnDate(ICriteria sqlServerLogCriteria, string serverIp);
+
+        /// <summary>
+        /// Get agent log by date
+        /// </summary>
+        /// <param name="sqlAgentLogCriteria"></param>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
         IEnumerable<SqlServerLog> GetAllSqlAgentLogOnDate(ICriteria sqlAgentLogCriteria, string serverIp);
     }
 }

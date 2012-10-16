@@ -9,10 +9,7 @@
 
 namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.Maintenance.Service.Interface.JobManagement;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Repository.Impl.JobManagement;
@@ -27,6 +24,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     {
         #region Member
 
+        /// <summary>
+        /// Step repository
+        /// </summary>
         private readonly IStepRepository _stepRepository = new StepRepository();
 
         #endregion
@@ -41,11 +41,18 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #region Ctor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         private StepService()
             : this(null)
         {
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="stepRepository"></param>
         private StepService(IStepRepository stepRepository)
         {
             _stepRepository = stepRepository ?? new StepRepository();
@@ -54,6 +61,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             this._jobName = string.Empty;
         }
 
+        /// <summary>
+        /// Create step service
+        /// </summary>
+        /// <returns></returns>
         public static IStepService Create()
         {
             return new StepService();
@@ -61,20 +72,34 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #endregion
 
-
+        /// <summary>
+        /// get from server
+        /// </summary>
+        /// <param name="serverName"></param>
+        /// <returns></returns>
         public IStepService FromServer(string serverName)
         {
             this._serverName = serverName;
+
             return this;
         }
 
+        /// <summary>
+        /// filter by job name
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
         public IStepService WithJob(string jobName)
         {
             this._jobName = jobName;
+
             return this;
         }
 
-
+        /// <summary>
+        /// get step
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StepDetail> GetSteps()
         {
             var criteria = new GetListJobCriteria

@@ -39,6 +39,7 @@ using System.Collections;
                     {
                         return ds.Tables[0];
                     }
+
                     return null;
                 }
             }
@@ -49,7 +50,7 @@ using System.Collections;
         }
 
         /// <summary>
-        /// Get Datatable with server Name
+        /// Get Data table with server Name
         /// </summary>
         /// <param name="criteria"></param>
         /// <param name="serverName"></param>
@@ -71,6 +72,7 @@ using System.Collections;
                     {
                         return ds.Tables[0];
                     }
+
                     return null;
                 }
             }
@@ -86,7 +88,7 @@ using System.Collections;
         /// <typeparam name="S">Class</typeparam>
         /// <param name="criteria">Criteria</param>
         /// <param name="serverName">Server Name will be executed sp</param>
-        /// <param name="mapObjectFunction">Read datareader and pass object</param>
+        /// <param name="mapObjectFunction">Read data reader and pass object</param>
         /// <returns>Collection of object</returns>
         public virtual IEnumerable<S> Fetch<S>(ICriteria criteria, string serverIp, Func<IDataReader, S> mapObjectFunction) where S : class
         {
@@ -109,6 +111,7 @@ using System.Collections;
                     }
                 }
             }
+
             return listObject;
         }
 

@@ -24,6 +24,9 @@ namespace Fanex.Maintenance.Service.Impl
 
         #region Ctor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         private LogCategoryService()
         {
         }
@@ -36,7 +39,7 @@ namespace Fanex.Maintenance.Service.Impl
         #endregion Ctor
 
         /// <summary>
-        /// Get all categorys
+        /// Get all category
         /// </summary>
         /// <returns></returns>
         public IEnumerable<LogCategory> GetAll()
