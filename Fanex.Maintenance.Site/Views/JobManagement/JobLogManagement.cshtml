@@ -117,12 +117,11 @@
                 <td class="align-center">                 
                  @if (item.Step.Id == 0)
                  { 
-                    <a href="#" instanceid="@item.InstanceId" class="stepOutcome expand">
-                        
+                    <a href="#" instanceid="@item.InstanceId" class="stepOutcome expand">                        
                     </a>                 
                  }
                 </td>             
-                <td>
+                <td class="align-center">
                     @if (item.Step.Id != 0)
                     {
                         if (item.RunSatus == 1)
@@ -139,7 +138,7 @@
                         <img src="~/themes/job/img/warning.png" />
                     }                   
                 </td>
-                <td>
+                <td class="align-center width-100">
                     @item.Step.Id
                 </td>
                 <td>
@@ -160,7 +159,7 @@
                         <div class="relative">
                             <ul class="actions" style="visibility: hidden; opacity: 0;">
                                 <li><a href="#" onclick="JobLogManagement.StartJob('@Model.Server','@Model.Job_Name','@item.Step.Id', '@item.Step.Name');" class="dd-site">Run</a></li>
-                                <li><a href="#" class="dd-site">Copy to</a></li>
+                           @*     <li><a href="#" class="dd-site">Copy to</a></li>*@
                             </ul>
                         </div>
                     </div>
