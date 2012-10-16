@@ -10,6 +10,7 @@ var ScheduleManagementPage = function ($) {
             ScheduleManagementPage.dateFrom = $("#dateFrom").val();
             ScheduleManagementPage.dateTo = $("#dateTo").val();
             ScheduleManagementPage.buttonImage = $('#imagePath').val();
+
         },
 
         //disbaled when datetype is all
@@ -18,12 +19,14 @@ var ScheduleManagementPage = function ($) {
             if (type == "") {
                 $('#From').attr('disabled', 'disabled');
                 $('#To').attr('disabled', 'disabled');
-                $('.ui-datepicker-trigger').hide();
+                $('.tempcalendarimg').show();
+                $('.ui-datepicker-trigger').css("visibility", "hidden");
             }
             else {
                 $('#From').removeAttr('disabled', 'disabled');
                 $('#To').removeAttr('disabled', 'disabled');
-                $('.ui-datepicker-trigger').show();
+                $('.ui-datepicker-trigger').css("visibility", "visible");
+                $('.tempcalendarimg').hide();
             }
         },
 
@@ -48,6 +51,7 @@ var ScheduleManagementPage = function ($) {
                     dates.not(this).datepicker("option", option, date);
                 }
             });
+
         }
     };
 
