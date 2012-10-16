@@ -60,7 +60,7 @@
         @Html.HiddenFor(m => m.PageSize)
         <div class="filter-form">	           
             <div class="submit">
-		        <input id="submitbutton" type="submit" value="Submit" /> 
+		        <input id="submitbutton" onclick="SqlServerLogManagement.UpdatePaging();" type="submit" value="Submit" /> 
             </div>    
         </div>             	       		   
     </section>
