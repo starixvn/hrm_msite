@@ -466,6 +466,24 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Frequent Sub.
+        /// </summary>
+        public static string FrequentSubType {
+            get {
+                return ResourceManager.GetString("FrequentSubType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Frequent.
+        /// </summary>
+        public static string FrequentType {
+            get {
+                return ResourceManager.GetString("FrequentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         public static string From {
@@ -925,7 +943,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Freq (Type : Interval).
+        ///   Looks up a localized string similar to Frequent (Type : Interval).
         /// </summary>
         public static string ScheduleFreq {
             get {
@@ -934,7 +952,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FreqSub (Type : Interval).
+        ///   Looks up a localized string similar to Frequent Sub (Type : Interval).
         /// </summary>
         public static string ScheduleFreqSub {
             get {

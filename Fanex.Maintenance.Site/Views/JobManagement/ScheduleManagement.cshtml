@@ -25,6 +25,14 @@
 @using (Html.BeginForm())
 { 
     <section id="filter-bar">    
+    		<div class="filter-form">	
+            <div class="lbl-field">
+			    @Html.LabelFor(m => m.Server)
+		    </div>   
+            <div class="edit-field">	
+                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
+            </div>
+        </div>  
          <div class="filter-form">	
             <div class="lbl-field">
 			    @ViewResource.ScheduleName
@@ -32,18 +40,10 @@
             <div class="edit-field width-auto">	
                 @Html.TextBoxFor(m => m.Schedule_Name)                
             </div>
-        </div>     
-		<div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.Server)
-		    </div>   
-            <div class="edit-field">	
-                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
-            </div>
-        </div>        
+        </div>           
         <div class="filter-form">	                              
             <div class="lbl-field ">
-			    @Html.LabelFor(m => m.FreqType)
+			    @ViewResource.FrequentType
 		    </div>
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.FreqType,
@@ -61,7 +61,7 @@
         </div> 
           <div class="filter-form">	                              
             <div class="lbl-field ">
-			    @Html.LabelFor(m => m.FreqSubType)
+			    @ViewResource.FrequentSubType
 		    </div>
             <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.FreqSubType,
@@ -118,16 +118,17 @@
             <th>
                 #
             </th>
-             <th>
-                @ViewResource.Server
-            </th>
+            
             <th class="width-140">
                 @ViewResource.ScheduleName
             </th>
-            <th class="width-200">
+             <th>
+                @ViewResource.Server
+            </th>
+            <th class="width-160">
                 @ViewResource.ScheduleFreq
             </th>
-            <th class="width-200">
+            <th class="width-180">
                 @ViewResource.ScheduleFreqSub
             </th>
             <th>
@@ -142,10 +143,10 @@
             <th>
                 @ViewResource.Enabled
             </th>
-           
+          @* 
             <th>
                 @ViewResource.Edit
-            </th>
+            </th>*@
         </tr>
     </thead>
     <tbody class="align-center">
@@ -159,31 +160,46 @@
                 <td class="align-center">
                     @(i)
                 </td>
-                 <td>
-                    @schedule.ServerIp
-                </td>
-                <td class="width-140">
+               
+                <td class="width-140 align-left">
                     @schedule.Name
                 </td>
-                <td class="width-180">
+                  <td>
+                    @schedule.ServerIp
+                </td>
+                <td class="width-160 align-left">
                     @schedule.FreqIntervalCombine
                 </td>
-                <td class="width-180">
+                <td class="width-180 align-left">
                     @schedule.FreqSubIntervalCombine
                 </td>
                 <td class="width-120">
                     @schedule.ActiveStartDate.ToFullDateWithTimeAdded(schedule.ActiveStartTime)
                 </td>
                 <td class="width-100">
+                @if (schedule.ActiveEndDate.Year == 9999)
+                {
+                    @ViewResource.N_A
+                }
+                else
+                {
                     @schedule.ActiveEndDate.ToDateString()
+                }
                 </td>
                 <td>
+                @if (schedule.JobCount > 0)
+                {
                     @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "JobManagement",
                         new
                         {
                             server = schedule.ServerIp,
                             schedule = schedule.Name
                         }, null)
+                }
+                else
+                {
+                    @: 0
+                }
                 </td>
                 <td>
                  @if (schedule.Enable == 1)
@@ -192,11 +208,11 @@
                  }
                 </td>
                
-                <td>
+               @* <td>
                 <div class="action-wrp">
                     <a href="#" class="btn-edit">Action</a>
                     </div>
-                </td>
+                </td>*@
             </tr>
             }
             if (i.Equals(0))

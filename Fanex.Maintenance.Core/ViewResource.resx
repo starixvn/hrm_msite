@@ -346,10 +346,10 @@
     <value>Active Start Date</value>
   </data>
   <data name="ScheduleFreq" xml:space="preserve">
-    <value>Freq (Type : Interval)</value>
+    <value>Frequent (Type : Interval)</value>
   </data>
   <data name="ScheduleFreqSub" xml:space="preserve">
-    <value>FreqSub (Type : Interval)</value>
+    <value>Frequent Sub (Type : Interval)</value>
   </data>
   <data name="ScheduleName" xml:space="preserve">
     <value>Schedule</value>
@@ -515,5 +515,11 @@
   </data>
   <data name="N_A" xml:space="preserve">
     <value>N/A</value>
+  </data>
+  <data name="FrequentSubType" xml:space="preserve">
+    <value>Frequent Sub</value>
+  </data>
+  <data name="FrequentType" xml:space="preserve">
+    <value>Frequent</value>
   </data>
 </root>
