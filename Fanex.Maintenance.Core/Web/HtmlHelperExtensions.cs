@@ -31,7 +31,7 @@ namespace Fanex.Maintenance.Core.Web
             string dateFormat = "MMM dd, yyyy", 
             string timeFormat = "HH:mm tt")
         {
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='time'>{1}</span></span>",
+            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
                 value.ToString(dateFormat), 
                 value.ToString(timeFormat)));
         }
@@ -63,9 +63,9 @@ namespace Fanex.Maintenance.Core.Web
             DateTime date = DateTime.ParseExact(strTime, 
                 "HHmmss", 
                 CultureInfo.InvariantCulture, 
-                DateTimeStyles.None);           
-           
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='time'>{1}</span></span>",
+                DateTimeStyles.None);
+
+            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
                 value.ToString(dateFormat), 
                 date.ToString(timeFormat)));
         }
@@ -110,7 +110,7 @@ namespace Fanex.Maintenance.Core.Web
                 CultureInfo.InvariantCulture, 
                 DateTimeStyles.None);
 
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='time'>{1}</span></span>",
+            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
                 date.ToString(dateFormat), 
                 date.ToString(timeFormat)));
         }
