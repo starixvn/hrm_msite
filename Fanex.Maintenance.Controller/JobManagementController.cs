@@ -27,6 +27,7 @@ namespace Fanex.Maintenance.Controller
     /// <summary>zz
     /// TODO: Update summary.
     /// </summary>
+    [Authorize]
     public class JobManagementController : Controller
     {
         private readonly IJobService _jobService = JobService.Create();
@@ -43,12 +44,7 @@ namespace Fanex.Maintenance.Controller
         }
      
         public ActionResult LeftMenuPage()
-        {
-            //var routeData = ControllerContext.ParentActionViewContext.RouteData;
-            //ViewBag.Controller = routeData.Values["controller"];
-            //ViewBag.Action = routeData.Values["action"];
-            //ViewBag.Server = Request.QueryString["server"] != null ?
-            //        Request.QueryString["server"].Replace('.', '_') : string.Empty;
+        {     
             return View(DatabaseServersSection.Instance.Servers);
         }
 
@@ -112,6 +108,7 @@ namespace Fanex.Maintenance.Controller
             }).ToList();
 
             ViewBag.ListJob = _jobService
+                .WithSchedule(schedule)
                 .FromServer(server)
                 .GetJobs();
 
