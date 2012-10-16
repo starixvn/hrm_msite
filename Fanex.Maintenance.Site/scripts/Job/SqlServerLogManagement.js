@@ -42,7 +42,6 @@ var SqlServerLogManagement = function ($) {
             var currentIndex = parseInt($('#PageIndex').val());
             if (currentIndex + moveIndex >= 0) {
                 $('#PageIndex').val(currentIndex + moveIndex);
-                SqlServerLogManagement.UpdatePaging();
                 $('.content form').submit();
             }
         },
@@ -50,10 +49,8 @@ var SqlServerLogManagement = function ($) {
             $('#PageSize').val($('#PageSizeSelect').val());
         },
         UpdatePaging: function () {
-            if (SqlServerLogManagement.serverIp != $('#Server').val()) {
-                $('#PageIndex').val(0);
-                $('#PageSize').val($('#PageSizeSelect').val());
-            }
+            $('#PageIndex').val(0);
+            $('#PageSize').val($('#PageSizeSelect').val());
         }
     };
 
