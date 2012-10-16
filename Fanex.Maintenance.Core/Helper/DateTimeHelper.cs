@@ -28,16 +28,20 @@ namespace Fanex.Maintenance.Core.Helper
         /// <returns>fulltime string</returns>
         public static string GetFullTime(int timeValue)
         {
-            string fullTimeString = timeValue.ToString();
-            if (fullTimeString.Length == 5)
+            string strTime = timeValue.ToString();
+            if (strTime.Length < 6)
             {
-                fullTimeString = "0" + fullTimeString;
+                int count = 6 - strTime.Length;
+                for (int i = 0; i < count; i++)
+                {
+                    strTime = strTime.Insert(0, "0");
+                }
             }
-            fullTimeString = fullTimeString.Length == 6 ? DateTime.ParseExact(fullTimeString,
+            strTime = DateTime.ParseExact(strTime,
                     "HHmmss",
                     CultureInfo.InvariantCulture,
-                    DateTimeStyles.None).ToLongTimeString() : DateTime.MinValue.ToLongTimeString();
-            return fullTimeString;
+                    DateTimeStyles.None).ToString("HH:mm:ss tt");
+            return strTime;
         }
 
         /// <summary>

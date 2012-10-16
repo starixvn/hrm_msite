@@ -39,6 +39,14 @@ namespace Fanex.Maintenance.Core.Web
                 value.ToString(dateFormat), value.ToString(timeFormat)));
         }
 
+        /// <summary>
+        /// Convert the Date value and combine with time(int) value to specific format for showing on wiew
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="time"></param>
+        /// <param name="dateFormat"></param>
+        /// <param name="timeFormat"></param>
+        /// <returns></returns>
         public static IHtmlString ToFullDateWithTimeAdded(this DateTime value, 
             int time = 0,
             string dateFormat = "MMM dd, yyyy", 
