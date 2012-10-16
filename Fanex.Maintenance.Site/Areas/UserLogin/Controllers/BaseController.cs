@@ -1,4 +1,13 @@
-﻿namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
+﻿// --------------------------------------------------------------------------
+// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.10.16">Created</change>
+// </history>
+
+namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Configuration;
@@ -6,6 +15,9 @@
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Context;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class BaseController : Controller
     {
         protected readonly CurrentContext _currentContext;

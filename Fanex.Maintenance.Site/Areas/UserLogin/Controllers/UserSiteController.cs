@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
-using Fanex.NAP.Core.Model.ValueObject;
-using Fanex.NAP.Core.Service.Impl;
-using Fanex.NAP.Core.Service.Interface;
-using Fanex.Common;
-using Fanex.NAP.Core.Web.Session;
-using System.Web;
-using Fanex.NAP.Core.Model;
-using Fanex.NAP.Core.Business;
+﻿// --------------------------------------------------------------------------
+// <copyright file="UserSiteController.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.10.16">Created</change>
+// </history>
+
 
 namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
+    using System;
+    using System.Web.Mvc;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
+    using Fanex.Common;
+    using Fanex.NAP.Core.Web.Session;
+    using System.Web;
+    using Fanex.NAP.Core.Model;
+    using Fanex.NAP.Core.Business;
+
     public class UserSiteController : BaseController
     {
         #region members

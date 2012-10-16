@@ -157,7 +157,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get detail mail by mailid
+        /// Get detail mail by mail id
         /// </summary>
         /// <param name="mailID"></param>
         /// <returns></returns>

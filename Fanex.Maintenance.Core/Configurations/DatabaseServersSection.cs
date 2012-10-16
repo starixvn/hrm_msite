@@ -80,6 +80,7 @@ namespace Fanex.Maintenance.Core.Configurations
             {
                 return (ServerElement)BaseGet(index);
             }
+
             set
             {
                 if (BaseGet(index) != null)

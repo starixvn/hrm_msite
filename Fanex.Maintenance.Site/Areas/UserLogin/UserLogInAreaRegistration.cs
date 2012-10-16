@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Http.Dispatcher;
-using System.Web.Routing;
+﻿// --------------------------------------------------------------------------
+// <copyright file="UserLogInAreaRegistration.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.10.16">Created</change>
+// </history>
 
 namespace Fanex.NAP.Hub.Areas.UserLogin
 {
+    using System.Web.Mvc;
+
     public class UserLoginAreaRegistration : AreaRegistration
     {
         public override string AreaName
@@ -22,19 +25,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin
         {
             context.MapRoute(
                 AreaName + "_DefaultAreas",
-
                 "UserLogin/{controller}/{action}/{id}",
-
-                new { controller = "Login", action = "Index", id = UrlParameter.Optional }
-
-            );
+                new { controller = "Login", action = "Index", id = UrlParameter.Optional });
 
             context.MapRoute(
               AreaName + "_Themes",
-              "UserLogin/Themes/{resourceName}"
-          );
+              "UserLogin/Themes/{resourceName}");
 
         }
-        
+
     }
 }

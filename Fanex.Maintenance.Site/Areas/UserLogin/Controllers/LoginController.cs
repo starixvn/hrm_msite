@@ -1,19 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
-using Fanex.NAP.Core.Criteria.User;
-using Fanex.NAP.Core.Model;
-using Fanex.NAP.Core.Service.Impl;
-using Fanex.NAP.Core.Service.Interface;
-using Fanex.NAP.Core.Web;
-using Fanex.NAP.Core.Web.Auth;
-using Fanex.NAP.Core.Web.Session;
-using Fanex.Common;
+﻿// --------------------------------------------------------------------------
+// <copyright file="LoginController.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.10.16">Created</change>
+// </history>
 
 namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Security;
+    using Fanex.NAP.Core.Criteria.User;
+    using Fanex.NAP.Core.Model;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
+    using Fanex.NAP.Core.Web;
+    using Fanex.NAP.Core.Web.Auth;
+    using Fanex.NAP.Core.Web.Session;
+    using Fanex.Common;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class LoginController : BaseController
     {
         #region members
