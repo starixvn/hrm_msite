@@ -62,7 +62,6 @@ $(document).ready(function () {
         var $trThis = $this.parents('tr');
 
         if ($this.hasClass("expand")) {
-            console.log("A");
             $this.removeClass("expand");
             $this.addClass("collapse");
         }
@@ -72,12 +71,20 @@ $(document).ready(function () {
         }
 
         var trNext = $trThis.next();
-        while (true) {
+        var isLoop = true;
+        while (isLoop) {
             trNext.toggle();
             trNext = trNext.next();
-            if (trNext.attr('id') != undefined) {
-                return;
+            console.log(trNext);
+            if (trNext != null) {
+                if (trNext.attr('id') != undefined) {
+                    isLoop = false;
+                }
             }
+            else {
+                isLoop = false;
+            }
+            
         }
 
     });
