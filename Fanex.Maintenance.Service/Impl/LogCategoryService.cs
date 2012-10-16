@@ -14,6 +14,9 @@ namespace Fanex.Maintenance.Service.Impl
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class LogCategoryService
     {
         #region Member
@@ -31,6 +34,10 @@ namespace Fanex.Maintenance.Service.Impl
         {
         }
 
+        /// <summary>
+        /// Create log category service
+        /// </summary>
+        /// <returns></returns>
         public static LogCategoryService Create()
         {
             return new LogCategoryService();

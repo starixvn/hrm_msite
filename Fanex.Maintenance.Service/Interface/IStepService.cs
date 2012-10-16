@@ -9,10 +9,7 @@
 
 namespace Fanex.Maintenance.Service.Interface
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.Maintenance.Entity.Domain;
 
     /// <summary>
@@ -20,8 +17,18 @@ namespace Fanex.Maintenance.Service.Interface
     /// </summary>
     public interface IStepService
     {
+        /// <summary>
+        /// Get step by job id
+        /// </summary>
+        /// <param name="jobId"></param>
+        /// <returns></returns>
         IEnumerable<Step> GetStepByJob(int jobId);
 
+        /// <summary>
+        /// Get step by job name
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
         IEnumerable<Step> GetStepByJob(string jobName);
     }
 }

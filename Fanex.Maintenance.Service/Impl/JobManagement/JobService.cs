@@ -293,8 +293,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     Logger.Log.Error(ex.Message, ex);
                 }
             }
-            else   //// get job all server
+            else  
             {
+                //// get job all server
                 foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                 {
                     try

@@ -34,10 +34,17 @@ namespace Fanex.Maintenance.Service.Impl
 
         #region Ctor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         private MailService()
         {
         }
 
+        /// <summary>
+        /// Create mail service
+        /// </summary>
+        /// <returns></returns>
         public static MailService Create()
         {
             return new MailService();

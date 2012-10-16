@@ -30,16 +30,27 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #region Ctor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         private SqlServerLogService()
             : this(null)
         {
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="sqlServerLogRepository"></param>
         private SqlServerLogService(ISqlServerLogRepository sqlServerLogRepository)
         {
             _sqlServerLogRepository = sqlServerLogRepository ?? new SqlServerLogRepository();
         }
 
+        /// <summary>
+        /// Create sql server service
+        /// </summary>
+        /// <returns></returns>
         public static ISqlServerLogService Create()
         {
             return new SqlServerLogService();

@@ -16,6 +16,11 @@ namespace Fanex.Maintenance.Service.Interface
     /// </summary>
     public interface IUserService
     {
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
         ICommandResult Login(ICriteria criteria);
     }
 }
