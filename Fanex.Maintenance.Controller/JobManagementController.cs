@@ -5,8 +5,8 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Ricky.Nguyen" date="2012.10.8">Created</change>
+//   <change who="Ricky.Nguyen" date="2012.10.16">StyleCop</change>
 // </history>
-
 
 namespace Fanex.Maintenance.Controller
 {
@@ -30,25 +30,54 @@ namespace Fanex.Maintenance.Controller
     [Authorize]
     public class JobManagementController : Controller
     {
+        /// <summary>
+        /// Job Service
+        /// </summary>
         private readonly IJobService _jobService = JobService.Create();
+        
+        /// <summary>
+        /// Schedule Service
+        /// </summary>
         private readonly IScheduleService _scheduleService = ScheduleService.Create();
+        
+        /// <summary>
+        /// Step Service
+        /// </summary>
         private readonly IStepService _stepService = StepService.Create();
+        
+        /// <summary>
+        /// Server Log Service
+        /// </summary>
         private readonly ISqlServerLogService _sqlServerLogService = SqlServerLogService.Create();
 
         #region Pages
 
+        /// <summary>
+        /// Main Content Page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult MainContentPage()
         {
             return View();
         }
-     
+        
+        /// <summary>
+        /// Left menu Page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult LeftMenuPage()
         {     
             return View(DatabaseServersSection.Instance.Servers);
         }
 
         #region ScheduleManagement
+
+        /// <summary>
+        /// Schedule Management Page
+        /// </summary>
+        /// <param name="server"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult ScheduleManagement(string server)
         {
@@ -65,6 +94,11 @@ namespace Fanex.Maintenance.Controller
                 });
         }
 
+        /// <summary>
+        /// Get Schedule List With Filter
+        /// </summary>
+        /// <param name="getAllScheduleCriteria"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ScheduleManagement(GetAllScheduleCriteria getAllScheduleCriteria)
         {
@@ -93,6 +127,12 @@ namespace Fanex.Maintenance.Controller
 
         #region JobManagement
 
+        /// <summary>
+        /// Job Management Page
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="schedule"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult JobManagement(string server = "", string schedule = "")
         {
@@ -123,6 +163,11 @@ namespace Fanex.Maintenance.Controller
             return View(criteria);
         }
 
+        /// <summary>
+        /// Get List Job with filter
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult JobManagement(GetListJobCriteria criteria)
         {
@@ -144,13 +189,18 @@ namespace Fanex.Maintenance.Controller
                 Value = s.Name
             }).ToList();
 
-
             ViewBag.ListJob = listJob;
             ViewBag.ListServer = GetServer();
 
             return View(criteria);
         }
 
+        /// <summary>
+        /// Start a job
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult StartJob(string server, string jobName)
         {
@@ -164,6 +214,12 @@ namespace Fanex.Maintenance.Controller
             });
         }
 
+        /// <summary>
+        /// Stop a job
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult StopJob(string server, string jobName)
         {
@@ -176,6 +232,12 @@ namespace Fanex.Maintenance.Controller
             });
         }
 
+        /// <summary>
+        /// Get Job Information after start or stop
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult GetJob(string server, string jobName)
         {
@@ -193,6 +255,7 @@ namespace Fanex.Maintenance.Controller
                 nextRunDate = jobSchedule.NextRunDate == 0 ? ViewResource.N_A : jobSchedule.NextRunDate.ToFullDateString(jobSchedule.NextRunTime).ToHtmlString();
                 jobSchedule.ServerIp = jobSchedule.ServerIp.Replace('.', '_');
             }
+
             return Json(new
             {
                 JobUpdated = jobSchedule,
@@ -206,6 +269,12 @@ namespace Fanex.Maintenance.Controller
 
         #region StepManagement
 
+        /// <summary>
+        /// Get Step
+        /// </summary>
+        /// <param name="job"></param>
+        /// <param name="server"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult StepManagement(string job, string server)
         {
@@ -223,6 +292,12 @@ namespace Fanex.Maintenance.Controller
 
         #region Job Log
 
+        /// <summary>
+        /// Get Job Log
+        /// </summary>
+        /// <param name="job"></param>
+        /// <param name="server"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult JobLogManagement(string job, string server)
         {
@@ -259,6 +334,11 @@ namespace Fanex.Maintenance.Controller
             return View(criteria);
         }
 
+        /// <summary>
+        /// Get Job log with Filter
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult JobLogManagement(GetListJobCriteria criteria)
         {
@@ -290,10 +370,14 @@ namespace Fanex.Maintenance.Controller
             return View(criteria);
         }
 
-
         #endregion
 
         #region Sql Server Log Management
+        /// <summary>
+        /// Get Server Log
+        /// </summary>
+        /// <param name="server"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult ServerLogManagement(string server)
         {
@@ -314,6 +398,11 @@ namespace Fanex.Maintenance.Controller
                 });
         }
 
+        /// <summary>
+        /// Get Server Log With Filter
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ServerLogManagement(GetSqlServerLogCriteria criteria)
         {
@@ -330,7 +419,6 @@ namespace Fanex.Maintenance.Controller
                 .ToDate(criteria.To)
                 .GetSqlServerLogs().Skip(pageSize * pageIndex).Take(pageSize);
 
-
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = pageIndex,
@@ -341,6 +429,11 @@ namespace Fanex.Maintenance.Controller
         #endregion
 
         #region Sql Agent Log Management
+        /// <summary>
+        /// Get Sql Server Agent Log
+        /// </summary>
+        /// <param name="server"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult AgentLogManagement(string server)
         {
@@ -361,6 +454,11 @@ namespace Fanex.Maintenance.Controller
             });
         }
 
+        /// <summary>
+        /// Get Sql Server Agent Log With Filter
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AgentLogManagement(GetSqlServerLogCriteria criteria)
         {
@@ -389,6 +487,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Server Management
 
+        /// <summary>
+        /// Server Management Page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult ServerManagement()
         {
@@ -401,6 +503,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Private
 
+        /// <summary>
+        /// Get List Server From Config File
+        /// </summary>
+        /// <returns></returns>
         private List<SelectListItem> GetServer()
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -412,9 +518,13 @@ namespace Fanex.Maintenance.Controller
                     Value = item.ServerIp
                 });
             }
+
             return list;
         }
 
+        /// <summary>
+        /// Init for Pagesize
+        /// </summary>
         private void InitPageSize()
         {
             List<SelectListItem> listPageSize = new List<SelectListItem>();
@@ -449,6 +559,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Ajax
 
+        /// <summary>
+        /// Get Schedule Ajax
+        /// </summary>
+        /// <param name="server"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult GetSchedule(string server)
         {

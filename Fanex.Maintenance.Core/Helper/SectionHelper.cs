@@ -7,13 +7,8 @@
 //   <change who="Ricky.Nguyen" date="2012.10.8">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Core.Helper
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.Maintenance.Core.Configurations;
 
     /// <summary>

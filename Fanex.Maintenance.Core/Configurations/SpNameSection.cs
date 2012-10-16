@@ -16,6 +16,9 @@ namespace Fanex.Maintenance.Core.Configurations
     /// </summary>
     public class SpNameSection : ConfigurationSection
     {
+        /// <summary>
+        /// List Sp Name
+        /// </summary>
         [ConfigurationProperty("spList", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(SpNameCollection),
             AddItemName = "add")]
@@ -23,29 +26,41 @@ namespace Fanex.Maintenance.Core.Configurations
         {
             get
             {
-                var spNameCollection =
+                var storeProcedureNameCollection =
                     (SpNameCollection)base["spList"];
-                return spNameCollection;
+                return storeProcedureNameCollection;
             }
         }
 
+        /// <summary>
+        /// Static instance for Reference
+        /// </summary>
         public static SpNameSection Instance
         {
             get
             {
-                var spNameSection =
+                var storeProcedureNameSection =
                  ConfigurationManager.GetSection("SpNameSection") as SpNameSection;
-                return spNameSection;
+                return storeProcedureNameSection;
             }
         }
     }
 
+    /// <summary>
+    /// Sp Name Collection
+    /// </summary>
     public class SpNameCollection : ConfigurationElementCollection
     {
+        /// <summary>
+        /// Contructor
+        /// </summary>
         public SpNameCollection()
         {
         }
 
+        /// <summary>
+        /// Collection Type
+        /// </summary>
         public override ConfigurationElementCollectionType CollectionType
         {
             get
@@ -54,26 +69,48 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
+        /// <summary>
+        /// Add Element
+        /// </summary>
+        /// <param name="mappingElement"></param>
         public void Add(SpNameElement mappingElement)
         {
             BaseAdd(mappingElement);
         }
 
+        /// <summary>
+        /// Base Add
+        /// </summary>
+        /// <param name="element"></param>
         protected override void BaseAdd(ConfigurationElement element)
         {
             BaseAdd(element, false);
         }
 
+        /// <summary>
+        /// Create new Element
+        /// </summary>
+        /// <returns></returns>
         protected override ConfigurationElement CreateNewElement()
         {
             return new SpNameElement();
         }
 
+        /// <summary>
+        /// Get Element Key
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
         protected override object GetElementKey(ConfigurationElement element)
         {
             return ((SpNameElement)element).Key + ((SpNameElement)element).Name;
         }
 
+        /// <summary>
+        /// Get Element with index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public SpNameElement this[int index]
         {
             get
@@ -87,13 +124,20 @@ namespace Fanex.Maintenance.Core.Configurations
                 {
                     BaseRemoveAt(index);
                 }
+
                 BaseAdd(index, value);
             }
         }
     }
 
+    /// <summary>
+    /// Sp name element
+    /// </summary>
     public class SpNameElement : ConfigurationElement
     {
+        /// <summary>
+        /// Key Attribute
+        /// </summary>
         [ConfigurationProperty("Key", IsRequired = true, IsKey = true)]
         public string Key
         {
@@ -108,6 +152,9 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
+        /// <summary>
+        /// Name Attribute
+        /// </summary>
         [ConfigurationProperty("Name", IsRequired = true)]
         public string Name
         {
