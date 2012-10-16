@@ -29,34 +29,34 @@
 { 
     <section id="filter-bar">    
          <div class="filter-form">	
-            <div class="lbl-field width-auto">
+            <div class="lbl-field">
 			    @Html.LabelFor(m => m.Job_Name)
 		    </div>   
-            <div class="edit-field width-auto">	
+            <div class="edit-field">	
                 @Html.TextBoxFor(m => m.Job_Name)                
             </div>
         </div>     
 		<div class="filter-form">	
-            <div class="lbl-field width-auto">
+            <div class="lbl-field">
 			    @Html.LabelFor(m => m.Server)
 		    </div>   
-            <div class="edit-field width-auto">	
+            <div class="edit-field">	
                 @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
             </div>
         </div>     
         <div class="filter-form">	
-            <div class="lbl-field width-auto">
+            <div class="lbl-field">
 			    @Html.LabelFor(m => m.Schedule)
 		    </div>   
-            <div class="edit-field width-auto">	
+            <div class="edit-field">	
                 @Html.DropDownListFor(m => m.Schedule, (List<SelectListItem>)ViewBag.ListSchedule, "All")			                
             </div>
         </div>        
         <div class="filter-form">	
-            <div class="lbl-field width-auto">
+            <div class="lbl-field">
 			    @Html.LabelFor(m => m.Enabled)
 		    </div>
-            <div class="edit-field width-auto">				                
+            <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.Enabled,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.Enabled,Value=((int)Status.Enabled).ToString()},
@@ -66,10 +66,10 @@
 		    </div>					    
         </div> 
         <div class="filter-form">	                              
-             <div class="lbl-field width-auto">
+             <div class="lbl-field">
 			    @Html.LabelFor(m => m.Execution_Status)
 		    </div>
-            <div class="edit-field width-auto">				                
+            <div class="edit-field">				                
                 @Html.DropDownListFor(m => m.Execution_Status,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.Obsolete,Value=((int)ExecutionStatus.Obsolete).ToString()},                        
@@ -83,7 +83,7 @@
                 , "All")
 		    </div>			  
         </div>             
-        <div class="filter-form">            	         
+        <div class="filter-form" style="margin-left:50px;">            	         
             <div class="submit">
 		            <input type="submit" value="Submit" />                        
             </div>
