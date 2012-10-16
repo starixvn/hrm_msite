@@ -53,7 +53,7 @@
             <div class="lbl-field">
 			    @Html.LabelFor(m => m.From)
 		    </div>   
-            <div class="edit-field">	                    
+            <div class="edit-field" style="position:relative;">	                    
                  @Html.TextBox("From", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
                 @* , new { @style = "width:90px;margin-right:5px;" }) *@
             </div>
@@ -62,7 +62,7 @@
             <div class="lbl-field">
 			    @Html.LabelFor(m => m.To)
 		    </div>   
-            <div class="edit-field">	                
+            <div class="edit-field" style="position:relative;">	                
                 @Html.TextBox("To", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
                 @*, new { @style = "width:90px;margin-right:5px;" })*@
             </div>

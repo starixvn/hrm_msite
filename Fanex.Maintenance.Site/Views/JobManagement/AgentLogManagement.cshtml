@@ -140,14 +140,18 @@
         }
     </tbody>
      <tfoot>
-          
+          @if (Model.PageIndex == 0 && sqlServerLogs.Count() == 0)
+          {
+          }
+          else
+          {
                 <tr>
                     <td class="align-center" colspan="10">
                         <a href="#" class="pagiPre" style="margin-right: 50px;" onclick="SqlServerLogManagement.OnNextPage(-1);" ><< Pre</a> <a href="#" class="pagiNext" onclick="SqlServerLogManagement.OnNextPage(1);">
                             Next >></a>
                     </td>
                 </tr>
-
+          }
         </tfoot>
 </table>
 </article>

@@ -19,14 +19,14 @@ var ScheduleManagementPage = function ($) {
             if (type == "") {
                 $('#From').attr('disabled', 'disabled');
                 $('#To').attr('disabled', 'disabled');
-                $('.tempcalendarimg').show();
+                $('.tempcalendarimg').css("visibility", "visible");
                 $('.ui-datepicker-trigger').css("visibility", "hidden");
             }
             else {
                 $('#From').removeAttr('disabled', 'disabled');
                 $('#To').removeAttr('disabled', 'disabled');
                 $('.ui-datepicker-trigger').css("visibility", "visible");
-                $('.tempcalendarimg').hide();
+                $('.tempcalendarimg').css("visibility", "hidden");
             }
         },
 
