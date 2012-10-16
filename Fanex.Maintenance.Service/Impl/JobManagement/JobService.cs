@@ -283,11 +283,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             try
             {
-                Hashtable outputParams = _jobRepository.StartJob(startJobCriteria, this._server);
+                _jobRepository.StartJob(startJobCriteria, this._server);
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
                 commandResult.Code = 1000;
                 commandResult.Message = ex.Message;
             }
@@ -313,11 +312,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             try
             {
-                Hashtable outputParams = _jobRepository.StartJob(stopJobCriteria, this._server);
+                _jobRepository.StartJob(stopJobCriteria, this._server);
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
                 commandResult.Code = 1000;
                 commandResult.Message = ex.Message;
             }
