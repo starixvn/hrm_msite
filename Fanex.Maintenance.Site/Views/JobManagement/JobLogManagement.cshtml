@@ -159,7 +159,7 @@
                         <span class="btn-action">Action</span>
                         <div class="relative">
                             <ul class="actions" style="visibility: hidden; opacity: 0;">
-                                <li><a href="#" class="dd-site">Run</a></li>
+                                <li><a href="#" onclick="JobLogManagement.StartJob('@Model.Server','@Model.Job_Name','@item.Step.Id', '@item.Step.Name');" class="dd-site">Run</a></li>
                                 <li><a href="#" class="dd-site">Copy to</a></li>
                             </ul>
                         </div>
