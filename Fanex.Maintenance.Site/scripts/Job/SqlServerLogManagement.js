@@ -6,11 +6,13 @@ var SqlServerLogManagement = function ($) {
         dateFrom: null,
         dateTo: null,
         buttonImage: null,
+        serverIpOld: null,
 
         InitData: function () {
             SqlServerLogManagement.dateFrom = $("#dateFrom").val();
             SqlServerLogManagement.dateTo = $("#dateTo").val();
             SqlServerLogManagement.buttonImage = $('#imagePath').val();
+            SqlServerLogManagement.serverIp = $('#Server').val();
             $('#PageSizeSelect').val($('#PageSize').val());
         },
 
@@ -40,12 +42,18 @@ var SqlServerLogManagement = function ($) {
             var currentIndex = parseInt($('#PageIndex').val());
             if (currentIndex + moveIndex >= 0) {
                 $('#PageIndex').val(currentIndex + moveIndex);
+                SqlServerLogManagement.UpdatePaging();
                 $('.content form').submit();
             }
         },
         OnChangePageSize: function () {
             $('#PageSize').val($('#PageSizeSelect').val());
-            $('.content form').submit();
+        },
+        UpdatePaging: function () {
+            if (SqlServerLogManagement.serverIp != $('#Server').val()) {
+                $('#PageIndex').val(0);
+                $('#PageSize').val($('#PageSizeSelect').val());
+            }
         }
     };
 
