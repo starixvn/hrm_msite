@@ -39,6 +39,29 @@ namespace Fanex.Maintenance.Core.Web
                 value.ToString(dateFormat), value.ToString(timeFormat)));
         }
 
+        public static IHtmlString ToFullDateWithTimeAdded(this DateTime value, 
+            int time = 0,
+            string dateFormat = "MMM dd, yyyy", 
+            string timeFormat = "HH:mm tt")
+        {
+            //// check format time correct HHmmss
+            string strTime = time.ToString();
+            if (strTime.Length < 6)
+            {
+                int count = 6 - strTime.Length;
+                for (int i = 0; i < count; i++)
+                {
+                    strTime = strTime.Insert(0, "0");
+                }
+            }
+
+            DateTime date = DateTime.ParseExact(strTime, "HHmmss"
+                                           , CultureInfo.InvariantCulture
+                                           , DateTimeStyles.None);
+            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='time'>{1}</span></span>",
+                value.ToString(dateFormat), date.ToString(timeFormat)));
+        }
+
         /// <summary>
         /// Converts the value of the current System.DateTime object to its equivalent string
         /// representation using the specified format.

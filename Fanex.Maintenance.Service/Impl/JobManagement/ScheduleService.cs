@@ -278,21 +278,18 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             {
                 case (int)FrequentTime.OneTimeOnly:
                     combinedString += ViewResource.FreqOneTime;
-                    combinedString += GetFreqIntervalValue(freq, freqInterval, activeStartTime);
                     break;
                 case (int)FrequentTime.Daily:
                     combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.Daily);
                     break;
                 case (int)FrequentTime.Weekly:
                     combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.Weekly);
-                    combinedString += GetFreqIntervalValue(freq, freqInterval, activeStartTime);
                     break;
                 case (int)FrequentTime.Monthly:
                     combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.Monthly);
                     break;
                 case (int)FrequentTime.MonlyRelative:
                     combinedString += ViewResource.FreqMonthlyRelative;
-                    combinedString += GetFreqIntervalValue(freq, freqInterval, activeStartTime);
                     break;
                 case (int)FrequentTime.SqlAgentStart:
                     combinedString += ViewResource.FreqAgentStart;
@@ -301,7 +298,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     combinedString += ViewResource.FreqComputerIdle;
                     break;
             }
-
+            combinedString += GetFreqIntervalValue(freq, freqInterval, activeStartTime);
             return combinedString;
         }
 
@@ -320,6 +317,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 case (int)FrequentTime.OneTimeOnly:
                     freqIntervalName = DateTimeHelper.GetFullTime(activeStartTime);
 
+                    break;
+                case (int)FrequentTime.Daily:
+                    freqIntervalName = Convert.ToString(freqInterval);
                     break;
                 case (int)FrequentTime.Weekly:
                     string hexValue = Convert.ToString(freqInterval, 2);
