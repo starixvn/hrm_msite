@@ -34,13 +34,13 @@
             </div>
         </div>  
          <div class="filter-form">	
-            <div class="lbl-field">
+                <div class="lbl-field">
 			    @ViewResource.ScheduleName
-		    </div>   
+		        </div>   
             <div class="edit-field width-auto">	
                 @Html.TextBoxFor(m => m.Schedule_Name)                
-            </div>
-        </div>           
+                </div>
+        </div>        
         <div class="filter-form">	                              
             <div class="lbl-field ">
 			    @ViewResource.FrequentType
@@ -118,13 +118,12 @@
             <th>
                 #
             </th>
-            
             <th class="width-140">
                 @ViewResource.ScheduleName
             </th>
              <th>
                 @ViewResource.Server
-            </th>
+            </th>            
             <th class="width-160">
                 @ViewResource.ScheduleFreq
             </th>
@@ -132,24 +131,24 @@
                 @ViewResource.ScheduleFreqSub
             </th>
             <th>
-                @ViewResource.ScheduleAcStartDate
+                @ViewResource.ActiveStartDate
             </th>
             <th>
-                @ViewResource.ScheduleAcEndDate
+                @ViewResource.ActiveEndDate
             </th>
             <th>
-                @ViewResource.ScheduleTotalJob
+                @ViewResource.Job
             </th>
             <th>
                 @ViewResource.Enabled
-            </th>
+            </th>@*           
           @* 
             <th>
                 @ViewResource.Edit
             </th>*@
         </tr>
     </thead>
-    <tbody class="align-center">
+    <tbody>
         @{
             int i = 0;
             foreach (var schedule in schedules)
@@ -164,29 +163,29 @@
                 <td class="width-140 align-left">
                     @schedule.Name
                 </td>
-                  <td>
+                <td>
                     @schedule.ServerIp
-                </td>
-                <td class="width-160 align-left">
+                </td>                
+                <td >
                     @schedule.FreqIntervalCombine
                 </td>
-                <td class="width-180 align-left">
+                <td >
                     @schedule.FreqSubIntervalCombine
                 </td>
-                <td class="width-120">
+                <td class="align-center">
                     @schedule.ActiveStartDate.ToFullDateWithTimeAdded(schedule.ActiveStartTime)
                 </td>
-                <td class="width-100">
+                <td class="align-center">
                 @if (schedule.ActiveEndDate.Year == 9999)
                 {
                     @ViewResource.N_A
                 }
                 else
                 {
-                    @schedule.ActiveEndDate.ToDateString()
+                        @schedule.ActiveEndDate.ToDateString()                    
                 }
                 </td>
-                <td>
+                <td class="align-center">
                 @if (schedule.JobCount > 0)
                 {
                     @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "JobManagement",
@@ -199,16 +198,17 @@
                 else
                 {
                     @: 0
+                    @schedule.JobCount
                 }
                 </td>
-                <td>
+                <td class="align-center">
                  @if (schedule.Enable == 1)
                  {
                         <img src="~/themes/job/img/blank.png" alt="" class="ico-tick" />
                  }
                 </td>
                
-               @* <td>
+                @*<td>
                 <div class="action-wrp">
                     <a href="#" class="btn-edit">Action</a>
                     </div>

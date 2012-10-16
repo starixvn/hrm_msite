@@ -70,7 +70,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active End Date.
+        ///   Looks up a localized string similar to Active End.
         /// </summary>
         public static string ActiveEndDate {
             get {
@@ -79,7 +79,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active Start Date.
+        ///   Looks up a localized string similar to Active Start.
         /// </summary>
         public static string ActiveStartDate {
             get {
