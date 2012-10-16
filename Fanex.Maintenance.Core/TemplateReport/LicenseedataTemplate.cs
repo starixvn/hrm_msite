@@ -174,25 +174,24 @@ namespace Fanex.Maintenance.Core.TemplateReport
     {
         protected static string s18 = "<tr><td rowspan=\"5\" class=\"b\">Bet Count</td><td class=\"l ";
 
-        protected string BgSBBA = "{BgSBBA}";
-
         protected static string s19 = "\">SB + BA</td></tr><tr><td class=\"l ";
-
-        protected string BgSportsbook = "{BgSportsbook}";
 
         protected static string s20 = "\">Sportsbook</td></tr><tr><td class=\"l ";
 
-        protected string BgBA = "{BgBA}";
-
         protected static string s21 = "\">BA</td></tr><tr><td class=\"l ";
-
-        protected string BgRacing = "{BgRacing}";
 
         protected static string s22 = "\">Racing</td></tr><tr><td class=\"l ";
 
-        protected string BgNumberGame = "{BgNumberGame}";
-
         protected static string s23 = "\">Number Game</td></tr>";
+
+        public LicenseedataTemplate_BetCount_Block()
+        {
+            BgSBBA = "{BgSBBA}";
+            BgSportsbook = "{BgSportsbook}";
+            BgBA = "{BgBA}";
+            BgRacing = "{BgRacing}";
+            BgNumberGame = "{BgNumberGame}";
+        }
 
         /// <summary>
         /// To string template
@@ -200,7 +199,7 @@ namespace Fanex.Maintenance.Core.TemplateReport
         /// <param name="bd"></param>
         public void ToString(ref StringBuilder bd)
         {
-            SetBackgrounds(ref BgSBBA, ref BgSportsbook, ref BgBA, ref BgRacing, ref BgNumberGame);
+            //SetBackgrounds(ref BgSBBA, ref BgSportsbook, ref BgBA, ref BgRacing, ref BgNumberGame);
             bd.Append(s18);
             bd.Append(BgSBBA);
             bd.Append(s19);

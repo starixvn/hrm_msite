@@ -36,9 +36,11 @@ namespace Fanex.Maintenance.Core.Helper
                     {
                         connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
                     }
+
                     break;
                 }
             }
+
             return connectionString;
         }
 
@@ -62,29 +64,32 @@ namespace Fanex.Maintenance.Core.Helper
                     {
                         connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
                     }
+
                     break;
                 }
             }
+
             return connectionString;
         }
 
         /// <summary>
         /// Get Sp Name From SpKey
         /// </summary>
-        /// <param name="spKey">Sp Key</param>
+        /// <param name="storeProcedureKey">Sp Key</param>
         /// <returns>Sp Name Map with sp Key</returns>
-        public static string GetSpNameFromSpKey(string spKey)
+        public static string GetSpNameFromSpKey(string storeProcedureKey)
         {
-            string spName = string.Empty;
+            string storeProcedureName = string.Empty;
             foreach (SpNameElement sp in SpNameSection.Instance.SpNames)
             {
-                if (sp.Key == spKey)
+                if (sp.Key == storeProcedureKey)
                 {
-                    spName = sp.Name;
+                    storeProcedureName = sp.Name;
                     break;
                 }
             }
-            return spName;
+
+            return storeProcedureName;
         }
     }
 }
