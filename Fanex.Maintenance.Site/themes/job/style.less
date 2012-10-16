@@ -1351,3 +1351,274 @@ footer {
     right: 20px;
     top: 4px;
 }
+
+/*----------------------------------*/
+.mailfail
+{
+	background-color:#FFB03B;	
+}
+
+input[type="button"]{
+	background-color: #046380;
+	border: 1px solid #046380;
+	color: white;
+	font-family: Tahoma;
+	font-size: 0.85em;
+	font-weight: bold;
+	height: 25px;
+	min-width: 80px;
+	padding: 0 16px;
+	text-decoration: none !important;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.5);
+	text-transform: uppercase;
+}
+
+a:hover
+{
+	color:#046380;
+	text-decoration:none;
+}
+
+#refreshtime {
+	background: url("img/time_ico.gif") no-repeat scroll left center transparent;
+	cursor: pointer;
+	float: right;
+	height: 13px;
+	padding: 2px 3px 3px;
+	width: 13px;
+}
+#dvtime {
+	display: inline;
+	float: right;
+	font-size: 11px;
+	padding: 3px 10px;
+}
+
+.number
+{
+		text-align:right;    
+}
+
+/*-----------------------------TABLE------------------------*/
+
+/*------------------------CHILD TABLE----------------------*/
+
+.tblData
+{
+	width: 137px !important;
+	border: 0px;
+}
+
+.tblData > tbody > tr > td
+{
+	border-top: 0px none ;
+	border-left: 0px none ;
+	border-right:0 ;
+	border-bottom: 1px solid;
+	padding: 1px;
+	width:15px;
+	text-align: right;
+	padding-right: 2px !important;
+	height: 28px;
+}
+
+.noBorder
+{
+	border-bottom: 0px !important;
+}
+
+
+.bgSBBA
+{
+	background-color: #A0E0A9;
+	font-weight: bold;
+}
+
+.bgSportsbook
+{
+	background-color: #FFEB79;
+	font-weight: bold;
+}
+
+.bgBA
+{
+	background-color: #b5dce6;
+	font-weight: bold;	
+}
+
+.bgRacing
+{
+	background-color: #e3b6b6;
+	font-weight: bold;	
+}
+
+.bgNumberGame
+{
+	background-color: #CAFCD8;
+	font-weight: bold;	
+}
+
+/*-----------------------END CHILD TABLE--------------------*/
+
+/*-----------------------------END TABLE------------------------*/
+
+
+/*-----------*/
+.tblLicenseedata {
+	clear: both;
+	width: 800px;
+	.box_shadow(0 0 2px rgba(0, 0, 0, 0.2));
+	 border-top: 1px solid; 
+	border-right: 1px solid; 
+
+	tr, tr.alt {
+		background-color: @grid_bg;
+
+		&:hover {
+			background-color: @grid_bg - #161616;
+		}
+	}
+
+	tr.alt {
+		background-color: @grid_bg - #090909;
+	}
+
+	td {
+		border-left: 1px solid;
+		border-bottom: 1px solid;
+		text-align: right;
+		padding: 0px;
+		height: 28px;
+		text-align: center;	
+		vertical-align: middle;
+	}
+
+	th {
+		.bg_linear_gradient(@grid_header_bg, @grid_header_bg + #050505);
+
+		border: 1px solid @grid_header_border;
+		border-bottom: 0;
+
+		padding: 10px 4px;
+		font-weight: normal;
+		text-align: center;
+		color: @grid_header_text;
+	}
+
+	th.first { border-left: 1px solid @grid_header_bg; }
+	th.last { border-right: 1px solid @grid_header_bg; }
+
+	td {
+		font-size: .9em;
+	}
+
+	th.footer {
+		.bg_linear_gradient(@white, @grid_header_bg);
+		border-width: 1px;
+	}	
+	.l
+	{
+		text-align: left !important;
+		padding-left: 2px !important;
+		width: 120px;
+	}
+	.weightBorderBottom
+	{
+		border-bottom: 2px solid !important;
+		border-bottom-color:#e06609 !important;
+	}
+	
+	.b
+	{
+		font-weight: bold;
+	}
+
+
+	.firstCol
+	{
+		width: 125px;
+	}
+}
+
+.tblCreditdata {
+	clear: both;
+	width:  width:523px;
+	.box_shadow(0 0 2px rgba(0, 0, 0, 0.2));
+	border-top: 1px solid; 
+	border-right: 1px solid; 
+
+	tr, tr.alt {
+		background-color: @grid_bg;
+
+		&:hover {
+			background-color: @grid_bg - #161616;
+		}
+	}
+
+	tr.alt {
+		background-color: @grid_bg - #090909;
+	}
+
+	td {
+		border-left: 1px solid;
+		border-bottom: 1px solid;
+		text-align: right;
+		padding: 0px;
+		height: 28px;
+		text-align: center;	
+		vertical-align: middle;
+	}
+
+	th {
+		.bg_linear_gradient(@grid_header_bg, @grid_header_bg + #050505);
+
+		border: 1px solid @grid_header_border;
+		border-bottom: 0;
+
+		padding: 10px 4px;
+		font-weight: normal;
+		text-align: center;
+		color: @grid_header_text;
+	}
+
+	th.first { border-left: 1px solid @grid_header_bg; }
+	th.last { border-right: 1px solid @grid_header_bg; }
+
+	td {
+		font-size: .9em;
+	}
+
+	th.footer {
+		.bg_linear_gradient(@white, @grid_header_bg);
+		border-width: 1px;
+	}	
+	.l
+	{
+		text-align: left !important;
+		padding-left: 2px !important;
+		width: 120px;
+	}
+	.weightBorderBottom
+	{
+		border-bottom: 2px solid !important;
+		border-bottom-color:#e06609 !important;
+	}
+	
+	.b
+	{
+		font-weight: bold;
+	}
+
+
+	.firstCol
+	{
+		width: 125px;
+	}
+
+	.r
+	{
+		padding-right: 2px!important;
+		text-align:right;
+		width: 136px;
+	}
+}
