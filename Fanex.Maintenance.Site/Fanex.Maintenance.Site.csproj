@@ -185,6 +185,7 @@
     <Content Include="Global.asax" />
     <Content Include="images\calendar.gif" />
     <Content Include="images\sprite_v.png" />
+    <Content Include="scripts\NotificationHub.js" />
     <Content Include="scripts\DatabaseReport\Chart.js" />
     <Content Include="scripts\DatabaseReport\Licenseedata.js" />
     <Content Include="scripts\DatabaseReport\RefreshTime.js" />
@@ -219,6 +220,10 @@
     <Content Include="scripts\lib\msgbox\msgbox-0.0.1.js" />
     <Content Include="scripts\lib\msgbox\msgbox-0.0.1.min.css" />
     <Content Include="scripts\lib\msgbox\msgbox-0.0.1.min.js" />
+    <Content Include="scripts\lib\notification\images\corners.png" />
+    <Content Include="scripts\lib\notification\images\sides.png" />
+    <Content Include="scripts\lib\notification\jquery.notify.css" />
+    <Content Include="scripts\lib\notification\jquery.notify.js" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.css" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.js" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.min.css" />
