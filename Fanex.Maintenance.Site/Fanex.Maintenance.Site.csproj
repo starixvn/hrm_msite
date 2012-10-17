@@ -87,6 +87,18 @@
     <Reference Include="Microsoft.Practices.Unity.Configuration">
       <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SignalR, Version=0.5.1.10822, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SignalR.Server.0.5.3\lib\net40\SignalR.dll</HintPath>
+    </Reference>
+    <Reference Include="SignalR.Hosting.AspNet, Version=0.5.1.10822, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SignalR.Hosting.AspNet.0.5.3\lib\net40\SignalR.Hosting.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="SignalR.Hosting.Common, Version=0.5.1.10822, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SignalR.Hosting.Common.0.5.3\lib\net40\SignalR.Hosting.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -108,9 +120,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -192,6 +201,10 @@
     <Content Include="scripts\Job\ScheduleManagement.js" />
     <Content Include="scripts\Job\JobLogManagement.js" />
     <Content Include="scripts\Job\JobManagementPage.js" />
+    <Content Include="scripts\lib\jquery-1.6.4.js" />
+    <Content Include="scripts\lib\jquery.qtip-1.0.0-rc3.min.js" />
+    <Content Include="scripts\lib\jquery.signalR-0.5.3.js" />
+    <Content Include="scripts\lib\jquery.signalR-0.5.3.min.js" />
     <Content Include="scripts\lib\chosen\chosen-sprite.png" />
     <Content Include="scripts\lib\chosen\chosen.css" />
     <Content Include="scripts\lib\chosen\chosen.jquery.js" />
@@ -719,6 +732,7 @@
     <Content Include="themes\job\images\btn_submit.png" />
     <Content Include="themes\job\images\btn_submit_2.png" />
     <Content Include="themes\job\images\btn_view_site.png" />
+    <Content Include="themes\job\images\error.png" />
     <Content Include="themes\job\images\evolution_tasks.png" />
     <Content Include="themes\job\images\header_bg.png" />
     <Content Include="themes\job\images\header_shadow.png" />
@@ -849,7 +863,9 @@
     <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
     <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
     <Content Include="Areas\UserLogin\Views\Web.config" />
-    <Content Include="Configurations\DatabaseServersSection.config" />
+    <Content Include="Configurations\DatabaseServersSection.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Configurations\SpNameSection.config" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\autocomplete\search.php" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\tabs\ajax\content3-slow.php" />

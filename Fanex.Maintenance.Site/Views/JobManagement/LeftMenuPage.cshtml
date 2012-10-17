@@ -6,12 +6,73 @@
 }
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+       
+    </style>
     <link href="~/scripts/Plugin/jquery.treeview/jquery.treeview.css" rel="stylesheet"
         type="text/css" />
     <script src="~/scripts/Plugin/jquery.treeview/jquery.treeview.js" type="text/javascript"></script>
-    <style type="text/css">
-        
-    </style>
+    <script src="~/scripts/lib/jquery.signalR-0.5.3.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
+    
+    <script type="text/javascript" src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        // Proxy created on the fly
+        var notitficationHub = $.connection.notificationHub;
+
+        // Declare a function on the chat hub so the server can invoke it
+        notitficationHub.addMessage = function (message) {
+            alert(message);
+        };
+
+        notitficationHub.gotMessage = function (notifyInfoes) {
+            for (var i = 0; i < notifyInfoes.length; i++) {
+                var notifyInfo = notifyInfoes[i];
+                $('span.' + notifyInfo.ServerIp).addClass("notifyError");
+                $('span.' + notifyInfo.ServerIp + notifyInfo.Type).addClass("notifyError");
+                $('span.' + notifyInfo.ServerIp + ',' + 'span.' + notifyInfo.ServerIp + notifyInfo.Type).qtip({
+                    content: notifyInfo.Message,
+                    position:
+                {
+                    corner: {
+                        tooltip: "topRight", // Use the corner...
+                        target: "bottomRight" // ...and opposite corner
+                    }
+                },
+                    hide: {
+                        fixed: true // Make it fixed so it can be hovered over
+                    },
+                    style: {
+                        border: {
+                            width: 5,
+                            radius: 10
+                        },
+                        width: 150,
+                        padding: 10,
+                        textAlign: 'center',
+                        tip: true, // Give it a speech bubble tip with automatic corner detection
+                        name: 'cream' // Style it according to the preset 'cream' style
+                    }
+                })
+            }
+        }
+
+
+        $(function () {
+            $.connection.hub.start(function () {
+            });
+
+            $('.removerErrorIcon').click(function () {
+                $(this).removeClass("notifyError");
+                $(this).parent().parent().prev().removeClass("notifyError");
+            });
+
+            $('.agentlog').click(function () {
+                $(this).next().removeClass("notifyError");
+                $(this).parent().parent().prev().removeClass("notifyError");
+            });
+        });
+    </script>
 }
 <section id="secondary_bar">
 		<div class="user">
@@ -55,7 +116,8 @@
             foreach (ServerElement server in Model)
             {
 		        <li id="phtml_1" class="closed">      
-                <span class="serverformat">@server.ServerIp</span>                    
+                <span class="serverformat">@server.ServerIp</span>   
+                <span class="@server.ServerIp.Replace(".","_") removerErrorIcon"></span>                 
 			        <ul>
 				        <li id="phtml_2" class="subitemmanage">
 					        @Html.ActionLink(ViewResource.SqlServerLog, "ServerLogManagement"
@@ -65,19 +127,21 @@
                                             @class = "navChild serverlog",
                                             @target = "centerFr"
                                         })
+                                       
 				        </li>
 				        <li id="phtml_3">
-					        @Html.ActionLink(ViewResource.SqlAgentLog, "AgentLogManagement", 
-                                                     new { server = server.ServerIp }, 
+					        @Html.ActionLink(ViewResource.SqlAgentLog, "AgentLogManagement",
+                                                     new { server = server.ServerIp },
                                                      new
                                                         {
                                                             @class = "navChild agentlog",
                                                             @target = "centerFr"
                                                         })
+                                                         <span class="@server.ServerIp.Replace(".","_")@((int)NotifyType.AgentLog) removerErrorIcon"></span>
 				        </li>
                         <li id="phtml_4">
-                         @Html.ActionLink(ViewResource.Schedule, "ScheduleManagement", 
-                         new { server = server.ServerIp }, 
+                         @Html.ActionLink(ViewResource.Schedule, "ScheduleManagement",
+                         new { server = server.ServerIp },
                          new
                             {
                                 @class = "navChild shcedule",
@@ -85,13 +149,14 @@
                             })
                         </li>
                         <li id="phtml_5">
-                          @Html.ActionLink(ViewResource.Jobs, "JobManagement", 
-                          new { server = server.ServerIp }, 
+                          @Html.ActionLink(ViewResource.Jobs, "JobManagement",
+                          new { server = server.ServerIp },
                           new
                              {
                                  @class = "navChild job",
                                  @target = "centerFr"
                              })
+                                 <span class="@server.ServerIp.Replace(",","_")@((int)NotifyType.Job) removerErrorIcon"></span>
                         </li>
 			        </ul>
 		        </li>	

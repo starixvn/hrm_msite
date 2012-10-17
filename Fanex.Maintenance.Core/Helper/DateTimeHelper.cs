@@ -55,5 +55,32 @@ namespace Fanex.Maintenance.Core.Helper
 
             return fullDate;
         }
+
+        public static DateTime GetFullDatetime(int dateNumber = 0, int timeNumber = 0)
+        {
+            if (dateNumber == 0 && timeNumber == 0)
+            {
+                return DateTime.Now;
+            }
+            else
+            {
+                //// check format time correct HHmmss
+                string strTime = timeNumber.ToString();
+                if (strTime.Length < 6)
+                {
+                    int count = 6 - strTime.Length;
+                    for (int i = 0; i < count; i++)
+                    {
+                        strTime = strTime.Insert(0, "0");
+                    }
+                }
+
+                DateTime fullDatetime = DateTime.ParseExact(dateNumber.ToString() + " " + strTime,
+                    "yyyyMMdd HHmmss",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None);
+                return fullDatetime;
+            }
+        }
     }
 }
