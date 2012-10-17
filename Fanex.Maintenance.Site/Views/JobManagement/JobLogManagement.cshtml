@@ -57,7 +57,6 @@
                     </div>
                     <div class="edit-field" style="position: relative;">
                         @Html.TextBox("From", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
-                        @* , new { @style = "width:90px;margin-right:5px;" }) *@
                     </div>
                 </div>
                 <div class="filter-form">
@@ -66,7 +65,6 @@
                     </div>
                     <div class="edit-field" style="position: relative;">
                         @Html.TextBox("To", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
-                        @*, new { @style = "width:90px;margin-right:5px;" })*@
                     </div>
                 </div>
                 <div class="filter-form">
@@ -123,21 +121,6 @@
                                 }
                             </td>
                             <td class="align-center">
-                                @*@if (item.Step.Id != 0)
-                    {
-                        if (item.RunSatus == 1)
-                        {
-                            <img src="~/themes/job/img/tick.png" /> 
-                        }
-                        else
-                        {
-                            <img src="~/themes/job/img/error.png" />
-                        }
-                    }
-                    else
-                    {
-                        <img src="~/themes/job/img/warning.png" />
-                    }      *@
                                 @switch (item.RunSatus)
                                 {
                                     case 0:
@@ -186,6 +169,14 @@
                                         </ul>
                                     </div>
                                 </div>
+                            </td>
+                        </tr>
+                        }
+                        if (i.Equals(0))
+                        {
+                        <tr>
+                            <td class="align-center" colspan="10">
+                                @ViewResource.NoInformationAvailable
                             </td>
                         </tr>
                         }
