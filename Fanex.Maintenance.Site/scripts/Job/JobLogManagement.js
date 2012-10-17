@@ -109,8 +109,7 @@ $(document).ready(function () {
         var isLoop = true;
         while (isLoop) {
             trNext.toggle();
-            trNext = trNext.next();
-            console.log(trNext);
+            trNext = trNext.next();            
             if (trNext.length>0) {
                 if (trNext.attr('id') != undefined) {
                     isLoop = false;

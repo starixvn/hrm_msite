@@ -39,23 +39,23 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         private DateTime? _nextRunDate;
 
         private int? _status;
-        
+
         private string _server;
-        
+
         private string _schedule;
-        
+
         private string _jobName;
-        
+
         private int? _currentExcuteStatus;
-        
+
         private Guid _jobId;
-        
+
         private int _startRunDate;
-        
+
         private int _endRunDate;
-        
+
         private string _stepName;
-        
+
         #endregion
 
         #region Ctor
@@ -296,7 +296,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     Logger.Log.Error(ex.Message, ex);
                 }
             }
-            else  
+            else
             {
                 //// get job all server
                 foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
@@ -334,7 +334,39 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             try
             {
-                return _jobRepository.GetJobLog(criteria, this._server);
+                List<JobLog> list = _jobRepository.GetJobLog(criteria, this._server).ToList();
+
+                if (!ReferenceEquals(list, null) && list.Count > 0)
+                {
+                    int sumStatus = 0;
+                    int countStep = 0;
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        var itemLog = list[i];
+                        if (itemLog.Step.Id != 0)
+                        {
+                            countStep++;
+                            sumStatus += itemLog.RunSatus;
+                        }
+                        else
+                        {
+                            if (countStep != sumStatus)
+                            {
+                                if (countStep != 1)
+                                {
+                                    list[i - countStep - 1].RunSatus = 6;
+                                }
+                                else
+                                {
+                                    list[i - countStep - 1].RunSatus = list[i - 1].RunSatus;
+                                }
+                            }
+                            sumStatus = 0;
+                            countStep = 0;
+                        }
+                    }
+                }
+                return list;
             }
             catch (Exception ex)
             {
