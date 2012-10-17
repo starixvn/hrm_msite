@@ -113,7 +113,7 @@
                         {
                             string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
                             i++;
-                        <tr @Html.Raw(rowCss) @(item.Step.Id != 0 ? "style=display:none" : "id=" + item.InstanceId.ToString())>
+                        <tr @Html.Raw(rowCss) @(item.Step.Id != 0 ? "style=display:none" : "id=" + item.InstanceId.ToString()) status="@item.RunSatus">
                             <td class="align-center">
                                 @if (item.Step.Id == 0)
                                 { 
@@ -138,8 +138,11 @@
                                     case 4:
                                     <img src="~/themes/job/images/progress.png" />
                                         break;
-                                    default:
+                                    case 5:
                                     <img src="~/themes/job/images/default.png" />
+                                        break;
+                                    default:
+                                    <img src="~/themes/job/images/warning.png" />
                                         break;
                                 }
                             </td>
