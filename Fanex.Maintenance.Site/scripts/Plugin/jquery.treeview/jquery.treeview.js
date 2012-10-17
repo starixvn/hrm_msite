@@ -70,7 +70,7 @@
 				if ( this == event.target )
 					toggler.apply($(this).next());
 			}).add( $("a", this) ).hoverClass();
-			
+			this.find("li>span").hoverClass();
 			if (!settings.prerendered) {
 				// handle closed ones first
 				this.filter(":has(>ul:hidden)")

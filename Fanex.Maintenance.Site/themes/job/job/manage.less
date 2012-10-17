@@ -379,22 +379,30 @@ aside#sidebar
     text-decoration: none;
 }
 
+
 #sidebar ul
 {
+
     clear: both;
     margin: 0;
     padding: 0;
+	
 }
 
-#sidebar li
+#sidebar .sidebarli
 {
+
     list-style: none;
-    margin: 0 0 0 12%;
+	
+    margin: 0 0 0 5%;
+	
     padding: 0;
+	
 }
 
-#sidebar li a
+#sidebar .sidebarli a
 {
+
     color: #666666;
     padding-left: 25px;
     text-decoration: none;
@@ -410,7 +418,7 @@ aside#sidebar
     text-transform: uppercase;
 }
 
-#sidebar li a:hover
+#sidebar .sidebarli a:hover
 {
     color: #444444;
 	text-decoration:none;
@@ -1247,7 +1255,7 @@ fieldset textarea:focus
     text-shadow: 0 1px 0 #FFF;
     text-transform: uppercase;
     background: url("../images/server.png") no-repeat center left;
-    padding-left: 25px;
+    padding-left: 20px;
 }
 
 #sidebar li a.navChild
@@ -1291,25 +1299,25 @@ fieldset textarea:focus
 #sidebar li a.shcedule
 {
     background: url("../images/schedule.png") no-repeat center left;    
-    padding-left: 25px;  
+    padding-left: 20px;  
 }
 
 #sidebar li a.job
 {
     background: url("../images/evolution_tasks.png") no-repeat center left;    
-    padding-left: 25px;
+    padding-left: 20px;
 }
 
 #sidebar li a.serverlog
 {
     background: url("../images/list_information.png") no-repeat center left;    
-    padding-left: 25px;
+    padding-left: 20px;
 }
 
 #sidebar li a.agentlog
 {
     background: url("../images/list_information.png") no-repeat center left;    
-    padding-left: 25px;
+    padding-left: 20px;
 }
 
 img.ui-datepicker-trigger, img.tempcalendarimg
@@ -1323,4 +1331,27 @@ img.ui-datepicker-trigger, img.tempcalendarimg
 	 margin-left: 2px;
     margin-top: 4px;
     position: absolute;
+}
+
+.treeview .serverformat
+        {
+             -moz-transition: all 0.2s ease-in-out 0s;
+            color: #666666;
+            display: inline-block;
+            font-family: Helvetica;
+            font-size: 1.1em;
+            font-weight: bold;
+            height: 22px;
+            line-height: 17px;
+            margin: -2px 0;
+            padding-left: 0;
+            text-decoration: none;
+            text-shadow: 0 1px 0 #FFF;
+            text-transform: uppercase;
+            background: url("../images/server.png") no-repeat center left;
+            padding-left: 20px;
+        }
+.treeview .subitemmanage
+{
+	 margin-left: 0 0 0 0 !important;
 }

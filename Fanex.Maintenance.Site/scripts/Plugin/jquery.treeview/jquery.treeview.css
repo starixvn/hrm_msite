@@ -5,8 +5,9 @@
 }
 
 .treeview ul {
-	background-color: #E0E0E3;
+	background-color:#E0E0E3;
 	margin-top: 4px;
+	margin-left: 4px !important;
 }
 
 .treeview .hitarea {
@@ -25,7 +26,7 @@
 
 .treeview li { 
 	margin: 0;
-	padding: 3px 0pt 3px 16px;
+	padding: 0px 0 2px 16px;
 }
 
 .treeview a.selected {
@@ -72,3 +73,5 @@
 .filetree span.folder { background: url(images/folder.gif) 0 0 no-repeat; }
 .filetree li.expandable span.folder { background: url(images/folder-closed.gif) 0 0 no-repeat; }
 .filetree span.file { background: url(images/file.gif) 0 0 no-repeat; }
+
+.myicon { background: url(images/folder.gif) 0 0 no-repeat; padding: 1px 0 1px 16px; display: block;}

@@ -8,8 +8,10 @@
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
     <link href="~/scripts/Plugin/jquery.treeview/jquery.treeview.css" rel="stylesheet"
         type="text/css" />
-    <script src="~/scripts/Plugin/jquery.treeview/lib/jquery.cookie.js" type="text/javascript"></script>
     <script src="~/scripts/Plugin/jquery.treeview/jquery.treeview.js" type="text/javascript"></script>
+    <style type="text/css">
+        
+    </style>
 }
 <section id="secondary_bar">
 		<div class="user">
@@ -18,9 +20,10 @@
 		</div>
 </section>
 <aside class="column" id="sidebar">   	
-		<h3>Content @*<a class="toggleLink" href="#"></a>*@</h3>
-		<ul class="toggle">
-			<li class="icn_new_article">
+		<div><h3>Content @*<a class="toggleLink" href="#"></a>*@</h3>
+        </div>
+		<ul class="toggle sidebarul">
+			<li class="icn_new_article sidebarli">
                 @Html.ActionLink(ViewResource.ServerManagement, "ServerManagement", "JobManagement"
                                       , new
                                       {
@@ -28,7 +31,7 @@
                                           @class = "menu"
                                       })
             </li>
-			<li class="icn_edit_article">
+			<li class="icn_edit_article sidebarli">
                 @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagement", "JobManagement"
                          , new
                          {
@@ -36,7 +39,7 @@
                              @class = "menu"
                          })
             </li>
-			<li class="icn_categories"> 
+			<li class="icn_categories sidebarli"> 
                 @Html.ActionLink(ViewResource.JobManagement, "JobManagement", "JobManagement"
                                    , new
                                    {
@@ -46,74 +49,61 @@
                 </li>			
 		</ul>	
        	<h3>Database Servers @*<a class="toggleLink" href="#"></a>*@</h3>   
-        <ul class="toggle" style="overflow-y:auto;height:650px;" id="navigation">
-    @{                
-        var classClose = string.Empty;
-        foreach (ServerElement server in Model)
-        {
-      @*  <div id="demo1">*@
-	 @*   <ul id="navigation">*@
-		    <li id="phtml_1">                           
-			    <a href="#" class="rootServer">             
-                @server.ServerIp                
-                </a>
-			    <ul style="display:none" >
-				    <li id="phtml_2">
-					    @Html.ActionLink(ViewResource.SqlServerLog, "ServerLogManagement"
-                            , new { server = server.ServerIp }
-                                    , new
-                                    {
-                                        @class = "navChild serverlog",
-                                        @target = "centerFr"
-                                    })
-				    </li>
-				    <li id="phtml_3">
-					    @Html.ActionLink(ViewResource.SqlAgentLog, "AgentLogManagement"
-                            , new { server = server.ServerIp }
-                                                    , new
-                                                    {
-                                                        @class = "navChild agentlog",
-                                                        @target = "centerFr"
-                                                    })
-				    </li>
-                    <li id="phtml_4">
-                     @Html.ActionLink(ViewResource.Schedule, "ScheduleManagement"
-                            , new { server = server.ServerIp }
-        , new
-        {
-            @class = "navChild shcedule",
-            @target = "centerFr"
-        })
-                    </li>
-                    <li id="phtml_5">
-                      @Html.ActionLink(ViewResource.Jobs, "JobManagement"
-                            , new { server = server.ServerIp }
-         , new
-         {
-             @class = "navChild job",
-             @target = "centerFr"
-         })
-                    </li>
-			    </ul>
-		    </li>
-        <li  style="display:none">
-            <a href="#"></a>
-        </li>		
-	   @* </ul>*@
-      @*  </div>*@
+        <ul class="treeview" style="overflow-y:auto;height:650px; margin-left:10px;" id="navigation">
+        @{                
+            var classClose = string.Empty;
+            foreach (ServerElement server in Model)
+            {
+		        <li id="phtml_1" class="closed">      
+                <span class="serverformat">@server.ServerIp</span>                    
+			        <ul>
+				        <li id="phtml_2" class="subitemmanage">
+					        @Html.ActionLink(ViewResource.SqlServerLog, "ServerLogManagement"
+                                , new { server = server.ServerIp }
+                                        , new
+                                        {
+                                            @class = "navChild serverlog",
+                                            @target = "centerFr"
+                                        })
+				        </li>
+				        <li id="phtml_3">
+					        @Html.ActionLink(ViewResource.SqlAgentLog, "AgentLogManagement", 
+                                                     new { server = server.ServerIp }, 
+                                                     new
+                                                        {
+                                                            @class = "navChild agentlog",
+                                                            @target = "centerFr"
+                                                        })
+				        </li>
+                        <li id="phtml_4">
+                         @Html.ActionLink(ViewResource.Schedule, "ScheduleManagement", 
+                         new { server = server.ServerIp }, 
+                         new
+                            {
+                                @class = "navChild shcedule",
+                                @target = "centerFr"
+                            })
+                        </li>
+                        <li id="phtml_5">
+                          @Html.ActionLink(ViewResource.Jobs, "JobManagement", 
+                          new { server = server.ServerIp }, 
+                          new
+                             {
+                                 @class = "navChild job",
+                                 @target = "centerFr"
+                             })
+                        </li>
+			        </ul>
+		        </li>	
+            }
         }
-    }
   </ul>   
 </aside>
 <script type="text/javascript">
     $(document).ready(function () {
 
-        // second example
         $("#navigation").treeview({
-            animated: "fast",
-            persist: "location",
-            collapsed: true,
-            unique: false
+            animated: "fast"
         });
 
         $('.rootServer').live('click', function () {
