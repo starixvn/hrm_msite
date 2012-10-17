@@ -518,8 +518,8 @@ section#main
     background: url(../images/sidebar_shadow.png) repeat-y left top;
     float: left;
     margin-top: -2px;
-	overflow-y:auto;
-	height:800px;
+	/*overflow-y:auto;
+	height:800px;*/
 }
 
 #main h3
@@ -536,7 +536,7 @@ section#main
 .module
 {    
     width: 100%;    
-    margin-top: 20px;
+    margin-top: 120px;
     
 }
 
@@ -699,6 +699,7 @@ section#main
 .tablesorter {
 	width: 100%;  	
 	clear: both;
+	
 
 	tr, tr.alt {
 		background-color: @grid_bg;
@@ -716,7 +717,7 @@ section#main
 	th, td {
 		border: solid 1px @grid_border;
 		height: 20px;
-		padding: 4px;
+		padding: 1px;
 		vertical-align: middle;		
 
 		input[type=checkbox] {
@@ -733,10 +734,11 @@ section#main
 		border: 1px solid @grid_header_border;
 		border-bottom: 0;
 
-		padding: 8px 4px;
+		padding: 1px;
 		font-weight: normal;
 		text-align: center;
 		color: @grid_header_text;
+		height:30px;
 	}
 
 	th.first { border-left: 1px solid @grid_header_bg; }

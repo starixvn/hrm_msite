@@ -10,43 +10,43 @@
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
 }
-<section id="secondary_bar">	
-		<div class="breadcrumbs_container">
-			<article class="breadcrumbs">
+<section id="secondary_bar">
+    <div class="breadcrumbs_container">
+        <article class="breadcrumbs">
             <a href="index.html">@Model.Server</a>
-             <div class="breadcrumb_divider"></div>
-              <a class="current">@ViewResource.ScheduleManagement</a>
-              </article>
-		</div>
-
-</section>
-<section class="column" id="main">	
-		<div class="content">
-@using (Html.BeginForm())
-{ 
-    <section id="filter-bar">    
-    		<div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.Server)
-		    </div>   
-            <div class="edit-field">	
-                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
+            <div class="breadcrumb_divider">
             </div>
-        </div>  
-         <div class="filter-form">	
-                <div class="lbl-field">
-			    @ViewResource.ScheduleName
-		        </div>   
-            <div class="edit-field width-auto">	
-                @Html.TextBoxFor(m => m.Schedule_Name)                
+            <a class="current">@ViewResource.ScheduleManagement</a>
+        </article>
+    </div>
+</section>
+<section class="column" id="main">
+    <div class="content">
+        @using (Html.BeginForm())
+        { 
+            <section id="filter-bar">
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.Server)
+                    </div>
+                    <div class="edit-field">
+                        @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")
+                    </div>
                 </div>
-        </div>        
-        <div class="filter-form">	                              
-            <div class="lbl-field ">
-			    @ViewResource.FrequentType
-		    </div>
-            <div class="edit-field">				                
-                @Html.DropDownListFor(m => m.FreqType,
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @ViewResource.ScheduleName
+                    </div>
+                    <div class="edit-field width-auto">
+                        @Html.TextBoxFor(m => m.Schedule_Name)
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field ">
+                        @ViewResource.FrequentType
+                    </div>
+                    <div class="edit-field">
+                        @Html.DropDownListFor(m => m.FreqType,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.OneTime,Value=((int)FrequentTime.OneTimeOnly).ToString()},                        
                         new SelectListItem{ Text=ViewResource.Daily,Value=((int)FrequentTime.Daily).ToString()},                        
@@ -57,14 +57,14 @@
                         new SelectListItem{ Text=ViewResource.ComputerIdle,Value=((int)FrequentTime.ComputerIdle).ToString()}
                     }
                 , "All")
-		    </div>			  
-        </div> 
-          <div class="filter-form">	                              
-            <div class="lbl-field ">
-			    @ViewResource.FrequentSubType
-		    </div>
-            <div class="edit-field">				                
-                @Html.DropDownListFor(m => m.FreqSubType,
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field ">
+                        @ViewResource.FrequentSubType
+                    </div>
+                    <div class="edit-field">
+                        @Html.DropDownListFor(m => m.FreqSubType,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.SpecifedTime,Value=((int)FrequentSubTime.SpecificTime).ToString()}, 
                         new SelectListItem{ Text=ViewResource.Seconds,Value=((int)FrequentSubTime.Seconds).ToString()}, 
@@ -72,163 +72,162 @@
                         new SelectListItem{ Text=ViewResource.Hours,Value=((int)FrequentSubTime.Hours).ToString()}                       
                     }
                 , "All")
-		    </div>			  
-        </div> 
-        <div class="filter-form">	
-            <div class="lbl-field ">
-			    @ViewResource.Date_Type
-		    </div>
-            <div class="edit-field">				                
-                @Html.DropDownListFor(m => m.SearchDateType,
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field ">
+                        @ViewResource.Date_Type
+                    </div>
+                    <div class="edit-field">
+                        @Html.DropDownListFor(m => m.SearchDateType,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.ActiveStartDate,Value=((int)SearchDate.StartDate).ToString()},
                         new SelectListItem{ Text=ViewResource.ActiveEndDate,Value=((int)SearchDate.EndDate).ToString()}
                     }
                 , "All")
-		    </div>					    
-        </div>  
-        <div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.From)
-		    </div>   
-            <div class="edit-field width-auto" style="position:relative;">	
-                @Html.TextBoxFor(m => m.From)   
-                <img class="tempcalendarimg" src="@Url.Content("~/images/calendar.gif")" alt="" />
-            </div>
-        </div>  
-         <div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.To)
-		    </div>   
-            <div class="edit-field width-auto" style="position:relative;">	
-                @Html.TextBoxFor(m => m.To)  
-                <img class="tempcalendarimg" src="@Url.Content("~/images/calendar.gif")" alt=""/>
-            </div>
-        </div>     
-        <div class="filter-form">
-        <div class="lbl-field"> </div>	   
-            <div class="submit">
-		        <input id="submitbutton" type="submit" value="Submit" /> 
-            </div>    
-        </div>             	       		   
-    </section>
-}
-<article class="module width_full" style="overflow: auto;">
-<table class="tablesorter">
-    <thead>
-        <tr>
-            <th>
-                #
-            </th>
-            <th class="width-140">
-                @ViewResource.ScheduleName
-            </th>
-             <th>
-                @ViewResource.Server
-            </th>            
-            <th class="width-160">
-                @ViewResource.ScheduleFreq
-            </th>
-            <th class="width-180">
-                @ViewResource.ScheduleFreqSub
-            </th>
-            <th>
-                @ViewResource.ActiveStartDate
-            </th>
-            <th>
-                @ViewResource.ActiveEndDate
-            </th>
-            <th>
-                @ViewResource.Job
-            </th>
-            <th>
-                @ViewResource.Enabled
-            </th>@*           
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.From)
+                    </div>
+                    <div class="edit-field width-auto" style="position: relative;">
+                        @Html.TextBoxFor(m => m.From)
+                        <img class="tempcalendarimg" src="@Url.Content("~/images/calendar.gif")" alt="" />
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.To)
+                    </div>
+                    <div class="edit-field width-auto" style="position: relative;">
+                        @Html.TextBoxFor(m => m.To)
+                        <img class="tempcalendarimg" src="@Url.Content("~/images/calendar.gif")" alt=""/>
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                    </div>
+                    <div class="submit">
+                        <input id="submitbutton" type="submit" value="Submit" />
+                    </div>
+                </div>
+            </section>
+        }
+        <article class="module width_full">
+            <table class="tablesorter" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th >
+                            @ViewResource.ScheduleName
+                        </th>
+                        <th>
+                            @ViewResource.Server
+                        </th>
+                        <th >
+                            @ViewResource.ScheduleFreq
+                        </th>
+                        <th >
+                            @ViewResource.ScheduleFreqSub
+                        </th>
+                        <th>
+                            @ViewResource.ActiveStartDate
+                        </th>
+                        <th>
+                            @ViewResource.ActiveEndDate
+                        </th>
+                        <th>
+                            @ViewResource.Job
+                        </th>
+                        <th>
+                            @ViewResource.Enabled
+                        </th>@*           
           @* 
             <th>
                 @ViewResource.Edit
             </th>*@
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int i = 0;
-            foreach (var schedule in schedules)
-            {
-                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
-                i++;
-            <tr @Html.Raw(rowCss)>
-                <td class="align-center">
-                    @(i)
-                </td>
-               
-                <td class="align-left">
-                    @schedule.Name
-                </td>
-                <td class="align-center">
-                    @schedule.ServerIp
-                </td>                
-                <td >
-                    @schedule.FreqIntervalCombine
-                </td>
-                <td >
-                    @schedule.FreqSubIntervalCombine
-                </td>
-                <td class="align-center">
-                    @schedule.ActiveStartDate.ToFullDateWithTimeAdded(schedule.ActiveStartTime)
-                </td>
-                <td class="align-center">
-                @if (schedule.ActiveEndDate.Year == 9999)
-                {
-                    @ViewResource.N_A
-                }
-                else
-                {
-                        @schedule.ActiveEndDate.ToDateString()                    
-                }
-                </td>
-                <td class="align-center">
-                @if (schedule.JobCount > 0)
-                {
-                    @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "JobManagement",
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                        foreach (var schedule in schedules)
+                        {
+                            string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                            i++;
+                        <tr @Html.Raw(rowCss)>
+                            <td class="align-center">
+                                @(i)
+                            </td>
+                            <td class="align-left">
+                                @schedule.Name
+                            </td>
+                            <td class="align-center">
+                                @schedule.ServerIp
+                            </td>
+                            <td>
+                                @schedule.FreqIntervalCombine
+                            </td>
+                            <td>
+                                @schedule.FreqSubIntervalCombine
+                            </td>
+                            <td class="align-center">
+                                @schedule.ActiveStartDate.ToFullDateWithTimeAdded(schedule.ActiveStartTime)
+                            </td>
+                            <td class="align-center">
+                                @if (schedule.ActiveEndDate.Year == 9999)
+                                {
+                                    @ViewResource.N_A
+                                }
+                                else
+                                {
+                                    @schedule.ActiveEndDate.ToDateString()                    
+                                }
+                            </td>
+                            <td class="align-center">
+                                @if (schedule.JobCount > 0)
+                                {
+                                    @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "JobManagement",
                         new
                         {
                             server = schedule.ServerIp,
                             schedule = schedule.Name
                         }, null)
-                }
-                else
-                {
-                    @: 0                   
-                }
-                </td>
-                <td class="align-center">
-                 @if (schedule.Enable == 1)
-                 {
-                        <img src="~/themes/job/img/blank.png" alt="" class="ico-tick" />
-                 }
-                </td>
-               
-                @*<td>
+                                }
+                                else
+                                {
+                                    @: 0
+                                                }
+                            </td>
+                            <td class="align-center">
+                                @if (schedule.Enable == 1)
+                                {
+                                    <img src="~/themes/job/img/blank.png" alt="" class="ico-tick" />
+                                }
+                            </td>
+                            @*<td>
                 <div class="action-wrp">
                     <a href="#" class="btn-edit">Action</a>
                     </div>
                 </td>*@
-            </tr>
-            }
-            if (i.Equals(0))
-            {
-                <tr>
-                    <td class="align-center" colspan="10">
-                    @ViewResource.NoInformationAvailable
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
-</article>
-</div>
+                        </tr>
+                        }
+                        if (i.Equals(0))
+                        {
+                        <tr>
+                            <td class="align-center" colspan="10">
+                                @ViewResource.NoInformationAvailable
+                            </td>
+                        </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </article>
+    </div>
 </section>
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
