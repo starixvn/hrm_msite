@@ -116,10 +116,7 @@
                         </th>
                         <th>
                             @ViewResource.Next_Run_Date
-                        </th>
-                        @*<th>
-                @ViewResource.Date_Modified
-            </th>      *@
+                        </th>                       
                         <th>
                             @ViewResource.Enabled
                         </th>
@@ -172,10 +169,7 @@
                                 {
                                     @ViewResource.N_A
                                 }
-                            </td>
-                            @*  <td class="align-center">
-                    @item.Job.DateModified.ToFullDateString()
-                </td>     *@
+                            </td>                          
                             <td class="align-center">
                                 @if (item.Job.Enable == 1)
                                 {
@@ -186,22 +180,18 @@
                                 <div class="action-wrp">
                                     <span class="btn-action">Action</span>
                                     <div class="relative">
-                                        <ul class="actions" style="visibility: hidden; opacity: 0;">
-                                            @*<li><a href="#" class="dd-edit">Edit '@item.Job.Name' Details</a> </li>*@
+                                        <ul class="actions" style="visibility: hidden; opacity: 0;">                                          
                                             <li>@Html.ActionLink("View log " + item.Job.Name, "JobLogManagement"
                                         , new { job = item.Job.Name, server = item.ServerIp }
-                                        , new { @class = "dd-edit" })
+                                        , new { @class = "dd-edit" })</li>
                                                 <li>@Html.ActionLink("View step " + item.Job.Name, "StepManagement"
                                         , new { job = item.Job.Name, server = item.ServerIp }
                                         , new { @class = "dd-edit" })
                                                 </li>
-                                                @*  <li><a href="#" class="dd-site">View schedule '@item.Job.Name'</a></li>*@
                                                 <li><a href="#" class="dd-chgpwd @startJobId" onclick="JobManagementPage.StartJob('@item.ServerIp','@item.Job.Name');">
                                                     Start Job</a></li>
                                                 <li><a href="#" class="dd-chgpwd @stopJobId" onclick="JobManagementPage.StopJob('@item.ServerIp','@item.Job.Name');">
-                                                    Stop Job</a></li>
-                                            @*<li><a href="#" class="dd-site">Run</a></li>
-                                <li><a href="#" class="dd-site">Copy to</a></li>*@
+                                                    Stop Job</a></li>                                            
                                         </ul>
                                     </div>
                                 </div>

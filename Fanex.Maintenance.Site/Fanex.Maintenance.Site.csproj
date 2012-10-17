@@ -762,13 +762,14 @@
     <Content Include="themes\job\images\sidebar_shadow.png" />
     <Content Include="themes\job\images\success.png" />
     <Content Include="themes\job\images\table_sorter_header.png" />
+    <Content Include="themes\job\images\warning.png" />
     <Content Include="themes\job\img\minus.png" />
     <Content Include="themes\job\img\plus.png" />
+    <Content Include="themes\job\img\tick.png" />
     <Content Include="themes\job\img\table_left.jpg" />
     <Content Include="themes\job\img\table_left.png" />
     <Content Include="themes\job\img\warning.png" />
     <Content Include="themes\job\img\error.png" />
-    <Content Include="themes\job\img\tick.png" />
     <Content Include="themes\job\img\actions\add-user.png" />
     <Content Include="themes\job\img\actions\chgpwd-ico.png" />
     <Content Include="themes\job\img\actions\dd\action-ico.png" />
