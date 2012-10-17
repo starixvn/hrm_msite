@@ -71,6 +71,11 @@
                 $(this).next().removeClass("notifyError");
                 $(this).parent().parent().prev().removeClass("notifyError");
             });
+
+            $('.job').click(function () {
+                $(this).next().removeClass("notifyError");
+                $(this).parent().parent().prev().removeClass("notifyError");
+            });
         });
     </script>
 }
@@ -156,7 +161,7 @@
                                  @class = "navChild job",
                                  @target = "centerFr"
                              })
-                                 <span class="@server.ServerIp.Replace(",","_")@((int)NotifyType.Job) removerErrorIcon"></span>
+                                 <span class="@server.ServerIp.Replace(".","_")@((int)NotifyType.Job) removerErrorIcon"></span>
                         </li>
 			        </ul>
 		        </li>	

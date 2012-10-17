@@ -73,6 +73,23 @@ namespace Fanex.Maintenance.Core.Helper
         }
 
         /// <summary>
+        /// Get Server Ip From server Name
+        /// </summary>
+        /// <param name="serverName"></param>
+        /// <returns></returns>
+        public static string GetServerIpFromServerName(string serverName)
+        {
+            foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+            {
+                if (server.ServerName == serverName)
+                {
+                    return server.ServerIp;
+                }
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
         /// Get Sp Name From SpKey
         /// </summary>
         /// <param name="storeProcedureKey">Sp Key</param>

@@ -64,8 +64,15 @@ namespace Fanex.Maintenance.Controller.Worker
                 try
                 {
                     List<NotifyInfo> notifyInfoes = new List<NotifyInfo>();
-                    notifyInfoes.AddRange(GetSqlAgentLogs());
-                    //notifyInfoes.AddRange(GetJobLogs());
+                    try
+                    {
+                        notifyInfoes.AddRange(GetSqlAgentLogs());
+                        notifyInfoes.AddRange(GetJobLogs());
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log.Error(ex.Message, ex);
+                    }
 
                     var context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
                     context.Clients.gotMessage(notifyInfoes);
@@ -74,6 +81,7 @@ namespace Fanex.Maintenance.Controller.Worker
                     {
                         _isFristTime = false;
                     }
+
                 }
                 catch (Exception ex)
                 {
@@ -95,16 +103,20 @@ namespace Fanex.Maintenance.Controller.Worker
             }
             else
             {
-                _sqlServerLogService.FromDate(DateTime.MinValue);
+                _sqlServerLogService.FromDate(DateTime.Now);
             }
+
+            //// Get all agent log
             IEnumerable<SqlServerLog> sqlServerLogs = _sqlServerLogService.ToDate(DateTime.Now.AddDays(1))
                 .GetSqlServerLogs((int)LogType.SqlAgentLog);
             List<NotifyInfo> notifyInformaitons = new List<NotifyInfo>();
             DateTime tempDatetime = DateTime.Now;
+
             foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
             {
                 foreach (SqlServerLog sqlServerLog in sqlServerLogs)
                 {
+                    //// if satisfy filter condition, then break to go to next server
                     if (sqlServerLog.LogDate > LastSqlAgentLogNotificationTime
                         && sqlServerLog.ErrorLevel == (int)ErrorType.Error
                         && sqlServerLog.ServerIp == server.ServerIp)
@@ -120,6 +132,7 @@ namespace Fanex.Maintenance.Controller.Worker
                 }
             }
 
+            //// Update Last run time
             LastSqlAgentLogNotificationTime = tempDatetime;
 
             return notifyInformaitons;
@@ -131,40 +144,69 @@ namespace Fanex.Maintenance.Controller.Worker
         /// <returns></returns>
         private IEnumerable<NotifyInfo> GetJobLogs()
         {
-            if (!_isFristTime)
-            {
-                _jobService.WithStartRunDate(LastJobLogNotificationTime);
-            }
-            else
-            {
-                _jobService.WithStartRunDate(DateTime.MinValue);
-            }
-            IEnumerable<JobLog> jobLogs = _jobService.WithEndRunDate(DateTime.Now.AddDays(1))
-                .GetJobLogs();
-
+            //// Initial variables
+            IEnumerable<JobLog> jobLogs = null;
             List<NotifyInfo> notifyInformaitons = new List<NotifyInfo>();
             DateTime tempDatetime = DateTime.Now;
+            bool isBreak = false;
             foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
             {
-                foreach (JobLog jobLog in jobLogs)
+                _jobService = JobService.Create();
+                IEnumerable<JobSchedule> jobs = _jobService.FromServer(server.ServerIp)
+                    .GetJobs();
+
+
+                if (!_isFristTime)
                 {
-                    DateTime jobLogDate = DateTimeHelper.GetFullDatetime(jobLog.RunDate, jobLog.RunTime);
-                    if (jobLogDate > LastJobLogNotificationTime
-                        && (jobLog.RunSatus == 0 || jobLog.RunSatus == 3) 
-                        && jobLog.Server == server.ServerIp)
+                    _jobService.WithStartRunDate(LastJobLogNotificationTime);
+                }
+                else
+                {
+                    _jobService.WithStartRunDate(DateTime.Now.AddDays(-1));
+                }
+                _jobService.WithEndRunDate(DateTime.Now.AddDays(1));
+                foreach (JobSchedule job in jobs)
+                {
+                   
+                    //// Get All job Log with daterange and job name
+                    jobLogs = _jobService 
+                        .WithJob(job.Job.Name)
+                        .GetJobLogs();
+
+                    if (jobLogs != null)
                     {
-                        notifyInformaitons.Add(new NotifyInfo
+                        foreach (JobLog jobLog in jobLogs)
                         {
-                            Type = NotifyType.Job,
-                            ServerIp = server.ServerIp,
-                            OccurTime = jobLogDate,
-                            Message = jobLog.Message
-                        });
+
+                            //// Get specific job satisfy filter contions, if yes then break out
+                            DateTime jobLogDate = DateTimeHelper.GetFullDatetime(jobLog.RunDate, jobLog.RunTime);
+                            if (jobLogDate > LastJobLogNotificationTime
+                                && (jobLog.RunSatus == 0 || jobLog.RunSatus == 3)
+                                && SectionHelper.GetServerIpFromServerName(jobLog.Server) == server.ServerIp)
+                            {
+                                notifyInformaitons.Add(new NotifyInfo
+                                {
+                                    Type = NotifyType.Job,
+                                    ServerIp = server.ServerIp.Replace(".", "_"),
+                                    OccurTime = jobLogDate,
+                                    Message = jobLog.Message
+                                });
+                                isBreak = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    //// Get out if break
+                    if (isBreak)
+                    {
+                        isBreak = false;
                         break;
                     }
                 }
             }
 
+            //// Update Last run time
             LastJobLogNotificationTime = DateTime.Now;
 
             return notifyInformaitons;
