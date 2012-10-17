@@ -5,6 +5,7 @@ var JobManagementPage = function ($) {
 
         GetSchedule: function (server) {
             //disabled when server is all
+//            $("#Schedule").trigger("liszt:updated"); 
             if (server == '') {
                 $('#Schedule').attr('disabled', 'disabled');
             }
@@ -28,7 +29,7 @@ var JobManagementPage = function ($) {
                     success: function (result) {
                         $("#Schedule").html("");
                         $("#Schedule").append("<option value=''>All</option>");
-                        $("#Schedule").append($("#templateSchedule").render(result));
+                        $("#Schedule").append($("#templateSchedule").render(result));                                                              
                     },
                     error: function (xhr, status, err) {
                         NAP.handleAjaxError(xhr, status, err);
@@ -121,6 +122,7 @@ var JobManagementPage = function ($) {
 } (jQuery);
 
 $(document).ready(function () {
+
 
     //disabled when server is all
     if ($('#Server').val() == '') {

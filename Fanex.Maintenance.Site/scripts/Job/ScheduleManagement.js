@@ -35,6 +35,7 @@ var ScheduleManagementPage = function ($) {
             $("#To").val(ScheduleManagementPage.dateTo);
 
             var dates = $("#From, #To").datepicker({
+                defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
                 dateFormat: "MM dd,yy",

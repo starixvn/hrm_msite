@@ -16,6 +16,7 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Criteria;
     using Fanex.Maintenance.Entity.Model;
+    using System.Data.Common;
 
     /// <summary>
     /// TODO: Update summary.
@@ -33,8 +34,9 @@ namespace Fanex.Maintenance.Repository.Impl
             {
                 Hashtable hash = criteria.GetSpParams();
                 hash = (new ResultCriteria()).AddSpParams(hash);
+                
                 using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
-                {
+                {                    
                     objectDb.ExecuteNonQuery(hash);
 
                     return this.GetCommandResult(hash);
