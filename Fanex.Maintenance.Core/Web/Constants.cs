@@ -163,5 +163,5 @@ namespace Fanex.Maintenance.Core.Web
         Error = 1,
         Warning = 2,
         Infomation = 3
-    }
+    }    
 }

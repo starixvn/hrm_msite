@@ -9,6 +9,7 @@
     using System.Web.Routing;
     using Fanex.Data;
     using Fanex.Maintenance.Core.Configurations;
+    using Fanex.Maintenance.Controller.Worker;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -23,6 +24,9 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
+
+            NotificationWorker notificationWorker = new NotificationWorker();
+            notificationWorker.Start();
         }
     }
 }
