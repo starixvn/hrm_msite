@@ -1,11 +1,11 @@
 ﻿@model Fanex.Maintenance.Criteria.Job.GetSqlServerLogCriteria
 @{
     ViewBag.Title = ViewResource.SqlAgentLog;
-    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";    
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
     var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
 }
 @section Head {
-    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />    
 }
 <section id="secondary_bar">	
 		<div class="breadcrumbs_container">
@@ -71,7 +71,7 @@
         Page Size :
         @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
     </div>
-<table class="tablesorter">
+<table class="tablesorter" id="dataTable">
     <thead>
         <tr>
             <th>
@@ -162,5 +162,5 @@
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
-    <script src="~/scripts/Job/SqlServerLogManagement.js" type="text/javascript"></script>
+    <script src="~/scripts/Job/SqlServerLogManagement.js" type="text/javascript"></script>    
 }

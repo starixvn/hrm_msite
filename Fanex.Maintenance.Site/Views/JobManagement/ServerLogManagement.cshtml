@@ -58,7 +58,7 @@
         Page Size :
         @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
     </div>
-<table class="tablesorter">
+<table class="tablesorter" id="dataTable">
     <thead>
         <tr>
             <th>
