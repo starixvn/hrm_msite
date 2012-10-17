@@ -25,20 +25,20 @@
     <script src="~/scripts/lib/modernizr-2.6.1.js" type="text/javascript"></script>
     <script src="~/themes/assets/js/prettify.min.js" type="text/javascript"></script>
     <script src="~/themes/assets/js/underscore.min.js" type="text/javascript"></script>
-    <script src="~/scripts/lib/fxHeader_0.6.js" type="text/javascript"></script>   
+    <script src="~/scripts/lib/fxHeader_0.6.js" type="text/javascript"></script>
     @RenderSection("Head", false)
 </head>
-<body>   
+<body>
     <section id="headline">
-		@RenderSection("Headline", false)
-	</section>
+        @RenderSection("Headline", false)
+    </section>
     @RenderSection("FilterBar", false)
     <section id="body">
-		<div class="content">
-          	@RenderSection("LeftMenu", false)            
-			@RenderBody()
-		</div>
-	</section>    
+        <div class="content">
+            @RenderSection("LeftMenu", false)
+            @RenderBody()
+        </div>
+    </section>
     <div id="dialog-message">
     </div>
     <div id="dialog-popup">
@@ -58,5 +58,5 @@
 <script type="text/javascript">
     fxheaderInit('dataTable', 650, 1, 0);
     fxheader();
-    </script>
+</script>
 @RenderSection("Foot", false)

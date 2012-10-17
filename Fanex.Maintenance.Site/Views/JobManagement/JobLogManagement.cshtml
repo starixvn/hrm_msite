@@ -9,120 +9,121 @@
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
     <script src="~/scripts/Job/JobLogManagement.js" type="text/javascript"></script>
 }
-<section id="secondary_bar">	
-		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="#">@Model.Server</a> 
-            <div class="breadcrumb_divider">            </div>
-             <a href="#">@Model.Job_Name</a>
-             <div class="breadcrumb_divider">            </div>
-             <a class="current">@ViewResource.Job_Log_Management</a>
-            </article>
-		</div>
-
-</section>
-<section class="column" id="main">	
-		<div class="content">	
-@using (Html.BeginForm())
-{ 
-    @Html.HiddenFor(m => m.Server)    
-    <section id="filter-bar">    
-         <div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.Job_Name)
-		    </div>   
-            <div class="edit-field">	
-                @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob
-             , new { @class = "chosen" })			                
+<section id="secondary_bar">
+    <div class="breadcrumbs_container">
+        <article class="breadcrumbs">
+            <a href="#">@Model.Server</a>
+            <div class="breadcrumb_divider">
             </div>
-        </div>   
-          <div class="filter-form">	                              
-             <div class="lbl-field">
-			    @Html.LabelFor(m => m.Execution_Status)
-		    </div>
-            <div class="edit-field">				                
-                @Html.DropDownListFor(m => m.Execution_Status,
+            <a href="#">@Model.Job_Name</a>
+            <div class="breadcrumb_divider">
+            </div>
+            <a class="current">@ViewResource.Job_Log_Management</a>
+        </article>
+    </div>
+</section>
+<section class="column" id="main">
+    <div class="content">
+        @using (Html.BeginForm())
+        { 
+            @Html.HiddenFor(m => m.Server)    
+            <section id="filter-bar">
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.Job_Name)
+                    </div>
+                    <div class="edit-field">
+                        @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob
+             , new { @class = "chosen" })
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.Execution_Status)
+                    </div>
+                    <div class="edit-field">
+                        @Html.DropDownListFor(m => m.Execution_Status,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.Success,Value=((int)StepRunStatus.Success).ToString()},                        
                         new SelectListItem{ Text=ViewResource.Fail,Value=((int)StepRunStatus.Fail).ToString()},                                              
                     }
                 , "All"
                 , new { @class = "chosen" })
-		    </div>			  
-        </div>   		                        
-        <div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.From)
-		    </div>   
-            <div class="edit-field" style="position:relative;">	                    
-                 @Html.TextBox("From", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
-                @* , new { @style = "width:90px;margin-right:5px;" }) *@
-            </div>
-        </div>  
-         <div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.To)
-		    </div>   
-            <div class="edit-field" style="position:relative;">	                
-                @Html.TextBox("To", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
-                @*, new { @style = "width:90px;margin-right:5px;" })*@
-            </div>
-        </div>     
-        <div class="filter-form">	
-         <div class="lbl-field">
-         </div>   
-            <div class="submit">
-		        <input type="submit" value="Submit" /> 
-            </div>    
-        </div>             		   
-    </section>
-}
-<article class="module width_full">
-<table class="tablesorter" id="dataTable">
-    <thead >
-        <tr class="persist-header">
-            <th>
-                #
-            </th>
-            <th>
-                @ViewResource.Status
-            </th>
-            <th>
-                @ViewResource.Step_Id
-            </th>
-            <th>
-                @ViewResource.Step_Name
-            </th>
-            <th>
-                @ViewResource.Date
-            </th>           
-            <th >
-                @ViewResource.Message
-            </th>
-            <th>
-                @ViewResource.Duration
-            </th>
-            <th>
-                @ViewResource.Action
-            </th>
-        </tr>    
-    </thead>
-    <tbody>
-        @{
-            int i = 0;
-            foreach (var item in lisJobLog)
-            {
-                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
-                i++;
-            <tr @Html.Raw(rowCss) @(item.Step.Id != 0 ? "style=display:none" : "id=" + item.InstanceId.ToString())>
-                <td class="align-center">                 
-                 @if (item.Step.Id == 0)
-                 { 
-                    <a href="#" instanceid="@item.InstanceId" class="stepOutcome expand">                        
-                    </a>                 
-                 }
-                </td>             
-                <td class="align-center">
-                    @if (item.Step.Id != 0)
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.From)
+                    </div>
+                    <div class="edit-field" style="position: relative;">
+                        @Html.TextBox("From", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
+                        @* , new { @style = "width:90px;margin-right:5px;" }) *@
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.To)
+                    </div>
+                    <div class="edit-field" style="position: relative;">
+                        @Html.TextBox("To", ((DateTime)Model.To).ToString("MMMM dd, yyyy"))
+                        @*, new { @style = "width:90px;margin-right:5px;" })*@
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="Submit" />
+                    </div>
+                </div>
+            </section>
+        }
+        <article class="module width_full">
+            <table class="tablesorter" id="dataTable">
+                <thead>
+                    <tr class="persist-header">
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            @ViewResource.Status
+                        </th>
+                        <th>
+                            @ViewResource.Step_Id
+                        </th>
+                        <th>
+                            @ViewResource.Step_Name
+                        </th>
+                        <th>
+                            @ViewResource.Date
+                        </th>
+                        <th>
+                            @ViewResource.Message
+                        </th>
+                        <th>
+                            @ViewResource.Duration
+                        </th>
+                        <th>
+                            @ViewResource.Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                        foreach (var item in lisJobLog)
+                        {
+                            string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                            i++;
+                        <tr @Html.Raw(rowCss) @(item.Step.Id != 0 ? "style=display:none" : "id=" + item.InstanceId.ToString())>
+                            <td class="align-center">
+                                @if (item.Step.Id == 0)
+                                { 
+                                    <a href="#" instanceid="@item.InstanceId" class="stepOutcome expand"></a>                 
+                                }
+                            </td>
+                            <td class="align-center">
+                                @*@if (item.Step.Id != 0)
                     {
                         if (item.RunSatus == 1)
                         {
@@ -136,41 +137,63 @@
                     else
                     {
                         <img src="~/themes/job/img/warning.png" />
-                    }                   
-                </td>
-                <td class="align-center width-100">
-                    @item.Step.Id
-                </td>
-                <td>
-                    @item.Step.Name
-                </td>
-                <td>
-                    @item.RunDate.ToFullDateString(item.RunTime)
-                </td>               
-                <td>
-                    @item.Message
-                </td>
-                <td>
-                    @item.RunDuration
-                </td>
-                <td class="align-center">
-                    <div class="action-wrp">
-                        <span class="btn-action">Action</span>
-                        <div class="relative">
-                            <ul class="actions" style="visibility: hidden; opacity: 0;">
-                                <li><a href="#" onclick="JobLogManagement.StartJob('@Model.Server','@Model.Job_Name','@item.Step.Id', '@item.Step.Name');" class="dd-site">Run</a></li>
-                           @*     <li><a href="#" class="dd-site">Copy to</a></li>*@
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            }
-        }       
-    </tbody>
-</table>
-</article>
-</div>
+                    }      *@
+                                @switch (item.RunSatus)
+                                {
+                                    case 0:
+                                    <img src="~/themes/job/images/error.png" />
+                                        break;
+                                    case 1:
+                                    <img src="~/themes/job/images/success.png" />
+                                        break;
+                                    case 2:
+                                    <img src="~/themes/job/images/retry.png" />
+                                        break;
+                                    case 3:
+                                    <img src="~/themes/job/images/cancel.png" />
+                                        break;
+                                    case 4:
+                                    <img src="~/themes/job/images/progress.png" />
+                                        break;
+                                    default:
+                                    <img src="~/themes/job/images/default.png" />
+                                        break;
+                                }
+                            </td>
+                            <td class="align-center width-100">
+                                @item.Step.Id
+                            </td>
+                            <td>
+                                @item.Step.Name
+                            </td>
+                            <td>
+                                @item.RunDate.ToFullDateString(item.RunTime)
+                            </td>
+                            <td>
+                                @item.Message
+                            </td>
+                            <td>
+                                @item.RunDuration
+                            </td>
+                            <td class="align-center">
+                                <div class="action-wrp">
+                                    <span class="btn-action">Action</span>
+                                    <div class="relative">
+                                        <ul class="actions" style="visibility: hidden; opacity: 0;">
+                                            <li><a href="#" onclick="JobLogManagement.StartJob('@Model.Server','@Model.Job_Name','@item.Step.Id', '@item.Step.Name');" class="dd-site">
+                                                Run</a></li>
+                                            @*     <li><a href="#" class="dd-site">Copy to</a></li>*@
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </article>
+    </div>
 </section>
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
