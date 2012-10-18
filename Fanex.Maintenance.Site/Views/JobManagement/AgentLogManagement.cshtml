@@ -162,7 +162,7 @@
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
-@Html.Hidden("top", (string)ViewBag.Top)
+@Html.Hidden("top", (string)ViewBag.Top.ToString())
 @section Foot {
     <script src="~/scripts/Job/SqlServerLogManagement.js" type="text/javascript"></script>
     <script type="text/javascript">

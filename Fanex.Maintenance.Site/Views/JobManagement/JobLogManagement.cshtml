@@ -189,7 +189,7 @@
         </article>
     </div>
 </section>
-@Html.Hidden("top", (string)ViewBag.Top)
+@Html.Hidden("top", (string)ViewBag.Top.ToString())
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
     <script type="text/javascript">
