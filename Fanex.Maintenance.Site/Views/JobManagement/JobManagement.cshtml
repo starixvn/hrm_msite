@@ -7,6 +7,17 @@
 }
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+     <style type="text/css">
+         #filter-bar
+        {
+            margin-left: -48px
+        }
+        .alignformat label
+        {
+            text-align:left;
+            margin-right:18px;
+        }
+        </style>
     <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
     <script type="text/x-jsrender" id="templateSchedule">
         <option value="{{:Name}}">{{:Name}}</option>
@@ -28,7 +39,7 @@
         { 
             <section id="filter-bar">
                 <div class="filter-form">
-                    <div class="lbl-field">
+                    <div class="lbl-field alignformat">
                         @Html.LabelFor(m => m.Job_Name)
                     </div>
                     <div class="edit-field">
@@ -57,22 +68,9 @@
                 , new { @class = "chosen" })
                     </div>
                 </div>
-                <div class="filter-form">
+                  <div class="filter-form">
                     <div class="lbl-field">
-                        @Html.LabelFor(m => m.Enabled)
-                    </div>
-                    <div class="edit-field">
-                        @Html.DropDownListFor(m => m.Enabled,
-                    new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.Enabled,Value=((int)Status.Enabled).ToString()},
-                        new SelectListItem{ Text=ViewResource.Disabled,Value=((int)Status.Disabled).ToString()}
-                    }
-                , "All")
-                    </div>
-                </div>
-                <div class="filter-form">
-                    <div class="lbl-field">
-                        @Html.LabelFor(m => m.Execution_Status)
+                        <label for="Execution_Status">Exec Status</label>
                     </div>
                     <div class="edit-field">
                         @Html.DropDownListFor(m => m.Execution_Status,
@@ -88,6 +86,20 @@
                 , "All")
                     </div>
                 </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.Enabled)
+                    </div>
+                    <div class="edit-field">
+                        @Html.DropDownListFor(m => m.Enabled,
+                    new List<SelectListItem> { 
+                        new SelectListItem{ Text=ViewResource.Enabled,Value=((int)Status.Enabled).ToString()},
+                        new SelectListItem{ Text=ViewResource.Disabled,Value=((int)Status.Disabled).ToString()}
+                    }
+                , "All")
+                    </div>
+                </div>
+              
                 <div class="filter-form" style="margin-left: 50px;">
                     <div class="submit">
                         <input type="submit" value="Submit" />

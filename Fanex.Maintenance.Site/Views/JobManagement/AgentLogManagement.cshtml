@@ -6,6 +6,20 @@
 }
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #filter-bar .filter-form .lbl-field
+        {
+            width: 50px;
+        }
+        .module {
+            margin-top: 90px;
+        }
+        #filter-bar
+        {
+            margin-bottom: 5px;
+            margin-left: -12px;
+        }
+    </style>
 }
 <section id="secondary_bar">
     <div class="breadcrumbs_container">
@@ -20,7 +34,7 @@
     <div class="content">
         @using (Html.BeginForm())
         { 
-            <section id="filter-bar" style="margin-bottom: 5px;">
+            <section id="filter-bar">
                 <div class="filter-form">
                     <div class="lbl-field ">
                         @Html.LabelFor(m => m.Server)

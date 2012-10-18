@@ -9,6 +9,17 @@
 }
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+     <style type="text/css">
+         #filter-bar
+        {
+            margin-left: -28px
+        }
+        .alignformat label
+        {
+            text-align:left;
+            margin-right:20px;
+        }
+        </style>
 }
 <section id="secondary_bar">
     <div class="breadcrumbs_container">
@@ -26,7 +37,7 @@
         { 
             <section id="filter-bar">
                 <div class="filter-form">
-                    <div class="lbl-field">
+                    <div class="lbl-field alignformat">
                         @Html.LabelFor(m => m.Server)
                     </div>
                     <div class="edit-field">
