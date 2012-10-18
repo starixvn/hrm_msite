@@ -115,7 +115,7 @@ namespace Fanex.Maintenance.Controller.Worker
                             OccurTime = sqlServerLog.LogDate,
                             Message = sqlServerLog.LogMessage
                         });
-                        
+
                         //// Send Mail
                         SendMailForSqlAgentError(sqlServerLogs, server.ServerIp);
 
@@ -178,7 +178,7 @@ namespace Fanex.Maintenance.Controller.Worker
                                     Message = "Job " + job.Job.Name + " has error: " + jobLog.Message,
                                     JobName = job.Job.Name
                                 });
-                                
+
                                 //// Send mail
                                 SendMailForJobStepError(job, jobLogs, server.ServerIp);
 
@@ -213,8 +213,27 @@ namespace Fanex.Maintenance.Controller.Worker
         {
             string mailTitle = "Sql Agent Error -" + DateTime.Now.ToString();
             string mailSubject = "Sql Agent Error -" + DateTime.Now.ToString();
+            string mailHeader = " <table > "
+               + " <thead>"
+                 + "   <tr>"
+                    + "    <th>"
+                   + "         #"
+                   + "     </th>"
+                   + "     <th>"
+                   + "         Server"
+                    + "    </th>"
+                   + "     <th>"
+                    + "        Occured Date"
+                   + "     </th>"
+                   + "     <th>"
+                   + "         Message"
+                   + "     </th>"
+                  + "  </tr>"
+               + " </thead>"
+              + "  <tbody> {0}"
+              + "  </tbody>"
+           + " </table>";
             string mailBody = string.Empty;
-
             foreach (SqlServerLog sqlServerLog in sqlServerLogs)
             {
                 //// if satisfy filter condition
@@ -222,16 +241,15 @@ namespace Fanex.Maintenance.Controller.Worker
                     && sqlServerLog.ErrorLevel == (int)ErrorType.Error
                     && sqlServerLog.ServerIp == serverIp)
                 {
-                    mailBody += "<br />Server: " + serverIp
-                        + "<br />" + "Occured at: " + sqlServerLog.LogDate
-                        + "<br />" + "Message: " + sqlServerLog.LogMessage
-                        + "<br />";
+                    mailBody += "<tr><td>" + serverIp + "</td>"
+                        + "<td>" + sqlServerLog.LogDate + "</td>"
+                        + "<td>" + sqlServerLog.LogMessage + "</td></tr>";
                 }
             }
 
             if (mailBody != string.Empty)
             {
-                MailHelper.SendMail(mailSubject, mailTitle, mailBody);
+                MailHelper.SendMail(mailSubject, mailTitle, string.Format(mailHeader, mailBody));
             }
         }
 
@@ -245,6 +263,29 @@ namespace Fanex.Maintenance.Controller.Worker
         {
             string mailTitle = "Job Step Error -" + DateTime.Now.ToString();
             string mailSubject = "Job Step Error -" + DateTime.Now.ToString();
+            string mailHeader = " <table > "
+               + " <thead>"
+                 + "   <tr>"
+                    + "    <th>"
+                   + "         #"
+                   + "     </th>"
+                   + "     <th>"
+                   + "         Job Name"
+                    + "    </th>"
+                   + "     <th>"
+                    + "        Failed at Step"
+                   + "     </th>"
+                     + "     <th>"
+                    + "         Occured Date"
+                   + "     </th>"
+                   + "     <th>"
+                   + "         Message"
+                   + "     </th>"
+                  + "  </tr>"
+               + " </thead>"
+              + "  <tbody> {0}"
+              + "  </tbody>"
+           + " </table>";
             string mailBody = string.Empty;
 
             foreach (JobLog jobLog in jobLogs)
@@ -255,21 +296,20 @@ namespace Fanex.Maintenance.Controller.Worker
                     && (Constants.NOTIFY_WHEN_JOB_STATUS.Contains(jobLog.RunSatus))
                     && SectionHelper.GetServerIpFromServerName(jobLog.Server) == serverIp)
                 {
-                    mailBody += "<br />Server: " + serverIp
-                        + "<br />" + "Job Name: " + job.Job.Name
-                        + "<br />" + "Failed at Step: " + jobLog.Step.Name
-                       + "<br />" + "Occured at: " + jobLogDate
-                       + "<br />" + "Message: " + jobLog.Message
-                       + "<br />";
+                    mailBody += "<tr><td>" + serverIp + "</td>"
+                        + "<td>" + job.Job.Name + "</td>"
+                        + "<td>" + jobLog.Step.Name + "</td>"
+                       + "<td>" + jobLogDate + "</td>"
+                       + "<td>" + jobLog.Message + "</td></tr>";
                 }
             }
 
             if (mailBody != string.Empty)
             {
-                MailHelper.SendMail(mailSubject, mailTitle, mailBody);
+                MailHelper.SendMail(mailSubject, mailTitle, string.Format(mailHeader, mailBody));
             }
         }
 
-        
+
     }
 }
