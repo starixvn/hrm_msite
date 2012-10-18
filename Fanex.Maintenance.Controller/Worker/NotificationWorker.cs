@@ -127,6 +127,10 @@ namespace Fanex.Maintenance.Controller.Worker
                             OccurTime = sqlServerLog.LogDate,
                             Message = sqlServerLog.LogMessage
                         });
+                        
+                        //// Send Mail
+                        SendMailForSqlAgentError(sqlServerLogs, server.ServerIp);
+
                         break;
                     }
                 }
@@ -181,7 +185,7 @@ namespace Fanex.Maintenance.Controller.Worker
                             //// Get specific job satisfy filter contions, if yes then break out
                             DateTime jobLogDate = DateTimeHelper.GetFullDatetime(jobLog.RunDate, jobLog.RunTime);
                             if (jobLogDate > LastJobLogNotificationTime
-                                && (jobLog.RunSatus == 0 || jobLog.RunSatus == 3)
+                                && (Constants.NOTIFY_WHEN_JOB_STATUS.Contains(jobLog.RunSatus))
                                 && SectionHelper.GetServerIpFromServerName(jobLog.Server) == server.ServerIp)
                             {
                                 notifyInformaitons.Add(new NotifyInfo
@@ -191,6 +195,11 @@ namespace Fanex.Maintenance.Controller.Worker
                                     OccurTime = jobLogDate,
                                     Message = "Job " + job.Job.Name + " has error: " + jobLog.Message
                                 });
+                                
+                                //// Send mail
+                                SendMailForJobStepError(job, jobLogs, server.ServerIp);
+
+
                                 isBreak = true;
                                 break;
                             }
@@ -211,5 +220,73 @@ namespace Fanex.Maintenance.Controller.Worker
 
             return notifyInformaitons;
         }
+
+        /// <summary>
+        /// Send mail for Sql Agent Error
+        /// </summary>
+        /// <param name="sqlServerLogs"></param>
+        /// <param name="serverIp"></param>
+        private void SendMailForSqlAgentError(IEnumerable<SqlServerLog> sqlServerLogs, string serverIp)
+        {
+            string mailTitle = "Mail Notification for Sql Agent Error -" + DateTime.Now.ToString();
+            string mailSubject = "Mail Notification for Sql Agent Error -" + DateTime.Now.ToString();
+            string mailBody = string.Empty;
+
+            foreach (SqlServerLog sqlServerLog in sqlServerLogs)
+            {
+                //// if satisfy filter condition
+                if (sqlServerLog.LogDate > LastSqlAgentLogNotificationTime
+                    && sqlServerLog.ErrorLevel == (int)ErrorType.Error
+                    && sqlServerLog.ServerIp == serverIp)
+                {
+                    mailBody += "<br />Server: " + serverIp
+                        + "<br />" + "Occured at: " + sqlServerLog.LogDate
+                        + "<br />" + "Message: " + sqlServerLog.LogMessage
+                        + "<br />";
+                }
+            }
+
+            if (mailBody != string.Empty)
+            {
+                MailHelper.SendMail(mailSubject, mailTitle, mailBody);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="job"></param>
+        /// <param name="jobLogs"></param>
+        /// <param name="serverIp"></param>
+        private void SendMailForJobStepError(JobSchedule job, IEnumerable<JobLog> jobLogs, string serverIp)
+        {
+            string mailTitle = "Mail Notification for Job Step Error -" + DateTime.Now.ToString();
+            string mailSubject = "Mail Notification for Job Step Error -" + DateTime.Now.ToString();
+            string mailBody = string.Empty;
+
+            foreach (JobLog jobLog in jobLogs)
+            {
+                //// Get specific job satisfy filter contions, if yes then break out
+                DateTime jobLogDate = DateTimeHelper.GetFullDatetime(jobLog.RunDate, jobLog.RunTime);
+                if (jobLogDate > LastJobLogNotificationTime
+                    && (Constants.NOTIFY_WHEN_JOB_STATUS.Contains(jobLog.RunSatus))
+                    && SectionHelper.GetServerIpFromServerName(jobLog.Server) == serverIp)
+                {
+                    mailBody += "<br />Server: " + serverIp
+                        + "<br />" + "Job Name: " + job.Job.Name
+                        + "<br />" + "Failed at Step: " + jobLog.Step.Name
+                       + "<br />" + "Occured at: " + jobLogDate
+                       + "<br />" + "Message: " + jobLog.Message
+                       + "<br />";
+                }
+            }
+
+            if (mailBody != string.Empty)
+            {
+                MailHelper.SendMail(mailSubject, mailTitle, mailBody);
+            }
+        }
+
+        
     }
 }

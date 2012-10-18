@@ -45,6 +45,12 @@ namespace Fanex.Maintenance.Core.Web
         /// </summary>
         public const string FULL = "FULL";
 
+        public static readonly List<int> NOTIFY_WHEN_JOB_STATUS = new List<int>
+        {
+            0,
+            3
+        };
+
         /// <summary>
         /// Freq Interval Values
         /// </summary>
