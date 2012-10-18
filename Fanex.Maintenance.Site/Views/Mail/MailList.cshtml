@@ -40,7 +40,7 @@
             </td>
             <td class="align-center">
                 <div class="action-wrp">
-                    <a href="#" title="Resend" class="btn-action resendmail" mailid="{{:MailID}}">Resend</a>
+                    <a href="#" title="Resend" class="resendmail" mailid="{{:MailID}}">Resend</a>
                 </div>
             </td>
         </tr>      
@@ -174,7 +174,7 @@
                     </td>
                     <td class="align-center @(mailItem.SentSuccess == 0 ? "mailfail" : string.Empty)">
                         <div class="action-wrp">
-                            <a href="#" title="Resend" class="btn-action resendmail" mailid="@mailItem.MailID">Resend</a>
+                            <a href="#" title="Resend" class="resendmail" mailid="@mailItem.MailID">Resend</a>
                         </div>
                     </td>
                 </tr>               
