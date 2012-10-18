@@ -28,10 +28,12 @@
         notitficationHub.gotMessage = function (notifyInfoes) {
             for (var i = 0; i < notifyInfoes.length; i++) {
                 var notifyInfo = notifyInfoes[i];
+                var message = notifyInfo.Type == 1 ? "Sql Agent Error" : "Job Error";
+                message += "<br/>" + notifyInfo.Message;
                 $('span.' + notifyInfo.ServerIp).addClass("notifyError");
                 $('span.' + notifyInfo.ServerIp + notifyInfo.Type).addClass("notifyError");
                 $('span.' + notifyInfo.ServerIp + ',' + 'span.' + notifyInfo.ServerIp + notifyInfo.Type).qtip({
-                    content: notifyInfo.Message,
+                    content: message,
                     position:
                 {
                     corner: {
@@ -51,7 +53,7 @@
                         padding: 10,
                         textAlign: 'center',
                         tip: true, // Give it a speech bubble tip with automatic corner detection
-                        name: 'cream' // Style it according to the preset 'cream' style
+                        name: 'dark' // Style it according to the preset 'cream' style
                     }
                 })
             }

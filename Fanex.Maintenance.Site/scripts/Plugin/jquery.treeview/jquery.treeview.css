@@ -17,6 +17,7 @@
 	margin-left: -16px;
 	float: left;
 	cursor: pointer;
+	 margin-top: 1px;
 }
 /* fix for IE6 */
 * html .hitarea {

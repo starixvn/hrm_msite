@@ -195,3 +195,4 @@ Array.prototype.removeAll = function (criteria) {
 		}
 	}
 };
+
