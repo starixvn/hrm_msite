@@ -34,17 +34,17 @@ namespace Fanex.Maintenance.Controller
         /// Job Service
         /// </summary>
         private readonly IJobService _jobService = JobService.Create();
-        
+
         /// <summary>
         /// Schedule Service
         /// </summary>
         private readonly IScheduleService _scheduleService = ScheduleService.Create();
-        
+
         /// <summary>
         /// Step Service
         /// </summary>
         private readonly IStepService _stepService = StepService.Create();
-        
+
         /// <summary>
         /// Server Log Service
         /// </summary>
@@ -57,17 +57,21 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult MainContentPage()
+        public ActionResult MainContentPage(string type = "", string server = "", string jobname = "")
         {
+            ViewBag.Type = type;
+            ViewBag.Server = server;
+            ViewBag.JobName = jobname;
+
             return View();
         }
-        
+
         /// <summary>
         /// Left menu Page
         /// </summary>
         /// <returns></returns>
         public ActionResult LeftMenuPage()
-        {     
+        {
             return View(DatabaseServersSection.Instance.Servers);
         }
 
@@ -202,15 +206,15 @@ namespace Fanex.Maintenance.Controller
         /// <param name="jobName"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult StartJob(string server, 
-            string jobName, 
+        public JsonResult StartJob(string server,
+            string jobName,
             string stepName)
         {
             CommandResult commandResult = _jobService.FromServer(server)
                 .WithJob(jobName)
                 .WithStepName(stepName)
                 .StartJob();
-            
+
             return Json(new
             {
                 Status = commandResult
@@ -302,7 +306,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="server"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult JobLogManagement(string job, string server)
+        public ActionResult JobLogManagement(string job, string server, int top = 0)
         {
             //// get log history 
             List<JobLog> listJobLog = _jobService
@@ -333,6 +337,8 @@ namespace Fanex.Maintenance.Controller
                 To = DateTime.Now.AddDays(1),
                 Server = server
             };
+
+            ViewBag.Top = top;
 
             return View(criteria);
         }
@@ -438,7 +444,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="server"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult AgentLogManagement(string server)
+        public ActionResult AgentLogManagement(string server, int top = 0)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
@@ -448,6 +454,8 @@ namespace Fanex.Maintenance.Controller
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
             ViewBag.DateFrom = DateTime.Now.ToString("MMMM dd, yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MMMM dd, yyyy");
+
+            ViewBag.Top = top;
 
             return View(new GetSqlServerLogCriteria
             {

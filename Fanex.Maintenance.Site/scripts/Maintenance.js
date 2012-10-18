@@ -196,3 +196,17 @@ Array.prototype.removeAll = function (criteria) {
 	}
 };
 
+
+//Replace all
+String.prototype.replaceAll = function (targetString, replaceString) {
+
+    var strText = this;
+    var intIndexOfMatch = strText.indexOf(targetString);
+
+    while (intIndexOfMatch != -1) {
+        strText = strText.replace(targetString, replaceString)
+        intIndexOfMatch = strText.indexOf(targetString);
+    }
+
+    return (strText);
+}

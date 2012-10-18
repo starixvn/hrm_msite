@@ -77,7 +77,7 @@
             </section>
         }
         <article class="module width_full">
-            <table class="tablesorter" id="dataTable" style="width:99%">
+            <table class="tablesorter" id="dataTable" style="width: 99%">
                 <thead>
                     <tr>
                         <th>
@@ -189,6 +189,15 @@
         </article>
     </div>
 </section>
+@Html.Hidden("top", (string)ViewBag.Top)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var top = $('#top').val();
+            if (top == 1) {
+
+            }
+        });
+    </script>
 }

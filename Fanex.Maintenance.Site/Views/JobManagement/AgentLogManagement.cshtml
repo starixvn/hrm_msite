@@ -5,162 +5,172 @@
     var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
 }
 @section Head {
-    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />    
+    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
 }
-<section id="secondary_bar">	
-		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.html">@Model.Server</a> <div class="breadcrumb_divider"></div> <a class="current">@ViewResource.SqlAgentLog</a></article>
-		</div>
-
-</section>
-<section class="column" id="main">	
-		<div class="content">
-@using (Html.BeginForm())
-{ 
-    <section id="filter-bar" style="margin-bottom: 5px;">      
-		<div class="filter-form">	
-            <div class="lbl-field ">
-			    @Html.LabelFor(m => m.Server)
-		    </div>   
-            <div class="edit-field ">	
-                @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
+<section id="secondary_bar">
+    <div class="breadcrumbs_container">
+        <article class="breadcrumbs">
+            <a href="index.html">@Model.Server</a>
+            <div class="breadcrumb_divider">
             </div>
-        </div>        
-        <div class="filter-form">	                              
-            <div class="lbl-field ">
-			    @ViewResource.Status
-		    </div>
-            <div class="edit-field ">				                
-                @Html.DropDownListFor(m => m.ErrorLevel,
+            <a class="current">@ViewResource.SqlAgentLog</a></article>
+    </div>
+</section>
+<section class="column" id="main">
+    <div class="content">
+        @using (Html.BeginForm())
+        { 
+            <section id="filter-bar" style="margin-bottom: 5px;">
+                <div class="filter-form">
+                    <div class="lbl-field ">
+                        @Html.LabelFor(m => m.Server)
+                    </div>
+                    <div class="edit-field ">
+                        @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field ">
+                        @ViewResource.Status
+                    </div>
+                    <div class="edit-field ">
+                        @Html.DropDownListFor(m => m.ErrorLevel,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.Error,Value=((int)ErrorType.Error).ToString()}, 
                         new SelectListItem{ Text=ViewResource.Warning,Value=((int)ErrorType.Warning).ToString()},   
                         new SelectListItem{ Text=ViewResource.Information,Value=((int)ErrorType.Infomation).ToString()}                      
                     }
                 , "All")
-		    </div>	
-            </div>		  
-        <div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.From)
-		    </div>   
-            <div class="edit-field" style="position:relative;">	
-                @Html.TextBoxFor(m => m.From)                
-            </div>
-        </div>  
-         <div class="filter-form">	
-            <div class="lbl-field">
-			    @Html.LabelFor(m => m.To)
-		    </div>   
-            <div class="edit-field" style="position:relative;">	
-                @Html.TextBoxFor(m => m.To)                
-            </div>
-        </div>     
-        @Html.HiddenFor(m => m.PageIndex)
-        @Html.HiddenFor(m => m.PageSize)
-        <div class="filter-form" style="margin-left:50px;">	           
-            <div class="submit">
-		        <input id="submitbutton" onclick="SqlServerLogManagement.UpdatePaging();" type="submit" value="Submit" /> 
-            </div>    
-        </div>             	       		   
-    </section>
-}
-
-<article class="module width_full">
- <div class="pagesize">
-        Page Size :
-        @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
-    </div>
-<table class="tablesorter" id="dataTable" style="width:99%">
-    <thead>
-        <tr>
-            <th>
-                #
-            </th>
-             <th>
-                @ViewResource.Server
-            </th>
-              <th>
-                @ViewResource.Status
-            </th>
-            <th>
-                @ViewResource.Date
-            </th>
-            <th>
-                @ViewResource.Message
-            </th>
-           
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int i = (int)Model.PageIndex * (int)Model.PageSize;
-            foreach (var sqlServerLog in sqlServerLogs)
-            {
-                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
-                i++;
-            <tr @Html.Raw(rowCss)>
-                <td class="align-center">
-                    @(i)
-                </td>
-                 <td class="align-center">
-                    @sqlServerLog.ServerIp
-                </td>
-                 <td class="align-center">
-                    @switch (sqlServerLog.ErrorLevel)
-                    {
-                        case (int)ErrorType.Error:
-                            <img src="~/themes/job/img/error.png" />
-                            break;
-                        case (int)ErrorType.Warning:
-                        <img src="~/themes/job/img/warning.png" />
-                            break;
-                        case (int)ErrorType.Infomation:
-                         <img src="~/themes/job/img/tick.png" /> 
-                            break;
-                    }          
-                </td>
-                <td class="align-center width-140">
-                    @sqlServerLog.LogDate.ToFullDateString()
-                </td>
-                <td>
-                    @sqlServerLog.LogMessage
-                </td>
-               
-            </tr>
-            }
-            if (sqlServerLogs.Count() == 0)
-            {
-                <tr>
-                    <td class="align-center" colspan="10">
-                    @ViewResource.NoInformationAvailable
-                    </td>
-                </tr>
-            }
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.From)
+                    </div>
+                    <div class="edit-field" style="position: relative;">
+                        @Html.TextBoxFor(m => m.From)
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.To)
+                    </div>
+                    <div class="edit-field" style="position: relative;">
+                        @Html.TextBoxFor(m => m.To)
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.PageIndex)
+                @Html.HiddenFor(m => m.PageSize)
+                <div class="filter-form" style="margin-left: 50px;">
+                    <div class="submit">
+                        <input id="submitbutton" onclick="SqlServerLogManagement.UpdatePaging();" type="submit"
+                            value="Submit" />
+                    </div>
+                </div>
+            </section>
         }
-    </tbody>
-     <tfoot>
-          @if (Model.PageIndex == 0 && sqlServerLogs.Count() == 0)
-          {
-          }
-          else
-          {
-                <tr>
-                    <td class="align-center" colspan="10">
-                        <a href="#" class="pagiPre" style="margin-right: 50px;" onclick="SqlServerLogManagement.OnNextPage(-1);" ><< Pre</a> <a href="#" class="pagiNext" onclick="SqlServerLogManagement.OnNextPage(1);">
-                            Next >></a>
-                    </td>
-                </tr>
-          }
-        </tfoot>
-</table>
-</article>
-</div>
-
+        <article class="module width_full">
+            <div class="pagesize">
+                Page Size :
+                @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
+            </div>
+            <table class="tablesorter" id="dataTable" style="width: 99%">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            @ViewResource.Server
+                        </th>
+                        <th>
+                            @ViewResource.Status
+                        </th>
+                        <th>
+                            @ViewResource.Date
+                        </th>
+                        <th>
+                            @ViewResource.Message
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = (int)Model.PageIndex * (int)Model.PageSize;
+                        foreach (var sqlServerLog in sqlServerLogs)
+                        {
+                            string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+                            i++;
+                        <tr @Html.Raw(rowCss)>
+                            <td class="align-center">
+                                @(i)
+                            </td>
+                            <td class="align-center">
+                                @sqlServerLog.ServerIp
+                            </td>
+                            <td class="align-center">
+                                @switch (sqlServerLog.ErrorLevel)
+                                {
+                                    case (int)ErrorType.Error:
+                                    <img src="~/themes/job/img/error.png" />
+                                        break;
+                                    case (int)ErrorType.Warning:
+                                    <img src="~/themes/job/img/warning.png" />
+                                        break;
+                                    case (int)ErrorType.Infomation:
+                                    <img src="~/themes/job/img/tick.png" /> 
+                                        break;
+                                }
+                            </td>
+                            <td class="align-center width-140">
+                                @sqlServerLog.LogDate.ToFullDateString()
+                            </td>
+                            <td>
+                                @sqlServerLog.LogMessage
+                            </td>
+                        </tr>
+                        }
+                        if (sqlServerLogs.Count() == 0)
+                        {
+                        <tr>
+                            <td class="align-center" colspan="10">
+                                @ViewResource.NoInformationAvailable
+                            </td>
+                        </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    @if (Model.PageIndex == 0 && sqlServerLogs.Count() == 0)
+                    {
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="align-center" colspan="10">
+                                <a href="#" class="pagiPre" style="margin-right: 50px;" onclick="SqlServerLogManagement.OnNextPage(-1);">
+                                    << Pre</a> <a href="#" class="pagiNext" onclick="SqlServerLogManagement.OnNextPage(1);">
+                                        Next >></a>
+                            </td>
+                        </tr>
+                    }
+                </tfoot>
+            </table>
+        </article>
+    </div>
 </section>
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
+@Html.Hidden("top", (string)ViewBag.Top)
 @section Foot {
-    <script src="~/scripts/Job/SqlServerLogManagement.js" type="text/javascript"></script>    
+    <script src="~/scripts/Job/SqlServerLogManagement.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var top = $('#top').val();
+            if (top == 1) {
+
+            }
+        });
+    </script>
 }

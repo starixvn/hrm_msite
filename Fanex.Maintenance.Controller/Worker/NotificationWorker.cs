@@ -44,7 +44,7 @@ namespace Fanex.Maintenance.Controller.Worker
 
             _getDataInterval = getDataInterval;
             _jobService = JobService.Create();
-            _sqlServerLogService =  SqlServerLogService.Create();
+            _sqlServerLogService = SqlServerLogService.Create();
         }
 
         /// <summary>
@@ -121,9 +121,10 @@ namespace Fanex.Maintenance.Controller.Worker
                         && sqlServerLog.ErrorLevel == (int)ErrorType.Error
                         && sqlServerLog.ServerIp == server.ServerIp)
                     {
-                        notifyInformaitons.Add(new NotifyInfo { 
+                        notifyInformaitons.Add(new NotifyInfo
+                        {
                             Type = NotifyType.AgentLog,
-                            ServerIp = server.ServerIp.Replace(".","_"),
+                            ServerIp = server.ServerIp.Replace(".", "_"),
                             OccurTime = sqlServerLog.LogDate,
                             Message = sqlServerLog.LogMessage
                         });
@@ -167,9 +168,9 @@ namespace Fanex.Maintenance.Controller.Worker
                 _jobService.WithEndRunDate(DateTime.Now.AddDays(1));
                 foreach (JobSchedule job in jobs)
                 {
-                   
+
                     //// Get All job Log with daterange and job name
-                    jobLogs = _jobService 
+                    jobLogs = _jobService
                         .WithJob(job.Job.Name)
                         .GetJobLogs();
 
@@ -189,7 +190,8 @@ namespace Fanex.Maintenance.Controller.Worker
                                     Type = NotifyType.Job,
                                     ServerIp = server.ServerIp.Replace(".", "_"),
                                     OccurTime = jobLogDate,
-                                    Message = "Job " + job.Job.Name + " has error: " + jobLog.Message
+                                    Message = "Job " + job.Job.Name + " has error: " + jobLog.Message,
+                                    JobName = job.Job.Name
                                 });
                                 isBreak = true;
                                 break;

@@ -21,9 +21,14 @@ namespace Fanex.Maintenance.Entity.Model
     public class NotifyInfo
     {
         public string ServerIp { get; set; }
+
         public NotifyType Type { get; set; }
+
         public string Message { get; set; }
+
         public DateTime OccurTime { get; set; }
+
+        public string JobName { get; set; }
     }
 
     /// <summary>
