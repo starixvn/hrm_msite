@@ -34,17 +34,17 @@ namespace Fanex.Maintenance.Controller.Worker
         public static DateTime LastJobLogNotificationTime { get; set; }
         private IJobService _jobService;
         private ISqlServerLogService _sqlServerLogService;
-        private bool _isFristTime = true;
 
 
         public NotificationWorker(
             int getDataInterval = 60000)
             : base()
         {
-
             _getDataInterval = getDataInterval;
             _jobService = JobService.Create();
             _sqlServerLogService = SqlServerLogService.Create();
+            LastSqlAgentLogNotificationTime = DateTime.Now;
+            LastJobLogNotificationTime = DateTime.Now;
         }
 
         /// <summary>
@@ -76,12 +76,6 @@ namespace Fanex.Maintenance.Controller.Worker
 
                     var context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
                     context.Clients.gotMessage(notifyInfoes);
-
-                    if (_isFristTime)
-                    {
-                        _isFristTime = false;
-                    }
-
                 }
                 catch (Exception ex)
                 {
@@ -97,18 +91,10 @@ namespace Fanex.Maintenance.Controller.Worker
         /// <returns></returns>
         private IEnumerable<NotifyInfo> GetSqlAgentLogs()
         {
-            if (!_isFristTime)
-            {
-                _sqlServerLogService.FromDate(LastSqlAgentLogNotificationTime);
-            }
-            else
-            {
-                _sqlServerLogService.FromDate(DateTime.Now);
-                LastSqlAgentLogNotificationTime = DateTime.Now;
-            }
-
             //// Get all agent log
-            IEnumerable<SqlServerLog> sqlServerLogs = _sqlServerLogService.ToDate(DateTime.Now.AddDays(1))
+            IEnumerable<SqlServerLog> sqlServerLogs = _sqlServerLogService
+                .FromDate(LastSqlAgentLogNotificationTime)
+                .ToDate(DateTime.Now.AddDays(1))
                 .GetSqlServerLogs((int)LogType.SqlAgentLog);
             List<NotifyInfo> notifyInformaitons = new List<NotifyInfo>();
             DateTime tempDatetime = DateTime.Now;
@@ -158,20 +144,13 @@ namespace Fanex.Maintenance.Controller.Worker
             foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
             {
                 _jobService = JobService.Create();
-                IEnumerable<JobSchedule> jobs = _jobService.FromServer(server.ServerIp)
+                IEnumerable<JobSchedule> jobs = _jobService
+                    .FromServer(server.ServerIp)
                     .GetJobs();
 
-
-                if (!_isFristTime)
-                {
-                    _jobService.WithStartRunDate(LastJobLogNotificationTime);
-                }
-                else
-                {
-                    _jobService.WithStartRunDate(DateTime.Now);
-                    LastJobLogNotificationTime = DateTime.Now;
-                }
-                _jobService.WithEndRunDate(DateTime.Now.AddDays(1));
+                _jobService
+                    .WithStartRunDate(LastJobLogNotificationTime)
+                    .WithEndRunDate(DateTime.Now.AddDays(1));
                 foreach (JobSchedule job in jobs)
                 {
 

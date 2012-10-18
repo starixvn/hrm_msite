@@ -10,6 +10,8 @@
     using Fanex.Data;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Controller.Worker;
+    using System.Configuration;
+    using Fanex.Common;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -25,7 +27,7 @@
 
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
 
-            NotificationWorker notificationWorker = new NotificationWorker();
+            NotificationWorker notificationWorker = new NotificationWorker(Converter.ToInt(ConfigurationManager.AppSettings["GetDataNotifyInterval"],60000));
             notificationWorker.Start();
         }
     }
