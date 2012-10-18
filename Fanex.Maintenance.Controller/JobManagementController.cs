@@ -376,6 +376,8 @@ namespace Fanex.Maintenance.Controller
                 Value = j.Job.Name
             }).ToList();
 
+            ViewBag.Top = 0;
+
             return View(criteria);
         }
 
@@ -486,6 +488,8 @@ namespace Fanex.Maintenance.Controller
                 .ToDate(criteria.To)
                 .WithErrorLevel(criteria.ErrorLevel)
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Skip(pageSize * pageIndex).Take(pageSize);
+
+            ViewBag.Top = 0;
 
             return View(new GetSqlServerLogCriteria
             {
