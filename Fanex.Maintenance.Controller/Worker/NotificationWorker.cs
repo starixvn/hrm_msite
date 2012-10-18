@@ -104,6 +104,7 @@ namespace Fanex.Maintenance.Controller.Worker
             else
             {
                 _sqlServerLogService.FromDate(DateTime.Now);
+                LastSqlAgentLogNotificationTime = DateTime.Now;
             }
 
             //// Get all agent log
@@ -167,7 +168,8 @@ namespace Fanex.Maintenance.Controller.Worker
                 }
                 else
                 {
-                    _jobService.WithStartRunDate(DateTime.Now.AddDays(-1));
+                    _jobService.WithStartRunDate(DateTime.Now);
+                    LastJobLogNotificationTime = DateTime.Now;
                 }
                 _jobService.WithEndRunDate(DateTime.Now.AddDays(1));
                 foreach (JobSchedule job in jobs)
@@ -230,8 +232,8 @@ namespace Fanex.Maintenance.Controller.Worker
         /// <param name="serverIp"></param>
         private void SendMailForSqlAgentError(IEnumerable<SqlServerLog> sqlServerLogs, string serverIp)
         {
-            string mailTitle = "Mail Notification for Sql Agent Error -" + DateTime.Now.ToString();
-            string mailSubject = "Mail Notification for Sql Agent Error -" + DateTime.Now.ToString();
+            string mailTitle = "Sql Agent Error -" + DateTime.Now.ToString();
+            string mailSubject = "Sql Agent Error -" + DateTime.Now.ToString();
             string mailBody = string.Empty;
 
             foreach (SqlServerLog sqlServerLog in sqlServerLogs)
@@ -262,8 +264,8 @@ namespace Fanex.Maintenance.Controller.Worker
         /// <param name="serverIp"></param>
         private void SendMailForJobStepError(JobSchedule job, IEnumerable<JobLog> jobLogs, string serverIp)
         {
-            string mailTitle = "Mail Notification for Job Step Error -" + DateTime.Now.ToString();
-            string mailSubject = "Mail Notification for Job Step Error -" + DateTime.Now.ToString();
+            string mailTitle = "Job Step Error -" + DateTime.Now.ToString();
+            string mailSubject = "Job Step Error -" + DateTime.Now.ToString();
             string mailBody = string.Empty;
 
             foreach (JobLog jobLog in jobLogs)
