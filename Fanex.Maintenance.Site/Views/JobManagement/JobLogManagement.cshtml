@@ -86,13 +86,13 @@
                         <th>
                             @ViewResource.Status
                         </th>
-                        <th>
+                        <th class="width-50">
                             @ViewResource.Step_Id
                         </th>
-                        <th>
+                        <th class="width-120">
                             @ViewResource.Step_Name
                         </th>
-                        <th>
+                        <th class="width-180">
                             @ViewResource.Date
                         </th>
                         <th>
@@ -146,16 +146,16 @@
                                         break;
                                 }
                             </td>
-                            <td class="align-center width-100">
+                            <td class="align-center width-50">
                                 @item.Step.Id
                             </td>
-                            <td>
+                            <td style="padding-left:10px">
                                 @item.Step.Name
                             </td>
-                            <td>
+                            <td class="align-center width-180">
                                 @item.RunDate.ToFullDateString(item.RunTime)
                             </td>
-                            <td>
+                            <td style="padding-left:10px">
                                 @item.Message
                             </td>
                             <td>
