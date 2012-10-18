@@ -33,15 +33,18 @@ namespace Fanex.Maintenance.Core.Helper
             {
                 foreach (MailElement mail in MailSection.Instance.Mails)
                 {
-                    using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
+                    if (mail.To == string.Empty)
                     {
-                        client.CreateMail(mailTitle)
-                            .AddBody(mailBody)
-                            .AddSubject(mailSubject)
-                            .To(mail.To)
-                            .ToCcMails(mail.CC)
-                            .ToBccMails(mail.BCC)
-                            .SendMail();
+                        using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
+                        {
+                            client.CreateMail(mailTitle)
+                                .AddBody(mailBody)
+                                .AddSubject(mailSubject)
+                                .To(mail.To)
+                                .ToCcMails(mail.CC)
+                                .ToBccMails(mail.BCC)
+                                .SendMail();
+                        }
                     }
                 }
             }
