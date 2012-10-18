@@ -346,10 +346,10 @@
     <value>Active Start Date</value>
   </data>
   <data name="ScheduleFreq" xml:space="preserve">
-    <value>Frequent (Type : Interval)</value>
+    <value>Frequent</value>
   </data>
   <data name="ScheduleFreqSub" xml:space="preserve">
-    <value>Frequent Sub (Type : Interval)</value>
+    <value>Frequent Sub</value>
   </data>
   <data name="ScheduleName" xml:space="preserve">
     <value>Schedule</value>

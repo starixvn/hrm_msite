@@ -74,10 +74,10 @@
 <table class="tablesorter" id="dataTable" style="width:99%">
     <thead>
         <tr>
-            <th>
+            <th class="align-center width-30">
                 #
             </th>
-             <th>
+             <th class="align-center width-100">
                 @ViewResource.Server
             </th>
             <th>
@@ -97,16 +97,16 @@
                 string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
                 i++;
             <tr @Html.Raw(rowCss)>
-                <td class="align-center">
+                <td class="align-center width-30">
                     @(i)
                 </td>
-                 <td class="align-center">
+                 <td class="align-center width-100">
                     @sqlServerLog.ServerIp
                 </td>
-                <td class="align-center width-140">
+                <td class="align-center width-180">
                     @sqlServerLog.LogDate.ToFullDateString()
                 </td>
-                <td>
+                <td style="padding-left:10px">
                     @sqlServerLog.LogMessage
                 </td>
                

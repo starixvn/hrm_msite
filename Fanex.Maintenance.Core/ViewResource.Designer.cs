@@ -943,7 +943,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Frequent (Type : Interval).
+        ///   Looks up a localized string similar to Frequent.
         /// </summary>
         public static string ScheduleFreq {
             get {
@@ -952,7 +952,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Frequent Sub (Type : Interval).
+        ///   Looks up a localized string similar to Frequent Sub.
         /// </summary>
         public static string ScheduleFreqSub {
             get {
