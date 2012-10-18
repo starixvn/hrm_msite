@@ -189,7 +189,7 @@ namespace Fanex.Maintenance.Controller.Worker
                                     Type = NotifyType.Job,
                                     ServerIp = server.ServerIp.Replace(".", "_"),
                                     OccurTime = jobLogDate,
-                                    Message = jobLog.Message
+                                    Message = "Job " + job.Job.Name + " has error: " + jobLog.Message
                                 });
                                 isBreak = true;
                                 break;

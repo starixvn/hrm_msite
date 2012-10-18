@@ -1,4 +1,5 @@
 ﻿/* File Created: October 17, 2012 */
+// Array Remove All elements matched the criteria
 // Proxy created on the fly
 var notitficationHub = $.connection.notificationHub;
 
@@ -10,15 +11,15 @@ notitficationHub.addMessage = function (message) {
 notitficationHub.gotMessage = function (notifyInfoes) {
     for (var i = 0; i < notifyInfoes.length; i++) {
         var notifyInfo = notifyInfoes[i];
-        var message = "Server: " + notifyInfo.ServerIp + "<br/>"
+        var message = "Server: " + notifyInfo.ServerIp.split('_').join('.') + "<br/>"
                 + (notifyInfo.Type == 1 ? "Sql Server Agent Error" : "Job Error") + "<br />"
                 + "Occur at " + notifyInfo.OccurTime + "<br />"
                 + "Message: " + notifyInfo.Message;
 
-        $.notify({
-            inline: true,
-            html: '<p>' + message + '</p>'
-        }, 20000);
+                $.notify({
+                    inline: true,
+                    html: '<p>' + message + '</p>'
+                }, 20000);
     }
 }
 
