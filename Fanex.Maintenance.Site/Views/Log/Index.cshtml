@@ -21,48 +21,47 @@
         <span class="title">@ViewBag.Title</span>
     </h1>
 }
-<section id="filter-bar">    
-        @using (Html.BeginForm())
-        {       
-			<div class="filter-form">	
+<section id="filter-bar">
+    @using (Html.BeginForm())
+    {       
+        <div class="filter-form">
             <div class="lbl-field width-auto">
-				@Html.LabelFor(m => m.CategoryId)
-			</div>
-            <div class="edit-field">				
-               @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory,"All")
-			</div>		
+                @Html.LabelFor(m => m.CategoryId)
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, "All")
+            </div>
             <div class="lbl-field width-auto">
-				@Html.LabelFor(m => m.Severity)
-			</div>
-            <div class="edit-field">				
+                @Html.LabelFor(m => m.Severity)
+            </div>
+            <div class="edit-field">
                 @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity)
-			</div>					                                   
+            </div>
             <div class="lbl-field width-auto">
-				@Html.LabelFor(m => m.From)
-			</div>
-            <div class="edit-field">				                
+                @Html.LabelFor(m => m.From)
+            </div>
+            <div class="edit-field">
                 @Html.TextBoxFor(m => m.From, new { @style = "width:90px;margin-right:5px;" })
-			</div>					                                   
+            </div>
             <div class="lbl-field width-auto">
-				@Html.LabelFor(m => m.To)
-			</div>
-            <div class="edit-field">				
-                 @Html.TextBoxFor(m => m.To, new { @style = "width:90px;margin-right:5px;" })
-			</div>					                                   
+                @Html.LabelFor(m => m.To)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.To, new { @style = "width:90px;margin-right:5px;" })
+            </div>
             <div class="submit">
-					<input type="submit" value="Submit" />                  
-		    </div>                               
+                <input type="submit" value="Submit" />
+            </div>
             <div class="submit">
-					<input type="button" value="Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())" id="btnRemoveLog" />                  
-                   
-		    </div>                               
-			</div>    
-            <div class="pagesize">
-                Page Size :
-                @Html.DropDownListFor(m => m.Size, (List<SelectListItem>)ViewBag.PageSize)
-            </div>        
-        }    
-    </section>
+                <input type="button" value="Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())" id="btnRemoveLog" />
+            </div>
+        </div>                     
+    }
+</section>
+<div class="pagesize">
+    Page Size :
+    @Html.DropDownListFor(m => m.Size, (List<SelectListItem>)ViewBag.PageSize)
+</div>
 <table class="grid">
     <thead>
         <tr>
