@@ -337,32 +337,21 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 List<JobLog> list = _jobRepository.GetJobLog(criteria, this._server).ToList();
 
                 if (!ReferenceEquals(list, null) && list.Count > 0)
-                {
-                    int sumStatus = 0;
-                    int countStep = 0;
+                {                    
+                    int indexOutCome = 0;
                     for (int i = 0; i < list.Count; i++)
                     {
                         var itemLog = list[i];
-                        if (itemLog.Step.Id != 0)
+                        if (itemLog.Step.Id == 0)
                         {
-                            countStep++;
-                            sumStatus += itemLog.RunSatus;
+                            indexOutCome = i;
                         }
                         else
                         {
-                            if (countStep != sumStatus)
+                            if (itemLog.RunSatus == 0 || itemLog.RunSatus == 2)
                             {
-                                if (countStep != 1)
-                                {
-                                    list[i - countStep - 1].RunSatus = 6;
-                                }
-                                else
-                                {
-                                    list[i - countStep - 1].RunSatus = list[i - 1].RunSatus;
-                                }
-                            }
-                            sumStatus = 0;
-                            countStep = 0;
+                                list[indexOutCome].RunSatus = 6;
+                            }                            
                         }
                     }
                 }
