@@ -26,7 +26,7 @@ namespace Fanex.Maintenance.Entity.Model
 
         public string Message { get; set; }
 
-        public DateTime OccurTime { get; set; }
+        public string OccurTime { get; set; }
 
         public string JobName { get; set; }
     }

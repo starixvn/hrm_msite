@@ -220,10 +220,6 @@
     <Content Include="scripts\lib\msgbox\msgbox-0.0.1.js" />
     <Content Include="scripts\lib\msgbox\msgbox-0.0.1.min.css" />
     <Content Include="scripts\lib\msgbox\msgbox-0.0.1.min.js" />
-    <Content Include="scripts\lib\notification\images\corners.png" />
-    <Content Include="scripts\lib\notification\images\sides.png" />
-    <Content Include="scripts\lib\notification\jquery.notify.css" />
-    <Content Include="scripts\lib\notification\jquery.notify.js" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.css" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.js" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.min.css" />
@@ -668,6 +664,13 @@
     <Content Include="scripts\Plugin\jquery.treeview\images\treeview-red.gif" />
     <Content Include="scripts\Plugin\jquery.treeview\jquery.treeview.css" />
     <Content Include="scripts\Plugin\jquery.treeview\jquery.treeview.js" />
+    <Content Include="scripts\Plugin\notification\images\close.gif" />
+    <Content Include="scripts\Plugin\notification\images\error.png" />
+    <Content Include="scripts\Plugin\notification\images\notice.png" />
+    <Content Include="scripts\Plugin\notification\images\success.png" />
+    <Content Include="scripts\Plugin\notification\images\warning.png" />
+    <Content Include="scripts\Plugin\notification\jquery.toastmessage.css" />
+    <Content Include="scripts\Plugin\notification\jquery.toastmessage.js" />
     <Content Include="scripts\SqlJobManagement\LeftMenuPage.js" />
     <Content Include="scripts\_Layout.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />

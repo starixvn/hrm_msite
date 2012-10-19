@@ -160,7 +160,7 @@ namespace Fanex.Maintenance.Controller.Worker
                         {
                             Type = NotifyType.AgentLog,
                             ServerIp = server.ServerIp.Replace(".", "_"),
-                            OccurTime = sqlServerLog.LogDate,
+                            OccurTime = sqlServerLog.LogDate.ToString("MMMM dd, yyyy HH:mm:ss"),
                             Message = sqlServerLog.LogMessage
                         });
 
@@ -222,7 +222,7 @@ namespace Fanex.Maintenance.Controller.Worker
                                 {
                                     Type = NotifyType.Job,
                                     ServerIp = server.ServerIp.Replace(".", "_"),
-                                    OccurTime = jobLogDate,
+                                    OccurTime = jobLogDate.ToString("MMMM dd, yyyy HH:mm:ss"),
                                     Message = "Job " + job.Job.Name + " has error: " + jobLog.Message,
                                     JobName = job.Job.Name
                                 });

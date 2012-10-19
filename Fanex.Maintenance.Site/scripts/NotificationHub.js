@@ -22,10 +22,17 @@ notitficationHub.gotMessage = function (notifyInfoes) {
                 + "Message: " + notifyInfo.Message + "<br />"
                 + "<a href=" + NAP.resolveClientUrl("JobManagement/MainContentPage?" + queryString) + ">View Detail</a>";
 
-        $.notify({
-            inline: true,
-            html: '<p>' + message + '</p>'
-        }, 20000);
+        $().toastmessage('showToast', {
+            text: message ,
+            //                sticky: true,
+            stayTime: 20000,
+            position: 'bottom-right',
+            type: 'error',
+            closeText: '',
+            close: function () {
+                //                    console.log("toast is closed ...");
+            }
+        }); 
     }
 }
 
