@@ -314,7 +314,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             switch (freq)
             {
                 case (int)FrequentTime.OneTimeOnly:
-                    freqIntervalName = DateTimeHelper.GetFullTime(activeStartTime);
+                    //freqIntervalName = DateTimeHelper.GetFullTime(activeStartTime);
 
                     break;
                 case (int)FrequentTime.Daily:
@@ -341,7 +341,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             if (freqIntervalName != string.Empty)
             {
-                freqIntervalName = " : " + (freqIntervalName.Contains(',') ? freqIntervalName.Substring(0, freqIntervalName.Length - 1) : freqIntervalName);
+                freqIntervalName = ": " + (freqIntervalName.Contains(',') ? freqIntervalName.Substring(0, freqIntervalName.Length - 2) : freqIntervalName);
             }
 
             return freqIntervalName;
@@ -361,8 +361,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             switch (freqSub)
             {
                 case (int)FrequentSubTime.SpecificTime:
-                    combinedString += ViewResource.FreqSubSpecificTime + " : ";
-                    combinedString += DateTimeHelper.GetFullTime(activeStartTime);
+                    combinedString += ViewResource.FreqSubSpecificTime;
                     break;
                 case (int)FrequentSubTime.Seconds:
                     combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Seconds);
