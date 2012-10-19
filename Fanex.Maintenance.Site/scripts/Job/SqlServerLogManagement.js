@@ -23,7 +23,7 @@ var SqlServerLogManagement = function ($) {
             var dates = $("#From, #To").datepicker({
                 changeMonth: true,
                 numberOfMonths: 1,
-                dateFormat: "MM dd,yy",
+                dateFormat: "M dd,yy",
                 showOn: "button",
                 buttonImage: SqlServerLogManagement.buttonImage,
                 buttonImageOnly: true,

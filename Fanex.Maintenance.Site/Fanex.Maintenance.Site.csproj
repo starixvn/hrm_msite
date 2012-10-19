@@ -184,6 +184,7 @@
     <Content Include="Areas\UserLogin\themes\login.css" />
     <Content Include="Global.asax" />
     <Content Include="images\calendar.gif" />
+    <Content Include="images\calendar.png" />
     <Content Include="images\sprite_v.png" />
     <Content Include="scripts\NotificationHub.js" />
     <Content Include="scripts\DatabaseReport\Chart.js" />
@@ -942,7 +943,7 @@
     <Content Include="Views\DatabaseReport\UserOnlineDaily.cshtml" />
     <Content Include="Views\DatabaseReport\UserOnline.cshtml" />
     <Content Include="Views\DatabaseReport\UserOnlineChart.cshtml" />
-    <Content Include="Views\JobManagement\MainContentPage.cshtml" />
+    <Content Include="Views\JobManagement\Index.cshtml" />
     <Content Include="Views\JobManagement\LeftMenuPage.cshtml" />
     <Content Include="Views\JobManagement\ScheduleManagement.cshtml" />
     <Content Include="Views\Shared\_SqlJobManagementLayout.cshtml" />

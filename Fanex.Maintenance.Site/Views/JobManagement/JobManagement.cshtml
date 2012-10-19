@@ -133,16 +133,16 @@
                         <th>
                             @ViewResource.Job
                         </th>
-                        <th>
+                        <th class="width-100">
                             @ViewResource.Server
                         </th>
                         <th>
                             @ViewResource.Executing
                         </th>
-                        <th>
+                        <th class="width-140">
                             @ViewResource.Last_Run_Date
                         </th>
-                        <th>
+                        <th class="width-140">
                             @ViewResource.Next_Run_Date
                         </th>                       
                         <th>
@@ -166,13 +166,13 @@
 
                             i++;
                         <tr @Html.Raw(rowCss) id="@trId">
-                            <td class="align-center width-30">
+                            <td class="align-center">
                                 @(i)
                             </td>
-                            <td style="padding-left:10px">
+                            <td style="padding-left:3px">
                                 @item.Job.Name
                             </td>
-                            <td class="align-center width-100">
+                            <td class="align-center">
                                 @item.ServerIp
                             </td>
                             <td class="align-center executestatus">

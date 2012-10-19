@@ -6,13 +6,11 @@
     ViewBag.Title = string.Format("{0}", "Home");
 }
 @section Head{
-    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
-   
-    <script type="text/javascript">
-        $(function () {
-   
-        });
-    </script>
+    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
 }
-
-
+@section HeadLine
+{
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+    </h1>
+}

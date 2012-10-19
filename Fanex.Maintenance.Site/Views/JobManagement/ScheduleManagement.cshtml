@@ -9,17 +9,21 @@
 }
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
-     <style type="text/css">
-         #filter-bar
+    <style type="text/css">
+        #filter-bar
         {
-            margin-left: -28px
+            margin-left: -28px;
         }
         .alignformat label
         {
-            text-align:left;
-            margin-right:20px;
-        }
-        </style>
+            text-align: left;
+            margin-right: 20px;
+        }  
+        img.ui-datepicker-trigger, img.tempcalendarimg
+        {
+            margin-top:-1px;
+        }     
+    </style>
 }
 <section id="secondary_bar">
     <div class="breadcrumbs_container">
@@ -126,28 +130,28 @@
             </section>
         }
         <article class="module width_full">
-            <table class="tablesorter" id="dataTable" style="width:99%">
+            <table class="tablesorter" id="dataTable" style="width: 99%">
                 <thead>
                     <tr>
                         <th class="width-30">
                             #
                         </th>
-                        <th >
+                        <th>
                             @ViewResource.ScheduleName
                         </th>
                         <th class="width-100">
                             @ViewResource.Server
                         </th>
-                        <th >
+                        <th>
                             @ViewResource.ScheduleFreq
                         </th>
-                        <th >
+                        <th>
                             @ViewResource.ScheduleFreqSub
                         </th>
-                        <th class="width-180">
+                        <th class="width-140">
                             @ViewResource.ActiveStartDate
                         </th>
-                        <th class="width-140">
+                        <th class="width-120">
                             @ViewResource.ActiveEndDate
                         </th>
                         <th class="width-30">
@@ -170,25 +174,25 @@
                             string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
                             i++;
                         <tr @Html.Raw(rowCss)>
-                            <td class="align-center width-30">
+                            <td class="align-center">
                                 @(i)
                             </td>
-                            <td class="align-left" style="padding-left:10px">
+                            <td class="align-left" style="padding-left: 3px">
                                 @schedule.Name
                             </td>
-                            <td class="align-center width-100">
+                            <td class="align-center">
                                 @schedule.ServerIp
                             </td>
-                            <td style="padding-left:10px">
+                            <td style="padding-left: 3px">
                                 @schedule.FreqIntervalCombine
                             </td>
-                            <td style="padding-left:10px">
+                            <td style="padding-left: 3px">
                                 @schedule.FreqSubIntervalCombine
                             </td>
-                            <td class="align-center width-180">
+                            <td class="align-center">
                                 @schedule.ActiveStartDate.ToFullDateWithTimeAdded(schedule.ActiveStartTime)
                             </td>
-                            <td class="align-center width-140">
+                            <td class="align-center">
                                 @if (schedule.ActiveEndDate.Year == 9999)
                                 {
                                     @ViewResource.N_A
@@ -198,7 +202,7 @@
                                     @schedule.ActiveEndDate.ToDateString()                    
                                 }
                             </td>
-                            <td class="align-center width-30">
+                            <td class="align-center">
                                 @if (schedule.JobCount > 0)
                                 {
                                     @Html.ActionLink(schedule.JobCount.ToString(), "JobManagement", "JobManagement",
@@ -211,7 +215,7 @@
                                 else
                                 {
                                     @: 0
-                                                }
+                                                                                }
                             </td>
                             <td class="align-center">
                                 @if (schedule.Enable == 1)

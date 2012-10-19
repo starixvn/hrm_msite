@@ -15,7 +15,7 @@ var JobLogManagement = function ($) {
             var dates = $("#From, #To").datepicker({
                 changeMonth: true,
                 numberOfMonths: 1,
-                dateFormat: "MM dd,yy",
+                dateFormat: "M dd,yy",
                 showOn: "button",
                 buttonImage: JobLogManagement.buttonImage,
                 buttonImageOnly: true,
