@@ -15,19 +15,15 @@ var ScheduleManagementPage = function ($) {
 
         //disbaled when datetype is all
         SelectDateType: function () {
-            var type = $('#SearchDateType').val();
-            if (type == "") {
-                $('#From').attr('disabled', 'disabled');
-                $('#To').attr('disabled', 'disabled');
-//                $('.tempcalendarimg').css("visibility", "visible");
-//                $('.ui-datepicker-trigger').attr("disabled", "disabled");
-            }
-            else {
-                $('#From').removeAttr('disabled', 'disabled');
-                $('#To').removeAttr('disabled', 'disabled');
-//                $('.ui-datepicker-trigger').css("visibility", "visible");
-//                $('.tempcalendarimg').removeAttr("disabled", "disabled");
-            }
+//            var type = $('#SearchDateType').val();
+//            if (type == "") {
+//                $('#From').attr('disabled', 'disabled');
+//                $('#To').attr('disabled', 'disabled');
+//            }
+//            else {
+//                $('#From').removeAttr('disabled', 'disabled');
+//                $('#To').removeAttr('disabled', 'disabled');
+//            }
         },
 
         InitDatetimePicker: function () {
