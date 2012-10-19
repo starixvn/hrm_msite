@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Sql Job Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+@section Head {
+    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/SqlJobManagement/MainContentPage.css" rel="stylesheet" type="text/css" />
+}
+<div class="contentbox">
+    <div class="leftcontent">
+        <iframe id="leftPanel" name="leftPanel" marginwidth="0" scrolling="auto" src="@Url.Action("LeftMenuPage", "JobManagement")"
+            marginheight="0" frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 850px;">
+        </iframe>
+    </div>
+    <div class="rightcontent">
+        <iframe id="centerFr" name="centerFr" src="" scrolling="auto" marginwidth="0" marginheight="0"
+            frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 850px;"></iframe>
+    </div>
+</div>
+@Html.Hidden("type", (string)ViewBag.Type)
+@Html.Hidden("server", (string)ViewBag.Server)
+@Html.Hidden("jobname", (string)ViewBag.JobName)
+@Html.Hidden("NapAdminRoot", Url.Content("~/"))
+<script type="text/javascript">
+    $(document).ready(function () {
+        var type = $('#type').val();
+        var server = $('#server').val().replaceAll('_', '.');
+        var jobName = $('#jobname').val();
+
+        if (type != '' && server != '') {
+            if (type == '2') {
+                document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/JobLogManagement?server=" + server + "&job=" + jobName + "&top=1");
+            }
+            else {
+                document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/AgentLogManagement?server=" + server + "&top=1");
+            }
+        }
+        else {
+            document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/ServerManagement");
+        }
+    });
+</script>

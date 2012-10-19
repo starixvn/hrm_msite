@@ -19,14 +19,14 @@ var ScheduleManagementPage = function ($) {
             if (type == "") {
                 $('#From').attr('disabled', 'disabled');
                 $('#To').attr('disabled', 'disabled');
-                $('.tempcalendarimg').css("visibility", "visible");
-                $('.ui-datepicker-trigger').css("visibility", "hidden");
+//                $('.tempcalendarimg').css("visibility", "visible");
+//                $('.ui-datepicker-trigger').attr("disabled", "disabled");
             }
             else {
                 $('#From').removeAttr('disabled', 'disabled');
                 $('#To').removeAttr('disabled', 'disabled');
-                $('.ui-datepicker-trigger').css("visibility", "visible");
-                $('.tempcalendarimg').css("visibility", "hidden");
+//                $('.ui-datepicker-trigger').css("visibility", "visible");
+//                $('.tempcalendarimg').removeAttr("disabled", "disabled");
             }
         },
 
@@ -81,9 +81,5 @@ $(document).ready(function () {
             $this.find('.actions').css({ visibility: 'hidden', opacity: 0 });
         }
     });
-
-    //            $('#submitbutton').click(function () {
-    //                $('#formsubmit').submit();
-    //            });
-    // #endregion
+   
 }); 
