@@ -4,9 +4,43 @@
 }
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .navigater
+        {
+               background-color: #E7F2F9;
+                background-repeat: no-repeat;
+                border: 1px solid #BDDCEF;
+                border-radius: 10px 10px 10px 10px;
+                cursor: pointer;
+                display: block;
+                float: left;
+                height: 25px;
+                margin-left: -10px;
+                margin-top: -2px;
+                opacity: 0.7;
+                padding: 7px 5px 7px 10px;
+                position: fixed;
+                text-align: center;
+                text-decoration: none;
+                top: 30px;
+                width: 30px;
+                display:none;
+        }
+    </style>
     <link href="~/themes/SqlJobManagement/MainContentPage.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function () {
+            $('img.navigater').click(function () {
+                $('img.navigater').hide();
+                $('div.leftcontent').css("width", "18%");
+                $('div.rightcontent').css("width", "82%");
+            });
+        });
+    </script>
 }
+ <img class="navigater" src="~/themes/job/images/forward.png" />
 <div class="contentbox">
+   
     <div class="leftcontent">
         <iframe id="leftPanel" name="leftPanel" marginwidth="0" scrolling="auto" src="@Url.Action("LeftMenuPage", "JobManagement")"
             marginheight="0" frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 850px;">
