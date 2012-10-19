@@ -38,7 +38,7 @@ var ScheduleManagementPage = function ($) {
                 defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
-                dateFormat: "MM dd,yy",
+                dateFormat: "M dd,yy",
                 showOn: "button",
                 buttonImage: ScheduleManagementPage.buttonImage,
                 buttonImageOnly: true,

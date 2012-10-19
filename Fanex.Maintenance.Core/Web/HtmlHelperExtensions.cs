@@ -28,8 +28,8 @@ namespace Fanex.Maintenance.Core.Web
         /// <param name="value"></param>
         /// <returns></returns>
         public static IHtmlString ToFullDateString(this DateTime value,
-            string dateFormat = "MMMM dd, yyyy", 
-            string timeFormat = "HH:mm:ss")
+            string dateFormat = "MMM dd, yyyy", 
+            string timeFormat = "HH:mm")
         {
             return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
                 value.ToString(dateFormat), 
@@ -46,8 +46,8 @@ namespace Fanex.Maintenance.Core.Web
         /// <returns></returns>
         public static IHtmlString ToFullDateWithTimeAdded(this DateTime value,
             int time = 0,
-            string dateFormat = "MMMM dd, yyyy",
-            string timeFormat = "HH:mm:ss")
+            string dateFormat = "MMM dd, yyyy",
+            string timeFormat = "HH:mm")
         {
             //// check format time correct HHmmss
             string strTime = time.ToString();
@@ -77,7 +77,7 @@ namespace Fanex.Maintenance.Core.Web
         /// <param name="value"></param>
         /// <returns></returns>
         public static IHtmlString ToDateString(this DateTime value,
-            string dateFormat = "MMMM dd, yyyy")
+            string dateFormat = "MMM dd, yyyy")
         {
             return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span>",
                 value.ToString(dateFormat)));
@@ -91,8 +91,8 @@ namespace Fanex.Maintenance.Core.Web
         /// <returns></returns>
         public static IHtmlString ToFullDateString(this int value, 
             int time,
-            string dateFormat = "MMMM dd, yyyy", 
-            string timeFormat = "HH:mm:ss")
+            string dateFormat = "MMM dd, yyyy", 
+            string timeFormat = "HH:mm")
         {
             //// check format time correct HHmmss
             string strTime = time.ToString();

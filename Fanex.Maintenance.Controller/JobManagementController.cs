@@ -57,7 +57,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult MainContentPage(string type = "", string server = "", string jobname = "")
+        public ActionResult Index(string type = "", string server = "", string jobname = "")
         {
             ViewBag.Type = type;
             ViewBag.Server = server;
@@ -88,8 +88,8 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListServer = GetServer();
             ViewBag.ListSchedule = _scheduleService.WithServer(server)
                 .GetSchedules();
-            ViewBag.DateFrom = DateTime.Now.ToString("MMMM dd, yyyy");
-            ViewBag.DateTo = DateTime.Now.ToString("MMMM dd, yyyy");
+            ViewBag.DateFrom = DateTime.Now.ToString("MMM dd, yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MMM dd, yyyy");
 
             return View(new GetAllScheduleCriteria
                 {
@@ -114,8 +114,8 @@ namespace Fanex.Maintenance.Controller
             getAllScheduleCriteria.From = getAllScheduleCriteria.From <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.From;
             getAllScheduleCriteria.To = getAllScheduleCriteria.To <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.To;
 
-            ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MMMM dd, yyyy");
-            ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MMMM dd, yyyy");
+            ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MMM dd, yyyy");
+            ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MMM dd, yyyy");
 
             ViewBag.ListSchedule = _scheduleService.WithScheduleName(getAllScheduleCriteria.Schedule_Name)
                 .WithServer(getAllScheduleCriteria.Server)
@@ -398,8 +398,8 @@ namespace Fanex.Maintenance.Controller
                 .FromDate(DateTime.Now)
                 .ToDate(DateTime.Now)
                 .GetSqlServerLogs().Take(100);
-            ViewBag.DateFrom = DateTime.Now.ToString("MMMM dd, yyyy");
-            ViewBag.DateTo = DateTime.Now.ToString("MMMM dd, yyyy");
+            ViewBag.DateFrom = DateTime.Now.ToString("MMM dd, yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MMM dd, yyyy");
 
             return View(new GetSqlServerLogCriteria
                 {
@@ -419,8 +419,8 @@ namespace Fanex.Maintenance.Controller
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.DateFrom = criteria.From.ToString("MMMM dd, yyyy");
-            ViewBag.DateTo = criteria.To.ToString("MMMM dd, yyyy");
+            ViewBag.DateFrom = criteria.From.ToString("MMM dd, yyyy");
+            ViewBag.DateTo = criteria.To.ToString("MMM dd, yyyy");
 
             int pageSize = criteria.PageSize == null ? 0 : (int)criteria.PageSize;
             int pageIndex = criteria.PageIndex == null ? 0 : (int)criteria.PageIndex;
@@ -454,8 +454,8 @@ namespace Fanex.Maintenance.Controller
                 .FromDate(DateTime.Now)
                 .ToDate(DateTime.Now)
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
-            ViewBag.DateFrom = DateTime.Now.ToString("MMMM dd, yyyy");
-            ViewBag.DateTo = DateTime.Now.ToString("MMMM dd, yyyy");
+            ViewBag.DateFrom = DateTime.Now.ToString("MMM dd, yyyy");
+            ViewBag.DateTo = DateTime.Now.ToString("MMM dd, yyyy");
 
             ViewBag.Top = top;
 
@@ -477,8 +477,8 @@ namespace Fanex.Maintenance.Controller
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.DateFrom = criteria.From.ToString("MMMM dd, yyyy");
-            ViewBag.DateTo = criteria.To.ToString("MMMM dd, yyyy");
+            ViewBag.DateFrom = criteria.From.ToString("MMM dd, yyyy");
+            ViewBag.DateTo = criteria.To.ToString("MMM dd, yyyy");
 
             int pageSize = criteria.PageSize == null ? 0 : (int)criteria.PageSize;
             int pageIndex = criteria.PageIndex == null ? 0 : (int)criteria.PageIndex;
@@ -505,8 +505,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Server Management Page
         /// </summary>
-        /// <returns></returns>
-        [HttpGet]
+        /// <returns></returns>       
         public ActionResult ServerManagement()
         {
             return View();

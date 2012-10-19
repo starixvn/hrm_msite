@@ -31,9 +31,14 @@
             margin-right: 15px;
         }
         */
-          .filter-form
+        .filter-form
         {
             margin-top: 15px;
+        }
+        
+        img.ui-datepicker-trigger, img.tempcalendarimg
+        {
+            margin-top: -1px;
         }
     </style>
 }
@@ -116,7 +121,7 @@
                         <th>
                             @ViewResource.Status
                         </th>
-                        <th class="width-180">
+                        <th class="width-140">
                             @ViewResource.Date
                         </th>
                         <th>
@@ -132,10 +137,10 @@
                             string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
                             i++;
                         <tr @Html.Raw(rowCss)>
-                            <td class="align-center width-30">
+                            <td class="align-center">
                                 @(i)
                             </td>
-                            <td class="align-center width-100">
+                            <td class="align-center">
                                 @sqlServerLog.ServerIp
                             </td>
                             <td class="align-center">
@@ -152,10 +157,10 @@
                                         break;
                                 }
                             </td>
-                            <td class="align-center width-180">
+                            <td class="align-center">
                                 @sqlServerLog.LogDate.ToFullDateString()
                             </td>
-                            <td style="padding-left: 10px">
+                            <td style="padding-left: 3px">
                                 @sqlServerLog.LogMessage
                             </td>
                         </tr>
