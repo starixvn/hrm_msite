@@ -15,7 +15,7 @@ notitficationHub.gotMessage = function (notifyInfoes) {
         if (notifyInfo.Type == 2) {
             queryString += "&jobname=" + notifyInfo.JobName;
         }
-
+        
         var message = "Server: " + notifyInfo.ServerIp.split('_').join('.') + "<br/>"
                 + (notifyInfo.Type == 1 ? "Sql Server Agent Error" : "Job Error") + "<br />"
                 + "Occur at " + notifyInfo.OccurTime + "<br />"
@@ -23,7 +23,7 @@ notitficationHub.gotMessage = function (notifyInfoes) {
                 + "<a href=" + NAP.resolveClientUrl("JobManagement?" + queryString) + ">View Detail</a>";
 
         $().toastmessage('showToast', {
-            text: message ,
+            text: message,
             //                sticky: true,
             stayTime: 20000,
             position: 'bottom-right',
@@ -32,7 +32,7 @@ notitficationHub.gotMessage = function (notifyInfoes) {
             close: function () {
                 //                    console.log("toast is closed ...");
             }
-        }); 
+        });
     }
 }
 
