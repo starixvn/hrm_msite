@@ -19,6 +19,19 @@
             text-align:left;
             margin-right:20px;
         }
+         .marginfilter
+        {
+            margin-left: 17px;
+            margin-right: 17px;
+        }
+          .firstmarginfilter
+        {
+            margin-right: 17px;
+        }
+         .lastmarginfilter
+        {
+            margin-left: 17px;
+        }
         </style>
 }
 <section id="secondary_bar">
@@ -36,7 +49,7 @@
         @using (Html.BeginForm())
         { 
             <section id="filter-bar">
-                <div class="filter-form">
+                <div class="filter-form firstmarginfilter">
                     <div class="lbl-field alignformat">
                         @Html.LabelFor(m => m.Server)
                     </div>
@@ -44,7 +57,7 @@
                         @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")
                     </div>
                 </div>
-                <div class="filter-form">
+                <div class="filter-form marginfilter">
                     <div class="lbl-field">
                         @ViewResource.ScheduleName
                     </div>
@@ -52,7 +65,7 @@
                         @Html.TextBoxFor(m => m.Schedule_Name)
                     </div>
                 </div>
-                <div class="filter-form">
+                <div class="filter-form marginfilter">
                     <div class="lbl-field ">
                         @ViewResource.FrequentType
                     </div>
@@ -70,7 +83,7 @@
                 , "All")
                     </div>
                 </div>
-                <div class="filter-form">
+                <div class="filter-form marginfilter">
                     <div class="lbl-field ">
                         @ViewResource.FrequentSubType
                     </div>
@@ -85,7 +98,7 @@
                 , "All")
                     </div>
                 </div>
-                <div class="filter-form">
+                <div class="filter-form firstmarginfilter">
                     <div class="lbl-field ">
                         @ViewResource.Date_Type
                     </div>
@@ -98,7 +111,7 @@
                 , "All")
                     </div>
                 </div>
-                <div class="filter-form">
+                <div class="filter-form marginfilter">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.From)
                     </div>
@@ -107,7 +120,7 @@
                         <img class="tempcalendarimg" src="@Url.Content("~/images/calendar.gif")" alt="" />
                     </div>
                 </div>
-                <div class="filter-form">
+                <div class="filter-form marginfilter">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.To)
                     </div>
@@ -116,7 +129,7 @@
                         <img class="tempcalendarimg" src="@Url.Content("~/images/calendar.gif")" alt=""/>
                     </div>
                 </div>
-                <div class="filter-form">
+                <div class="filter-form lastmarginfilter">
                     <div class="lbl-field">
                     </div>
                     <div class="submit">

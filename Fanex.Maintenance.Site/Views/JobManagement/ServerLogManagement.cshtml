@@ -18,6 +18,15 @@
         {
             margin-left: -12px;
         }
+        .marginfilter
+        {
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+          .firstmarginfilter
+        {
+            margin-right: 40px;
+        }
     </style>
 }
 <section id="secondary_bar">		
@@ -31,7 +40,7 @@
 @using (Html.BeginForm())
 { 
     <section id="filter-bar">      
-		<div class="filter-form">	
+		<div class="filter-form firstmarginfilter">	
             <div class="lbl-field">
 			    @Html.LabelFor(m => m.Server)
 		    </div>   
@@ -39,7 +48,7 @@
                 @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")			                
             </div>
         </div>        
-        <div class="filter-form">	
+        <div class="filter-form marginfilter">	
             <div class="lbl-field">
 			    @Html.LabelFor(m => m.From)
 		    </div>   
@@ -47,7 +56,7 @@
                 @Html.TextBoxFor(m => m.From)                
             </div>
         </div>  
-         <div class="filter-form">	
+         <div class="filter-form marginfilter">	
             <div class="lbl-field">
 			    @Html.LabelFor(m => m.To)
 		    </div>   
