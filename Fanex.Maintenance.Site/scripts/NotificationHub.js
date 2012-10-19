@@ -20,7 +20,7 @@ notitficationHub.gotMessage = function (notifyInfoes) {
                 + (notifyInfo.Type == 1 ? "Sql Server Agent Error" : "Job Error") + "<br />"
                 + "Occur at " + notifyInfo.OccurTime + "<br />"
                 + "Message: " + notifyInfo.Message + "<br />"
-                + "<a href=" + NAP.resolveClientUrl("JobManagement/MainContentPage?" + queryString) + ">View Detail</a>";
+                + "<a href=" + NAP.resolveClientUrl("Index?" + queryString) + ">View Detail</a>";
 
         $().toastmessage('showToast', {
             text: message ,
