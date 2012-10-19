@@ -67,8 +67,11 @@ namespace Fanex.Maintenance.Controller
             ViewBag.MinDate = string.Format("{0:dd/MM/yyyy}", sinceLastMonth);
             ViewBag.MaxDate = string.Format("{0:dd/MM/yyyy}", moveBetsDay);
 
-            ViewBag.BodyLicenseeData = _databaseReportService.GenerateTemplateHtmlLicensee(moveBetsDay, 1);
-            ViewBag.BodyCreditData = _databaseReportService.GenerateTemplateHtmlCredit(moveBetsDay, 1);
+            //ViewBag.BodyLicenseeData = _databaseReportService.GenerateTemplateHtmlLicensee(moveBetsDay, 1);
+            //ViewBag.BodyCreditData = _databaseReportService.GenerateTemplateHtmlCredit(moveBetsDay, 1);
+
+            ViewBag.BodyLicenseeData = string.Empty;
+            ViewBag.BodyCreditData = string.Empty;
 
             List<SelectListItem> listDrawFilter = new List<SelectListItem>();
             listDrawFilter.Add(new SelectListItem
