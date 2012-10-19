@@ -161,7 +161,7 @@
                 fxCB.appendChild(t3);
             }
             w = (parseInt(w) - cw) + 'px';
-            ge$(tbl[i].tid + ':scroller').style.height = (h - tHeight + 110) + 'px';
+            ge$(tbl[i].tid + ':scroller').style.height = (h - tHeight + 150) + 'px';
             ge$(tbl[i].tid + ':scroller').style.width = w;
             ge$(tbl[i].tid + ':scroller:fx:OuterDiv').style.height = tHeight + 'px';
             ge$(tbl[i].tid + ':scroller:fx:OuterDiv').style.width = w;

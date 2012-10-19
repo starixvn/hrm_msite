@@ -51,16 +51,16 @@
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.Job_Name)
                     </div>
-                    <div class="edit-field">
+                    <div class="edit-field width-200">
                         @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob
-             , new { @class = "chosen" })
+             , new { @class = "chosen width-180" })
                     </div>
                 </div>
                 <div class="filter-form">
-                    <div class="lbl-field">
+                    <div class="lbl-field width-auto">
                         @Html.LabelFor(m => m.Execution_Status)
                     </div>
-                    <div class="edit-field">
+                    <div class="edit-field width-auto">
                         @Html.DropDownListFor(m => m.Execution_Status,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.Success,Value=((int)StepRunStatus.Success).ToString()},                        
