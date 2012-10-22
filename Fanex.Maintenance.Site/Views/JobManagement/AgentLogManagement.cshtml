@@ -42,15 +42,13 @@
         }
     </style>
 }
-<section id="secondary_bar">
-    <div class="breadcrumbs_container">
+@section HeaderBar {
         <article class="breadcrumbs">
             <a href="index.html">@Model.Server</a>
             <div class="breadcrumb_divider">
             </div>
             <a class="current">@ViewResource.SqlAgentLog</a></article>
-    </div>
-</section>
+}
 <section class="column" id="main">
     <div class="content">
         @using (Html.BeginForm())

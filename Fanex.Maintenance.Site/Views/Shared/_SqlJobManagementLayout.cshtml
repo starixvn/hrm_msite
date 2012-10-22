@@ -21,6 +21,17 @@
     <link href="~/themes/assets/css/site.css" rel="stylesheet" type="text/css" />
     <link href="~/scripts/lib/tipsy/tipsy-1.0.0.min.css" rel="stylesheet" type="text/css" />
     <link href="~/scripts/lib/msgbox/msgbox-0.0.1.min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .navigater
+        {
+            cursor: pointer;
+            float: left;
+            text-decoration: none;
+            margin-left: 10px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
     <script src="~/scripts/lib/jquery-1.8.0.min.js" type="text/javascript"></script>
     <script src="~/scripts/lib/modernizr-2.6.1.js" type="text/javascript"></script>
     <script src="~/themes/assets/js/prettify.min.js" type="text/javascript"></script>
@@ -35,7 +46,12 @@
     @RenderSection("FilterBar", false)
     <section id="body">
         <div class="content">
-            @RenderSection("LeftMenu", false)
+            <section id="secondary_bar">
+    <div class="breadcrumbs_container">
+        <img class="navigater" src="~/themes/job/images/forward.png" />
+            @RenderSection("HeaderBar", false)
+             </div>
+</section>
             @RenderBody()
         </div>
     </section>
@@ -60,8 +76,12 @@
     fxheader();
 </script>
 <script type="text/javascript">
-//    $(document).ready(function () {
-//        $('.chosen').chosen();      
-//    });
+    $(function () {
+        $('img.navigater').click(function () {
+            $('img.navigater').hide();
+            parent.$('div.leftcontent').css("width", "18%");
+            parent.$('div.rightcontent').css("width", "82%");
+        });
+    });
 </script>
 @RenderSection("Foot", false)

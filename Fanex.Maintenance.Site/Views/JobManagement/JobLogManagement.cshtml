@@ -28,8 +28,7 @@
     </style>
     <script src="~/scripts/Job/JobLogManagement.js" type="text/javascript"></script>
 }
-<section id="secondary_bar">
-    <div class="breadcrumbs_container">
+@section HeaderBar {
         <article class="breadcrumbs">
             <a href="#">@Model.Server</a>
             <div class="breadcrumb_divider">
@@ -39,8 +38,7 @@
             </div>
             <a class="current">@ViewResource.Job_Log_Management</a>
         </article>
-    </div>
-</section>
+   }
 <section class="column" id="main">
     <div class="content">
         @using (Html.BeginForm())
