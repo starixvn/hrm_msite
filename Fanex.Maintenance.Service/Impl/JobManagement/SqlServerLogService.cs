@@ -20,6 +20,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// TODO: Update summary.
@@ -119,9 +120,29 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 }
                 else
                 {
+                    Task<IEnumerable<SqlServerLog>>[] listTask = new Task<IEnumerable<SqlServerLog>>[DatabaseServersSection.Instance.Servers.Count];
+                    int taskIndex = 0;
                     foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                     {
-                        sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(logType, server.ServerIp));
+
+                        listTask[taskIndex] = Task.Factory.StartNew<IEnumerable<SqlServerLog>>(param
+                            =>
+                            {
+                                SqlLogServerParamForTask sqlLogServerParamForTask = (SqlLogServerParamForTask)param;
+                                return GetLogBySpecificDateAndServerIp(sqlLogServerParamForTask.LogType, sqlLogServerParamForTask.ServerIp);
+                            }, new SqlLogServerParamForTask
+                            {
+                                LogType = logType,
+                                ServerIp = server.ServerIp
+                            });
+                        taskIndex++;
+                        //sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(logType, server.ServerIp));
+                    }
+
+                    Task.WaitAll(listTask);
+                    for (int i = 0; i < listTask.Length; i++)
+                    {
+                        sqlServerLogs.AddRange(listTask[i].Result);
                     }
                 }
 
@@ -160,6 +181,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             List<SqlServerLog> sqlServerLogs = new List<SqlServerLog>();
             //// Restrict get Log from Sql Server is 7 and Sql Server Agent is 10
             int maxDayForGetLog = logType == (int)LogType.SqlServerLog ? 7 : 10;
+            Task<IEnumerable<SqlServerLog>>[] listTask = new Task<IEnumerable<SqlServerLog>>[maxDayForGetLog];
             for (int i = 0; i < maxDayForGetLog; i++)
             {
                 try
@@ -167,30 +189,50 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     switch (logType)
                     {
                         case (int)LogType.SqlServerLog:
-                            sqlServerLogs.AddRange(_sqlServerLogRepository.GetAllSqlServerLogOnDate(
-                               new GetSqlServerLogCriteria
+                            listTask[i] = Task.Factory.StartNew<IEnumerable<SqlServerLog>>(param
+                           =>
+                           {
+                               SqlLogSpParamForTask sqlLogSpParamForTask = (SqlLogSpParamForTask)param;
+                               return _sqlServerLogRepository.GetAllSqlServerLogOnDate(new GetSqlServerLogCriteria
                                {
-                                   p1 = i
-                               }, 
-                               serverIp));
-
+                                   p1 = sqlLogSpParamForTask.P1
+                               }, sqlLogSpParamForTask.ServerIp);
+                           }, new SqlLogSpParamForTask
+                           {
+                               P1 = i,
+                               ServerIp = serverIp
+                           });
                             break;
                         case (int)LogType.SqlAgentLog:
-                            sqlServerLogs.AddRange(_sqlServerLogRepository.GetAllSqlAgentLogOnDate(
-                              new GetSqlServerLogCriteria
-                              {
-                                  p1 = i,
-                                  p2 = 2
-                              }, 
-                              serverIp));
-
+                            listTask[i] = Task.Factory.StartNew<IEnumerable<SqlServerLog>>(param
+                          =>
+                            {
+                                SqlLogSpParamForTask sqlLogSpParamForTask = (SqlLogSpParamForTask)param;
+                                return _sqlServerLogRepository.GetAllSqlAgentLogOnDate(new GetSqlServerLogCriteria
+                                {
+                                    p1 = sqlLogSpParamForTask.P1,
+                                    p2 = 2
+                                }, sqlLogSpParamForTask.ServerIp);
+                            }, new SqlLogSpParamForTask
+                            {
+                                P1 = i,
+                                ServerIp = serverIp
+                            });
                             break;
                     }
+
+
                 }
                 catch (Exception ex)
                 {
                     Logger.Log.Error(ex.Message, ex);
                 }
+            }
+
+            Task.WaitAll(listTask);
+            for (int i = 0; i < listTask.Length; i++)
+            {
+                sqlServerLogs.AddRange(listTask[i].Result);
             }
 
             sqlServerLogs = sqlServerLogs.Where(sqlServerLog => {

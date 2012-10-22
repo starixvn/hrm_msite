@@ -126,7 +126,8 @@
             $('.menu').live('click', function () {
                 $('.menu').removeClass("selected");
                 $('.navChild').removeClass("selected");
-                $(this).addClass("selected");              
+                $(this).addClass("selected");
+                parent.NAP.loadingBox.show();            
             });
 
             $('.navChild').live('click', function () {

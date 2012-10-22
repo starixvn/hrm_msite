@@ -171,25 +171,44 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <returns>List Schedule satisfy filter</returns>
         public IEnumerable<Schedule> GetSchedules()
         {
-            GetAllScheduleCriteria getAllSchedule = new GetAllScheduleCriteria
-            {
-                Schedule_Name = ScheduleName
-            };
-
             List<ScheduleDetail> schedules = new List<ScheduleDetail>();
-
             try
             {
                 //// Get All Schedule from Database
                 if (!string.IsNullOrEmpty(ServerIp))
                 {
-                    schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, ServerIp));
+                    schedules.AddRange(_scheduleRepository.GetAllSchedule(new GetAllScheduleCriteria
+                    {
+                        Schedule_Name = ScheduleName
+                    }, ServerIp));
                 }
                 else
                 {
+                    Task<IEnumerable<ScheduleDetail>>[] listTask = new Task<IEnumerable<ScheduleDetail>>[DatabaseServersSection.Instance.Servers.Count];
+                    int taskIndex = 0;
+
                     foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                     {
-                        schedules.AddRange(_scheduleRepository.GetAllSchedule(getAllSchedule, server.ServerIp));
+                        listTask[taskIndex] = Task.Factory.StartNew<IEnumerable<ScheduleDetail>>(param
+                        =>
+                        {
+                            ScheduleParamForTask scheduleParamForTask = (ScheduleParamForTask)param;
+                            return _scheduleRepository.GetAllSchedule(new GetAllScheduleCriteria
+                            {
+                                Schedule_Name = scheduleParamForTask.ScheduleName
+                            }, scheduleParamForTask.ServerIp);
+                        }, new ScheduleParamForTask
+                        {
+                            ScheduleName = ScheduleName,
+                            ServerIp = server.ServerIp
+                        });
+                        taskIndex++;
+                    }
+
+                    Task.WaitAll(listTask);
+                    for (int i = 0; i < listTask.Length; i++)
+                    {
+                        schedules.AddRange(listTask[i].Result);
                     }
                 }
 

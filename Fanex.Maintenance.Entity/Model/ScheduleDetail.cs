@@ -24,4 +24,10 @@ namespace Fanex.Maintenance.Entity.Model
 
         public string FreqSubIntervalCombine { get; set; }
     }
+
+    public class ScheduleParamForTask
+    {
+        public string ScheduleName { get; set; }
+        public string ServerIp { get; set; }
+    }
 }
