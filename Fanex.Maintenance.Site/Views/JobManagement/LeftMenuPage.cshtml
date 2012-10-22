@@ -134,12 +134,14 @@
                 $('.navChild').removeClass("selected");
                 $('.menu').removeClass("selected");
                 $(this).addClass("selected");
+                parent.NAP.loadingBox.show();
             });
 
             $('img.imgcollapse').click(function () {
                 parent.$('#centerFr').contents().find('img.navigater').show();
                 parent.$('div.leftcontent').css("width", "0%");
                 parent.$('div.rightcontent').css("width", "100%");
+                parent.$("#collapsepanel").val("1");
             });
 
         });

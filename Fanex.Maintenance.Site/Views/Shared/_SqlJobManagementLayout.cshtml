@@ -78,6 +78,7 @@
     $(function () {
         var expr = new RegExp('>[ \t\r\n\v\f]*<', 'g');
         if ($.browser.msie) {
+            ;
             var ie = parseInt($.browser.version, 10);
             if (ie == 9) {
                 $('#dataTable').html($('#dataTable').html().replace(expr, '><'));
@@ -89,11 +90,20 @@
 </script>
 <script type="text/javascript">
     $(function () {
+        if (parent.$('#collapsepanel').val() == "1") {
+            $('img.navigater').show();
+        }
         $('img.navigater').click(function () {
             $('img.navigater').hide();
             parent.$('div.leftcontent').css("width", "18%");
             parent.$('div.rightcontent').css("width", "82%");
+            parent.$('#collapsepanel').val("0");
         });     
+        try {
+            parent.NAP.loadingBox.close();
+        }
+        catch (e) {
+        }
     });
 </script>
 @RenderSection("Foot", false)
