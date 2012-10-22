@@ -138,64 +138,64 @@ var NAP = function ($) {
 } (jQuery);
 
 $(document).ready(function () {
-	NAP.initCoreValues();
+    NAP.initCoreValues();
 
-	NAP.headlineMsgBox = $.msgbox({
-		message: '',
-		//containerId: 'msg-bar',
-		type: 'err',
-		modal: false,
-		position: ['top:130', 'center'],
-		theme: '',
-		zIndex: 9999,
-		useAnimation: false
-	});
+    NAP.headlineMsgBox = $.msgbox({
+        message: '',
+        //containerId: 'msg-bar',
+        type: 'err',
+        modal: false,
+        position: ['top:130', 'center'],
+        theme: '',
+        zIndex: 9999,
+        useAnimation: false
+    });
 
-	NAP.loadingBox = $.msgbox({
-		message: 'Loading...',
-		type: 'warn',
-		modal: true,
-		position: ['top:0', 'center'],
-		closeBtn: false,
-		theme: '',
-		zIndex: 9999,
-		sticky: true,
-		useAnimation: false
-	});
+    NAP.loadingBox = $.msgbox({
+        message: 'Loading...',
+        type: 'warn',
+        modal: true,
+        position: ['top:0', 'center'],
+        closeBtn: false,
+        theme: '',
+        zIndex: 9999,
+        sticky: true,
+        useAnimation: false
+    });
 });
 
 // -- Utilities -- //
 
 // String Format
 String.prototype.format = function () {
-	var args = arguments;
-	return this.replace(/{(\d+)}/g, function (match, number) {
-		return typeof args[number] != 'undefined'
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function (match, number) {
+        return typeof args[number] != 'undefined'
 	  ? args[number]
 	  : match
 	;
-	});
+    });
 };
 
 // Array Remove - By John Resig (MIT Licensed)
 Array.prototype.remove = function (from, to) {
-	var rest = this.slice((to || from) + 1 || this.length);
-	this.length = from < 0 ? this.length + from : from;
-	return this.push.apply(this, rest);
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
 };
 
 // Array Remove All elements matched the criteria
 Array.prototype.removeAll = function (criteria) {
-	var length = this.length;
+    var length = this.length;
 
-	for (var i = 0; i < length; i++) {
-		var element = this[i];
+    for (var i = 0; i < length; i++) {
+        var element = this[i];
 
-		if (criteria(element)) {
-			this.splice(i--, 1);
-			length--;
-		}
-	}
+        if (criteria(element)) {
+            this.splice(i--, 1);
+            length--;
+        }
+    }
 };
 
 
@@ -212,3 +212,4 @@ String.prototype.replaceAll = function (targetString, replaceString) {
 
     return (strText);
 }
+

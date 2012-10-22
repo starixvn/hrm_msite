@@ -31,9 +31,9 @@ namespace Fanex.Maintenance.Core.Web
             string dateFormat = "MMM dd, yyyy", 
             string timeFormat = "HH:mm")
         {
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
+            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> - <span class='date'>{1}</span></span>",
                 value.ToString(dateFormat), 
-                value.ToString(timeFormat)));
+                value.ToString(timeFormat).Replace(':','h')));
         }
 
         /// <summary>
@@ -65,9 +65,9 @@ namespace Fanex.Maintenance.Core.Web
                 CultureInfo.InvariantCulture, 
                 DateTimeStyles.None);
 
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
-                value.ToString(dateFormat), 
-                date.ToString(timeFormat)));
+            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> - <span class='date'>{1}</span></span>",
+                value.ToString(dateFormat),
+                date.ToString(timeFormat).Replace(':', 'h')));
         }
 
         /// <summary>
@@ -110,9 +110,9 @@ namespace Fanex.Maintenance.Core.Web
                 CultureInfo.InvariantCulture, 
                 DateTimeStyles.None);
 
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
-                date.ToString(dateFormat), 
-                date.ToString(timeFormat)));
+            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> - <span class='date'>{1}</span></span>",
+                date.ToString(dateFormat),
+                date.ToString(timeFormat).Replace(':', 'h')));
         }
 
         #endregion DateTime
