@@ -12,24 +12,32 @@ var JobLogManagement = function ($) {
 
         InitDatetimePicker: function () {
 
-            var dates = $("#From, #To").datepicker({
-                changeMonth: true,
-                numberOfMonths: 1,
+            $( "#From" ).datepicker({
+			        defaultDate: "+1w",
+			        changeMonth: true,
+			        numberOfMonths: 1,
+                    dateFormat: "M dd,yy",
+                    showOn: "button",
+                    buttonImage: JobLogManagement.buttonImage,
+                    buttonImageOnly: true,
+			        onSelect: function( selectedDate ) {
+				        $( "#To" ).datepicker( "option", "minDate", selectedDate );
+                        $( "#To" ).val($(this).val());
+			        }
+		        });
+		    $( "#To" ).datepicker({
+			    defaultDate: "+1w",
+			    changeMonth: true,
+			    numberOfMonths: 1,
                 dateFormat: "M dd,yy",
                 showOn: "button",
                 buttonImage: JobLogManagement.buttonImage,
                 buttonImageOnly: true,
-                onSelect: function (selectedDate) {
-                    var option = this.id == "From" ? "minDate" : "maxDate",
-					instance = $(this).data("datepicker"),
-					date = $.datepicker.parseDate(
-						instance.settings.dateFormat ||
-						$.datepicker._defaults.dateFormat,
-						selectedDate, instance.settings);
-                    dates.not(this).datepicker("option", option, date);
-                }
-            });
-
+			    onSelect: function( selectedDate ) {
+				    $( "#From" ).datepicker( "option", "maxDate", selectedDate );
+                    $( "#From" ).val($(this).val());
+			    }
+		    });
         },
          StartJob: function (server, jobName, stepId, stepName) {
             var stepMessage = "";

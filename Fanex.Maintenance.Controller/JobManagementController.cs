@@ -350,20 +350,8 @@ namespace Fanex.Maintenance.Controller
         /// <returns></returns>
         [HttpPost]
         public ActionResult JobLogManagement(GetListJobCriteria criteria)
-        {
-            //// get log history 
-            List<JobLog> listJobLog = _jobService
-                               .WithJob(criteria.Job_Name)
-                               .WithStartRunDate(criteria.From)
-                               .WithEndRunDate(((DateTime)criteria.To).AddDays(1))
-                               .WithCurrentExecuteStatus(criteria.Execution_Status)
-                               .FromServer(criteria.Server)
-                               .GetJobLogs().ToList();
-
-            ViewBag.ListLogJob = listJobLog;
-
+        {                  
             //// get list job
-
             List<JobSchedule> listJob = _jobService
                                         .WithJob(null)
                                         .WithCurrentExecuteStatus(null)
@@ -377,6 +365,25 @@ namespace Fanex.Maintenance.Controller
             }).ToList();
 
             ViewBag.Top = 0;
+
+            //// check datetime
+            if (ReferenceEquals(criteria.From, null) || ReferenceEquals(criteria.To, null))
+            {
+                criteria.From = DateTime.Now;
+                criteria.To = DateTime.Now.AddDays(1);
+                return View(criteria);
+            }  
+
+            //// get log history 
+            List<JobLog> listJobLog = _jobService
+                               .WithJob(criteria.Job_Name)
+                               .WithStartRunDate(criteria.From)
+                               .WithEndRunDate(((DateTime)criteria.To).AddDays(1))
+                               .WithCurrentExecuteStatus(criteria.Execution_Status)
+                               .FromServer(criteria.Server)
+                               .GetJobLogs().ToList();
+
+            ViewBag.ListLogJob = listJobLog;
 
             return View(criteria);
         }
