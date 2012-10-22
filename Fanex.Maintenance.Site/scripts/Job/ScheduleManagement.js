@@ -15,22 +15,22 @@ var ScheduleManagementPage = function ($) {
 
         //disbaled when datetype is all
         SelectDateType: function () {
-//            var type = $('#SearchDateType').val();
-//            if (type == "") {
-//                $('#From').attr('disabled', 'disabled');
-//                $('#To').attr('disabled', 'disabled');
-//            }
-//            else {
-//                $('#From').removeAttr('disabled', 'disabled');
-//                $('#To').removeAttr('disabled', 'disabled');
-//            }
+            var type = $('#SearchDateType').val();
+            if (type == "") {
+                $('#From').attr('disabled', 'disabled');
+                $('#To').attr('disabled', 'disabled');
+            }
+            else {
+                $('#From').removeAttr('disabled', 'disabled');
+                $('#To').removeAttr('disabled', 'disabled');
+            }
         },
 
         InitDatetimePicker: function () {
             $("#From").val(ScheduleManagementPage.dateFrom);
             $("#To").val(ScheduleManagementPage.dateTo);
 
-            var dates = $("#From, #To").datepicker({
+            $("#From").datepicker({
                 defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
@@ -39,13 +39,21 @@ var ScheduleManagementPage = function ($) {
                 buttonImage: ScheduleManagementPage.buttonImage,
                 buttonImageOnly: true,
                 onSelect: function (selectedDate) {
-                    var option = this.id == "From" ? "minDate" : "maxDate",
-					instance = $(this).data("datepicker"),
-					date = $.datepicker.parseDate(
-						instance.settings.dateFormat ||
-						$.datepicker._defaults.dateFormat,
-						selectedDate, instance.settings);
-                    dates.not(this).datepicker("option", option, date);
+                    $("#To").datepicker("option", "minDate", selectedDate);
+                    $("#To").val($(this).val());
+                }
+            });
+            $("#To").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 1,
+                dateFormat: "M dd,yy",
+                showOn: "button",
+                buttonImage: ScheduleManagementPage.buttonImage,
+                buttonImageOnly: true,
+                onSelect: function (selectedDate) {
+                    $("#From").datepicker("option", "maxDate", selectedDate);
+                    $("#From").val($(this).val());
                 }
             });
 
@@ -77,5 +85,5 @@ $(document).ready(function () {
             $this.find('.actions').css({ visibility: 'hidden', opacity: 0 });
         }
     });
-   
+
 }); 
