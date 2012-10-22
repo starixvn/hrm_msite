@@ -122,8 +122,7 @@ var JobManagementPage = function ($) {
 } (jQuery);
 
 $(document).ready(function () {
-
-
+  
     //disabled when server is all
     if ($('#Server').val() == '') {
         $('#Schedule').attr('disabled', 'disabled');
