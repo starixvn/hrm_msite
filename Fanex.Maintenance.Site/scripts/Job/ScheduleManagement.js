@@ -52,8 +52,6 @@ var ScheduleManagementPage = function ($) {
                 buttonImage: ScheduleManagementPage.buttonImage,
                 buttonImageOnly: true,
                 onSelect: function (selectedDate) {
-                    $("#From").datepicker("option", "maxDate", selectedDate);
-                    $("#From").val($(this).val());
                 }
             });
 

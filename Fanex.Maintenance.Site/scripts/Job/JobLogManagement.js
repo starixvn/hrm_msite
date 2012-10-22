@@ -34,8 +34,6 @@ var JobLogManagement = function ($) {
                 buttonImage: JobLogManagement.buttonImage,
                 buttonImageOnly: true,
 			    onSelect: function( selectedDate ) {
-				    $( "#From" ).datepicker( "option", "maxDate", selectedDate );
-                    $( "#From" ).val($(this).val());
 			    }
 		    });
         },

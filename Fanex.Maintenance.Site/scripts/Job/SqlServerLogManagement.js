@@ -20,7 +20,8 @@ var SqlServerLogManagement = function ($) {
             $("#From").val(SqlServerLogManagement.dateFrom);
             $("#To").val(SqlServerLogManagement.dateTo);
 
-            var dates = $("#From, #To").datepicker({
+            $("#From").datepicker({
+                defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
                 dateFormat: "M dd,yy",
@@ -28,13 +29,19 @@ var SqlServerLogManagement = function ($) {
                 buttonImage: SqlServerLogManagement.buttonImage,
                 buttonImageOnly: true,
                 onSelect: function (selectedDate) {
-                    var option = this.id == "From" ? "minDate" : "maxDate",
-					instance = $(this).data("datepicker"),
-					date = $.datepicker.parseDate(
-						instance.settings.dateFormat ||
-						$.datepicker._defaults.dateFormat,
-						selectedDate, instance.settings);
-                    dates.not(this).datepicker("option", option, date);
+                    $("#To").datepicker("option", "minDate", selectedDate);
+                    $("#To").val($(this).val());
+                }
+            });
+            $("#To").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 1,
+                dateFormat: "M dd,yy",
+                showOn: "button",
+                buttonImage: SqlServerLogManagement.buttonImage,
+                buttonImageOnly: true,
+                onSelect: function (selectedDate) {
                 }
             });
         },

@@ -402,8 +402,8 @@ namespace Fanex.Maintenance.Controller
             InitPageSize();
             ViewBag.ListServer = GetServer();
             ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
-                .FromDate(DateTime.Now)
-                .ToDate(DateTime.Now)
+                .FromDate(DateTime.Now.Date)
+                .ToDate(DateTime.Now.AddDays(1))
                 .GetSqlServerLogs().Take(100);
             ViewBag.DateFrom = DateTime.Now.ToString("MMM dd, yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MMM dd, yyyy");
@@ -434,7 +434,7 @@ namespace Fanex.Maintenance.Controller
 
             ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(criteria.Server)
                 .FromDate(criteria.From)
-                .ToDate(criteria.To)
+                .ToDate(criteria.To.AddDays(1))
                 .GetSqlServerLogs().Skip(pageSize * pageIndex).Take(pageSize);
 
             return View(new GetSqlServerLogCriteria
@@ -458,8 +458,8 @@ namespace Fanex.Maintenance.Controller
             InitPageSize();
             ViewBag.ListServer = GetServer();
             ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
-                .FromDate(DateTime.Now)
-                .ToDate(DateTime.Now)
+                .FromDate(DateTime.Now.Date)
+                .ToDate(DateTime.Now.AddDays(1))
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
             ViewBag.DateFrom = DateTime.Now.ToString("MMM dd, yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MMM dd, yyyy");
@@ -492,7 +492,7 @@ namespace Fanex.Maintenance.Controller
 
             ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(criteria.Server)
                 .FromDate(criteria.From)
-                .ToDate(criteria.To)
+                .ToDate(criteria.To.AddDays(1))
                 .WithErrorLevel(criteria.ErrorLevel)
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Skip(pageSize * pageIndex).Take(pageSize);
 

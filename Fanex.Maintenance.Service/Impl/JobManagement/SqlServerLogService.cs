@@ -158,13 +158,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         private IEnumerable<SqlServerLog> GetLogBySpecificDateAndServerIp(int logType, string serverIp)
         {
             List<SqlServerLog> sqlServerLogs = new List<SqlServerLog>();
-            TimeSpan maxQueryTimeSpan = DateTime.Now - From;
-            TimeSpan queryTimeSpan = To - From;
-            //// Restrict get Log from Sql Server is 7
-            int maxDayForGetLog = maxQueryTimeSpan.Days > 6 ? 6 : maxQueryTimeSpan.Days;
-            int endDate = maxDayForGetLog;
-            int startDate = (DateTime.Now - To).Days;
-            for (int i = startDate; i <= maxDayForGetLog; i++)
+            //// Restrict get Log from Sql Server is 7 and Sql Server Agent is 10
+            int maxDayForGetLog = logType == (int)LogType.SqlServerLog ? 7 : 10;
+            for (int i = 0; i < maxDayForGetLog; i++)
             {
                 try
                 {
@@ -196,6 +192,14 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     Logger.Log.Error(ex.Message, ex);
                 }
             }
+
+            sqlServerLogs = sqlServerLogs.Where(sqlServerLog => {
+                if (sqlServerLog.LogDate < To && sqlServerLog.LogDate > From)
+                {
+                    return true;
+                }
+                return false;
+            }).ToList();
 
             return sqlServerLogs;
         }
