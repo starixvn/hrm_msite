@@ -7,12 +7,11 @@
     <link href="~/themes/SqlJobManagement/MainContentPage.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(function () {
-          
+
         });
     </script>
 }
 <div class="contentbox">
-   
     <div class="leftcontent">
         <iframe id="leftPanel" name="leftPanel" marginwidth="0" scrolling="auto" src="@Url.Action("LeftMenuPage", "JobManagement")"
             marginheight="0" frameborder="0" vspace="0" hspace="0" style="width: 100%; height: 850px;">
@@ -27,8 +26,9 @@
 @Html.Hidden("server", (string)ViewBag.Server)
 @Html.Hidden("jobname", (string)ViewBag.JobName)
 @Html.Hidden("NapAdminRoot", Url.Content("~/"))
-<script type="text/javascript">
-    $(document).ready(function () {
+<script type="text/javascript">  
+    $(document).ready(function () {                          
+
         var type = $('#type').val();
         var server = $('#server').val().replaceAll('_', '.');
         var jobName = $('#jobname').val();
