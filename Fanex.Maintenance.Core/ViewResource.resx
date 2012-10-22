@@ -379,7 +379,7 @@
     <value>Server Management</value>
   </data>
   <data name="SqlAgentLog" xml:space="preserve">
-    <value>Server Agent Log</value>
+    <value>Agent Log</value>
   </data>
   <data name="SqlServerLog" xml:space="preserve">
     <value>Server Log</value>

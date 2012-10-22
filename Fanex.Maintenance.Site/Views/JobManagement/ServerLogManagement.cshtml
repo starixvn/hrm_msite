@@ -41,12 +41,12 @@
     </style>
 }
 @section HeaderBar {
-        <article class="breadcrumbs">
-            <a href="index.html">@Model.Server</a>
-            <div class="breadcrumb_divider">
-            </div>
-            <a class="current">@ViewResource.SqlServerLog</a>
-            </article>
+    <article class="breadcrumbs">
+        <a href="index.html">@Model.Server</a>
+        <div class="breadcrumb_divider">
+        </div>
+        <a class="current">@ViewResource.SqlServerLog</a>
+    </article>
 }
 <section class="column" id="main">
     <div class="content">
@@ -142,24 +142,25 @@
                     }
                 </tbody>
                 <tfoot>
-                 @if (Model.PageIndex == 0 && sqlServerLogs.Count() == 0)
-                 {
-                 }
-                 else
-                 {
-                    <tr>
-                        <td class="align-center" colspan="10">
-                            <a href="#" class="pagiPre" style="margin-right: 50px;" onclick="SqlServerLogManagement.OnNextPage(-1);">
-                                << Pre</a> <a href="#" class="pagiNext" onclick="SqlServerLogManagement.OnNextPage(1);">
-                                    Next >></a>
-                        </td>
-                    </tr>
-                 }
+                    @if (Model.PageIndex == 0 && sqlServerLogs.Count() == 0)
+                    {
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="align-center" colspan="10">
+                                <a href="#" class="pagiPre" style="margin-right: 50px;" onclick="SqlServerLogManagement.OnNextPage(-1);">
+                                    << Pre</a> <a href="#" class="pagiNext" onclick="SqlServerLogManagement.OnNextPage(1);">
+                                        Next >></a>
+                            </td>
+                        </tr>
+                    }
                 </tfoot>
             </table>
         </article>
     </div>
 </section>
+<input type="hidden" id="countData" value="@(sqlServerLogs.Count())" />
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))

@@ -1078,7 +1078,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server Agent Log.
+        ///   Looks up a localized string similar to Agent Log.
         /// </summary>
         public static string SqlAgentLog {
             get {

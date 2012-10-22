@@ -62,6 +62,15 @@ var SqlServerLogManagement = function ($) {
         UpdatePaging: function () {
             $('#PageIndex').val(0);
             $('#PageSize').val($('#PageSizeSelect').val());
+        },
+        UpdateNavigation: function () {
+            var count = $('#countData').val();
+            if (count == 0) {
+                $('.pagiNext').hide();
+            }
+            if ($('#PageIndex').val() == 0) {
+                $('.pagiPre').hide();
+            }
         }
     };
 
@@ -70,4 +79,5 @@ var SqlServerLogManagement = function ($) {
 $(document).ready(function () {
     SqlServerLogManagement.InitData();
     SqlServerLogManagement.InitDatetimePicker();
+    SqlServerLogManagement.UpdateNavigation();
 });     

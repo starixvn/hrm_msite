@@ -43,11 +43,11 @@
     </style>
 }
 @section HeaderBar {
-        <article class="breadcrumbs">
-            <a href="index.html">@Model.Server</a>
-            <div class="breadcrumb_divider">
-            </div>
-            <a class="current">@ViewResource.SqlAgentLog</a></article>
+    <article class="breadcrumbs">
+        <a href="index.html">@Model.Server</a>
+        <div class="breadcrumb_divider">
+        </div>
+        <a class="current">@ViewResource.SqlAgentLog</a></article>
 }
 <section class="column" id="main">
     <div class="content">
@@ -192,6 +192,7 @@
         </article>
     </div>
 </section>
+<input type="hidden" id="countData" value="@(sqlServerLogs.Count())" />
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
