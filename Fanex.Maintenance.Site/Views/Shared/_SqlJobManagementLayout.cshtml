@@ -99,6 +99,11 @@
             parent.$('div.rightcontent').css("width", "82%");
             parent.$('#collapsepanel').val("0");
         });
+        try {
+            parent.NAP.loadingBox.close();
+        }
+        catch (e) {
+        }
     });
 </script>
 @RenderSection("Foot", false)
