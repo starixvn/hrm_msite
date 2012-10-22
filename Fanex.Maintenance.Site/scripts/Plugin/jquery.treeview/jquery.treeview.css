@@ -7,7 +7,7 @@
 .treeview ul {
 	background-color:#E0E0E3;
 	margin-top: 4px;
-	margin-left: 4px !important;
+	margin-left: -8px !important;
 }
 
 .treeview .hitarea {
