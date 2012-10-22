@@ -13,6 +13,7 @@ namespace Fanex.Maintenance.Core.Web
     using System;
     using System.Globalization;
     using System.Web;
+    using System.Text;
 
     /// <summary>
     /// TODO: Update summary.
@@ -28,12 +29,10 @@ namespace Fanex.Maintenance.Core.Web
         /// <param name="value"></param>
         /// <returns></returns>
         public static IHtmlString ToFullDateString(this DateTime value,
-            string dateFormat = "MMM dd, yyyy", 
+            string dateFormat = "MMM dd, yyyy",
             string timeFormat = "HH:mm")
         {
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
-                value.ToString(dateFormat), 
-                value.ToString(timeFormat)));
+            return new HtmlString(value.ToString(dateFormat) + " - " + value.ToString(timeFormat).Replace(':', 'h') + "'");
         }
 
         /// <summary>
@@ -60,14 +59,12 @@ namespace Fanex.Maintenance.Core.Web
                 }
             }
 
-            DateTime date = DateTime.ParseExact(strTime, 
-                "HHmmss", 
-                CultureInfo.InvariantCulture, 
+            DateTime date = DateTime.ParseExact(strTime,
+                "HHmmss",
+                CultureInfo.InvariantCulture,
                 DateTimeStyles.None);
 
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
-                value.ToString(dateFormat), 
-                date.ToString(timeFormat)));
+            return new HtmlString(value.ToString(dateFormat) + " - " + value.ToString(timeFormat).Replace(':', 'h') + "'");
         }
 
         /// <summary>
@@ -79,8 +76,7 @@ namespace Fanex.Maintenance.Core.Web
         public static IHtmlString ToDateString(this DateTime value,
             string dateFormat = "MMM dd, yyyy")
         {
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span>",
-                value.ToString(dateFormat)));
+            return new HtmlString(value.ToString(dateFormat));
         }
 
         /// <summary>
@@ -89,9 +85,9 @@ namespace Fanex.Maintenance.Core.Web
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static IHtmlString ToFullDateString(this int value, 
+        public static IHtmlString ToFullDateString(this int value,
             int time,
-            string dateFormat = "MMM dd, yyyy", 
+            string dateFormat = "MMM dd, yyyy",
             string timeFormat = "HH:mm")
         {
             //// check format time correct HHmmss
@@ -107,12 +103,10 @@ namespace Fanex.Maintenance.Core.Web
 
             DateTime date = DateTime.ParseExact(value.ToString() + " " + strTime,
                 "yyyyMMdd HHmmss",
-                CultureInfo.InvariantCulture, 
+                CultureInfo.InvariantCulture,
                 DateTimeStyles.None);
 
-            return new HtmlString(string.Format("<span class='datetime'><span class='date'>{0}</span> <span class='date'>{1}</span></span>",
-                date.ToString(dateFormat), 
-                date.ToString(timeFormat)));
+            return new HtmlString(date.ToString(dateFormat) + " - " + date.ToString("HH:mm").Replace(':', 'h') + "'");
         }
 
         #endregion DateTime

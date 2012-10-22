@@ -43,11 +43,11 @@
     </style>
 }
 @section HeaderBar {
-        <article class="breadcrumbs">
-            <a href="index.html">@Model.Server</a>
-            <div class="breadcrumb_divider">
-            </div>
-            <a class="current">@ViewResource.SqlAgentLog</a></article>
+    <article class="breadcrumbs">
+        <a href="index.html">@Model.Server</a>
+        <div class="breadcrumb_divider">
+        </div>
+        <a class="current">@ViewResource.SqlAgentLog</a></article>
 }
 <section class="column" id="main">
     <div class="content">
@@ -104,7 +104,7 @@
         }
         <article class="module width_full">
             <div class="pagesize">
-                Page Size :
+                Page size :
                 @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
             </div>
             <table class="tablesorter" id="dataTable" style="width: 99%">
@@ -192,6 +192,7 @@
         </article>
     </div>
 </section>
+<input type="hidden" id="countData" value="@(sqlServerLogs.Count())" />
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))

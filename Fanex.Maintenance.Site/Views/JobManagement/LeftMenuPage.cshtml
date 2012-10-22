@@ -143,106 +143,109 @@
                 parent.$('div.rightcontent').css("width", "100%");
                 parent.$("#collapsepanel").val("1");
             });
-           
+
         });
     </script>
 </head>
 <body>
     <section id="body">
         <div class="content">
-<section id="secondary_bar">
-         <img class="imgcollapse" src="~/themes/job/images/forward-back.png" />
-		<div class="user">
-			<p>Job Management</p>
-			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
-		</div>
-</section>
-<aside class="column" id="sidebar">
-		<div><h3>Content @*<a class="toggleLink" href="#"></a>*@</h3>
-        </div>
-		<ul class="toggle sidebarul">
-			<li class="icn_new_article sidebarli">
-                @Html.ActionLink(ViewResource.ServerManagement, "ServerManagement", "JobManagement"
+            <section id="secondary_bar">
+                <img class="imgcollapse" src="~/themes/job/images/forward-back.png" />
+                <div class="user">
+                    <p>
+                        Job Management</p>
+                    <!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+                </div>
+            </section>
+            <aside class="column" id="sidebar">
+                <div>
+                    <h3>
+                        Content @*<a class="toggleLink" href="#"></a>*@</h3>
+                </div>
+                <ul class="toggle sidebarul">
+                    <li class="icn_new_article sidebarli">
+                        @Html.ActionLink(ViewResource.ServerManagement, "ServerManagement", "JobManagement"
                                       , new
                                       {
                                           @target = "centerFr",
                                           @class = "menu"
                                       })
-            </li>
-			<li class="icn_edit_article sidebarli">
-                @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagement", "JobManagement"
+                    </li>
+                    <li class="icn_edit_article sidebarli">
+                        @Html.ActionLink(ViewResource.ScheduleManagement, "ScheduleManagement", "JobManagement"
                          , new
                          {
                              @target = "centerFr",
                              @class = "menu"
                          })
-            </li>
-			<li class="icn_categories sidebarli">
-                @Html.ActionLink(ViewResource.JobManagement, "JobManagement", "JobManagement"
+                    </li>
+                    <li class="icn_categories sidebarli">
+                        @Html.ActionLink(ViewResource.JobManagement, "JobManagement", "JobManagement"
                                    , new
                                    {
                                        @target = "centerFr",
                                        @class = "menu"
                                    })
-                </li>
-		</ul>
-       	<h3>Database Servers @*<a class="toggleLink" href="#"></a>*@</h3>
-        <ul class="treeview" style="overflow-y:auto;height:650px; margin-left:10px;" id="navigation">
-        @{
-            var classClose = string.Empty;
-            foreach (ServerElement server in Model)
-            {
-		        <li id="phtml_1" class="closed">
-                <span class="serverformat">@server.ServerIp</span>
-                <span class="@server.ServerIp.Replace(".", "_") removedErrorIcon"></span>
-			        <ul>
-				        <li id="phtml_2" class="subitemmanage">
-					        @Html.ActionLink(ViewResource.SqlServerLog, "ServerLogManagement"
+                    </li>
+                </ul>
+                <h3>
+                    Database Servers @*<a class="toggleLink" href="#"></a>*@</h3>
+                <ul class="treeview" style="overflow-y: auto; height: 650px; margin-left: 10px;"
+                    id="navigation">
+                    @{
+                        var classClose = string.Empty;
+                        foreach (ServerElement server in Model)
+                        {
+                        <li id="phtml_1" class="closed"><span class="serverformat">@server.ServerIp</span> <span class="@server.ServerIp.Replace(".", "_") removedErrorIcon">
+                        </span>
+                            <ul>
+                                <li id="phtml_2" class="subitemmanage">
+                                    @Html.ActionLink(ViewResource.SqlServerLog, "ServerLogManagement"
                                 , new { server = server.ServerIp }
                                         , new
                                         {
                                             @class = "navChild serverlog",
                                             @target = "centerFr"
                                         })
-
-				        </li>
-				        <li id="phtml_3">
-					        @Html.ActionLink(ViewResource.SqlAgentLog, "AgentLogManagement",
+                                </li>
+                                <li id="phtml_3">
+                                    @Html.ActionLink(ViewResource.SqlAgentLog, "AgentLogManagement",
                                                      new { server = server.ServerIp },
                                                      new
                                                         {
                                                             @class = "navChild agentlog",
                                                             @target = "centerFr"
                                                         })
-                                                         <span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.AgentLog) removedErrorIcon"></span>
-				        </li>
-                        <li id="phtml_4">
-                         @Html.ActionLink(ViewResource.Schedule, "ScheduleManagement",
+                                    <span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.AgentLog) removedErrorIcon">
+                                    </span></li>
+                                <li id="phtml_4">
+                                    @Html.ActionLink(ViewResource.Schedule, "ScheduleManagement",
                          new { server = server.ServerIp },
                          new
                             {
                                 @class = "navChild shcedule",
                                 @target = "centerFr"
                             })
-                        </li>
-                        <li id="phtml_5">
-                          @Html.ActionLink(ViewResource.Jobs, "JobManagement",
+                                </li>
+                                <li id="phtml_5">
+                                    @Html.ActionLink(ViewResource.Jobs, "JobManagement",
                           new { server = server.ServerIp },
                           new
                              {
                                  @class = "navChild job",
                                  @target = "centerFr"
                              })
-                                 <span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.Job) removedErrorIcon"></span>
+                                    <span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.Job) removedErrorIcon">
+                                    </span></li>
+                            </ul>
                         </li>
-			        </ul>
-		        </li>
-            }
-        }
-  </ul>
-</aside>
-</div>
-</section>
+                        }
+                    }
+                </ul>
+            </aside>
+        </div>
+    </section>
 </body>
 </html>
 @Html.Hidden("NapAdminRoot", Url.Content("~/"))
