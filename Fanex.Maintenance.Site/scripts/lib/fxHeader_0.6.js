@@ -38,7 +38,8 @@
         var sd = document.createElement("div");
         sd.id = tid + ':scroller';
         sd.style.cssText = 'height:auto;overflow-x:auto;overflow-y:auto;width:auto;';
-        sd.onscroll = scrollHeader;
+        sd.onscroll = scrollHeader;               
+
         sd.appendChild(tb);
         var sd2 = document.createElement("div");
         sd2.id = tid + ':scroller:fx:OuterDiv';
