@@ -74,6 +74,18 @@
 <script type="text/javascript">
     fxheaderInit('dataTable', 540, 1, 0);
     fxheader();
+
+    $(function () {
+        var expr = new RegExp('>[ \t\r\n\v\f]*<', 'g');
+        if ($.browser.msie) {
+            var ie = parseInt($.browser.version, 10);
+            if (ie == 9) {
+                $('#dataTable').html($('#dataTable').html().replace(expr, '><'));
+            }
+        }
+    });
+
+    
 </script>
 <script type="text/javascript">
     $(function () {
