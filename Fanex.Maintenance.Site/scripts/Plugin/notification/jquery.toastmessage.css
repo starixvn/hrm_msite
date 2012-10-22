@@ -39,9 +39,9 @@
 
 .toast-item p a
 {
-    color: #000000;
+    /*color: #000000;
     font-weight: bold;
-    text-decoration: none;
+    text-decoration: none;*/
 }
 
 .toast-item-close {
