@@ -7,16 +7,23 @@
     <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
 }
 @section HeaderBar {
-   
-        <article class="breadcrumbs">
-            <a href="index.html"></a>
-            <div class="breadcrumb_divider">
-            </div>
-            <a class="current">@ViewResource.ServerManagement</a></article>
+    <article class="breadcrumbs">
+        <a href="index.html"></a>
+        <div class="breadcrumb_divider">
+        </div>
+        <a class="current">@ViewResource.ServerManagement</a></article>
 }
 <section class="column" id="main">
     <div class="content">
-       Under development
+        <table class="tablesorter" id="dataTable" style="width: 99%">
+            <thead>
+                <tr>
+                    <th>
+                        Under development
+                    </th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </section>
 @section Foot {
