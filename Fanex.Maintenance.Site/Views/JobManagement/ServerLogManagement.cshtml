@@ -5,7 +5,7 @@
     var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
 }
 @section Head {
-    <link href="~/themes/job/server/manage.less" rel="stylesheet" type="text/css" />   
+    <link href="~/themes/job/server/manage.less" rel="stylesheet" type="text/css" />
 }
 @section HeaderBar {
     <article class="breadcrumbs">
@@ -56,9 +56,23 @@
         }
         <article class="module width_full">
             <div class="pagesize">
+              @if (Model.PageIndex == 0 && sqlServerLogs.Count() == 0)
+              {
+              }
+              else
+              {
+                <div class="pagingcontainer">
+                    <a href="#" class="pagiPre pagingitem" onclick="SqlServerLogManagement.OnNextPage(-1);">
+                    ← Prev</a> <a href="#" class="pagiNext pagingitem" onclick="SqlServerLogManagement.OnNextPage(1);">
+                        Next →</a>
+                </div>
+              }
+            <div>
                 Page size :
                 @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
+                </div>
             </div>
+            
             <table class="tablesorter" id="dataTable" style="width: 99%">
                 <thead>
                     <tr>
@@ -109,22 +123,7 @@
                     }
                 </tbody>
                 <tfoot>
-                    @if (Model.PageIndex == 0 && sqlServerLogs.Count() == 0)
-                    {
-                    }
-                    else
-                    {
-                        <tr>
-                            <td class="align-right tdpaging" colspan="10">
-                                <div class="pagingcontainer">
-                                    <a href="#" class="pagiPre pagingitem" onclick="SqlServerLogManagement.OnNextPage(-1);">
-                                    ← Prev</a> <a href="#" class="pagiNext pagingitem" onclick="SqlServerLogManagement.OnNextPage(1);">
-                                       Next →</a>
-                                </div>
-                                
-                            </td>
-                        </tr>
-                    }
+                  
                 </tfoot>
             </table>
         </article>
