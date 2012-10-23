@@ -98,12 +98,15 @@
             parent.$('div.leftcontent').css("width", "18%");
             parent.$('div.rightcontent').css("width", "82%");
             parent.$('#collapsepanel').val("0");
-        });     
+        });
         try {
             parent.NAP.loadingBox.close();
         }
         catch (e) {
         }
+        $('form').live("submit", function () {
+            parent.NAP.loadingBox.show();
+        });
     });
 </script>
 @RenderSection("Foot", false)
