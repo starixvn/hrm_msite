@@ -169,7 +169,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// Get Schedule with filtered
         /// </summary>
         /// <returns>List Schedule satisfy filter</returns>
-        public IEnumerable<Schedule> GetSchedules()
+        public IEnumerable<ScheduleDetail> GetSchedules()
         {
             List<ScheduleDetail> schedules = new List<ScheduleDetail>();
             try
