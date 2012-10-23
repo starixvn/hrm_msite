@@ -47,6 +47,13 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
         IJobService WithSchedule(string scheduleName);
 
         /// <summary>
+        /// Filter by shedule id
+        /// </summary>
+        /// <param name="scheduleName"></param>
+        /// <returns></returns>
+        IJobService WithSchedule(int scheduleId);
+
+        /// <summary>
         /// Filter by current execution status
         /// </summary>
         /// <param name="executeStatus"></param>

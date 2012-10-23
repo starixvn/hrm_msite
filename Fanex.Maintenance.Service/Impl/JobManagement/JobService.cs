@@ -54,6 +54,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         private int _endRunDate;
 
+        private int _scheduleId;
+
         private string _stepName;
 
         #endregion
@@ -390,6 +392,32 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return new List<JobSchedule>();
         }
 
+
+        /// <summary>
+        /// Get job buy schedule name
+        /// </summary>
+        /// <param name="schedule"></param>
+        /// <param name="server"></param>
+        /// <returns></returns>
+        private IEnumerable<JobSchedule> GetJobBySchedule(int scheduleId, string server)
+        {
+            try
+            {
+                var criteria = new GetAllJobInScheduleCriteria
+                {
+                    Schedule_Id = scheduleId
+                };
+
+                return _jobRepository.GetAllJob(criteria, server);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return new List<JobSchedule>();
+        }
+
         /// <summary>
         /// Start Job
         /// </summary>
@@ -449,6 +477,13 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
 
             return commandResult;
+        }
+
+
+        public IJobService WithSchedule(int scheduleId)
+        {
+            this._scheduleId = scheduleId;
+            return this;
         }
     }
 }
