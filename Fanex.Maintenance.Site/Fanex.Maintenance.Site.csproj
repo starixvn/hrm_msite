@@ -186,6 +186,8 @@
     <Content Include="images\calendar.gif" />
     <Content Include="images\calendar.png" />
     <Content Include="images\sprite_v.png" />
+    <Content Include="scripts\Job\LeftMenuPage.js" />
+    <Content Include="scripts\Job\Index.js" />
     <Content Include="scripts\NotificationHub.js" />
     <Content Include="scripts\DatabaseReport\Chart.js" />
     <Content Include="scripts\DatabaseReport\Licenseedata.js" />
@@ -920,8 +922,12 @@
     <None Include="themes\job\common.less" />
     <None Include="themes\job\grid.less" />
     <None Include="themes\job\index.less" />
+    <None Include="themes\job\job\jobmanage.less" />
+    <None Include="themes\job\job\joblog.less" />
     <None Include="themes\job\job\manage.less" />
     <None Include="themes\job\report\dataintegry.less" />
+    <None Include="themes\job\schedule\manage.less" />
+    <None Include="themes\job\server\manage.less" />
     <None Include="themes\job\style.less" />
     <None Include="themes\job\themes.less" />
     <None Include="themes\job\user\manage.less" />
