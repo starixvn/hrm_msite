@@ -30,6 +30,10 @@
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
     <link href="~/scripts/Plugin/jquery.treeview/jquery.treeview.css" rel="stylesheet"
         type="text/css" />
+    <script src="~/scripts/Plugin/jquery.treeview/jquery.treeview.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/jquery.signalR-0.5.3.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/signalr/hubs"></script>
     <style type="text/css">
         .imgcollapse
         {
@@ -37,12 +41,8 @@
             margin-right: 10px;
             margin-top: 5px;
             cursor: pointer;
-        }
+        }      
     </style>
-    <script src="~/scripts/Plugin/jquery.treeview/jquery.treeview.js" type="text/javascript"></script>
-    <script src="~/scripts/lib/jquery.signalR-0.5.3.js" type="text/javascript"></script>
-    <script src="~/scripts/lib/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="~/signalr/hubs"></script>
     <script type="text/javascript">
         // Proxy created on the fly
         var notitficationHub = $.connection.notificationHub;
@@ -65,9 +65,11 @@
 
                 var message = notifyInfo.Type == 1 ? "Sql Agent Error" : "Job Error";
                 message += "<br/>" + notifyInfo.Message;
-                $('span.' + notifyInfo.ServerIp).addClass("notifyError");
+//                $('span.' + notifyInfo.ServerIp).addClass("notifyErrorServer");
+                $('span.' + notifyInfo.ServerIp).attr("style","color:red;");
+
                 $('span.' + notifyInfo.ServerIp + notifyInfo.Type).addClass("notifyError").attr("linkerrorpage", linkErrorPage);
-                $('span.' + notifyInfo.ServerIp + ',' + 'span.' + notifyInfo.ServerIp + notifyInfo.Type).qtip({
+                $('span.' + notifyInfo.ServerIp + notifyInfo.Type).qtip({
                     content: message,
                     position:
                 {
@@ -100,6 +102,7 @@
 
             $('.removedErrorIcon').click(function () {
                 $(this).removeClass("notifyError");
+                $(this).removeAttr("style");
                 $(this).parent().parent().prev().removeClass("notifyError");
                 parent.$("#centerFr").attr("src", $(this).attr("linkerrorpage"));
             });
@@ -127,7 +130,7 @@
                 $('.menu').removeClass("selected");
                 $('.navChild').removeClass("selected");
                 $(this).addClass("selected");
-                parent.NAP.loadingBox.show();            
+                parent.NAP.loadingBox.show();
             });
 
             $('.navChild').live('click', function () {
@@ -197,8 +200,9 @@
                         var classClose = string.Empty;
                         foreach (ServerElement server in Model)
                         {
-                        <li id="phtml_1" class="closed"><span class="serverformat">@server.ServerIp</span> <span class="@server.ServerIp.Replace(".", "_") removedErrorIcon">
-                        </span>
+                        <li id="phtml_1" class="closed"><span class="serverformat @server.ServerIp.Replace(".", "_") removedErrorIcon">@server.ServerIp</span>
+                            @*<span class="@server.ServerIp.Replace(".", "_") removedErrorIcon">
+                        </span>*@
                             <ul>
                                 <li id="phtml_2" class="subitemmanage">
                                     @Html.ActionLink(ViewResource.SqlServerLog, "ServerLogManagement"
