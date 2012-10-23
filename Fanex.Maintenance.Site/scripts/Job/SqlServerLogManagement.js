@@ -54,9 +54,7 @@ var SqlServerLogManagement = function ($) {
         },
         OnChangePageSize: function () {
             $('#PageSize').val($('#PageSizeSelect').val());
-            if (SqlServerLogManagement.serverIp != $('#Server').val()) {
-                SqlServerLogManagement.UpdatePaging();
-            }
+            SqlServerLogManagement.UpdatePaging();
             $('.content form').submit();
         },
         UpdatePaging: function () {

@@ -148,10 +148,13 @@
                     else
                     {
                         <tr>
-                            <td class="align-center" colspan="10">
-                                <a href="#" class="pagiPre" style="margin-right: 50px;" onclick="SqlServerLogManagement.OnNextPage(-1);">
-                                    << Pre</a> <a href="#" class="pagiNext" onclick="SqlServerLogManagement.OnNextPage(1);">
-                                        Next >></a>
+                            <td class="align-right tdpaging" colspan="10">
+                                <div class="pagingcontainer">
+                                    <a href="#" class="pagiPre pagingitem" onclick="SqlServerLogManagement.OnNextPage(-1);">
+                                    ← Prev</a> <a href="#" class="pagiNext pagingitem" onclick="SqlServerLogManagement.OnNextPage(1);">
+                                       Next →</a>
+                                </div>
+                                
                             </td>
                         </tr>
                     }
