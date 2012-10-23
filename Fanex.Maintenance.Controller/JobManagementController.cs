@@ -142,7 +142,7 @@ namespace Fanex.Maintenance.Controller
         {
             ViewBag.ListServer = GetServer();
 
-            List<Schedule> listSchedule = _scheduleService
+            List<ScheduleDetail> listSchedule = _scheduleService
                 .WithServer(server)
                 .GetSchedules().ToList();
             ViewBag.ListSchedule = listSchedule.Select(s => new SelectListItem
@@ -184,7 +184,7 @@ namespace Fanex.Maintenance.Controller
                 .FromServer(criteria.Server)
                 .GetJobs().ToList();
 
-            List<Schedule> listSchedule = _scheduleService
+            List<ScheduleDetail> listSchedule = _scheduleService
               .WithServer(criteria.Server)
               .GetSchedules().ToList();
             ViewBag.ListSchedule = listSchedule.Select(s => new SelectListItem

@@ -12,6 +12,7 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
     using System;
     using System.Collections.Generic;
     using Fanex.Maintenance.Entity.Domain;
+    using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// TODO: Update summary.
@@ -65,6 +66,6 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
         /// Get schedule
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Schedule> GetSchedules();
+        IEnumerable<ScheduleDetail> GetSchedules();
     }
 }
