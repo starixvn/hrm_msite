@@ -17,8 +17,9 @@ var JobLogManagement = function ($) {
 			        changeMonth: true,
 			        numberOfMonths: 1,
                     dateFormat: "M dd,yy",
-                    showOn: "button",
+                    showOn: "button",                    
                     buttonImage: JobLogManagement.buttonImage,
+                    buttonText:"From",
                     buttonImageOnly: true,
 			        onSelect: function( selectedDate ) {
 				        $( "#To" ).datepicker( "option", "minDate", selectedDate );
@@ -32,6 +33,7 @@ var JobLogManagement = function ($) {
                 dateFormat: "M dd,yy",
                 showOn: "button",
                 buttonImage: JobLogManagement.buttonImage,
+                buttonText:"To",
                 buttonImageOnly: true,
 			    onSelect: function( selectedDate ) {
 			    }
@@ -80,22 +82,7 @@ $(document).ready(function () {
     JobLogManagement.InitData();
     JobLogManagement.InitDatetimePicker();
 
-    $('#Job_Name').chosen();
-
-    // #region actions dropdownlist
-    var event = NAP.agentIsOldIe || NAP.agentIsApple ? 'click' : 'hover';
-
-    $('.action-wrp').bind(event, function () {
-        var $this = $(this),
-			dropdown = $this.find('.actions');
-
-        if (dropdown.css('visibility') == 'hidden') {
-            $('.actions').css({ visibility: 'hidden', opacity: 0 });
-            $this.find('.actions').css({ visibility: 'visible', opacity: 1 });
-        } else {
-            $this.find('.actions').css({ visibility: 'hidden', opacity: 0 });
-        }
-    });
+    $('#Job_Name').chosen();    
 
     $('.stepOutcome').live('click', function () {
         var $this = $(this);
@@ -129,4 +116,27 @@ $(document).ready(function () {
 
     });
     // #endregion
+
+    // #region actions dropdownlist
+    var event = NAP.agentIsOldIe || NAP.agentIsApple ? 'click' : 'hover';
+
+     $('.action-wrp').bind("click", function (e) {
+        var $this = $(this),
+    			dropdown = $this.find('.actions');
+
+        if (dropdown.css('visibility') == 'hidden') {
+            $('.actions').css({ visibility: 'hidden', opacity: 0 });
+            $this.find('.actions').css({ visibility: 'visible', opacity: 1 });
+        } else {
+            $this.find('.actions').css({ visibility: 'hidden', opacity: 0 });
+        }
+
+        e.stopPropagation();
+    });
+    // #endregion
+
+    // hides action-panel when clicking outside the action buttons
+    $('body, header, #headline, #body').on('click', function () {
+        $('.action-wrp').find('.actions').css({ visibility: 'hidden', opacity: 0 });
+    });
 });

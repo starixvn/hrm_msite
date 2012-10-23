@@ -24,21 +24,22 @@
         img.ui-datepicker-trigger, img.tempcalendarimg
         {
             margin-top: -1px;
-        }       
+            cursor: pointer;
+        }
     </style>
     <script src="~/scripts/Job/JobLogManagement.js" type="text/javascript"></script>
 }
 @section HeaderBar {
-        <article class="breadcrumbs">
-            <a href="#">@Model.Server</a>
-            <div class="breadcrumb_divider">
-            </div>
-            <a href="#">@Model.Job_Name</a>
-            <div class="breadcrumb_divider">
-            </div>
-            <a class="current">@ViewResource.Job_Log_Management</a>
-        </article>
-   }
+    <article class="breadcrumbs">
+        <a href="#">@Model.Server</a>
+        <div class="breadcrumb_divider">
+        </div>
+        <a href="#">@Model.Job_Name</a>
+        <div class="breadcrumb_divider">
+        </div>
+        <a class="current">@ViewResource.Job_Log_Management</a>
+    </article>
+}
 <section class="column" id="main">
     <div class="content">
         @using (Html.BeginForm())
@@ -73,7 +74,7 @@
                         @Html.LabelFor(m => m.From)
                     </div>
                     <div class="edit-field" style="position: relative;">
-                        @Html.TextBox("From", ((DateTime)Model.From).ToString("MMM dd, yyyy"))
+                        @Html.TextBox("From", ((DateTime)Model.From).ToString("MMM dd, yyyy"), new { @autocomplete = "off" })
                     </div>
                 </div>
                 <div class="filter-form">
@@ -81,7 +82,7 @@
                         @Html.LabelFor(m => m.To)
                     </div>
                     <div class="edit-field" style="position: relative;">
-                        @Html.TextBox("To", ((DateTime)Model.To).ToString("MMM dd, yyyy"))
+                        @Html.TextBox("To", ((DateTime)Model.To).ToString("MMM dd, yyyy"), new { @autocomplete = "off" })
                     </div>
                 </div>
                 <div class="filter-form">

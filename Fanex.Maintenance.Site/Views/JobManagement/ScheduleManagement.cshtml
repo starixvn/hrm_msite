@@ -22,6 +22,7 @@
         img.ui-datepicker-trigger, img.tempcalendarimg
         {
             margin-top: -1px;
+            cursor: pointer;
         }
     </style>
 }
@@ -105,7 +106,7 @@
                         @Html.LabelFor(m => m.From)
                     </div>
                     <div class="edit-field width-auto" style="position: relative;">
-                        @Html.TextBoxFor(m => m.From)
+                        @Html.TextBoxFor(m => m.From, new { autocomplete = "off" })
                     </div>
                 </div>
                 <div class="filter-form marginfilter">
@@ -113,7 +114,7 @@
                         @Html.LabelFor(m => m.To)
                     </div>
                     <div class="edit-field width-auto" style="position: relative;">
-                        @Html.TextBoxFor(m => m.To)
+                        @Html.TextBoxFor(m => m.To, new { autocomplete = "off" })
                     </div>
                 </div>
                 <div class="filter-form lastmarginfilter">
@@ -211,7 +212,7 @@
                                 else
                                 {
                                     @: 0
-                                                                                                                }
+                                                                                                                                                                                }
                             </td>
                             <td class="align-center">
                                 @if (schedule.Enable == 1)
