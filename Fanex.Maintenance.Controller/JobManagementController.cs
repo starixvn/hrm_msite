@@ -138,7 +138,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="schedule"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult JobManagement( int? scheduleId,string server = "")
+        public ActionResult JobManagement(int? scheduleId, string server = "")
         {
             ViewBag.ListServer = GetServer();
 
@@ -307,24 +307,31 @@ namespace Fanex.Maintenance.Controller
         /// <param name="server"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult JobLogManagement(string job, string server, int top = 0)
+        public ActionResult JobLogManagement(int top = 0, string job = "", string server = "")
         {
+            ViewBag.ListServer = GetServer();
+
             //// get log history 
-            List<JobLog> listJobLog = _jobService
-                               .WithJob(job)
+            var listJobLog = new List<JobLog>();
+            if (!job.Equals(string.Empty) && !server.Equals(string.Empty))
+            {
+                listJobLog = _jobService.WithJob(job)
                                .WithStartRunDate(DateTime.Now)
                                .WithEndRunDate(DateTime.Now.AddDays(1))
                                .FromServer(server)
                                .GetJobLogs().ToList();
+            }
 
             ViewBag.ListLogJob = listJobLog;
 
             //// get list job
-            List<JobSchedule> listJob = _jobService
-                                        .WithJob(null)
-                                        .FromServer(server)
-                                        .GetJobs().ToList();
-
+            var listJob = new List<JobSchedule>();
+            if (!server.Equals(string.Empty))
+            {
+                listJob = _jobService.WithJob(null)
+                                             .FromServer(server)
+                                             .GetJobs().ToList();
+            }
             ViewBag.ListJob = listJob.Select(j => new SelectListItem
             {
                 Text = j.Job.Name,
@@ -351,7 +358,9 @@ namespace Fanex.Maintenance.Controller
         /// <returns></returns>
         [HttpPost]
         public ActionResult JobLogManagement(GetListJobCriteria criteria)
-        {                  
+        {
+            ViewBag.ListServer = GetServer();
+
             //// get list job
             List<JobSchedule> listJob = _jobService
                                         .WithJob(null)
@@ -373,7 +382,7 @@ namespace Fanex.Maintenance.Controller
                 criteria.From = DateTime.Now;
                 criteria.To = DateTime.Now.AddDays(1);
                 return View(criteria);
-            }  
+            }
 
             //// get log history 
             List<JobLog> listJobLog = _jobService
@@ -596,6 +605,31 @@ namespace Fanex.Maintenance.Controller
                     .GetSchedules();
 
                 return Json(list);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get Job Ajax
+        /// </summary>
+        /// <param name="server"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetJobByServer(string server)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                //// get list job
+                var listJob = new List<JobSchedule>();
+                if (!server.Equals(string.Empty))
+                {
+                    listJob = _jobService.WithJob(null)
+                                                 .FromServer(server)
+                                                 .GetJobs().ToList();
+                }
+
+                return Json(listJob);
             }
 
             return null;

@@ -12,46 +12,46 @@ var JobLogManagement = function ($) {
 
         InitDatetimePicker: function () {
 
-            $( "#From" ).datepicker({
-			        defaultDate: "+1w",
-			        changeMonth: true,
-			        numberOfMonths: 1,
-                    dateFormat: "M dd,yy",
-                    showOn: "button",                    
-                    buttonImage: JobLogManagement.buttonImage,
-                    buttonText:"From",
-                    buttonImageOnly: true,
-			        onSelect: function( selectedDate ) {
-				        $( "#To" ).datepicker( "option", "minDate", selectedDate );
-                        $( "#To" ).val($(this).val());
-			        }
-		        });
-		    $( "#To" ).datepicker({
-			    defaultDate: "+1w",
-			    changeMonth: true,
-			    numberOfMonths: 1,
+            $("#From").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 1,
                 dateFormat: "M dd,yy",
                 showOn: "button",
                 buttonImage: JobLogManagement.buttonImage,
-                buttonText:"To",
+                buttonText: "From",
                 buttonImageOnly: true,
-			    onSelect: function( selectedDate ) {
-			    }
-		    });
+                onSelect: function (selectedDate) {
+                    $("#To").datepicker("option", "minDate", selectedDate);
+                    $("#To").val($(this).val());
+                }
+            });
+            $("#To").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 1,
+                dateFormat: "M dd,yy",
+                showOn: "button",
+                buttonImage: JobLogManagement.buttonImage,
+                buttonText: "To",
+                buttonImageOnly: true,
+                onSelect: function (selectedDate) {
+                }
+            });
         },
-         StartJob: function (server, jobName, stepId, stepName) {
+
+        StartJob: function (server, jobName, stepId, stepName) {
             var stepMessage = "";
-            if(stepId != '0')
-            {
+            if (stepId != '0') {
                 stepMessage = " at Step " + stepName;
             }
             $.ajax({
                 url: NAP.resolveClientUrl("JobManagement/StartJob"),
-                data: { 
-                        server: server, 
-                        jobName: jobName, 
-                        stepName: stepId != 0 ? stepName : null 
-                        },
+                data: {
+                    server: server,
+                    jobName: jobName,
+                    stepName: stepId != 0 ? stepName : null
+                },
                 type: 'POST',
                 dataType: 'JSON',
                 cache: false,
@@ -74,6 +74,32 @@ var JobLogManagement = function ($) {
                 }
             });
         },
+
+        GetJob: function (server) {
+            $.ajax({
+                url: NAP.resolveClientUrl("JobManagement/GetJobByServer"),
+                data: { server: server },
+                type: 'POST',
+                dataType: 'JSON',
+                cache: false,
+                beforeSend: function () {
+                    //                    NAP.loadingBox.show();
+                    //$('#Job_Name').attr('disabled', 'disabled');
+                },
+                complete: function () {
+                    //                    NAP.loadingBox.close();
+                    //$('#Job_Name').removeAttr('disabled', 'disabled');
+                },
+                success: function (result) {
+                    $("#Job_Name").html("");
+                    $("#Job_Name").append("<option value=''>[None]</option>");
+                    $("#Job_Name").append($("#templateJob").render(result));
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
+        }
     };
 
 } (jQuery);
@@ -82,7 +108,11 @@ $(document).ready(function () {
     JobLogManagement.InitData();
     JobLogManagement.InitDatetimePicker();
 
-    $('#Job_Name').chosen();    
+    $('#Server').bind('change', function () {
+        var server = $(this).val();
+        JobLogManagement.GetJob(server);
+    });
+    // $('#Job_Name').chosen();    
 
     $('.stepOutcome').live('click', function () {
         var $this = $(this);
@@ -102,8 +132,8 @@ $(document).ready(function () {
         var isLoop = true;
         while (isLoop) {
             trNext.toggle();
-            trNext = trNext.next();            
-            if (trNext.length>0) {
+            trNext = trNext.next();
+            if (trNext.length > 0) {
                 if (trNext.attr('id') != undefined) {
                     isLoop = false;
                 }
@@ -111,7 +141,7 @@ $(document).ready(function () {
             else {
                 isLoop = false;
             }
-            
+
         }
 
     });
@@ -120,7 +150,7 @@ $(document).ready(function () {
     // #region actions dropdownlist
     var event = NAP.agentIsOldIe || NAP.agentIsApple ? 'click' : 'hover';
 
-     $('.action-wrp').bind("click", function (e) {
+    $('.action-wrp').bind("click", function (e) {
         var $this = $(this),
     			dropdown = $this.find('.actions');
 

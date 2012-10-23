@@ -522,4 +522,7 @@
   <data name="FrequentType" xml:space="preserve">
     <value>Frequent</value>
   </data>
+  <data name="JobLog" xml:space="preserve">
+    <value>Job Log</value>
+  </data>
 </root>

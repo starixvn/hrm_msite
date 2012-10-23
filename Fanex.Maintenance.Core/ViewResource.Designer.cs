@@ -583,6 +583,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Job Log.
+        /// </summary>
+        public static string JobLog {
+            get {
+                return ResourceManager.GetString("JobLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Job Management.
         /// </summary>
         public static string JobManagement {

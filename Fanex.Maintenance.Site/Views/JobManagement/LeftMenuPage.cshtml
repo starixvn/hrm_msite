@@ -85,6 +85,14 @@
                                        @class = "menu"
                                    })
                     </li>
+                    <li class="icn_tags sidebarli">
+                        @Html.ActionLink(ViewResource.Job_Log_Management, "JobLogManagement", "JobManagement"
+                                   , new
+                                   {
+                                       @target = "centerFr",
+                                       @class = "menu"
+                                   })
+                    </li>
                 </ul>
                 <h3>
                     Database Servers @*<a class="toggleLink" href="#"></a>*@</h3>
@@ -132,6 +140,16 @@
                           new
                              {
                                  @class = "navChild job",
+                                 @target = "centerFr"
+                             })
+                                    <span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.Job) removedErrorIcon">
+                                    </span></li>
+                                <li id="phtml_6">
+                                    @Html.ActionLink(ViewResource.JobLog, "JobLogManagement",
+                          new { server = server.ServerIp },
+                          new
+                             {
+                                 @class = "navChild joblog",
                                  @target = "centerFr"
                              })
                                     <span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.Job) removedErrorIcon">
