@@ -54,7 +54,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         private int _endRunDate;
 
-        private int _scheduleId;
+        private int? _scheduleId;
 
         private string _stepName;
 
@@ -279,10 +279,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     listJob.AddRange(list);
 
                     //// check filter by schedule
-                    if (!ReferenceEquals(this._schedule, null) && !this._schedule.Equals(string.Empty))
+                    if (!ReferenceEquals(this._scheduleId, null))
                     {
                         var listTemp = new List<JobSchedule>();
-                        List<JobSchedule> listJobSchedule = GetJobBySchedule(this._schedule, this._server).ToList();
+                        List<JobSchedule> listJobSchedule = GetJobByScheduleId(this._scheduleId, this._server).ToList();
 
                         //// get job filter by schedule name
                         foreach (var item in listJobSchedule)
@@ -399,7 +399,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <param name="schedule"></param>
         /// <param name="server"></param>
         /// <returns></returns>
-        private IEnumerable<JobSchedule> GetJobBySchedule(int scheduleId, string server)
+        private IEnumerable<JobSchedule> GetJobByScheduleId(int? scheduleId, string server)
         {
             try
             {
@@ -480,7 +480,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
 
-        public IJobService WithSchedule(int scheduleId)
+        public IJobService WithScheduleId(int? scheduleId)
         {
             this._scheduleId = scheduleId;
             return this;

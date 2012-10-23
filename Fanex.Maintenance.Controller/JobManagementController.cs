@@ -138,21 +138,22 @@ namespace Fanex.Maintenance.Controller
         /// <param name="schedule"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult JobManagement(string server = "", string schedule = "")
+        public ActionResult JobManagement( int? scheduleId,string server = "")
         {
             ViewBag.ListServer = GetServer();
 
             List<ScheduleDetail> listSchedule = _scheduleService
                 .WithServer(server)
                 .GetSchedules().ToList();
+
             ViewBag.ListSchedule = listSchedule.Select(s => new SelectListItem
             {
                 Text = s.Name,
-                Value = s.Name
+                Value = s.Id.ToString()
             }).ToList();
 
             ViewBag.ListJob = _jobService
-                .WithSchedule(schedule)
+                .WithScheduleId(scheduleId)
                 .FromServer(server)
                 .GetJobs();
 
@@ -161,7 +162,7 @@ namespace Fanex.Maintenance.Controller
                 From = DateTime.Now,
                 To = DateTime.Now.AddDays(1),
                 Server = server,
-                Schedule = schedule
+                ScheduleId = scheduleId
             };
 
             return View(criteria);
@@ -178,7 +179,7 @@ namespace Fanex.Maintenance.Controller
             List<JobSchedule> listJob = new List<JobSchedule>();
 
             listJob = _jobService.WithJob(criteria.Job_Name)
-                .WithSchedule(criteria.Schedule)
+                .WithScheduleId(criteria.ScheduleId)
                 .WithStatus(criteria.Enabled)
                 .WithCurrentExecuteStatus(criteria.Execution_Status)
                 .FromServer(criteria.Server)
@@ -190,7 +191,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ListSchedule = listSchedule.Select(s => new SelectListItem
             {
                 Text = s.Name,
-                Value = s.Name
+                Value = s.Id.ToString()
             }).ToList();
 
             ViewBag.ListJob = listJob;

@@ -18,20 +18,20 @@
         {
             text-align: left;
             margin-right: 20px;
-        }  
+        }
         img.ui-datepicker-trigger, img.tempcalendarimg
         {
-            margin-top:-1px;
-        }     
+            margin-top: -1px;
+        }
     </style>
 }
 @section HeaderBar {
-        <article class="breadcrumbs">
-            <a href="index.html">@Model.Server</a>
-            <div class="breadcrumb_divider">
-            </div>
-            <a class="current">@ViewResource.ScheduleManagement</a>
-        </article>
+    <article class="breadcrumbs">
+        <a href="index.html">@Model.Server</a>
+        <div class="breadcrumb_divider">
+        </div>
+        <a class="current">@ViewResource.ScheduleManagement</a>
+    </article>
 }
 <section class="column" id="main">
     <div class="content">
@@ -205,13 +205,13 @@
                         new
                         {
                             server = schedule.ServerIp,
-                            schedule = schedule.Id
+                            scheduleId = schedule.Id
                         }, null)
                                 }
                                 else
                                 {
                                     @: 0
-                                                                                }
+                                                                                                                }
                             </td>
                             <td class="align-center">
                                 @if (schedule.Enable == 1)

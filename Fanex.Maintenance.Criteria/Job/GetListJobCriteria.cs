@@ -30,6 +30,11 @@ namespace Fanex.Maintenance.Criteria.Job
         [Display(Name = "Schedule", ResourceType = typeof(ViewResource))]
         public string Schedule { get; set; }
 
+
+        [SpParam(Ignored = true)]
+        [Display(Name = "Schedule", ResourceType = typeof(ViewResource))]
+        public int? ScheduleId { get; set; }
+
         [SpParam(Ignored = true)]
         [Display(Name = "Date_Type", ResourceType = typeof(ViewResource))]
         public int? DateType { get; set; }

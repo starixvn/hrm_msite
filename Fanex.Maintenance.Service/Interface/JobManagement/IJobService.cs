@@ -51,7 +51,7 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
         /// </summary>
         /// <param name="scheduleName"></param>
         /// <returns></returns>
-        IJobService WithSchedule(int scheduleId);
+        IJobService WithScheduleId(int? scheduleId);
 
         /// <summary>
         /// Filter by current execution status
