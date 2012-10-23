@@ -39,7 +39,7 @@
     <script src="~/scripts/lib/fxHeader_0.6.js" type="text/javascript"></script>
     @RenderSection("Head", false)
 </head>
-<body>
+<body style="overflow:hidden;">
     <section id="headline">
         @RenderSection("Headline", false)
     </section>
@@ -76,15 +76,19 @@
     fxheaderInit('dataTable', parent.$("body").height() - 400, 1, 0);
     fxheader();
     $(function () {
-           
-            var expr = new RegExp('>[ \t\r\n\v\f]*<', 'g');
-            if ($.browser.msie) {
-                ;
-                var ie = parseInt($.browser.version, 10);
-                if (ie == 9) {
-                    $('#dataTable').html($('#dataTable').html().replace(expr, '><'));
-                }
+
+        var expr = new RegExp('>[ \t\r\n\v\f]*<', 'g');
+        if ($.browser.msie) {
+            ;
+            var ie = parseInt($.browser.version, 10);
+            if (ie == 9) {
+                $('#dataTable').html($('#dataTable').html().replace(expr, '><'));
             }
+        }
+
+//        $(parent.window).resize(function () {
+//            $("#dataTable").parent().height(parent.$("body").height() - 400);
+//        });
     });
 
     
