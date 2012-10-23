@@ -915,6 +915,7 @@
     <None Include="themes\fonts\YanoneKaffeesatz.woff" />
     <None Include="themes\grid.less" />
     <None Include="themes\job\addnew.less" />
+    <None Include="themes\job\agent\manage.less" />
     <None Include="themes\job\colors.less" />
     <None Include="themes\job\common.less" />
     <None Include="themes\job\grid.less" />

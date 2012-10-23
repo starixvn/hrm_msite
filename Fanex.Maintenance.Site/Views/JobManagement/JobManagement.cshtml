@@ -6,23 +6,7 @@
     var lisJob = ViewBag.ListJob != null ? (List<JobSchedule>)ViewBag.ListJob : new List<JobSchedule>();
 }
 @section Head {
-    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
-     <style type="text/css">
-         #filter-bar
-        {
-            margin-left: -48px
-        }
-        .alignformat label
-        {
-            text-align:left;
-            margin-right:18px;
-        }
-         .lastmarginfilter
-        {
-            margin-left: 50px;
-        }
-        
-        </style>
+    <link href="~/themes/job/job/jobmanage.less" rel="stylesheet" type="text/css" />    
     <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
     <script type="text/x-jsrender" id="templateSchedule">
         <option value="{{:Id}}">{{:Name}}</option>

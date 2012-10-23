@@ -6,28 +6,7 @@
     var lisJobLog = ViewBag.ListLogJob != null ? (List<JobLog>)ViewBag.ListLogJob : new List<JobLog>();
 }
 @section Head {
-    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        #filter-bar .filter-form .lbl-field
-        {
-            width: 55px;
-        }
-        .module
-        {
-            margin-top: 70px;
-        }
-        #filter-bar
-        {
-            margin-left: -35px;
-        }
-        
-        img.ui-datepicker-trigger, img.tempcalendarimg
-        {
-            margin-top: -1px;
-            cursor: pointer;
-        }
-    </style>
-    <script src="~/scripts/Job/JobLogManagement.js" type="text/javascript"></script>
+    <link href="~/themes/job/job/joblog.less" rel="stylesheet" type="text/css" />       
 }
 @section HeaderBar {
     <article class="breadcrumbs">
@@ -210,6 +189,7 @@
 @Html.Hidden("top", (string)ViewBag.Top.ToString())
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
+    <script src="~/scripts/Job/JobLogManagement.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var top = $('#top').val();

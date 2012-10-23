@@ -28,6 +28,7 @@ var SqlServerLogManagement = function ($) {
                 showOn: "button",
                 buttonImage: SqlServerLogManagement.buttonImage,
                 buttonImageOnly: true,
+                buttonText: "From",
                 onSelect: function (selectedDate) {
                     $("#To").datepicker("option", "minDate", selectedDate);
                     $("#To").val($(this).val());
@@ -41,6 +42,7 @@ var SqlServerLogManagement = function ($) {
                 showOn: "button",
                 buttonImage: SqlServerLogManagement.buttonImage,
                 buttonImageOnly: true,
+                buttonText: "To",
                 onSelect: function (selectedDate) {
                 }
             });

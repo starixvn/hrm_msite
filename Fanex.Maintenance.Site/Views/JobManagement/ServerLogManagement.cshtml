@@ -5,40 +5,7 @@
     var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
 }
 @section Head {
-    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        #filter-bar .filter-form .lbl-field
-        {
-            width: 50px;
-        }
-        .module
-        {
-            margin-top: 90px;
-        }
-        #filter-bar
-        {
-            margin-left: -12px;
-        }
-        /*
-        .marginfilter
-        {
-            margin-left: 40px;
-            margin-right: 40px;
-        }
-          .firstmarginfilter
-        {
-            margin-right: 40px;
-        }*/
-        .filter-form
-        {
-            margin-top: 15px;
-        }
-        
-        img.ui-datepicker-trigger, img.tempcalendarimg
-        {
-            margin-top: -1px;
-        }
-    </style>
+    <link href="~/themes/job/server/manage.less" rel="stylesheet" type="text/css" />   
 }
 @section HeaderBar {
     <article class="breadcrumbs">

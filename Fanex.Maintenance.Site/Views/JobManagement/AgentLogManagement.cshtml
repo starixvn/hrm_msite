@@ -5,46 +5,11 @@
     var sqlServerLogs = ViewBag.SqlServerLogs != null ? (IEnumerable<SqlServerLog>)ViewBag.SqlServerLogs : new List<SqlServerLog>();
 }
 @section Head {
-    <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        #filter-bar .filter-form .lbl-field
-        {
-            width: 50px;
-        }
-        .module
-        {
-            margin-top: 90px;
-        }
-        #filter-bar
-        {
-            margin-bottom: 5px;
-            margin-left: -12px;
-        }
-        /*
-         .marginfilter
-        {
-            margin-left: 15px;
-            margin-right: 15px;
-        }
-         .firstmarginfilter
-        {
-            margin-right: 15px;
-        }
-        */
-        .filter-form
-        {
-            margin-top: 15px;
-        }
-        
-        img.ui-datepicker-trigger, img.tempcalendarimg
-        {
-            margin-top: -1px;
-        }
-    </style>
+    <link href="~/themes/job/agent/manage.less" rel="stylesheet" type="text/css" />
 }
 @section HeaderBar {
     <article class="breadcrumbs">
-        <a href="index.html">@Model.Server</a>
+        <a href="#">@Model.Server</a>
         <div class="breadcrumb_divider">
         </div>
         <a class="current">@ViewResource.SqlAgentLog</a></article>
@@ -81,7 +46,7 @@
                         @Html.LabelFor(m => m.From)
                     </div>
                     <div class="edit-field" style="position: relative;">
-                        @Html.TextBoxFor(m => m.From)
+                        @Html.TextBoxFor(m => m.From, new { autocomplete = "off" })
                     </div>
                 </div>
                 <div class="filter-form marginfilter">
@@ -89,7 +54,7 @@
                         @Html.LabelFor(m => m.To)
                     </div>
                     <div class="edit-field" style="position: relative;">
-                        @Html.TextBoxFor(m => m.To)
+                        @Html.TextBoxFor(m => m.To, new { autocomplete = "off" })
                     </div>
                 </div>
                 @Html.HiddenFor(m => m.PageIndex)
@@ -183,10 +148,9 @@
                             <td class="align-right tdpaging" colspan="10">
                                 <div class="pagingcontainer">
                                     <a href="#" class="pagiPre pagingitem" onclick="SqlServerLogManagement.OnNextPage(-1);">
-                                    ← Prev</a> <a href="#" class="pagiNext pagingitem" onclick="SqlServerLogManagement.OnNextPage(1);">
-                                       Next →</a>
+                                        ← Prev</a> <a href="#" class="pagiNext pagingitem" onclick="SqlServerLogManagement.OnNextPage(1);">
+                                            Next →</a>
                                 </div>
-                                
                             </td>
                         </tr>
                     }

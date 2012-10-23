@@ -7,10 +7,10 @@ var JobManagementPage = function ($) {
             //disabled when server is all
             //            $("#Schedule").trigger("liszt:updated"); 
             if (server == '') {
-                $('#Schedule').attr('disabled', 'disabled');
+                $('#ScheduleId').attr('disabled', 'disabled');
             }
             else {
-                $('#Schedule').removeAttr('disabled', 'disabled');
+                $('#ScheduleId').removeAttr('disabled', 'disabled');
 
                 $.ajax({
                     url: NAP.resolveClientUrl("JobManagement/GetSchedule"),
@@ -20,16 +20,16 @@ var JobManagementPage = function ($) {
                     cache: false,
                     beforeSend: function () {
                         //                    NAP.loadingBox.show();
-                        $('#Schedule').attr('disabled', 'disabled');
+                        $('#ScheduleId').attr('disabled', 'disabled');
                     },
                     complete: function () {
                         //                    NAP.loadingBox.close();
-                        $('#Schedule').removeAttr('disabled', 'disabled');
+                        $('#ScheduleId').removeAttr('disabled', 'disabled');
                     },
                     success: function (result) {
-                        $("#Schedule").html("");
-                        $("#Schedule").append("<option value=''>All</option>");
-                        $("#Schedule").append($("#templateSchedule").render(result));
+                        $("#ScheduleId").html("");
+                        $("#ScheduleId").append("<option value=''>All</option>");
+                        $("#ScheduleId").append($("#templateSchedule").render(result));
                     },
                     error: function (xhr, status, err) {
                         NAP.handleAjaxError(xhr, status, err);
@@ -125,10 +125,10 @@ $(document).ready(function () {
 
     //disabled when server is all
     if ($('#Server').val() == '') {
-        $('#Schedule').attr('disabled', 'disabled');
+        $('#ScheduleId').attr('disabled', 'disabled');
     }
     else {
-        $('#Schedule').removeAttr('disabled', 'disabled');
+        $('#ScheduleId').removeAttr('disabled', 'disabled');
     }
 
     $('#Server').bind('change', function () {
