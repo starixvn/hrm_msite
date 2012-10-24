@@ -133,4 +133,19 @@
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
     <script src="~/scripts/Job/SqlServerLogManagement.js" type="text/javascript"></script>
+      <script type="text/javascript">
+          fxheaderInit('dataTable', parent.$("body").height() - 400, 1, 0);
+          fxheader();
+          $(function () {
+
+              var expr = new RegExp('>[ \t\r\n\v\f]*<', 'g');
+              if ($.browser.msie) {
+                  ;
+                  var ie = parseInt($.browser.version, 10);
+                  if (ie == 9) {
+                      $('#dataTable').html($('#dataTable').html().replace(expr, '><'));
+                  }
+              }
+          });    
+    </script>
 }
