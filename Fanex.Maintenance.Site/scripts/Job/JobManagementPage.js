@@ -55,7 +55,7 @@ var JobManagementPage = function ($) {
                         NAP.headlineMsgBox.showInfo("Start Job " + jobName + " Successfully !", { closeBtn: false });
                         setTimeout(function () {
                             JobManagementPage.UpdateJobInfo(server, jobName);
-                        }, 3000);
+                        }, 5000);
                     }
                     else {
                         NAP.headlineMsgBox.showInfo("Start Job " + jobName + " Fail !<br />Message: " + result.Status.Message, { closeBtn: false });
@@ -84,7 +84,7 @@ var JobManagementPage = function ($) {
                         NAP.headlineMsgBox.showInfo("Stop Job " + jobName + " Successfully !", { closeBtn: false });
                         setTimeout(function () {
                             JobManagementPage.UpdateJobInfo(server, jobName);
-                        }, 3000);
+                        }, 5000);
                     }
                     else {
                         NAP.headlineMsgBox.showInfo("Stop Job " + jobName + " Fail !<br />Message: " + result.Status.Message, { closeBtn: false });

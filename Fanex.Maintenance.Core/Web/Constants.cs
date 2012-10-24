@@ -169,5 +169,14 @@ namespace Fanex.Maintenance.Core.Web
         Error = 1,
         Warning = 2,
         Infomation = 3
-    }    
+    }
+
+    /// <summary>
+    /// Server Type for get Connection String
+    /// </summary>
+    public enum ServerType : int
+    {
+        Normal = 0,
+        Resource = 1
+    }
 }

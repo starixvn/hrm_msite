@@ -34,6 +34,22 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
+        /// List Server ForGet Resource
+        /// </summary>
+        [ConfigurationProperty("resourceservers", IsDefaultCollection = false)]
+        [ConfigurationCollection(typeof(ServerCollection),
+            AddItemName = "add")]
+        public ServerCollection ResourceServers
+        {
+            get
+            {
+                var resourceServerCollection = (ServerCollection)base["resourceservers"];
+
+                return resourceServerCollection;
+            }
+        }
+
+        /// <summary>
         /// Create static instance for reference
         /// </summary>
         public static DatabaseServersSection Instance

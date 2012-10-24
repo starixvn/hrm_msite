@@ -5,6 +5,36 @@
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
     <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/jquery.signalR-0.5.3.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        // Proxy created on the fly
+        var serverInfoHub = $.connection.serverInfoHub;
+
+        // Declare a function on the chat hub so the server can invoke it
+        serverInfoHub.addMessage = function (message) {
+            alert(message);
+        };
+
+        serverInfoHub.gotMessage = function (resourceInfoes) {
+            $('#information').empty()
+            for (var i = 0; i < resourceInfoes.length; i++) {
+                var resourceInfo = resourceInfoes[i];
+                $('#information').append("<p>ServerIp:" + resourceInfo.ServerIp + "<p/>")
+                .append("<p>MemoryUsage:" + resourceInfo.MemoryUsage + "<p/>")
+                .append("<p>TotalMemory:" + resourceInfo.TotalMemory + "<p/>")
+                .append("<p>CpuPercent:" + resourceInfo.CpuPercent + "<p/>");
+            }
+        };
+
+        $(function () {
+            $.connection.hub.start(function () {
+                
+            }); 
+        });
+
+
+    </script>
 }
 @section HeaderBar {
     <article class="breadcrumbs">
@@ -25,6 +55,7 @@
             </thead>
         </table>
     </div>
+    <div id="information"></div>
 </section>
 @section Foot {
 }

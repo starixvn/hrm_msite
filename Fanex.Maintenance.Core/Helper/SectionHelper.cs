@@ -10,6 +10,7 @@
 namespace Fanex.Maintenance.Core.Helper
 {
     using Fanex.Maintenance.Core.Configurations;
+using Fanex.Maintenance.Core.Web;
 
     /// <summary>
     /// TODO: Update summary.
@@ -48,27 +49,56 @@ namespace Fanex.Maintenance.Core.Helper
         /// Get Connection String From Server Name
         /// </summary>
         /// <param name="serverName">Server Name</param>
+        /// <param name="getType">Get Server Type</param>
         /// <returns>Connection String maps with server name</returns>
-        public static string GetConnectionStringFromServerIp(string serverIp)
+        public static string GetConnectionStringFromServerIp(
+            string serverIp = "",
+            int getType = 0)
         {
             string connectionString = string.Empty;
-            foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+            switch (getType)
             {
-                if (server.ServerIp == serverIp)
-                {
-                    if (server.Plain == "1")
+                case (int)ServerType.Normal:
                     {
-                        connectionString = server.ConnectionString;
-                    }
-                    else
-                    {
-                        connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
-                    }
+                        foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+                        {
+                            if (server.ServerIp == serverIp)
+                            {
+                                if (server.Plain == "1")
+                                {
+                                    connectionString = server.ConnectionString;
+                                }
+                                else
+                                {
+                                    connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
+                                }
 
+                                break;
+                            }
+                        }
+                    }
                     break;
-                }
-            }
+                case (int)ServerType.Resource:
+                    {
+                        foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
+                        {
+                            if (server.ServerIp == serverIp)
+                            {
+                                if (server.Plain == "1")
+                                {
+                                    connectionString = server.ConnectionString;
+                                }
+                                else
+                                {
+                                    connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
+                                }
 
+                                break;
+                            }
+                        }
+                    }
+                    break;
+            }
             return connectionString;
         }
 
