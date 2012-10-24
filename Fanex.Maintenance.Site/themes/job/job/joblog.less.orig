@@ -1,0 +1,31 @@
+﻿@import "manage.less";
+ #filter-bar .filter-form .lbl-field
+{
+    width: 55px;
+}
+.module
+{
+<<<<<<< HEAD
+    margin-top: 120px;
+}
+#filter-bar
+{   
+=======
+    margin-top: 80px;
+}
+#filter-bar
+{
+    margin-left: -34px;
+	margin-top: 10px;
+>>>>>>> f277aa0a287ef35183dcd5ad663f11c42cd19db6
+}
+        
+img.ui-datepicker-trigger, img.tempcalendarimg
+{
+    margin-top: -1px;
+    cursor: pointer;
+}
+.marginfilter
+{
+	margin-left:35px;
+}
