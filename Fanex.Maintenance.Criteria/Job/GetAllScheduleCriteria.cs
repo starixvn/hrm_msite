@@ -11,25 +11,30 @@ namespace Fanex.Maintenance.Criteria.Job
 {
     using Fanex.NAP.Framework.Data;
     using System;
+    using System.ComponentModel.DataAnnotations;
+    using Fanex.Maintenance.Core;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class GetAllScheduleCriteria : CriteriaBase
     {
-        [SpParam(Ignored=true)]
+        [SpParam(Ignored = true)]
         public string Server { get; set; }
 
         [SpParam(Ignored = true)]
         public int? FreqType { get; set; }
 
         [SpParam(Ignored = true)]
+        [Display(Name = "FrequentSubType", ResourceType = typeof(ViewResource))]
         public int? FreqSubType { get; set; }
 
         [SpParam(Ignored = true)]
+        [Display(Name = "From", ResourceType = typeof(ViewResource))]
         public DateTime From { get; set; }
 
         [SpParam(Ignored = true)]
+        [Display(Name = "To", ResourceType = typeof(ViewResource))]
         public DateTime To { get; set; }
 
         [SpParam(Ignored = true)]

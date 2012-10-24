@@ -92,7 +92,7 @@ var JobLogManagement = function ($) {
                 },
                 success: function (result) {
                     $("#Job_Name").html("");
-                    $("#Job_Name").append("<option value=''>[None]</option>");
+                    $("#Job_Name").append("<option value=''>Select Job</option>");
                     $("#Job_Name").append($("#templateJob").render(result));
                 },
                 error: function (xhr, status, err) {

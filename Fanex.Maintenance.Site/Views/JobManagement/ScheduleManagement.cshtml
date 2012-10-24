@@ -23,15 +23,15 @@
         @using (Html.BeginForm())
         { 
             <section id="filter-bar">
-                <div class="filter-form firstmarginfilter">
-                    <div class="lbl-field alignformat">
+                <div class="filter-form ">
+                    <div class="lbl-field ">
                         @Html.LabelFor(m => m.Server)
                     </div>
                     <div class="edit-field">
                         @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
+                <div class="filter-form ">
                     <div class="lbl-field">
                         @ViewResource.ScheduleName
                     </div>
@@ -39,7 +39,7 @@
                         @Html.TextBoxFor(m => m.Schedule_Name)
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
+                <div class="filter-form ">
                     <div class="lbl-field ">
                         @ViewResource.FrequentType
                     </div>
@@ -57,22 +57,7 @@
                 , "All")
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
-                    <div class="lbl-field ">
-                        @ViewResource.FrequentSubType
-                    </div>
-                    <div class="edit-field">
-                        @Html.DropDownListFor(m => m.FreqSubType,
-                    new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.SpecifedTime,Value=((int)FrequentSubTime.SpecificTime).ToString()}, 
-                        new SelectListItem{ Text=ViewResource.Seconds,Value=((int)FrequentSubTime.Seconds).ToString()}, 
-                        new SelectListItem{ Text=ViewResource.Minutes,Value=((int)FrequentSubTime.Minutes).ToString()}, 
-                        new SelectListItem{ Text=ViewResource.Hours,Value=((int)FrequentSubTime.Hours).ToString()}                       
-                    }
-                , "All")
-                    </div>
-                </div>
-                <div class="filter-form firstmarginfilter">
+                <div class="filter-form ">
                     <div class="lbl-field ">
                         @ViewResource.Date_Type
                     </div>
@@ -85,23 +70,51 @@
                 , "All")
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
+                <div class="filter-form ">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.From)
                     </div>
-                    <div class="edit-field width-auto" style="position: relative;">
+                    <div class="edit-field " style="position: relative;">
                         @Html.TextBoxFor(m => m.From, new { autocomplete = "off" })
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
+                <div class="filter-form ">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.To)
                     </div>
-                    <div class="edit-field width-auto" style="position: relative;">
+                    <div class="edit-field " style="position: relative;">
                         @Html.TextBoxFor(m => m.To, new { autocomplete = "off" })
                     </div>
                 </div>
-                <div class="filter-form lastmarginfilter">
+                <div class="filter-form ">
+                    <div class="lbl-field">
+                        @Html.LabelFor(m => m.FreqSubType)
+                    </div>
+                    <div class="edit-field " style="position: relative; width: 610px;">
+                        <div class="radioButton">
+                            @Html.RadioButtonFor(m => m.FreqSubType, string.Empty, new { @checked = "checked" })
+                            <label>
+                                All</label>
+                        </div>
+                        <div class="radioButton">
+                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.SpecificTime).ToString())
+                            <label>@ViewResource.SpecifedTime</label>
+                        </div>
+                        <div class="radioButton">
+                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.Seconds).ToString())
+                            <label>@ViewResource.Seconds</label>
+                        </div>
+                        <div class="radioButton">
+                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.Minutes).ToString())
+                            <label>@ViewResource.Minutes</label>
+                        </div>
+                        <div class="radioButton">
+                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.Hours).ToString())
+                            <label>@ViewResource.Hours</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-form">
                     <div class="lbl-field">
                     </div>
                     <div class="submit">
@@ -196,7 +209,7 @@
                                 else
                                 {
                                     @: 0
-                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
                             </td>
                             <td class="align-center">
                                 @if (schedule.Enable == 1)
@@ -231,3 +244,20 @@
 @section Foot {
     <script src="~/scripts/Job/ScheduleManagement.js" type="text/javascript"></script>
 }
+@*
+   <div class="filter-form ">
+                    <div class="lbl-field ">
+                        @ViewResource.FrequentSubType
+                    </div>
+                    <div class="edit-field">
+                        @Html.DropDownListFor(m => m.FreqSubType,
+                    new List<SelectListItem> { 
+                        new SelectListItem{ Text=ViewResource.SpecifedTime,Value=((int)FrequentSubTime.SpecificTime).ToString()}, 
+                        new SelectListItem{ Text=ViewResource.Seconds,Value=((int)FrequentSubTime.Seconds).ToString()}, 
+                        new SelectListItem{ Text=ViewResource.Minutes,Value=((int)FrequentSubTime.Minutes).ToString()}, 
+                        new SelectListItem{ Text=ViewResource.Hours,Value=((int)FrequentSubTime.Hours).ToString()}                       
+                    }
+                , "All")
+                    </div>
+                </div>
+*@

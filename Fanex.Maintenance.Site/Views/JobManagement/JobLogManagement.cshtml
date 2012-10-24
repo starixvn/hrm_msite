@@ -35,7 +35,7 @@
                     <div class="edit-field ">
                         @Html.DropDownListFor(m => m.Server
                     , (List<SelectListItem>)ViewBag.ListServer
-                    , "[None]"
+                    , "Select Server"
                     , new { @class = "chosen" })
                     </div>
                 </div>
@@ -44,8 +44,22 @@
                         @Html.LabelFor(m => m.Job_Name)
                     </div>
                     <div class="edit-field width-300">
-                        @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob, "[None]"
+                        @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob, "Select Job"
              , new { @class = "chosen width-300" })
+                    </div>
+                </div>
+                <div class="filter-form">
+                    <div class="lbl-field width-auto">
+                        @Html.LabelFor(m => m.Execution_Status)
+                    </div>
+                    <div class="edit-field ">
+                        @Html.DropDownListFor(m => m.Execution_Status,
+                    new List<SelectListItem> { 
+                        new SelectListItem{ Text=ViewResource.Success,Value=((int)StepRunStatus.Success).ToString()},                        
+                        new SelectListItem{ Text=ViewResource.Fail,Value=((int)StepRunStatus.Fail).ToString()},                                              
+                    }
+                , "All"
+                , new { @class = "chosen" })
                     </div>
                 </div>
                 <div class="filter-form">
@@ -62,20 +76,6 @@
                     </div>
                     <div class="edit-field" style="position: relative;">
                         @Html.TextBox("To", ((DateTime)Model.To).ToString("MMM dd, yyyy"), new { @autocomplete = "off" })
-                    </div>
-                </div>
-                <div class="filter-form">
-                    <div class="lbl-field width-auto">
-                        @Html.LabelFor(m => m.Execution_Status)
-                    </div>
-                    <div class="edit-field ">
-                        @Html.DropDownListFor(m => m.Execution_Status,
-                    new List<SelectListItem> { 
-                        new SelectListItem{ Text=ViewResource.Success,Value=((int)StepRunStatus.Success).ToString()},                        
-                        new SelectListItem{ Text=ViewResource.Fail,Value=((int)StepRunStatus.Fail).ToString()},                                              
-                    }
-                , "All"
-                , new { @class = "chosen" })
                     </div>
                 </div>
                 <div class="filter-form">
@@ -177,7 +177,7 @@
                                     <span class="btn-action">Action</span>
                                     <div class="relative">
                                         <ul class="actions" style="visibility: hidden; opacity: 0;">
-                                            <li><a href="#" onclick="JobLogManagement.StartJob('@Model.Server','@Model.Job_Name','@item.Step.Id', '@item.Step.Name');" class="dd-site">
+                                            <li><a href="#" onclick="JobLogManagement.StartJob('@Model.Server','@Model.Job_Name','@item.Step.Id', '@item.Step.Name');" class="dd-play">
                                                 Run</a></li>
                                             @*     <li><a href="#" class="dd-site">Copy to</a></li>*@
                                         </ul>

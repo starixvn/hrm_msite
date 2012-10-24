@@ -20,7 +20,7 @@
         @using (Html.BeginForm())
         { 
             <section id="filter-bar">
-                <div class="filter-form firstmarginfilter">
+                <div class="filter-form">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.Server)
                     </div>
@@ -28,7 +28,7 @@
                         @Html.DropDownListFor(m => m.Server, (List<SelectListItem>)ViewBag.ListServer, "All")
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
+                <div class="filter-form">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.From)
                     </div>
@@ -36,7 +36,7 @@
                         @Html.TextBoxFor(m => m.From)
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
+                <div class="filter-form">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.To)
                     </div>
@@ -46,7 +46,7 @@
                 </div>
                 @Html.HiddenFor(m => m.PageIndex)
                 @Html.HiddenFor(m => m.PageSize)
-                <div class="filter-form" style="margin-left: 50px;">
+                <div class="filter-form">
                     <div class="submit">
                         <input id="submitbutton" type="submit" onclick="SqlServerLogManagement.UpdatePaging();"
                             value="Submit" />
@@ -56,23 +56,22 @@
         }
         <article class="module width_full">
             <div class="pagesize">
-              @if (Model.PageIndex == 0 && sqlServerLogs.Count() == 0)
-              {
-              }
-              else
-              {
-                <div class="pagingcontainer">
-                    <a href="#" class="pagiPre pagingitem" onclick="SqlServerLogManagement.OnNextPage(-1);">
-                    ← Prev</a> <a href="#" class="pagiNext pagingitem" onclick="SqlServerLogManagement.OnNextPage(1);">
-                        Next →</a>
-                </div>
-              }
-            <div>
-                Page size :
-                @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
+                @if (Model.PageIndex == 0 && sqlServerLogs.Count() == 0)
+                {
+                }
+                else
+                {
+                    <div class="pagingcontainer">
+                        <a href="#" class="pagiPre pagingitem" onclick="SqlServerLogManagement.OnNextPage(-1);">
+                            ← Prev</a> <a href="#" class="pagiNext pagingitem" onclick="SqlServerLogManagement.OnNextPage(1);">
+                                Next →</a>
+                    </div>
+                }
+                <div>
+                    Page size :
+                    @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize, new { id = "PageSizeSelect", onChange = "SqlServerLogManagement.OnChangePageSize();" })
                 </div>
             </div>
-            
             <table class="tablesorter" id="dataTable" style="width: 99%">
                 <thead>
                     <tr>
@@ -123,7 +122,6 @@
                     }
                 </tbody>
                 <tfoot>
-                  
                 </tfoot>
             </table>
         </article>

@@ -384,6 +384,12 @@ namespace Fanex.Maintenance.Controller
                 return View(criteria);
             }
 
+            //// check server and job
+            if (ReferenceEquals(criteria.Server, null) || ReferenceEquals(criteria.Job_Name, null))
+            {             
+                return View(criteria);
+            }
+
             //// get log history 
             List<JobLog> listJobLog = _jobService
                                .WithJob(criteria.Job_Name)
