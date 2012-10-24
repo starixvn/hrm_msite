@@ -24,12 +24,20 @@
     <style type="text/css">
         .navigater
         {
-            cursor: pointer;
+            background: url("../themes/job/images/forward.png") no-repeat transparent;
             float: left;
-            text-decoration: none;
-            margin-left: 10px;
-            margin-top: 5px;
+            margin-right: 5px;
+            cursor: pointer;
+            background-position: 0px 0px;
             display: none;
+            width: 30px;
+            height: 25px;
+            font-size: 0;
+        }
+        
+        a.navigater:hover
+        {
+            background-position: 0px -35px;
         }
     </style>
     <script src="~/scripts/lib/jquery-1.8.0.min.js" type="text/javascript"></script>
@@ -39,7 +47,7 @@
     <script src="~/scripts/lib/fxHeader_0.6.js" type="text/javascript"></script>
     @RenderSection("Head", false)
 </head>
-<body style="overflow:hidden;">
+<body style="overflow: hidden;">
     <section id="headline">
         @RenderSection("Headline", false)
     </section>
@@ -47,11 +55,11 @@
     <section id="body">
         <div class="content">
             <section id="secondary_bar">
-    <div class="breadcrumbs_container">
-        <img class="navigater" src="~/themes/job/images/forward.png" />
-            @RenderSection("HeaderBar", false)
-             </div>
-</section>
+                <div class="breadcrumbs_container">
+                    <a href="#" class="navigater"></a>
+                    @RenderSection("HeaderBar", false)
+                </div>
+            </section>
             @RenderBody()
         </div>
     </section>
@@ -86,9 +94,9 @@
             }
         }
 
-//        $(parent.window).resize(function () {
-//            $("#dataTable").parent().height(parent.$("body").height() - 400);
-//        });
+        //        $(parent.window).resize(function () {
+        //            $("#dataTable").parent().height(parent.$("body").height() - 400);
+        //        });
     });
 
     
@@ -96,10 +104,10 @@
 <script type="text/javascript">
     $(function () {
         if (parent.$('#collapsepanel').val() == "1") {
-            $('img.navigater').show();
+            $('a.navigater').show();
         }
-        $('img.navigater').click(function () {
-            $('img.navigater').hide();
+        $('a.navigater').click(function () {
+            $('a.navigater').hide();
             parent.$('div.leftcontent').css("width", "18%");
             parent.$('div.rightcontent').css("width", "82%");
             parent.$('#collapsepanel').val("0");

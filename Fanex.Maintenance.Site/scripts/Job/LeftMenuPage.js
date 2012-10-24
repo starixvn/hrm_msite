@@ -104,8 +104,8 @@ $(document).ready(function () {
         parent.NAP.loadingBox.show();
     });
 
-    $('img.imgcollapse').click(function () {
-        parent.$('#centerFr').contents().find('img.navigater').show();
+    $('a.imgcollapse').click(function () {
+        parent.$('#centerFr').contents().find('a.navigater').show();
         parent.$('div.leftcontent').css("width", "0%");
         parent.$('div.rightcontent').css("width", "100%");
         parent.$("#collapsepanel").val("1");
