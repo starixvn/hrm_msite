@@ -21,7 +21,7 @@ namespace Fanex.Maintenance.Criteria.Job
     /// TODO: Update summary.
     /// </summary>
     public class GetListJobCriteria : CriteriaBase
-    {
+    {        
         [SpParam(Ignored = true)]
         [Display(Name = "Server", ResourceType = typeof(ViewResource))]
         public string Server { get; set; }
@@ -50,7 +50,7 @@ namespace Fanex.Maintenance.Criteria.Job
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM dd,yyyy}")]
         public DateTime? To { get; set; }
-
+     
         [Display(Name = "Job", ResourceType = typeof(ViewResource))]
         public string Job_Name { get; set; }
 

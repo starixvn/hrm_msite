@@ -717,6 +717,7 @@
     <Content Include="themes\job\images\default.png" />
     <Content Include="themes\job\images\error.png" />
     <Content Include="themes\job\images\evolution_tasks.png" />
+    <Content Include="themes\job\images\forward-back.png" />
     <Content Include="themes\job\images\forward.png" />
     <Content Include="themes\job\images\header_bg.png" />
     <Content Include="themes\job\images\header_shadow.png" />
@@ -758,6 +759,10 @@
     <Content Include="themes\job\images\success.png" />
     <Content Include="themes\job\images\table_sorter_header.png" />
     <Content Include="themes\job\images\warning.png" />
+    <Content Include="themes\job\img\actions\dd\play.png" />
+    <Content Include="themes\job\img\actions\dd\step.png" />
+    <Content Include="themes\job\img\actions\dd\stop.png" />
+    <Content Include="themes\job\img\actions\dd\viewlog.png" />
     <Content Include="themes\job\img\minus.png" />
     <Content Include="themes\job\img\plus.png" />
     <Content Include="themes\job\img\tick.png" />

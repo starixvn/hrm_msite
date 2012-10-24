@@ -152,8 +152,8 @@
                                  @class = "navChild job",
                                  @target = "centerFr"
                              })
-                                    <span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.Job) removedErrorIcon">
-                                    </span></li>
+                                    @*<span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.Job) removedErrorIcon">
+                                    </span>*@</li>
                                 <li id="phtml_6">
                                     @Html.ActionLink(ViewResource.JobLog, "JobLogManagement",
                           new { server = server.ServerIp },

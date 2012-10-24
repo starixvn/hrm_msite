@@ -25,15 +25,15 @@
         @using (Html.BeginForm())
         { 
             <section id="filter-bar">
-                <div class="filter-form firstmarginfilter">
-                    <div class="lbl-field alignformat">
+                <div class="filter-form">
+                    <div class="lbl-field">
                         @Html.LabelFor(m => m.Job_Name)
                     </div>
                     <div class="edit-field">
                         @Html.TextBoxFor(m => m.Job_Name)
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
+                <div class="filter-form">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.Server)
                     </div>
@@ -44,7 +44,7 @@
                     , new { @class = "chosen" })
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
+                <div class="filter-form">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.ScheduleId)
                     </div>
@@ -55,7 +55,7 @@
                 , new { @class = "chosen" })
                     </div>
                 </div>
-                <div class="filter-form marginfilter">
+                <div class="filter-form">
                     <div class="lbl-field">
                         <label for="Execution_Status">
                             Exec Status</label>
@@ -74,7 +74,7 @@
                 , "All")
                     </div>
                 </div>
-                <div class="filter-form firstmarginfilter">
+                <div class="filter-form">
                     <div class="lbl-field">
                         @Html.LabelFor(m => m.Enabled)
                     </div>
@@ -87,7 +87,9 @@
                 , "All")
                     </div>
                 </div>
-                <div class="filter-form lastmarginfilter">
+                <div class="filter-form">
+                    <div class="lbl-field">
+                    </div>
                     <div class="submit">
                         <input type="submit" value="Submit" />
                     </div>

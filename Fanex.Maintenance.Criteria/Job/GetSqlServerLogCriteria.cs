@@ -15,6 +15,8 @@ namespace Fanex.Maintenance.Criteria.Job
     using System.Linq;
     using System.Text;
     using Fanex.NAP.Framework.Data;
+    using System.ComponentModel.DataAnnotations;
+    using Fanex.Maintenance.Core;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,9 +27,11 @@ namespace Fanex.Maintenance.Criteria.Job
         public string Server { get; set; }
 
         [SpParam(Ignored = true)]
+        [Display(Name = "From", ResourceType = typeof(ViewResource))]
         public DateTime From { get; set; }
 
         [SpParam(Ignored = true)]
+        [Display(Name = "To", ResourceType = typeof(ViewResource))]
         public DateTime To { get; set; }
 
 
