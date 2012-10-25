@@ -32,6 +32,7 @@ notitficationHub.gotMessage = function (notifyInfoes) {
         $('span.' + notifyInfo.ServerIp).attr("style", "color:red;background-position:0px 0px; ");
 
         $('span.' + notifyInfo.ServerIp + notifyInfo.Type).addClass("notifyError").attr("linkerrorpage", linkErrorPage);
+        //$('span.' + notifyInfo.ServerIp + notifyInfo.Type).remove();
         $('span.' + notifyInfo.ServerIp + notifyInfo.Type).qtip({
             content: message,
             position:
