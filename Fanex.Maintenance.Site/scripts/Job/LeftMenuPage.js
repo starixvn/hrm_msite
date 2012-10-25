@@ -2,7 +2,6 @@
 var LeftMenuPage = function ($) {
 
     return {
-        
     };
 
 } (jQuery);
@@ -109,5 +108,22 @@ $(document).ready(function () {
         parent.$('div.leftcontent').css("width", "0%");
         parent.$('div.rightcontent').css("width", "100%");
         parent.$("#collapsepanel").val("1");
-    });   
+    });
+
+    var go = parent.$("#leftPanel").attr("go");
+    if (go != '') {
+        $('.menu').removeClass("selected");
+        if (go == '0') {
+            $('.databaseNavi').addClass("selected");
+        }
+        if (go == '1') {
+            $('.scheduleNavi').addClass("selected");
+        }
+        if (go == '2') {
+            $('.jobNavi').addClass("selected");
+        }
+        if (go == '3') {
+            $('.JobLogNavi').addClass("selected");
+        }
+    }
 });

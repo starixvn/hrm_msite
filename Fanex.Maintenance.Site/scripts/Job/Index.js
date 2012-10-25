@@ -31,12 +31,15 @@ var Index = function ($) {
             if (go != '') {
                 if (go == '1') {
                     document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/ScheduleManagement");
+                    $("#leftPanel").attr("go", go);
                 }
                 if (go == '2') {
                     document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/JobManagement");
+                    $("#leftPanel").attr("go", go);
                 }
                 if (go == '3') {
                     document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/JobLogManagement");
+                    $("#leftPanel").attr("go", go);
                 }
             }
         }
