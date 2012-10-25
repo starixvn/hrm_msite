@@ -719,7 +719,10 @@
     <Content Include="themes\job\images\error.png" />
     <Content Include="themes\job\images\evolution_tasks.png" />
     <Content Include="themes\job\images\forward-back.png" />
+    <Content Include="themes\job\images\forward-back1.png" />
     <Content Include="themes\job\images\forward.png" />
+    <Content Include="themes\job\images\forward1.png" />
+    <Content Include="themes\job\images\hardwarechip.png" />
     <Content Include="themes\job\images\header_bg.png" />
     <Content Include="themes\job\images\header_shadow.png" />
     <Content Include="themes\job\images\icn_add_user.png" />
@@ -729,8 +732,10 @@
     <Content Include="themes\job\images\icn_alert_warning.png" />
     <Content Include="themes\job\images\icn_audio.png" />
     <Content Include="themes\job\images\icn_categories.png" />
+    <Content Include="themes\job\images\icn_categories1.png" />
     <Content Include="themes\job\images\icn_edit.png" />
     <Content Include="themes\job\images\icn_edit_article.png" />
+    <Content Include="themes\job\images\icn_edit_article1.png" />
     <Content Include="themes\job\images\icn_folder.png" />
     <Content Include="themes\job\images\icn_jump_back.png" />
     <Content Include="themes\job\images\icn_logout.png" />
@@ -741,10 +746,13 @@
     <Content Include="themes\job\images\icn_security.png" />
     <Content Include="themes\job\images\icn_settings.png" />
     <Content Include="themes\job\images\icn_tags.png" />
+    <Content Include="themes\job\images\icn_tags1.png" />
     <Content Include="themes\job\images\icn_trash.png" />
     <Content Include="themes\job\images\icn_user.png" />
     <Content Include="themes\job\images\icn_video.png" />
     <Content Include="themes\job\images\icn_view_users.png" />
+    <Content Include="themes\job\images\list_information.png" />
+    <Content Include="themes\job\images\memory.png" />
     <Content Include="themes\job\images\messagebox_warning.png" />
     <Content Include="themes\job\images\module_footer_bg.png" />
     <Content Include="themes\job\images\post_message.png" />
@@ -757,6 +765,7 @@
     <Content Include="themes\job\images\sidebar.png" />
     <Content Include="themes\job\images\sidebar_divider.png" />
     <Content Include="themes\job\images\sidebar_shadow.png" />
+    <Content Include="themes\job\images\sprites.png" />
     <Content Include="themes\job\images\success.png" />
     <Content Include="themes\job\images\table_sorter_header.png" />
     <Content Include="themes\job\images\warning.png" />
