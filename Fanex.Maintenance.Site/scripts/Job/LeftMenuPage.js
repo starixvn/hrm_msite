@@ -20,16 +20,16 @@ notitficationHub.gotMessage = function (notifyInfoes) {
         var notifyInfo = notifyInfoes[i];
         var linkErrorPage = "";
         if (notifyInfo.Type == 2) {
-            linkErrorPage = "JobManagement/JobLogManagement?server=" + notifyInfo.ServerIp.replaceAll('_', '.') + "&job=" + notifyInfo.JobName + "&top=1";
+            linkErrorPage = NAP.resolveClientUrl("JobManagement/JobLogManagement?server=" + notifyInfo.ServerIp.replaceAll('_', '.') + "&job=" + notifyInfo.JobName + "&top=1");
         }
         else {
-            linkErrorPage = "JobManagement/AgentLogManagement?server=" + server.replaceAll('_', '.') + "&top=1";
+            linkErrorPage = NAP.resolveClientUrl("JobManagement/AgentLogManagement?server=" + server.replaceAll('_', '.') + "&top=1");
         }
 
         var message = notifyInfo.Type == 1 ? "Sql Agent Error" : "Job Error";
         message += "<br/>" + notifyInfo.Message;
         //                $('span.' + notifyInfo.ServerIp).addClass("notifyErrorServer");
-        $('span.' + notifyInfo.ServerIp).attr("style", "color:red;");
+        $('span.' + notifyInfo.ServerIp).attr("style", "color:red;background-position:0px 0px; ");
 
         $('span.' + notifyInfo.ServerIp + notifyInfo.Type).addClass("notifyError").attr("linkerrorpage", linkErrorPage);
         //$('span.' + notifyInfo.ServerIp + notifyInfo.Type).remove();
@@ -47,14 +47,16 @@ notitficationHub.gotMessage = function (notifyInfoes) {
             },
             style: {
                 border: {
-                    width: 5,
-                    radius: 10
+                    width: 2,
+                    radius: 4
                 },
+                color:'#000',
+                background: '#fff',
                 width: 150,
-                padding: 10,
-                textAlign: 'center',
+                padding: 5,
+                textAlign: 'left',
                 tip: true, // Give it a speech bubble tip with automatic corner detection
-                name: 'dark' // Style it according to the preset 'cream' style
+                name: 'red' // Style it according to the preset 'cream' style
             }
         })
     }

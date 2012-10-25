@@ -1636,3 +1636,74 @@ a:hover
 		width: 136px;
 	}
 }
+
+header .user-info {
+    float: right;
+}
+header .user-info .greeting {
+    float: right;
+    position: relative;
+}
+header .user-info .greeting h2 {
+    background: url("img/setting.png") no-repeat scroll right 25px transparent;
+    clear: none;
+    color: #F9F9F9;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 1.2em;
+    font-weight: normal;
+    height: 22px;
+    margin: 0;
+    padding: 23px 32px 25px 10px;
+}
+header .user-info .greeting h2:hover {
+    text-decoration: underline;
+}
+header .user-info .greeting ul {
+    background-color: #FFFFFF;
+    list-style-type: none;
+    margin: 0;
+    min-width: 160px;
+    opacity: 0;
+    padding: 5px 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    visibility: hidden;
+}
+header .user-info .greeting ul li {
+    display: block;
+    text-align: left;
+    white-space: nowrap;
+}
+header .user-info .greeting ul li a {
+    color: #549CBA;
+    display: block;
+    font-size: 1.2em;
+    padding: 6px 10px;
+}
+header .user-info .greeting ul li:hover a {
+    background-color: #438BA9;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+header .user-info .greeting:hover h2 {
+    background: url("img/setting.png") no-repeat scroll right -59px #F9F9F9;
+    color: #549CBA;
+    text-decoration: none;
+}
+header .user-info .greeting.selected h2 {
+    background: url("img/setting.png") no-repeat scroll right -59px #F9F9F9;
+    color: #549CBA;
+}
+header .user-info .greeting.selected h2:hover {
+    text-decoration: none;
+}
+header .user-info .greeting.selected ul {
+    border-bottom: 5px solid #549CBA;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    top: 70px;
+    visibility: visible;
+}

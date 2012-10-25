@@ -184,7 +184,6 @@
     <Content Include="Areas\UserLogin\themes\login.css" />
     <Content Include="Global.asax" />
     <Content Include="images\calendar.gif" />
-    <Content Include="images\calendar.png" />
     <Content Include="images\sprite_v.png" />
     <Content Include="scripts\Job\LeftMenuPage.js" />
     <Content Include="scripts\Job\Index.js" />
