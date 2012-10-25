@@ -46,14 +46,16 @@ notitficationHub.gotMessage = function (notifyInfoes) {
             },
             style: {
                 border: {
-                    width: 5,
-                    radius: 10
+                    width: 2,
+                    radius: 4
                 },
+                color:'#000',
+                background: '#fff',
                 width: 150,
-                padding: 10,
-                textAlign: 'center',
+                padding: 5,
+                textAlign: 'left',
                 tip: true, // Give it a speech bubble tip with automatic corner detection
-                name: 'dark' // Style it according to the preset 'cream' style
+                name: 'red' // Style it according to the preset 'cream' style
             }
         })
     }
