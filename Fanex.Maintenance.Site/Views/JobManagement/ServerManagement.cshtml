@@ -4,10 +4,149 @@
 }
 @section Head {
     <link href="~/themes/job/job/manage.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .sqlcpu
+        {
+            width: 100%;
+            height: 55%;
+            float: left;
+        }
+        .memory
+        {
+            width: 100%;
+            height: 30%;
+            float: left;
+        }
+        .subcontainer
+        {
+            width: 45%;
+            height: 330px;
+            float: left;
+            margin-left: 20px;
+            background-color: #F4F4F4;
+            border: 1px solid #C8C8C8;
+            border-radius: 2px 2px 2px 2px;
+            box-shadow: 1px 1px 5px #888888;
+            margin-top: 10px;
+            padding: 15px 10px;
+        }
+        #resourceInfoContainer
+        {
+            height: 760px;
+            overflow: auto;
+        }
+        .serverinfo
+        {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
     <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
+    <script src="~/scripts/Plugin/highchart/highcharts.js" type="text/javascript"></script>
+    <script src="~/scripts/Plugin/highchart/exporting.js" type="text/javascript"></script>
     <script src="~/scripts/lib/jquery.signalR-0.5.3.js" type="text/javascript"></script>
     <script type="text/javascript" src="~/signalr/hubs"></script>
     <script type="text/javascript">
+        var ServerManagement = function ($) {
+            return {
+                Servers: [],
+                FirstTime: true,
+                UpdateServerData: function (resourceInfo) {
+                    for (var i = 0; i < ServerManagement.Servers.length; i++) {
+                        if (ServerManagement.Servers[i].ServerIp == resourceInfo.ServerIp) {
+                            ServerManagement.Servers[i] = resourceInfo;
+                            break;
+                        }
+                    }
+                },
+                GetDataFromServerName: function (serverName, type) {
+                    for (var i = 0; i < ServerManagement.Servers.length; i++) {
+                        var server = ServerManagement.Servers[i];
+                        if (server.ServerName == serverName) {
+                            if (type == 1) {
+                                return server.SqlCpuPercent;
+                            }
+                            else {
+                                return server.MemoryUsage;
+                            }
+                        }
+                    }
+                },
+                RenderChart: function (charid, type, title, ytitle) {
+                    var charIdCombine = charid + (type == 1 ? "SqlCpu" : "Memory");
+                    return new Highcharts.Chart({
+                        name: charid,
+                        chart: {
+                            renderTo: charIdCombine,
+                            type: 'spline',
+                            marginRight: 25,
+                            events: {
+                                load: function () {
+
+                                    // set up the updating of the chart each second
+                                    var series = this.series[0];
+                                    setInterval(function () {
+                                        var x = (new Date()).getTime(), // current time
+                                        y = ServerManagement.GetDataFromServerName(charid, type); //Math.random();
+                                        series.addPoint([x, y], true, true);
+                                    }, 4000);
+                                }
+                            }
+                        },
+                        title: {
+                            text: title
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            tickPixelInterval: 75
+                        },
+                        yAxis: {
+                            title: {
+                                text: ytitle
+                            },
+                            plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#8011111'
+                            }]
+                        },
+                        tooltip: {
+                            formatter: function () {
+                                return '<b>' + this.series.name + '</b><br/>' +
+                                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                                Highcharts.numberFormat(this.y, 2);
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        exporting: {
+                            enabled: false
+                        },
+                        series: [{
+                            name: 'Random data',
+                            data: (function () {
+                                // generate an array of random data
+                                var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+
+                                for (i = -10; i <= 0; i++) {
+                                    data.push({
+                                        x: time + i * 4000,
+                                        y: ServerManagement.GetDataFromServerName(charid, type)
+                                    });
+                                }
+                                return data;
+                            })()
+                        }]
+                    });
+                }
+            };
+        } (jQuery);
+
         // Proxy created on the fly
         var serverInfoHub = $.connection.serverInfoHub;
 
@@ -19,21 +158,38 @@
         serverInfoHub.gotMessage = function (resourceInfoes) {
             $('#information').empty()
             for (var i = 0; i < resourceInfoes.length; i++) {
-                var resourceInfo = resourceInfoes[i];
-                $('#information').append("<p>ServerIp:" + resourceInfo.ServerIp + "<p/>")
-                .append("<p>MemoryUsage:" + resourceInfo.MemoryUsage + "<p/>")
-                .append("<p>TotalMemory:" + resourceInfo.TotalMemory + "<p/>")
-                .append("<p>CpuPercent:" + resourceInfo.CpuPercent + "<p/>");
+                if (ServerManagement.FirstTime) {
+                    ServerManagement.Servers.push(resourceInfoes[i]);
+
+                }
+                else {
+                    ServerManagement.UpdateServerData(resourceInfoes[i]);
+                }
+            }
+
+            if (ServerManagement.FirstTime) {
+                $("#resourceInfoContainer").empty().html($("#containerTemplate").render(ServerManagement.Servers));
+                ServerManagement.FirstTime = false;
+                var arrayChart = [];
+                for (var i = 0; i < ServerManagement.Servers.length; i++) {
+                    var server = ServerManagement.Servers[i];
+                    arrayChart.push(ServerManagement.RenderChart(server.ServerName, 1, "Sql Server Cpu", "%"));
+                    arrayChart.push(ServerManagement.RenderChart(server.ServerName, 2, "Sql Server Memory Usage", "MB"));
+                }
+                NAP.loadingBox.close();
             }
         };
 
-        $(function () {
-            $.connection.hub.start(function () {
-                
-            }); 
-        });
+      
 
 
+    </script>
+    <script id="containerTemplate" type="text/x-jsrender">
+        <div class="subcontainer">
+            <div class="serverinfo">Server {{>ServerIp}} </div>
+            <div id="{{>ServerName}}SqlCpu" class="sqlcpu"></div>
+            <div id="{{>ServerName}}Memory" class="memory"></div>
+        </div>
     </script>
 }
 @section HeaderBar {
@@ -45,7 +201,7 @@
 }
 <section class="column" id="main">
     <div class="content">
-        <table class="tablesorter" id="dataTable" style="width: 99%">
+        <table class="tablesorter" id="dataTable" style="width: 99%; display:none;">
             <thead>
                 <tr>
                     <th>
@@ -54,8 +210,26 @@
                 </tr>
             </thead>
         </table>
+        <div id="resourceInfoContainer"></div>
     </div>
-    <div id="information"></div>
+    
 </section>
 @section Foot {
+<script type="text/javascript">
+    $(function () {
+        NAP.loadingBox.show();
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+
+        $.connection.hub.start(function () {
+
+        });
+
+
+    });
+</script>
+ 
 }

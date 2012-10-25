@@ -234,6 +234,8 @@
     <Content Include="scripts\Mail\AddMailConfig.js" />
     <Content Include="scripts\Mail\MailList.js" />
     <Content Include="scripts\Maintenance.js" />
+    <Content Include="scripts\Plugin\highchart\exporting.js" />
+    <Content Include="scripts\Plugin\highchart\highcharts.js" />
     <Content Include="scripts\Plugin\jquery-1.6.2.js" />
     <Content Include="scripts\Plugin\jquery-ui-1.8.23.custom\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="scripts\Plugin\jquery-ui-1.8.23.custom\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />

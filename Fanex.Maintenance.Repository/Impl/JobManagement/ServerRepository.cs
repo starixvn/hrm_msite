@@ -16,6 +16,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
     using Fanex.Common.Extensions;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -32,9 +33,11 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         {
             ResourceInfo resourceInfo = new ResourceInfo
             {
-                CpuPercent = 0,
+                SqlCpuPercent = 0,
+                SystemCpuPercent = 0,
                 MemoryUsage = 0,
-                TotalMemory = 0
+                TotalMemory = 0,
+                EventTime = DateTime.Now
             };
 
             DbSetting dbSetting = new DbSetting
@@ -51,6 +54,9 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                     {
                         resourceInfo.MemoryUsage = reader.ToFloat("MemoryUsage");
                         resourceInfo.TotalMemory = reader.ToFloat("TotalMemory");
+                        resourceInfo.SystemCpuPercent = reader.ToFloat("system_cpu_utilization");
+                        resourceInfo.SqlCpuPercent = reader.ToFloat("sql_cpu_utilization");
+                        resourceInfo.EventTime = reader.ToDateTime("EventTime");
                         break;
                     }
                 }

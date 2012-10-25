@@ -16,9 +16,12 @@ namespace Fanex.Maintenance.Entity.Model
     /// </summary>
     public class ResourceInfo
     {
-        public float CpuPercent { get; set; }
+        public float SqlCpuPercent { get; set; }
+        public float SystemCpuPercent { get; set; }
         public float MemoryUsage { get; set; }
         public string ServerIp { get; set; }
+        public string ServerName { get; set; }
         public float TotalMemory { get; set; }
+        public DateTime EventTime { get; set; }
     }
 }

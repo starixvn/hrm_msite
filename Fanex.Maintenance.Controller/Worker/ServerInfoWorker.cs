@@ -75,9 +75,17 @@ using Fanex.Maintenance.Repository.Impl.JobManagement;
 
             foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
             {
-                ResourceInfo resourceInfo = _serverRepository.GetServerResourceInfo(new GetResourceInfoCriteria(), server.ConnectionString);
-                resourceInfo.ServerIp = server.ServerIp;
-                resourceInfoes.Add(resourceInfo);
+                //try
+                //{
+                    ResourceInfo resourceInfo = _serverRepository.GetServerResourceInfo(new GetResourceInfoCriteria(), server.ConnectionString);
+                    resourceInfo.ServerIp = server.ServerIp;
+                    resourceInfo.ServerName = server.ServerIp.Replace(".", "_");
+                    resourceInfoes.Add(resourceInfo);
+                //}
+                //catch (Exception ex)
+                //{
+                //    Logger.Log.Error(ex.ToString(),ex);
+                //}
             }
 
             var context = GlobalHost.ConnectionManager.GetHubContext<ServerInfoHub>();
