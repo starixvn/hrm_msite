@@ -1,7 +1,7 @@
 ﻿@using Fanex.Maintenance.Criteria.Log
 @model GetLogCriteria
 @{
-    ViewBag.Title = "Index Logs";
+    ViewBag.Title = "View Logs";
     Layout = "~/Views/Shared/_Layout.cshtml";
     IEnumerable<Log> listLog = (IEnumerable<Log>)ViewBag.ListLog;
 }
@@ -21,9 +21,9 @@
         <span class="title">@ViewBag.Title</span>
     </h1>
 }
-<section id="filter-bar">
-    @using (Html.BeginForm())
-    {       
+@using (Html.BeginForm())
+{  
+    <section id="filter-bar">
         <div class="filter-form">
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.CategoryId)
@@ -41,13 +41,13 @@
                 @Html.LabelFor(m => m.From)
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.From, new { @style = "width:90px;margin-right:5px;" })
+                @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
             </div>
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.To)
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.To, new { @style = "width:90px;margin-right:5px;" })
+                @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
             </div>
             <div class="submit">
                 <input type="submit" value="Submit" />
@@ -55,13 +55,24 @@
             <div class="submit">
                 <input type="button" value="Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())" id="btnRemoveLog" />
             </div>
-        </div>                     
+        </div>
+    </section>
+    @Html.HiddenFor(m => m.Page)
+    <div class="pagesize">
+        Page Size :
+        @Html.DropDownListFor(m => m.Size, (List<SelectListItem>)ViewBag.PageSize, new { onChange = "Index.OnChangePageSize();" })
+    </div>
+}
+@if (!ReferenceEquals(listLog, null))
+{
+    if (listLog.Count() > 0)
+    {
+    <div class="pagingcontainer">
+        <a href="#" class="pagiPre pagingitem" onclick="Index.OnNextPage(-1);">← Prev</a>
+        <a href="#" class="pagiNext pagingitem" onclick="Index.OnNextPage(1);">Next →</a>
+    </div>
     }
-</section>
-<div class="pagesize">
-    Page Size :
-    @Html.DropDownListFor(m => m.Size, (List<SelectListItem>)ViewBag.PageSize)
-</div>
+}
 <table class="grid">
     <thead>
         <tr>
@@ -116,15 +127,15 @@
             else
             {
             <tr>
-                <td colspan="5">
-                    Not found !
+                <td colspan="5" class="align-center">
+                    @ViewResource.NoInformationAvailable
                 </td>
             </tr>
             }
         }
     </tbody>
 </table>
-@Html.Hidden("dateNow", DateTime.Now.ToString("dd/MM/yyyy"))
+<input type="hidden" id="countData" value="listLog.Count()" />
 @section Foot {
     <script src="~/scripts/Logs/Index.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -132,21 +143,31 @@
 
         $(function () {
 
-            $("#From").val(dateNow);
-            $("#To").val(dateNow);
-
             $("#From").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 1,
+                dateFormat: "M dd,yy",
                 showOn: "button",
                 buttonImage: "images/calendar.gif",
+                buttonText: "From",
                 buttonImageOnly: true,
-                dateFormat: "dd/mm/yy"
+                onSelect: function (selectedDate) {
+                    $("#To").datepicker("option", "minDate", selectedDate);
+                    $("#To").val($(this).val());
+                }
             });
-
             $("#To").datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 1,
+                dateFormat: "M dd,yy",
                 showOn: "button",
                 buttonImage: "images/calendar.gif",
+                buttonText: "To",
                 buttonImageOnly: true,
-                dateFormat: "dd/mm/yy"
+                onSelect: function (selectedDate) {
+                }
             });
         });        
     </script>

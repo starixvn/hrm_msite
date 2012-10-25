@@ -155,13 +155,13 @@ namespace Fanex.Maintenance.Controller
             InitPageSize();
 
             ////Get logs by date
-            IEnumerable<Log> listLogs = _logService.With(0, "All")
-                .From(DateTime.Now)
-                .To(DateTime.Now.AddDays(1))
-                .WithPagination(0, 10)
-                .GetLogs();
+            //IEnumerable<Log> listLogs = _logService.With(0, "All")
+            //    .From(DateTime.Now)
+            //    .To(DateTime.Now.AddDays(1))
+            //    .WithPagination(0, 10)
+            //    .GetLogs();
 
-            ViewBag.ListLog = listLogs;
+            ViewBag.ListLog = null;
 
             GetLogCriteria criteria = new GetLogCriteria
             {
@@ -184,21 +184,19 @@ namespace Fanex.Maintenance.Controller
         /// <param name="to"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Index(GetLogCriteria criteria, string from, string to, int size = 0)
+        public ActionResult Index(GetLogCriteria criteria)
         {
             InitDataView();
 
             InitPageSize();
 
-            criteria.From = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-            criteria.To = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            criteria.CategoryId = criteria.CategoryId ?? 0;
 
             ////Get logs by date
             IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)
-                .WithPagination(0, size)
+                .WithPagination(criteria.Page, criteria.Size)
                 .GetLogs();
 
             ViewBag.ListLog = listLogs;
