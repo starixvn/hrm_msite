@@ -1,7 +1,37 @@
 ﻿var Index = function ($) {
 
     return {
-        page: 1
+        page: 1,
+
+        OnNextPage: function (moveIndex) {
+            var currentIndex = parseInt($('#Page').val());
+            if (currentIndex + moveIndex >= 0) {
+                $('#Page').val(currentIndex + moveIndex);
+                $('.content form').submit();
+            }
+        },
+
+        OnChangePageSize: function () {
+            $('#PageSize').val($('#Size').val());
+            console.log($('#PageSize').val($('#Size').val()));
+            Index.UpdatePaging();
+            $('.content form').submit();
+        },
+
+        UpdatePaging: function () {
+            $('#Page').val(0);
+            $('#PageSize').val($('#Size').val());
+        },
+
+        UpdateNavigation: function () {
+            var count = $('#countData').val();
+            if (count == 0) {
+                $('.pagiNext').hide();
+            }
+            if ($('#Page').val() == 0) {
+                $('.pagiPre').hide();
+            }
+        }
     };
 
 } (jQuery);
@@ -53,4 +83,6 @@ $(document).ready(function () {
 
         }
     });
+
+    Index.UpdateNavigation();
 });
