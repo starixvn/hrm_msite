@@ -8,34 +8,48 @@
 }
 @section Head
 {
-    <link href="~/themes/job/report/dataintegry.less" rel="stylesheet" type="text/css"></link>  
+    <link href="~/themes/job/report/dataintegry.less" rel="stylesheet" type="text/css">
+    </link>
+    <style type="text/css">
+        #filter-bar
+        {
+            background-color: #F4F4F4;
+            border: 1px solid #C8C8C8;
+            border-radius: 2px 2px 2px 2px;
+            box-shadow: 1px 1px 5px #888888;
+            margin-top: 10px;
+            min-width: 600px;
+            padding: 15px 10px;
+            width: 98%;
+            margin-bottom: 45px;
+        }
+    </style>
 }
-@section Headline {  
+@section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
     </h1>
 }
 @using (Html.BeginForm())
 { 
-    <section id="filter-bar">  
-			<div class="filter-form">	            
+    <section id="filter-bar">
+        <div class="filter-form">
             <div class="lbl-field width-auto">
-				@Html.LabelFor(m => m.DrawFilter)
-			</div>
-            <div class="edit-field">		              
+                @Html.LabelFor(m => m.DrawFilter)
+            </div>
+            <div class="edit-field">
                 @Html.DropDownListFor(m => m.DrawFilter, (List<SelectListItem>)ViewBag.ListDrawFilter)
-			</div>				            
+            </div>
             <div class="lbl-field width-auto">
-				@Html.LabelFor(m => m.Date)
-			</div>
-            <div class="edit-field">				                
+                @Html.LabelFor(m => m.Date)
+            </div>
+            <div class="edit-field">
                 @Html.TextBoxFor(m => m.Date, (string)ViewBag.MaxDate, new { @style = "width:90px;margin-right:5px;" })
-			</div>					                                              
+            </div>
             <div class="submit">
-					<input type="submit" value="Submit" />                  
-		    </div>                                           
-			</div>            
-       
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
     </section>      
 }
 @Html.Raw(ViewBag.BodyLicenseeData)
