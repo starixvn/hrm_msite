@@ -361,7 +361,7 @@
     <value>Alerts</value>
   </data>
   <data name="JobManagement" xml:space="preserve">
-    <value>Job Management</value>
+    <value>Sql Jobs</value>
   </data>
   <data name="Jobs" xml:space="preserve">
     <value>Jobs</value>
@@ -370,13 +370,13 @@
     <value>Operators</value>
   </data>
   <data name="ScheduleManagement" xml:space="preserve">
-    <value>Schedule Management</value>
+    <value>Sql Schedules</value>
   </data>
   <data name="Schedules" xml:space="preserve">
     <value>Schedules</value>
   </data>
   <data name="ServerManagement" xml:space="preserve">
-    <value>Server Management</value>
+    <value>Database Servers</value>
   </data>
   <data name="SqlAgentLog" xml:space="preserve">
     <value>Agent Log</value>
@@ -469,7 +469,7 @@
     <value>Retries Attempted</value>
   </data>
   <data name="Job_Log_Management" xml:space="preserve">
-    <value>Job Log Management</value>
+    <value>Job Logs</value>
   </data>
   <data name="Fail" xml:space="preserve">
     <value>Fail</value>

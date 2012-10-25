@@ -574,7 +574,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Job Log Management.
+        ///   Looks up a localized string similar to Job Logs.
         /// </summary>
         public static string Job_Log_Management {
             get {
@@ -592,7 +592,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Job Management.
+        ///   Looks up a localized string similar to Sql Jobs.
         /// </summary>
         public static string JobManagement {
             get {
@@ -970,7 +970,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Schedule Management.
+        ///   Looks up a localized string similar to Sql Schedules.
         /// </summary>
         public static string ScheduleManagement {
             get {
@@ -1051,7 +1051,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server Management.
+        ///   Looks up a localized string similar to Database Servers.
         /// </summary>
         public static string ServerManagement {
             get {

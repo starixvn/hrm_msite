@@ -61,7 +61,12 @@
                     </ul>
                 </li>
                 <li class="first">
-                    @Html.ActionLink("Job Management", "", "JobManagement")
+                    @Html.ActionLink("Database Management", "", "JobManagement")
+                    <ul>
+                        <li>@Html.ActionLink("Sql Schedules", "Index/1", "JobManagement")</li>
+                        <li>@Html.ActionLink("Sql Jobs", "Index/2", "JobManagement")</li>
+                        <li>@Html.ActionLink("Job Logs", "Index/3", "JobManagement")</li>
+                    </ul>
                 </li>
             </ul>
         </nav>
@@ -69,7 +74,7 @@
             <div class="greeting">
                 <h2>
                     Howdy, @HttpContext.Current.User.Identity.Name</h2>
-                <ul>                    
+                <ul>
                     <li>@Html.ActionLink("Sign Out", "LogOut", "Login", new { Area = "UserLogin" }, new { })</li>
                 </ul>
             </div>

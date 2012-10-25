@@ -57,11 +57,12 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Index(string type = "", string server = "", string jobname = "")
+        public ActionResult Index(string type = "", string server = "", string jobname = "", string id = "")
         {
             ViewBag.Type = type;
             ViewBag.Server = server;
             ViewBag.JobName = jobname;
+            ViewBag.Go = id;
 
             return View();
         }
@@ -386,7 +387,7 @@ namespace Fanex.Maintenance.Controller
 
             //// check server and job
             if (ReferenceEquals(criteria.Server, null) || ReferenceEquals(criteria.Job_Name, null))
-            {             
+            {
                 return View(criteria);
             }
 

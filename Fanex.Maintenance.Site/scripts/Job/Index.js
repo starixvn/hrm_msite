@@ -4,11 +4,13 @@ var Index = function ($) {
         type: null,
         server: null,
         jobName: null,
+        go: null,
 
         InitData: function () {
             Index.type = $('#type').val();
             Index.server = $('#server').val().replaceAll('_', '.');
             Index.jobName = $('#jobname').val();
+            Index.go = $('#go').val();
         },
 
         GotoLogDetail: function (type, server, jobName) {
@@ -23,6 +25,20 @@ var Index = function ($) {
             else {
                 document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/ServerManagement");
             }
+        },
+
+        Navigation: function (go) {
+            if (go != '') {
+                if (go == '1') {
+                    document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/ScheduleManagement");
+                }
+                if (go == '2') {
+                    document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/JobManagement");
+                }
+                if (go == '3') {
+                    document.getElementById('centerFr').src = NAP.resolveClientUrl("JobManagement/JobLogManagement");
+                }
+            }
         }
     };
 
@@ -31,4 +47,5 @@ var Index = function ($) {
 $(document).ready(function () {
     Index.InitData();
     Index.GotoLogDetail(Index.type, Index.server, Index.jobName);
+    Index.Navigation(Index.go);
 });
