@@ -55,10 +55,7 @@
             height: 100%;
             float:left;
         }
-        .servercpu, .servermemory, .serveripchart
-        {
-            float:left;
-        }
+       
     </style>
     <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
     <script src="~/scripts/Plugin/highchart/highcharts.js" type="text/javascript"></script>
@@ -252,8 +249,8 @@
         <div class="subcontainer">
             <div class="serverinfo">
                 <div class="serveripchart">Server {{>ServerIp}}</div><br />
-                <span class="servercpu">Cpu <span class="servermemoryusagevalue">{{>SqlCpuPercent}}</span>% || </span>
-                <span class="servermemory">Ram <span class="servermemoryusage">{{>MemoryUsage}}</span>/{{>TotalMemory}} GB</span>
+                <span class="servercpu"><span class="servermemoryusagevalue">{{>SqlCpuPercent}}</span>%</span>
+                <span class="servermemory"><span class="servermemoryusage">{{>MemoryUsage}}</span>/{{>TotalMemory}} GB</span>
                 <a class="toggler" servername="{{>ServerName}}" servershow="1" title="Expand/Collapse" href="javascript:void(0)">  </a>
             </div>
             <div id="{{>ServerName}}SqlCpu" class="sqlcpu"></div>
