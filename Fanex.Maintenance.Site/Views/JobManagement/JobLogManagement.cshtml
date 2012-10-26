@@ -91,10 +91,7 @@
             <table class="tablesorter" id="dataTable" style="width: 99%">
                 <thead>
                     <tr>
-                        <th>
-                            #
-                        </th>
-                        <th>
+                        <th colspan="2">
                             @ViewResource.Status
                         </th>
                         <th class="width-50">
@@ -125,13 +122,13 @@
                             string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
                             i++;
                         <tr @Html.Raw(rowCss) @(item.Step.Id != 0 ? "style=display:none" : "id=" + item.InstanceId.ToString()) status="@item.RunSatus">
-                            <td class="align-center">
+                            <td style="border-right:0px;text-align:right;padding-left:3px;">
                                 @if (item.Step.Id == 0)
                                 { 
-                                    <a href="#" instanceid="@item.InstanceId" class="stepOutcome expand"></a>                 
+                                    <a href="#" instanceid="@item.InstanceId" class="stepOutcome expand" style="margin-left:4px;"></a>                 
                                 }
                             </td>
-                            <td class="align-center">
+                            <td class="align-center" style="border-left:0px;">
                                 @switch (item.RunSatus)
                                 {
                                     case 0:
