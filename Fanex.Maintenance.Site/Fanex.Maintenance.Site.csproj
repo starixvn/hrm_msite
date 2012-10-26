@@ -1296,9 +1296,11 @@
     <Content Include="themes\job\images\btn_submit_2.png" />
     <Content Include="themes\job\images\btn_view_site.png" />
     <Content Include="themes\job\images\cancel.png" />
+    <Content Include="themes\job\images\collapse-title.png" />
     <Content Include="themes\job\images\default.png" />
     <Content Include="themes\job\images\error.png" />
     <Content Include="themes\job\images\evolution_tasks.png" />
+    <Content Include="themes\job\images\expand-title.png" />
     <Content Include="themes\job\images\forward-back.png" />
     <Content Include="themes\job\images\forward-back1.png" />
     <Content Include="themes\job\images\forward.png" />
