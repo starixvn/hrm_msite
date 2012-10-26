@@ -112,7 +112,7 @@
                         var classClose = string.Empty;
                         foreach (ServerElement server in Model)
                         {
-                        <li id="phtml_1" class="closed"><span class="serverformat @server.ServerIp.Replace(".", "_") removedErrorIcon">@server.ServerIp</span>
+                        <li id="phtml_1" class="closed"><span class="serverformat @server.ServerIp.Replace(".", "_") removedErrorIcon" id="server_@server.ServerIp.Replace(".", "_")">@server.ServerIp</span>
                             @*<span class="@server.ServerIp.Replace(".", "_") removedErrorIcon">
                         </span>*@
                             <ul>
@@ -171,7 +171,7 @@
                                  @class = "navChild joblog",
                                  @target = "centerFr"
                              })
-                                    <span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.Job) removedErrorIcon">
+                                    <span class="@server.ServerIp.Replace(".", "_")@((int)NotifyType.Job) removedErrorIcon" serverip="@server.ServerIp.Replace(".", "_")">
                                     </span></li>
                             </ul>
                         </li>

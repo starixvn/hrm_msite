@@ -71,6 +71,11 @@ $(document).ready(function () {
         $(this).removeAttr("style");
         $(this).parent().parent().prev().removeClass("notifyError");
         parent.$("#centerFr").attr("src", $(this).attr("linkerrorpage"));
+
+        var serverIp = $(this).attr('serverip');
+        console.log(serverIp);
+
+        $('#server_' + serverIp).removeAttr('style');
     });
 
     $('.agentlog').click(function () {
