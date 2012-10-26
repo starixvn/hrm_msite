@@ -61,7 +61,7 @@
                 MaxMemory: 0,
                 UpdateServerData: function (resourceInfo) {
                     if (ServerDetail.Server.ServerIp == resourceInfo.ServerIp) {
-                        ServerDetail.Server == resourceInfo;
+                        ServerDetail.Server = resourceInfo;
                     }
                 },
                 GetDataFromServerName: function (type) {
@@ -73,9 +73,9 @@
                     }
                 },
                 RenderChart: function (charid, type, title, ytitle, pointTitle) {
-                    var pointColor = (type == 1 ? '#4572A7' : '#888888');
+                    var pointColor = (type == 1 ? '#4572A7' : '#CCBB66');
                     return new Highcharts.Chart({
-                        name: charid,
+                        name: charid + type,
                         chart: {
                             renderTo: charid,
                             type: 'spline',
@@ -167,8 +167,8 @@
             for (var i = 0; i < resourceInfoes.length; i++) {
                 if (resourceInfoes[i].ServerIp == serverIp) {
                     ServerDetail.Server = resourceInfoes[i];
-                    ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
-                    ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
+                    var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
+                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
                     break;
                 }
             }
