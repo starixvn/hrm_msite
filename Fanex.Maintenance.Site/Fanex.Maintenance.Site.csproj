@@ -976,7 +976,7 @@
     <Content Include="Views\JobManagement\ServerLogManagement.cshtml" />
     <Content Include="Views\JobManagement\AgentLogManagement.cshtml" />
     <Content Include="Views\JobManagement\ServerManagement.cshtml" />
-    <Content Include="Views\JobManagement\ServerManagement2.cshtml" />
+    <Content Include="Views\JobManagement\ServerDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

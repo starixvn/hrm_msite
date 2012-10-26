@@ -50,6 +50,8 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         private readonly ISqlServerLogService _sqlServerLogService = SqlServerLogService.Create();
 
+
+        private readonly IServerService _serverService = ServerService.Create();
         #region Pages
 
         /// <summary>
@@ -535,6 +537,17 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
+        public ActionResult ServerDetail(string serverIp)
+        {
+            ViewBag.ServerIp = serverIp;
+            ViewBag.ServerFullInfo = _serverService.GetServerFullInformation(serverIp);
+            return View();
+        }
         #endregion
 
         #endregion

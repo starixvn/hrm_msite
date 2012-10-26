@@ -18,5 +18,6 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     public interface IServerRepository
     {
         ResourceInfo GetServerResourceInfo(ICriteria criteria, string connectionString);
+        ServerFullInfo GetServerFullInformation(ICriteria criteria, string serverIp);
     }
 }

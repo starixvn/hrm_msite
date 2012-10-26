@@ -58,6 +58,7 @@
         .serveripchart
         {
             padding-top: 2px;
+            cursor: pointer;
         }
     </style>
     <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
@@ -217,6 +218,7 @@
                     });
                 }
             };
+
         } (jQuery);
 
         // Proxy created on the fly
@@ -252,23 +254,44 @@
                 arrayChart.push(ServerManagement.RenderChart(server.ServerName, 1, "Sql Server Cpu", "%", "Cpu Usage"));
                 arrayChart.push(ServerManagement.RenderChart(server.ServerName, 2, "Sql Server Memory Usage", "%", "Memory Usage"));
             }
-            $('.toggler').live("click", function () {
+            $('.subcontainer .toggler').live("click", function () {
                 var $this = $(this);
                 var granParent = $this.parent().parent();
                 var serverName = $this.attr("servername");
                 var serverShow = $this.attr("servershow");
                 if (serverShow == "1") {
-                    $("#" + serverName + "SqlCpu").hide();
-                    $("#" + serverName + "Memory").hide();
+                    $("#" + serverName + "SqlCpu").hide("fast");
+                    $("#" + serverName + "Memory").hide("fast");
                     $this.attr("servershow", "0");
                     granParent.css("height", 30);
                 }
                 else {
-                    $("#" + serverName + "SqlCpu").show();
-                    $("#" + serverName + "Memory").show();
+                    $("#" + serverName + "SqlCpu").show("fast");
+                    $("#" + serverName + "Memory").show("fast");
                     $this.attr("servershow", "1");
                     granParent.css("height", 420);
                 }
+            });
+            $('#togglerall').live("click", function () {
+                var $this = $(this);
+                var serverShow = $this.attr("servershow");
+                if (serverShow == "1") {
+                    //$(".subcontainer .sqlcpu,.subcontainer .memory").hide();
+                    $(".subcontainer .toggler").attr("servershow", "1");
+                    $(".subcontainer .toggler").trigger("click");
+                    $this.attr("servershow", "0");
+                }
+                else {
+                    //$(".subcontainer .sqlcpu,.subcontainer .memory").show();
+                    $(".subcontainer .toggler").attr("servershow", "0");
+                    $(".subcontainer .toggler").trigger("click");
+                    $this.attr("servershow", "1");
+                }
+            });
+            $(".serverinfo .serveripchart").live("click", function () {
+                var serverIp = $(this).attr("serverdetailip");
+                var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + serverIp);
+                parent.$("#centerFr").attr("src", queryString);
             });
             NAP.loadingBox.close();
         };
@@ -276,11 +299,12 @@
         serverInfoHub.gotMessage = function (resourceInfo) {
             ServerManagement.UpdateServerData(resourceInfo);
         };
+
     </script>
     <script id="containerTemplate" type="text/x-jsrender">
         <div class="subcontainer">
             <div class="serverinfo">
-                <div class="serveripchart">Ip: {{>ServerIp}}</div>
+                <div class="serveripchart" serverdetailip="{{>ServerIp}}">{{>ServerIp}}</div>
                 <span class="servercpu"><span class="servermemoryusagevalue">{{>SqlCpuPercent}}</span>%</span>
                 <span class="servermemory"><span class="servermemoryusage">{{>MemoryUsage}}</span>%</span>
                 <a class="toggler" servername="{{>ServerName}}" servershow="1" title="Expand/Collapse" href="javascript:void(0)">  </a>
@@ -295,7 +319,10 @@
         <a href="index.html"></a>
         <div class="breadcrumb_divider">
         </div>
-        <a class="current">@ViewResource.ServerManagement</a></article>
+        <a class="current">@ViewResource.ServerManagement</a>
+        
+        </article>
+        <a id="togglerall" class="toggler" servershow="1" title="Expand/Collapse" href="javascript:void(0)" style="margin-top:16px;">  </a>
 }
 <section class="column" id="main">
     <div class="content">

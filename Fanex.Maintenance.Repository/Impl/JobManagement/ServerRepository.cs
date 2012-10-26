@@ -64,5 +64,33 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
             return resourceInfo;
         }
+
+        public ServerFullInfo GetServerFullInformation(ICriteria criteria, string serverIp)
+        {
+            ServerFullInfo serverFullInfo = new ServerFullInfo();
+
+            DbSetting dbSetting = new DbSetting
+            {
+                ConnectionString = SectionHelper.GetConnectionStringFromServerIp(serverIp, (int)ServerType.Resource),
+                SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
+            };
+
+            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            {
+                using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
+                {
+                    while (reader.Read())
+                    {
+                        serverFullInfo.NumberLogicalCpu = reader.ToInt("NumberLogicalCPU");
+                        serverFullInfo.HyperThreadRatio = reader.ToInt("hyperthread_ratio");
+                        serverFullInfo.NumberPhysicalCpu = reader.ToInt("NumberPhysicalCPU");
+                        serverFullInfo.TotalPhysicalMemory = reader.ToInt("TotalPhysicalMemory");
+                        break;
+                    }
+                }
+            }
+
+            return serverFullInfo;
+        }
     }
 }

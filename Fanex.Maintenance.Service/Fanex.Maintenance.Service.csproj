@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Impl\JobManagement\ScheduleService.cs" />
     <Compile Include="Impl\JobManagement\JobService.cs" />
+    <Compile Include="Impl\JobManagement\ServerService.cs" />
     <Compile Include="Impl\JobManagement\SqlServerLogService.cs" />
     <Compile Include="Impl\JobManagement\StepService.cs" />
     <Compile Include="Impl\LogCategoryService.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Interface\IStepService.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="Interface\JobManagement\IScheduleService.cs" />
+    <Compile Include="Interface\JobManagement\IServerService.cs" />
     <Compile Include="Interface\JobManagement\ISqlServerLogService.cs" />
     <Compile Include="Interface\JobManagement\IStepService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -50,6 +50,8 @@
     <Compile Include="DatabaseReport\DataIntegrityViewModel.cs" />
     <Compile Include="Job\GetAllJobInScheduleCriteria.cs" />
     <Compile Include="Job\GetAllScheduleCriteria.cs" />
+    <Compile Include="Job\GetCpuInfoCriteria.cs" />
+    <Compile Include="Job\GetCpuNameCriteria.cs" />
     <Compile Include="Job\GetJobHistoryCriteria.cs" />
     <Compile Include="Job\GetListJobCriteria.cs" />
     <Compile Include="Job\GetResourceInfoCriteria.cs" />
