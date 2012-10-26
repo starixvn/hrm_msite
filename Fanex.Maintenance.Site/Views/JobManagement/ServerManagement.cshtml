@@ -97,10 +97,10 @@
                                 var oldSqlCpu = containerdiv.find(".servermemoryusagevalue").text();
                                 var newSqlCpu = server.SqlCpuPercent;
                                 if (oldSqlCpu != newSqlCpu) {
-                                    var currentColor = containerdiv.find(".servermemoryusagevalue").css("color");
-                                    containerdiv.find(".servermemoryusagevalue").css("color", "Red");
+                                    var currentColor = containerdiv.find(".servercpu").css("color");
+                                    containerdiv.find(".servercpu").css("color", "Red");
                                     setTimeout(function () {
-                                        containerdiv.find(".servermemoryusagevalue").css("color", currentColor);
+                                        containerdiv.find(".servercpu").css("color", currentColor);
                                     }, 3000);
                                 }
                                 containerdiv.find(".servermemoryusagevalue").text(newSqlCpu);
@@ -108,10 +108,10 @@
                                 var oldSqlRam = containerdiv.find(".servermemoryusage").text();
                                 var newSqlRam = Math.round(server.MemoryUsage * 100 / server.TotalMemory);
                                 if (oldSqlRam != newSqlRam) {
-                                    var currentColor = containerdiv.find(".servermemoryusage").css("color");
-                                    containerdiv.find(".servermemoryusage").css("color", "Red");
+                                    var currentColor = containerdiv.find(".servermemory").css("color");
+                                    containerdiv.find(".servermemory").css("color", "Red");
                                     setTimeout(function () {
-                                        containerdiv.find(".servermemoryusage").css("color", currentColor);
+                                        containerdiv.find(".servermemory").css("color", currentColor);
                                     }, 3000);
                                 }
                                 containerdiv.find(".servermemoryusage").text(newSqlRam);
