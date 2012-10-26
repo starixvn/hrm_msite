@@ -525,4 +525,10 @@
   <data name="JobLog" xml:space="preserve">
     <value>Job Log</value>
   </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>Monitor</value>
+  </data>
+  <data name="Exec_Statuc" xml:space="preserve">
+    <value>Exec Status</value>
+  </data>
 </root>

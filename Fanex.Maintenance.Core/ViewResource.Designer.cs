@@ -394,6 +394,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exec Status.
+        /// </summary>
+        public static string Exec_Statuc {
+            get {
+                return ResourceManager.GetString("Exec_Statuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Executing.
         /// </summary>
         public static string Executing {
@@ -741,6 +750,15 @@ namespace Fanex.Maintenance.Core {
         public static string Minutes {
             get {
                 return ResourceManager.GetString("Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monitor.
+        /// </summary>
+        public static string Monitor {
+            get {
+                return ResourceManager.GetString("Monitor", resourceCulture);
             }
         }
         

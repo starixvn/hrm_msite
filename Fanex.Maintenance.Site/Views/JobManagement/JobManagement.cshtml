@@ -110,7 +110,7 @@
                             @ViewResource.Server
                         </th>
                         <th>
-                            @ViewResource.Executing
+                            @ViewResource.Exec_Statuc
                         </th>
                         <th class="width-140">
                             @ViewResource.Last_Run_Date
@@ -216,7 +216,7 @@
 @section Foot {
     <script src="~/scripts/Job/JobManagementPage.js" type="text/javascript"></script>
     <script type="text/javascript">
-        fxheaderInit('dataTable', parent.$("body").height() - 400, 1, 0);
+        fxheaderInit('dataTable', parent.$("body").height() - 450, 1, 0);
         fxheader();
         $(function () {
 

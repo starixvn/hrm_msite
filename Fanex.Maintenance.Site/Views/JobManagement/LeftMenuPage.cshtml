@@ -59,10 +59,10 @@
     <section id="body">
         <div class="content">
             <section id="secondary_bar">
-                <a href="#" class="imgcollapse">Collapse</a>
+                <a href="#" class="imgcollapse" title="Collapse">Collapse</a>
                 <div class="user">
                     <p>
-                        Database Management</p>
+                        Monitor Servers</p>
                 </div>
             </section>
             <aside class="column" id="sidebar">
@@ -92,7 +92,7 @@
                                    , new
                                    {
                                        @target = "centerFr",
-                                       @class = "menu jobNavi" 
+                                       @class = "menu jobNavi"
                                    })
                     </li>
                     <li class="icn_tags sidebarli">
@@ -116,6 +116,15 @@
                             @*<span class="@server.ServerIp.Replace(".", "_") removedErrorIcon">
                         </span>*@
                             <ul>
+                                <li id="phtml_2" class="subitemmanage">
+                                    @Html.ActionLink(ViewResource.Monitor, "ServerDetail"
+                             , new { serverIp = server.ServerIp }
+                                        , new
+                                        {
+                                            @class = "navChild serverlog",
+                                            @target = "centerFr"
+                                        })
+                                </li>
                                 <li id="phtml_2" class="subitemmanage">
                                     @Html.ActionLink(ViewResource.SqlServerLog, "ServerLogManagement"
                                 , new { server = server.ServerIp }
