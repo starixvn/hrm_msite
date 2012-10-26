@@ -36,6 +36,10 @@
             height: 800px;
             
         }
+        .form .form-row
+        {
+            width:100%;
+        }
         .resourceinfo
         {
              height: 760px;
@@ -45,8 +49,38 @@
         .form .form-row .lbl-field
         {
             width:100%;
+            text-align:left;
         }
-        
+        .backlink
+        {
+            background-color: #B45C6E;
+            border: 1px solid transparent;
+            color: white;
+            display: block;
+            float: right;
+            font-family: Tahoma;
+            font-size: 0.9em;
+            font-weight: bold;
+            outline: 0 none;
+            padding: 5px 10px;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            transition: all 0.2s ease-in-out 0s;
+            cursor: pointer;
+            
+        }
+        .backlink:hover
+        {
+            background-color:#C56D7F;
+            text-decoration:none;
+        }
+        #ListServer
+        {
+            border: 1px solid #549CBA;
+            color: #666666;
+            font-size: 1em;
+            padding: 3px 5px 4px;
+        }
     </style>
     <script src="~/scripts/Plugin/highchart/highcharts.js" type="text/javascript"></script>
     <script src="~/scripts/Plugin/highchart/exporting.js" type="text/javascript"></script>
@@ -173,6 +207,14 @@
                 }
             }
             ServerDetail.FirstTime = false;
+            $('#ListServer').change(function () {
+                var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + $(this).val());
+                parent.$("#centerFr").attr("src", queryString);
+            });
+            $('span.backlink').live("click", function () {
+                parent.$("#centerFr").attr("src", NAP.resolveClientUrl("JobManagement/ServerManagement"));
+            });
+            $('#ListServer').val(serverIp);
             NAP.loadingBox.close();
         };
 
@@ -181,6 +223,7 @@
                 ServerDetail.UpdateServerData(resourceInfo);
             }
         };
+
         var serverIp = '@ViewBag.ServerIp';
     </script>
 }
@@ -197,27 +240,19 @@
          <div class="form">
             <div class="form-row required">
                 <div class="lbl-field">
-                   Server @ViewBag.ServerIp
+                   Server: @Html.DropDownList("ListServer", (List<SelectListItem>)ViewBag.ListServer)   <span class="backlink">← Back To List</span>
                 </div>
-             @*   <div class="edit-field">
-                    <label>@ViewBag.ServerIp</label>
-                </div>*@
+                    
             </div>
             <div class="form-row required">
                 <div class="lbl-field">
                     Cpu: @serverFullInfo.NumberPhysicalCpu Cpu(s) Physical, @serverFullInfo.NumberLogicalCpu Cpu(s) Logical
                 </div>
-               @* <div class="edit-field">
-                    <label></label>
-                </div>*@
             </div>
             <div class="form-row required">
                 <div class="lbl-field">
                     Memory: @(Math.Round((double)serverFullInfo.TotalPhysicalMemory / 1024)) GB
                 </div>
-               @* <div class="edit-field">
-                    <label>@serverFullInfo.TotalPhysicalMemory GB</label>
-                </div>*@
             </div>
         </div>
         

@@ -545,6 +545,7 @@ namespace Fanex.Maintenance.Controller
         public ActionResult ServerDetail(string serverIp)
         {
             ViewBag.ServerIp = serverIp;
+            ViewBag.ListServer = GetServer();
             ViewBag.ServerFullInfo = _serverService.GetServerFullInformation(serverIp);
             return View();
         }
