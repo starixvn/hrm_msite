@@ -121,13 +121,13 @@
                             string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
                             i++;
                         <tr @Html.Raw(rowCss) @(item.Step.Id != 0 ? "style=display:none" : "id=" + item.InstanceId.ToString()) status="@item.RunSatus">
-                            <td style="border-right:0px;text-align:right;padding-left:3px;">
+                            <td style="border-right:0px;text-align:right;padding-left:3px;padding-top:2px;">
                                 @if (item.Step.Id == 0)
                                 { 
                                     <a href="#" instanceid="@item.InstanceId" class="stepOutcome expand" style="margin-left:4px;"></a>                 
                                 }
                             </td>
-                            <td class="align-center" style="border-left:0px;">
+                            <td class="align-center" style="border-left:0px;padding-top:2px;">
                                 @switch (item.RunSatus)
                                 {
                                     case 0:
