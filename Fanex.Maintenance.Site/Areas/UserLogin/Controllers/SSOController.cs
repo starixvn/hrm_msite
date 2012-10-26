@@ -43,7 +43,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult SSOIndex(string UserId, string OnUserId, string Time)
+        public ActionResult Index(string UserId, string OnUserId, string Time)
         {
             string strUserId = Cryptography.CfsDeCrypt(UserId.Replace(" ", "+"));
             string strOnUserId = Cryptography.CfsDeCrypt(OnUserId.Replace(" ", "+"));

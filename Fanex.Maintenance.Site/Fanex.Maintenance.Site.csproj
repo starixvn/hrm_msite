@@ -1447,7 +1447,7 @@
     <None Include="Areas\UserLogin\themes\select-site.less" />
     <Content Include="Areas\UserLogin\Views\Login\Index.cshtml" />
     <Content Include="Areas\UserLogin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
+    <Content Include="Areas\UserLogin\Views\SSO\Index.cshtml" />
     <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
     <Content Include="Areas\UserLogin\Views\Web.config" />
     <Content Include="Configurations\DatabaseServersSection.config" />
