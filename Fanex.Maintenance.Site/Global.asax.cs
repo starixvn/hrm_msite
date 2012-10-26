@@ -31,7 +31,7 @@
             notificationWorker.Start();
 
             //ServerInfoWorker serverInfoWorker = new ServerInfoWorker(Converter.ToInt(ConfigurationManager.AppSettings["GetDataNotifyInterval"], 60000));
-            ServerInfoWorker serverInfoWorker = new ServerInfoWorker(4000);
+            ServerInfoWorker serverInfoWorker = new ServerInfoWorker(6000);
             serverInfoWorker.Start();
         }
     }

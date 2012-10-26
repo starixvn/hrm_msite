@@ -71,8 +71,8 @@ using Fanex.Maintenance.Repository.Impl.JobManagement;
         /// </summary>
         private void GetListResourceInfo()
         {
-            List<ResourceInfo> resourceInfoes = new List<ResourceInfo>();
-
+            //List<ResourceInfo> resourceInfoes = new List<ResourceInfo>();
+            var context = GlobalHost.ConnectionManager.GetHubContext<ServerInfoHub>();
             foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
             {
                 //try
@@ -80,7 +80,7 @@ using Fanex.Maintenance.Repository.Impl.JobManagement;
                     ResourceInfo resourceInfo = _serverRepository.GetServerResourceInfo(new GetResourceInfoCriteria(), server.ConnectionString);
                     resourceInfo.ServerIp = server.ServerIp;
                     resourceInfo.ServerName = server.ServerIp.Replace(".", "_");
-                    resourceInfoes.Add(resourceInfo);
+                    context.Clients.gotMessage(resourceInfo);
                 //}
                 //catch (Exception ex)
                 //{
@@ -88,8 +88,8 @@ using Fanex.Maintenance.Repository.Impl.JobManagement;
                 //}
             }
 
-            var context = GlobalHost.ConnectionManager.GetHubContext<ServerInfoHub>();
-            context.Clients.gotMessage(resourceInfoes);
+            
+            
 
         }
     }
