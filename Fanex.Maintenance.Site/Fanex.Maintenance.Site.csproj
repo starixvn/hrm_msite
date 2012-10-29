@@ -185,6 +185,7 @@
     <Content Include="Global.asax" />
     <Content Include="images\calendar.gif" />
     <Content Include="images\sprite_v.png" />
+    <Content Include="scripts\Job\ServerManagement.js" />
     <Content Include="scripts\Job\LeftMenuPage.js" />
     <Content Include="scripts\Job\Index.js" />
     <Content Include="scripts\NotificationHub.js" />
@@ -1335,6 +1336,7 @@
     <Content Include="themes\job\images\icn_video.png" />
     <Content Include="themes\job\images\icn_view_users.png" />
     <Content Include="themes\job\images\list_information.png" />
+    <Content Include="themes\job\images\loading7.gif" />
     <Content Include="themes\job\images\memory.png" />
     <Content Include="themes\job\images\messagebox_warning.png" />
     <Content Include="themes\job\images\module_footer_bg.png" />
