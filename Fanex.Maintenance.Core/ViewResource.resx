@@ -531,4 +531,7 @@
   <data name="Exec_Statuc" xml:space="preserve">
     <value>Exec Status</value>
   </data>
+  <data name="Monitor_Server" xml:space="preserve">
+    <value>Monitor Servers</value>
+  </data>
 </root>

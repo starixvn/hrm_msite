@@ -763,6 +763,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Monitor Servers.
+        /// </summary>
+        public static string Monitor_Server {
+            get {
+                return ResourceManager.GetString("Monitor_Server", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Monthly.
         /// </summary>
         public static string Monthly {
