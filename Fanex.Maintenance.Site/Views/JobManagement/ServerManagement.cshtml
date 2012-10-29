@@ -58,13 +58,13 @@
             </thead>
         </table>
         <div id="resourceInfoContainer">
-            <div id="resourceInfoContainerLeft"> 
+            <div id="resourceInfoContainerLeft" class="connectedSortable"> 
                 @foreach (var resourceInfo in leftArray)
                 {
                     @RenderContainer(resourceInfo)
                 }
             </div>
-            <div id="resourceInfoContainerRight"> 
+            <div id="resourceInfoContainerRight" class="connectedSortable"> 
                 @foreach (var resourceInfo in rightArray)
                 {
                     @RenderContainer(resourceInfo)

@@ -62,6 +62,11 @@ var ServerManagement = function ($) {
                 var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + serverIp);
                 parent.$("#centerFr").attr("src", queryString);
             });
+
+            //// Draggable
+            $("#resourceInfoContainerLeft, #resourceInfoContainerRight").sortable({
+                    connectWith: ".connectedSortable"
+                }).disableSelection();
         },
         UpdateServerData: function (resourceInfo) {
             var isExist = false;
