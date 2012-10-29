@@ -87,10 +87,6 @@ using Fanex.Maintenance.Repository.Impl.JobManagement;
                 //    Logger.Log.Error(ex.ToString(),ex);
                 //}
             }
-
-            
-            
-
         }
     }
 }

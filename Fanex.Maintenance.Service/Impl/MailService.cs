@@ -156,7 +156,12 @@ namespace Fanex.Maintenance.Service.Impl
                 var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, _page, _counter, _mailStatus);
                 if (data != null)
                 {
-                    mails = data.ToList();
+                    mails = data.Select(mailRecord => {
+                        mailRecord.MailTo = mailRecord.MailTo.Replace(";","<br />");
+                        mailRecord.MailBcc = mailRecord.MailBcc.Replace(";", "<br />");
+                        mailRecord.MailCc = mailRecord.MailCc.Replace(";", "<br />");
+                        return mailRecord;
+                    }).ToList();
                 }
             }
 

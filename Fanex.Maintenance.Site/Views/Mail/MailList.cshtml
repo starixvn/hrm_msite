@@ -148,7 +148,7 @@
                         @mailItem.Config.AppName
                     </td>
                     <td>
-                        @mailItem.MailTo
+                        @Html.Raw(mailItem.MailTo)
                     </td>
                     <td>
                         @if (mailItem.MailCc.IndexOf(',') > 0)
