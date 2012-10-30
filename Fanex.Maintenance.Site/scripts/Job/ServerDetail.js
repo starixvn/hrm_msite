@@ -10,7 +10,7 @@ var ServerDetail = function ($) {
                 if (resourceInfoes[i].ServerIp == serverIp) {
                     ServerDetail.Server = resourceInfoes[i];
                     var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
-                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "G B", "Memory Usage");
+                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
                     break;
                 }
             }
@@ -70,6 +70,7 @@ var ServerDetail = function ($) {
                                 var x = (new Date()).getTime() // current time
                                 y = ServerDetail.GetDataFromServerName(type);
                                 if (type != 1) {
+                                    y = Math.round(y * 100 / ServerDetail.Server.TotalMemory)
                                     $('#currentmemory').text(y);
                                 }
                                 else {
@@ -97,7 +98,7 @@ var ServerDetail = function ($) {
                         color: '#8011111'
                     }],
                     min: 0,
-                    max: (type == 1 ? 100 : Math.round(ServerDetail.Server.TotalMemory))
+                    max: 100
                 },
                 tooltip: {
                     formatter: function () {
@@ -122,6 +123,7 @@ var ServerDetail = function ($) {
                                 i;
                         var yValue = ServerDetail.GetDataFromServerName(type);
                         if (type != 1) {
+                            yValue = Math.round(yValue * 100 / ServerDetail.Server.TotalMemory)
                             $('#currentmemory').text(yValue);
                         }
                         else {

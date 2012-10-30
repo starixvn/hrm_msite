@@ -92,25 +92,25 @@
                     </div>
                     <div class="edit-field " style="position: relative; width: 610px;">
                         <div class="radioButton">
-                            @Html.RadioButtonFor(m => m.FreqSubType, 0, new { @checked = "checked" })
-                            <label>
+                            @Html.RadioButtonFor(m => m.FreqSubType, 0, new { @checked = "checked", @id = "FreqSubTypeAll" })
+                            <label for="FreqSubTypeAll">
                                 All</label>
                         </div>
                         <div class="radioButton">
-                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.SpecificTime).ToString())
-                            <label>@ViewResource.SpecifedTime</label>
+                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.SpecificTime).ToString(), new { @id = "FreqSubTypeSpecifedTime" })
+                            <label for="FreqSubTypeSpecifedTime">@ViewResource.SpecifedTime</label>
                         </div>
                         <div class="radioButton">
-                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.Seconds).ToString())
-                            <label>@ViewResource.Seconds</label>
+                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.Seconds).ToString(), new { @id = "FreqSubTypeSeconds" })
+                            <label for="FreqSubTypeSeconds">@ViewResource.Seconds</label>
                         </div>
                         <div class="radioButton">
-                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.Minutes).ToString())
-                            <label>@ViewResource.Minutes</label>
+                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.Minutes).ToString(), new { @id = "FreqSubTypeMinutes" })
+                            <label for="FreqSubTypeMinutes">@ViewResource.Minutes</label>
                         </div>
                         <div class="radioButton">
-                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.Hours).ToString())
-                            <label>@ViewResource.Hours</label>
+                            @Html.RadioButtonFor(m => m.FreqSubType, ((int)FrequentSubTime.Hours).ToString(), new { @id = "FreqSubTypeHours" })
+                            <label for="FreqSubTypeHours">@ViewResource.Hours</label>
                         </div>
                     </div>
                 </div>
