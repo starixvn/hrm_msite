@@ -32,7 +32,7 @@ var ServerDetail = function ($) {
                     $('.resourceinfo').css("width", $(window).width() - 12);
                     $(window).trigger("resize");
                 }
-               
+
 
             });
 
@@ -53,7 +53,7 @@ var ServerDetail = function ($) {
             }
         },
         RenderChart: function (charid, type, title, ytitle, pointTitle) {
-            var pointColor = (type == 1 ? '#4572A7' : '#CCBB66');
+            var pointColor = (type == 1 ? '#4572A7' : '#ff7200');
             return new Highcharts.Chart({
                 name: charid + type,
                 chart: {
@@ -70,6 +70,8 @@ var ServerDetail = function ($) {
                                 var x = (new Date()).getTime() // current time
                                 y = ServerDetail.GetDataFromServerName(type);
                                 series.addPoint([x, y], true, true);
+                                $('#currentmemory').text(y);
+
                             }, 4000);
                         }
                     }
@@ -120,6 +122,7 @@ var ServerDetail = function ($) {
                                 x: time + i * 4000,
                                 y: yValue
                             });
+                            $('#currentmemory').text(yValue);
                         }
                         return data;
                     })()

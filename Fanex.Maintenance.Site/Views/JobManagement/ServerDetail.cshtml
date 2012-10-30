@@ -38,7 +38,7 @@
             </div>
             <div class="form-row required">
                 <div class="lbl-field">
-                    Memory: @(Math.Round((double)serverFullInfo.TotalPhysicalMemory / 1024)) GB
+                    Memory: <span id="currentmemory">0</span> / @(Math.Round((double)serverFullInfo.TotalPhysicalMemory / 1024)) GB
                 </div>
             </div>
         </div>

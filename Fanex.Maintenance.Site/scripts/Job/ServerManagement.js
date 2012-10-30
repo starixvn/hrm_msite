@@ -4,7 +4,7 @@ var ServerManagement = function ($) {
         Servers: [],
         FirstTime: true,
         MaxMemory: 0,
-        InitEvent: function() {
+        InitEvent: function () {
             //// Click toggle to collapse
             $('.subcontainer .toggler').live("click", function () {
                 var $this = $(this);
@@ -65,8 +65,8 @@ var ServerManagement = function ($) {
 
             //// Draggable
             $("#resourceInfoContainerLeft, #resourceInfoContainerRight").sortable({
-                    connectWith: ".connectedSortable"
-                }).disableSelection();
+                connectWith: ".connectedSortable"
+            }).disableSelection();
         },
         UpdateServerData: function (resourceInfo) {
             var isExist = false;
@@ -98,6 +98,7 @@ var ServerManagement = function ($) {
                 if (server.ServerName == serverName) {
                     if (type == 1) {
                         var containerdiv = $("#" + serverName + (type == 1 ? "SqlCpu" : "Memory")).prev();
+                        var parentContainerDiv = $("#" + serverName + (type == 1 ? "SqlCpu" : "Memory")).parent();
 
                         //// Check if New Sql Cpu new is difference with Old then change the text color to red
                         var oldSqlCpu = containerdiv.find(".servermemoryusagevalue").text();
@@ -125,6 +126,20 @@ var ServerManagement = function ($) {
                         }
                         containerdiv.find(".servermemoryusage").text(newSqlRam);
 
+                        //// Notify when Cpu or Ram Execced
+                        if (newSqlCpu > 50 ) {
+                            if (newSqlCpu > 75 ) {
+                                parentContainerDiv.css("border", "2px solid #FF0000");
+                            }
+                            else {
+                                parentContainerDiv.css("border", "2px solid #FF9933");
+                            }
+                        }
+                        else {
+                            parentContainerDiv.css("border", "1px solid #C8C8C8");
+                        }
+
+                        //// return info
                         return server.SqlCpuPercent;
                     }
                     else {
@@ -136,7 +151,7 @@ var ServerManagement = function ($) {
         RenderChart: function (charid, type, title, ytitle, pointTitle) {
             // Type 1 is Sql Cpu, else Memory
             var charIdCombine = charid + (type == 1 ? "SqlCpu" : "Memory");
-            var pointColor = (type == 1 ? '#4572A7' : '#CCBB66');
+            var pointColor = (type == 1 ? '#4572A7' : '#ff7200');
             var yAxisCustom = (type == 1 ? {
                 title: {
                     text: ytitle
