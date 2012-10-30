@@ -4,12 +4,13 @@ var ServerDetail = function ($) {
         Server: null,
         FirstTime: true,
         MaxMemory: 0,
-        Init: function(resourceInfoes) {
+        ResizeCount: 0,
+        Init: function (resourceInfoes) {
             for (var i = 0; i < resourceInfoes.length; i++) {
                 if (resourceInfoes[i].ServerIp == serverIp) {
                     ServerDetail.Server = resourceInfoes[i];
                     var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
-                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
+                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "G B", "Memory Usage");
                     break;
                 }
             }
@@ -21,6 +22,21 @@ var ServerDetail = function ($) {
             $('span.backlink').live("click", function () {
                 parent.$("#centerFr").attr("src", NAP.resolveClientUrl("JobManagement/ServerManagement"));
             });
+
+            $(window).resize(function () {
+                if (ServerDetail.ResizeCount > 1) {
+                    ServerDetail.ResizeCount = 0;
+                }
+                else {
+                    ServerDetail.ResizeCount++;
+                    $('.resourceinfo').css("width", $(window).width() - 12);
+                    $(window).trigger("resize");
+                }
+               
+
+            });
+
+            $(window).trigger("resize");
             NAP.loadingBox.close();
         },
         UpdateServerData: function (resourceInfo) {
@@ -53,9 +69,6 @@ var ServerDetail = function ($) {
                             setInterval(function () {
                                 var x = (new Date()).getTime() // current time
                                 y = ServerDetail.GetDataFromServerName(type);
-                                if (type != 1) {
-                                    y = Math.round(y * 100 / ServerDetail.Server.TotalMemory)
-                                }
                                 series.addPoint([x, y], true, true);
                             }, 4000);
                         }
@@ -78,7 +91,7 @@ var ServerDetail = function ($) {
                         color: '#8011111'
                     }],
                     min: 0,
-                    max: 100
+                    max: (type == 1 ? 100 : Math.round(ServerDetail.Server.TotalMemory))
                 },
                 tooltip: {
                     formatter: function () {
@@ -102,9 +115,6 @@ var ServerDetail = function ($) {
                                 time = (new Date()).getTime(),
                                 i;
                         var yValue = ServerDetail.GetDataFromServerName(type);
-                        if (type != 1) {
-                            yValue = Math.round(yValue * 100 / ServerDetail.Server.TotalMemory)
-                        }
                         for (i = -10; i <= 0; i++) {
                             data.push({
                                 x: time + i * 4000,

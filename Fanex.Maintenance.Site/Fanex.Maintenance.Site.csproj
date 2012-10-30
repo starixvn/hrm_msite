@@ -185,6 +185,7 @@
     <Content Include="Global.asax" />
     <Content Include="images\calendar.gif" />
     <Content Include="images\sprite_v.png" />
+    <Content Include="scripts\Job\ServerDetail.js" />
     <Content Include="scripts\Job\ServerManagement.js" />
     <Content Include="scripts\Job\LeftMenuPage.js" />
     <Content Include="scripts\Job\Index.js" />
@@ -1572,6 +1573,7 @@
     <None Include="themes\job\job\manage.less" />
     <None Include="themes\job\report\dataintegry.less" />
     <None Include="themes\job\schedule\manage.less" />
+    <None Include="themes\job\server\detail.less" />
     <None Include="themes\job\server\manage.less" />
     <None Include="themes\job\style.less" />
     <None Include="themes\job\themes.less" />

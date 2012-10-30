@@ -27,7 +27,7 @@
          <div class="form">
             <div class="form-row required">
                 <div class="lbl-field">
-                   Server: @Html.DropDownList("ListServer", (List<SelectListItem>)ViewBag.ListServer)   <span class="backlink">← Back To List</span>
+                   Server: @ViewBag.ServerIp @*@Html.DropDownList("ListServer", (List<SelectListItem>)ViewBag.ListServer)   <span class="backlink">← Back To List</span>*@
                 </div>
                     
             </div>
@@ -43,10 +43,10 @@
             </div>
         </div>
         
-            <div id="slqCpuContainer">
-            </div>
-            <div id="memoryContainer">
-            </div>
+        <div id="slqCpuContainer">
+        </div>
+        <div id="memoryContainer">
+        </div>
         </div>
         
     </div>
