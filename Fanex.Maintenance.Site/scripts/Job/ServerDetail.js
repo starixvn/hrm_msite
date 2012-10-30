@@ -1,0 +1,153 @@
+﻿/* File Created: October 30, 2012 */
+var ServerDetail = function ($) {
+    return {
+        Server: null,
+        FirstTime: true,
+        MaxMemory: 0,
+        Init: function(resourceInfoes) {
+            for (var i = 0; i < resourceInfoes.length; i++) {
+                if (resourceInfoes[i].ServerIp == serverIp) {
+                    ServerDetail.Server = resourceInfoes[i];
+                    var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
+                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
+                    break;
+                }
+            }
+            ServerDetail.FirstTime = false;
+            $('#ListServer').change(function () {
+                var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + $(this).val());
+                parent.$("#centerFr").attr("src", queryString);
+            });
+            $('span.backlink').live("click", function () {
+                parent.$("#centerFr").attr("src", NAP.resolveClientUrl("JobManagement/ServerManagement"));
+            });
+            NAP.loadingBox.close();
+        },
+        UpdateServerData: function (resourceInfo) {
+            if (ServerDetail.Server.ServerIp == resourceInfo.ServerIp) {
+                ServerDetail.Server = resourceInfo;
+            }
+        },
+        GetDataFromServerName: function (type) {
+            if (type == 1) {
+                return ServerDetail.Server.SqlCpuPercent;
+            }
+            else {
+                return ServerDetail.Server.MemoryUsage;
+            }
+        },
+        RenderChart: function (charid, type, title, ytitle, pointTitle) {
+            var pointColor = (type == 1 ? '#4572A7' : '#CCBB66');
+            return new Highcharts.Chart({
+                name: charid + type,
+                chart: {
+                    renderTo: charid,
+                    type: 'spline',
+                    marginRight: 25,
+                    //width: 1000,
+                    events: {
+                        load: function () {
+
+                            // set up the updating of the chart each second
+                            var series = this.series[0];
+                            setInterval(function () {
+                                var x = (new Date()).getTime() // current time
+                                y = ServerDetail.GetDataFromServerName(type);
+                                if (type != 1) {
+                                    y = Math.round(y * 100 / ServerDetail.Server.TotalMemory)
+                                }
+                                series.addPoint([x, y], true, true);
+                            }, 4000);
+                        }
+                    }
+                },
+                title: {
+                    text: title
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 100
+                },
+                yAxis: {
+                    title: {
+                        text: ytitle
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#8011111'
+                    }],
+                    min: 0,
+                    max: 100
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                                Highcharts.numberFormat(this.y, 2);
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [{
+                    name: pointTitle,
+                    color: pointColor,
+                    data: (function () {
+                        // generate an array of random data
+                        var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+                        var yValue = ServerDetail.GetDataFromServerName(type);
+                        if (type != 1) {
+                            yValue = Math.round(yValue * 100 / ServerDetail.Server.TotalMemory)
+                        }
+                        for (i = -10; i <= 0; i++) {
+                            data.push({
+                                x: time + i * 4000,
+                                y: yValue
+                            });
+                        }
+                        return data;
+                    })()
+                }]
+            });
+        }
+    };
+} (jQuery);
+
+
+
+$(function () {
+    $('#ListServer').val(serverIp);
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+
+    // Proxy created on the fly
+    var serverInfoHub = $.connection.serverInfoHub;
+
+    // Declare a function on the chat hub so the server can invoke it
+    serverInfoHub.addMessage = function (message) {
+        alert(message);
+    };
+
+    serverInfoHub.firstMessage = function (resourceInfoes) {
+        ServerDetail.Init(resourceInfoes);
+    };
+
+    serverInfoHub.gotMessage = function (resourceInfo) {
+        if (!ServerDetail.FirstTime) {
+            ServerDetail.UpdateServerData(resourceInfo);
+        }
+    };
+
+    $.connection.hub.start(function () {
+        serverInfoHub.getListServerInfoFirstTime();
+    });
+});
