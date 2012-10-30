@@ -213,7 +213,7 @@ var ServerManagement = function ($) {
                                 }
 
                                 series.addPoint([x, y], true, true);
-                            }, 4000);
+                            }, getDataTimeInterval);
                         }
                     }
                 },
@@ -253,7 +253,7 @@ var ServerManagement = function ($) {
                                 yValue = Math.round(yValue * 100 / ServerManagement.GetMaxMemory(charid))
                             }
                             data.push({
-                                x: time + i * 4000,
+                                x: time + i * getDataTimeInterval,
                                 y: yValue
                             });
                         }

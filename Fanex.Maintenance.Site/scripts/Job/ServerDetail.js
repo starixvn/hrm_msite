@@ -76,7 +76,7 @@ var ServerDetail = function ($) {
                                     $('#currentcpu').text(y); 
                                 }
                                 series.addPoint([x, y], true, true);
-                            }, 4000);
+                            }, getDataTimeInterval);
                         }
                     }
                 },
@@ -129,7 +129,7 @@ var ServerDetail = function ($) {
                         }
                         for (i = -10; i <= 0; i++) {
                             data.push({
-                                x: time + i * 4000,
+                                x: time + i * getDataTimeInterval,
                                 y: yValue
                             });
 
