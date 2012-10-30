@@ -69,8 +69,11 @@ var ServerDetail = function ($) {
                             setInterval(function () {
                                 var x = (new Date()).getTime() // current time
                                 y = ServerDetail.GetDataFromServerName(type);
+                                if (type != 1) {
+                                    $('#currentmemory').text(y);
+                                }
                                 series.addPoint([x, y], true, true);
-                                $('#currentmemory').text(y);
+                                
 
                             }, 4000);
                         }
@@ -117,12 +120,15 @@ var ServerDetail = function ($) {
                                 time = (new Date()).getTime(),
                                 i;
                         var yValue = ServerDetail.GetDataFromServerName(type);
+                        if (type != 1) {
+                            $('#currentmemory').text(yValue);
+                        }
                         for (i = -10; i <= 0; i++) {
                             data.push({
                                 x: time + i * 4000,
                                 y: yValue
                             });
-                            $('#currentmemory').text(yValue);
+                            
                         }
                         return data;
                     })()

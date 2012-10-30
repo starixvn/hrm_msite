@@ -4,6 +4,7 @@ var ServerManagement = function ($) {
         Servers: [],
         FirstTime: true,
         MaxMemory: 0,
+        ResizeCount: 0,
         InitEvent: function () {
             //// Click toggle to collapse
             $('.subcontainer .toggler').live("click", function () {
@@ -67,6 +68,7 @@ var ServerManagement = function ($) {
             $("#resourceInfoContainerLeft, #resourceInfoContainerRight").sortable({
                 connectWith: ".connectedSortable"
             }).disableSelection();
+
         },
         UpdateServerData: function (resourceInfo) {
             var isExist = false;
