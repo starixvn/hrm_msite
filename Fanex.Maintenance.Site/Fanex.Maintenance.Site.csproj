@@ -188,6 +188,9 @@
     <Content Include="scripts\Job\ServerManagement.js" />
     <Content Include="scripts\Job\LeftMenuPage.js" />
     <Content Include="scripts\Job\Index.js" />
+    <Content Include="scripts\lib\jquery.qtip-1.0.0-rc3.min.js" />
+    <Content Include="scripts\lib\jquery.signalR-0.5.3.js" />
+    <Content Include="scripts\lib\jquery.signalR-0.5.3.min.js" />
     <Content Include="scripts\NotificationHub.js" />
     <Content Include="scripts\DatabaseReport\Chart.js" />
     <Content Include="scripts\DatabaseReport\Licenseedata.js" />
@@ -1251,6 +1254,8 @@
     <Content Include="scripts\Plugin\jquery.treeview\jquery.treeview.css" />
     <Content Include="scripts\Plugin\jquery.treeview\jquery.treeview.js" />
     <Content Include="scripts\Plugin\notification\images\close.gif" />
+    <Content Include="scripts\Plugin\notification\images\dialog_warning.png" />
+    <Content Include="scripts\Plugin\notification\images\dialog_warning1.png" />
     <Content Include="scripts\Plugin\notification\images\error.png" />
     <Content Include="scripts\Plugin\notification\images\notice.png" />
     <Content Include="scripts\Plugin\notification\images\success.png" />

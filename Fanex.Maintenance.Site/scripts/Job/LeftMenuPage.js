@@ -32,33 +32,6 @@ notitficationHub.gotMessage = function (notifyInfoes) {
         $('span.' + notifyInfo.ServerIp).attr("style", "color:red;background-position:0px 0px; ");
 
         $('span.' + notifyInfo.ServerIp + notifyInfo.Type).addClass("notifyError").attr("linkerrorpage", linkErrorPage);
-        //        //$('span.' + notifyInfo.ServerIp + notifyInfo.Type).remove();
-        //        $('span.' + notifyInfo.ServerIp + notifyInfo.Type).qtip({
-        //            content: message,
-        //            position:
-        //                {
-        //                    corner: {
-        //                        tooltip: "topRight", // Use the corner...
-        //                        target: "bottomRight" // ...and opposite corner
-        //                    }
-        //                },
-        //            hide: {
-        //                fixed: true // Make it fixed so it can be hovered over
-        //            },
-        //            style: {
-        //                border: {
-        //                    width: 2,
-        //                    radius: 4
-        //                },
-        //                color:'#000',
-        //                background: '#fff',
-        //                width: 150,
-        //                padding: 5,
-        //                textAlign: 'left',
-        //                tip: true, // Give it a speech bubble tip with automatic corner detection
-        //                name: 'red' // Style it according to the preset 'cream' style
-        //            }
-        //        })
         $('span.' + notifyInfo.ServerIp + notifyInfo.Type).attr("title", message);
         $('span.' + notifyInfo.ServerIp + notifyInfo.Type).bt({
             width: "180px",
