@@ -17,32 +17,26 @@
 }
 @section HeaderBar {
     <article class="breadcrumbs">
-        <a href="index.html">@ViewBag.ServerIp</a>
+        <a href="#" >@ViewBag.ServerIp</a>
         <div class="breadcrumb_divider">
         </div>
-        <a class="current"> Cpu: <span id="currentcpu">0</span> %, @serverFullInfo.NumberPhysicalCpu Cpu(s) Physical, @serverFullInfo.NumberLogicalCpu Cpu(s) Logical. Memory: <span id="currentmemory">0</span> / @(Math.Round((double)serverFullInfo.TotalPhysicalMemory / 1024)) GB.</a></article>
+        <a class="current">Cpu: @serverFullInfo.NumberPhysicalCpu Cpu(s) Physical, @serverFullInfo.NumberLogicalCpu Cpu(s) Logical. Memory: @(Math.Round((double)serverFullInfo.TotalPhysicalMemory / 1024)) GB.</a></article>
 }
 <section class="column" id="main">
     <div class="content">
         <div class="resourceinfo">
-        @* <div class="form">
+         <div class="form">
             <div class="form-row required">
                 <div class="lbl-field">
-                   Server: @ViewBag.ServerIp @Html.DropDownList("ListServer", (List<SelectListItem>)ViewBag.ListServer)   <span class="backlink">← Back To List</span>
-                </div>
-                    
-            </div>
-            <div class="form-row required">
-                <div class="lbl-field">
-                    Cpu: <span id="currentcpu">0</span> %, @serverFullInfo.NumberPhysicalCpu Cpu(s) Physical, @serverFullInfo.NumberLogicalCpu Cpu(s) Logical. Memory: <span id="currentmemory">0</span> / @(Math.Round((double)serverFullInfo.TotalPhysicalMemory / 1024)) GB.
+                   Cpu: <span id="currentcpu">0</span> % | Memory: <span id="currentmemory">0</span> / @(Math.Round((double)serverFullInfo.TotalPhysicalMemory / 1024)) GB.
                 </div>
             </div>
-            <div class="form-row required">
+          @*  <div class="form-row required">
                 <div class="lbl-field">
                     
                 </div>
-            </div>
-        </div>*@
+            </div>*@
+        </div>
         
         <div id="slqCpuContainer">
         </div>
