@@ -1299,6 +1299,7 @@
     <Content Include="themes\Authentication\_images\logo.jpg" />
     <Content Include="themes\fonts.css" />
     <Content Include="themes\fonts.css" />
+    <Content Include="themes\job\images\ajax-loader.gif" />
     <Content Include="themes\job\images\breadcrumb_divider.png" />
     <Content Include="themes\job\images\btn_submit.png" />
     <Content Include="themes\job\images\btn_submit_2.png" />

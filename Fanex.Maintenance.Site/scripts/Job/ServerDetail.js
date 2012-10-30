@@ -72,9 +72,10 @@ var ServerDetail = function ($) {
                                 if (type != 1) {
                                     $('#currentmemory').text(y);
                                 }
+                                else {
+                                    $('#currentcpu').text(y); 
+                                }
                                 series.addPoint([x, y], true, true);
-                                
-
                             }, 4000);
                         }
                     }
@@ -123,12 +124,15 @@ var ServerDetail = function ($) {
                         if (type != 1) {
                             $('#currentmemory').text(yValue);
                         }
+                        else {
+                            $('#currentcpu').text(yValue);
+                        }
                         for (i = -10; i <= 0; i++) {
                             data.push({
                                 x: time + i * 4000,
                                 y: yValue
                             });
-                            
+
                         }
                         return data;
                     })()

@@ -5,6 +5,7 @@ var ServerManagement = function ($) {
         FirstTime: true,
         MaxMemory: 0,
         ResizeCount: 0,
+        IsHighLightTime: false,
         InitEvent: function () {
             //// Click toggle to collapse
             $('.subcontainer .toggler').live("click", function () {
@@ -69,6 +70,7 @@ var ServerManagement = function ($) {
                 connectWith: ".connectedSortable"
             }).disableSelection();
 
+            setInterval(ServerManagement.HighLightServer, 1000);
         },
         UpdateServerData: function (resourceInfo) {
             var isExist = false;
@@ -128,18 +130,8 @@ var ServerManagement = function ($) {
                         }
                         containerdiv.find(".servermemoryusage").text(newSqlRam);
 
-                        //// Notify when Cpu or Ram Execced
-                        if (newSqlCpu > 50 ) {
-                            if (newSqlCpu > 75 ) {
-                                parentContainerDiv.css("border", "2px solid #FF0000");
-                            }
-                            else {
-                                parentContainerDiv.css("border", "2px solid #FF9933");
-                            }
-                        }
-                        else {
-                            parentContainerDiv.css("border", "1px solid #C8C8C8");
-                        }
+                        //// For HighLightServer
+                        parentContainerDiv.attr("informvalue", newSqlCpu);
 
                         //// return info
                         return server.SqlCpuPercent;
@@ -149,6 +141,29 @@ var ServerManagement = function ($) {
                     }
                 }
             }
+        },
+        HighLightServer: function () {
+            $('.subcontainer').each(function () {
+                var $this = $(this);
+                var currentValue = parseInt($this.attr("informvalue"));
+                if (ServerManagement.IsHighLightTime) {
+                    if (currentValue > 50) {
+                        if (currentValue > 75) {
+                            $this.css("border", "2px solid #FF0000")
+                        }
+                        else {
+                            $this.css("border", "2px solid #FF9933")
+                        }
+                    }
+                    else {
+                        $this.css("border", "1px solid #C8C8C8");
+                    }
+                }
+                else {
+                    $this.css("border", "1px solid #C8C8C8");
+                }
+                ServerManagement.IsHighLightTime = !ServerManagement.IsHighLightTime;
+            });
         },
         RenderChart: function (charid, type, title, ytitle, pointTitle) {
             // Type 1 is Sql Cpu, else Memory
