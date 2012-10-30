@@ -1255,6 +1255,7 @@
     <Content Include="scripts\Plugin\notification\images\notice.png" />
     <Content Include="scripts\Plugin\notification\images\success.png" />
     <Content Include="scripts\Plugin\notification\images\warning.png" />
+    <Content Include="scripts\Plugin\notification\jquery.bt.js" />
     <Content Include="scripts\Plugin\notification\jquery.toastmessage.css" />
     <Content Include="scripts\Plugin\notification\jquery.toastmessage.js" />
     <Content Include="scripts\SqlJobManagement\LeftMenuPage.js" />
