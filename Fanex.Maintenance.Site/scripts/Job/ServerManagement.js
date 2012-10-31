@@ -109,7 +109,7 @@ var ServerManagement = function ($) {
                         var newSqlCpu = server.SqlCpuPercent;
                         if (oldSqlCpu != newSqlCpu) {
                             var serverCpu = containerdiv.find(".servercpu");
-                            var currentColor = serverCpu.css("color");
+                            var currentColor = $(body).css("color");
                             serverCpu.css("color", "Red");
                             setTimeout(function () {
                                 serverCpu.css("color", currentColor);
@@ -122,7 +122,7 @@ var ServerManagement = function ($) {
                         var newSqlRam = Math.round(server.MemoryUsage * 100 / server.TotalMemory);
                         if (oldSqlRam != newSqlRam) {
                             var serverMemory = containerdiv.find(".servermemory");
-                            var currentColor = serverMemory.css("color");
+                            var currentColor = $(body).css("color");
                             serverMemory.css("color", "Red");
                             setTimeout(function () {
                                 serverMemory.css("color", currentColor);
