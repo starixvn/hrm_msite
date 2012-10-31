@@ -150,7 +150,7 @@ $(document).ready(function () {
     // #region actions dropdownlist
     var event = NAP.agentIsOldIe || NAP.agentIsApple ? 'click' : 'hover';
 
-    $('.action-wrp').bind("click", function (e) {
+    $(document).on("click", ".action-wrp", function (e) {
         var $this = $(this),
     			dropdown = $this.find('.actions');
 
