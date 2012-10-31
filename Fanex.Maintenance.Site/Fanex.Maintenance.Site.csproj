@@ -1314,6 +1314,7 @@
     <Content Include="themes\job\images\forward-back1.png" />
     <Content Include="themes\job\images\forward.png" />
     <Content Include="themes\job\images\forward1.png" />
+    <Content Include="themes\job\images\gnome_system_monitor.png" />
     <Content Include="themes\job\images\hardwarechip.png" />
     <Content Include="themes\job\images\header_bg.png" />
     <Content Include="themes\job\images\header_shadow.png" />

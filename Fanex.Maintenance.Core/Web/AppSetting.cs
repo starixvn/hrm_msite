@@ -13,6 +13,8 @@ namespace Fanex.Maintenance.Core.Web
     using System.Configuration;
     using System.Globalization;
     using System.Web;
+    using Fanex.Logging;
+    using Fanex.Common;
 
     /// <summary>
     /// TODO: Update summary.
@@ -29,13 +31,26 @@ namespace Fanex.Maintenance.Core.Web
         /// </summary>
         private static int _minute = 10;
 
+        private static int _getDataNotifyInterval = 60000;
+        private static int _getServerResourcesInfoInterval = 2000;
+
+
         /// <summary>
         /// Contructor
         /// </summary>
         static AppSetting()
         {
-            _isVirtualDir = ConfigurationManager.AppSettings["isVirtualDirectory"];
-            _minute = Convert.ToInt32(ConfigurationManager.AppSettings["Minute"]);
+            try
+            {
+                _isVirtualDir = ConfigurationManager.AppSettings["isVirtualDirectory"];
+                _minute = Converter.ToInt(ConfigurationManager.AppSettings["Minute"]);
+                _getDataNotifyInterval = Converter.ToInt(ConfigurationManager.AppSettings["GetDataNotifyInterval"], 60000);
+                _getServerResourcesInfoInterval = Converter.ToInt(ConfigurationManager.AppSettings["GetServerResourcesInfoInterval"], 2000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString(), ex);
+            }
         }
 
         /// <summary>
@@ -59,6 +74,23 @@ namespace Fanex.Maintenance.Core.Web
                 return _minute;
             }
         }
+
+        public static int GetDataNotifyInterval
+        {
+            get
+            {
+                return _getDataNotifyInterval;
+            }
+        }
+
+        public static int GetServerResourcesInfoInterval
+        {
+            get
+            {
+                return _getServerResourcesInfoInterval;
+            }
+        }
+            
 
         /// <summary>
         /// Culture Info

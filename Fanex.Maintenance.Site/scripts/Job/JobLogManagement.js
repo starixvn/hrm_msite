@@ -13,7 +13,7 @@ var JobLogManagement = function ($) {
         InitDatetimePicker: function () {
 
             $("#From").datepicker({
-                defaultDate: "+1w",
+                //defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
                 dateFormat: "M dd,yy",
@@ -27,7 +27,7 @@ var JobLogManagement = function ($) {
                 }
             });
             $("#To").datepicker({
-                defaultDate: "+1w",
+                //defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
                 dateFormat: "M dd,yy",
