@@ -103,12 +103,18 @@ $(document).ready(function () {
 
             $('span.' + notifyInfo.ServerIp + notifyInfo.Type).addClass("notifyError").attr("linkerrorpage", linkErrorPage);
             $('span.' + notifyInfo.ServerIp + notifyInfo.Type).attr("title", message);
-            $('span.' + notifyInfo.ServerIp + notifyInfo.Type).bt({
-                width: "180px",
-                fill: "#FFFFFF",
-                strokeStyle: "#FF0000",
-                strokeWidth: 3
-            });
+            if ($('span.' + notifyInfo.ServerIp + notifyInfo.Type).attr("hasnotifyattach") != "true") {
+                $('span.' + notifyInfo.ServerIp + notifyInfo.Type).bt({
+                    width: "180px",
+                    fill: "#FFFFFF",
+                    strokeStyle: "#FF0000",
+                    strokeWidth: 3
+                });
+                $('span.' + notifyInfo.ServerIp + notifyInfo.Type).attr("hasnotifyattach", "true");
+            }
+            else {
+                $('span.' + notifyInfo.ServerIp + notifyInfo.Type).attr("bt-xtitle", message);
+            }
         }
     }
 
