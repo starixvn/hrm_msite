@@ -55,6 +55,7 @@
     <Compile Include="Job\GetJobHistoryCriteria.cs" />
     <Compile Include="Job\GetListJobCriteria.cs" />
     <Compile Include="Job\GetResourceInfoCriteria.cs" />
+    <Compile Include="Job\GetServerStatusCriteria.cs" />
     <Compile Include="Job\GetSqlServerLogCriteria.cs" />
     <Compile Include="Job\ServiceControlCriteria.cs" />
     <Compile Include="Job\StartJobCriteria.cs" />

@@ -12,16 +12,15 @@ namespace Fanex.Maintenance.Controller.Worker
     using System;
     using System.Collections.Generic;
     using System.Threading;
+    using System.Threading.Tasks;
     using Fanex.Logging;
     using Fanex.Maintenance.Controller.Hubs;
     using Fanex.Maintenance.Core.Configurations;
-    using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Repository.Impl.JobManagement;
-    using Fanex.Maintenance.Repository.Interface.JobManagement;
+    using Fanex.Maintenance.Service.Impl.JobManagement;
+    using Fanex.Maintenance.Service.Interface.JobManagement;
     using SignalR;
     using SignalR.Hubs;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// TODO: Update summary.
@@ -30,18 +29,18 @@ namespace Fanex.Maintenance.Controller.Worker
     {
         private int _getDataInterval { get; set; }
 
-        private IServerRepository _serverRepository { get; set; }
+        private IServerService _serverService { get; set; }
 
         private static Dictionary<string, bool> _checkingList;
 
         private IHubContext _hubContext;
 
         public ServerInfoWorker(
-            int getDataInterval = 60000)
+            int getDataInterval = 3000)
             : base()
         {
             _getDataInterval = getDataInterval;
-            _serverRepository = new ServerRepository();
+            _serverService = ServerService.Create();
         }
 
         /// <summary>
@@ -104,7 +103,7 @@ namespace Fanex.Maintenance.Controller.Worker
                     //// Update that server is doing, so other thread cannot access
                     _checkingList[serverElement.ServerIp] = true;
                     //// Get Data
-                    ResourceInfo resourceInfo = _serverRepository.GetServerResourceInfo(new GetResourceInfoCriteria(), serverElement.ConnectionString);
+                    ResourceInfo resourceInfo = _serverService.GetServerResourceInfo(serverElement.ConnectionString);
                     resourceInfo.ServerIp = serverElement.ServerIp.ToString();
                     resourceInfo.ServerName = resourceInfo.ServerIp.Replace(".", "_");
                     if (_hubContext != null)

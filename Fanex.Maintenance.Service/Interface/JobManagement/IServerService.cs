@@ -22,5 +22,7 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
     public interface IServerService
     {
         ServerFullInfo GetServerFullInformation(string serverIp);
+        ResourceInfo GetServerResourceInfo(string connectionString);
+        ServerStatus GetServerStatus(string connectionString);
     }
 }

@@ -118,6 +118,10 @@ $(document).ready(function () {
         }
     }
 
+    notitficationHub.updateServerStatus = function (serverStatuses) {
+        var servers = serverStatuses;
+    };
+
     $.connection.hub.start(function () {
     });
     LeftMenuPage.InitEvent();

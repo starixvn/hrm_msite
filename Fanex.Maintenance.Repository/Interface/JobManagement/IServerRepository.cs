@@ -19,5 +19,6 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     {
         ResourceInfo GetServerResourceInfo(ICriteria criteria, string connectionString);
         ServerFullInfo GetServerFullInformation(ICriteria criteria, string serverIp);
+        ServerStatus GetServerStatus(ICriteria criteria, string connectionString);
     }
 }
