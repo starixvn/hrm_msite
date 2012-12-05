@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+    <Function Name="User">
+        <Setting Key="NAP_User_GetByUsername" SpName="NAP_User_GetByUsername" DbName="Nap">
+            <Mapping DataField="UserId" ObjectProperty="Id" />
+            <Mapping DataField="userpwd" ObjectProperty="Password" />
+            <Mapping DataField="GroupId" ObjectProperty="Id" />
+            <Mapping DataField="GroupName" ObjectProperty="Name" />
+            <Mapping DataField="CreatorId" ObjectProperty="Id" />
+            <Mapping DataField="CreatorUsername" ObjectProperty="Username" />
+            <Mapping DataField="ModifierId" ObjectProperty="Id" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
+        </Setting>
+        <Setting Key="NAP_User_CheckIn" SpName="NAP_User_CheckIn" DbName="Nap"  />
+        <Setting Key="NAP_User_ReCheckIn" SpName="NAP_User_ReCheckIn" DbName="Nap"  />
+        <Setting Key="NAP_User_SSOCheckIn" SpName="NAP_User_SSOCheckIn" DbName="Nap"  />
+        <Setting Key="NAP_User_Logout" SpName="Nap_User_Logout" DbName="Nap"  />
+        <Setting Key="NAP_User_GetUserSiteLevel" SpName="NAP_User_GetUserSiteLevel" DbName="Nap"  />
+    </Function>
+    <Function Name="Site">
+        <Setting Key="NAP_Site_GetByUser" SpName="NAP_Site_GetByUser" DbName="Nap">
+            <Mapping DataField="SiteId" ObjectProperty="Id" />
+            <Mapping DataField="SiteName" ObjectProperty="Name" />
+            <Mapping DataField="CreatorId" ObjectProperty="Id" />
+            <Mapping DataField="CreatorUsername" ObjectProperty="Username" />
+            <Mapping DataField="ModifierId" ObjectProperty="Id" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
+        </Setting>
+    </Function>
+    <Function Name="MenuItem">
+        <Setting Key="NAP_MenuItem_GetByUserAndSiteIncludeGroup" SpName="NAP_MenuItem_GetByUserAndSiteIncludeGroup" DbName="Nap"></Setting>
+    </Function>
+    <Function Name="LogUserLogin">
+        <Setting Key="NAP_LogUserLogin_Insert" SpName="NAP_LogUserLogin_Insert" DbName="Nap"  />
+    </Function>
+</Functions>

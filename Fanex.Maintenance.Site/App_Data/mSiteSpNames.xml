@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Functions>
-    <Function>
+    <Function Name="Log">
         <Setting Key="Logging_Category_SelAll" SpName="IS_SelLogCategory_ALL" DbName="customer_log"  Plain="1"/>
         <Setting Key="Logging_Sel_Padding" SpName="IS_SelLogPadding_All" DbName="customer_log" Plain="1" />
         <Setting Key="Logging_Del" SpName="IS_DeleteLog" DbName="customer_log" Plain="1" />
-
         <Setting Key="lrf_GetLicenseeStatistic" SpName="lrf_GetLicenseeStatistic" DbName="Licensee" />
         <Setting Key="Lrf_GetFunctionStatistic" SpName="Lrf_GetFunctionStatistic" DbName="Licensee" />
         <Setting Key="Lrf_BrowserStatistic" SpName="Lrf_BrowserStatistic" DbName="Licensee" />
@@ -13,7 +12,7 @@
 
         <Setting Key="Acc_LoginAdmin" SpName="Acc_LoginAdmin" DbName="main" />
     </Function>
-    <Function>
+    <Function Name="Licensee">
         <Setting Key="Lrf_SelBalanceUpDay" SpName="Lrf_SelBalanceUpDay" DbName="licensee_archive" />
         <Setting Key="GET_DepositDataToValidate_SumWL" SpName="GET_DepositDataToValidate_SumWL" DbName="licensee" />
         <Setting Key="GET_DepositDataToValidate_SumWLOld" SpName="GET_DepositDataToValidate_SumWLOld" DbName="licensee" />
@@ -25,7 +24,8 @@
         <Setting Key="Is_SelTotalOnlineUser" SpName="Is_SelTotalOnlineUser" DbName="on_user" />
         <Setting Key="Is_OnlineReportDaily" SpName="Is_OnlineReportDaily" DbName="on_user" />
     </Function>
-    <Function Name="Site">
+    
+    <!--<Function Name="Site">
         <Setting Key="NAP_Site_GetAll" SpName="NAP_Site_GetAll" DbName="Nap"  >
             <Mapping DataField="SiteId" ObjectProperty="Id" />
             <Mapping DataField="SiteName" ObjectProperty="Name" />
@@ -297,5 +297,5 @@
         <Setting Key="NAP_Cust_Insert" SpName="NAP_Cust_Insert" DbName="Nap"  />
         <Setting Key="NAP_Cust_Update" SpName="NAP_Cust_Update" DbName="Nap"  />
         <Setting Key="NAP_Cust_UpdatePassword" SpName="NAP_Cust_UpdatePassword" DbName="Nap"  />
-    </Function>
+    </Function>-->
 </Functions>
