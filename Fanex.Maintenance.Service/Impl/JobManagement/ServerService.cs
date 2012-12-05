@@ -34,6 +34,11 @@ using Fanex.Maintenance.Repository.Interface.JobManagement;
             return new ServerService();
         }
 
+        /// <summary>
+        /// Get Server Full information for showing in Detail Page
+        /// </summary>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
         public ServerFullInfo GetServerFullInformation(string serverIp)
         {
             try
@@ -47,6 +52,37 @@ using Fanex.Maintenance.Repository.Interface.JobManagement;
                 {
                     CpuName = "None"
                 };
+            }
+        }
+
+        /// <summary>
+        /// Get Server Resource Info for Update User View throught SignalR
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public ResourceInfo GetServerResourceInfo(string connectionString)
+        {
+            try
+            {
+                return _serverRepository.GetServerResourceInfo(new GetResourceInfoCriteria(), connectionString);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+                return new ResourceInfo();
+            }
+        }
+
+        public ServerStatus GetServerStatus(string connectionString)
+        {
+            try
+            {
+                return _serverRepository.GetServerStatus(new GetServerStatusCriteria(), connectionString);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+                return new ServerStatus();
             }
         }
     }

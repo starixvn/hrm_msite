@@ -34,6 +34,7 @@ namespace Fanex.Maintenance.Controller.Worker
         public static DateTime LastJobLogNotificationTime { get; set; }
         private IJobService _jobService;
         private ISqlServerLogService _sqlServerLogService;
+        private IServerService _serverService;
         private string _sqlAgentErrorMailFormat = " <table cellspacing=\"0\" border=\"1\" style=\"border-color:DodgerBlue;border-style:Solid;border-collapse:collapse;font-size:8pt;font-family:Tahoma,Arial,Verdana,Sans-Serif\" rules=\"all\"> "
                + " <thead>"
                  + "   <tr align=\"center\" valign=\"Middle\" style=\"background-color:#deedef;min-height:25px;font-weight:bold\">"
@@ -91,6 +92,7 @@ namespace Fanex.Maintenance.Controller.Worker
             _getDataInterval = getDataInterval;
             _jobService = JobService.Create();
             _sqlServerLogService = SqlServerLogService.Create();
+            _serverService = ServerService.Create();
             LastSqlAgentLogNotificationTime = DateTime.Now;
             LastJobLogNotificationTime = DateTime.Now;
         }
@@ -122,8 +124,12 @@ namespace Fanex.Maintenance.Controller.Worker
                         Logger.Log.Error(ex.Message, ex);
                     }
 
+                    //// Notify to client
                     var context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
                     context.Clients.gotMessage(notifyInfoes);
+                    //context.Clients.updateServerStatus(UpdateServerStatus());
+
+                    UpdateServerStatus();
                 }
                 catch (Exception ex)
                 {
@@ -326,6 +332,35 @@ namespace Fanex.Maintenance.Controller.Worker
             }
         }
 
+        /// <summary>
+        /// Get Server status
+        /// </summary>
+        /// <returns>List of ServerStatus</returns>
+        private void UpdateServerStatus()
+        {
+            try
+            {
+                string mailSubject = "Error: Sql Agent Stopped on " + DateTime.Now.ToString();
+                string mailTitle = "Error: Sql Agent Stopped on " + DateTime.Now.ToString();
+                string mailBody = string.Empty;
+                foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
+                {
+                    ServerStatus serverStatus = _serverService.GetServerStatus(server.ConnectionString);
+                    if (serverStatus.SqlServerAgentRunning == false)
+                    {
+                        mailBody += string.Format("<p>Sql Server Agent of Server <span style='font-weight:bold;'>{0} </span> was <span style='font-weight:bold;'>stopped</span></p>", server.ServerIp);
+                    }
+                }
 
+                if (mailBody != string.Empty)
+                {
+                    MailHelper.SendMail(mailSubject, mailTitle, mailBody);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+        }
     }
 }

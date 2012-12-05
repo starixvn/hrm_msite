@@ -65,6 +65,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             return resourceInfo;
         }
 
+        /// <summary>
+        /// Get Server information, Cpu Core, Total ram
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="serverIp"></param>
+        /// <returns></returns>
         public ServerFullInfo GetServerFullInformation(ICriteria criteria, string serverIp)
         {
             ServerFullInfo serverFullInfo = new ServerFullInfo();
@@ -92,5 +98,38 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
             return serverFullInfo;
         }
+
+        /// <summary>
+        /// Get Server Status like SqlServerAgent Status
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="serverIp"></param>
+        /// <returns>Current Server Status</returns>
+        public ServerStatus GetServerStatus(ICriteria criteria, string connectionString)
+        {
+            ServerStatus serverStatus = new ServerStatus();
+
+            DbSetting dbSetting = new DbSetting
+            {
+                ConnectionString = connectionString,
+                SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
+            };
+
+            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            {
+                using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
+                {
+                    while (reader.Read())
+                    {
+                        serverStatus.SqlServerAgentRunning = reader.ToString("SQLAgent").ToLower().Contains("running");
+                        break;
+                    }
+                }
+            }
+
+            return serverStatus;
+        }
+
+
     }
 }

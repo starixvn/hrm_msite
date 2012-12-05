@@ -21,7 +21,7 @@ var SqlServerLogManagement = function ($) {
             $("#To").val(SqlServerLogManagement.dateTo);
 
             $("#From").datepicker({
-                defaultDate: "+1w",
+                //defaultDate: "+5d",
                 changeMonth: true,
                 numberOfMonths: 1,
                 dateFormat: "M dd,yy",
@@ -35,7 +35,7 @@ var SqlServerLogManagement = function ($) {
                 }
             });
             $("#To").datepicker({
-                defaultDate: "+1w",
+                //defaultDate: "+5d",
                 changeMonth: true,
                 numberOfMonths: 1,
                 dateFormat: "M dd,yy",

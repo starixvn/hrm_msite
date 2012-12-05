@@ -1,269 +1,41 @@
 ﻿@{
     ViewBag.Title = "Server Management";
-    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";    
+    Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
+    var leftArray = (List<ResourceInfo>)ViewBag.LeftArray;
+    var rightArray = (List<ResourceInfo>)ViewBag.RightArray;    
+    
+}
+@helper RenderContainer(ResourceInfo resourceInfo)
+    {
+
+        var sqlCpuId = resourceInfo.ServerName + "SqlCpu";
+        var sqlMemoryId = resourceInfo.ServerName + "Memory";
+    <div class="subcontainer" informvalue="0">
+        <div class="serverinfo">
+            <div class="serveripchart" serverdetailip="@resourceInfo.ServerIp">@resourceInfo.ServerIp</div>
+            <span class="servercpu"><span class="servermemoryusagevalue">0</span>%</span> <span
+                class="servermemory"><span class="servermemoryusage">0</span>%</span> <a class="toggler collapse" servername="@resourceInfo.ServerName" servershow="1" title="Expand/Collapse" href="javascript:void(0)">
+                </a>
+        </div>
+        <div id="@sqlCpuId" class="sqlcpu">
+            <div class="loading">
+            </div>
+        </div>
+        <div id="@sqlMemoryId" class="memory">
+            <div class="loading">
+            </div>
+        </div>
+    </div>
 }
 @section Head {
-    <link href="~/themes/job/server/manage.less" rel="stylesheet" type="text/css" />   
-    <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
+    <link href="~/themes/job/server/manage.less" rel="stylesheet" type="text/css" />
     <script src="~/scripts/Plugin/highchart/highcharts.js" type="text/javascript"></script>
     <script src="~/scripts/Plugin/highchart/exporting.js" type="text/javascript"></script>
     <script src="~/scripts/lib/jquery.signalR-0.5.3.js" type="text/javascript"></script>
     <script type="text/javascript" src="~/signalr/hubs"></script>
+    <script src="~/scripts/Job/ServerManagement.js" type="text/javascript"></script>
     <script type="text/javascript">
-        var ServerManagement = function ($) {
-            return {
-                Servers: [],
-                FirstTime: true,
-                MaxMemory: 0,
-                UpdateServerData: function (resourceInfo) {
-                    for (var i = 0; i < ServerManagement.Servers.length; i++) {
-                        if (ServerManagement.Servers[i].ServerIp == resourceInfo.ServerIp) {
-                            ServerManagement.Servers[i] = resourceInfo;
-                            break;
-                        }
-                    }
-                },
-                GetMaxMemory: function (serverName) {
-                    for (var i = 0; i < ServerManagement.Servers.length; i++) {
-                        var server = ServerManagement.Servers[i];
-                        if (server.ServerName == serverName) {
-                            return server.TotalMemory;
-                        }
-                    }
-                },
-                GetDataFromServerName: function (serverName, type) {
-                    for (var i = 0; i < ServerManagement.Servers.length; i++) {
-                        var server = ServerManagement.Servers[i];
-                        if (server.ServerName == serverName) {
-                            if (type == 1) {
-                                var containerdiv = $("#" + serverName + (type == 1 ? "SqlCpu" : "Memory")).prev();
-                                var oldSqlCpu = containerdiv.find(".servermemoryusagevalue").text();
-                                var newSqlCpu = server.SqlCpuPercent;
-                                if (oldSqlCpu != newSqlCpu) {
-                                    var currentColor = containerdiv.find(".servercpu").css("color");
-                                    containerdiv.find(".servercpu").css("color", "Red");
-                                    setTimeout(function () {
-                                        containerdiv.find(".servercpu").css("color", currentColor);
-                                    }, 3000);
-                                }
-                                containerdiv.find(".servermemoryusagevalue").text(newSqlCpu);
-
-                                var oldSqlRam = containerdiv.find(".servermemoryusage").text();
-                                var newSqlRam = Math.round(server.MemoryUsage * 100 / server.TotalMemory);
-                                if (oldSqlRam != newSqlRam) {
-                                    var currentColor = containerdiv.find(".servermemory").css("color");
-                                    containerdiv.find(".servermemory").css("color", "Red");
-                                    setTimeout(function () {
-                                        containerdiv.find(".servermemory").css("color", currentColor);
-                                    }, 3000);
-                                }
-                                containerdiv.find(".servermemoryusage").text(newSqlRam);
-
-                                return server.SqlCpuPercent;
-                            }
-                            else {
-                                return server.MemoryUsage;
-                            }
-                        }
-                    }
-                },
-                RenderChart: function (charid, type, title, ytitle, pointTitle) {
-                    var charIdCombine = charid + (type == 1 ? "SqlCpu" : "Memory");
-                    var pointColor = (type == 1 ? '#4572A7' : '#CCBB66');
-                    var yAxisCustom = (type == 1 ? {
-                        title: {
-                            text: ytitle
-                        },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#8011111'
-                        }],
-                        min: 0,
-                        max: 100
-                    } : {
-                        title: {
-                            text: ytitle
-                        },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#8011111'
-                        }],
-                        min: 0,
-                        max: 100
-                    });
-                    return new Highcharts.Chart({
-                        name: charid,
-                        chart: {
-                            renderTo: charIdCombine,
-                            type: 'spline',
-                            marginRight: 25,
-                            events: {
-                                load: function () {
-
-                                    // set up the updating of the chart each second
-                                    var series = this.series[0];
-                                    setInterval(function () {
-                                        var x = (new Date()).getTime() // current time
-                                        y = ServerManagement.GetDataFromServerName(charid, type); //Math.random();
-                                        if (type != 1) {
-                                            y = Math.round(y * 100 / ServerManagement.GetMaxMemory(charid))
-                                        }
-                                        series.addPoint([x, y], true, true);
-                                    }, 4000);
-                                }
-                            }
-                        },
-                        title: {
-                            text: title
-                        },
-                        xAxis: {
-                            type: 'datetime',
-                            tickPixelInterval: 75
-                        },
-                        yAxis: yAxisCustom,
-                        tooltip: {
-                            formatter: function () {
-                                return '<b>' + this.series.name + '</b><br/>' +
-                                Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                                Highcharts.numberFormat(this.y, 2);
-                            }
-                        },
-                        legend: {
-                            enabled: false
-                        },
-                        exporting: {
-                            enabled: false
-                        },
-                        series: [{
-                            name: pointTitle,
-                            color: pointColor,
-                            data: (function () {
-                                // generate an array of random data
-                                var data = [],
-                                time = (new Date()).getTime(),
-                                i;
-
-                                for (i = -10; i <= 0; i++) {
-                                    var yValue = ServerManagement.GetDataFromServerName(charid, type);
-                                    if (type != 1) {
-                                        yValue = Math.round(yValue * 100 / ServerManagement.GetMaxMemory(charid))
-                                    }
-                                    data.push({
-                                        x: time + i * 4000,
-                                        y: yValue
-                                    });
-                                }
-                                return data;
-                            })()
-                        }]
-                    });
-                }
-            };
-
-        } (jQuery);
-
-        // Proxy created on the fly
-        var serverInfoHub = $.connection.serverInfoHub;
-
-        // Declare a function on the chat hub so the server can invoke it
-        serverInfoHub.addMessage = function (message) {
-            alert(message);
-        };
-
-        serverInfoHub.firstMessage = function (resourceInfoes) {
-            $('#information').empty()
-            for (var i = 0; i < resourceInfoes.length; i++) {
-                ServerManagement.Servers.push(resourceInfoes[i]);
-            }
-            var totalLeft = Math.round(ServerManagement.Servers.length / 2);
-            var totalRight = ServerManagement.Servers.length - totalLeft;
-            var arrayLeft = [];
-            var arrayRight = [];
-            var index;
-            for (var i = 0; i < totalLeft; i++) {
-                arrayLeft.push(ServerManagement.Servers[i]);
-            }
-            for (var i = totalLeft; i < totalRight + totalLeft; i++) {
-                arrayRight.push(ServerManagement.Servers[i]);
-            }
-            $("#resourceInfoContainerLeft").empty().html($("#containerTemplate").render(arrayLeft));
-            $("#resourceInfoContainerRight").empty().html($("#containerTemplate").render(arrayRight));
-            ServerManagement.FirstTime = false;
-            var arrayChart = [];
-            for (var i = 0; i < ServerManagement.Servers.length; i++) {
-                var server = ServerManagement.Servers[i];
-                arrayChart.push(ServerManagement.RenderChart(server.ServerName, 1, "Sql Server Cpu", "%", "Cpu Usage"));
-                arrayChart.push(ServerManagement.RenderChart(server.ServerName, 2, "Sql Server Memory Usage", "%", "Memory Usage"));
-            }
-            $('.subcontainer .toggler').live("click", function () {
-                var $this = $(this);               
-
-                var granParent = $this.parent().parent();
-                var serverName = $this.attr("servername");
-                var serverShow = $this.attr("servershow");
-                if (serverShow == "1") {
-                    $("#" + serverName + "SqlCpu").hide("fast");
-                    $("#" + serverName + "Memory").hide("fast");
-                    $this.attr("servershow", "0");
-                    granParent.css("height", 30);
-                    $this.removeClass("collapse");
-                    $this.addClass("expand");
-                }
-                else {
-                    $("#" + serverName + "SqlCpu").show("fast");
-                    $("#" + serverName + "Memory").show("fast");
-                    $this.attr("servershow", "1");
-                    granParent.css("height", 440);                  
-                    $this.removeClass("expand");
-                    $this.addClass("collapse");
-                }
-            });
-            $('#togglerall').live("click", function () {
-                var $this = $(this);
-                var serverShow = $this.attr("servershow");
-                if (serverShow == "1") {
-                    //$(".subcontainer .sqlcpu,.subcontainer .memory").hide();
-                    $(".subcontainer .toggler").attr("servershow", "1");
-                    $(".subcontainer .toggler").trigger("click");
-                    $this.attr("servershow", "0");
-                    $this.removeClass("collapse");
-                    $this.addClass("expand");
-                }
-                else {
-                    //$(".subcontainer .sqlcpu,.subcontainer .memory").show();
-                    $(".subcontainer .toggler").attr("servershow", "0");
-                    $(".subcontainer .toggler").trigger("click");
-                    $this.attr("servershow", "1");
-                    $this.removeClass("expand");
-                    $this.addClass("collapse");
-                }
-            });
-            $(".serverinfo .serveripchart").live("click", function () {
-                var serverIp = $(this).attr("serverdetailip");
-                var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + serverIp);
-                parent.$("#centerFr").attr("src", queryString);
-            });
-            NAP.loadingBox.close();
-        };
-
-        serverInfoHub.gotMessage = function (resourceInfo) {
-            ServerManagement.UpdateServerData(resourceInfo);
-        };
-
-    </script>
-    <script id="containerTemplate" type="text/x-jsrender">
-        <div class="subcontainer">
-            <div class="serverinfo">
-                <div class="serveripchart" serverdetailip="{{>ServerIp}}">{{>ServerIp}}</div>
-                <span class="servercpu"><span class="servermemoryusagevalue">{{>SqlCpuPercent}}</span>%</span>
-                <span class="servermemory"><span class="servermemoryusage">{{>MemoryUsage}}</span>%</span>
-                <a class="toggler collapse" servername="{{>ServerName}}" servershow="1" title="Expand/Collapse" href="javascript:void(0)">  </a>
-            </div>
-            <div id="{{>ServerName}}SqlCpu" class="sqlcpu"></div>
-            <div id="{{>ServerName}}Memory" class="memory"></div>
-        </div>
+        var getDataTimeInterval = @AppSetting.GetServerResourcesInfoInterval;
     </script>
 }
 @section HeaderBar {
@@ -274,7 +46,8 @@
         <a class="current">@ViewResource.ServerManagement</a>
         
         </article>
-        <a id="togglerall" class="toggler collapse" servershow="1" title="Expand/Collapse" href="javascript:void(0)" style="margin-top:12px;margin-right:2px;">  </a>
+    <a id="togglerall" class="toggler collapse" servershow="1" title="Expand/Collapse"
+        href="javascript:void(0)" style="margin-top: 12px; margin-right: 2px;"></a>
 }
 <section class="column" id="main">
     <div class="content">
@@ -288,8 +61,18 @@
             </thead>
         </table>
         <div id="resourceInfoContainer">
-            <div id="resourceInfoContainerLeft"> </div>
-            <div id="resourceInfoContainerRight"> </div>
+            <div id="resourceInfoContainerLeft" class="connectedSortable"> 
+                @foreach (var resourceInfo in leftArray)
+                {
+                    @RenderContainer(resourceInfo)
+                }
+            </div>
+            <div id="resourceInfoContainerRight" class="connectedSortable"> 
+                @foreach (var resourceInfo in rightArray)
+                {
+                    @RenderContainer(resourceInfo)
+                }
+            </div>
         </div>
     </div>
     
@@ -297,18 +80,11 @@
 @section Foot {
     <script type="text/javascript">
         $(function () {
-            NAP.loadingBox.show();
             Highcharts.setOptions({
                 global: {
                     useUTC: false
                 }
             });
-
-            $.connection.hub.start(function () {
-                serverInfoHub.getListServerInfoFirstTime();
-            });
-
-
         });
     </script>
 }

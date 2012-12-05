@@ -13,7 +13,7 @@ var JobLogManagement = function ($) {
         InitDatetimePicker: function () {
 
             $("#From").datepicker({
-                defaultDate: "+1w",
+                //defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
                 dateFormat: "M dd,yy",
@@ -27,7 +27,7 @@ var JobLogManagement = function ($) {
                 }
             });
             $("#To").datepicker({
-                defaultDate: "+1w",
+                //defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 1,
                 dateFormat: "M dd,yy",
@@ -150,7 +150,7 @@ $(document).ready(function () {
     // #region actions dropdownlist
     var event = NAP.agentIsOldIe || NAP.agentIsApple ? 'click' : 'hover';
 
-    $('.action-wrp').bind("click", function (e) {
+    $(document).on("click", ".action-wrp", function (e) {
         var $this = $(this),
     			dropdown = $this.find('.actions');
 

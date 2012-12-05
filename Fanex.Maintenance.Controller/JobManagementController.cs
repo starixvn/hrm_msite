@@ -534,6 +534,33 @@ namespace Fanex.Maintenance.Controller
         /// <returns></returns>       
         public ActionResult ServerManagement()
         {
+            List<ResourceInfo> leftArray = new List<ResourceInfo>();
+            List<ResourceInfo> rightArray = new List<ResourceInfo>();
+            int leftLength = (DatabaseServersSection.Instance.ResourceServers.Count + 1) / 2;
+            int index = 0;
+            foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
+            {
+                ResourceInfo resourceInfo = new ResourceInfo
+                {
+                    ServerIp = server.ServerIp,
+                    ServerName = server.ServerIp.Replace(".","_")
+                };
+
+                if (index < leftLength)
+                {
+                    leftArray.Add(resourceInfo);
+                }
+                else
+                {
+                    rightArray.Add(resourceInfo);
+                }
+
+                index++;
+            }
+
+            ViewBag.LeftArray = leftArray;
+            ViewBag.RightArray = rightArray;
+
             return View();
         }
 

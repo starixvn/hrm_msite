@@ -33,9 +33,10 @@
 }
 */
 
-@font-face {
-	font-family: "Yanone Kaffeesatz";
-	font-style: normal;
-	font-weight: 400;
-	src: local("Yanone Kaffeesatz Regular"), local("YanoneKaffeesatz-Regular"), url("fonts/YanoneKaffeesatz.woff") format("woff");
+@font-face
+{
+    font-family: "Yanone Kaffeesatz";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Yanone Kaffeesatz Regular"), local("YanoneKaffeesatz-Regular"), url("fonts/YanoneKaffeesatz.woff") format("woff");
 }

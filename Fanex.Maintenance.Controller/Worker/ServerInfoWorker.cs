@@ -7,22 +7,20 @@
 //   <change who="Ricky.Nguyen" date="2012.10.24">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Controller.Worker
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using Fanex.Logging;
-using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Core.Configurations;
-using Fanex.Maintenance.Repository.Impl.JobManagement;
-    using Fanex.Maintenance.Repository.Interface.JobManagement;
-    using Fanex.Maintenance.Criteria.Job;
-    using SignalR;
     using Fanex.Maintenance.Controller.Hubs;
+    using Fanex.Maintenance.Core.Configurations;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Service.Impl.JobManagement;
+    using Fanex.Maintenance.Service.Interface.JobManagement;
+    using SignalR;
+    using SignalR.Hubs;
 
     /// <summary>
     /// TODO: Update summary.
@@ -30,14 +28,19 @@ using Fanex.Maintenance.Repository.Impl.JobManagement;
     public class ServerInfoWorker : BaseWorker
     {
         private int _getDataInterval { get; set; }
-        private IServerRepository _serverRepository { get; set; }
+
+        private IServerService _serverService { get; set; }
+
+        private static Dictionary<string, bool> _checkingList;
+
+        private IHubContext _hubContext;
 
         public ServerInfoWorker(
-            int getDataInterval = 60000)
+            int getDataInterval = 3000)
             : base()
         {
             _getDataInterval = getDataInterval;
-            _serverRepository = new ServerRepository();
+            _serverService = ServerService.Create();
         }
 
         /// <summary>
@@ -45,15 +48,21 @@ using Fanex.Maintenance.Repository.Impl.JobManagement;
         /// </summary>
         protected override void Run()
         {
+            //// Init check list for query
+            _checkingList = new Dictionary<string, bool>();
+            foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
+            {
+                _checkingList.Add(server.ServerIp, false);
+            }
+
+            //// Main Function
             while (true)
             {
                 Thread.Sleep(_getDataInterval);
-
                 if (IsStop)
                 {
                     break;
                 }
-
 
                 try
                 {
@@ -72,25 +81,42 @@ using Fanex.Maintenance.Repository.Impl.JobManagement;
         private void GetListResourceInfo()
         {
             //List<ResourceInfo> resourceInfoes = new List<ResourceInfo>();
-            var context = GlobalHost.ConnectionManager.GetHubContext<ServerInfoHub>();
+            _hubContext = GlobalHost.ConnectionManager.GetHubContext<ServerInfoHub>();
             foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
             {
-                //try
-                //{
-                    ResourceInfo resourceInfo = _serverRepository.GetServerResourceInfo(new GetResourceInfoCriteria(), server.ConnectionString);
-                    resourceInfo.ServerIp = server.ServerIp;
-                    resourceInfo.ServerName = server.ServerIp.Replace(".", "_");
-                    context.Clients.gotMessage(resourceInfo);
-                //}
-                //catch (Exception ex)
-                //{
-                //    Logger.Log.Error(ex.ToString(),ex);
-                //}
+                Task.Factory.StartNew(UpdateResourceInfoToClient, server);
             }
+        }
 
-            
-            
-
+        /// <summary>
+        /// Get Resource info and return to client
+        /// </summary>
+        /// <param name="serverIp"></param>
+        private void UpdateResourceInfoToClient(object server)
+        {
+            try
+            {
+                ServerElement serverElement = server as ServerElement;
+                if (serverElement != null
+                    && _checkingList[serverElement.ServerIp] == false)
+                {
+                    //// Update that server is doing, so other thread cannot access
+                    _checkingList[serverElement.ServerIp] = true;
+                    //// Get Data
+                    ResourceInfo resourceInfo = _serverService.GetServerResourceInfo(serverElement.ConnectionString);
+                    resourceInfo.ServerIp = serverElement.ServerIp.ToString();
+                    resourceInfo.ServerName = resourceInfo.ServerIp.Replace(".", "_");
+                    if (_hubContext != null)
+                    {
+                        _hubContext.Clients.gotMessage(resourceInfo);
+                    }
+                    _checkingList[serverElement.ServerIp] = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.ToString(), ex);
+            }
         }
     }
 }

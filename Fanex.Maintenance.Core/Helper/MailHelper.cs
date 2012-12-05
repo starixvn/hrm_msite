@@ -33,7 +33,7 @@ namespace Fanex.Maintenance.Core.Helper
             {
                 foreach (MailElement mail in MailSection.Instance.Mails)
                 {
-                    if (mail.To != string.Empty)
+                    if (!string.IsNullOrEmpty(mail.To))
                     {
                         using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
                         {
