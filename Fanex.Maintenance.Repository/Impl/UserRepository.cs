@@ -38,7 +38,7 @@ namespace Fanex.Maintenance.Repository.Impl
                 using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
                 {                    
                     objectDb.ExecuteNonQuery(hash);
-
+                    
                     return this.GetCommandResult(hash);
                 }
             }
