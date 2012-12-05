@@ -7,47 +7,51 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-	<meta charset="utf-8" />
-	<title>Sign In</title>
-	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	<meta name="viewport" content="width=device-width" />
-	<link href="~/areas/userlogin/themes/login.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <title>@ViewResources.Log_In</title>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Areas/UserLogin/scripts/lib/jquery-1.8.0.min.js"
+        type="text/javascript"></script>
+    <link href="~/areas/userlogin/themes/login.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/UserLogin/scripts/lib/msgbox/msgbox-0.0.1.css" rel="stylesheet"
+        type="text/css" />
+    <script src="~/Areas/UserLogin/scripts/lib/msgbox/msgbox-0.0.1.js" type="text/javascript"></script>
 </head>
 <body>
-	<div id='not-supported-browser-panel' style="display: none">
-		Your browser is no longer supported. Some parts will not work and you may experience problems.<br />
-		If you are having problems, try <a href='http://browsehappy.com/'>this</a> for full browsing experience. Thank you!
-	</div>
-@using (Html.BeginForm())
-{
-	<div id="login-box">
-		<div id="msg">
-			<span id="inner-msg">@ViewBag.Message</span>
-		</div>
-		<div class="header">
-			<div class="welcome"></div>
-			<div class="secure"></div>
-		</div>
-		<div class="auth">
-			<input type="text" id="username" name="username" autocomplete="off" />
-			<input type="password" id="password" name="password" />
-			<input type="submit" id="submit" value="Sign In" />
-		</div>
-	</div>
-}
+    <div id='not-supported-browser-panel' style="display: none">
+        Your browser is no longer supported. Some parts will not work and you may experience
+        problems.<br />
+        If you are having problems, try <a href='http://browsehappy.com/'>this</a> for full
+        browsing experience. Thank you!
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div id="login-box">
+            <div id="msg">
+                <span id="inner-msg">@ViewBag.Message</span>
+            </div>
+            <div class="header">
+                <div class="welcome">
+                </div>
+                <div class="secure">
+                </div>
+            </div>
+            <div class="auth">
+                <input type="text" id="username" name="username" autocomplete="off" />
+                <input type="password" id="password" name="password" />
+                <input type="submit" id="submit" value="@ViewResources.Log_In" />
+            </div>
+        </div>
+    }
 </body>
 </html>
-
-<script type="text/javascript">
-	eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('3 4,2,7,o;p.M=f(){N(\'p.O.P()\',0);4=d.g(\'4\');w=d.g(\'Q-4\');2=d.g(\'2\');7=d.g(\'7\');o=d.g(\'R\');x();6(w.S.q>0){4.e.h=\'y\';l(\'4\',5,r)}t{4.e.h=\'u\'}};d.T[0].U=f(){4.e.h=\'u\';3 a=V;2.k=2.k.z();6(2.k.q==0){2.m.A(\'n\');a=B;l(\'2\',5,r)}t{2.m.C(\'n\')}6(7.k.q==0){7.m.A(\'n\');a=B;l(\'7\',5,r)}t{7.m.C(\'n\')}6(a){o.k=\'W X\'}v a};Y.Z.z=f(){v 10.D(/^\\s*/,"").D(/\\s*$/,"")};f l(a,b,c){11(3 i=b,j=0;i>=0;i--){E(a+".e.F = \'-"+i+"G\'",j++*c);E(a+".e.F = \'"+i+"G\'",j++*c)}}f x(){3 a=H();6(a!=-1&&a<8.0){3 b=d.g(\'12-13-14-15\');6(b.e.h==\'u\'){b.e.h=\'y\'}}};f H(){3 a=-1;6(p.I.J.16("K")>0){3 b=I.J;3 c=17 L("K ([0-9]{1,}[\\.0-9]{0,})");6(c.18(b)!=19)a=1a(L.$1)}v a};',62,73,'||username|var|msg||if|password||||||document|style|function|getElementById|display|||value|shake|classList|err|btnSubmit|window|length|100||else|none|return|innerMsg|checkBrowser|block|trim|add|false|remove|replace|setTimeout|left|0px|getIeVersion|navigator|userAgent|MSIE|RegExp|onload|setInterval|history|forward|inner|submit|innerHTML|forms|onsubmit|true|Signing|In|String|prototype|this|for|not|supported|browser|panel|indexOf|new|exec|null|parseFloat'.split('|'),0,{}))
-</script>
-
+<script type="text/javascript">    eval(function (p, a, c, k, e, r) { e = function (c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c); k = [function (e) { return r[e] } ]; e = function () { return '\\w+' }; c = 1 }; while (c--) if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]); return p } ('3 4,2,6,w;o.M=f(){p(\'o.N.O()\',0);4=7.g(\'4\');x=7.g(\'P-4\');2=7.g(\'2\');6=7.g(\'6\');w=7.g(\'Q\');y();d(x.R.q>0){4.e.h=\'z\';k(\'4\',5,r)}t{4.e.h=\'u\'}};7.S[0].T=f(){4.e.h=\'u\';3 a=U;2.l=2.l.A();d(2.l.q==0){2.m.B(\'n\');a=C;k(\'2\',5,r)}t{2.m.D(\'n\')}d(6.l.q==0){6.m.B(\'n\');a=C;k(\'6\',5,r)}t{6.m.D(\'n\')}v a};V.W.A=f(){v X.E(/^\\s*/,"").E(/\\s*$/,"")};f k(a,b,c){Y(3 i=b,j=0;i>=0;i--){p(a+".e.F = \'-"+i+"G\'",j++*c);p(a+".e.F = \'"+i+"G\'",j++*c)}}f y(){3 a=H();d(a!=-1&&a<8.0){3 b=7.g(\'Z-10-11-12\');d(b.e.h==\'u\'){b.e.h=\'z\'}}};f H(){3 a=-1;d(o.I.J.13("K")>0){3 b=I.J;3 c=14 L("K ([0-9]{1,}[\\.0-9]{0,})");d(c.15(b)!=16)a=17(L.$1)}v a};', 62, 70, '||username|var|msg||password|document||||||if|style|function|getElementById|display|||shake|value|classList|err|window|setTimeout|length|100||else|none|return|btnSubmit|innerMsg|checkBrowser|block|trim|add|false|remove|replace|left|0px|getIeVersion|navigator|userAgent|MSIE|RegExp|onload|history|forward|inner|submit|innerHTML|forms|onsubmit|true|String|prototype|this|for|not|supported|browser|panel|indexOf|new|exec|null|parseFloat'.split('|'), 0, {}))</script>
 @*<script type="text/javascript">
 
 	var msg, username, password, btnSubmit;
 
 	window.onload = function () {
-		setInterval('window.history.forward()', 0);
+		setTimeout('window.history.forward()', 0);
 
 		msg = document.getElementById('msg');
 		innerMsg = document.getElementById('inner-msg');
@@ -87,11 +91,6 @@
 			shake('password', 5, 100);
 		} else {
 			password.classList.remove('err');
-		}
-
-		if (isValid) {
-			btnSubmit.value = 'Signing In';
-			//btnSubmit.disabled = true;
 		}
 
 		return isValid;

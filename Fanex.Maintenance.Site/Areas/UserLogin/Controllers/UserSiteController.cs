@@ -1,25 +1,26 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="UserSiteController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Edward.Nguyen" date="2012.10.16">Created</change>
+//   <change who="Edward.Nguyen" date="2012.8.28">Add properties _currentContext</change>
 // </history>
-
 
 namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
+    using System.Web;
     using System.Web.Mvc;
+    using Fanex.Common;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Model;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
-    using Fanex.Common;
     using Fanex.NAP.Core.Web.Session;
-    using System.Web;
-    using Fanex.NAP.Core.Model;
-    using Fanex.NAP.Core.Business;
+    using System.Diagnostics.CodeAnalysis;
 
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class UserSiteController : BaseController
     {
         #region members
@@ -31,7 +32,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         #region ctors
 
-        public UserSiteController() : this(null, null) { }
+        public UserSiteController()
+            : this(null, null)
+        {
+        }
 
         public UserSiteController(ISiteService siteService, ICurrentSession currentSession)
         {
@@ -45,42 +49,30 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         public ActionResult Site()
         {
-            if (HttpContext.User.Identity.IsAuthenticated
-                && _currentSession.UserId > 0)
+            if (HttpContext.User.Identity.IsAuthenticated && _currentSession.UserId > 0)
             {
-                var listSite = _siteService.GetByUser(_currentSession.UserId);
+                var siteUrlList = _siteService.GetSiteUrlByUser(_currentSession.UserId, this.Environment);
 
-                ViewBag.OnUserId = _currentSession.OnUserId;
+                ViewBag.OnUserId = _currentSession.OnUserId; // for re-checkin
 
-                return View(listSite);
+                return View(siteUrlList);
             }
 
             return RedirectToAction("logout", "login");
         }
 
         [HttpGet]
-        public ActionResult GoToSite(string id)
+        public ActionResult Forward(string id)
         {
-            string param = GenerateQueryParam(_currentSession.UserId, _currentSession.OnUserId);
-            Site objSite = (Site)_siteService.GetById(int.Parse(id));
+            int siteUrlId = Convert.ToInt32(id);
+            var siteUrl = _siteService.GetSiteUrlById(siteUrlId);
 
-            if (this._environment.Equals(Constant.LIVE))
-            {
-                return new RedirectResult(objSite.Url + "/UserLogin/SSO/SSOIndex?" + param);
-            }
-            else
-            {
-                return new RedirectResult(objSite.TestUrl + "/UserLogin/SSO/SSOIndex?" + param);
-            }
-        }
-
-        protected string GenerateQueryParam(int userId, int onUserId)
-        {
-            string timeSubmit = DateTime.Now.ToString("G");
-            timeSubmit = Cryptography.CfsEnCrypt(timeSubmit);
-            string strUserId = Cryptography.CfsEnCrypt(userId.ToString());
-            string strOnUserId = Cryptography.CfsEnCrypt(onUserId.ToString());
-            return "UserId=" + strUserId + "&OnUserId=" + strOnUserId + "&Time=" + timeSubmit;
+            return new RedirectResult(
+                string.Format("{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}",
+                    siteUrl.Url.Trim(),
+                    Cryptography.CfsEnCrypt(_currentSession.UserId.ToString()),
+                    Cryptography.CfsEnCrypt(_currentSession.OnUserId.ToString()),
+                    Cryptography.CfsEnCrypt(DateTime.Now.ToString("G"))));
         }
 
         #endregion
