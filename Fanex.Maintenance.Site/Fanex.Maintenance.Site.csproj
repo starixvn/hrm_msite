@@ -193,6 +193,7 @@
     <Content Include="scripts\Job\ServerManagement.js" />
     <Content Include="scripts\Job\LeftMenuPage.js" />
     <Content Include="scripts\Job\Index.js" />
+    <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\jquery.qtip-1.0.0-rc3.min.js" />
     <Content Include="scripts\lib\jquery.signalR-0.5.3.js" />
     <Content Include="scripts\lib\jquery.signalR-0.5.3.min.js" />
