@@ -77,6 +77,7 @@ using Fanex.Maintenance.Core.Web;
                             }
                         }
                     }
+
                     break;
                 case (int)ServerType.Resource:
                     {
@@ -97,8 +98,10 @@ using Fanex.Maintenance.Core.Web;
                             }
                         }
                     }
+
                     break;
             }
+
             return connectionString;
         }
 
@@ -116,6 +119,7 @@ using Fanex.Maintenance.Core.Web;
                     return server.ServerIp;
                 }
             }
+
             return string.Empty;
         }
 

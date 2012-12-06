@@ -11,19 +11,21 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.Maintenance.Service.Interface.JobManagement;
-    using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Repository.Interface.JobManagement;
-    using Fanex.Maintenance.Core.Configurations;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Fanex.Maintenance.Repository.Impl.JobManagement;
-    using Fanex.Maintenance.Criteria.Job;
-    using Fanex.Maintenance.Core.Web;
     using Fanex.Logging;
+    using Fanex.Maintenance.Core.Configurations;
+    using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Repository.Impl.JobManagement;
+    using Fanex.Maintenance.Repository.Interface.JobManagement;
+    using Fanex.Maintenance.Service.Interface.JobManagement;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class JobService : IJobService
     {
         #region Member
@@ -339,7 +341,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 List<JobLog> list = _jobRepository.GetJobLog(criteria, this._server).ToList();
 
                 if (!ReferenceEquals(list, null) && list.Count > 0)
-                {                    
+                {
                     int indexOutCome = 0;
                     for (int i = 0; i < list.Count; i++)
                     {
@@ -353,10 +355,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                             if (itemLog.RunSatus == 0 || itemLog.RunSatus == 2)
                             {
                                 list[indexOutCome].RunSatus = 6;
-                            }                            
+                            }
                         }
                     }
                 }
+
                 return list;
             }
             catch (Exception ex)
@@ -391,7 +394,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             return new List<JobSchedule>();
         }
-
 
         /// <summary>
         /// Get job buy schedule name
@@ -478,7 +480,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             return commandResult;
         }
-
 
         public IJobService WithScheduleId(int? scheduleId)
         {

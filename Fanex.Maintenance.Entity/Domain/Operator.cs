@@ -7,9 +7,11 @@
 //   <change who="Edward.Nguyen" date="2012.10.5">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Entity.Domain
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Operator : IEntity<int, string>
     {
         /// <summary>

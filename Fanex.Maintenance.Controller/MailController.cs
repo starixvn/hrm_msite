@@ -38,7 +38,7 @@ namespace Fanex.Maintenance.Controller
         #region Ctor
 
         /// <summary>
-        /// Mail Service Parameterless controller
+        /// Mail Service Parameter less controller
         /// </summary>
         public MailController()
             : this(null)
@@ -203,7 +203,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
-        /// <param name="applicationID">if applicationid=0 get all</param>
+        /// <param name="applicationID">if application id = 0 get all</param>
         /// <param name="mailStatus"></param>
         /// <returns></returns>
         [HttpPost]
@@ -347,7 +347,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get mail config filter by serverip
+        /// Get mail config filter by server ip
         /// </summary>
         /// <param name="serverIp"></param>
         /// <returns></returns>

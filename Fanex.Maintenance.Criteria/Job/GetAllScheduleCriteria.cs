@@ -13,10 +13,12 @@ namespace Fanex.Maintenance.Criteria.Job
     using System;
     using System.ComponentModel.DataAnnotations;
     using Fanex.Maintenance.Core;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetAllScheduleCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]

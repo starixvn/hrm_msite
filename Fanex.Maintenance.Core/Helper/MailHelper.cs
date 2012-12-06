@@ -13,7 +13,6 @@ namespace Fanex.Maintenance.Core.Helper
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Logging;
     
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

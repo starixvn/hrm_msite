@@ -15,25 +15,27 @@ namespace Fanex.Maintenance.Core.Web
     using System.Web;
     using Fanex.Logging;
     using Fanex.Common;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class AppSetting
     {
         /// <summary>
         /// Is Virtual
         /// </summary>
         private static string _isVirtualDir = "false";
-        
+
         /// <summary>
         /// Minute
         /// </summary>
         private static int _minute = 10;
 
         private static int _getDataNotifyInterval = 60000;
-        private static int _getServerResourcesInfoInterval = 2000;
 
+        private static int _getServerResourcesInfoInterval = 2000;
 
         /// <summary>
         /// Contructor
@@ -90,7 +92,6 @@ namespace Fanex.Maintenance.Core.Web
                 return _getServerResourcesInfoInterval;
             }
         }
-            
 
         /// <summary>
         /// Culture Info
@@ -149,16 +150,16 @@ namespace Fanex.Maintenance.Core.Web
         /// <summary>
         /// Is Success
         /// </summary>
-        public bool isSuccess = true;
+        public bool IsSuccess = true;
 
         /// <summary>
         /// Is DataOk
         /// </summary>
-        public bool isDataOK = false;
+        public bool IsDataOK = false;
 
         /// <summary>
         /// Error Message
         /// </summary>
-        public string errMsg = string.Empty;
+        public string ErrMsg = string.Empty;
     }
 }

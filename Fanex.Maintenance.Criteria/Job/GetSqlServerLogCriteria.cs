@@ -7,20 +7,18 @@
 //   <change who="Ricky.Nguyen" date="2012.10.10">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Criteria.Job
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
     using Fanex.Maintenance.Core;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetSqlServerLogCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]
@@ -33,7 +31,6 @@ namespace Fanex.Maintenance.Criteria.Job
         [SpParam(Ignored = true)]
         [Display(Name = "To", ResourceType = typeof(ViewResource))]
         public DateTime To { get; set; }
-
 
         [SpParam(Ignored = true)]
         public int? ErrorLevel { get; set; }
@@ -63,7 +60,6 @@ namespace Fanex.Maintenance.Criteria.Job
         /// Search string 2: String two you want to search for to further refine the results
         /// </summary>
         public string p4 { get; set; }
-
 
         public override bool IsValid()
         {

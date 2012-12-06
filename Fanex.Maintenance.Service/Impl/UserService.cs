@@ -9,6 +9,7 @@
 
 namespace Fanex.Maintenance.Service.Impl
 {
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Repository.Impl;
     using Fanex.Maintenance.Repository.Interface;
     using Fanex.Maintenance.Service.Interface;
@@ -17,6 +18,7 @@ namespace Fanex.Maintenance.Service.Impl
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository = new UserRepository();

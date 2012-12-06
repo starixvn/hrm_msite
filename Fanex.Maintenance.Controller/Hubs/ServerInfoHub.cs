@@ -7,22 +7,20 @@
 //   <change who="Ricky.Nguyen" date="2012.10.24">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Controller.Hubs
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using SignalR.Hubs;
-    using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Repository.Impl.JobManagement;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Repository.Impl.JobManagement;
+    using SignalR.Hubs;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ServerInfoHub : Hub
     {
         public void SendData(string data)

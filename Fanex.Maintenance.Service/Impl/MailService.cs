@@ -10,15 +10,17 @@
 namespace Fanex.Maintenance.Service.Impl
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using Fanex.Maintenance.Service.Interface;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Fanex.MailDeliver.MailClient.API;
     using Fanex.MailDeliver.Model;
+    using Fanex.Maintenance.Service.Interface;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailService : IMailService
     {
         #region Member
@@ -73,7 +75,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// By applicationid
+        /// By application id
         /// </summary>
         /// <param name="appId"></param>
         /// <returns></returns>
@@ -156,8 +158,9 @@ namespace Fanex.Maintenance.Service.Impl
                 var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, _page, _counter, _mailStatus);
                 if (data != null)
                 {
-                    mails = data.Select(mailRecord => {
-                        mailRecord.MailTo = mailRecord.MailTo.Replace(";","<br />");
+                    mails = data.Select(mailRecord =>
+                    {
+                        mailRecord.MailTo = mailRecord.MailTo.Replace(";", "<br />");
                         mailRecord.MailBcc = mailRecord.MailBcc.Replace(";", "<br />");
                         mailRecord.MailCc = mailRecord.MailCc.Replace(";", "<br />");
                         return mailRecord;

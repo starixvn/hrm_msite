@@ -17,10 +17,12 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.DatabaseReport;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Database report controller
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class DatabaseReportController : Controller
     {
         #region Member
@@ -35,7 +37,7 @@ namespace Fanex.Maintenance.Controller
         #region Ctor
 
         /// <summary>
-        /// Parameterless constructor
+        /// Parameter less constructor
         /// </summary>
         public DatabaseReportController()
             : this(null)
@@ -43,7 +45,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Constuctor with service input
+        /// Constructor with service input
         /// </summary>
         /// <param name="databaseReportService"></param>
         public DatabaseReportController(IDatabaseReportService databaseReportService)
@@ -61,8 +63,10 @@ namespace Fanex.Maintenance.Controller
         public ActionResult DataIntegrity()
         {
             var criteria = new GetBalanceUpDayCriteria();
+            
             DataTable balanceUpDayTable = _databaseReportService.GetBalanceUpDay(criteria);
             var moveBetsDay = (DateTime)balanceUpDayTable.Rows[0][1];
+
             var sinceLastMonth = new DateTime(moveBetsDay.AddMonths(-1).Year, moveBetsDay.AddMonths(-1).Month, 1);
             ViewBag.MinDate = string.Format("{0:dd/MM/yyyy}", sinceLastMonth);
             ViewBag.MaxDate = string.Format("{0:dd/MM/yyyy}", moveBetsDay);
@@ -154,7 +158,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// User Online Dayli by date
+        /// User Online Daily by date
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>

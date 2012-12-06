@@ -40,14 +40,14 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
         IJobService WithJob(string jobName);
 
         /// <summary>
-        /// Filter by shedule name
+        /// Filter by schedule name
         /// </summary>
         /// <param name="scheduleName"></param>
         /// <returns></returns>
         IJobService WithSchedule(string scheduleName);
 
         /// <summary>
-        /// Filter by shedule id
+        /// Filter by schedule id
         /// </summary>
         /// <param name="scheduleName"></param>
         /// <returns></returns>

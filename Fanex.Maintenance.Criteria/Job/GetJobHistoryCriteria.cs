@@ -10,14 +10,13 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetJobHistoryCriteria : CriteriaBase
     {
         public Guid? Job_Id { get; set; }

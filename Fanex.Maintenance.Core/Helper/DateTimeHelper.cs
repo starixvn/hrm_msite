@@ -12,16 +12,18 @@ namespace Fanex.Maintenance.Core.Helper
 {
     using System;
     using System.Globalization;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class DateTimeHelper
     {
         /// <summary>
-        /// Get Full time String from int
+        /// Get Full time String from integer
         /// </summary>
-        /// <param name="timeValue">contains time value by int, example 092113 is 09:21:13</param>
+        /// <param name="timeValue">contains time value by integer, example 092113 is 09:21:13</param>
         /// <returns>fulltime string</returns>
         public static string GetFullTime(int timeValue)
         {
@@ -34,6 +36,7 @@ namespace Fanex.Maintenance.Core.Helper
                     strTime = strTime.Insert(0, "0");
                 }
             }
+
             strTime = DateTime.ParseExact(strTime,
                     "HHmmss",
                     CultureInfo.InvariantCulture,

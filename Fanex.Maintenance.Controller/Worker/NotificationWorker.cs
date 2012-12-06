@@ -11,79 +11,87 @@ namespace Fanex.Maintenance.Controller.Worker
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
-    using Fanex.Maintenance.Service.Interface.JobManagement;
-    using Fanex.Maintenance.Service.Impl.JobManagement;
     using Fanex.Logging;
-    using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Controller.Hubs;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Core.Helper;
+    using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Service.Impl.JobManagement;
+    using Fanex.Maintenance.Service.Interface.JobManagement;
     using SignalR;
-    using Fanex.Maintenance.Controller.Hubs;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class NotificationWorker : BaseWorker
     {
         private int _getDataInterval;
-        public static DateTime LastSqlAgentLogNotificationTime { get; set; }
-        public static DateTime LastJobLogNotificationTime { get; set; }
-        private IJobService _jobService;
-        private ISqlServerLogService _sqlServerLogService;
-        private IServerService _serverService;
-        private string _sqlAgentErrorMailFormat = " <table cellspacing=\"0\" border=\"1\" style=\"border-color:DodgerBlue;border-style:Solid;border-collapse:collapse;font-size:8pt;font-family:Tahoma,Arial,Verdana,Sans-Serif\" rules=\"all\"> "
-               + " <thead>"
-                 + "   <tr align=\"center\" valign=\"Middle\" style=\"background-color:#deedef;min-height:25px;font-weight:bold\">"
-                    + "    <th  width=\"20\">"
-                   + "         #"
-                   + "     </th>"
-                   + "     <th  width=\"80\">"
-                   + "         Server"
-                    + "    </th>"
-                   + "     <th  width=\"120\">"
-                    + "        Occured Date"
-                   + "     </th>"
-                   + "     <th>"
-                   + "         Message"
-                   + "     </th>"
-                  + "  </tr>"
-               + " </thead>"
-              + "  <tbody> {0}"
-              + "  </tbody>"
-           + " </table>";
-        private string _jobErrorMailFormat = " <table cellspacing=\"0\" border=\"1\" style=\"border-color:DodgerBlue;border-style:Solid;border-collapse:collapse;font-size:8pt;font-family:Tahoma,Arial,Verdana,Sans-Serif\" rules=\"all\"> "
-               + " <thead>"
-                 + "   <tr align=\"center\" valign=\"Middle\" style=\"background-color:#deedef;min-height:25px;font-weight:bold\">"
-                    + "    <th width=\"20\">"
-                   + "         #"
-                   + "     </th>"
-                     + "    <th width=\"80\">"
-                   + "         Server"
-                   + "     </th>"
-                   + "     <th width=\"80\">"
-                   + "         Job Name"
-                    + "    </th>"
-                   + "     <th width=\"80\">"
-                    + "        Failed at Step"
-                   + "     </th>"
-                     + "     <th width=\"80\">"
-                    + "         Occured Date"
-                   + "     </th>"
-                   + "     <th>"
-                   + "         Message"
-                   + "     </th>"
-                  + "  </tr>"
-               + " </thead>"
-              + "  <tbody> {0}"
-              + "  </tbody>"
-           + " </table>";
-        private string _rowOddStyle = "align=\"center\" valign=\"Middle\" style=\"background-color:#fcfcfc;min-height:25px\"";
-        private string _rowEvenStyle = "align=\"center\" valign=\"Middle\" style=\"background-color:#f2f2f2;min-height:25px\"";
 
+        public static DateTime LastSqlAgentLogNotificationTime { get; set; }
+
+        public static DateTime LastJobLogNotificationTime { get; set; }
+
+        private IJobService _jobService;
+
+        private ISqlServerLogService _sqlServerLogService;
+
+        private IServerService _serverService;
+
+        private string _sqlAgentErrorMailFormat = " <table cellspacing=\"0\" border=\"1\" style=\"border-color:DodgerBlue;border-style:Solid;border-collapse:collapse;font-size:8pt;font-family:Tahoma,Arial,Verdana,Sans-Serif\" rules=\"all\"> "
+                + " <thead>"
+                + "   <tr align=\"center\" valign=\"Middle\" style=\"background-color:#deedef;min-height:25px;font-weight:bold\">"
+                + "    <th  width=\"20\">"
+                + "         #"
+                + "     </th>"
+                + "     <th  width=\"80\">"
+                + "         Server"
+                + "    </th>"
+                + "     <th  width=\"120\">"
+                + "        Occured Date"
+                + "     </th>"
+                + "     <th>"
+                + "         Message"
+                + "     </th>"
+                + "  </tr>"
+                + " </thead>"
+                + "  <tbody> {0}"
+                + "  </tbody>"
+                + " </table>";
+
+        private string _jobErrorMailFormat = " <table cellspacing=\"0\" border=\"1\" style=\"border-color:DodgerBlue;border-style:Solid;border-collapse:collapse;font-size:8pt;font-family:Tahoma,Arial,Verdana,Sans-Serif\" rules=\"all\"> "
+                + " <thead>"
+                + "   <tr align=\"center\" valign=\"Middle\" style=\"background-color:#deedef;min-height:25px;font-weight:bold\">"
+                + "    <th width=\"20\">"
+                + "         #"
+                + "     </th>"
+                + "    <th width=\"80\">"
+                + "         Server"
+                + "     </th>"
+                + "     <th width=\"80\">"
+                + "         Job Name"
+                + "    </th>"
+                + "     <th width=\"80\">"
+                + "        Failed at Step"
+                + "     </th>"
+                + "     <th width=\"80\">"
+                + "         Occured Date"
+                + "     </th>"
+                + "     <th>"
+                + "         Message"
+                + "     </th>"
+                + "  </tr>"
+                + " </thead>"
+                + "  <tbody> {0}"
+                + "  </tbody>"
+                + " </table>";
+
+        private string _rowOddStyle = "align=\"center\" valign=\"Middle\" style=\"background-color:#fcfcfc;min-height:25px\"";
+
+        private string _rowEvenStyle = "align=\"center\" valign=\"Middle\" style=\"background-color:#f2f2f2;min-height:25px\"";
 
         public NotificationWorker(
             int getDataInterval = 60000)
@@ -137,7 +145,6 @@ namespace Fanex.Maintenance.Controller.Worker
                 }
             }
         }
-
 
         /// <summary>
         /// Get Sql Agent Log For notifications
@@ -207,7 +214,6 @@ namespace Fanex.Maintenance.Controller.Worker
                     .WithEndRunDate(DateTime.Now.AddDays(1));
                 foreach (JobSchedule job in jobs)
                 {
-
                     //// Get All job Log with daterange and job name
                     jobLogs = _jobService
                         .WithJob(job.Job.Name)
@@ -217,7 +223,6 @@ namespace Fanex.Maintenance.Controller.Worker
                     {
                         foreach (JobLog jobLog in jobLogs)
                         {
-
                             //// Get specific job satisfy filter contions, if yes then break out
                             DateTime jobLogDate = DateTimeHelper.GetFullDatetime(jobLog.RunDate, jobLog.RunTime);
                             if (jobLogDate > LastJobLogNotificationTime
@@ -236,8 +241,8 @@ namespace Fanex.Maintenance.Controller.Worker
                                 //// Send mail
                                 SendMailForJobStepError(job, jobLogs, server.ServerIp);
 
-
                                 isBreak = true;
+
                                 break;
                             }
                         }
@@ -272,16 +277,14 @@ namespace Fanex.Maintenance.Controller.Worker
             int index = 1;
             foreach (SqlServerLog sqlServerLog in sqlServerLogs)
             {
-               
                 //// if satisfy filter condition
                 if (sqlServerLog.LogDate > LastSqlAgentLogNotificationTime
                     && sqlServerLog.ErrorLevel == (int)ErrorType.Error
                     && sqlServerLog.ServerIp == serverIp)
                 {
-
                     mailBody += "<tr " + ((index % 2 == 0) ? _rowOddStyle : _rowEvenStyle) + ">"
                         + "<td>" + index.ToString() + "</td>"
-                        +"<td>" + serverIp + "</td>"
+                        + "<td>" + serverIp + "</td>"
                         + "<td>" + sqlServerLog.LogDate + "</td>"
                         + "<td align=\"left\">" + sqlServerLog.LogMessage + "</td></tr>";
                     index++;

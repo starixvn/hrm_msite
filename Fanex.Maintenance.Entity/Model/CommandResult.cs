@@ -7,10 +7,12 @@
 namespace Fanex.Maintenance.Entity.Model
 {
     using Fanex.NAP.Framework.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class CommandResult : CommandResultBase
     {
         public override bool IsSuccessful

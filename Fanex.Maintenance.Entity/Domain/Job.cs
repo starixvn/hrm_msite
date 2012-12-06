@@ -10,7 +10,9 @@
 namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Job : IEntity<int, string>
     {
         public Guid JobId { get; set; }
@@ -35,37 +37,37 @@ namespace Fanex.Maintenance.Entity.Domain
 
         /// <summary>
         ///  Bitmask indicating under what circumstances a notification event should be logged to the Microsoft Windows application log:
-        ///0 = Never
-        ///1 = When the job succeeds
-        ///2 = When the job fails
-        ///3 = Whenever the job completes (regardless of the job outcome)
+        /// 0 = Never
+        /// 1 = When the job succeeds
+        /// 2 = When the job fails
+        /// 3 = Whenever the job completes (regardless of the job outcome)
         /// </summary>
         public int NotifyLevelEventLog { get; set; }
 
         /// <summary>
         /// Bitmask indicating under what circumstances a notification e-mail should be sent when a job completes:
-        ///0 = Never
-        ///1 = When the job succeeds
-        ///2 = When the job fails
-        ///3 = Whenever the job completes (regardless of the job outcome)
+        /// 0 = Never
+        /// 1 = When the job succeeds
+        /// 2 = When the job fails
+        /// 3 = Whenever the job completes (regardless of the job outcome)
         /// </summary>
         public int NotifyLevelEmail { get; set; }
 
         /// <summary>
         /// Bitmask indicating under what circumstances a network message should be sent when a job completes:
-        ///0 = Never
-        ///1 = When the job succeeds
-        ///2 = When the job fails
-        ///3 = Whenever the job completes (regardless of the job outcome)
+        /// 0 = Never
+        /// 1 = When the job succeeds
+        /// 2 = When the job fails
+        /// 3 = Whenever the job completes (regardless of the job outcome)
         /// </summary>
         public int NotifyLevelNetsend { get; set; }
 
         /// <summary>
         /// Bitmask indicating under what circumstances a page should be sent when a job completes:
-        ///0 = Never
-        ///1 = When the job succeeds
-        ///2 = When the job fails
-        ///3 = Whenever the job completes (regardless of the job outcome)
+        /// 0 = Never
+        /// 1 = When the job succeeds
+        /// 2 = When the job fails
+        /// 3 = Whenever the job completes (regardless of the job outcome)
         /// </summary>
         public int NotifyLevelPage { get; set; }
 
@@ -86,10 +88,10 @@ namespace Fanex.Maintenance.Entity.Domain
 
         /// <summary>
         ///  Bitmask indicating under what circumstances the job should be deleted when a job completes:
-        ///0 = Never
-        ///1 = When the job succeeds
-        ///2 = When the job fails
-        ///3 = Whenever the job completes (regardless of the job outcome)
+        /// 0 = Never
+        /// 1 = When the job succeeds
+        /// 2 = When the job fails
+        /// 3 = Whenever the job completes (regardless of the job outcome)
         /// </summary>
         public int DeleteLevel { get; set; }
 

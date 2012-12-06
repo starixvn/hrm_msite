@@ -11,7 +11,9 @@ namespace Fanex.Maintenance.Entity.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Log
     {
         public long LogId { get; set; }
