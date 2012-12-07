@@ -270,8 +270,8 @@ namespace Fanex.Maintenance.Controller.Worker
         /// <param name="serverIp"></param>
         private void SendMailForSqlAgentError(IEnumerable<SqlServerLog> sqlServerLogs, string serverIp)
         {
-            string mailTitle = "Sql Agent Error -" + DateTime.Now.ToString();
-            string mailSubject = "Sql Agent Error -" + DateTime.Now.ToString();
+            string mailTitle = "Sql Agent Error -" + DateTime.Now.ToShortDateString();
+            string mailSubject = "Sql Agent Error -" + DateTime.Now.ToShortDateString();
             string mailHeader = _sqlAgentErrorMailFormat;
             string mailBody = string.Empty;
             int index = 1;
@@ -305,8 +305,8 @@ namespace Fanex.Maintenance.Controller.Worker
         /// <param name="serverIp"></param>
         private void SendMailForJobStepError(JobSchedule job, IEnumerable<JobLog> jobLogs, string serverIp)
         {
-            string mailTitle = "Job Step Error -" + DateTime.Now.ToString();
-            string mailSubject = "Job Step Error -" + DateTime.Now.ToString();
+            string mailTitle = "Job Step Error -" + DateTime.Now.ToShortDateString();
+            string mailSubject = "Job Step Error -" + DateTime.Now.ToShortDateString();
             string mailHeader = _jobErrorMailFormat;
             string mailBody = string.Empty;
             int index = 1;
@@ -343,8 +343,8 @@ namespace Fanex.Maintenance.Controller.Worker
         {
             try
             {
-                string mailSubject = "Error: Sql Agent Stopped on " + DateTime.Now.ToString();
-                string mailTitle = "Error: Sql Agent Stopped on " + DateTime.Now.ToString();
+                string mailSubject = "Error: Sql Agent Stopped on " + DateTime.Now.ToShortDateString();
+                string mailTitle = "Error: Sql Agent Stopped on " + DateTime.Now.ToShortDateString();
                 string mailBody = string.Empty;
                 foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
                 {
