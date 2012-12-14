@@ -42,7 +42,7 @@ namespace Fanex.Maintenance.Entity.Model
         public string AdditionalParameters { get; set; }
 
         /// <summary>
-        /// Error-level value returned by CmdExec subsystem steps to indicate success.
+        /// Error-level value returned by Command Execute subsystem steps to indicate success.
         /// </summary>
         public int CmdExecSuccessCode { get; set; }
 
@@ -97,7 +97,7 @@ namespace Fanex.Maintenance.Entity.Model
         public string OsRunPriority { get; set; }
 
         /// <summary>
-        /// Name of the file in which the step's output is saved when subsystem is TSQL, PowerShell, or CmdExec.
+        /// Name of the file in which the step's output is saved when subsystem is TSQL, PowerShell, or command execute.
         /// </summary>
         public string OutputFileName { get; set; }
 

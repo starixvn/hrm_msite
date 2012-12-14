@@ -11,8 +11,8 @@
 namespace Fanex.Maintenance.Core.Helper
 {
     using System;
-    using System.Globalization;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
 
     /// <summary>
     /// TODO: Update summary.

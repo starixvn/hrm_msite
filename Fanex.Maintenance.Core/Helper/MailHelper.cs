@@ -7,11 +7,8 @@
 namespace Fanex.Maintenance.Core.Helper
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Core.Configurations;
     using Fanex.Logging;
+    using Fanex.Maintenance.Core.Configurations;
     
     /// <summary>
     /// TODO: Update summary.

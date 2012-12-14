@@ -58,7 +58,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Server Resource Info for Update User View throught SignalR
+        /// Get Server Resource Info for Update User View through SignalR
         /// </summary>
         /// <param name="connectionString"></param>
         /// <returns></returns>

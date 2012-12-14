@@ -9,14 +9,14 @@
 
 namespace Fanex.Maintenance.Repository.Impl.JobManagement
 {
+    using System;
+    using Fanex.Common.Extensions;
     using Fanex.Data;
     using Fanex.Maintenance.Core.Helper;
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Common.Extensions;
-    using System;
 
     /// <summary>
     /// TODO: Update summary.

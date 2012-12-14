@@ -13,7 +13,6 @@ namespace Fanex.Maintenance.Core.Web
     using System;
     using System.Globalization;
     using System.Web;
-    using System.Text;
 
     /// <summary>
     /// TODO: Update summary.

@@ -10,14 +10,14 @@
 namespace Fanex.Maintenance.Repository.Impl.JobManagement
 {
     using System;
-    using System.Collections.Generic;
-    using Fanex.Maintenance.Entity.Domain;
-    using Fanex.Maintenance.Repository.Interface.JobManagement;
-    using Fanex.Maintenance.Entity.Model;
-    using Fanex.Common.Extensions;
-    using System.Data;
-    using Fanex.NAP.Framework.Data;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
+    using Fanex.Common.Extensions;
+    using Fanex.Maintenance.Entity.Domain;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Repository.Interface.JobManagement;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

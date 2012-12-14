@@ -11,11 +11,11 @@ namespace Fanex.Maintenance.Core.Web
 {
     using System;
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web;
-    using Fanex.Logging;
     using Fanex.Common;
-    using System.Diagnostics.CodeAnalysis;
+    using Fanex.Logging;
 
     /// <summary>
     /// TODO: Update summary.
@@ -37,9 +37,6 @@ namespace Fanex.Maintenance.Core.Web
 
         private static int _getServerResourcesInfoInterval = 2000;
 
-        /// <summary>
-        /// Contructor
-        /// </summary>
         static AppSetting()
         {
             try
@@ -62,7 +59,7 @@ namespace Fanex.Maintenance.Core.Web
         {
             get
             {
-                return (string.Compare(_isVirtualDir, "true", true) == 0);
+                return string.Compare(_isVirtualDir, "true", true) == 0;
             }
         }
 

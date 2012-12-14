@@ -12,14 +12,14 @@ namespace Fanex.Maintenance.Controller
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web.Mvc;
+    using Fanex.DataValidation.Service.Implement;
+    using Fanex.DataValidation.Validation.Implement;
     using Fanex.Maintenance.Criteria.DatabaseReport;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;
-    using System.Diagnostics.CodeAnalysis;
-    using Fanex.DataValidation.Service.Implement;
-    using Fanex.DataValidation.Validation.Implement;
 
     /// <summary>
     /// Database report controller
@@ -167,7 +167,6 @@ namespace Fanex.Maintenance.Controller
 
         #region Ajax
 
-
         /// <summary>
         /// User online chart report with size
         /// </summary>
@@ -226,6 +225,5 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion
-
     }
 }

@@ -134,7 +134,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                             {
                                 SqlLogServerParamForTask sqlLogServerParamForTask = (SqlLogServerParamForTask)param;
                                 return GetLogBySpecificDateAndServerIp(sqlLogServerParamForTask.LogType, sqlLogServerParamForTask.ServerIp);
-                            }, new SqlLogServerParamForTask
+                            },
+                            new SqlLogServerParamForTask
                             {
                                 LogType = logType,
                                 ServerIp = server.ServerIp
@@ -197,11 +198,15 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                            =>
                            {
                                SqlLogSpParamForTask sqlLogSpParamForTask = (SqlLogSpParamForTask)param;
-                               return _sqlServerLogRepository.GetAllSqlServerLogOnDate(new GetSqlServerLogCriteria
+
+                               return _sqlServerLogRepository.GetAllSqlServerLogOnDate(
+                                   new GetSqlServerLogCriteria
                                {
                                    p1 = sqlLogSpParamForTask.P1
-                               }, sqlLogSpParamForTask.ServerIp);
-                           }, new SqlLogSpParamForTask
+                               }, 
+                               sqlLogSpParamForTask.ServerIp);
+                           },
+                           new SqlLogSpParamForTask
                            {
                                P1 = i,
                                ServerIp = serverIp
@@ -212,12 +217,15 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                           =>
                             {
                                 SqlLogSpParamForTask sqlLogSpParamForTask = (SqlLogSpParamForTask)param;
+
                                 return _sqlServerLogRepository.GetAllSqlAgentLogOnDate(new GetSqlServerLogCriteria
                                 {
                                     p1 = sqlLogSpParamForTask.P1,
                                     p2 = 2
-                                }, sqlLogSpParamForTask.ServerIp);
-                            }, new SqlLogSpParamForTask
+                                }, 
+                                sqlLogSpParamForTask.ServerIp);
+                            },
+                            new SqlLogSpParamForTask
                             {
                                 P1 = i,
                                 ServerIp = serverIp

@@ -11,16 +11,11 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Repository.Interface.JobManagement;
-    using Fanex.Maintenance.Criteria.Job;
-    using Fanex.Maintenance.Core.Web;
     using System.Data;
     using Fanex.Common.Extensions;
-    using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Entity.Domain;
-    using System.Globalization;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

@@ -69,9 +69,6 @@
     <Compile Include="Helper\SectionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateReport\Block.cs" />
-    <Compile Include="TemplateReport\BlockCredit.cs" />
-    <Compile Include="TemplateReport\CreditdataTemplate.cs" />
-    <Compile Include="TemplateReport\LicenseedataTemplate.cs" />
     <Compile Include="ViewResource.Designer.cs">
       <DependentUpon>ViewResource.resx</DependentUpon>
       <AutoGen>True</AutoGen>

@@ -106,7 +106,7 @@ namespace Fanex.Maintenance.Controller.Worker
         }
 
         /// <summary>
-        /// Run Untill stop thread
+        /// Run Until stop thread
         /// </summary>
         protected override void Run()
         {
@@ -226,7 +226,7 @@ namespace Fanex.Maintenance.Controller.Worker
                             //// Get specific job satisfy filter contions, if yes then break out
                             DateTime jobLogDate = DateTimeHelper.GetFullDatetime(jobLog.RunDate, jobLog.RunTime);
                             if (jobLogDate > LastJobLogNotificationTime
-                                && (Constants.NOTIFY_WHEN_JOB_STATUS.Contains(jobLog.RunSatus))
+                                && Constants.NOTIFY_WHEN_JOB_STATUS.Contains(jobLog.RunSatus)
                                 && SectionHelper.GetServerIpFromServerName(jobLog.Server) == server.ServerIp)
                             {
                                 notifyInformaitons.Add(new NotifyInfo
@@ -315,7 +315,7 @@ namespace Fanex.Maintenance.Controller.Worker
                 //// Get specific job satisfy filter contions, if yes then break out
                 DateTime jobLogDate = DateTimeHelper.GetFullDatetime(jobLog.RunDate, jobLog.RunTime);
                 if (jobLogDate > LastJobLogNotificationTime
-                    && (Constants.NOTIFY_WHEN_JOB_STATUS.Contains(jobLog.RunSatus))
+                    && Constants.NOTIFY_WHEN_JOB_STATUS.Contains(jobLog.RunSatus)
                     && SectionHelper.GetServerIpFromServerName(jobLog.Server) == serverIp)
                 {
                     mailBody += "<tr " + ((index % 2 == 0) ? _rowOddStyle : _rowEvenStyle) + ">"

@@ -10,27 +10,24 @@
 namespace Fanex.Maintenance.Service.Impl
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
-    using System.Linq;
     using System.Text;
-    using Fanex.Maintenance.Core.TemplateReport;
-    using Fanex.Maintenance.Criteria.DatabaseReport;
+    using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Criteria.User;
     using Fanex.Maintenance.Repository.Impl;
     using Fanex.Maintenance.Service.Interface;
-    using Fanex.NAP.Framework.Data;
-    using Fanex.Maintenance.Criteria.User;
-    using Fanex.Maintenance.Core.Web;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class DatabaseReportService : IDatabaseReportService
     {
         #region Member
-        
+
         private readonly DatabaseReportRepository _databaseReportRepository = new DatabaseReportRepository();
-               
+
         #endregion Member
 
         /// <summary>

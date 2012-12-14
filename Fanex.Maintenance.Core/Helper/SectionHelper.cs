@@ -10,7 +10,7 @@
 namespace Fanex.Maintenance.Core.Helper
 {
     using Fanex.Maintenance.Core.Configurations;
-using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Core.Web;
 
     /// <summary>
     /// TODO: Update summary.
