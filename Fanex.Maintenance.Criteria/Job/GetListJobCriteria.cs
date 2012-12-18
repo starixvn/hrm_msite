@@ -50,15 +50,18 @@ namespace Fanex.Maintenance.Criteria.Job
         public DateTime? To { get; set; }
 
         [Display(Name = "Job", ResourceType = typeof(ViewResource))]
-        public string Job_Name { get; set; }
+        [SpParam(SqlParamName = "Job_Name")]
+        public string JobName { get; set; }
 
         [Display(Name = "Status", ResourceType = typeof(ViewResource))]
         public int? Enabled { get; set; }
 
         [Display(Name = "Execution_Status", ResourceType = typeof(ViewResource))]
-        public int? Execution_Status { get; set; }
+        [SpParam(SqlParamName = "Execution_Status")]
+        public int? ExecutionStatus { get; set; }
 
-        public string Job_Aspect { get; set; }
+        [SpParam(SqlParamName = "Job_Aspect")]
+        public string JobAspect { get; set; }
 
         public override bool IsValid()
         {

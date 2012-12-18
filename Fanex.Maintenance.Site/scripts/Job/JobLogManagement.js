@@ -91,9 +91,9 @@ var JobLogManagement = function ($) {
                     //$('#Job_Name').removeAttr('disabled', 'disabled');
                 },
                 success: function (result) {
-                    $("#Job_Name").html("");
-                    $("#Job_Name").append("<option value=''>Select Job</option>");
-                    $("#Job_Name").append($("#templateJob").render(result));
+                    $("#JobName").html("");
+                    $("#JobName").append("<option value=''>Select Job</option>");
+                    $("#JobName").append($("#templateJob").render(result));
                 },
                 error: function (xhr, status, err) {
                     NAP.handleAjaxError(xhr, status, err);

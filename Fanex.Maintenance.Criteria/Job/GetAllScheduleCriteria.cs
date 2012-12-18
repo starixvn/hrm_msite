@@ -42,13 +42,17 @@ namespace Fanex.Maintenance.Criteria.Job
         [SpParam(Ignored = true)]
         public int? SearchDateType { get; set; }
 
-        public int? Schedule_Id { get; set; }
+        [SpParam(SqlParamName = "Schedule_Id")]
+        public int? ScheduleId { get; set; }
 
-        public string Schedule_Name { get; set; }
+        [SpParam(SqlParamName = "Schedule_Name")]
+        public string ScheduleName { get; set; }
 
-        public int Attached_Schedules_Only { get; set; }
+        [SpParam(SqlParamName = "Attached_Schedules_Only")]
+        public int AttachedSchedulesOnly { get; set; }
 
-        public int Include_Description { get; set; }
+        [SpParam(SqlParamName = "Include_Description")]
+        public int IncludeDescription { get; set; }
 
         public override bool IsValid()
         {

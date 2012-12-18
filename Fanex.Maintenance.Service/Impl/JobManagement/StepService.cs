@@ -106,8 +106,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             var criteria = new GetListJobCriteria
             {
-                Job_Name = this._jobName,
-                Job_Aspect = Constants.STEPS
+                JobName = this._jobName,
+                JobAspect = Constants.STEPS
             };
 
             return _stepRepository.GetStepByJob(criteria, this._serverName);

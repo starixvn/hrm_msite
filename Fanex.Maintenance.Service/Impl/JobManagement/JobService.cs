@@ -264,8 +264,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             var criteria = new GetListJobCriteria
             {
-                Job_Name = this._jobName,
-                Execution_Status = this._currentExcuteStatus,
+                JobName = this._jobName,
+                ExecutionStatus = this._currentExcuteStatus,
                 Enabled = this._status
             };
 
@@ -329,10 +329,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             //// create criteria get job history
             var criteria = new GetJobHistoryCriteria
             {
-                Job_Name = this._jobName,
-                Run_Status = this._currentExcuteStatus,
-                Start_Run_Date = this._startRunDate,
-                End_Run_Date = this._endRunDate,
+                JobName = this._jobName,
+                RunStatus = this._currentExcuteStatus,
+                StartRunDate = this._startRunDate,
+                EndRunDate = this._endRunDate,
                 Mode = Constants.FULL
             };
 
@@ -382,7 +382,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             {
                 var criteria = new GetAllJobInScheduleCriteria
                 {
-                    Schedule_Name = schedule
+                    ScheduleName = schedule
                 };
 
                 return _jobRepository.GetAllJob(criteria, server);
@@ -407,7 +407,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             {
                 var criteria = new GetAllJobInScheduleCriteria
                 {
-                    Schedule_Id = scheduleId
+                    ScheduleId = scheduleId
                 };
 
                 return _jobRepository.GetAllJob(criteria, server);
@@ -428,8 +428,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             StartJobCriteria startJobCriteria = new StartJobCriteria
             {
-                Job_Name = this._jobName,
-                Step_Name = this._stepName
+                JobName = this._jobName,
+                StepName = this._stepName
             };
 
             CommandResult commandResult = new CommandResult
@@ -459,7 +459,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             StopJobCriteria stopJobCriteria = new StopJobCriteria
             {
-                Job_Name = this._jobName
+                JobName = this._jobName
             };
 
             CommandResult commandResult = new CommandResult

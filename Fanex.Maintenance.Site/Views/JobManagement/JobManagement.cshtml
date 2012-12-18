@@ -27,10 +27,10 @@
             <section id="filter-bar">
                 <div class="filter-form">
                     <div class="lbl-field">
-                        @Html.LabelFor(m => m.Job_Name)
+                        @Html.LabelFor(m => m.JobName)
                     </div>
                     <div class="edit-field">
-                        @Html.TextBoxFor(m => m.Job_Name)
+                        @Html.TextBoxFor(m => m.JobName)
                     </div>
                 </div>
                 <div class="filter-form">
@@ -61,7 +61,7 @@
                             Exec Status</label>
                     </div>
                     <div class="edit-field">
-                        @Html.DropDownListFor(m => m.Execution_Status,
+                        @Html.DropDownListFor(m => m.ExecutionStatus,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.Obsolete,Value=((int)ExecutionStatus.Obsolete).ToString()},                        
                         new SelectListItem{ Text=ViewResource.Executing,Value=((int)ExecutionStatus.Executing).ToString()},                        

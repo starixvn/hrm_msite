@@ -178,7 +178,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 {
                     schedules.AddRange(_scheduleRepository.GetAllSchedule(new GetAllScheduleCriteria
                     {
-                        Schedule_Name = ScheduleName
+                        ScheduleName = ScheduleName
                     }, ServerIp));
                 }
                 else
@@ -194,7 +194,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                             ScheduleParamForTask scheduleParamForTask = (ScheduleParamForTask)param;
                             return _scheduleRepository.GetAllSchedule(new GetAllScheduleCriteria
                             {
-                                Schedule_Name = scheduleParamForTask.ScheduleName
+                                ScheduleName = scheduleParamForTask.ScheduleName
                             }, scheduleParamForTask.ServerIp);
                         }, new ScheduleParamForTask
                         {

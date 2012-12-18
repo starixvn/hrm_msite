@@ -19,18 +19,23 @@ namespace Fanex.Maintenance.Criteria.Job
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetJobHistoryCriteria : CriteriaBase
     {
-        public Guid? Job_Id { get; set; }
+        [SpParam(SqlParamName = "Job_Id")]
+        public Guid? JobId { get; set; }
 
-        public string Job_Name { get; set; }
+        [SpParam(SqlParamName = "Job_Name")]
+        public string JobName { get; set; }
 
-        public int? Run_Status { get; set; }
+        [SpParam(SqlParamName = "Run_Status")]
+        public int? RunStatus { get; set; }
 
-        public int? Start_Run_Date { get; set; }
+        [SpParam(SqlParamName = "Start_Run_Date")]
+        public int? StartRunDate { get; set; }
 
-        public int? End_Run_Date { get; set; }
+        [SpParam(SqlParamName = "End_Run_Date")]
+        public int? EndRunDate { get; set; }
 
         public string Mode { get; set; }
-        
+
         public override bool IsValid()
         {
             return true;

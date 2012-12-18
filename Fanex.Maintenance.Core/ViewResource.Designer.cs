@@ -61,6 +61,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accounting.
+        /// </summary>
+        public static string Accounting {
+            get {
+                return ResourceManager.GetString("Accounting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action.
         /// </summary>
         public static string Action {
@@ -93,6 +102,42 @@ namespace Fanex.Maintenance.Core {
         public static string AddSuccessMsg {
             get {
                 return ResourceManager.GetString("AddSuccessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Affiliate.
+        /// </summary>
+        public static string Affiliate {
+            get {
+                return ResourceManager.GetString("Affiliate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Affiliate Admin.
+        /// </summary>
+        public static string Affiliate_Admin {
+            get {
+                return ResourceManager.GetString("Affiliate_Admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agency.
+        /// </summary>
+        public static string Agency {
+            get {
+                return ResourceManager.GetString("Agency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agent.
+        /// </summary>
+        public static string Agent {
+            get {
+                return ResourceManager.GetString("Agent", resourceCulture);
             }
         }
         
@@ -646,6 +691,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Local Time Range.
+        /// </summary>
+        public static string Local_Time_Range {
+            get {
+                return ResourceManager.GetString("Local_Time_Range", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
@@ -732,6 +786,15 @@ namespace Fanex.Maintenance.Core {
         public static string Mail_To {
             get {
                 return ResourceManager.GetString("Mail_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master.
+        /// </summary>
+        public static string Master {
+            get {
+                return ResourceManager.GetString("Master", resourceCulture);
             }
         }
         
@@ -867,6 +930,15 @@ namespace Fanex.Maintenance.Core {
         public static string Operators {
             get {
                 return ResourceManager.GetString("Operators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page Size.
+        /// </summary>
+        public static string Page_Size {
+            get {
+                return ResourceManager.GetString("Page_Size", resourceCulture);
             }
         }
         
@@ -1204,11 +1276,38 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Super.
+        /// </summary>
+        public static string Super {
+            get {
+                return ResourceManager.GetString("Super", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Suspended.
         /// </summary>
         public static string Suspended {
             get {
                 return ResourceManager.GetString("Suspended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Range.
+        /// </summary>
+        public static string Time_Range {
+            get {
+                return ResourceManager.GetString("Time_Range", resourceCulture);
             }
         }
         
@@ -1227,6 +1326,15 @@ namespace Fanex.Maintenance.Core {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        public static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
             }
         }
         
@@ -1281,6 +1389,15 @@ namespace Fanex.Maintenance.Core {
         public static string Waiting_For_Thread {
             get {
                 return ResourceManager.GetString("Waiting_For_Thread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wap.
+        /// </summary>
+        public static string Wap {
+            get {
+                return ResourceManager.GetString("Wap", resourceCulture);
             }
         }
         
