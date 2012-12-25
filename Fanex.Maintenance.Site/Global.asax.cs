@@ -22,11 +22,17 @@
 
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
 
-            NotificationWorker notificationWorker = new NotificationWorker(AppSetting.GetDataNotifyInterval);
-            notificationWorker.Start();
+            if (AppSetting.NotifiJob)
+            {
+                NotificationWorker notificationWorker = new NotificationWorker(AppSetting.GetDataNotifyInterval);
+                notificationWorker.Start();
+            }
 
-            ServerInfoWorker serverInfoWorker = new ServerInfoWorker(AppSetting.GetServerResourcesInfoInterval);
-            serverInfoWorker.Start();
+            if (AppSetting.NotifiServer)
+            {
+                ServerInfoWorker serverInfoWorker = new ServerInfoWorker(AppSetting.GetServerResourcesInfoInterval);
+                serverInfoWorker.Start();
+            }
         }
     }
 }

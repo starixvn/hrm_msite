@@ -37,11 +37,17 @@ namespace Fanex.Maintenance.Core.Web
 
         private static int _getServerResourcesInfoInterval = 2000;
 
+        private static bool _notifiServer = false;
+
+        private static bool _notifiJob = false;
+
         static AppSetting()
         {
             try
             {
                 _isVirtualDir = ConfigurationManager.AppSettings["isVirtualDirectory"];
+                _notifiServer = Converter.ToBool(ConfigurationManager.AppSettings["isNotifiServer"].ToString());
+                _notifiJob = Converter.ToBool(ConfigurationManager.AppSettings["isNotifiJob"].ToString());
                 _minute = Converter.ToInt(ConfigurationManager.AppSettings["Minute"]);
                 _getDataNotifyInterval = Converter.ToInt(ConfigurationManager.AppSettings["GetDataNotifyInterval"], 60000);
                 _getServerResourcesInfoInterval = Converter.ToInt(ConfigurationManager.AppSettings["GetServerResourcesInfoInterval"], 2000);
@@ -110,6 +116,22 @@ namespace Fanex.Maintenance.Core.Web
             {
                 return HttpContext.Current;
             }
+        }
+
+        /// <summary>
+        /// Notification job
+        /// </summary>
+        public static bool NotifiJob
+        {
+            get { return _notifiJob; }
+        }
+
+        /// <summary>
+        /// Notificatino server
+        /// </summary>
+        public static bool NotifiServer
+        {
+            get { return _notifiServer; }
         }
     }
 
