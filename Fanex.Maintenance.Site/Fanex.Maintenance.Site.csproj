@@ -1378,6 +1378,7 @@
     <Content Include="themes\job\img\tick.png" />
     <Content Include="themes\job\img\table_left.jpg" />
     <Content Include="themes\job\img\table_left.png" />
+    <Content Include="themes\job\img\time_ico.gif" />
     <Content Include="themes\job\img\warning.png" />
     <Content Include="themes\job\img\error.png" />
     <Content Include="themes\job\img\actions\add-user.png" />
@@ -1464,12 +1465,12 @@
     <Content Include="Areas\UserLogin\themes\select-site.less" />
     <Content Include="Areas\UserLogin\Views\Login\Index.cshtml" />
     <Content Include="Areas\UserLogin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\UserLogin\Views\SSO\Index.cshtml" />
     <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
     <Content Include="Areas\UserLogin\Views\Web.config" />
     <Content Include="Configurations\DatabaseServersSection.config" />
     <Content Include="Configurations\SpNameSection.config" />
     <Content Include="Configurations\MailSection.config" />
+    <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\autocomplete\search.php" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\tabs\ajax\content3-slow.php" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\tabs\ajax\content4-broken.php" />
