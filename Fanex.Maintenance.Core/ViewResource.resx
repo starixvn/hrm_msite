@@ -163,7 +163,7 @@
     <value>The Name field can only contain A-Z, a-z, 0-9, underscore, and spaces.</value>
   </data>
   <data name="IsAuth" xml:space="preserve">
-    <value>IsAuth</value>
+    <value>Is Auth</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -572,5 +572,11 @@
   </data>
   <data name="Wap" xml:space="preserve">
     <value>Wap</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="DrawFilter" xml:space="preserve">
+    <value>Draw Filter</value>
   </data>
 </root>

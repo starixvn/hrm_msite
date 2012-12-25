@@ -214,6 +214,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Computer is idle.
         /// </summary>
         public static string ComputerIdle {
@@ -390,6 +399,15 @@ namespace Fanex.Maintenance.Core {
         public static string Disabled {
             get {
                 return ResourceManager.GetString("Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Draw Filter.
+        /// </summary>
+        public static string DrawFilter {
+            get {
+                return ResourceManager.GetString("DrawFilter", resourceCulture);
             }
         }
         
@@ -610,7 +628,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IsAuth.
+        ///   Looks up a localized string similar to Is Auth.
         /// </summary>
         public static string IsAuth {
             get {

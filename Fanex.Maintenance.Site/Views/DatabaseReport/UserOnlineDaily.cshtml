@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "UserOnlineDaily";
+    ViewBag.Title = "User Online Daily";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head
@@ -73,6 +73,7 @@
     </tr>
     @Html.Raw(ViewBag.UserDailyData)
 </table>
+@Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
     <script type="text/javascript">
 
@@ -80,7 +81,7 @@
 
             $("#Date").datepicker({
                 showOn: "button",
-                buttonImage: location.protocol + "//" + location.host + "/images/calendar.gif",
+                buttonImage: $('#imagePath').val(),
                 buttonImageOnly: true,
                 dateFormat: "dd/mm/yy"
             });
