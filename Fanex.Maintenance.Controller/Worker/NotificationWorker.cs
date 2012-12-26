@@ -340,15 +340,19 @@ namespace Fanex.Maintenance.Controller.Worker
         {
             try
             {
-                string mailSubject = "Error: Sql Agent Stopped on " + DateTime.Now.ToString();
-                string mailTitle = "Error: Sql Agent Stopped on " + DateTime.Now.ToString();
+                string mailSubject = "Error: Sql Agent Stopped on " + DateTime.Now.ToShortDateString();
+                string mailTitle = "Error: Sql Agent Stopped on " + DateTime.Now.ToShortDateString();
                 string mailBody = string.Empty;
                 foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
                 {
                     ServerStatus serverStatus = _serverService.GetServerStatus(server.ConnectionString);
-                    if (serverStatus.SqlServerAgentRunning == false)
+                    if (serverStatus.SqlServerCannotConnect == false)
                     {
-                        mailBody += string.Format("<p>Sql Server Agent of Server <span style='font-weight:bold;'>{0} </span> was <span style='font-weight:bold;'>stopped</span></p>", server.ServerIp);
+                        mailBody += string.Format("<p>Sql Server of Server <span style='font-weight:bold;'>{0} </span> cannot connect</p>", server.ServerIp);
+                    }
+                    else if (serverStatus.SqlServerAgentRunning == false)
+                    {
+                        mailBody += string.Format("<p>Sql Server Agent of Server <span style='font-weight:bold;'>{0} </span> was <span style='font-weight:bold;'>stopped</span></p> on {1}", server.ServerIp, DateTime.Now.ToString());
                     }
                 }
 

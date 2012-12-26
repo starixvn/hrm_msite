@@ -16,7 +16,7 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.Data;
     using Fanex.Maintenance.Core.Helper;
     using Fanex.NAP.Framework.Data;
-using System.Collections;
+    using System.Collections;
 
     /// <summary>
     /// TODO: Update summary.

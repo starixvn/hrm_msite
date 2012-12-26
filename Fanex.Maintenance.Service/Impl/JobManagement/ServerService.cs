@@ -82,7 +82,11 @@ using Fanex.Maintenance.Repository.Interface.JobManagement;
             catch (Exception ex)
             {
                 Logger.Log.Error(ex.Message, ex);
-                return new ServerStatus();
+                return new ServerStatus
+                    {
+                        SqlServerCannotConnect= false,
+                        SqlServerAgentRunning = false
+                    };
             }
         }
     }

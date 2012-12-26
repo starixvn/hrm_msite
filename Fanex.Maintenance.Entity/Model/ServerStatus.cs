@@ -22,5 +22,6 @@ namespace Fanex.Maintenance.Entity.Model
     {
         public string ServerIp { get; set; }
         public bool SqlServerAgentRunning { get; set; }
+        public bool SqlServerCannotConnect { get; set; }
     }
 }
