@@ -349,7 +349,7 @@ namespace Fanex.Maintenance.Controller.Worker
                 foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
                 {
                     ServerStatus serverStatus = _serverService.GetServerStatus(server.ConnectionString);
-                    if (serverStatus.SqlServerCannotConnect == false)
+                    if (serverStatus.SqlServerCanConnect == false)
                     {
                         mailBody += string.Format("<p>Sql Server of Server <span style='font-weight:bold;'>{0} </span> cannot connect</p>", server.ServerIp);
                     }

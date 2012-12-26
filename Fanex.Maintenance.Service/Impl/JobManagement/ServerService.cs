@@ -86,7 +86,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 Logger.Log.Error(ex.Message, ex);
                 return new ServerStatus
                     {
-                        SqlServerCannotConnect= false,
+                        SqlServerCanConnect= false,
                         SqlServerAgentRunning = false
                     };
             }

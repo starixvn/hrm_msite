@@ -122,7 +122,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                     while (reader.Read())
                     {
                         serverStatus.SqlServerAgentRunning = reader.ToString("SQLAgent").ToLower().Contains("running");
-                        serverStatus.SqlServerCannotConnect = true;
+                        serverStatus.SqlServerCanConnect = true;
                         break;
                     }
                 }
