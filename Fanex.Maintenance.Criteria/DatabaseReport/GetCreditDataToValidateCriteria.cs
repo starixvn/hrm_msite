@@ -1,18 +1,19 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GetDepositDataToValidateLicenseeWLCriteria.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="GetCreditDataToValidateCriteria.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.12.6">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Criteria.DatabaseReport
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
+    using System.Diagnostics.CodeAnalysis;
 
-
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetCreditDataToValidateBettingCriteria : CriteriaBase
     {
         public DateTime Date { get; set; }
@@ -30,7 +31,7 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
-
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetCreditDataToValidateDWCriteria : GetCreditDataToValidateBettingCriteria
     {      
         public override string GetSettingKey()

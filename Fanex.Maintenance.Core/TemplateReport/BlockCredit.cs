@@ -1,39 +1,68 @@
-﻿using System.Text;
+﻿// --------------------------------------------------------------------------
+// <copyright file="BlockCredit.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.12.6">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Core.TemplateReport
 {
+    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
+
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class BlockCredit
     {
         public string BgSportsbook { get; set; }
+
         public string BgRacing { get; set; }
+
         public string BgNumberGame { get; set; }
 
         public string SBBetting { get; set; }
+
         public string SBDW { get; set; }
 
         public string RacingBetting { get; set; }
+
         public string RacingDW { get; set; }
 
         public string NGBetting { get; set; }
+
         public string NGDW { get; set; }
 
         protected static string s2 = "<tr><td rowspan=\"3\" class=\"b firstCol weightBorderBottom\">Turnover</td><td class=\"l ";
+
         protected static string s2CustomerWL = "<tr><td rowspan=\"3\" class=\"b firstCol weightBorderBottom\">Customer Win Loss</td><td class=\"l ";
+
         protected static string s2BetCount = "<tr><td rowspan=\"3\" class=\"b firstCol\">Bet Count</td><td class=\"l ";
+
         protected static string s3 = "\" >Sportsbook</td><td class=\"r\">";
+
         protected static string s4 = "</td><td class=\"r\">";
+
         protected static string s5 = "</td></tr><tr><td class=\"l ";
+
         protected static string s6 = "\">Racing</td><td class=\"r\">";
+
         protected static string s7 = "</td><td class=\"r\">";
+
         protected static string s8 = "</td></tr><tr><td class=\"l weightBorderBottom ";
+
         protected static string s8BetCount = "</td></tr><tr><td class=\"l ";
+
         protected static string s9 = "\">Number Game</td><td class=\"r weightBorderBottom\">";
+
         protected static string s10 = "</td><td class=\"r weightBorderBottom\">";
 
         protected static string s9BetCount = "\">Number Game</td><td class=\"r\">";
+
         protected static string s10BetCount = "</td><td class=\"r\">";
 
         protected static string s11 = "</td></tr>";
+
         public virtual void ToString(ref StringBuilder bd, string typeBlock)
         {
             if (typeBlock == "Turnover")
@@ -48,6 +77,7 @@ namespace Fanex.Maintenance.Core.TemplateReport
             {
                 bd.Append(s2BetCount);
             }
+
             bd.Append(BgSportsbook);
             bd.Append(s3);
             bd.Append(SBBetting);
@@ -59,6 +89,7 @@ namespace Fanex.Maintenance.Core.TemplateReport
             bd.Append(RacingBetting);
             bd.Append(s7);
             bd.Append(RacingDW);
+
             if (typeBlock == "BetCount")
             {
                 bd.Append(s8BetCount);
@@ -67,7 +98,9 @@ namespace Fanex.Maintenance.Core.TemplateReport
             {
                 bd.Append(s8);
             }
+
             bd.Append(BgNumberGame);
+
             if (typeBlock == "BetCount")
             {
                 bd.Append(s9BetCount);
@@ -76,7 +109,9 @@ namespace Fanex.Maintenance.Core.TemplateReport
             {
                 bd.Append(s9);
             }
+
             bd.Append(NGBetting);
+
             if (typeBlock == "BetCount")
             {
                 bd.Append(s10BetCount);
@@ -85,6 +120,7 @@ namespace Fanex.Maintenance.Core.TemplateReport
             {
                 bd.Append(s10);
             }
+
             bd.Append(NGDW);
             bd.Append(s11);
         }

@@ -11,12 +11,12 @@
 namespace Fanex.Maintenance.Repository.Impl
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using Fanex.Data;
     using Fanex.Maintenance.Core.Helper;
     using Fanex.NAP.Framework.Data;
-    using System.Collections;
 
     /// <summary>
     /// TODO: Update summary.
@@ -123,7 +123,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <returns></returns>
         public virtual Hashtable ExecuteCommand(ICriteria criteria, string serverIp)
         {
-             //// new dbsetting from server name and setting key
+            //// new dbsetting from server name and setting key
             DbSetting setting = new DbSetting
             {
                 //// get connection string from servername

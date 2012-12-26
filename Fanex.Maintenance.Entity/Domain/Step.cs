@@ -10,7 +10,9 @@
 namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Step : IEntity<int, string>
     {
         /// <summary>
@@ -100,11 +102,11 @@ namespace Fanex.Maintenance.Entity.Domain
 
         /// <summary>
         /// Outcome of the previous execution of the job step.
-        ///0 = Failed
-        ///1 = Succeeded
-        ///2 = Retry
-        ///3 = Canceled
-        ///5 = Unknown
+        /// 0 = Failed
+        /// 1 = Succeeded
+        /// 2 = Retry
+        /// 3 = Canceled
+        /// 5 = Unknown
         /// </summary>
         public int LastRunOutCome { get; set; }
 

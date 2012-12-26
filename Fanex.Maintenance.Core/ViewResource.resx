@@ -163,7 +163,7 @@
     <value>The Name field can only contain A-Z, a-z, 0-9, underscore, and spaces.</value>
   </data>
   <data name="IsAuth" xml:space="preserve">
-    <value>IsAuth</value>
+    <value>Is Auth</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -533,5 +533,50 @@
   </data>
   <data name="Monitor_Server" xml:space="preserve">
     <value>Monitor Servers</value>
+  </data>
+  <data name="Page_Size" xml:space="preserve">
+    <value>Page Size</value>
+  </data>
+  <data name="Accounting" xml:space="preserve">
+    <value>Accounting</value>
+  </data>
+  <data name="Affiliate" xml:space="preserve">
+    <value>Affiliate</value>
+  </data>
+  <data name="Affiliate_Admin" xml:space="preserve">
+    <value>Affiliate Admin</value>
+  </data>
+  <data name="Agency" xml:space="preserve">
+    <value>Agency</value>
+  </data>
+  <data name="Agent" xml:space="preserve">
+    <value>Agent</value>
+  </data>
+  <data name="Local_Time_Range" xml:space="preserve">
+    <value>Local Time Range</value>
+  </data>
+  <data name="Master" xml:space="preserve">
+    <value>Master</value>
+  </data>
+  <data name="Super" xml:space="preserve">
+    <value>Super</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Time_Range" xml:space="preserve">
+    <value>Time Range</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Wap" xml:space="preserve">
+    <value>Wap</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="DrawFilter" xml:space="preserve">
+    <value>Draw Filter</value>
   </data>
 </root>

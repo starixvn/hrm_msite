@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.Maintenance.Criteria.Log;
@@ -23,11 +23,12 @@ namespace Fanex.Maintenance.Controller
     /// Log Controller
     /// </summary>
     [Authorize]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class LogController : Controller
     {
         #region Member
         /// <summary>
-        /// Log Serivce
+        /// Log Service
         /// </summary>
         private readonly LogService _logService;
 
@@ -41,7 +42,7 @@ namespace Fanex.Maintenance.Controller
         #region Ctor
 
         /// <summary>
-        /// Parameterless Controller
+        /// Parameter less Controller
         /// </summary>
         public LogController()
             : this(null, null)

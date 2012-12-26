@@ -11,10 +11,12 @@ namespace Fanex.Maintenance.Entity.Model
 {
     using System;
     using Fanex.Maintenance.Entity.Domain;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class JobSchedule
     {
         public Job Job { get; set; }

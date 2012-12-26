@@ -7,22 +7,21 @@
 //   <change who="Ricky.Nguyen" date="2012.10.26">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Service.Interface.JobManagement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public interface IServerService
     {
         ServerFullInfo GetServerFullInformation(string serverIp);
+
         ResourceInfo GetServerResourceInfo(string connectionString);
+
         ServerStatus GetServerStatus(string connectionString);
     }
 }

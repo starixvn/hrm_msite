@@ -11,10 +11,12 @@
 namespace Fanex.Maintenance.Core.TemplateReport
 {
     using System.Text;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
-    /// LicenseedataTemplate
+    /// Licensee data Template
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class LicenseedataTemplate
     {
         public LicenseedataTemplate()
@@ -29,12 +31,12 @@ namespace Fanex.Maintenance.Core.TemplateReport
         /// <summary>
         /// Turn Over
         /// </summary>
-        public LicenseedataTemplate_Turnover_Block Turnover {get;set;}
+        public LicenseedataTemplate_Turnover_Block Turnover { get; set; }
 
         /// <summary>
         /// Winloss
         /// </summary>
-        public LicenseedataTemplate_Winloss_Block Winloss {get;set;}
+        public LicenseedataTemplate_Winloss_Block Winloss { get; set; }
 
         /// <summary>
         /// Betcount
@@ -135,7 +137,7 @@ namespace Fanex.Maintenance.Core.TemplateReport
         /// Field
         /// </summary>
         public string DataBetting = "{DataBetting}";
-        
+
         /// <summary>
         /// Field
         /// </summary>

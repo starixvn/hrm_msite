@@ -12,22 +12,23 @@ namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Core.Configurations;
-    using Fanex.Maintenance.Service.Impl.JobManagement;
-    using Fanex.Maintenance.Service.Interface.JobManagement;
-    using System.Globalization;
-    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Domain;
-    using Fanex.Maintenance.Core.Web;
-    using Fanex.Maintenance.Core;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Service.Impl.JobManagement;
+    using Fanex.Maintenance.Service.Interface.JobManagement;
 
-    /// <summary>zz
+    /// <summary>
     /// TODO: Update summary.
     /// </summary>
     [Authorize]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class JobManagementController : Controller
     {
         /// <summary>
@@ -49,7 +50,6 @@ namespace Fanex.Maintenance.Controller
         /// Server Log Service
         /// </summary>
         private readonly ISqlServerLogService _sqlServerLogService = SqlServerLogService.Create();
-
 
         private readonly IServerService _serverService = ServerService.Create();
         #region Pages
@@ -120,7 +120,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MMM dd, yyyy");
             ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MMM dd, yyyy");
 
-            ViewBag.ListSchedule = _scheduleService.WithScheduleName(getAllScheduleCriteria.Schedule_Name)
+            ViewBag.ListSchedule = _scheduleService.WithScheduleName(getAllScheduleCriteria.ScheduleName)
                 .WithServer(getAllScheduleCriteria.Server)
                 .WithSearchDateType(getAllScheduleCriteria.SearchDateType)
                 .WithDateRange(getAllScheduleCriteria.From, getAllScheduleCriteria.To)
@@ -181,10 +181,10 @@ namespace Fanex.Maintenance.Controller
         {
             List<JobSchedule> listJob = new List<JobSchedule>();
 
-            listJob = _jobService.WithJob(criteria.Job_Name)
+            listJob = _jobService.WithJob(criteria.JobName)
                 .WithScheduleId(criteria.ScheduleId)
                 .WithStatus(criteria.Enabled)
-                .WithCurrentExecuteStatus(criteria.Execution_Status)
+                .WithCurrentExecuteStatus(criteria.ExecutionStatus)
                 .FromServer(criteria.Server)
                 .GetJobs().ToList();
 
@@ -335,6 +335,7 @@ namespace Fanex.Maintenance.Controller
                                              .FromServer(server)
                                              .GetJobs().ToList();
             }
+
             ViewBag.ListJob = listJob.Select(j => new SelectListItem
             {
                 Text = j.Job.Name,
@@ -343,7 +344,7 @@ namespace Fanex.Maintenance.Controller
 
             var criteria = new GetListJobCriteria
             {
-                Job_Name = job,
+                JobName = job,
                 From = DateTime.Now,
                 To = DateTime.Now.AddDays(1),
                 Server = server
@@ -388,17 +389,17 @@ namespace Fanex.Maintenance.Controller
             }
 
             //// check server and job
-            if (ReferenceEquals(criteria.Server, null) || ReferenceEquals(criteria.Job_Name, null))
+            if (ReferenceEquals(criteria.Server, null) || ReferenceEquals(criteria.JobName, null))
             {
                 return View(criteria);
             }
 
             //// get log history 
             List<JobLog> listJobLog = _jobService
-                               .WithJob(criteria.Job_Name)
+                               .WithJob(criteria.JobName)
                                .WithStartRunDate(criteria.From)
                                .WithEndRunDate(((DateTime)criteria.To).AddDays(1))
-                               .WithCurrentExecuteStatus(criteria.Execution_Status)
+                               .WithCurrentExecuteStatus(criteria.ExecutionStatus)
                                .FromServer(criteria.Server)
                                .GetJobLogs().ToList();
 
@@ -543,7 +544,7 @@ namespace Fanex.Maintenance.Controller
                 ResourceInfo resourceInfo = new ResourceInfo
                 {
                     ServerIp = server.ServerIp,
-                    ServerName = server.ServerIp.Replace(".","_")
+                    ServerName = server.ServerIp.Replace(".", "_")
                 };
 
                 if (index < leftLength)
@@ -602,7 +603,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init for Pagesize
+        /// Init for Page size
         /// </summary>
         private void InitPageSize()
         {

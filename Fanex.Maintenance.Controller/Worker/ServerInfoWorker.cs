@@ -11,6 +11,7 @@ namespace Fanex.Maintenance.Controller.Worker
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using System.Threading.Tasks;
     using Fanex.Logging;
@@ -25,6 +26,7 @@ namespace Fanex.Maintenance.Controller.Worker
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ServerInfoWorker : BaseWorker
     {
         private int _getDataInterval { get; set; }
@@ -110,6 +112,7 @@ namespace Fanex.Maintenance.Controller.Worker
                     {
                         _hubContext.Clients.gotMessage(resourceInfo);
                     }
+
                     _checkingList[serverElement.ServerIp] = false;
                 }
             }

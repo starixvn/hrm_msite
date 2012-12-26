@@ -11,7 +11,9 @@
 namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Schedule : IEntity<int, string>
     {
         public string ScheduleUId { get; set; }
@@ -24,13 +26,13 @@ namespace Fanex.Maintenance.Entity.Domain
 
         /// <summary>
         /// How frequently a job runs for this schedule.
-        ///1 = One time only
-        ///4 = Daily
-        ///8 = Weekly
-        ///16 = Monthly
-        ///32 = Monthly, relative to freq_interval
-        ///64 = Runs when the SQL Server Agent service starts
-        ///128 = Runs when the computer is idle
+        /// 1 = One time only
+        /// 4 = Daily
+        /// 8 = Weekly
+        /// 16 = Monthly
+        /// 32 = Monthly, relative to freq_interval
+        /// 64 = Runs when the SQL Server Agent service starts
+        /// 128 = Runs when the computer is idle
         /// </summary>
         public int FreqType { get; set; }
 
@@ -89,11 +91,11 @@ namespace Fanex.Maintenance.Entity.Domain
         /// When freq_interval occurs in each month, if freq_interval is 32 (monthly relative).
         /// Can be one of the following values:
         ///  0 = freq_relative_interval is unused
-        ///1 = First
-        ///2 = Second
-        ///4 = Third
-        ///8 = Fourth
-        ///16 = Last
+        /// 1 = First
+        /// 2 = Second
+        /// 4 = Third
+        /// 8 = Fourth
+        /// 16 = Last
         /// </summary>
         public int FreqRelativeInterval { get; set; }
 

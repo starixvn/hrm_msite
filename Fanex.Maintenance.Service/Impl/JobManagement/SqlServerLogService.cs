@@ -11,7 +11,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Threading.Tasks;
     using Fanex.Logging;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Core.Web;
@@ -20,11 +22,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SqlServerLogService : ISqlServerLogService
     {
         private readonly ISqlServerLogRepository _sqlServerLogRepository;
@@ -79,6 +81,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public ISqlServerLogService FromDate(DateTime from)
         {
             this.From = from;
+
             return this;
         }
 
@@ -90,6 +93,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public ISqlServerLogService ToDate(DateTime to)
         {
             this.To = to;
+
             return this;
         }
 
@@ -101,6 +105,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public ISqlServerLogService WithServer(string serverIp)
         {
             this.ServerIp = serverIp;
+
             return this;
         }
 
@@ -124,13 +129,13 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     int taskIndex = 0;
                     foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                     {
-
                         listTask[taskIndex] = Task.Factory.StartNew<IEnumerable<SqlServerLog>>(param
                             =>
                             {
                                 SqlLogServerParamForTask sqlLogServerParamForTask = (SqlLogServerParamForTask)param;
                                 return GetLogBySpecificDateAndServerIp(sqlLogServerParamForTask.LogType, sqlLogServerParamForTask.ServerIp);
-                            }, new SqlLogServerParamForTask
+                            },
+                            new SqlLogServerParamForTask
                             {
                                 LogType = logType,
                                 ServerIp = server.ServerIp
@@ -193,11 +198,15 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                            =>
                            {
                                SqlLogSpParamForTask sqlLogSpParamForTask = (SqlLogSpParamForTask)param;
-                               return _sqlServerLogRepository.GetAllSqlServerLogOnDate(new GetSqlServerLogCriteria
+
+                               return _sqlServerLogRepository.GetAllSqlServerLogOnDate(
+                                   new GetSqlServerLogCriteria
                                {
                                    p1 = sqlLogSpParamForTask.P1
-                               }, sqlLogSpParamForTask.ServerIp);
-                           }, new SqlLogSpParamForTask
+                               }, 
+                               sqlLogSpParamForTask.ServerIp);
+                           },
+                           new SqlLogSpParamForTask
                            {
                                P1 = i,
                                ServerIp = serverIp
@@ -208,20 +217,21 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                           =>
                             {
                                 SqlLogSpParamForTask sqlLogSpParamForTask = (SqlLogSpParamForTask)param;
+
                                 return _sqlServerLogRepository.GetAllSqlAgentLogOnDate(new GetSqlServerLogCriteria
                                 {
                                     p1 = sqlLogSpParamForTask.P1,
                                     p2 = 2
-                                }, sqlLogSpParamForTask.ServerIp);
-                            }, new SqlLogSpParamForTask
+                                }, 
+                                sqlLogSpParamForTask.ServerIp);
+                            },
+                            new SqlLogSpParamForTask
                             {
                                 P1 = i,
                                 ServerIp = serverIp
                             });
                             break;
                     }
-
-
                 }
                 catch (Exception ex)
                 {
@@ -235,11 +245,13 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 sqlServerLogs.AddRange(listTask[i].Result);
             }
 
-            sqlServerLogs = sqlServerLogs.Where(sqlServerLog => {
+            sqlServerLogs = sqlServerLogs.Where(sqlServerLog =>
+            {
                 if (sqlServerLog.LogDate < To && sqlServerLog.LogDate > From)
                 {
                     return true;
                 }
+
                 return false;
             }).ToList();
 
@@ -254,6 +266,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public ISqlServerLogService WithErrorLevel(int? errorLevel)
         {
             this.ErrorLevel = errorLevel;
+
             return this;
         }
     }

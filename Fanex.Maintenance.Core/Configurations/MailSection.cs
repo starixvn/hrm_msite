@@ -10,10 +10,12 @@
 namespace Fanex.Maintenance.Core.Configurations
 {
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailSection : ConfigurationSection
     {
         /// <summary>
@@ -49,10 +51,11 @@ namespace Fanex.Maintenance.Core.Configurations
     /// <summary>
     /// Sp Name Collection
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailCollection : ConfigurationElementCollection
     {
         /// <summary>
-        /// Contructor
+        /// Constructor
         /// </summary>
         public MailCollection()
         {
@@ -133,6 +136,7 @@ namespace Fanex.Maintenance.Core.Configurations
     /// <summary>
     /// Sp name element
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailElement : ConfigurationElement
     {
         /// <summary>

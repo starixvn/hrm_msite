@@ -10,10 +10,12 @@
 namespace Fanex.Maintenance.Controller.Worker
 {
     using System.Threading;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class BaseWorker
     {
         private Thread _workerThread;

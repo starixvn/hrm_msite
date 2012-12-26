@@ -10,18 +10,17 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
     using Fanex.Maintenance.Core;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetListJobCriteria : CriteriaBase
-    {        
+    {
         [SpParam(Ignored = true)]
         [Display(Name = "Server", ResourceType = typeof(ViewResource))]
         public string Server { get; set; }
@@ -29,7 +28,6 @@ namespace Fanex.Maintenance.Criteria.Job
         [SpParam(Ignored = true)]
         [Display(Name = "Schedule", ResourceType = typeof(ViewResource))]
         public string Schedule { get; set; }
-
 
         [SpParam(Ignored = true)]
         [Display(Name = "Schedule", ResourceType = typeof(ViewResource))]
@@ -50,17 +48,20 @@ namespace Fanex.Maintenance.Criteria.Job
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM dd,yyyy}")]
         public DateTime? To { get; set; }
-     
+
         [Display(Name = "Job", ResourceType = typeof(ViewResource))]
-        public string Job_Name { get; set; }
+        [SpParam(SqlParamName = "Job_Name")]
+        public string JobName { get; set; }
 
         [Display(Name = "Status", ResourceType = typeof(ViewResource))]
         public int? Enabled { get; set; }
 
         [Display(Name = "Execution_Status", ResourceType = typeof(ViewResource))]
-        public int? Execution_Status { get; set; }
+        [SpParam(SqlParamName = "Execution_Status")]
+        public int? ExecutionStatus { get; set; }
 
-        public string Job_Aspect { get; set; }
+        [SpParam(SqlParamName = "Job_Aspect")]
+        public string JobAspect { get; set; }
 
         public override bool IsValid()
         {

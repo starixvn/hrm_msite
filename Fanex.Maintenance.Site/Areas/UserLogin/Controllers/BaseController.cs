@@ -1,42 +1,45 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Edward.Nguyen" date="2012.10.16">Created</change>
+//   <change who="Edward.Nguyen" date="2012.8.28">Add properties _currentContext</change>
 // </history>
 
 namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
-    using System;
-    using System.Configuration;
     using System.Web.Mvc;
-    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Web.Context;
+    using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>
-    /// 
-    /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class BaseController : Controller
     {
-        protected readonly CurrentContext _currentContext;
+        protected readonly string Environment = NapSettings.Settings.Environment;
 
-        protected readonly string _environment = ConfigurationManager.AppSettings[Constant.Environment] ?? Constant.UAT;
+        protected readonly int SiteId = NapSettings.Settings.SiteId;
 
-        protected readonly int _siteId = Convert.ToInt32(ConfigurationManager.AppSettings[Constant.SiteId].ToString());
+        private int _issiteLogin = NapSettings.Settings.IsSiteLogin;
+
+        protected readonly CurrentContext CurrentContext;
 
         public BaseController()
         {
-            _currentContext = new CurrentContext();
+            CurrentContext = new CurrentContext();
         }
 
+        /// <summary>
+        /// Indicates whether the current site allows users login directly.
+        /// If "0", users must login through NAP Hub
+        /// </summary>
         public int IsSiteLogin
         {
             get
             {
-                return Convert.ToInt32(ConfigurationManager.AppSettings["IsSiteLogin"].ToString() ?? "0");
+                return _issiteLogin;
             }
-        }        
+        }
     }
 }

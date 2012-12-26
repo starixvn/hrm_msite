@@ -7,20 +7,16 @@
 //   <change who="Ricky.Nguyen" date="2012.10.25">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Entity.Model
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ServerFullInfo
     {
-        
         //-- Scritp to get Processor Info from Registry
         //EXEC xp_instance_regread
         //'HKEY_LOCAL_MACHINE',
@@ -35,9 +31,13 @@ namespace Fanex.Maintenance.Entity.Model
         //,physical_memory_in_bytes/1048576 AS [Total Physical Memory IN MB]
         //FROM sys.dm_os_sys_info OPTION (RECOMPILE);
         public string CpuName { get; set; }
+
         public int NumberLogicalCpu { get; set; }
+
         public int HyperThreadRatio { get; set; }
+
         public int NumberPhysicalCpu { get; set; }
+
         public int TotalPhysicalMemory { get; set; }
     }
 }

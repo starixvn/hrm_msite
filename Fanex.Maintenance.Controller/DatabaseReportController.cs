@@ -12,8 +12,11 @@ namespace Fanex.Maintenance.Controller
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web.Mvc;
+    using Fanex.DataValidation.Service.Implement;
+    using Fanex.DataValidation.Validation.Implement;
     using Fanex.Maintenance.Criteria.DatabaseReport;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;
@@ -21,6 +24,7 @@ namespace Fanex.Maintenance.Controller
     /// <summary>
     /// Database report controller
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class DatabaseReportController : Controller
     {
         #region Member
@@ -35,7 +39,7 @@ namespace Fanex.Maintenance.Controller
         #region Ctor
 
         /// <summary>
-        /// Parameterless constructor
+        /// Parameter less constructor
         /// </summary>
         public DatabaseReportController()
             : this(null)
@@ -43,7 +47,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Constuctor with service input
+        /// Constructor with service input
         /// </summary>
         /// <param name="databaseReportService"></param>
         public DatabaseReportController(IDatabaseReportService databaseReportService)
@@ -60,15 +64,10 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult DataIntegrity()
         {
-            var criteria = new GetBalanceUpDayCriteria();
-            DataTable balanceUpDayTable = _databaseReportService.GetBalanceUpDay(criteria);
-            var moveBetsDay = (DateTime)balanceUpDayTable.Rows[0][1];
-            var sinceLastMonth = new DateTime(moveBetsDay.AddMonths(-1).Year, moveBetsDay.AddMonths(-1).Month, 1);
-            ViewBag.MinDate = string.Format("{0:dd/MM/yyyy}", sinceLastMonth);
-            ViewBag.MaxDate = string.Format("{0:dd/MM/yyyy}", moveBetsDay);
+            var validationService = new ValidationService();
+            var moveBetsDay = validationService.MoveBetsDay;
 
-            //ViewBag.BodyLicenseeData = _databaseReportService.GenerateTemplateHtmlLicensee(moveBetsDay, 1);
-            //ViewBag.BodyCreditData = _databaseReportService.GenerateTemplateHtmlCredit(moveBetsDay, 1);
+            ViewBag.MaxDate = string.Format("{0:dd/MM/yyyy}", moveBetsDay);
 
             ViewBag.BodyLicenseeData = string.Empty;
             ViewBag.BodyCreditData = string.Empty;
@@ -97,48 +96,7 @@ namespace Fanex.Maintenance.Controller
             {
                 Date = moveBetsDay.ToString("dd/MM/yyyy")
             });
-        }
-
-        /// <summary>
-        /// Data Integrity Post return
-        /// </summary>
-        /// <param name="modelView"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult DataIntegrity(DataIntegrityViewModel modelView)
-        {
-            var criteria = new GetBalanceUpDayCriteria();
-            DataTable balanceUpDayTable = _databaseReportService.GetBalanceUpDay(criteria);
-            var moveBetsDay = (DateTime)balanceUpDayTable.Rows[0][1];
-            var sinceLastMonth = new DateTime(moveBetsDay.AddMonths(-1).Year, moveBetsDay.AddMonths(-1).Month, 1);
-            ViewBag.MinDate = string.Format("{0:dd/MM/yyyy}", sinceLastMonth);
-            ViewBag.MaxDate = string.Format("{0:dd/MM/yyyy}", moveBetsDay);
-
-            ViewBag.BodyLicenseeData = _databaseReportService.GenerateTemplateHtmlLicensee(modelView.GetDate(), modelView.DrawFilter);
-            ViewBag.BodyCreditData = _databaseReportService.GenerateTemplateHtmlCredit(modelView.GetDate(), modelView.DrawFilter);
-
-            List<SelectListItem> listDrawFilter = new List<SelectListItem>();
-            listDrawFilter.Add(new SelectListItem
-            {
-                Text = "Normal",
-                Value = "1"
-            });
-            listDrawFilter.Add(new SelectListItem
-            {
-                Text = "No Draw",
-                Value = "2"
-            });
-
-            listDrawFilter.Add(new SelectListItem
-            {
-                Text = "No Draw for Turnover Only",
-                Value = "3"
-            });
-
-            ViewBag.ListDrawFilter = listDrawFilter;
-
-            return View(modelView);
-        }
+        }        
 
         /// <summary>
         /// User Online Daily
@@ -154,7 +112,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// User Online Dayli by date
+        /// User Online Daily by date
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
@@ -207,6 +165,8 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        #region Ajax
+
         /// <summary>
         /// User online chart report with size
         /// </summary>
@@ -223,5 +183,47 @@ namespace Fanex.Maintenance.Controller
 
             return Json(null);
         }
+
+        [HttpPost]
+        public string GetDepositIntegrity(int filter = 1, string date = "")
+        {
+            if (Request.IsAjaxRequest())
+            {
+                DateTime fromData = DateTime.Now;
+                if (!string.IsNullOrEmpty(date))
+                {
+                    fromData = DateTime.Parse(date, new CultureInfo("en-GB", false));
+                }
+
+                bool isConsistent;
+                var validationLicensee = new DepositValidation { DrawFilter = filter };
+
+                return validationLicensee.GetDataComparisionString(fromData, fromData, false, out isConsistent);
+            }
+
+            return string.Empty;
+        }
+
+        [HttpPost]
+        public string GetCreditIntegrity(int filter = 1, string date = "")
+        {
+            if (Request.IsAjaxRequest())
+            {
+                DateTime fromData = DateTime.Now;
+                if (!string.IsNullOrEmpty(date))
+                {
+                    fromData = DateTime.Parse(date, new CultureInfo("en-GB", false));
+                }
+
+                bool isConsistent;
+                var validationCredit = new CreditValidation { DrawFilter = filter };
+
+                return validationCredit.GetDataComparisionString(fromData, fromData, false, out isConsistent);
+            }
+
+            return string.Empty;
+        }
+
+        #endregion
     }
 }

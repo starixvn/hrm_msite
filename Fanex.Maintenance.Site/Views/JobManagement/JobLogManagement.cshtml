@@ -1,7 +1,7 @@
 ﻿@using Fanex.Maintenance.Criteria.Job
 @model GetListJobCriteria
 @{
-    ViewBag.Title = Model.Job_Name;
+    ViewBag.Title = Model.JobName;
     Layout = "~/Views/Shared/_SqlJobManagementLayout.cshtml";
     var lisJobLog = ViewBag.ListLogJob != null ? (List<JobLog>)ViewBag.ListLogJob : new List<JobLog>();
 }
@@ -17,7 +17,7 @@
         <a href="#">@Model.Server</a>
         <div class="breadcrumb_divider">
         </div>
-        <a href="#">@Model.Job_Name</a>
+        <a href="#">@Model.JobName</a>
         <div class="breadcrumb_divider">
         </div>
         <a class="current">@ViewResource.Job_Log_Management</a>
@@ -41,19 +41,19 @@
                 </div>
                 <div class="filter-form">
                     <div class="lbl-field">
-                        @Html.LabelFor(m => m.Job_Name)
+                        @Html.LabelFor(m => m.JobName)
                     </div>
                     <div class="edit-field width-316">
-                        @Html.DropDownListFor(m => m.Job_Name, (List<SelectListItem>)ViewBag.ListJob, "Select Job"
+                        @Html.DropDownListFor(m => m.JobName, (List<SelectListItem>)ViewBag.ListJob, "Select Job"
              , new { @class = "chosen width-316" })
                     </div>
                 </div>
                 <div class="filter-form">
                     <div class="lbl-field width-auto">
-                        @Html.LabelFor(m => m.Execution_Status)
+                        @Html.LabelFor(m => m.ExecutionStatus)
                     </div>
                     <div class="edit-field ">
-                        @Html.DropDownListFor(m => m.Execution_Status,
+                        @Html.DropDownListFor(m => m.ExecutionStatus,
                     new List<SelectListItem> { 
                         new SelectListItem{ Text=ViewResource.Success,Value=((int)StepRunStatus.Success).ToString()},                        
                         new SelectListItem{ Text=ViewResource.Fail,Value=((int)StepRunStatus.Fail).ToString()},                                              
@@ -173,7 +173,7 @@
                                     <span class="btn-action">Action</span>
                                     <div class="relative">
                                         <ul class="actions" style="visibility: hidden; opacity: 0;">
-                                            <li><a href="#" onclick="JobLogManagement.StartJob('@Model.Server','@Model.Job_Name','@item.Step.Id', '@item.Step.Name');" class="dd-play">
+                                            <li><a href="#" onclick="JobLogManagement.StartJob('@Model.Server','@Model.JobName','@item.Step.Id', '@item.Step.Name');" class="dd-play">
                                                 Run</a></li>
                                             @*     <li><a href="#" class="dd-site">Copy to</a></li>*@
                                         </ul>

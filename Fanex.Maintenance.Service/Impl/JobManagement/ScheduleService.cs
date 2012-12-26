@@ -11,24 +11,23 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Threading.Tasks;
     using Fanex.Logging;
     using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Criteria.Job;
-    using Fanex.Maintenance.Entity.Domain;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
-    using Fanex.Maintenance.Core.Helper;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ScheduleService : IScheduleService
     {
         #region Member
@@ -179,7 +178,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 {
                     schedules.AddRange(_scheduleRepository.GetAllSchedule(new GetAllScheduleCriteria
                     {
-                        Schedule_Name = ScheduleName
+                        ScheduleName = ScheduleName
                     }, ServerIp));
                 }
                 else
@@ -195,7 +194,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                             ScheduleParamForTask scheduleParamForTask = (ScheduleParamForTask)param;
                             return _scheduleRepository.GetAllSchedule(new GetAllScheduleCriteria
                             {
-                                Schedule_Name = scheduleParamForTask.ScheduleName
+                                ScheduleName = scheduleParamForTask.ScheduleName
                             }, scheduleParamForTask.ServerIp);
                         }, new ScheduleParamForTask
                         {

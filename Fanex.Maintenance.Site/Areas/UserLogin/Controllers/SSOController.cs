@@ -1,15 +1,16 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SSOController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GroupController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Edward.Nguyen" date="2012.10.16">Created</change>
+//   <change who="Edward.Nguyen" date="2012.8.28">Add properties _currentContext</change>
 // </history>
 
 namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
@@ -20,20 +21,29 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
-    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SSOController : BaseController
     {
+        #region members
+
         private IUserService _userService;
         private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
+
+        #endregion
+
+        #region ctors
 
         public SSOController()
             : this(null, null, null)
         {
         }
 
-        public SSOController(IUserService userService, IMenuItemService menuItemService,
+        public SSOController(
+            IUserService userService,
+            IMenuItemService menuItemService,
             ICurrentSession currentSession)
         {
             _userService = userService ?? new UserService();
@@ -41,85 +51,102 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             _currentSession = currentSession ?? new CurrentSession();
         }
 
+        #endregion
+
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult Index(string UserId, string OnUserId, string Time)
+        public ActionResult Index(string userId, string onuserId, string time)
         {
-            string strUserId = Cryptography.CfsDeCrypt(UserId.Replace(" ", "+"));
-            string strOnUserId = Cryptography.CfsDeCrypt(OnUserId.Replace(" ", "+"));
-            string strTime = Cryptography.CfsDeCrypt(Time.Replace(" ", "+"));
+            userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
+            onuserId = Cryptography.CfsDeCrypt(onuserId.Replace(" ", "+"));
+            time = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
 
-            DateTime time = Convert.ToDateTime(strTime);
-            DateTime timeNow = DateTime.Now;
-            TimeSpan expiration = timeNow - time;
+            var expiration = DateTime.Now - Convert.ToDateTime(time);
+
             if (expiration.TotalSeconds <= 10)
             {
-                int userId = Convert.ToInt32(strUserId);
-                int onUserId = Convert.ToInt32(strOnUserId);
-                UserSSOCheckInUserCriteria criteria = new UserSSOCheckInUserCriteria();
-                criteria.UserId = userId;
-                criteria.SiteId = _siteId;
-                criteria.CheckOnUserId = onUserId;
-                criteria.OnUserId = 0;
-                criteria.IP = _currentContext.IP;
-                criteria.NetSessionId = Session.SessionID;
+                #region do SSO check-in
+
+                var criteria = new UserSSOCheckInUserCriteria
+                {
+                    UserId = Convert.ToInt32(userId),
+                    SiteId = SiteId,
+                    CheckOnUserId = Convert.ToInt32(onuserId),
+                    OnUserId = 0,
+                    IP = CurrentContext.IP,
+                    NetSessionId = Session.SessionID,
+                    LoginDate = DateTime.Now,
+                    BrowserName = CurrentContext.BrowserName,
+                    CountryCode = CurrentContext.CountryCode,
+                    Domain = CurrentContext.DomainName,
+                    Platform = CurrentContext.Platform
+                };
 
                 _userService.UserSSOCheckIn(ref criteria);
+
+                #endregion
+
                 if (criteria.OnUserId != 0)
                 {
-                    User objUser = new User();
-                    objUser = (User)_userService.GetById(userId);
+                    var user = _userService.GetById(criteria.UserId) as User;
 
-                    _currentSession.UserId = objUser.Id;
-                    _currentSession.Username = objUser.Username;
+                    #region saves user session & auth info
+
+                    _currentSession.UserId = user.Id;
+                    _currentSession.Username = user.Username;
                     _currentSession.OnUserId = criteria.OnUserId;
-                    _currentSession.NetSessionId = Session.SessionID.ToString();
-                    _currentSession.Level = _userService.GetUserSiteLevel(objUser.Id, this._siteId);
+                    _currentSession.SessionId = Session.SessionID.ToString();
+                    _currentSession.Level = _userService.GetUserSiteLevel(user.Id, this.SiteId);
 
-                    if (this._siteId != 0)
+                    if (this.SiteId != 0)
                     {
-                        CreateUserMenu(objUser);
+                        _currentSession.MenuItemList = _menuItemService.GetByUserAndSiteIncludeGroup(
+                                                                                user.Id,
+                                                                                SiteId,
+                                                                                Environment,
+                                                                                true) as IList<MenuItem>;
                     }
 
-                    CreateAuthInfo(objUser);
+                    CreateAuthInfo(user);
+
+                    #endregion
+
                     return Redirect(FormsAuthentication.DefaultUrl);
                 }
             }
-            else
-            {
-                RedirectToAction("Index", "Home");
-            }
 
-            return View();
+            return Redirect(FormsAuthentication.LoginUrl);
         }
 
-        private void CreateUserMenu(User user)
-        {
-            _currentSession.MenuItemList = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(user.Id, _siteId,
-                _environment, true);
-        }
+        #region utilities
 
         private void CreateAuthInfo(User user)
         {
             var authInfo = new AuthInfo();
+
             authInfo.UserId = user.Id;
             authInfo.OnUserId = this._currentSession.OnUserId;
 
-            var authTicket = new FormsAuthenticationTicket(1, user.Username,
-                DateTime.Now, DateTime.Now.AddMinutes(20000), false, authInfo.ToXml());
+            var authTicket = new FormsAuthenticationTicket(
+                 1,
+                user.Username,
+                DateTime.Now,
+                DateTime.Now.AddMinutes(20000),
+                false,
+                authInfo.ToXml(),
+                FormsAuthentication.FormsCookiePath);
+
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
+            {
+                HttpOnly = true,
+                Path = FormsAuthentication.FormsCookiePath,
+                Name = FormsAuthentication.FormsCookieName
+            };
 
             Response.Cookies.Add(authCookie);
         }
 
-        public ActionResult LogOut()
-        {
-            LogOutUserCriteria criteria = new LogOutUserCriteria();
-            criteria.OnUserId = _currentSession.OnUserId;
-            _userService.UserLogOut(criteria);
-            _currentSession.ClearAll();
-            return Redirect(FormsAuthentication.LoginUrl);
-        }
+        #endregion
     }
 }

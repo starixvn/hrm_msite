@@ -10,29 +10,37 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using Fanex.NAP.Framework.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class StartJobCriteria : CriteriaBase
     {
-        public string Job_Name { get; set; }
+        [SpParam(SqlParamName = "Job_Name")]
+        public string JobName { get; set; }
 
         /// <summary>
         /// Identified for informational purposes only. Not supported. Future compatibility is not guaranteed.
         /// </summary>
-        public int? Error_Flag {get;set;}
+        [SpParam(SqlParamName = "Error_Flag")]
+        public int? ErrorFlag { get; set; }
 
         /// <summary>
         /// The target server on which to start the job. server_name is nvarchar(128), with a default of NULL. server_name must be one of the target servers to which the job is currently targeted.
         /// </summary>
-        public string Server_Name { get; set; }
+        [SpParam(SqlParamName = "Server_Name")]
+        public string ServerName { get; set; }
 
-        public string Step_Name { get; set; }
+        [SpParam(SqlParamName = "Step_Name")]
+        public string StepName { get; set; }
+
         /// <summary>
         /// Identified for informational purposes only. Not supported. Future compatibility is not guaranteed.
         /// </summary>
-        public int? Output_Flag { get; set; }
+        [SpParam(SqlParamName = "Output_Flag")]
+        public int? OutputFlag { get; set; }
 
         public override bool IsValid()
         {

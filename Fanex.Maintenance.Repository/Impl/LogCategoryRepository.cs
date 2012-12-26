@@ -12,8 +12,8 @@ namespace Fanex.Maintenance.Repository.Impl
     using System;
     using System.Collections.Generic;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Entity.Model;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Log category

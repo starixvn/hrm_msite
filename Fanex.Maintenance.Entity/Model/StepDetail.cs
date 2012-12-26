@@ -10,8 +10,10 @@
 namespace Fanex.Maintenance.Entity.Model
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Entity.Domain;
 
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class StepDetail : IEntity<int, string>
     {
         /// <summary>
@@ -40,7 +42,7 @@ namespace Fanex.Maintenance.Entity.Model
         public string AdditionalParameters { get; set; }
 
         /// <summary>
-        /// Error-level value returned by CmdExec subsystem steps to indicate success.
+        /// Error-level value returned by Command Execute subsystem steps to indicate success.
         /// </summary>
         public int CmdExecSuccessCode { get; set; }
 
@@ -95,17 +97,17 @@ namespace Fanex.Maintenance.Entity.Model
         public string OsRunPriority { get; set; }
 
         /// <summary>
-        /// Name of the file in which the step's output is saved when subsystem is TSQL, PowerShell, or CmdExec.
+        /// Name of the file in which the step's output is saved when subsystem is TSQL, PowerShell, or command execute.
         /// </summary>
         public string OutputFileName { get; set; }
 
         /// <summary>
         /// Outcome of the previous execution of the job step.
-        ///0 = Failed
-        ///1 = Succeeded
-        ///2 = Retry
-        ///3 = Canceled
-        ///5 = Unknown
+        /// 0 = Failed
+        /// 1 = Succeeded
+        /// 2 = Retry
+        /// 3 = Canceled
+        /// 5 = Unknown
         /// </summary>
         public int LastRunOutCome { get; set; }
 

@@ -10,12 +10,11 @@
 namespace Fanex.Maintenance.Criteria.Log
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
 
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetLogCriteria : CriteriaBase
     {
         public int? CategoryId { get; set; }

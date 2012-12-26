@@ -8,59 +8,42 @@
 }
 @section Head
 {
-    <link href="~/themes/job/report/dataintegry.less" rel="stylesheet" type="text/css">
-    </link>
-    <style type="text/css">
-        #filter-bar
-        {
-            background-color: #F4F4F4;
-            border: 1px solid #C8C8C8;
-            border-radius: 2px 2px 2px 2px;
-            box-shadow: 1px 1px 5px #888888;
-            margin-top: 10px;
-            min-width: 600px;
-            padding: 15px 10px;
-            width: 98%;
-            margin-bottom: 45px;
-        }
-    </style>
+    <link href="~/themes/job/report/dataintegry.less" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
     </h1>
 }
-@using (Html.BeginForm())
-{ 
-    <section id="filter-bar">
-        <div class="filter-form">
-            <div class="lbl-field width-auto">
-                @Html.LabelFor(m => m.DrawFilter)
-            </div>
-            <div class="edit-field">
-                @Html.DropDownListFor(m => m.DrawFilter, (List<SelectListItem>)ViewBag.ListDrawFilter)
-            </div>
-            <div class="lbl-field width-auto">
-                @Html.LabelFor(m => m.Date)
-            </div>
-            <div class="edit-field">
-                @Html.TextBoxFor(m => m.Date, (string)ViewBag.MaxDate, new { @style = "width:90px;margin-right:5px;" })
-            </div>
-            <div class="submit">
-                <input type="submit" value="Submit" />
-            </div>
+<section id="filter-bar">
+    <div class="filter-form">
+        <div class="lbl-field width-auto">
+            @Html.Label(@ViewResource.DrawFilter)
         </div>
-    </section>      
-}
-@Html.Raw(ViewBag.BodyLicenseeData)
+        <div class="edit-field">
+            @Html.DropDownListFor(m => m.DrawFilter, (List<SelectListItem>)ViewBag.ListDrawFilter)
+        </div>
+        <div class="lbl-field width-auto">
+            @Html.LabelFor(m => m.Date)
+        </div>
+        <div class="edit-field">
+            @Html.TextBoxFor(m => m.Date, (string)ViewBag.MaxDate, new { @style = "width:90px;margin-right:5px;" })
+        </div>
+        <div class="submit">
+            <input type="submit" value="Submit" />
+        </div>
+    </div>
+</section>
+<div id="deposit">
+</div>
 <br />
 <br />
-@Html.Raw(ViewBag.BodyCreditData)
+<div id="credit">
+</div>
 <input type="hidden" value="@ViewBag.MinDate" id="minDate" />
 <input type="hidden" value="@ViewBag.MaxDate" id="maxDate" />
 @section Foot {
-    <script type="text/javascript">
-
+    <script type="text/javascript">       
         $(function () {
             var buttonFromImage = '@Url.Content("~/images/calendar.gif")';
             $("#Date").datepicker({
@@ -68,11 +51,67 @@
                 buttonImage: buttonFromImage,
                 buttonImageOnly: true,
                 dateFormat: "dd/mm/yy",
-                minDate: $('#minDate').val(),
                 maxDate: $('#maxDate').val(),
                 defaultDate: $('#maxDate').val()
             });
+        });   
+        
+        $('input[type=submit]').click(function(){
 
-        });        
+            var countComplete=0;
+            
+            $.ajax({
+                url: NAP.resolveClientUrl("DatabaseReport/GetDepositIntegrity"),
+                data: {
+                    filter: $('#DrawFilter').val(),
+                    date: $('#Date').val(),                    
+                },
+                type: 'POST',
+                dataType: 'html',
+                cache: false,
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    countComplete++;
+                    if(countComplete==2){
+                        NAP.loadingBox.close();
+                    }
+                },
+                success: function (result) {   
+                    $('#deposit').append('<h1><span class="titleSites">Deposit Sites</span></h1>');                
+                    $('#deposit').append(result);                    
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
+            $.ajax({
+                url: NAP.resolveClientUrl("DatabaseReport/GetCreditIntegrity"),
+                data: {
+                    filter: $('#DrawFilter').val(),
+                    date: $('#Date').val(),                    
+                },
+                type: 'POST',
+                dataType: 'html',
+                cache: false,
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    countComplete++;
+                    if(countComplete==2){
+                        NAP.loadingBox.close();
+                    }
+                },
+                success: function (result) {      
+                    $('#credit').append('<h1><span class="titleSites">Credit Sites</span></h1>');                
+                    $('#credit').append(result);                    
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
+        });     
     </script>
 }

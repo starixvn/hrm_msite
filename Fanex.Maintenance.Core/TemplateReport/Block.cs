@@ -18,18 +18,22 @@ namespace Fanex.Maintenance.Core.TemplateReport
         /// BgSBBA
         /// </summary>
         public string BgSBBA { get; set; }
+
         /// <summary>
-        /// BgSportsbook
+        /// Bg Sports book
         /// </summary>
         public string BgSportsbook { get; set; }
+
         /// <summary>
         /// BgBA
         /// </summary>
         public string BgBA { get; set; }
+
         /// <summary>
         /// BgRacing
         /// </summary>
         public string BgRacing { get; set; }
+
         /// <summary>
         /// BgNumberGame
         /// </summary>
@@ -38,19 +42,23 @@ namespace Fanex.Maintenance.Core.TemplateReport
         /// <summary>
         /// SetBackgrounds
         /// </summary>
-        /// <param name="BgSBBA"></param>
-        /// <param name="BgSportsbook"></param>
-        /// <param name="BgBA"></param>
-        /// <param name="BgRacing"></param>
-        /// <param name="BgNumberGame"></param>
-        public void SetBackgrounds(ref string BgSBBA, ref string BgSportsbook,
-                                   ref string BgBA, ref string BgRacing, ref string BgNumberGame)
+        /// <param name="bgSBBA"></param>
+        /// <param name="bgSportsbook"></param>
+        /// <param name="bgBA"></param>
+        /// <param name="bgRacing"></param>
+        /// <param name="bgNumberGame"></param>
+        public void SetBackgrounds(
+            ref string bgSBBA,
+            ref string bgSportsbook,
+            ref string bgBA,
+            ref string bgRacing,
+            ref string bgNumberGame)
         {
-            BgSBBA = this.BgSBBA;
-            BgSportsbook = this.BgSportsbook;
-            BgBA = this.BgBA;
-            BgRacing = this.BgRacing;
-            BgNumberGame = this.BgNumberGame;
+            bgSBBA = this.BgSBBA;
+            bgSportsbook = this.BgSportsbook;
+            bgBA = this.BgBA;
+            bgRacing = this.BgRacing;
+            bgNumberGame = this.BgNumberGame;
         }
     }
 }

@@ -10,15 +10,19 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using Fanex.NAP.Framework.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetAllJobInScheduleCriteria : CriteriaBase
     {
-        public string Schedule_Name { get; set; }
+        [SpParam(SqlParamName = "Schedule_Name")]
+        public string ScheduleName { get; set; }
 
-        public int? Schedule_Id { get; set; }
+        [SpParam(SqlParamName = "Schedule_Id")]
+        public int? ScheduleId { get; set; }
 
         public override bool IsValid()
         {

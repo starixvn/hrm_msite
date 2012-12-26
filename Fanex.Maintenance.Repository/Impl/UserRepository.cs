@@ -12,11 +12,10 @@ namespace Fanex.Maintenance.Repository.Impl
     using System;
     using System.Collections;
     using Fanex.Data;
-    using Fanex.Maintenance.Repository.Interface;
-    using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Criteria;
     using Fanex.Maintenance.Entity.Model;
-    using System.Data.Common;
+    using Fanex.Maintenance.Repository.Interface;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -38,7 +37,7 @@ namespace Fanex.Maintenance.Repository.Impl
                 using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
                 {                    
                     objectDb.ExecuteNonQuery(hash);
-
+                    
                     return this.GetCommandResult(hash);
                 }
             }

@@ -1,6 +1,10 @@
 ﻿$(document).ready(function () {
     FirstLoad();
     DisplayButton("", $('input[name=hdDate]').val());
+
+    $('input[type=submit]').click(function () {
+        console.log('a');
+    });
 })
 
 //Method use load data default
@@ -134,3 +138,4 @@ function ShowData(chooseDate, minDate, maxDate) {
         $("#btnsubmit").show();
     }); //dvCreditdata
 }
+

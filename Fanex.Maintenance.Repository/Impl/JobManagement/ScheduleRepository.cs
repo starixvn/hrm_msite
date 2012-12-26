@@ -13,13 +13,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Globalization;
     using Fanex.Common.Extensions;
     using Fanex.Logging;
+    using Fanex.Maintenance.Core.Helper;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Maintenance.Core.Helper;
 
     /// <summary>
     /// TODO: Update summary.

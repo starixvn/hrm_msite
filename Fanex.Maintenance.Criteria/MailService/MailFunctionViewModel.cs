@@ -1,22 +1,23 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="MailSettingViewModel.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="MailFunctionViewModel.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2012.12.6">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Criteria.MailService
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
     using MailDeliver.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailFunctionViewModel
     {
         public int FunctionId { get; set; }

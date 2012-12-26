@@ -11,19 +11,21 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.Maintenance.Service.Interface.JobManagement;
-    using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Repository.Interface.JobManagement;
-    using Fanex.Maintenance.Core.Configurations;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Fanex.Maintenance.Repository.Impl.JobManagement;
-    using Fanex.Maintenance.Criteria.Job;
-    using Fanex.Maintenance.Core.Web;
     using Fanex.Logging;
+    using Fanex.Maintenance.Core.Configurations;
+    using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Repository.Impl.JobManagement;
+    using Fanex.Maintenance.Repository.Interface.JobManagement;
+    using Fanex.Maintenance.Service.Interface.JobManagement;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class JobService : IJobService
     {
         #region Member
@@ -262,8 +264,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             var criteria = new GetListJobCriteria
             {
-                Job_Name = this._jobName,
-                Execution_Status = this._currentExcuteStatus,
+                JobName = this._jobName,
+                ExecutionStatus = this._currentExcuteStatus,
                 Enabled = this._status
             };
 
@@ -327,10 +329,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             //// create criteria get job history
             var criteria = new GetJobHistoryCriteria
             {
-                Job_Name = this._jobName,
-                Run_Status = this._currentExcuteStatus,
-                Start_Run_Date = this._startRunDate,
-                End_Run_Date = this._endRunDate,
+                JobName = this._jobName,
+                RunStatus = this._currentExcuteStatus,
+                StartRunDate = this._startRunDate,
+                EndRunDate = this._endRunDate,
                 Mode = Constants.FULL
             };
 
@@ -339,7 +341,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 List<JobLog> list = _jobRepository.GetJobLog(criteria, this._server).ToList();
 
                 if (!ReferenceEquals(list, null) && list.Count > 0)
-                {                    
+                {
                     int indexOutCome = 0;
                     for (int i = 0; i < list.Count; i++)
                     {
@@ -353,10 +355,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                             if (itemLog.RunSatus == 0 || itemLog.RunSatus == 2)
                             {
                                 list[indexOutCome].RunSatus = 6;
-                            }                            
+                            }
                         }
                     }
                 }
+
                 return list;
             }
             catch (Exception ex)
@@ -379,7 +382,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             {
                 var criteria = new GetAllJobInScheduleCriteria
                 {
-                    Schedule_Name = schedule
+                    ScheduleName = schedule
                 };
 
                 return _jobRepository.GetAllJob(criteria, server);
@@ -391,7 +394,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             return new List<JobSchedule>();
         }
-
 
         /// <summary>
         /// Get job buy schedule name
@@ -405,7 +407,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             {
                 var criteria = new GetAllJobInScheduleCriteria
                 {
-                    Schedule_Id = scheduleId
+                    ScheduleId = scheduleId
                 };
 
                 return _jobRepository.GetAllJob(criteria, server);
@@ -426,8 +428,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             StartJobCriteria startJobCriteria = new StartJobCriteria
             {
-                Job_Name = this._jobName,
-                Step_Name = this._stepName
+                JobName = this._jobName,
+                StepName = this._stepName
             };
 
             CommandResult commandResult = new CommandResult
@@ -457,7 +459,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             StopJobCriteria stopJobCriteria = new StopJobCriteria
             {
-                Job_Name = this._jobName
+                JobName = this._jobName
             };
 
             CommandResult commandResult = new CommandResult
@@ -478,7 +480,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
             return commandResult;
         }
-
 
         public IJobService WithScheduleId(int? scheduleId)
         {

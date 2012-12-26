@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "UserOnline";
+    ViewBag.Title = "User Online";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head
@@ -11,14 +11,14 @@
             setInterval("CountDown(false)", 1000);
         };
     </script>
-
 }
-@section Headline {    <h1>
+@section Headline {
+    <h1>
         <span class="title">@ViewBag.Title</span>
     </h1>
 }
 <div class="pagesize" style="width: 200px">
-    Page Size :
+    @ViewResource.Page_Size :
     <select id="pageSize" onchange="showOption();">
         <option value="10">10</option>
         <option value="20">20</option>
@@ -45,30 +45,30 @@
     <thead>
         <tr>
             <th rowspan="2">
-                Time
+                @ViewResource.Time
             </th>
             <th colspan="4">
-                Agency
+                @ViewResource.Agency
             </th>
             <th rowspan="2">
-                Accounting
+                @ViewResource.Accounting
             </th>
             <th rowspan="2">
-                Affiliate
+                @ViewResource.Affiliate
             </th>
         </tr>
         <tr>
             <th>
-                Total
+                @ViewResource.Total
             </th>
             <th>
-                Super
+                @ViewResource.Super
             </th>
             <th>
-                Master
+                @ViewResource.Master
             </th>
             <th>
-                Agent
+                @ViewResource.Agent
             </th>
         </tr>
     </thead>

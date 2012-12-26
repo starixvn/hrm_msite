@@ -17,62 +17,7 @@ namespace Fanex.Maintenance.Service.Interface
     /// TODO: Update summary.
     /// </summary>
     public interface IDatabaseReportService
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="drawFilter"></param>
-        /// <returns></returns>
-        DataTable GetSumWinloss(DateTime date, int drawFilter);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="drawFilter"></param>
-        /// <returns></returns>
-        DataTable GetLicenseeWinloss(DateTime date, int drawFilter);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="drawFilter"></param>
-        /// <returns></returns>
-        DataTable GetBetting(DateTime date, int drawFilter);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="drawFilter"></param>
-        /// <returns></returns>
-        DataTable GetDW(DateTime date, int drawFilter);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
-        DataTable GetBalanceUpDay(ICriteria criteria);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="drawFilter"></param>
-        /// <returns></returns>
-        DataTable CreditDataBetting(DateTime date, int drawFilter);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="drawFilter"></param>
-        /// <returns></returns>
-        DataTable CreditDataDW(DateTime date, int drawFilter);
-        
+    { 
         /// <summary>
         /// 
         /// </summary>
@@ -85,23 +30,7 @@ namespace Fanex.Maintenance.Service.Interface
         /// </summary>
         /// <param name="top"></param>
         /// <returns></returns>
-        DataTable GetUserOnline(int top);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="drawFilter"></param>
-        /// <returns></returns>
-        string GenerateTemplateHtmlLicensee(DateTime date, int drawFilter);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <param name="drawFilter"></param>
-        /// <returns></returns>
-        string GenerateTemplateHtmlCredit(DateTime date, int drawFilter);
+        DataTable GetUserOnline(int top);        
 
         /// <summary>
         /// 

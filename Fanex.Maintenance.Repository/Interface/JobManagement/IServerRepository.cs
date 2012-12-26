@@ -9,16 +9,20 @@
 
 namespace Fanex.Maintenance.Repository.Interface.JobManagement
 {
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public interface IServerRepository
     {
         ResourceInfo GetServerResourceInfo(ICriteria criteria, string connectionString);
+
         ServerFullInfo GetServerFullInformation(ICriteria criteria, string serverIp);
+
         ServerStatus GetServerStatus(ICriteria criteria, string connectionString);
     }
 }

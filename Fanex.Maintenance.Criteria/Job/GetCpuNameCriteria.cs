@@ -7,21 +7,17 @@
 //   <change who="Ricky.Nguyen" date="2012.10.25">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Criteria.Job
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.NAP.Framework.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetCpuNameCriteria : CriteriaBase
     {
-
         public override bool IsValid()
         {
             return true;

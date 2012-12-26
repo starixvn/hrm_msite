@@ -9,16 +9,13 @@
 
 namespace Fanex.Maintenance.Controller.Hubs
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using SignalR.Hubs;
-    using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class NotificationHub : Hub
     {
         public void SendData(string data)

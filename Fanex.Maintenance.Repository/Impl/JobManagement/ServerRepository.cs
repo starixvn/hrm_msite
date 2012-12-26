@@ -9,14 +9,14 @@
 
 namespace Fanex.Maintenance.Repository.Impl.JobManagement
 {
+    using System;
+    using Fanex.Common.Extensions;
     using Fanex.Data;
     using Fanex.Maintenance.Core.Helper;
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Common.Extensions;
-    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -52,7 +52,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 {
                     while (reader.Read())
                     {
-                        resourceInfo.MemoryUsage = (float)Math.Round((reader.ToFloat("MemoryUsage") / 1024),2);
+                        resourceInfo.MemoryUsage = (float)Math.Round((reader.ToFloat("MemoryUsage") / 1024), 2);
                         resourceInfo.TotalMemory = (float)Math.Round((reader.ToFloat("TotalMemory") / 1024), 2);
                         resourceInfo.SystemCpuPercent = reader.ToFloat("system_cpu_utilization");
                         resourceInfo.SqlCpuPercent = reader.ToFloat("sql_cpu_utilization");
@@ -130,7 +130,5 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
             return serverStatus;
         }
-
-
     }
 }

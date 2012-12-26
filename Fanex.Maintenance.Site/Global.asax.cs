@@ -1,21 +1,15 @@
 ﻿namespace Fanex.Maintenance.Site
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Fanex.Data;
-    using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Controller.Worker;
-    using System.Configuration;
-    using Fanex.Common;
     using Fanex.Maintenance.Core.Web;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -28,12 +22,17 @@
 
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
 
-            NotificationWorker notificationWorker = new NotificationWorker(AppSetting.GetDataNotifyInterval);
-            notificationWorker.Start();
+            if (AppSetting.NotifiJob)
+            {
+                NotificationWorker notificationWorker = new NotificationWorker(AppSetting.GetDataNotifyInterval);
+                notificationWorker.Start();
+            }
 
-            
-            ServerInfoWorker serverInfoWorker = new ServerInfoWorker(AppSetting.GetServerResourcesInfoInterval);
-            serverInfoWorker.Start();
+            if (AppSetting.NotifiServer)
+            {
+                ServerInfoWorker serverInfoWorker = new ServerInfoWorker(AppSetting.GetServerResourcesInfoInterval);
+                serverInfoWorker.Start();
+            }
         }
     }
 }

@@ -11,18 +11,20 @@ namespace Fanex.Maintenance.Service.Impl
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.Maintenance.Repository.Impl;
-    using Fanex.Maintenance.Entity.Model;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Criteria.Log;
+    using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Repository.Impl;
 
     /// <summary>
     /// Log service
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class LogService
     {
         #region Member
 
-        private readonly LogRepository _logRepository = new LogRepository();       
+        private readonly LogRepository _logRepository = new LogRepository();
 
         #region Ctor
 
@@ -76,6 +78,7 @@ namespace Fanex.Maintenance.Service.Impl
         public LogService With(int categoryId)
         {
             this._categoryId = categoryId;
+
             return this;
         }
 
@@ -89,6 +92,7 @@ namespace Fanex.Maintenance.Service.Impl
         {
             this._categoryId = categoryId;
             this._severity = severity;
+
             return this;
         }
 
@@ -100,6 +104,7 @@ namespace Fanex.Maintenance.Service.Impl
         public LogService From(DateTime fromDate)
         {
             this._dateFrom = fromDate;
+
             return this;
         }
 
@@ -111,6 +116,7 @@ namespace Fanex.Maintenance.Service.Impl
         public LogService To(DateTime toDate)
         {
             this._dateTo = toDate;
+
             return this;
         }
 
@@ -124,6 +130,7 @@ namespace Fanex.Maintenance.Service.Impl
         {
             this._page = page;
             this._size = size;
+
             return this;
         }
 
@@ -136,6 +143,7 @@ namespace Fanex.Maintenance.Service.Impl
         {
             string message = string.Empty;
             message = _logRepository.GetLogMessage(logId);
+
             return message;
         }
 

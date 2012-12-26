@@ -10,17 +10,22 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using Fanex.NAP.Framework.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class StopJobCriteria : CriteriaBase
     {
-        public string Job_Name { get; set; }
+        [SpParam(SqlParamName = "Job_Name")]
+        public string JobName { get; set; }
 
-        public string Originating_Server { get; set; }
+        [SpParam(SqlParamName = "Originating_Server")]
+        public string OriginatingServer { get; set; }
 
-        public string Server_Name { get; set; }
+        [SpParam(SqlParamName = "Server_Name")]
+        public string ServerName { get; set; }
 
         public override bool IsValid()
         {
