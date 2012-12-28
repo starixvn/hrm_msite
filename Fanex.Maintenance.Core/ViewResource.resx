@@ -579,4 +579,7 @@
   <data name="DrawFilter" xml:space="preserve">
     <value>Draw Filter</value>
   </data>
+  <data name="IsAgent" xml:space="preserve">
+    <value>Is Agent</value>
+  </data>
 </root>

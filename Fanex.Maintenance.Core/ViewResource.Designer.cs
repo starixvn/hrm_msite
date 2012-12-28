@@ -628,6 +628,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Agent.
+        /// </summary>
+        public static string IsAgent {
+            get {
+                return ResourceManager.GetString("IsAgent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Auth.
         /// </summary>
         public static string IsAuth {

@@ -18,6 +18,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
+    using Fanex.Maintenance.Core.Web;
 
     /// <summary>
     /// TODO: Update summary.
@@ -86,6 +87,56 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 if (!string.IsNullOrEmpty(serverIp))
                 {
                     IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(sqlAgentLogCriteria, serverIp, mapObjectFunc);
+                    serverLogs.ForEach(serverLog =>
+                    {
+                        serverLog.ServerIp = serverIp;
+                    });
+                    return serverLogs;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return new List<SqlServerLog>();
+        }
+
+
+        public IEnumerable<SqlServerLog> GetAllSqlLogOnDate(ICriteria sqlLogCriteria, string serverIp, bool isAgent)
+        {
+            try
+            {
+                //// Create Function will map Data from DataReader to Schedule Object
+                Func<IDataReader, SqlServerLog> mapObjectFunc;
+
+                if (isAgent)
+                {
+                    mapObjectFunc = (reader) =>
+                    {
+                        return new SqlServerLog
+                        {
+                            LogDate = reader.ToDateTime("LogDate"),
+                            LogMessage = reader.ToString("Text"),
+                            ErrorLevel = reader.ToInt("ErrorLevel")
+                        };
+                    };
+                }
+                else
+                {
+                    mapObjectFunc = (reader) =>
+                    {
+                        return new SqlServerLog
+                        {
+                            LogDate = reader.ToDateTime("LogDate"),
+                            LogMessage = reader.ToString("Text")
+                        };
+                    };
+                }
+
+                if (!string.IsNullOrEmpty(serverIp))
+                {
+                    IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(sqlLogCriteria, serverIp, mapObjectFunc, (int)ServerType.Resource);
                     serverLogs.ForEach(serverLog =>
                     {
                         serverLog.ServerIp = serverIp;
