@@ -1467,7 +1467,9 @@
     <Content Include="Areas\UserLogin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
     <Content Include="Areas\UserLogin\Views\Web.config" />
-    <Content Include="Configurations\DatabaseServersSection.config" />
+    <Content Include="Configurations\DatabaseServersSection.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Configurations\SpNameSection.config" />
     <Content Include="Configurations\MailSection.config" />
     <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
