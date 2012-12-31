@@ -1365,6 +1365,7 @@
     <Content Include="themes\job\images\memory.png" />
     <Content Include="themes\job\images\messagebox_warning.png" />
     <Content Include="themes\job\images\module_footer_bg.png" />
+    <Content Include="themes\job\images\network_server.png" />
     <Content Include="themes\job\images\post_message.png" />
     <Content Include="themes\job\images\progress.png" />
     <Content Include="themes\job\images\retry.png" />
