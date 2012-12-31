@@ -158,21 +158,21 @@ $(function () {
     var serverInfoHub = $.connection.serverInfoHub;
 
     // Declare a function on the chat hub so the server can invoke it
-    serverInfoHub.addMessage = function (message) {
+    serverInfoHub.client.addMessage = function (message) {
         alert(message);
     };
 
-    serverInfoHub.firstMessage = function (resourceInfoes) {
+    serverInfoHub.client.firstMessage = function (resourceInfoes) {
         ServerDetail.Init(resourceInfoes);
     };
 
-    serverInfoHub.gotMessage = function (resourceInfo) {
+    serverInfoHub.client.gotMessage = function (resourceInfo) {
         if (!ServerDetail.FirstTime) {
             ServerDetail.UpdateServerData(resourceInfo);
         }
     };
 
     $.connection.hub.start(function () {
-        serverInfoHub.getListServerInfoFirstTime();
+        serverInfoHub.server.getListServerInfoFirstTime();
     });
 });

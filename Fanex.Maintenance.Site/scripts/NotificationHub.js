@@ -4,11 +4,11 @@
 var notitficationHub = $.connection.notificationHub;
 
 // Declare a function on the chat hub so the server can invoke it
-notitficationHub.addMessage = function (message) {
+notitficationHub.client.addMessage = function (message) {
     alert(message);
 };
 
-notitficationHub.gotMessage = function (notifyInfoes) {
+notitficationHub.client.gotMessage = function (notifyInfoes) {
     for (var i = 0; i < notifyInfoes.length; i++) {
         var notifyInfo = notifyInfoes[i];
         var queryString = "type=" + notifyInfo.Type + "&server=" + notifyInfo.ServerIp;

@@ -15,7 +15,7 @@ namespace Fanex.Maintenance.Controller.Hubs
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl.JobManagement;
-    using SignalR.Hubs;
+    using Microsoft.AspNet.SignalR.Hubs;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,7 +25,7 @@ namespace Fanex.Maintenance.Controller.Hubs
     {
         public void SendData(string data)
         {
-            Clients.addMessage(data);
+            Clients.All.addMessage(data);
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace Fanex.Maintenance.Controller.Hubs
                 resourceInfoes.Add(resourceInfo);
             }
 
-            //Caller.firstMessage(resourceInfoes);
-            Clients.firstMessage(resourceInfoes);
+            Clients.Caller.firstMessage(resourceInfoes);
+            //Clients.firstMessage(resourceInfoes);
         }
     }
 }

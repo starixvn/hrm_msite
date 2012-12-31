@@ -6,6 +6,7 @@
     using System.Web.Routing;
     using Fanex.Maintenance.Controller.Worker;
     using Fanex.Maintenance.Core.Web;
+    using Microsoft.AspNet.SignalR;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -14,11 +15,15 @@
     {
         protected void Application_Start()
         {
+            RouteTable.Routes.MapHubs();
+
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+           
 
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
 

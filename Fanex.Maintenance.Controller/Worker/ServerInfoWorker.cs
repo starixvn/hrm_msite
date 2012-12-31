@@ -20,8 +20,8 @@ namespace Fanex.Maintenance.Controller.Worker
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
-    using SignalR;
-    using SignalR.Hubs;
+    using Microsoft.AspNet.SignalR.Hubs;
+    using Microsoft.AspNet.SignalR;
 
     /// <summary>
     /// TODO: Update summary.
@@ -110,7 +110,7 @@ namespace Fanex.Maintenance.Controller.Worker
                     resourceInfo.ServerName = resourceInfo.ServerIp.Replace(".", "_");
                     if (_hubContext != null)
                     {
-                        _hubContext.Clients.gotMessage(resourceInfo);
+                        _hubContext.Clients.All.gotMessage(resourceInfo);
                     }
 
                     _checkingList[serverElement.ServerIp] = false;

@@ -10,7 +10,7 @@
 namespace Fanex.Maintenance.Controller.Hubs
 {
     using System.Diagnostics.CodeAnalysis;
-    using SignalR.Hubs;
+    using Microsoft.AspNet.SignalR.Hubs;
 
     /// <summary>
     /// TODO: Update summary.
@@ -20,7 +20,7 @@ namespace Fanex.Maintenance.Controller.Hubs
     {
         public void SendData(string data)
         {
-            Clients.addMessage(data);
+            Clients.All.addMessage(data);
         }
     }
 }
