@@ -43,7 +43,8 @@ namespace Fanex.Maintenance.Controller.Hubs
                 resourceInfoes.Add(resourceInfo);
             }
 
-            Caller.firstMessage(resourceInfoes);
+            //Caller.firstMessage(resourceInfoes);
+            Clients.firstMessage(resourceInfoes);
         }
     }
 }
