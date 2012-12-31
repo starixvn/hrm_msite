@@ -17,6 +17,7 @@ namespace Fanex.Maintenance.Controller.Hubs
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Microsoft.AspNet.SignalR.Hubs;
     using Fanex.Maintenance.Core.Helper;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -26,13 +27,19 @@ namespace Fanex.Maintenance.Controller.Hubs
     {
         public void SendData(string data)
         {
+            try
+            {
+                Clients.All.addMessage(data);
+                string currentData = "Data: " + data + "<br/>"
+                    + "Clients: " + (Clients.All == null).ToString() + "<br/>"
+                    + "ClientCaller: " + (Clients.Caller == null).ToString() + "<br/>";
 
-            Clients.All.addMessage(data);
-            string currentData = "Data: " + data + "<br/>"
-                + "Clients: " + (Clients.All == null).ToString() + "<br/>"
-                + "ClientCaller: " + (Clients.Caller == null).ToString() + "<br/>";
-
-            MailHelper.SendMail("Test Hub", "Test Hub", currentData);
+                MailHelper.SendMail("Test Hub", "Test Hub", currentData);
+            }
+            catch (Exception ex)
+            {
+                MailHelper.SendMail("Test Hub", "Test Hub", ex.Message +"<br/>"+ ex.StackTrace);
+            }
         }
 
         /// <summary>
