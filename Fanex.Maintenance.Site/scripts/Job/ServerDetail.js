@@ -14,30 +14,33 @@ var ServerDetail = function ($) {
                     break;
                 }
             }
-            ServerDetail.FirstTime = false;
-            $('#ListServer').change(function () {
-                var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + $(this).val());
-                parent.$("#centerFr").attr("src", queryString);
-            });
-            $('span.backlink').live("click", function () {
-                parent.$("#centerFr").attr("src", NAP.resolveClientUrl("JobManagement/ServerManagement"));
-            });
 
-            $(window).resize(function () {
-                if (ServerDetail.ResizeCount > 1) {
-                    ServerDetail.ResizeCount = 0;
-                }
-                else {
-                    ServerDetail.ResizeCount++;
-                    $('.resourceinfo').css("width", $(window).width() - 12);
-                    $(window).trigger("resize");
-                }
+            if (ServerDetail.Server != null && ServerDetail.FirstTime == true) {
+                ServerDetail.FirstTime = false;
+                $('#ListServer').change(function () {
+                    var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + $(this).val());
+                    parent.$("#centerFr").attr("src", queryString);
+                });
+                $('span.backlink').live("click", function () {
+                    parent.$("#centerFr").attr("src", NAP.resolveClientUrl("JobManagement/ServerManagement"));
+                });
+
+                $(window).resize(function () {
+                    if (ServerDetail.ResizeCount > 1) {
+                        ServerDetail.ResizeCount = 0;
+                    }
+                    else {
+                        ServerDetail.ResizeCount++;
+                        $('.resourceinfo').css("width", $(window).width() - 12);
+                        $(window).trigger("resize");
+                    }
 
 
-            });
+                });
 
-            $(window).trigger("resize");
-            NAP.loadingBox.close();
+                $(window).trigger("resize");
+                NAP.loadingBox.close();
+            }
         },
         UpdateServerData: function (resourceInfo) {
             if (ServerDetail.Server.ServerIp == resourceInfo.ServerIp) {
@@ -74,7 +77,7 @@ var ServerDetail = function ($) {
                                     $('#currentmemory').text(y);
                                 }
                                 else {
-                                    $('#currentcpu').text(y); 
+                                    $('#currentcpu').text(y);
                                 }
                                 series.addPoint([x, y], true, true);
                             }, getDataTimeInterval);
