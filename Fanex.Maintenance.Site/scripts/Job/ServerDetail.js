@@ -172,7 +172,7 @@ $(function () {
         }
     };
 
-    $.connection.hub.start(function () {
+    $.connection.hub.start().done(function () {
         serverInfoHub.server.getListServerInfoFirstTime();
     });
 });
