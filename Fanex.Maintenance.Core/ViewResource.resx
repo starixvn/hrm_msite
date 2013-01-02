@@ -582,4 +582,10 @@
   <data name="IsAgent" xml:space="preserve">
     <value>Is Agent</value>
   </data>
+  <data name="Machine_Name" xml:space="preserve">
+    <value>Machine Name</value>
+  </data>
+  <data name="Timestamp" xml:space="preserve">
+    <value>Timestamp</value>
+  </data>
 </root>

@@ -736,6 +736,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Machine Name.
+        /// </summary>
+        public static string Machine_Name {
+            get {
+                return ResourceManager.GetString("Machine_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mail.
         /// </summary>
         public static string Mail {
@@ -1335,6 +1344,15 @@ namespace Fanex.Maintenance.Core {
         public static string Time_Range {
             get {
                 return ResourceManager.GetString("Time_Range", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timestamp.
+        /// </summary>
+        public static string Timestamp {
+            get {
+                return ResourceManager.GetString("Timestamp", resourceCulture);
             }
         }
         
