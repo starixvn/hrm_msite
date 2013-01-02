@@ -13,14 +13,14 @@ notitficationHub.client.gotMessage = function (notifyInfoes) {
         var notifyInfo = notifyInfoes[i];
         var queryString = "type=" + notifyInfo.Type + "&server=" + notifyInfo.ServerIp;
         if (notifyInfo.Type == 2) {
-            queryString += "&jobname=" + notifyInfo.JobName;
+            queryString += "&jobname=" + encodeURI(notifyInfo.JobName);
         }
-        
+
         var message = "Server: " + notifyInfo.ServerIp.split('_').join('.') + "<br/>"
                 + (notifyInfo.Type == 1 ? "Sql Server Agent Error" : "Job Error") + "<br />"
                 + "Occur at " + notifyInfo.OccurTime + "<br />"
                 + "Message: " + notifyInfo.Message + "<br />"
-                + "<a href=" + NAP.resolveClientUrl("JobManagement?" + queryString) + ">View Detail</a>";
+                + "<a href=" + NAP.resolveClientUrl("JobManagement?" + encodeURI(queryString)) + ">View Detail</a>";
 
         $().toastmessage('showToast', {
             text: message,
