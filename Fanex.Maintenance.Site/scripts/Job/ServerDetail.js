@@ -5,15 +5,18 @@ var ServerDetail = function ($) {
         FirstTime: true,
         MaxMemory: 0,
         ResizeCount: 0,
-        Init: function (resourceInfoes) {
-            for (var i = 0; i < resourceInfoes.length; i++) {
-                if (resourceInfoes[i].ServerIp == serverIp) {
-                    ServerDetail.Server = resourceInfoes[i];
-                    var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
-                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
-                    break;
-                }
-            }
+        Init: function (resourceInfo) {
+//            for (var i = 0; i < resourceInfoes.length; i++) {
+//                if (resourceInfoes[i].ServerIp == serverIp) {
+//                    ServerDetail.Server = resourceInfoes[i];
+//                    var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
+//                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
+//                    break;
+//                }
+            //            }
+            ServerDetail.Server = resourceInfo;
+            var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
+            var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
 
             if (ServerDetail.Server != null && ServerDetail.FirstTime == true) {
                 ServerDetail.FirstTime = false;
@@ -176,6 +179,29 @@ $(function () {
     };
 
     $.connection.hub.start().done(function () {
-        serverInfoHub.server.getListServerInfoFirstTime();
+        $.ajax({
+            url: NAP.resolveClientUrl("JobManagement/GetServerResourceInfo"),
+            data: { serverIp: serverIp },
+            type: 'POST',
+            dataType: 'JSON',
+            cache: false,
+            beforeSend: function () {
+                NAP.loadingBox.show();
+            },
+            complete: function () {
+                NAP.loadingBox.close();
+            },
+            success: function (resourceInfo) {
+                if (resourceInfo != null) {
+                    ServerDetail.Init(resourceInfo);
+                }
+                else {
+                    
+                }
+            },
+            error: function (xhr, status, err) {
+                NAP.handleAjaxError(xhr, status, err);
+            }
+        });
     });
 });
