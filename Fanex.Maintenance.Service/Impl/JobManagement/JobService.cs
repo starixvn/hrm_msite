@@ -21,6 +21,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
+    using Fanex.Maintenance.Entity.Domain;
 
     /// <summary>
     /// TODO: Update summary.
@@ -357,6 +358,18 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                                 list[indexOutCome].RunSatus = 6;
                             }
                         }
+                    }
+
+                    if (indexOutCome == 0)
+                    {
+                        list.Insert(0, new JobLog
+                        {
+                            Step = new Step
+                            {
+                                Id = 0,
+                                Name = "(Job outcome)"
+                            }
+                        });
                     }
                 }
 
