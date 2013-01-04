@@ -187,11 +187,11 @@ $(function () {
     };
 
     serverInfoHub.client.getCpuInfo = function (resourceInfo) {
-        ServerManagement.UpdateServerUtilizeCpu(resourceInfo);
+        ServerDetail.UpdateServerUtilizeCpu(resourceInfo);
     };
 
     serverInfoHub.client.getMemoryInfo = function (resourceInfo) {
-        ServerManagement.UpdateServerUtilizeMemory(resourceInfo);
+        ServerDetail.UpdateServerUtilizeMemory(resourceInfo);
     };
 
     $.connection.hub.start().done(function () {
