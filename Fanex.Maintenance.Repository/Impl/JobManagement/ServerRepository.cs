@@ -130,5 +130,69 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
             return serverStatus;
         }
+
+
+        public CPUInfo GetServerCpuUtilization(ICriteria criteria, string connectionString)
+        {
+            CPUInfo cpuInfo = new CPUInfo
+            {
+                SqlCpuPercent = 0,
+                SystemCpuPercent = 0,
+                EventTime = DateTime.Now
+            };
+
+            DbSetting dbSetting = new DbSetting
+            {
+                ConnectionString = connectionString,
+                SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
+            };
+
+            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            {
+                using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
+                {
+                    while (reader.Read())
+                    {
+                        cpuInfo.SystemCpuPercent = reader.ToFloat("system_cpu_utilization");
+                        cpuInfo.SqlCpuPercent = reader.ToFloat("sql_cpu_utilization");
+                        cpuInfo.EventTime = reader.ToDateTime("EventTime");
+                        break;
+                    }
+                }
+            }
+
+            return cpuInfo;
+        }
+
+
+        public MemoryInfo GetServerMemoryUtilization(ICriteria criteria, string connectionString)
+        {
+            MemoryInfo memoryInfo = new MemoryInfo
+            {
+                MemoryUsage = 0,
+                TotalMemory = 0
+            };
+
+            DbSetting dbSetting = new DbSetting
+            {
+                ConnectionString = connectionString,
+                SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
+            };
+
+            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            {
+                using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
+                {
+                    while (reader.Read())
+                    {
+                        memoryInfo.MemoryUsage = (float)Math.Round((reader.ToFloat("MemoryUsage") / 1024), 2);
+                        memoryInfo.TotalMemory = (float)Math.Round((reader.ToFloat("TotalMemory") / 1024), 2);
+                        break;
+                    }
+                }
+            }
+
+            return memoryInfo;
+        }
     }
 }

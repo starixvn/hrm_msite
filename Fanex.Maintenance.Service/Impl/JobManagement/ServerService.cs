@@ -75,6 +75,33 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
         }
 
+        public CPUInfo GetCpuUtilization(string connectionString)
+        {
+            try
+            {
+                return _serverRepository.GetServerCpuUtilization(new GetResourceInfoCriteria(), connectionString);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+                return new CPUInfo();
+            }
+        }
+
+        public MemoryInfo GetMemoryUtilization(string connectionString)
+        {
+            try
+            {
+                return _serverRepository.GetServerMemoryUtilization(new GetResourceInfoCriteria(), connectionString);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+                return new MemoryInfo();
+            }
+        }
+
+
         public ServerStatus GetServerStatus(string connectionString)
         {
             try

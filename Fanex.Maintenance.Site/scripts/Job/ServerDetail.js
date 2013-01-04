@@ -2,23 +2,18 @@
 var ServerDetail = function ($) {
     return {
         Server: null,
+        CpuServer: null,
+        MemoryServer: null,
         FirstTime: true,
         MaxMemory: 0,
         ResizeCount: 0,
         Init: function (resourceInfo) {
-//            for (var i = 0; i < resourceInfoes.length; i++) {
-//                if (resourceInfoes[i].ServerIp == serverIp) {
-//                    ServerDetail.Server = resourceInfoes[i];
-//                    var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
-//                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
-//                    break;
-//                }
-            //            }
-            ServerDetail.Server = resourceInfo;
+            ServerDetail.CpuServer = resourceInfo.CpuUtilization;
+            ServerDetail.MemoryServer = resourceInfo.MemoryUtilization;
             var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
             var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
 
-            if (ServerDetail.Server != null && ServerDetail.FirstTime == true) {
+            if (ServerDetail.CpuServer != null && ServerDetail.MemoryServer != null && ServerDetail.FirstTime == true) {
                 ServerDetail.FirstTime = false;
                 $('#ListServer').change(function () {
                     var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + $(this).val());
@@ -50,16 +45,29 @@ var ServerDetail = function ($) {
                 ServerDetail.Server = resourceInfo;
             }
         },
+        UpdateServerUtilizeCpu: function (cpuInfo) {
+            if (ServerDetail.CpuServer.ServerIp == cpuInfo.ServerIp) {
+                ServerDetail.CpuServer = cpuInfo;
+            }
+
+        },
+        UpdateServerUtilizeMemory: function (memoryInfo) {
+            if (ServerDetail.MemoryServer.ServerIp == memoryInfo.ServerIp) {
+                ServerDetail.MemoryServer = memoryInfo;
+            }
+
+        },
         GetDataFromServerName: function (type) {
             if (type == 1) {
-                return ServerDetail.Server.SqlCpuPercent;
+                return ServerDetail.CpuServer.SqlCpuPercent;
             }
             else {
-                return ServerDetail.Server.MemoryUsage;
+                return ServerDetail.MemoryServer.MemoryUsage;
             }
         },
         RenderChart: function (charid, type, title, ytitle, pointTitle) {
             var pointColor = (type == 1 ? '#4572A7' : '#ff7200');
+            var getDataInterval = (type == 1 ? getCpuUtilizationInterval : getMemoryUtilizationInterval)
             return new Highcharts.Chart({
                 name: charid + type,
                 chart: {
@@ -76,14 +84,14 @@ var ServerDetail = function ($) {
                                 var x = (new Date()).getTime() // current time
                                 y = ServerDetail.GetDataFromServerName(type);
                                 if (type != 1) {
-                                    y = Math.round(y * 100 / ServerDetail.Server.TotalMemory)
+                                    y = Math.round(y * 100 / ServerDetail.MemoryServer.TotalMemory)
                                     $('#currentmemory').text(y);
                                 }
                                 else {
                                     $('#currentcpu').text(y);
                                 }
                                 series.addPoint([x, y], true, true);
-                            }, getDataTimeInterval);
+                            }, getDataInterval);
                         }
                     }
                 },
@@ -129,7 +137,7 @@ var ServerDetail = function ($) {
                                 i;
                         var yValue = ServerDetail.GetDataFromServerName(type);
                         if (type != 1) {
-                            yValue = Math.round(yValue * 100 / ServerDetail.Server.TotalMemory)
+                            yValue = Math.round(yValue * 100 / ServerDetail.MemoryServer.TotalMemory)
                             $('#currentmemory').text(yValue);
                         }
                         else {
@@ -137,7 +145,7 @@ var ServerDetail = function ($) {
                         }
                         for (i = -10; i <= 0; i++) {
                             data.push({
-                                x: time + i * getDataTimeInterval,
+                                x: time + i * getDataInterval,
                                 y: yValue
                             });
 
@@ -176,6 +184,14 @@ $(function () {
         if (!ServerDetail.FirstTime) {
             ServerDetail.UpdateServerData(resourceInfo);
         }
+    };
+
+    serverInfoHub.client.getCpuInfo = function (resourceInfo) {
+        ServerManagement.UpdateServerUtilizeCpu(resourceInfo);
+    };
+
+    serverInfoHub.client.getMemoryInfo = function (resourceInfo) {
+        ServerManagement.UpdateServerUtilizeMemory(resourceInfo);
     };
 
     $.connection.hub.start().done(function () {

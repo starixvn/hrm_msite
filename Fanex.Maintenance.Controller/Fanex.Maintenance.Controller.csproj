@@ -95,6 +95,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="JobManagementController.cs" />
     <Compile Include="Worker\BaseWorker.cs" />
+    <Compile Include="Worker\MemoryUtilizationWorker.cs" />
+    <Compile Include="Worker\CpuUtilizationWorker.cs" />
     <Compile Include="Worker\NotificationWorker.cs" />
     <Compile Include="Worker\ServerInfoWorker.cs" />
   </ItemGroup>

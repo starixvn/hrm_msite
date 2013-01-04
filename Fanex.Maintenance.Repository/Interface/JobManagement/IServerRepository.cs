@@ -24,5 +24,9 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
         ServerFullInfo GetServerFullInformation(ICriteria criteria, string serverIp);
 
         ServerStatus GetServerStatus(ICriteria criteria, string connectionString);
+
+        CPUInfo GetServerCpuUtilization(ICriteria criteria, string connectionString);
+
+        MemoryInfo GetServerMemoryUtilization(ICriteria criteria, string connectionString);
     }
 }

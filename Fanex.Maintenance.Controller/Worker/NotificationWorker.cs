@@ -94,10 +94,10 @@ namespace Fanex.Maintenance.Controller.Worker
         private string _rowEvenStyle = "align=\"center\" valign=\"Middle\" style=\"background-color:#f2f2f2;min-height:25px\"";
 
         public NotificationWorker(
-            int getDataInterval = 60000)
+            long getDataInterval = 60000)
             : base()
         {
-            _getDataInterval = getDataInterval;
+            _getDataInterval = (int)getDataInterval;
             _jobService = JobService.Create();
             _sqlServerLogService = SqlServerLogService.Create();
             _serverService = ServerService.Create();

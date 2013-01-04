@@ -22,6 +22,10 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
 
         ResourceInfo GetServerResourceInfo(string connectionString);
 
+        CPUInfo GetCpuUtilization(string connectionString);
+
+        MemoryInfo GetMemoryUtilization(string connectionString);
+
         ServerStatus GetServerStatus(string connectionString);
     }
 }

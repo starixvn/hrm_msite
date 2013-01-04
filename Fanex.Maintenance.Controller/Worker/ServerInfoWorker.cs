@@ -38,10 +38,10 @@ namespace Fanex.Maintenance.Controller.Worker
         private IHubContext _hubContext;
 
         public ServerInfoWorker(
-            int getDataInterval = 3000)
+            long getDataInterval = 10000)
             : base()
         {
-            _getDataInterval = getDataInterval;
+            _getDataInterval = (int)getDataInterval;
             _serverService = ServerService.Create();
         }
 

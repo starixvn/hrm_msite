@@ -54,11 +54,13 @@
     <Compile Include="Domain\OrinatingServer.cs" />
     <Compile Include="Domain\Schedule.cs" />
     <Compile Include="Domain\Step.cs" />
+    <Compile Include="Model\CPUInfo.cs" />
     <Compile Include="Model\JobLog.cs" />
     <Compile Include="Model\JobSchedule.cs" />
     <Compile Include="Model\LogCategory.cs" />
     <Compile Include="Model\CommandResult.cs" />
     <Compile Include="Model\Log.cs" />
+    <Compile Include="Model\MemoryInfo.cs" />
     <Compile Include="Model\NotifyInfo.cs" />
     <Compile Include="Model\ResourceInfo.cs" />
     <Compile Include="Model\ScheduleDetail.cs" />

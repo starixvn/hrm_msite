@@ -33,9 +33,23 @@ namespace Fanex.Maintenance.Core.Web
         /// </summary>
         private static int _minute = 10;
 
-        private static int _getDataNotifyInterval = 60000;
+        private static long _getDataNotifyInterval = 60000;
 
-        private static int _getServerResourcesInfoInterval = 2000;
+        private static long _getServerResourcesInfoInterval = 2000;
+
+        private static long _getCpuUtilizationInterval = 2000;
+
+        public static long GetCpuUtilizationInterval
+        {
+            get { return AppSetting._getCpuUtilizationInterval; }
+        }
+
+        private static long _getMemoryUtilizationInterval = 2000;
+
+        public static long GetMemoryUtilizationInterval
+        {
+            get { return AppSetting._getMemoryUtilizationInterval; }
+        }
 
         private static bool _notifiServer = false;
 
@@ -49,8 +63,10 @@ namespace Fanex.Maintenance.Core.Web
                 _notifiServer = Converter.ToBool(ConfigurationManager.AppSettings["isNotifiServer"].ToString());
                 _notifiJob = Converter.ToBool(ConfigurationManager.AppSettings["isNotifiJob"].ToString());
                 _minute = Converter.ToInt(ConfigurationManager.AppSettings["Minute"]);
-                _getDataNotifyInterval = Converter.ToInt(ConfigurationManager.AppSettings["GetDataNotifyInterval"], 60000);
-                _getServerResourcesInfoInterval = Converter.ToInt(ConfigurationManager.AppSettings["GetServerResourcesInfoInterval"], 2000);
+                _getDataNotifyInterval = Converter.To<long>(ConfigurationManager.AppSettings["GetDataNotifyInterval"]) * 1000;
+                _getServerResourcesInfoInterval = Converter.To<long>(ConfigurationManager.AppSettings["GetServerResourcesInfoInterval"]) * 1000;
+                _getCpuUtilizationInterval = Converter.To<long>(ConfigurationManager.AppSettings["GetCpuUtilizationInterval"]) * 1000;
+                _getMemoryUtilizationInterval = Converter.To<long>(ConfigurationManager.AppSettings["GetMemoryUtilizationInterval"]) * 1000;
             }
             catch (Exception ex)
             {
@@ -80,7 +96,7 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        public static int GetDataNotifyInterval
+        public static long GetDataNotifyInterval
         {
             get
             {
@@ -88,7 +104,7 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        public static int GetServerResourcesInfoInterval
+        public static long GetServerResourcesInfoInterval
         {
             get
             {

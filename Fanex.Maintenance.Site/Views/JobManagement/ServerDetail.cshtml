@@ -12,7 +12,9 @@
     <script type="text/javascript" src="~/signalr/hubs"></script>
     <script type="text/javascript">
         var serverIp = '@ViewBag.ServerIp';
-        var getDataTimeInterval = @AppSetting.GetServerResourcesInfoInterval;
+        var getDataTimeInterval = @(AppSetting.GetServerResourcesInfoInterval);
+        var getCpuUtilizationInterval = @(AppSetting.GetCpuUtilizationInterval);
+        var getMemoryUtilizationInterval = @(AppSetting.GetMemoryUtilizationInterval);
     </script>
 }
 @section HeaderBar {

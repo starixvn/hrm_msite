@@ -35,8 +35,11 @@
 
             if (AppSetting.NotifiServer)
             {
-                ServerInfoWorker serverInfoWorker = new ServerInfoWorker(AppSetting.GetServerResourcesInfoInterval);
-                serverInfoWorker.Start();
+                CpuUtilizationWorker cpuUtilizationWorker = new CpuUtilizationWorker(AppSetting.GetCpuUtilizationInterval);
+                cpuUtilizationWorker.Start();
+
+                MemoryUtilizationWorker memoryUtilizationWorker = new MemoryUtilizationWorker(AppSetting.GetMemoryUtilizationInterval);
+                memoryUtilizationWorker.Start();
             }
         }
     }
