@@ -33,5 +33,15 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
         /// <param name="serverIp"></param>
         /// <returns></returns>
         IEnumerable<SqlServerLog> GetAllSqlAgentLogOnDate(ICriteria sqlAgentLogCriteria, string serverIp);
+
+
+        /// <summary>
+        /// Get server log or agent log
+        /// </summary>
+        /// <param name="sqlCriteria"></param>
+        /// <param name="serverIp"></param>
+        /// <param name="isAgent"></param>
+        /// <returns></returns>
+        IEnumerable<SqlServerLog> GetAllSqlLogOnDate(ICriteria sqlCriteria, string serverIp, bool isAgent);
     }
 }

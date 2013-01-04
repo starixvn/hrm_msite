@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseReport\DataIntegrityViewModel.cs" />
+    <Compile Include="Job\GetReadSQLLogCriteria.cs" />
     <Compile Include="Job\GetAllJobInScheduleCriteria.cs" />
     <Compile Include="Job\GetAllScheduleCriteria.cs" />
     <Compile Include="Job\GetCpuInfoCriteria.cs" />

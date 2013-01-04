@@ -23,7 +23,9 @@ var JobLogManagement = function ($) {
                 buttonImageOnly: true,
                 onSelect: function (selectedDate) {
                     $("#To").datepicker("option", "minDate", selectedDate);
-                    $("#To").val($(this).val());
+                    if ($('#To').val() == "") {
+                        $("#To").val($(this).val());
+                    }
                 }
             });
             $("#To").datepicker({

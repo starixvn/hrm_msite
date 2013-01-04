@@ -21,7 +21,7 @@ namespace Fanex.Maintenance.Controller.Worker
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
-    using SignalR;
+    using Microsoft.AspNet.SignalR;
 
     /// <summary>
     /// TODO: Update summary.
@@ -134,8 +134,7 @@ namespace Fanex.Maintenance.Controller.Worker
 
                     //// Notify to client
                     var context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                    context.Clients.gotMessage(notifyInfoes);
-                    //context.Clients.updateServerStatus(UpdateServerStatus());
+                    context.Clients.All.gotMessage(notifyInfoes);
 
                     UpdateServerStatus();
                 }

@@ -577,6 +577,26 @@ namespace Fanex.Maintenance.Controller
             ViewBag.ServerFullInfo = _serverService.GetServerFullInformation(serverIp);
             return View();
         }
+
+        [HttpPost]
+        public JsonResult GetServerResourceInfo(string serverIp)
+        {
+            List<ResourceInfo> resourceInfoes = new List<ResourceInfo>();
+
+            foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
+            {
+                if (server.ServerIp == serverIp)
+                {
+                    ResourceInfo resourceInfo = _serverService.GetServerResourceInfo(server.ConnectionString);
+                    resourceInfo.ServerIp = server.ServerIp;
+                    resourceInfo.ServerName = server.ServerIp.Replace(".", "_");
+                    return Json(resourceInfo);
+                }
+            }
+
+            return Json(null);
+        }
+
         #endregion
 
         #endregion

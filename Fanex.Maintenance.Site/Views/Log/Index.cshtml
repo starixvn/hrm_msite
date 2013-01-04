@@ -80,16 +80,16 @@
                 #
             </th>
             <th>
-                Message
+                @ViewResource.Message
             </th>
             <th>
-                Category
+                @ViewResource.Category
             </th>
             <th>
-                Machine Name
+                @ViewResource.Machine_Name
             </th>
             <th>
-                Timestamp
+                @ViewResource.Timestamp
             </th>
         </tr>
     </thead>
@@ -155,7 +155,7 @@
                 buttonImageOnly: true,
                 onSelect: function (selectedDate) {
                     $("#To").datepicker("option", "minDate", selectedDate);
-                    $("#To").val($(this).val());
+                    //                    $("#To").val($(this).val());
                 }
             });
             $("#To").datepicker({

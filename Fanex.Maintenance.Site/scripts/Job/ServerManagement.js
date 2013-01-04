@@ -271,11 +271,11 @@ $(function () {
     var serverInfoHub = $.connection.serverInfoHub;
 
     // Declare a function on the chat hub so the server can invoke it
-    serverInfoHub.addMessage = function (message) {
+    serverInfoHub.client.addMessage = function (message) {
         alert(message);
     };
 
-    serverInfoHub.gotMessage = function (resourceInfo) {
+    serverInfoHub.client.gotMessage = function (resourceInfo) {
         ServerManagement.UpdateServerData(resourceInfo);
     };
 

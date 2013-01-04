@@ -127,7 +127,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 {
                     Task<IEnumerable<SqlServerLog>>[] listTask = new Task<IEnumerable<SqlServerLog>>[DatabaseServersSection.Instance.Servers.Count];
                     int taskIndex = 0;
-                    foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+                    foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
                     {
                         listTask[taskIndex] = Task.Factory.StartNew<IEnumerable<SqlServerLog>>(param
                             =>
@@ -141,6 +141,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                                 ServerIp = server.ServerIp
                             });
                         taskIndex++;
+
                         //sqlServerLogs.AddRange(GetLogBySpecificDateAndServerIp(logType, server.ServerIp));
                     }
 
@@ -184,76 +185,54 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         private IEnumerable<SqlServerLog> GetLogBySpecificDateAndServerIp(int logType, string serverIp)
         {
             List<SqlServerLog> sqlServerLogs = new List<SqlServerLog>();
-            //// Restrict get Log from Sql Server is 7 and Sql Server Agent is 10
-            int maxDayForGetLog = logType == (int)LogType.SqlServerLog ? 7 : 10;
-            Task<IEnumerable<SqlServerLog>>[] listTask = new Task<IEnumerable<SqlServerLog>>[maxDayForGetLog];
-            for (int i = 0; i < maxDayForGetLog; i++)
+
+            try
             {
-                try
+                var criteria = new GetReadSQLLogCriteria
                 {
-                    switch (logType)
-                    {
-                        case (int)LogType.SqlServerLog:
-                            listTask[i] = Task.Factory.StartNew<IEnumerable<SqlServerLog>>(param
-                           =>
-                           {
-                               SqlLogSpParamForTask sqlLogSpParamForTask = (SqlLogSpParamForTask)param;
+                    FromDate = From,
+                    ToDate = To
+                };
 
-                               return _sqlServerLogRepository.GetAllSqlServerLogOnDate(
-                                   new GetSqlServerLogCriteria
-                               {
-                                   p1 = sqlLogSpParamForTask.P1
-                               }, 
-                               sqlLogSpParamForTask.ServerIp);
-                           },
-                           new SqlLogSpParamForTask
-                           {
-                               P1 = i,
-                               ServerIp = serverIp
-                           });
-                            break;
-                        case (int)LogType.SqlAgentLog:
-                            listTask[i] = Task.Factory.StartNew<IEnumerable<SqlServerLog>>(param
-                          =>
-                            {
-                                SqlLogSpParamForTask sqlLogSpParamForTask = (SqlLogSpParamForTask)param;
-
-                                return _sqlServerLogRepository.GetAllSqlAgentLogOnDate(new GetSqlServerLogCriteria
-                                {
-                                    p1 = sqlLogSpParamForTask.P1,
-                                    p2 = 2
-                                }, 
-                                sqlLogSpParamForTask.ServerIp);
-                            },
-                            new SqlLogSpParamForTask
-                            {
-                                P1 = i,
-                                ServerIp = serverIp
-                            });
-                            break;
-                    }
-                }
-                catch (Exception ex)
+                switch (logType)
                 {
-                    Logger.Log.Error(ex.Message, ex);
+                    case (int)LogType.SqlServerLog:
+
+                        criteria.IsAgent = false;
+
+                        sqlServerLogs = _sqlServerLogRepository.GetAllSqlLogOnDate(criteria, serverIp, false).ToList();
+                        break;
+
+                    case (int)LogType.SqlAgentLog:
+
+                        criteria.IsAgent = true;
+
+                        sqlServerLogs = _sqlServerLogRepository.GetAllSqlLogOnDate(criteria, serverIp, true).ToList();
+                        break;
                 }
             }
-
-            Task.WaitAll(listTask);
-            for (int i = 0; i < listTask.Length; i++)
+            catch (Exception ex)
             {
-                sqlServerLogs.AddRange(listTask[i].Result);
+                Logger.Log.Error(ex.Message, ex);
             }
 
-            sqlServerLogs = sqlServerLogs.Where(sqlServerLog =>
-            {
-                if (sqlServerLog.LogDate < To && sqlServerLog.LogDate > From)
-                {
-                    return true;
-                }
+            //}
 
-                return false;
-            }).ToList();
+            //Task.WaitAll(listTask);
+            //for (int i = 0; i < listTask.Length; i++)
+            //{
+            //    sqlServerLogs.AddRange(listTask[i].Result);
+            //}
+
+            //sqlServerLogs = sqlServerLogs.Where(sqlServerLog =>
+            //{
+            //    if (sqlServerLog.LogDate < To && sqlServerLog.LogDate > From)
+            //    {
+            //        return true;
+            //    }
+
+            //    return false;
+            //}).ToList();
 
             return sqlServerLogs;
         }

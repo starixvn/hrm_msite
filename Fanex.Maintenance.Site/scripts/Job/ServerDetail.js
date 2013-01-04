@@ -5,39 +5,45 @@ var ServerDetail = function ($) {
         FirstTime: true,
         MaxMemory: 0,
         ResizeCount: 0,
-        Init: function (resourceInfoes) {
-            for (var i = 0; i < resourceInfoes.length; i++) {
-                if (resourceInfoes[i].ServerIp == serverIp) {
-                    ServerDetail.Server = resourceInfoes[i];
-                    var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
-                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
-                    break;
-                }
+        Init: function (resourceInfo) {
+//            for (var i = 0; i < resourceInfoes.length; i++) {
+//                if (resourceInfoes[i].ServerIp == serverIp) {
+//                    ServerDetail.Server = resourceInfoes[i];
+//                    var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
+//                    var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
+//                    break;
+//                }
+            //            }
+            ServerDetail.Server = resourceInfo;
+            var sqlCpuChart = ServerDetail.RenderChart("slqCpuContainer", 1, "Sql Server Cpu", "%", "Cpu Usage");
+            var memoryChart = ServerDetail.RenderChart("memoryContainer", 2, "Sql Server Memory Usage", "%", "Memory Usage");
+
+            if (ServerDetail.Server != null && ServerDetail.FirstTime == true) {
+                ServerDetail.FirstTime = false;
+                $('#ListServer').change(function () {
+                    var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + $(this).val());
+                    parent.$("#centerFr").attr("src", queryString);
+                });
+                $('span.backlink').live("click", function () {
+                    parent.$("#centerFr").attr("src", NAP.resolveClientUrl("JobManagement/ServerManagement"));
+                });
+
+                $(window).resize(function () {
+                    if (ServerDetail.ResizeCount > 1) {
+                        ServerDetail.ResizeCount = 0;
+                    }
+                    else {
+                        ServerDetail.ResizeCount++;
+                        $('.resourceinfo').css("width", $(window).width() - 12);
+                        $(window).trigger("resize");
+                    }
+
+
+                });
+
+                $(window).trigger("resize");
+                NAP.loadingBox.close();
             }
-            ServerDetail.FirstTime = false;
-            $('#ListServer').change(function () {
-                var queryString = NAP.resolveClientUrl("JobManagement/ServerDetail?serverIp=" + $(this).val());
-                parent.$("#centerFr").attr("src", queryString);
-            });
-            $('span.backlink').live("click", function () {
-                parent.$("#centerFr").attr("src", NAP.resolveClientUrl("JobManagement/ServerManagement"));
-            });
-
-            $(window).resize(function () {
-                if (ServerDetail.ResizeCount > 1) {
-                    ServerDetail.ResizeCount = 0;
-                }
-                else {
-                    ServerDetail.ResizeCount++;
-                    $('.resourceinfo').css("width", $(window).width() - 12);
-                    $(window).trigger("resize");
-                }
-
-
-            });
-
-            $(window).trigger("resize");
-            NAP.loadingBox.close();
         },
         UpdateServerData: function (resourceInfo) {
             if (ServerDetail.Server.ServerIp == resourceInfo.ServerIp) {
@@ -74,7 +80,7 @@ var ServerDetail = function ($) {
                                     $('#currentmemory').text(y);
                                 }
                                 else {
-                                    $('#currentcpu').text(y); 
+                                    $('#currentcpu').text(y);
                                 }
                                 series.addPoint([x, y], true, true);
                             }, getDataTimeInterval);
@@ -158,21 +164,44 @@ $(function () {
     var serverInfoHub = $.connection.serverInfoHub;
 
     // Declare a function on the chat hub so the server can invoke it
-    serverInfoHub.addMessage = function (message) {
+    serverInfoHub.client.addMessage = function (message) {
         alert(message);
     };
 
-    serverInfoHub.firstMessage = function (resourceInfoes) {
+    serverInfoHub.client.firstMessage = function (resourceInfoes) {
         ServerDetail.Init(resourceInfoes);
     };
 
-    serverInfoHub.gotMessage = function (resourceInfo) {
+    serverInfoHub.client.gotMessage = function (resourceInfo) {
         if (!ServerDetail.FirstTime) {
             ServerDetail.UpdateServerData(resourceInfo);
         }
     };
 
-    $.connection.hub.start(function () {
-        serverInfoHub.getListServerInfoFirstTime();
+    $.connection.hub.start().done(function () {
+        $.ajax({
+            url: NAP.resolveClientUrl("JobManagement/GetServerResourceInfo"),
+            data: { serverIp: serverIp },
+            type: 'POST',
+            dataType: 'JSON',
+            cache: false,
+            beforeSend: function () {
+                NAP.loadingBox.show();
+            },
+            complete: function () {
+                NAP.loadingBox.close();
+            },
+            success: function (resourceInfo) {
+                if (resourceInfo != null) {
+                    ServerDetail.Init(resourceInfo);
+                }
+                else {
+                    
+                }
+            },
+            error: function (xhr, status, err) {
+                NAP.handleAjaxError(xhr, status, err);
+            }
+        });
     });
 });

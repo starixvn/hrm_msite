@@ -90,14 +90,14 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <param name="serverName">Server Name will be executed sp</param>
         /// <param name="mapObjectFunction">Read data reader and pass object</param>
         /// <returns>Collection of object</returns>
-        public virtual IEnumerable<S> Fetch<S>(ICriteria criteria, string serverIp, Func<IDataReader, S> mapObjectFunction) where S : class
+        public virtual IEnumerable<S> Fetch<S>(ICriteria criteria, string serverIp, Func<IDataReader, S> mapObjectFunction, int? serverType = null) where S : class
         {
             IList<S> listObject = new List<S>();
             //// new dbsetting from server name and setting key
             DbSetting setting = new DbSetting
             {
                 //// get connection string from servername
-                ConnectionString = SectionHelper.GetConnectionStringFromServerIp(serverIp),
+                ConnectionString = SectionHelper.GetConnectionStringFromServerIp(serverIp, serverType != null ? (int)serverType : 0),
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 

@@ -628,6 +628,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Agent.
+        /// </summary>
+        public static string IsAgent {
+            get {
+                return ResourceManager.GetString("IsAgent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Auth.
         /// </summary>
         public static string IsAuth {
@@ -723,6 +732,15 @@ namespace Fanex.Maintenance.Core {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Machine Name.
+        /// </summary>
+        public static string Machine_Name {
+            get {
+                return ResourceManager.GetString("Machine_Name", resourceCulture);
             }
         }
         
@@ -1326,6 +1344,15 @@ namespace Fanex.Maintenance.Core {
         public static string Time_Range {
             get {
                 return ResourceManager.GetString("Time_Range", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timestamp.
+        /// </summary>
+        public static string Timestamp {
+            get {
+                return ResourceManager.GetString("Timestamp", resourceCulture);
             }
         }
         
