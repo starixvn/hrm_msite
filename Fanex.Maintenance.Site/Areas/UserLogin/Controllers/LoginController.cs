@@ -16,11 +16,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
-
     using Fanex.Common;
     using Fanex.Common.Extensions;
     using Fanex.Logging;
-
     using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Model;
     using Fanex.NAP.Core.Service.Impl;
@@ -39,13 +37,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         private ISiteService _siteService;
         private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
+        private IMaintainanceService _maintenanceService;
 
         #endregion
 
         #region ctors
 
         public LoginController()
-            : this(null, null, null, null, null)
+            : this(null, null, null, null, null, null)
         {
         }
 
@@ -54,13 +53,15 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             IGroupService groupService,
             ISiteService siteService,
             IMenuItemService menuItemService,
-            ICurrentSession currentSession)
+            ICurrentSession currentSession,
+            IMaintainanceService maintenanceService)
         {
             _userService = userService ?? new UserService();
             _groupService = groupService ?? new GroupService();
             _siteService = siteService ?? new SiteService();
             _menuItemService = menuItemService ?? new MenuItemService();
             _currentSession = currentSession ?? new CurrentSession();
+            _maintenanceService = maintenanceService ?? new MaintainanceService();
         }
 
         #endregion
@@ -78,6 +79,8 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         private void CreateAuthInfo(User user)
         {
+            var currentDomain = CurrentContext.GetCurrentDomain();
+
             var authInfo = new AuthInfo();
 
             authInfo.UserId = user.Id;
@@ -90,13 +93,13 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 DateTime.Now.AddMinutes(20000),
                 false,
                 authInfo.ToXml(),
-                FormsAuthentication.FormsCookiePath);
+                currentDomain.Path);
 
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
                 HttpOnly = true,
-                Path = FormsAuthentication.FormsCookiePath,
+                Path = currentDomain.Path,
                 Name = FormsAuthentication.FormsCookieName
             };
 
@@ -109,10 +112,18 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
+
+            if (maintenanceInfo.IsDowntime)
+            {
+                return RedirectToAction("Offline", "Common");
+            }
+
             return View();
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Index(string username, string password)
         {
             if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty())
@@ -196,13 +207,27 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                 else
                                 {
                                     // user has access to multiple sites
-                                    if (siteLevelList.Count() > 1)
+                                    if (siteLevelList.Where(s => s.IsActive).Count() > 1)
                                     {
                                         return RedirectToAction("Site", "UserSite");
                                     }
 
-                                    return RedirectToAction("GoToSite", "UserSite", new { id = siteLevelList.First().Site.Id });
+                                    #region user has acces to one site
+
+                                    var site = siteLevelList.Where(s => s.IsActive).First().Site;
+
+                                    var listSiteUrl = _siteService.GetSiteUrlBySiteId(site.Id, this.Environment).Where(u => u.IsActive).ToList();
+
+                                    if (listSiteUrl.Count() > 1)
+                                    {
+                                        return RedirectToAction("Site", "UserSite");
+                                    }
+
+                                    return RedirectToAction("Forward", "UserSite", new { id = listSiteUrl.First().SiteUrlId });
+
+                                    #endregion
                                 }
+
                                 #endregion
 
                                 #endregion
@@ -265,6 +290,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 OnUserId = _currentSession.OnUserId
             });
             FormsAuthentication.SignOut();
+            Response.Cookies.Clear();
             _currentSession.ClearAll();
         }
 
@@ -275,11 +301,22 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
-            var siteStatus = _siteService.GetStatusById(this.SiteId);
+            var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
 
-            if (!siteStatus)
+            if (maintenanceInfo.IsDowntime)
             {
-                return Json("1");
+                return Json("-1");
+            }
+
+            // check if not nap hub
+            if (this.SiteId != 0)
+            {
+                var siteStatus = _siteService.GetStatusById(this.SiteId);
+
+                if (!siteStatus)
+                {
+                    return Json("1");
+                }
             }
 
             UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();

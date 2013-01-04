@@ -28,6 +28,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     {
         #region members
 
+        private readonly int _timeExipration = 30;
         private IUserService _userService;
         private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
@@ -60,10 +61,11 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
             onuserId = Cryptography.CfsDeCrypt(onuserId.Replace(" ", "+"));
             time = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
+            string currentTime = _userService.UserSSOGetTime();
 
-            var expiration = DateTime.Now - Convert.ToDateTime(time);
+            var expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
 
-            if (expiration.TotalSeconds <= 10)
+            if (expiration.TotalSeconds <= _timeExipration)
             {
                 #region do SSO check-in
 
@@ -122,6 +124,8 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         private void CreateAuthInfo(User user)
         {
+            var currentDomain = CurrentContext.GetCurrentDomain();
+
             var authInfo = new AuthInfo();
 
             authInfo.UserId = user.Id;
@@ -134,13 +138,13 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 DateTime.Now.AddMinutes(20000),
                 false,
                 authInfo.ToXml(),
-                FormsAuthentication.FormsCookiePath);
+                currentDomain.Path);
 
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
                 HttpOnly = true,
-                Path = FormsAuthentication.FormsCookiePath,
+                Path = currentDomain.Path,
                 Name = FormsAuthentication.FormsCookieName
             };
 

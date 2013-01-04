@@ -111,6 +111,7 @@ namespace Fanex.Maintenance.Core.Web
             }
             catch (Exception ex)             
             {
+                Logging.Logger.Log.Error(ex.Message);
                 return new HtmlString(value.ToString());
             }
         }

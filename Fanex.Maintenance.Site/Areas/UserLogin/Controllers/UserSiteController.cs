@@ -25,22 +25,24 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     {
         #region members
 
-        private ISiteService _siteService = new SiteService();
-        private ICurrentSession _currentSession = new CurrentSession();
+        private ISiteService _siteService;
+        private ICurrentSession _currentSession;
+        private IUserService _userService;
 
         #endregion
 
         #region ctors
 
         public UserSiteController()
-            : this(null, null)
+            : this(null, null, null)
         {
         }
 
-        public UserSiteController(ISiteService siteService, ICurrentSession currentSession)
+        public UserSiteController(ISiteService siteService, ICurrentSession currentSession, IUserService userService)
         {
             _siteService = _siteService ?? new SiteService();
             _currentSession = _currentSession ?? new CurrentSession();
+            _userService = _userService ?? new UserService();
         }
 
         #endregion
@@ -53,7 +55,8 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             {
                 var siteUrlList = _siteService.GetSiteUrlByUser(_currentSession.UserId, this.Environment);
 
-                ViewBag.OnUserId = _currentSession.OnUserId; // for re-checkin
+                // for re-checkin
+                ViewBag.OnUserId = _currentSession.OnUserId;
 
                 return View(siteUrlList);
             }
@@ -67,12 +70,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             int siteUrlId = Convert.ToInt32(id);
             var siteUrl = _siteService.GetSiteUrlById(siteUrlId);
 
+            string time = _userService.UserSSOGetTime();
+
             return new RedirectResult(
                 string.Format("{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}",
                     siteUrl.Url.Trim(),
                     Cryptography.CfsEnCrypt(_currentSession.UserId.ToString()),
                     Cryptography.CfsEnCrypt(_currentSession.OnUserId.ToString()),
-                    Cryptography.CfsEnCrypt(DateTime.Now.ToString("G"))));
+                    Cryptography.CfsEnCrypt(time)));
         }
 
         #endregion

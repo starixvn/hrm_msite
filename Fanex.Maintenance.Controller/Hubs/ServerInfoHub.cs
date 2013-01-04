@@ -38,7 +38,7 @@ namespace Fanex.Maintenance.Controller.Hubs
             }
             catch (Exception ex)
             {
-                MailHelper.SendMail("Test Hub", "Test Hub", ex.Message +"<br/>"+ ex.StackTrace);
+                MailHelper.SendMail("Test Hub", "Test Hub", ex.Message + "<br/>" + ex.StackTrace);
             }
         }
 

@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Controller
     /// Mail Controller
     /// </summary>
     [Authorize]
-    public class MailController : Controller
+    public class MailController : BaseController
     {
         #region Member
 

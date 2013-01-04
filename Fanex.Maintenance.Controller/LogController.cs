@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Controller
     /// </summary>
     [Authorize]
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
-    public class LogController : Controller
+    public class LogController : BaseController
     {
         #region Member
         /// <summary>

@@ -25,7 +25,7 @@ namespace Fanex.Maintenance.Controller
     /// Database report controller
     /// </summary>
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
-    public class DatabaseReportController : Controller
+    public class DatabaseReportController : BaseController
     {
         #region Member
 

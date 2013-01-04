@@ -69,7 +69,7 @@ namespace Fanex.Maintenance.Controller.Worker
 
                 try
                 {
-                    if (!Constants.IsUMTime)
+                    if (!this.IsDownTime)
                     {
                         GetListResourceInfo();
                     }

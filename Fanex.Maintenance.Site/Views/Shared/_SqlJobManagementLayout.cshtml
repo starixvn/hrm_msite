@@ -14,7 +14,7 @@
     <meta http-equiv="cleartype" content="on" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="~/themes/reset.css" rel="stylesheet" type="text/css" />
-    <link href="~/themes/fonts.css" rel="stylesheet" type="text/css" />    
+    <link href="~/themes/fonts.css" rel="stylesheet" type="text/css" />
     <link href="~/scripts/Plugin/jquery-ui-1.9.1.custom/css/custom-theme/jquery-ui-1.9.1.custom.min.css"
         rel="stylesheet" type="text/css" />
     <link href="~/themes/assets/css/prettify.css" rel="stylesheet" type="text/css" />
@@ -45,6 +45,10 @@
     <script src="~/themes/assets/js/prettify.min.js" type="text/javascript"></script>
     <script src="~/themes/assets/js/underscore.min.js" type="text/javascript"></script>
     <script src="~/scripts/lib/fxHeader_0.6.js" type="text/javascript"></script>
+    @if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)
+    { 
+        <script src="~/Areas/UserLogin/scripts/ReCheckIn.js" type="text/javascript"></script>
+    }
     @RenderSection("Head", false)
 </head>
 <body style="overflow: hidden;">

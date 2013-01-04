@@ -11,8 +11,7 @@
 namespace Fanex.Maintenance.Core.Web
 {
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-
+    using System.Diagnostics.CodeAnalysis;    
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -49,8 +48,6 @@ namespace Fanex.Maintenance.Core.Web
             0,
             3
         };
-
-        public static bool IsUMTime = false; 
 
         /// <summary>
         /// Freq Interval Values

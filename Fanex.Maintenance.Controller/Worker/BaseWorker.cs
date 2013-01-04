@@ -11,6 +11,8 @@ namespace Fanex.Maintenance.Controller.Worker
 {
     using System.Threading;
     using System.Diagnostics.CodeAnalysis;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
 
     /// <summary>
     /// TODO: Update summary.
@@ -19,12 +21,14 @@ namespace Fanex.Maintenance.Controller.Worker
     public class BaseWorker
     {
         private Thread _workerThread;
+        private IMaintainanceService _maintenceService;
 
         protected bool IsStop { get; set; }
 
         public BaseWorker()
         {
             _workerThread = new Thread(Run);
+            _maintenceService = new MaintainanceService();
         }
 
         protected virtual void Run()
@@ -47,6 +51,16 @@ namespace Fanex.Maintenance.Controller.Worker
         public void Stop()
         {
             IsStop = true;
+        }
+
+        public bool IsDownTime
+        {
+            get
+            {
+                var downtimeInfo = _maintenceService.GetDowntimeInfo();
+
+                return downtimeInfo.IsDowntime;
+            }
         }
     }
 }

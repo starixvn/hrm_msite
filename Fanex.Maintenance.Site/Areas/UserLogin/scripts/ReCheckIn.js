@@ -8,21 +8,21 @@
 
         init: function () {
             Recheckin.time = 5000;
-            Recheckin.root = location.protocol + '//' + location.host + $('#NapRoot').val();
+            Recheckin.root = location.protocol + '//' + location.host + $('#NapAdminRoot').val();
             Recheckin.kickedOutMsg = 'You have logged in from another session or your login session has expired!';
         },
 
         reCheckin: function () {
-
             $.ajax({
                 url: Recheckin.root + "UserLogin/Login/ReCheckLogin",
                 type: "POST",
                 dataType: "json",
                 success: function (result) {
                     if (result == "1") {
-
                         Recheckin.headlineMsgBox.showInfo(Recheckin.kickedOutMsg, { closeBtn: false });
-
+                    }
+                    if (result == "-1") {
+                        window.location.href = Recheckin.root + "UserLogin/Common/Offline";
                     }
                 },
                 error: function (request, status, error) {
@@ -44,6 +44,7 @@
 
 
 $(document).ready(function () {
+
     Recheckin.init();
 
     Recheckin.headlineMsgBox = $.msgbox({

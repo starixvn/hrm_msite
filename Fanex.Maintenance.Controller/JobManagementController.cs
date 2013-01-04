@@ -29,7 +29,7 @@ namespace Fanex.Maintenance.Controller
     /// </summary>
     [Authorize]
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
-    public class JobManagementController : Controller
+    public class JobManagementController : BaseController
     {
         /// <summary>
         /// Job Service
