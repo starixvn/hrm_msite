@@ -261,6 +261,7 @@
             <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
         </Setting>
         <Setting Key="NAP_User_GetAllByUsernameGroupSite" SpName="NAP_User_GetAllByUsernameGroupSite" DbName="Nap"  />
+        <Setting Key="NAP_User_SSOGetTime" SpName="NAP_User_SSOGetTime" DbName="Nap"  />
     </Function>
     <Function Name="Site">
         <Setting Key="NAP_Site_GetByUser" SpName="NAP_Site_GetByUser" DbName="Nap">
