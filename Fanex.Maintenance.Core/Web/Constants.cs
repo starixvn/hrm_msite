@@ -50,6 +50,8 @@ namespace Fanex.Maintenance.Core.Web
             3
         };
 
+        public static bool IsUMTime = false; 
+
         /// <summary>
         /// Freq Interval Values
         /// </summary>

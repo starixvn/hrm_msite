@@ -22,6 +22,7 @@ namespace Fanex.Maintenance.Controller.Worker
     using Fanex.Maintenance.Service.Interface.JobManagement;
     using Microsoft.AspNet.SignalR.Hubs;
     using Microsoft.AspNet.SignalR;
+    using Fanex.Maintenance.Core.Web;
 
     /// <summary>
     /// TODO: Update summary.
@@ -68,7 +69,10 @@ namespace Fanex.Maintenance.Controller.Worker
 
                 try
                 {
-                    GetListResourceInfo();
+                    if (!Constants.IsUMTime)
+                    {
+                        GetListResourceInfo();
+                    }
                 }
                 catch (Exception ex)
                 {

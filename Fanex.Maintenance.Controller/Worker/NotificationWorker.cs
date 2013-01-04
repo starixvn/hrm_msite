@@ -121,22 +121,25 @@ namespace Fanex.Maintenance.Controller.Worker
 
                 try
                 {
-                    List<NotifyInfo> notifyInfoes = new List<NotifyInfo>();
-                    try
+                    if (!Constants.IsUMTime)
                     {
-                        notifyInfoes.AddRange(GetSqlAgentLogs());
-                        notifyInfoes.AddRange(GetJobLogs());
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Log.Error(ex.Message, ex);
-                    }
+                        List<NotifyInfo> notifyInfoes = new List<NotifyInfo>();
+                        try
+                        {
+                            notifyInfoes.AddRange(GetSqlAgentLogs());
+                            notifyInfoes.AddRange(GetJobLogs());
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Log.Error(ex.Message, ex);
+                        }
 
-                    //// Notify to client
-                    var context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                    context.Clients.All.gotMessage(notifyInfoes);
+                        //// Notify to client
+                        var context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
+                        context.Clients.All.gotMessage(notifyInfoes);
 
-                    UpdateServerStatus();
+                        UpdateServerStatus();
+                    }
                 }
                 catch (Exception ex)
                 {

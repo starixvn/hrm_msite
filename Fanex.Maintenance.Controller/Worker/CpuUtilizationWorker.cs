@@ -22,6 +22,7 @@ namespace Fanex.Maintenance.Controller.Worker
     using Fanex.Maintenance.Service.Interface.JobManagement;
     using Microsoft.AspNet.SignalR.Hubs;
     using Microsoft.AspNet.SignalR;
+    using Fanex.Maintenance.Core.Web;
 
     /// <summary>
     /// TODO: Update summary.
@@ -59,7 +60,10 @@ namespace Fanex.Maintenance.Controller.Worker
 
                 try
                 {
-                    GetListCpuUtilization();
+                    if (!Constants.IsUMTime)
+                    {
+                        GetListCpuUtilization();
+                    }
                 }
                 catch (Exception ex)
                 {
