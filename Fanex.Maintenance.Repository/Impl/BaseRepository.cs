@@ -115,6 +115,25 @@ namespace Fanex.Maintenance.Repository.Impl
             return listObject;
         }
 
+
+        public virtual IEnumerable<S> Fetch<S>(ICriteria criteria, Func<IDataReader, S> mapObjectFunction) where S : class
+        {
+            IList<S> listObject = new List<S>();
+            
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                using (var reader = db.ExecuteReader(criteria.GetSpParams()))
+                {
+                    while (reader.Read())
+                    {
+                        listObject.Add(mapObjectFunction(reader));
+                    }
+                }
+            }
+
+            return listObject;
+        }
+
         /// <summary>
         /// Execute command to Db
         /// </summary>

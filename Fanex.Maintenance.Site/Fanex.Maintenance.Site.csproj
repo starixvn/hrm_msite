@@ -1645,7 +1645,9 @@
     <Content Include="Views\JobManagement\AgentLogManagement.cshtml" />
     <Content Include="Views\JobManagement\ServerManagement.cshtml" />
     <Content Include="Views\JobManagement\ServerDetail.cshtml" />
-    <Content Include="WebConnectionString.config" />
+    <Content Include="WebConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

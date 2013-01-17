@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fanex.ConnectionString">
+      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient">
       <HintPath>..\_Dependencies\MailService\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
@@ -54,6 +57,7 @@
     <Compile Include="Domain\OrinatingServer.cs" />
     <Compile Include="Domain\Schedule.cs" />
     <Compile Include="Domain\Step.cs" />
+    <Compile Include="Model\ConnectionString\AliasConnectionString.cs" />
     <Compile Include="Model\CPUInfo.cs" />
     <Compile Include="Model\JobLog.cs" />
     <Compile Include="Model\JobSchedule.cs" />
