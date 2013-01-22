@@ -46,8 +46,22 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                                },
                                ConnectionString = new ConnectionString
                                {
-
-                               }
+                                   Alias = new Alias
+                                   {
+                                       Id = reader.ToInt("Id"),
+                                       Name = reader.ToString("Name")
+                                   },
+                                   InitialCatalog = reader.ToString("InitialCatalog"),
+                                   IntegratedSecurity = reader.ToBool("IntegratedSecurity"),
+                                   UserID = reader.ToString("UserId"),
+                                   Password = reader.ToString("Password"),
+                                   FreeText = reader.ToString("FreeText"),
+                                   Server = new DatabaseServer
+                                   {
+                                       ServerIP = reader.ToString("ServerIP")
+                                   }
+                               },
+                               NumOfSite = reader.ToInt("NumOfSite")
                            };
                        };
 

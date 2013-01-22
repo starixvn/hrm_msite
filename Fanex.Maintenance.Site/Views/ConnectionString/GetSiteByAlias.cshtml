@@ -1,0 +1,47 @@
+﻿@model List<Site>
+@{
+    Layout = null;
+}
+<table class="grid">
+    <thead>
+        <tr>
+            <th class="first">
+                #
+            </th>
+            <th>
+                @ViewResource.Site
+            </th>
+            <th>
+                @ViewResource.Active
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!ReferenceEquals(Model, null) && Model.Count() > 0)
+        {
+            int i = 0;
+            foreach (var item in Model)
+            {
+                string rowCss = i % 2 == 0 ? string.Empty : "class='alt'";
+		
+            <tr @Html.Raw(rowCss)>
+                <td class="align-center width-30">
+                    @(++i)
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td class="align-center">
+                    @if (item.IsActive)
+                    {
+                        <img src="~/themes/job/img/blank.png" alt="" class="ico-tick" />
+                    }
+                    else
+                    {
+                    }
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>

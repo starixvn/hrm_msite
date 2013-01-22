@@ -34,4 +34,19 @@
         <Setting Key="GET_CreditDataToValidate_DW" SpName="GET_CreditDataToValidate_DW" DbName="Licensee" />
         <Setting Key="Lrf_SelBalanceUpDay" SpName="Lrf_SelBalanceUpDay" DbName="licensee_archive" />
     </Function>
+    <Function Name="ConnectionString">
+        <Setting Key="ConnectionString_DatabaseServer_GetAll" SpName="ConnectionString_DatabaseServer_GetAll" DbName="connectionstring" Plain="1" >
+            <Mapping DataField="ModifierId" ObjectProperty="Id" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
+        </Setting>
+        <Setting Key="ConnectionString_Sites_GetAll" SpName="ConnectionString_Sites_GetAll" DbName="connectionstring" Plain="1" >
+            <Mapping DataField="ModifierId" ObjectProperty="Id" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
+        </Setting>
+        <Setting Key="ConnectionString_Alias_GetAll" SpName="ConnectionString_Alias_GetAll" DbName="connectionstring" Plain="1"/>
+        <Setting Key="ConnectionString_Sites_GetByAlias" SpName="ConnectionString_Sites_GetByAlias" DbName="connectionstring" Plain="1">
+            <Mapping DataField="ModifierId" ObjectProperty="Id" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
+        </Setting>
+    </Function>
 </Functions>

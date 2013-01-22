@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionString\Alias\AliasGetAllCriteria.cs" />
+    <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetAllCriteria.cs" />
+    <Compile Include="ConnectionString\Site\SiteGetByAliasCriteria.cs" />
+    <Compile Include="ConnectionString\Site\SiteGetAllCriteria.cs" />
     <Compile Include="DatabaseReport\DataIntegrityViewModel.cs" />
     <Compile Include="Job\GetCpuUtilizationCriteria.cs" />
     <Compile Include="Job\GetMemoryInfoCriteria.cs" />

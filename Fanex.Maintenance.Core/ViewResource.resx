@@ -588,4 +588,49 @@
   <data name="Timestamp" xml:space="preserve">
     <value>Timestamp</value>
   </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Change Connection" xml:space="preserve">
+    <value>Change Connection</value>
+  </data>
+  <data name="Connection String" xml:space="preserve">
+    <value>Connecion String</value>
+  </data>
+  <data name="Database_Server" xml:space="preserve">
+    <value>Database Server</value>
+  </data>
+  <data name="Edit Connection" xml:space="preserve">
+    <value>Edit Connection</value>
+  </data>
+  <data name="Manage_Alias" xml:space="preserve">
+    <value>Manage Alias</value>
+  </data>
+  <data name="Modified_Date" xml:space="preserve">
+    <value>Modified Date</value>
+  </data>
+  <data name="Modifier" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Sites" xml:space="preserve">
+    <value>Sites</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="All_Server" xml:space="preserve">
+    <value>All Servers</value>
+  </data>
+  <data name="All_Site" xml:space="preserve">
+    <value>All Sites</value>
+  </data>
+  <data name="Create_New_Alias" xml:space="preserve">
+    <value>Create New Alias</value>
+  </data>
+  <data name="Alias" xml:space="preserve">
+    <value>Alias</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Is Active</value>
+  </data>
 </root>

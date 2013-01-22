@@ -10,16 +10,21 @@
 namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
     using Fanex.NAP.Framework.Data;
+    using System.ComponentModel.DataAnnotations;
+    using Fanex.Maintenance.Core;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class AliasGetAllCriteria : CriteriaBase
     {
-        public int DbServerId { get; set; }
+        [Display(Name = "Database_Server", ResourceType = typeof(ViewResource))]
+        public int? DbServerId { get; set; }
 
-        public int SiteId { get; set; }
+        [Display(Name = "Site", ResourceType = typeof(ViewResource))]
+        public int? SiteId { get; set; }
 
+        [Display(Name = "Name", ResourceType = typeof(ViewResource))]
         public string Alias { get; set; }
 
         public override bool IsValid()

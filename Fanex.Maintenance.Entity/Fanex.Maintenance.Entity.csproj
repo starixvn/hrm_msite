@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fanex.ConnectionString">
+    <Reference Include="Fanex.ConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient">

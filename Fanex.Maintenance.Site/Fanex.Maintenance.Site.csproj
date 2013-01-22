@@ -51,6 +51,9 @@
     <Reference Include="Fanex.Common">
       <HintPath>..\_Dependencies\Fanex\Fanex.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.ConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Data">
       <HintPath>..\_Dependencies\Fanex\Fanex.Data.dll</HintPath>
     </Reference>
@@ -215,6 +218,7 @@
     <Content Include="Global.asax" />
     <Content Include="images\calendar.gif" />
     <Content Include="images\sprite_v.png" />
+    <Content Include="scripts\Connection\Alias.js" />
     <Content Include="scripts\Job\ServerDetail.js" />
     <Content Include="scripts\Job\ServerManagement.js" />
     <Content Include="scripts\Job\LeftMenuPage.js" />
@@ -1648,6 +1652,10 @@
     <Content Include="WebConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\ConnectionString\Alias.cshtml" />
+    <Content Include="themes\connectionstring\manage.less" />
+    <Content Include="Views\ConnectionString\GetSiteByAlias.cshtml" />
+    <Content Include="Views\ConnectionString\CreateAlias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

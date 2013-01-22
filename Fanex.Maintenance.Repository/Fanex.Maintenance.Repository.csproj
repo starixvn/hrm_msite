@@ -34,7 +34,7 @@
     <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Fanex\Fanex.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.ConnectionString">
+    <Reference Include="Fanex.ConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data">
@@ -57,6 +57,8 @@
   <ItemGroup>
     <Compile Include="Impl\BaseRepository.cs" />
     <Compile Include="Impl\ConnectionString\AliasRepository.cs" />
+    <Compile Include="Impl\ConnectionString\SiteRepository.cs" />
+    <Compile Include="Impl\ConnectionString\DatabaseServerRepository.cs" />
     <Compile Include="Impl\JobManagement\ScheduleRepository.cs" />
     <Compile Include="Impl\JobManagement\JobRepository.cs" />
     <Compile Include="Impl\JobManagement\ServerRepository.cs" />
@@ -66,7 +68,9 @@
     <Compile Include="Impl\DatabaseReportRepository.cs" />
     <Compile Include="Impl\LogRepository.cs" />
     <Compile Include="Impl\UserRepository.cs" />
+    <Compile Include="Interface\ConnectionString\ISiteRepository.cs" />
     <Compile Include="Interface\ConnectionString\IAliasRepository.cs" />
+    <Compile Include="Interface\ConnectionString\IDatabaseServerRepository.cs" />
     <Compile Include="Interface\JobManagement\IJobRepository.cs" />
     <Compile Include="Interface\ILogCategoryRepository.cs" />
     <Compile Include="Interface\IDatabaseReportRepository.cs" />

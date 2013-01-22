@@ -1,0 +1,110 @@
+﻿@model Alias
+@{
+    ViewBag.Title = ViewResource.Create_New_Alias;
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+@{
+    ViewBag.Title = string.Format("{0} {1}", ViewResource.Create_New, ViewResource.Alias);
+    bool success = ViewBag.Success != null && ViewBag.Success;    
+}
+@section Head {
+    <link href="~/themes/connectionstring/alias/createalias.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .subteam
+        {
+            border: 1px solid #CCCCCC;
+            height: 100px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            padding-bottom: 8px;
+            width: 290px;
+            background-color: #fff;
+        }
+        .subteam label
+        {
+            border-top: 1px solid #ccc;
+            display: block;
+            line-height: 20px;
+            margin-top: 4px;
+            padding-top: 4px;
+            background-color: #fff;
+        }
+        .subteam label:first-child
+        {
+            border-top: medium none !important;
+        }
+    </style>
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+        @Html.ActionLink("← " + ViewResource.Back_To_List, "Alias", "ConnectionString", null, new { @class = "lnk" })
+    </h1>
+}
+@using (Html.BeginForm())
+{
+    <div class="form">
+        <div class="form-row summary">
+            <div class="lbl-field">
+            </div>
+            <div class="edit-field">
+                @Html.ValidationSummary()
+            </div>
+        </div>
+        <div class="form-row required">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Name)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.Name)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.LabelFor(m => m.Description)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.Description)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.Label(ViewResource.Site)
+            </div>
+            <div class="edit-field">
+                <div class="input subteam">
+                    <label>
+                        <input type="checkbox" value="11" name="SubGroupArray" id="SubGroupArray11" />Management</label>
+                    <label>
+                        <input type="checkbox" value="11" name="SubGroupArray" id="SubGroupArray11" />Management</label>
+                    <label>
+                        <input type="checkbox" value="11" name="SubGroupArray" id="SubGroupArray11" />Management</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+                @Html.Label(ViewResource.Active)
+            </div>
+            <div class="edit-field">
+                @Html.CheckBoxFor(m => m.IsActive)
+                @Html.LabelFor(m => m.IsActive, ViewResource.IsActive)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
+            </div>
+            <div class="edit-field">
+                @if (!success)
+                {
+                    <input type="submit" value="@ViewResource.Create" />
+                    <input type="reset" value="@ViewResource.Cancel" />  
+                }
+            </div>
+        </div>
+    </div>
+}
+@section Foot
+{
+    <script src="~/scripts/Connection/CreateAlias.js" type="text/javascript"></script>
+}
