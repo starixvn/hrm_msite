@@ -14,6 +14,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Context;
+    using Fanex.NAP.Core.Web.Session;
 
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class BaseController : Controller
@@ -25,6 +26,8 @@ namespace Fanex.Maintenance.Controller
         private int _issiteLogin = NapSettings.Settings.IsSiteLogin;
 
         protected readonly CurrentContext CurrentContext;
+
+        protected CurrentSession CurrentSession;
 
         private ViewFlags _viewFlags;
 
@@ -44,6 +47,7 @@ namespace Fanex.Maintenance.Controller
         public BaseController()
         {
             CurrentContext = new CurrentContext();
+            CurrentSession = new CurrentSession();
 
             ViewFlags = new ViewFlags
             {

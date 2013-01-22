@@ -1,14 +1,15 @@
-﻿@model Alias
+﻿@model AliasInsertCriteria
 @{
     ViewBag.Title = ViewResource.Create_New_Alias;
     Layout = "~/Views/Shared/_Layout.cshtml";    
 }
 @{
     ViewBag.Title = string.Format("{0} {1}", ViewResource.Create_New, ViewResource.Alias);
-    bool success = ViewBag.Success != null && ViewBag.Success;    
+    bool success = ViewBag.Success != null && ViewBag.Success;
+    var listSite = (List<Site>)ViewBag.Site;
 }
 @section Head {
-    <link href="~/themes/connectionstring/alias/createalias.less" rel="stylesheet" type="text/css" />
+    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .subteam
         {
@@ -32,6 +33,11 @@
         .subteam label:first-child
         {
             border-top: medium none !important;
+        }
+        
+        .item
+        {
+            margin: 5px 5px;
         }
     </style>
 }
@@ -73,12 +79,15 @@
             </div>
             <div class="edit-field">
                 <div class="input subteam">
-                    <label>
-                        <input type="checkbox" value="11" name="SubGroupArray" id="SubGroupArray11" />Management</label>
-                    <label>
-                        <input type="checkbox" value="11" name="SubGroupArray" id="SubGroupArray11" />Management</label>
-                    <label>
-                        <input type="checkbox" value="11" name="SubGroupArray" id="SubGroupArray11" />Management</label>
+                    @if (!ReferenceEquals(listSite, null))
+                    {
+                        foreach (var item in listSite)
+                        {
+                        <label>
+                            <input type="checkbox" class="item" value="@item.Id" name="siteId"/>@item.Name
+                        </label>
+                        }
+                    }
                 </div>
             </div>
         </div>

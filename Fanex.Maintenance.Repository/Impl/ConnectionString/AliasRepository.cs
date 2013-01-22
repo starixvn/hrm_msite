@@ -72,5 +72,36 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 throw ex;
             }
         }
+
+        public int InsertOrUpdate(ICriteria criteria)
+        {
+            try
+            {
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    var hsParam = criteria.GetSpParams();
+
+                    db.ExecuteNonQuery(hsParam);
+
+                    return (int)hsParam["aliasid"];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Alias GetById(ICriteria criteria)
+        {
+            try
+            {
+                return Get<Alias>(criteria);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

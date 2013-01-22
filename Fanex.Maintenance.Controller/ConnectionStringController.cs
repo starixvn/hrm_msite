@@ -16,6 +16,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.ConnectionString.Alias;
     using System.Collections.Generic;
     using Fanex.ConnectionString.Domain;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -30,25 +31,35 @@ namespace Fanex.Maintenance.Controller
 
         private readonly ISiteService _siteService;
 
+        private readonly IConnectionService _connectionService;
+
         #endregion
 
         #region Ctor
 
         public ConnectionStringController()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
         }
 
-        public ConnectionStringController(IAliasService aliasService, IDatabaseServerService databaseServerService, ISiteService siteService)
+        public ConnectionStringController(
+            IAliasService aliasService,
+            IDatabaseServerService databaseServerService,
+            ISiteService siteService,
+            IConnectionService connectionService
+            )
         {
             _aliasService = aliasService ?? new AliasService();
             _databaseServerService = databaseServerService ?? new DatabaseServiceService();
             _siteService = siteService ?? new SiteService();
+            _connectionService = connectionService ?? new ConnectionService();
         }
 
         #endregion
 
         #region Manage Alias
+
+        #region Mange
 
         [HttpGet]
         public ActionResult Alias()
@@ -67,6 +78,9 @@ namespace Fanex.Maintenance.Controller
                 Text = s.Name,
                 Value = s.Id.ToString()
             }).ToList();
+
+            var listAlias = _aliasService.GetAll();
+            ViewBag.ListAlias = listAlias;
 
             return View();
         }
@@ -97,37 +111,65 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        #endregion
+
+        #region Create
+
         [HttpGet]
         public ActionResult CreateAlias()
         {
             var listSite = _siteService.GetAll();
-
-            ViewBag.Site = listSite.Select(s => new SelectListItem
-            {
-                Text = s.Name,
-                Value = s.Id.ToString()
-            }).ToList();
+            ViewBag.Site = listSite.ToList();
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateAlias(Alias model)
+        public ActionResult CreateAlias(AliasInsertCriteria model)
         {
             var listSite = _siteService.GetAll();
+            ViewBag.Site = listSite.ToList();
 
-            ViewBag.Site = listSite.Select(s => new SelectListItem
-            {
-                Text = s.Name,
-                Value = s.Id.ToString(),
-                Selected = model.Site.Id == s.Id
-            }).ToList();
+            model.Creator = CurrentSession.UserId;
+            model.CreatedDate = DateTime.Now;
 
-
+            ViewBag.Success = _aliasService.InsertOrUpdate(model);
 
             return View(model);
         }
 
+        #endregion
+
+        #region Edit
+
+        #region Create
+
+        [HttpGet]
+        public ActionResult EditAlias(int id)
+        {
+            var listSite = _siteService.GetAll();
+            ViewBag.Site = listSite.ToList();
+
+            var alias = _aliasService.Get(id);
+            ViewBag.Alias = alias;
+
+            var listSiteAlias = _siteService.GetByAlias(id);
+            ViewBag.SiteAlias = listSiteAlias;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditAlias(AliasInsertCriteria model)
+        {
+            var listSite = _siteService.GetAll();
+            ViewBag.Site = listSite.ToList();
+            return View();
+        }
+
+        #endregion
+
+        #endregion
 
         #endregion
 
@@ -146,6 +188,45 @@ namespace Fanex.Maintenance.Controller
             return View(listSite);
         }
 
+        [HttpGet]
+        public ActionResult GetConnectionByAlias(int id)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var listConnection = _connectionService.GetByAlias(id);
+                ViewBag.AliasId = id;
+
+                return View(listConnection);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateDefaultConenction(int aliasId, int conectionId)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var check = _connectionService.UpdateDefaultConnection(aliasId, conectionId);
+
+                return Json(check.ToString().ToLower());
+            }
+
+            return Json(null);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStatusAlias(int aliasId, bool isActive)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var check = _aliasService.UpdateStatus(aliasId, isActive);
+
+                return Json(check.ToString().ToLower());
+            }
+
+            return Json(null);
+        }
         #endregion
     }
 }

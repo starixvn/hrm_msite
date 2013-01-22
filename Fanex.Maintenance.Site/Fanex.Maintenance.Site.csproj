@@ -219,6 +219,7 @@
     <Content Include="images\calendar.gif" />
     <Content Include="images\sprite_v.png" />
     <Content Include="scripts\Connection\Alias.js" />
+    <Content Include="scripts\Connection\CreateAlias.js" />
     <Content Include="scripts\Job\ServerDetail.js" />
     <Content Include="scripts\Job\ServerManagement.js" />
     <Content Include="scripts\Job\LeftMenuPage.js" />
@@ -1653,9 +1654,11 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\ConnectionString\Alias.cshtml" />
-    <Content Include="themes\connectionstring\manage.less" />
+    <Content Include="themes\connectionstring\alias\createalias.less" />
     <Content Include="Views\ConnectionString\GetSiteByAlias.cshtml" />
     <Content Include="Views\ConnectionString\CreateAlias.cshtml" />
+    <Content Include="Views\ConnectionString\EditAlias.cshtml" />
+    <Content Include="Views\ConnectionString\GetConnectionByAlias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

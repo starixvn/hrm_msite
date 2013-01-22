@@ -12,9 +12,14 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
     using System.Collections.Generic;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.NAP.Framework.Data;
+    using Fanex.ConnectionString.Domain;
 
     public interface IAliasRepository
     {
         IEnumerable<AliasConnectionString> GetAll(ICriteria criteria);
+
+        Alias GetById(ICriteria criteria);
+
+        int InsertOrUpdate(ICriteria criteria);
     }
 }

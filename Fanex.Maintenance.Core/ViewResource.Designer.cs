@@ -1537,6 +1537,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Alias.
+        /// </summary>
+        public static string Update_Alias {
+            get {
+                return ResourceManager.GetString("Update_Alias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string Username {

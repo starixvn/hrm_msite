@@ -7,6 +7,15 @@
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .form
+        {
+            background: none repeat scroll 0 0 transparent;
+            border: 0 none;
+            box-shadow: none;
+            padding: 10px 0 0;
+        }
+    </style>
 }
 @section Headline {
     <h1>
@@ -100,7 +109,14 @@
                     }
                 </td>
                 <td>
-                    @item.ConnectionString.Connection
+                    @if (!string.IsNullOrWhiteSpace(item.ConnectionString.Connection))
+                    {
+                        <span>@item.ConnectionString.Connection</span>
+                    }
+                    else
+                    {
+                        @ViewResource.N_A
+                    }
                 </td>
                 <td>
                     @item.Alias.Modifier.Name
@@ -111,15 +127,23 @@
                 <td class="align-center">
                     @if (item.Alias.IsActive)
                     {
-                        <input type="checkbox" checked="checked" />
+                        <input type="checkbox" checked="checked" aid="@item.Alias.Id" aname="@item.Alias.Name" class="update-status"/>
                     }
                     else
                     {
-                        <input type="checkbox" />
+                        <input type="checkbox" aid="@item.Alias.Id" aname="@item.Alias.Name" class="update-status"/>
                     }
                 </td>
                 <td class="align-center">
-                    <a href="#">Edit</a>
+                    @if (!string.IsNullOrWhiteSpace(item.ConnectionString.Connection))
+                    {
+                        <a href="#" class="change-connection" aid="@item.Alias.Id" aname="@item.Alias.Name">
+                            Change</a>
+                    }
+                    else
+                    {
+                        @ViewResource.N_A
+                    }
                 </td>
                 <td class="align-center">
                     <a href="#">Edit</a>

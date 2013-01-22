@@ -11,14 +11,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Entity.Model.ConnectionString;
     using Fanex.Logging;
     using Fanex.Maintenance.Criteria.ConnectionString.Alias;
-    using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
+    using Fanex.Maintenance.Repository.Interface.ConnectionString;
+    using Fanex.Maintenance.Service.Interface.ConnectionString;
+    using Fanex.NAP.Framework.Data;
+    using Fanex.ConnectionString.Domain;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -28,7 +29,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         private readonly IAliasRepository _aliasRepository;
 
-        #endregion
+        #endregion Member
 
         #region Ctor
 
@@ -41,7 +42,8 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         {
             _aliasRepository = aliasrepository ?? new AliasRepository();
         }
-        #endregion
+
+        #endregion Ctor
 
         public IEnumerable<AliasConnectionString> GetAll(string alias = "", int? dbServerId = null, int? siteId = null)
         {
@@ -62,6 +64,64 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
 
             return null;
+        }
+
+        public bool InsertOrUpdate(ICriteria criteria)
+        {
+            try
+            {
+                int check = _aliasRepository.InsertOrUpdate(criteria);
+
+                return check > 0;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return false;
+        }
+
+        public Alias Get(int aliasId)
+        {
+            try
+            {
+                var criteria = new AliasGetByIdCriteria
+                {
+                    AliasId = aliasId
+                };
+
+                return _aliasRepository.GetById(criteria);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return null;
+        }
+
+
+        public bool UpdateStatus(int aliasId, bool isActive)
+        {
+            try
+            {
+                var criteria = new AliasUpdateStatusCriteria
+                {
+                    AliasId = aliasId,
+                    IsActive = isActive
+                };
+
+                int check = _aliasRepository.InsertOrUpdate(criteria);
+
+                return check > 0;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return false;
         }
     }
 }
