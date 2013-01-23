@@ -96,7 +96,7 @@
                     @i
                 </td>
                 <td>
-                    @item.Alias.Name
+                    @Html.ActionLink(item.Alias.Name, "EditAlias", new { id = item.Alias.Id })
                 </td>
                 <td class="align-center">
                     @if (item.NumOfSite > 0)

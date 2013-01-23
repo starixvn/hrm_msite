@@ -1546,6 +1546,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} has been updated successfully. You will be redirected in &lt;span class=&apos;msec&apos;&gt;{1}&lt;/span&gt; seconds..
+        /// </summary>
+        public static string UpSuccessMsg {
+            get {
+                return ResourceManager.GetString("UpSuccessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string Username {

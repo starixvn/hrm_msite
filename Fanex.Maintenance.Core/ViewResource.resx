@@ -636,4 +636,7 @@
   <data name="Update_Alias" xml:space="preserve">
     <value>Update Alias</value>
   </data>
+  <data name="UpSuccessMsg" xml:space="preserve">
+    <value>{0} has been updated successfully. You will be redirected in &lt;span class='msec'&gt;{1}&lt;/span&gt; seconds.</value>
+  </data>
 </root>

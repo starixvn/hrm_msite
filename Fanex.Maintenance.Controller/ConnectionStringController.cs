@@ -160,10 +160,21 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult EditAlias(AliasInsertCriteria model)
+        public ActionResult EditAlias(AliasUpdateCriteria model)
         {
             var listSite = _siteService.GetAll();
             ViewBag.Site = listSite.ToList();
+
+            model.Modifier = CurrentSession.UserId;
+            model.ModifiedDate = DateTime.Now;
+            ViewBag.Success = _aliasService.InsertOrUpdate(model);
+
+            var alias = _aliasService.Get(model.AliasId);
+            ViewBag.Alias = alias;
+
+            var listSiteAlias = _siteService.GetByAlias(model.AliasId);
+            ViewBag.SiteAlias = listSiteAlias;
+
             return View();
         }
 

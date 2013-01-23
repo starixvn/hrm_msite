@@ -116,4 +116,14 @@
 @section Foot
 {
     <script src="~/scripts/Connection/CreateAlias.js" type="text/javascript"></script>
+    @if (success)
+    {
+        string dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Alias + " '" + Model.Name + "'", 3);
+
+        <script type="text/javascript">
+            $(function () {
+                NAP.showSuccessMsg('@dialogMsg', 'ConnectionString/Alias', 2000);
+            });
+        </script>
+    }
 }

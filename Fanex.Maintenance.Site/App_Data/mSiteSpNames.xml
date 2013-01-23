@@ -53,5 +53,6 @@
         <Setting Key="ConnectionString_ConnectionStrings_GetByAlias" SpName="ConnectionString_ConnectionStrings_GetByAlias" DbName="connectionstring" Plain="1"/>
         <Setting Key="ConnectionString_ConnectionStrings_UpdateDefaultConnection" SpName="ConnectionString_ConnectionStrings_UpdateDefaultConnection" DbName="connectionstring" Plain="1"/>
         <Setting Key="ConnectionString_Alias_UpdateStatus" SpName="ConnectionString_Alias_UpdateStatus" DbName="connectionstring" Plain="1"/>
+        <Setting Key="ConnectionString_Alias_Update" SpName="ConnectionString_Alias_Update" DbName="connectionstring" Plain="1"/>
     </Function>
 </Functions>

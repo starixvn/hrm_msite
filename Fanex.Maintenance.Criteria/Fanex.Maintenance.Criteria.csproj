@@ -51,6 +51,7 @@
     <Compile Include="ConnectionString\Alias\AliasInsertCriteria.cs" />
     <Compile Include="ConnectionString\Alias\AliasGetByIdCriteria.cs" />
     <Compile Include="ConnectionString\Alias\AliasUpdateStatusCriteria.cs" />
+    <Compile Include="ConnectionString\Alias\AliasUpdateCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionGetByAliasCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionUpdateDefaultCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetAllCriteria.cs" />
