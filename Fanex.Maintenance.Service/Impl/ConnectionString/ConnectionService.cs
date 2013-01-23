@@ -18,6 +18,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Criteria.ConnectionString.Connection;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -73,6 +74,55 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                 };
 
                 return _connectionRepository.InsertOrUpdate(criteria) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public bool InsertOrUpdate(ICriteria criteria)
+        {
+            try
+            {
+                return _connectionRepository.InsertOrUpdate(criteria) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public ConnectionString GetById(int id)
+        {
+            try
+            {
+                var criteria = new ConnectionGetByIdCriteria
+                {
+                    ConectionId = id
+                };
+
+                return _connectionRepository.GetById(criteria);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public IEnumerable<ConnectionString> GetSecondaryConection(int id)
+        {
+            try
+            {
+                var criteria = new ConnectionGetSecondaryConectionCriteria
+                {
+                    ConectionId = id
+                };
+
+                return _connectionRepository.GetByAlais(criteria);
             }
             catch (Exception ex)
             {

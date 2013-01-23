@@ -75,5 +75,25 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 throw ex;
             }
         }
+
+
+        public ConnectionString GetById(ICriteria criteria)
+        {
+            try
+            {
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    return db.QueryEntity<ConnectionString, DatabaseServer, Alias, ConnectionString, ConnectionString>(
+                        (c, d, a, c1) => { c.Server = d; c.Alias = a; c.PrimaryConnection = c1; return c; },
+                        "ServerId,AliasId,PrimaryConectionId",
+                        criteria.GetSpParams()
+                        );
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -1,0 +1,35 @@
+﻿@model List<ConnectionString>
+@{
+    Layout = null;    
+}
+<table class="grid">
+    <thead>
+        <tr>
+            <th class="first">
+                #
+            </th>
+            <th>
+                @ViewResource.Connection_String
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!ReferenceEquals(Model, null) && Model.Count() > 0)
+        {
+            int i = 0;
+            foreach (var item in Model)
+            {
+                string rowCss = i % 2 == 0 ? string.Empty : "class='alt'";
+		
+            <tr @Html.Raw(rowCss)>
+                <td class="align-center width-30">
+                    @(++i)
+                </td>
+                <td>
+                    @item.Connection
+                </td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -639,4 +639,43 @@
   <data name="UpSuccessMsg" xml:space="preserve">
     <value>{0} has been updated successfully. You will be redirected in &lt;span class='msec'&gt;{1}&lt;/span&gt; seconds.</value>
   </data>
+  <data name="Data_Source" xml:space="preserve">
+    <value>Data Source</value>
+  </data>
+  <data name="Free_Text" xml:space="preserve">
+    <value>Free Text</value>
+  </data>
+  <data name="Initial_Catalog" xml:space="preserve">
+    <value>Initial Catalog</value>
+  </data>
+  <data name="Integrated_Security" xml:space="preserve">
+    <value>Integrated Security</value>
+  </data>
+  <data name="User_ID" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Manage_Connection" xml:space="preserve">
+    <value>Manage Connection</value>
+  </data>
+  <data name="Conection" xml:space="preserve">
+    <value>Conection</value>
+  </data>
+  <data name="IsDefault" xml:space="preserve">
+    <value>Is Default</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Primary_Connection" xml:space="preserve">
+    <value>Primary Connection</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
 </root>

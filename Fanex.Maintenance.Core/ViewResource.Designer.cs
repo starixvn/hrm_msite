@@ -214,6 +214,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        public static string Backup {
+            get {
+                return ResourceManager.GetString("Backup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet Count.
         /// </summary>
         public static string Bet_Count {
@@ -273,6 +282,15 @@ namespace Fanex.Maintenance.Core {
         public static string ComputerIdle {
             get {
                 return ResourceManager.GetString("ComputerIdle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conection.
+        /// </summary>
+        public static string Conection {
+            get {
+                return ResourceManager.GetString("Conection", resourceCulture);
             }
         }
         
@@ -394,6 +412,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data Source.
+        /// </summary>
+        public static string Data_Source {
+            get {
+                return ResourceManager.GetString("Data_Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database Name.
         /// </summary>
         public static string Database_Name {
@@ -444,6 +471,15 @@ namespace Fanex.Maintenance.Core {
         public static string Date_Type {
             get {
                 return ResourceManager.GetString("Date_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        public static string Default {
+            get {
+                return ResourceManager.GetString("Default", resourceCulture);
             }
         }
         
@@ -574,6 +610,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Free Text.
+        /// </summary>
+        public static string Free_Text {
+            get {
+                return ResourceManager.GetString("Free_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SQL Server Agent service starts.
         /// </summary>
         public static string FreqAgentStart {
@@ -691,11 +736,29 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initial Catalog.
+        /// </summary>
+        public static string Initial_Catalog {
+            get {
+                return ResourceManager.GetString("Initial_Catalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} field must be at least {2} and maximum {1} characters long..
         /// </summary>
         public static string InputLengthValidationMsg {
             get {
                 return ResourceManager.GetString("InputLengthValidationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Integrated Security.
+        /// </summary>
+        public static string Integrated_Security {
+            get {
+                return ResourceManager.GetString("Integrated_Security", resourceCulture);
             }
         }
         
@@ -732,6 +795,15 @@ namespace Fanex.Maintenance.Core {
         public static string IsAuth {
             get {
                 return ResourceManager.GetString("IsAuth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Default.
+        /// </summary>
+        public static string IsDefault {
+            get {
+                return ResourceManager.GetString("IsDefault", resourceCulture);
             }
         }
         
@@ -925,6 +997,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Connection.
+        /// </summary>
+        public static string Manage_Connection {
+            get {
+                return ResourceManager.GetString("Manage_Connection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Master.
         /// </summary>
         public static string Master {
@@ -1042,6 +1123,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obsolete.
         /// </summary>
         public static string Obsolete {
@@ -1119,6 +1209,15 @@ namespace Fanex.Maintenance.Core {
         public static string Port {
             get {
                 return ResourceManager.GetString("Port", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Primary Connection.
+        /// </summary>
+        public static string Primary_Connection {
+            get {
+                return ResourceManager.GetString("Primary_Connection", resourceCulture);
             }
         }
         
@@ -1555,6 +1654,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User ID.
+        /// </summary>
+        public static string User_ID {
+            get {
+                return ResourceManager.GetString("User_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string Username {
@@ -1623,6 +1731,15 @@ namespace Fanex.Maintenance.Core {
         public static string WindowsEventLog {
             get {
                 return ResourceManager.GetString("WindowsEventLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

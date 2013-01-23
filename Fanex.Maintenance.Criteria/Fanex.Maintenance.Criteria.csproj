@@ -54,6 +54,10 @@
     <Compile Include="ConnectionString\Alias\AliasUpdateCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionGetByAliasCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionUpdateDefaultCriteria.cs" />
+    <Compile Include="ConnectionString\Connection\ConnectionInsertCriteria.cs" />
+    <Compile Include="ConnectionString\Connection\ConnectionUpdateCriteria.cs" />
+    <Compile Include="ConnectionString\Connection\ConnectionGetByIdCriteria.cs" />
+    <Compile Include="ConnectionString\Connection\ConnectionGetSecondaryConectionCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetAllCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteGetByAliasCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteGetAllCriteria.cs" />

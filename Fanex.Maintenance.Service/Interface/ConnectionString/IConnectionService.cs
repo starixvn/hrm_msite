@@ -14,6 +14,7 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     using System.Linq;
     using System.Text;
     using Fanex.ConnectionString.Domain;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -22,6 +23,12 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     {
         IEnumerable<ConnectionString> GetByAlias(int aliasId);
 
+        IEnumerable<ConnectionString> GetSecondaryConection(int id);
+
+        ConnectionString GetById(int id);
+
         bool UpdateDefaultConnection(int aliasId, int conectionId);
+
+        bool InsertOrUpdate(ICriteria criteria);
     }
 }

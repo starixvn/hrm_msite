@@ -37,16 +37,16 @@
     <Function Name="ConnectionString">
         <Setting Key="ConnectionString_DatabaseServer_GetAll" SpName="ConnectionString_DatabaseServer_GetAll" DbName="connectionstring" Plain="1" >
             <Mapping DataField="ModifierId" ObjectProperty="Id" />
-            <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="UserName" />
         </Setting>
         <Setting Key="ConnectionString_Sites_GetAll" SpName="ConnectionString_Sites_GetAll" DbName="connectionstring" Plain="1" >
             <Mapping DataField="ModifierId" ObjectProperty="Id" />
-            <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="UserName" />
         </Setting>
         <Setting Key="ConnectionString_Alias_GetAll" SpName="ConnectionString_Alias_GetAll" DbName="connectionstring" Plain="1"/>
         <Setting Key="ConnectionString_Sites_GetByAlias" SpName="ConnectionString_Sites_GetByAlias" DbName="connectionstring" Plain="1">
             <Mapping DataField="ModifierId" ObjectProperty="Id" />
-            <Mapping DataField="ModifierUsername" ObjectProperty="Username" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="UserName" />
         </Setting>
         <Setting Key="ConnectionString_Alias_Insert" SpName="ConnectionString_Alias_Insert" DbName="connectionstring" Plain="1"/>
         <Setting Key="ConnectionString_Alias_GetById" SpName="ConnectionString_Alias_GetById" DbName="connectionstring" Plain="1"/>
@@ -54,5 +54,20 @@
         <Setting Key="ConnectionString_ConnectionStrings_UpdateDefaultConnection" SpName="ConnectionString_ConnectionStrings_UpdateDefaultConnection" DbName="connectionstring" Plain="1"/>
         <Setting Key="ConnectionString_Alias_UpdateStatus" SpName="ConnectionString_Alias_UpdateStatus" DbName="connectionstring" Plain="1"/>
         <Setting Key="ConnectionString_Alias_Update" SpName="ConnectionString_Alias_Update" DbName="connectionstring" Plain="1"/>
+        <Setting Key="ConnectionString_ConnectionStrings_Insert" SpName="ConnectionString_ConnectionStrings_Insert" DbName="connectionstring" Plain="1"/>
+        <Setting Key="ConnectionString_ConnectionStrings_Update" SpName="ConnectionString_ConnectionStrings_Update" DbName="connectionstring" Plain="1"/>
+        <Setting Key="ConnectionString_ConnectionStrings_GetById" SpName="ConnectionString_ConnectionStrings_GetById" DbName="connectionstring" Plain="1" >
+            <Mapping DataField="ServerId" ObjectProperty="Id" />
+            <Mapping DataField="ServerName" ObjectProperty="Name" />
+            <Mapping DataField="AliasId" ObjectProperty="Id" />
+            <Mapping DataField="AliasName" ObjectProperty="Name" />
+            <Mapping DataField="PrimaryConectionId" ObjectProperty="Id" />
+        </Setting>
+        <Setting Key="ConnectionString_ConnectionStrings_GetSecondaryConnection" SpName="ConnectionString_ConnectionStrings_GetSecondaryConnection" DbName="connectionstring" Plain="1" >
+            <Mapping DataField="ServerId" ObjectProperty="Id" />
+            <Mapping DataField="ServerName" ObjectProperty="Name" />
+            <Mapping DataField="AliasId" ObjectProperty="Id" />
+            <Mapping DataField="AliasName" ObjectProperty="Name" />            
+        </Setting>
     </Function>
 </Functions>

@@ -23,6 +23,8 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
     {
         IEnumerable<ConnectionString> GetByAlais(ICriteria criteria);
 
+        ConnectionString GetById(ICriteria criteria);
+
         int InsertOrUpdate(ICriteria criteria);
     }
 }
