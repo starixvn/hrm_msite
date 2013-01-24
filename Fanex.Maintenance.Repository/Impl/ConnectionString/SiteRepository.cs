@@ -11,13 +11,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.ConnectionString.Domain;
-    using NAP.Framework.Data;
     using Fanex.Data;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
+    using Fanex.Maintenance.Repository.Interface.ConnectionString;
+    using NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -32,7 +30,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 {
                     return db.Query<Site, Users, Site>(
                         (s, u) => { s.Modifier = u; return s; },
-                        "ModifierId",
+                        "ModifierUserId",
                         criteria.GetSpParams());
                 }
             }
@@ -50,7 +48,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 {
                     return db.Query<SiteAlias, Site, Users, SiteAlias>(
                         (sa, s, u) => { sa.Site = s; s.Modifier = u; return sa; },
-                        "Id,ModifierId",
+                        "Id,ModifierUserId",
                         criteria.GetSpParams());
                 }
             }
@@ -66,10 +64,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             {
                 using (var db = new ObjectDb(criteria.GetSettingKey()))
                 {
-                    return db.QueryEntity<Site, Users, Site>(
-                        (s, u) => { s.Modifier = u; return s; },
-                        "ModifierId",
-                        criteria.GetSpParams());
+                    return db.QueryEntity<Site>(criteria.GetSpParams());
                 }
             }
             catch (Exception ex)
@@ -77,7 +72,6 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 throw ex;
             }
         }
-
 
         public int InsertOrUpdate(ICriteria criteria)
         {

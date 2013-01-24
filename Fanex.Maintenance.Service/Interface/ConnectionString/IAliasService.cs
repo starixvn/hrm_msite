@@ -23,6 +23,8 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
 
         IEnumerable<Alias> GetBySite(int siteId);
 
+        IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(int fromDbServerId, int toDbServerId);
+
         Alias Get(int aliasId);
 
         bool InsertOrUpdate(ICriteria criteria);

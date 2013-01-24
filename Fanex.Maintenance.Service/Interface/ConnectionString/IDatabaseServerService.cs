@@ -23,7 +23,7 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     /// </summary>
     public interface IDatabaseServerService
     {
-        IEnumerable<DatabaseServer> GetAll();
+        IEnumerable<DatabaseServer> GetAll();        
 
         IEnumerable<DatabaseServerSite> GetWithNumOfSite(string name = "");
 

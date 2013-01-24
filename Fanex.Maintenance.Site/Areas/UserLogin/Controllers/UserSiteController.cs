@@ -10,15 +10,13 @@
 namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using Fanex.Common;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Model;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Session;
-    using System.Diagnostics.CodeAnalysis;
 
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class UserSiteController : BaseController
@@ -29,7 +27,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         private ICurrentSession _currentSession;
         private IUserService _userService;
 
-        #endregion
+        #endregion members
 
         #region ctors
 
@@ -45,7 +43,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             _userService = _userService ?? new UserService();
         }
 
-        #endregion
+        #endregion ctors
 
         #region actions
 
@@ -80,6 +78,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                     Cryptography.CfsEnCrypt(time)));
         }
 
-        #endregion
+        #endregion actions
     }
 }

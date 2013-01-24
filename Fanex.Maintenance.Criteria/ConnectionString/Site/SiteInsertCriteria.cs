@@ -14,10 +14,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
     using System.Linq;
     using System.Text;
     using Fanex.NAP.Framework.Data;
+    using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class SiteInsertCriteria : CriteriaBase
     {
         public int SiteId { get; set; }

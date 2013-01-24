@@ -10,17 +10,13 @@
 namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class SiteUpdateStatusCriteria : CriteriaBase
     {
-        public int SiteId { get; set; }        
+        public int SiteId { get; set; }
 
         public bool IsActive { get; set; }
 

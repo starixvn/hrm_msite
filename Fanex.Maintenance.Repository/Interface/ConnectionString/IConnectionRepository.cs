@@ -9,19 +9,18 @@
 
 namespace Fanex.Maintenance.Repository.Interface.ConnectionString
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.ConnectionString.Domain;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public interface IConnectionRepository
     {
-        IEnumerable<ConnectionString> GetByAlais(ICriteria criteria);
+        IEnumerable<ConnectionString> GetSecondaryConection(ICriteria criteria);
+
+        IEnumerable<ConnectionStringConnection> GetByAlais(ICriteria criteria);
 
         ConnectionString GetById(ICriteria criteria);
 

@@ -10,16 +10,12 @@
 namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
+    using Fanex.NAP.Framework.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionUpdateCriteria : CriteriaBase
     {
         public int ConnectionId { get; set; }

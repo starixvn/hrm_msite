@@ -58,6 +58,8 @@
     <Compile Include="Domain\Schedule.cs" />
     <Compile Include="Domain\Step.cs" />
     <Compile Include="Model\ConnectionString\AliasConnectionString.cs" />
+    <Compile Include="Model\ConnectionString\ConnectionStringConnection.cs" />
+    <Compile Include="Model\ConnectionString\AliasConnectionStringConnection.cs" />
     <Compile Include="Model\ConnectionString\DatabaseServerSite.cs" />
     <Compile Include="Model\ConnectionString\SiteAlias.cs" />
     <Compile Include="Model\CPUInfo.cs" />

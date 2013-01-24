@@ -143,5 +143,26 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
             return null;
         }
+
+
+        public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(int fromDbServerId, int toDbServerId)
+        {
+            try
+            {
+                var criteria = new AliasGetSwitchConnectionCriteria
+                {
+                    FromDbServerId = fromDbServerId,
+                    ToDbServerId = toDbServerId
+                };
+
+                return _aliasRepository.GetSwitchConnection(criteria);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return null;
+        }
     }
 }

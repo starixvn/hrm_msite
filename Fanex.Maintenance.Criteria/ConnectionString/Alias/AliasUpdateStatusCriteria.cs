@@ -9,21 +9,16 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
-    using System;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
-    using System.ComponentModel.DataAnnotations;
-    using Fanex.Maintenance.Core;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasUpdateStatusCriteria : CriteriaBase
-    {        
+    {
         public int AliasId { get; set; }
 
         public bool IsActive { get; set; }
-        
+
         public override bool IsValid()
         {
             return true;

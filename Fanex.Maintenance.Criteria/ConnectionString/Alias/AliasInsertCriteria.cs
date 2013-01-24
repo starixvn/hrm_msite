@@ -10,17 +10,16 @@
 namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
     using System;
-    using System.Text;
-    using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Text;
     using Fanex.Maintenance.Core;
+    using Fanex.NAP.Framework.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasInsertCriteria : CriteriaBase
     {
-        private readonly string Format = "<Sites SiteId='{0}'/>";
+        private readonly string _formatXml = "<Sites SiteId='{0}'/>";
 
         public int AliasId { get; set; }
 
@@ -45,9 +44,10 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
                 {
                     foreach (var item in SiteId)
                     {
-                        xmlSite.Append(string.Format(Format, item.ToString()));
+                        xmlSite.Append(string.Format(_formatXml, item.ToString()));
                     }
                 }
+
                 return xmlSite.Append("</ROOT>").ToString();
             }
         }

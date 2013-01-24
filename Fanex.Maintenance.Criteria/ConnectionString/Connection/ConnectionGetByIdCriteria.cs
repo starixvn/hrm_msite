@@ -9,15 +9,10 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionGetByIdCriteria : CriteriaBase
     {
         public int ConectionId { get; set; }

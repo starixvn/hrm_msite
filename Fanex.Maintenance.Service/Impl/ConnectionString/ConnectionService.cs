@@ -11,18 +11,16 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Service.Interface.ConnectionString;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.ConnectionString.Domain;
+    using Fanex.Maintenance.Criteria.ConnectionString.Connection;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
-    using Fanex.Maintenance.Criteria.ConnectionString.Connection;
+    using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionService : IConnectionService
     {
         #region Member
@@ -45,7 +43,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #endregion
 
-        public IEnumerable<ConnectionString> GetByAlias(int aliasId)
+        public IEnumerable<ConnectionStringConnection> GetByAlias(int aliasId)
         {
             try
             {
@@ -122,7 +120,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     ConectionId = id
                 };
 
-                return _connectionRepository.GetByAlais(criteria);
+                return _connectionRepository.GetSecondaryConection(criteria);
             }
             catch (Exception ex)
             {

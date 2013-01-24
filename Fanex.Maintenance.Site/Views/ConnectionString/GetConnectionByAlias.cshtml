@@ -1,4 +1,4 @@
-﻿@model List<ConnectionString>
+﻿@model List<ConnectionStringConnection>
 @{
     Layout = null;
     var aliasId = ViewBag.AliasId;
@@ -24,17 +24,17 @@
 		
             <tr @Html.Raw(rowCss)>
                 <td class="align-center width-30">
-                    @if (item.IsDefault)
+                    @if (item.ConnectionString.IsDefault)
                     {
-                        <input type="radio" checked="checked" name="conection" cid="@item.Id" aid="@aliasId"/>
+                        <input type="radio" checked="checked" name="conection" cid="@item.ConnectionString.Id" aid="@aliasId"/>
                     }
                     else
                     {
-                        <input type="radio" name="conection" cid="@item.Id" aid="@aliasId"/>
+                        <input type="radio" name="conection" cid="@item.ConnectionString.Id" aid="@aliasId"/>
                     }
                 </td>
                 <td>
-                    @item.Connection
+                    @item.ConnectionString.Connection
                 </td>
             </tr>
             }

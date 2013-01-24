@@ -11,6 +11,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
@@ -21,7 +22,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
-    using System.Diagnostics.CodeAnalysis;
 
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SSOController : BaseController
@@ -33,7 +33,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
 
-        #endregion
+        #endregion members
 
         #region ctors
 
@@ -52,7 +52,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             _currentSession = currentSession ?? new CurrentSession();
         }
 
-        #endregion
+        #endregion ctors
 
         [AllowAnonymous]
         [HttpGet]
@@ -86,7 +86,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                 _userService.UserSSOCheckIn(ref criteria);
 
-                #endregion
+                #endregion do SSO check-in
 
                 if (criteria.OnUserId != 0)
                 {
@@ -111,7 +111,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                     CreateAuthInfo(user);
 
-                    #endregion
+                    #endregion saves user session & auth info
 
                     return Redirect(FormsAuthentication.DefaultUrl);
                 }
@@ -151,6 +151,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             Response.Cookies.Add(authCookie);
         }
 
-        #endregion
+        #endregion utilities
     }
 }

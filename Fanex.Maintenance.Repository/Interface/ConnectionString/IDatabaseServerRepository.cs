@@ -24,9 +24,9 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
     {
         IEnumerable<DatabaseServer> GetAll(ICriteria criteria);
 
-        DatabaseServer Get(ICriteria criteria);
+        IEnumerable<DatabaseServerSite> GetWithNumOfSite(ICriteria criteria);        
 
-        IEnumerable<DatabaseServerSite> GetWithNumOfSite(ICriteria criteria);
+        DatabaseServer Get(ICriteria criteria);
 
         int InsertOrUpdate(ICriteria criteria);
     }

@@ -11,13 +11,14 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Repository.Interface.ConnectionString;
-    using Fanex.ConnectionString.Domain;
-    using NAP.Framework.Data;
-    using Fanex.Data;
+    using System.Data;
     using Entity.Model.ConnectionString;
+    using Fanex.Common.Extensions;
+    using Fanex.ConnectionString.Domain;
+    using Fanex.Data;
+    using Fanex.Maintenance.Repository.Interface.ConnectionString;
+    using NAP.Framework.Data;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -40,7 +41,6 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 throw ex;
             }
         }
-
 
         public IEnumerable<DatabaseServerSite> GetWithNumOfSite(ICriteria criteria)
         {
@@ -78,8 +78,6 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 throw ex;
             }
         }
-
-
 
         public DatabaseServer Get(ICriteria criteria)
         {

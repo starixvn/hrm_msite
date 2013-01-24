@@ -18,6 +18,8 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
     {
         IEnumerable<AliasConnectionString> GetAll(ICriteria criteria);
 
+        IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(ICriteria criteria);
+
         IEnumerable<Alias> GetBySite(ICriteria criteria);
 
         Alias GetById(ICriteria criteria);

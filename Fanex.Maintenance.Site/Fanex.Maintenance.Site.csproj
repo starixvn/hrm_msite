@@ -199,6 +199,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App_Data\ConnectionStringSpName.xml" />
     <Content Include="App_Data\mSiteSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -1674,6 +1675,7 @@
     <Content Include="Views\ConnectionString\CreateDbServer.cshtml" />
     <Content Include="Views\ConnectionString\EditDbServer.cshtml" />
     <Content Include="Views\ConnectionString\GetSiteByDbServer.cshtml" />
+    <Content Include="Views\ConnectionString\ChangeConnection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

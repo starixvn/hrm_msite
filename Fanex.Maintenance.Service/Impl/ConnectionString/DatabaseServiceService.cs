@@ -11,19 +11,17 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Service.Interface.ConnectionString;
+    using System.Diagnostics.CodeAnalysis;
+    using Entity.Model.ConnectionString;
     using Fanex.ConnectionString.Domain;
+    using Fanex.Logging;
     using Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
-    using Entity.Model.ConnectionString;
+    using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Logging;
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class DatabaseServiceService : IDatabaseServerService
     {
         #region Member
@@ -62,7 +60,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-
         public IEnumerable<DatabaseServerSite> GetWithNumOfSite(string name = "")
         {
             try
@@ -98,7 +95,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return false;
         }
 
-
         public bool UpdateStatus(int dbServerId, bool isActive)
         {
             try
@@ -106,9 +102,9 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                 var criteria = new DatabaseServerUpdateStatusCriteria
                 {
                     DbServerId = dbServerId,
-                    IsActive = isActive                    
+                    IsActive = isActive
                 };
-                
+
                 int check = _databaseServerRepository.InsertOrUpdate(criteria);
 
                 return check > 0;
@@ -120,7 +116,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
             return false;
         }
-
 
         public DatabaseServer GetById(int id)
         {

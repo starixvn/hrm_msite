@@ -39,7 +39,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         private ICurrentSession _currentSession;
         private IMaintainanceService _maintenanceService;
 
-        #endregion
+        #endregion members
 
         #region ctors
 
@@ -64,7 +64,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             _maintenanceService = maintenanceService ?? new MaintainanceService();
         }
 
-        #endregion
+        #endregion ctors
 
         #region helpers
 
@@ -106,9 +106,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             Response.Cookies.Add(authCookie);
         }
 
-        #endregion
+        #endregion helpers
 
         #region sign in
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -146,6 +147,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                 #region allows user login
 
                                 #region check-in user
+
                                 var criteria = new UserCheckInUserCriteria
                                 {
                                     UserId = user.Id,
@@ -160,9 +162,11 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                 };
 
                                 _userService.UserCheckIn(ref criteria);
-                                #endregion
+
+                                #endregion check-in user
 
                                 #region saves user session
+
                                 _currentSession.Level = _userService.GetUserSiteLevel(user.Id, this.SiteId);
                                 _currentSession.UserId = user.Id;
                                 _currentSession.Username = username;
@@ -176,13 +180,16 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                 }
 
                                 CreateAuthInfo(user);
-                                #endregion
+
+                                #endregion saves user session
 
                                 #region redirects user
+
                                 // if the user login directly, not through NAP Hub
                                 if (this.IsSiteLogin == 1)
                                 {
                                     #region checks if logging-in user is active on this site
+
                                     bool userIsActiveOnThisSite = false;
 
                                     foreach (var siteLevel in siteLevelList)
@@ -192,7 +199,8 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                             userIsActiveOnThisSite = true;
                                         }
                                     }
-                                    #endregion
+
+                                    #endregion checks if logging-in user is active on this site
 
                                     if (userIsActiveOnThisSite)
                                     {
@@ -225,12 +233,12 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                                     return RedirectToAction("Forward", "UserSite", new { id = listSiteUrl.First().SiteUrlId });
 
-                                    #endregion
+                                    #endregion user has acces to one site
                                 }
 
-                                #endregion
+                                #endregion redirects user
 
-                                #endregion
+                                #endregion allows user login
                             }
                             else
                             {
@@ -272,7 +280,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             return View();
         }
 
-        #endregion
+        #endregion sign in
 
         #region sign out
 
@@ -294,7 +302,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             _currentSession.ClearAll();
         }
 
-        #endregion
+        #endregion sign out
 
         #region re check in
 
@@ -326,6 +334,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             return Json(criteria.IsKickedOut ? "1" : "0");
         }
 
-        #endregion
+        #endregion re check in
     }
 }

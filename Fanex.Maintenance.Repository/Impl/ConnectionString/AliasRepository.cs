@@ -11,16 +11,16 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Repository.Interface.ConnectionString;
-    using Fanex.ConnectionString.Domain;
-    using Fanex.Maintenance.Entity.Model.ConnectionString;
-    using Fanex.NAP.Framework.Data;
-    using Fanex.Data;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Common.Extensions;
+    using Fanex.ConnectionString.Domain;
+    using Fanex.Data;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
+    using Fanex.Maintenance.Repository.Interface.ConnectionString;
+    using Fanex.NAP.Framework.Data;
 
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasRepository : BaseRepository<Alias>, IAliasRepository
     {
         public IEnumerable<AliasConnectionString> GetAll(ICriteria criteria)
@@ -33,22 +33,23 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                            {
                                Alias = new Alias
                                {
-                                   Id = reader.ToInt("Id"),
+                                   Id = reader.ToInt("AliasId"),
                                    Name = reader.ToString("Name"),
                                    Description = reader.ToString("Description"),
                                    IsActive = reader.ToBool("IsActive"),
-                                   Modifier = reader.IsDBNull("Modifier") ? new Users
+                                   Modifier = !reader.IsDBNull("ModifierUserId") ? new Users
                                    {
-                                       Id = reader.ToInt("Modifier"),
+                                       Id = reader.ToInt("ModifierUserId"),
                                        Name = reader.ToString("ModifierUsername")
                                    } : new Users(),
-                                   ModifiedDate = reader.IsDBNull("ModifiedDate") ? reader.ToDateTime("ModifiedDate") : DateTime.Now
+                                   ModifiedDate = !reader.IsDBNull("ModifiedDate") ? reader.ToDateTime("ModifiedDate") : DateTime.Now
                                },
                                ConnectionString = new ConnectionString
                                {
+                                   Id = reader.ToInt("ConnectionStringId"),
                                    Alias = new Alias
                                    {
-                                       Id = reader.ToInt("Id"),
+                                       Id = reader.ToInt("AliasId"),
                                        Name = reader.ToString("Name")
                                    },
                                    InitialCatalog = reader.ToString("InitialCatalog"),
@@ -58,6 +59,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                                    FreeText = reader.ToString("FreeText"),
                                    Server = new DatabaseServer
                                    {
+                                       Id = reader.ToInt("DbServerId"),
                                        ServerIP = reader.ToString("ServerIP")
                                    }
                                },
@@ -104,12 +106,73 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
-
         public IEnumerable<Alias> GetBySite(ICriteria criteria)
         {
             try
             {
                 return Fetch<Alias>(criteria);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(ICriteria criteria)
+        {
+            try
+            {
+                Func<IDataReader, AliasConnectionStringConnection> objMapFunc = (reader) =>
+                {
+                    return new AliasConnectionStringConnection
+                    {
+                        Alias = new Alias
+                        {
+                            Id = reader.ToInt("AliasId"),
+                            Name = reader.ToString("Name")
+                        },
+                        FromConnectionString = new ConnectionString
+                        {
+                            Id = reader.ToInt("ConnectionStringId"),
+                            Alias = new Alias
+                            {
+                                Id = reader.ToInt("AliasId"),
+                                Name = reader.ToString("Name")
+                            },
+                            InitialCatalog = reader.ToString("InitialCatalog"),
+                            IntegratedSecurity = reader.ToBool("IntegratedSecurity"),
+                            UserID = reader.ToString("UserId"),
+                            Password = reader.ToString("Password"),
+                            FreeText = reader.ToString("FreeText"),
+                            Server = new DatabaseServer
+                            {
+                                Id = reader.ToInt("DbServerId"),
+                                ServerIP = reader.ToString("ServerIP")
+                            }
+                        },
+                        ToConnectionString = new ConnectionString
+                        {
+                            Id = reader.ToInt("ToConnectionStringId"),
+                            Alias = new Alias
+                            {
+                                Id = reader.ToInt("AliasId"),
+                                Name = reader.ToString("Name")
+                            },
+                            InitialCatalog = reader.ToString("ToInitialCatalog"),
+                            IntegratedSecurity = reader.ToBool("ToIntegratedSecurity"),
+                            UserID = reader.ToString("ToUserId"),
+                            Password = reader.ToString("ToPassword"),
+                            FreeText = reader.ToString("ToFreeText"),
+                            Server = new DatabaseServer
+                            {
+                                Id = reader.ToInt("ToDbServerId"),
+                                ServerIP = reader.ToString("ToServerIP")
+                            }
+                        }
+                    };
+                };
+
+                return this.Fetch<AliasConnectionStringConnection>(criteria, objMapFunc);
             }
             catch (Exception ex)
             {

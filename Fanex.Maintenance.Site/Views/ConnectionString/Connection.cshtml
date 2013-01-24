@@ -1,4 +1,4 @@
-﻿@model List<ConnectionString>
+﻿@model List<ConnectionStringConnection>
 @{
     ViewBag.Title = ViewResource.Manage_Connection;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -68,27 +68,27 @@
                     @i
                 </td>
                 <td>
-                    @item.Server.ServerIP
+                    @item.ConnectionString.Server.ServerIP
                 </td>
                 <td>
-                    @item.InitialCatalog
+                    @item.ConnectionString.InitialCatalog
                 </td>
                 <td class="align-center">
-                    @item.IntegratedSecurity.ToString()
+                    @item.ConnectionString.IntegratedSecurity.ToString()
                 </td>
                 <td>
-                    @item.UserID
+                    @item.ConnectionString.UserID
                 </td>
                 <td>
-                    @item.Password
+                    @item.ConnectionString.Password
                 </td>
                 <td class="align-center">
-                    @item.FreeText
+                    @item.ConnectionString.FreeText
                 </td>
                 <td class="align-center">
-                    @if (item.Modifier != null)
+                    @if (item.ConnectionString.Modifier != null)
                     {
-                        <span>@item.Modifier.Name</span>
+                        <span>@item.ConnectionString.Modifier.Name</span>
                     }
                     else
                     {
@@ -96,26 +96,26 @@
                     }
                 </td>
                 <td>
-                    @item.ModifiedDate.ToFullDateString()
+                    @item.ConnectionString.ModifiedDate.ToFullDateString()
                 </td>
                 <td class="align-center">
-                    @if (item.IsDefault)
+                    @if (item.ConnectionString.IsDefault)
                     {
-                        <input type="radio" name="connection-default" checked="checked" cid="@item.Id"/>
+                        <input type="radio" name="connection-default" checked="checked" cid="@item.ConnectionString.Id"/>
                     }
                     else
                     { 
-                        <input type="radio" name="connection-default" cid="@item.Id"/>
+                        <input type="radio" name="connection-default" cid="@item.ConnectionString.Id"/>
                     }
                 </td>
                 <td class="align-center">
                     @if (item.NumOfConection > 0)
                     { 
-                        <a href="#" cid="@item.Id" class="second-conection">View</a>
+                        <a href="#" cid="@item.ConnectionString.Id" class="second-conection">View</a>
                     }
                 </td>
                 <td class="align-center">
-                    @Html.ActionLink("Edit", "EditConnection", new { id = item.Id })
+                    @Html.ActionLink("Edit", "EditConnection", new { id = item.ConnectionString.Id })
                 </td>
             </tr>
             }

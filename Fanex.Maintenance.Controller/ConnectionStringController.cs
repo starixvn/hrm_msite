@@ -218,8 +218,8 @@ namespace Fanex.Maintenance.Controller
             var listConnection = _connectionService.GetByAlias(id);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
-                Value = c.Id.ToString(),
-                Text = c.Connection
+                Value = c.ConnectionString.Id.ToString(),
+                Text = c.ConnectionString.Connection
             }).ToList();
 
             return View(new ConnectionInsertCriteria
@@ -245,8 +245,8 @@ namespace Fanex.Maintenance.Controller
             var listConnection = _connectionService.GetByAlias(model.AliasId);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
-                Value = c.Id.ToString(),
-                Text = c.Connection
+                Value = c.ConnectionString.Id.ToString(),
+                Text = c.ConnectionString.Connection
             }).ToList();
 
             model.Creator = CurrentSession.UserId;
@@ -277,9 +277,9 @@ namespace Fanex.Maintenance.Controller
             var listConnection = _connectionService.GetByAlias(connection.Alias.Id);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
-                Value = c.Id.ToString(),
-                Text = c.Connection,
-                Selected = connection.PrimaryConnection != null ? c.Id == connection.PrimaryConnection.Id : false
+                Value = c.ConnectionString.Id.ToString(),
+                Text = c.ConnectionString.Connection,
+                Selected = connection.PrimaryConnection != null ? c.ConnectionString.Id == connection.PrimaryConnection.Id : false
             }).ToList();
 
             var model = new ConnectionUpdateCriteria
@@ -315,9 +315,9 @@ namespace Fanex.Maintenance.Controller
             var listConnection = _connectionService.GetByAlias(connection.Alias.Id);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
-                Value = c.Id.ToString(),
-                Text = c.Connection,
-                Selected = connection.PrimaryConnection != null ? c.Id == connection.PrimaryConnection.Id : false
+                Value = c.ConnectionString.Id.ToString(),
+                Text = c.ConnectionString.Connection,
+                Selected = connection.PrimaryConnection != null ? c.ConnectionString.Id == connection.PrimaryConnection.Id : false
             }).ToList();
 
             model.Modifier = CurrentSession.UserId;
@@ -499,6 +499,38 @@ namespace Fanex.Maintenance.Controller
 
         #endregion
 
+        #region Quick change connection from db server to other db server
+
+        [HttpGet]
+        public ActionResult ChangeConnection()
+        {
+            var listDatabaseServer = _databaseServerService.GetAll();
+            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
+            {
+                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
+                Value = d.Id.ToString()
+            }).ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangeConnection(AliasGetSwitchConnectionCriteria model)
+        {
+            var listDatabaseServer = _databaseServerService.GetAll();
+            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
+            {
+                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
+                Value = d.Id.ToString()
+            }).ToList();
+
+            var list = _aliasService.GetSwitchConnection(model.FromDbServerId, model.ToDbServerId);
+            ViewBag.ListConnection = list;
+            return View(model);
+        }
+
+        #endregion
+
         #region Ajax
 
         [HttpGet]
@@ -596,7 +628,7 @@ namespace Fanex.Maintenance.Controller
         public ActionResult UpdateStatusDbServer(int dbServerId, bool isActive)
         {
             if (Request.IsAjaxRequest())
-            {                
+            {
                 var check = _databaseServerService.UpdateStatus(dbServerId, isActive);
 
                 return Json(check.ToString().ToLower());

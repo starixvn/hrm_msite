@@ -115,11 +115,10 @@ namespace Fanex.Maintenance.Repository.Impl
             return listObject;
         }
 
-
         public virtual IEnumerable<S> Fetch<S>(ICriteria criteria, Func<IDataReader, S> mapObjectFunction) where S : class
         {
             IList<S> listObject = new List<S>();
-            
+
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 using (var reader = db.ExecuteReader(criteria.GetSpParams()))

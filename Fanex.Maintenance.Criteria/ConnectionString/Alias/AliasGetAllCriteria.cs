@@ -9,13 +9,12 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
-    using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
+    using Fanex.NAP.Framework.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasGetAllCriteria : CriteriaBase
     {
         [Display(Name = "Database_Server", ResourceType = typeof(ViewResource))]
