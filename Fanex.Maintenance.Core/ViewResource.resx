@@ -681,4 +681,10 @@
   <data name="Manage_Site" xml:space="preserve">
     <value>Manage Site</value>
   </data>
+  <data name="Server_IP" xml:space="preserve">
+    <value>Server IP</value>
+  </data>
+  <data name="Manage_Server" xml:space="preserve">
+    <value>Manage Database Server</value>
+  </data>
 </root>

@@ -164,5 +164,25 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
             return false;
         }
+
+
+        public IEnumerable<Site> GetByDbServer(int dbServerId)
+        {
+            try
+            {
+                var criteria = new SiteGetByDbServerCriteria
+                {
+                    DbServerId = dbServerId
+                };
+
+                return _siteRepository.Fetch(criteria);
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.Log.Error(ex.Message, ex);
+            }
+
+            return null;
+        }
     }
 }

@@ -1006,6 +1006,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Database Server.
+        /// </summary>
+        public static string Manage_Server {
+            get {
+                return ResourceManager.GetString("Manage_Server", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage Site.
         /// </summary>
         public static string Manage_Site {
@@ -1407,6 +1416,15 @@ namespace Fanex.Maintenance.Core {
         public static string Server {
             get {
                 return ResourceManager.GetString("Server", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server IP.
+        /// </summary>
+        public static string Server_IP {
+            get {
+                return ResourceManager.GetString("Server_IP", resourceCulture);
             }
         }
         

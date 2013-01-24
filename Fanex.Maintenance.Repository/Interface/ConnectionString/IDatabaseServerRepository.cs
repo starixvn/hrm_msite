@@ -15,6 +15,7 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
     using System.Text;
     using Fanex.ConnectionString.Domain;
     using Fanex.NAP.Framework.Data;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
 
     /// <summary>
     /// TODO: Update summary.
@@ -22,5 +23,11 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
     public interface IDatabaseServerRepository
     {
         IEnumerable<DatabaseServer> GetAll(ICriteria criteria);
+
+        DatabaseServer Get(ICriteria criteria);
+
+        IEnumerable<DatabaseServerSite> GetWithNumOfSite(ICriteria criteria);
+
+        int InsertOrUpdate(ICriteria criteria);
     }
 }

@@ -14,6 +14,8 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     using System.Linq;
     using System.Text;
     using Fanex.ConnectionString.Domain;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
+    using Fanex.NAP.Framework.Data;
 
 
     /// <summary>
@@ -22,5 +24,13 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     public interface IDatabaseServerService
     {
         IEnumerable<DatabaseServer> GetAll();
+
+        IEnumerable<DatabaseServerSite> GetWithNumOfSite(string name = "");
+
+        DatabaseServer GetById(int id);
+
+        bool InsertOrUpdate(ICriteria criteria);
+
+        bool UpdateStatus(int dbServerId, bool isActive);
     }
 }

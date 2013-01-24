@@ -28,6 +28,8 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
 
         IEnumerable<Site> GetByAlias(int aliasId);
 
+        IEnumerable<Site> GetByDbServer(int dbServerId);
+
         Site GetById(int id);
 
         bool InsertOrUpdate(ICriteria criteria);

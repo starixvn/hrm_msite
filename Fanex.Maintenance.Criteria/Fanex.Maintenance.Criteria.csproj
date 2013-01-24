@@ -59,7 +59,12 @@
     <Compile Include="ConnectionString\Connection\ConnectionUpdateCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionGetByIdCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionGetSecondaryConectionCriteria.cs" />
+    <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetByIdCriteria.cs" />
+    <Compile Include="ConnectionString\DatabaseServer\DatabaseServerUpdateStatusCriteria.cs" />
+    <Compile Include="ConnectionString\DatabaseServer\DatabaseServerUpdateCriteria.cs" />
+    <Compile Include="ConnectionString\DatabaseServer\DatabaseServerInsertCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetAllCriteria.cs" />
+    <Compile Include="ConnectionString\Site\SiteGetByDbServerCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteUpdateStatusCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteUpdateCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteInsertCriteria.cs" />

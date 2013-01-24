@@ -20,6 +20,8 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
     /// </summary>
     public class DatabaseServerGetAllCriteria : CriteriaBase
     {
+        public string Name { get; set; }
+
         public override bool IsValid()
         {
             return true;

@@ -9,16 +9,17 @@
 
 namespace Fanex.Maintenance.Controller
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.ConnectionString.Domain;
+    using Fanex.Maintenance.Criteria.ConnectionString.Alias;
+    using Fanex.Maintenance.Criteria.ConnectionString.Connection;
+    using Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer;
+    using Fanex.Maintenance.Criteria.ConnectionString.Site;
     using Fanex.Maintenance.Service.Impl.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
-    using Fanex.Maintenance.Criteria.ConnectionString.Alias;
-    using System.Collections.Generic;
-    using Fanex.ConnectionString.Domain;
-    using System;
-    using Fanex.Maintenance.Criteria.ConnectionString.Connection;
-    using Fanex.Maintenance.Criteria.ConnectionString.Site;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -422,6 +423,82 @@ namespace Fanex.Maintenance.Controller
 
         #endregion
 
+        #region DB Server
+
+        #region Manage
+
+        [HttpGet]
+        public ActionResult DatabaseServer()
+        {
+            var listDbServer = _databaseServerService.GetWithNumOfSite();
+            ViewBag.ListDbServer = listDbServer;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DatabaseServer(DatabaseServerGetAllCriteria model)
+        {
+            var listDbServer = _databaseServerService.GetWithNumOfSite(model.Name);
+            ViewBag.ListDbServer = listDbServer;
+
+            return View();
+        }
+
+        #endregion
+
+        #region Create
+
+        [HttpGet]
+        public ActionResult CreateDbServer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateDbServer(DatabaseServerInsertCriteria model)
+        {
+            model.Creator = CurrentSession.UserId;
+            model.CreatedDate = DateTime.Now;
+
+            ViewBag.Success = _databaseServerService.InsertOrUpdate(model);
+
+            return View(model);
+        }
+        #endregion
+
+        #region Edit
+
+        [HttpGet]
+        public ActionResult EditDbServer(int id)
+        {
+            var dbServer = _databaseServerService.GetById(id);
+
+            var model = new DatabaseServerUpdateCriteria
+            {
+                DbServerId = dbServer.Id,
+                Description = dbServer.Description,
+                IsActive = dbServer.IsActive,
+                Name = dbServer.Name,
+                ServerIp = dbServer.ServerIP
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditDbServer(DatabaseServerUpdateCriteria model)
+        {
+            model.Modifier = CurrentSession.UserId;
+            model.ModifiedDate = DateTime.Now;
+
+            ViewBag.Success = _databaseServerService.InsertOrUpdate(model);
+            return View(model);
+        }
+        #endregion
+
+        #endregion
+
         #region Ajax
 
         [HttpGet]
@@ -514,6 +591,33 @@ namespace Fanex.Maintenance.Controller
 
             return Json(null);
         }
+
+        [HttpPost]
+        public ActionResult UpdateStatusDbServer(int dbServerId, bool isActive)
+        {
+            if (Request.IsAjaxRequest())
+            {                
+                var check = _databaseServerService.UpdateStatus(dbServerId, isActive);
+
+                return Json(check.ToString().ToLower());
+            }
+
+            return Json(null);
+        }
+
+        [HttpGet]
+        public ActionResult GetSiteByDbServer(int id)
+        {
+            var listSite = new List<Site>();
+
+            if (Request.IsAjaxRequest())
+            {
+                listSite = _siteService.GetByDbServer(id).ToList();
+            }
+
+            return View(listSite);
+        }
+
         #endregion
     }
 }

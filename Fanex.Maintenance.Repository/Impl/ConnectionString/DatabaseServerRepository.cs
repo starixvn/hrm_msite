@@ -17,7 +17,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.ConnectionString.Domain;
     using NAP.Framework.Data;
     using Fanex.Data;
-
+    using Entity.Model.ConnectionString;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -30,6 +30,64 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 using (var db = new ObjectDb(criteria.GetSettingKey()))
                 {
                     return db.Query<DatabaseServer, Users, DatabaseServer>(
+                        (d, u) => { d.Modifier = u; return d; },
+                        "ModifierId",
+                        criteria.GetSpParams());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public IEnumerable<DatabaseServerSite> GetWithNumOfSite(ICriteria criteria)
+        {
+            try
+            {
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    return db.Query<DatabaseServerSite, DatabaseServer, Users, DatabaseServerSite>(
+                        (ds, s, u) => { ds.DatabaseServer = s; s.Modifier = u; return ds; },
+                        "Id,ModifierId",
+                        criteria.GetSpParams());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int InsertOrUpdate(ICriteria criteria)
+        {
+            try
+            {
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    var hsParam = criteria.GetSpParams();
+
+                    db.ExecuteNonQuery(hsParam);
+
+                    return (int)hsParam["dbserverid"];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
+        public DatabaseServer Get(ICriteria criteria)
+        {
+            try
+            {
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    return db.QueryEntity<DatabaseServer, Users, DatabaseServer>(
                         (d, u) => { d.Modifier = u; return d; },
                         "ModifierId",
                         criteria.GetSpParams());
