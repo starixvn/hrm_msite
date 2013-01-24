@@ -46,6 +46,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                         {
                             ServerIP = reader.ToString("ServerIP")
                         },
+                        NumOfConection = !reader.IsDBNull("NumOfConection") ? reader.ToInt("NumOfConection") : 0,
                         IsDefault = reader.ToBool("IsDefault")
                     };
                 };

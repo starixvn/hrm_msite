@@ -15,12 +15,19 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
     using System.Text;
     using Fanex.ConnectionString.Domain;
     using Fanex.NAP.Framework.Data;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface ISiteRepository
     {
-        IEnumerable<Site> Fetch(ICriteria criteria);      
+        IEnumerable<Site> Fetch(ICriteria criteria);
+
+        Site Get(ICriteria criteria);
+
+        IEnumerable<SiteAlias> GetSiteAlias(ICriteria criteria);
+
+        int InsertOrUpdate(ICriteria criteria);
     }
 }

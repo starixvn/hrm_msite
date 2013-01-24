@@ -18,7 +18,9 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Criteria.ConnectionString.Site;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
-
+    using Entity.Model.ConnectionString;
+    using Fanex.NAP.Framework.Data;
+    using Fanex.Logging;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -44,11 +46,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #endregion
 
-        public IEnumerable<Site> GetAll()
+        public IEnumerable<Site> GetAll(string name = "", int? dbServerId = null)
         {
             try
             {
-                var criteria = new SiteGetAllCriteria();
+                var criteria = new SiteGetAllCriteria
+                {
+                    Name = name,
+                    DbServerId = dbServerId
+                };
 
                 return _siteRepository.Fetch(criteria);
             }
@@ -77,6 +83,86 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
 
             return null;
+        }
+
+        public IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? dbServerId = null)
+        {
+            try
+            {
+                var criteria = new SiteGetAllCriteria
+                {
+                    Name = name,
+                    DbServerId = dbServerId
+                };
+
+                return _siteRepository.GetSiteAlias(criteria);
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.Log.Error(ex.Message, ex);
+            }
+
+            return null;
+        }
+
+
+        public Site GetById(int id)
+        {
+            try
+            {
+                var criteria = new SiteGetByIdCriteria
+                {
+                    SiteId = id
+                };
+
+                return _siteRepository.Get(criteria);
+            }
+            catch (Exception ex)
+            {
+                Logging.Logger.Log.Error(ex.Message, ex);
+            }
+
+            return null;
+        }
+
+
+        public bool InsertOrUpdate(ICriteria criteria)
+        {
+            try
+            {
+                int check = _siteRepository.InsertOrUpdate(criteria);
+
+                return check > 0;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return false;
+        }
+
+
+        public bool UpdateStatus(int siteId, bool isActive)
+        {
+            try
+            {
+                var criteria = new SiteUpdateStatusCriteria
+                {
+                    SiteId = siteId,
+                    IsActive = isActive
+                };
+
+                int check = _siteRepository.InsertOrUpdate(criteria);
+
+                return check > 0;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return false;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.ConnectionString.Domain;
     using NAP.Framework.Data;
     using Fanex.Data;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
 
     /// <summary>
     /// TODO: Update summary.
@@ -39,6 +40,62 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             {
                 throw ex;
             }
-        }        
+        }
+
+        public IEnumerable<SiteAlias> GetSiteAlias(ICriteria criteria)
+        {
+            try
+            {
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    return db.Query<SiteAlias, Site, Users, SiteAlias>(
+                        (sa, s, u) => { sa.Site = s; s.Modifier = u; return sa; },
+                        "Id,ModifierId",
+                        criteria.GetSpParams());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Site Get(ICriteria criteria)
+        {
+            try
+            {
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    return db.QueryEntity<Site, Users, Site>(
+                        (s, u) => { s.Modifier = u; return s; },
+                        "ModifierId",
+                        criteria.GetSpParams());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public int InsertOrUpdate(ICriteria criteria)
+        {
+            try
+            {
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    var hsParam = criteria.GetSpParams();
+
+                    db.ExecuteNonQuery(hsParam);
+
+                    return (int)hsParam["siteid"];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

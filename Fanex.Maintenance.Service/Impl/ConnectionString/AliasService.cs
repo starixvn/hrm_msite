@@ -123,5 +123,25 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
             return false;
         }
+
+
+        public IEnumerable<Alias> GetBySite(int siteId)
+        {
+            try
+            {
+                var criteria = new AliasGetBySiteCriteria
+                {
+                    SiteId = siteId
+                };
+
+                return _aliasRepository.GetBySite(criteria);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return null;
+        }
     }
 }

@@ -109,7 +109,10 @@
                     }
                 </td>
                 <td class="align-center">
-                    <a href="#" cid="@item.Id" class="second-conection">View</a>
+                    @if (item.NumOfConection > 0)
+                    { 
+                        <a href="#" cid="@item.Id" class="second-conection">View</a>
+                    }
                 </td>
                 <td class="align-center">
                     @Html.ActionLink("Edit", "EditConnection", new { id = item.Id })

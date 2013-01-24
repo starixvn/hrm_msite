@@ -21,6 +21,8 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     {
         IEnumerable<AliasConnectionString> GetAll(string alias = "", int? dbServerId = null, int? siteId = null);
 
+        IEnumerable<Alias> GetBySite(int siteId);
+
         Alias Get(int aliasId);
 
         bool InsertOrUpdate(ICriteria criteria);

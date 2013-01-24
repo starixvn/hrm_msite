@@ -220,6 +220,7 @@
     <Content Include="images\sprite_v.png" />
     <Content Include="scripts\Connection\Alias.js" />
     <Content Include="scripts\Connection\Connection.js" />
+    <Content Include="scripts\Connection\Site.js" />
     <Content Include="scripts\Connection\CreateAlias.js" />
     <Content Include="scripts\Job\ServerDetail.js" />
     <Content Include="scripts\Job\ServerManagement.js" />
@@ -1664,6 +1665,10 @@
     <Content Include="Views\ConnectionString\CreateConnection.cshtml" />
     <Content Include="Views\ConnectionString\EditConnection.cshtml" />
     <Content Include="Views\ConnectionString\GetSecondaryConection.cshtml" />
+    <Content Include="Views\ConnectionString\Site.cshtml" />
+    <Content Include="Views\ConnectionString\CreateSite.cshtml" />
+    <Content Include="Views\ConnectionString\EditSite.cshtml" />
+    <Content Include="Views\ConnectionString\GetAliasBySite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

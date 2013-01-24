@@ -14,15 +14,24 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     using System.Linq;
     using System.Text;
     using Fanex.ConnectionString.Domain;
-
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface ISiteService
     {
-        IEnumerable<Site> GetAll();
+        IEnumerable<Site> GetAll(string name = "", int? dbServerId = null);
+
+        IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? dbServerId = null);
 
         IEnumerable<Site> GetByAlias(int aliasId);
+
+        Site GetById(int id);
+
+        bool InsertOrUpdate(ICriteria criteria);
+
+        bool UpdateStatus(int siteId, bool isActive);
     }
 }

@@ -18,7 +18,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.ConnectionString.Domain;
     using System;
     using Fanex.Maintenance.Criteria.ConnectionString.Connection;
-
+    using Fanex.Maintenance.Criteria.ConnectionString.Site;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -330,6 +330,98 @@ namespace Fanex.Maintenance.Controller
 
         #endregion
 
+        #region Site
+
+        #region Mange
+
+        [HttpGet]
+        public ActionResult Site()
+        {
+            var listSite = _siteService.GetSiteWithNumOfAlias();
+
+            var listDatabaseServer = _databaseServerService.GetAll();
+
+            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
+            {
+                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
+                Value = d.Id.ToString()
+            }).ToList();
+
+            ViewBag.ListSite = listSite;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Site(SiteGetAllCriteria model)
+        {
+            var listSite = _siteService.GetSiteWithNumOfAlias(model.Name, model.DbServerId);
+
+            var listDatabaseServer = _databaseServerService.GetAll();
+
+            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
+            {
+                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
+                Value = d.Id.ToString()
+            }).ToList();
+
+            ViewBag.ListSite = listSite;
+
+            return View(model);
+        }
+
+        #endregion
+
+        #region Create
+
+        [HttpGet]
+        public ActionResult CreateSite()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateSite(SiteInsertCriteria model)
+        {
+            model.Creator = CurrentSession.UserId;
+            model.CreatedDate = DateTime.Now;
+            ViewBag.Success = _siteService.InsertOrUpdate(model);
+            return View(model);
+        }
+        #endregion
+
+        #region Edit
+
+        [HttpGet]
+        public ActionResult EditSite(int id)
+        {
+            var site = _siteService.GetById(id);
+
+            var model = new SiteUpdateCriteria
+            {
+                SiteId = site.Id,
+                Name = site.Name,
+                Description = site.Description,
+                IsActive = site.IsActive
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditSite(SiteUpdateCriteria model)
+        {
+            model.Modifier = CurrentSession.UserId;
+            model.ModifiedDate = DateTime.Now;
+
+            ViewBag.Success = _siteService.InsertOrUpdate(model);
+
+            return View(model);
+        }
+        #endregion
+
+        #endregion
+
         #region Ajax
 
         [HttpGet]
@@ -395,6 +487,32 @@ namespace Fanex.Maintenance.Controller
             }
 
             return View(listConection);
+        }
+
+        [HttpGet]
+        public ActionResult GetAliasBySite(int id)
+        {
+            var listAlias = new List<Alias>();
+
+            if (Request.IsAjaxRequest())
+            {
+                listAlias = _aliasService.GetBySite(id).ToList();
+            }
+
+            return View(listAlias);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStatusSite(int siteId, bool isActive)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var check = _siteService.UpdateStatus(siteId, isActive);
+
+                return Json(check.ToString().ToLower());
+            }
+
+            return Json(null);
         }
         #endregion
     }

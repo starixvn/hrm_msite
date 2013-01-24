@@ -20,6 +20,10 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
     /// </summary>
     public class SiteGetAllCriteria : CriteriaBase
     {
+        public string Name { get; set; }
+
+        public int? DbServerId { get; set; }
+
         public override bool IsValid()
         {
             return true;

@@ -678,4 +678,7 @@
   <data name="None" xml:space="preserve">
     <value>None</value>
   </data>
+  <data name="Manage_Site" xml:space="preserve">
+    <value>Manage Site</value>
+  </data>
 </root>

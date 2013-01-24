@@ -103,5 +103,18 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 throw ex;
             }
         }
+
+
+        public IEnumerable<Alias> GetBySite(ICriteria criteria)
+        {
+            try
+            {
+                return Fetch<Alias>(criteria);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

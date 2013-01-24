@@ -1006,6 +1006,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Site.
+        /// </summary>
+        public static string Manage_Site {
+            get {
+                return ResourceManager.GetString("Manage_Site", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Master.
         /// </summary>
         public static string Master {

@@ -69,5 +69,13 @@
             <Mapping DataField="AliasId" ObjectProperty="Id" />
             <Mapping DataField="AliasName" ObjectProperty="Name" />            
         </Setting>
+        <Setting Key="ConnectionString_Sites_GetById" SpName="ConnectionString_Sites_GetById" DbName="connectionstring" Plain="1">
+            <Mapping DataField="ModifierId" ObjectProperty="Id" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="UserName" />
+        </Setting>
+        <Setting Key="ConnectionString_Sites_Insert" SpName="ConnectionString_Sites_Insert" DbName="connectionstring" Plain="1"/>
+        <Setting Key="ConnectionString_Sites_Update" SpName="ConnectionString_Sites_Update" DbName="connectionstring" Plain="1"/>
+        <Setting Key="ConnectionString_Alias_GetBySite" SpName="ConnectionString_Alias_GetBySite" DbName="connectionstring" Plain="1"/>
+        <Setting Key="ConnectionString_Sites_UpdateStatus" SpName="ConnectionString_Sites_UpdateStatus" DbName="connectionstring" Plain="1"/>
     </Function>
 </Functions>
