@@ -9,14 +9,18 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
+    using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasGetSwitchConnectionCriteria : CriteriaBase
     {
+        [Display(Name = "From_DbServer", ResourceType = typeof(ViewResource))]
         public int FromDbServerId { get; set; }
 
+        [Display(Name = "To_DbServer", ResourceType = typeof(ViewResource))]
         public int ToDbServerId { get; set; }
 
         public override bool IsValid()

@@ -687,4 +687,13 @@
   <data name="Manage_Server" xml:space="preserve">
     <value>Manage Database Server</value>
   </data>
+  <data name="Change_Connection_FromDb" xml:space="preserve">
+    <value>Change Connection From Database Server</value>
+  </data>
+  <data name="From_DbServer" xml:space="preserve">
+    <value>From Database Server</value>
+  </data>
+  <data name="To_DbServer" xml:space="preserve">
+    <value>To Database Server</value>
+  </data>
 </root>

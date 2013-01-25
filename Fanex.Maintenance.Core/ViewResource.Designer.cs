@@ -277,6 +277,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Connection From Database Server.
+        /// </summary>
+        public static string Change_Connection_FromDb {
+            get {
+                return ResourceManager.GetString("Change_Connection_FromDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Computer is idle.
         /// </summary>
         public static string ComputerIdle {
@@ -687,6 +696,15 @@ namespace Fanex.Maintenance.Core {
         public static string From {
             get {
                 return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From Database Server.
+        /// </summary>
+        public static string From_DbServer {
+            get {
+                return ResourceManager.GetString("From_DbServer", resourceCulture);
             }
         }
         
@@ -1632,6 +1650,15 @@ namespace Fanex.Maintenance.Core {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Database Server.
+        /// </summary>
+        public static string To_DbServer {
+            get {
+                return ResourceManager.GetString("To_DbServer", resourceCulture);
             }
         }
         

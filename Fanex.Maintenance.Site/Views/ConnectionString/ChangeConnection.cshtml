@@ -1,7 +1,7 @@
 ﻿@using Fanex.Maintenance.Entity.Model.ConnectionString
 @model AliasGetSwitchConnectionCriteria
 @{
-    ViewBag.Title = ViewResource.Manage_Alias;
+    ViewBag.Title = ViewResource.Change_Connection_FromDb;
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listConnection = (List<AliasConnectionStringConnection>)ViewBag.ListConnection;
     int i = 0;
@@ -21,7 +21,7 @@
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
-        @Html.ActionLink("+ Create New", "CreateAlias", "ConnectionString", null, new { @class = "lnk" })
+         @Html.ActionLink("← " + ViewResource.Back_To_List, "Alias", "ConnectionString", null, new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm())
@@ -122,16 +122,14 @@
                 }
                 j = 0;
             }
-            if (i == 0)
-            {
+        }
+        @if (i == 0)
+        {
             <tr>
                 <td colspan="10" class="align-center">
                     @ViewResource.NoInformationAvailable
                 </td>
             </tr>
-            }
-
-
         }
     </tbody>
 </table>

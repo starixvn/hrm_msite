@@ -9,7 +9,9 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
+    using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
@@ -17,6 +19,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
     {
         public string Name { get; set; }
 
+        [Display(Name = "Database_Server", ResourceType = typeof(ViewResource))]
         public int? DbServerId { get; set; }
 
         public override bool IsValid()
