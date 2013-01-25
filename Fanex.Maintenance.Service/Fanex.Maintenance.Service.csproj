@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Impl\BaseService.cs" />
     <Compile Include="Impl\ConnectionString\AliasService.cs" />
     <Compile Include="Impl\ConnectionString\ConnectionService.cs" />
     <Compile Include="Impl\ConnectionString\SiteService.cs" />
@@ -70,18 +71,19 @@
     <Compile Include="Impl\DatabaseReportService.cs" />
     <Compile Include="Impl\LogService.cs" />
     <Compile Include="Impl\MailService.cs" />
-    <Compile Include="Impl\UserService.cs" />
+    <Compile Include="Impl\ServiceContext.cs" />
     <Compile Include="Interface\ConnectionString\IConnectionService.cs" />
     <Compile Include="Interface\ConnectionString\ISiteService.cs" />
     <Compile Include="Interface\ConnectionString\IAliasService.cs" />
     <Compile Include="Interface\ConnectionString\IDatabaseServerService.cs" />
+    <Compile Include="Interface\IBaseService.cs" />
+    <Compile Include="Interface\IServiceContext.cs" />
     <Compile Include="Interface\JobManagement\IJobService.cs" />
     <Compile Include="Interface\ILogCategoryService.cs" />
     <Compile Include="Interface\IDatabaseReportService.cs" />
     <Compile Include="Interface\ILogService.cs" />
     <Compile Include="Interface\IMailService.cs" />
     <Compile Include="Interface\IStepService.cs" />
-    <Compile Include="Interface\IUserService.cs" />
     <Compile Include="Interface\JobManagement\IScheduleService.cs" />
     <Compile Include="Interface\JobManagement\IServerService.cs" />
     <Compile Include="Interface\JobManagement\ISqlServerLogService.cs" />

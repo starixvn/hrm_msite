@@ -19,6 +19,8 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
+    using System.Collections;
+    using Fanex.Maintenance.Criteria.Misc;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasRepository : BaseRepository<Alias>, IAliasRepository
@@ -68,25 +70,6 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                        };
 
                 return this.Fetch<AliasConnectionString>(criteria, objMapFunc);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public int InsertOrUpdate(ICriteria criteria)
-        {
-            try
-            {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    var hsParam = criteria.GetSpParams();
-
-                    db.ExecuteNonQuery(hsParam);
-
-                    return (int)hsParam["aliasid"];
-                }
             }
             catch (Exception ex)
             {
@@ -173,6 +156,27 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 };
 
                 return this.Fetch<AliasConnectionStringConnection>(criteria, objMapFunc);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
+        {
+            try
+            {
+                Hashtable hash = criteria.GetSpParams();
+                hash = logCriteria.AddSpParams(hash);
+                hash = (new ResultCriteria()).AddSpParams(hash);
+
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    db.ExecuteNonQuery(hash);
+
+                    return GetCommandResult(hash);
+                }
             }
             catch (Exception ex)
             {

@@ -29,8 +29,8 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
 
         Alias Get(int aliasId);
 
-        bool InsertOrUpdate(ICriteria criteria);
+        ICommandResult InsertOrUpdate(ICriteria criteria);
 
-        bool UpdateStatus(int aliasId, bool isActive);
+        ICommandResult UpdateStatus(int aliasId, bool isActive);
     }
 }

@@ -59,8 +59,8 @@
     <Compile Include="ConnectionString\Connection\ConnectionUpdateCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionGetByIdCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionGetSecondaryConectionCriteria.cs" />
-    <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetSwitchSecondConnectionCriteria.cs" />
-    <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetSwitchConnectionCriteria.cs" />
+    <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetSecondConnectionFromDbServerCriteria.cs" />
+    <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetConnectionFromDbServerCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionChangeConnectionFromDbServerCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetByIdCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerUpdateStatusCriteria.cs" />
@@ -98,8 +98,9 @@
     <Compile Include="MailService\MailConfigViewModel.cs" />
     <Compile Include="MailService\MailFunctionViewModel.cs" />
     <Compile Include="MailService\MailSettingViewModel.cs" />
+    <Compile Include="Misc\LogExecSpCriteria.cs" />
+    <Compile Include="Misc\ResultCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResultCriteria.cs" />
     <Compile Include="User\GetUserOnlineCriteria.cs" />
     <Compile Include="User\UserLoginCriteria.cs" />
   </ItemGroup>

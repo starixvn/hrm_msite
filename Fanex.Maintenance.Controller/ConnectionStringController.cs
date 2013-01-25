@@ -20,7 +20,6 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.ConnectionString.Site;
     using Fanex.Maintenance.Service.Impl.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
-    using System.Text;
 
     /// <summary>
     /// TODO: Update summary.
@@ -37,7 +36,7 @@ namespace Fanex.Maintenance.Controller
 
         private readonly IConnectionService _connectionService;
 
-        #endregion
+        #endregion Member
 
         #region Ctor
 
@@ -53,13 +52,13 @@ namespace Fanex.Maintenance.Controller
             IConnectionService connectionService
             )
         {
-            _aliasService = aliasService ?? new AliasService();
+            _aliasService = aliasService ?? new AliasService { ServiceContext = ServiceContext };
             _databaseServerService = databaseServerService ?? new DatabaseServiceService();
             _siteService = siteService ?? new SiteService();
             _connectionService = connectionService ?? new ConnectionService();
         }
 
-        #endregion
+        #endregion Ctor
 
         #region Manage Alias
 
@@ -115,13 +114,14 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        #endregion
+        #endregion Mange
 
         #region Create
 
         [HttpGet]
         public ActionResult CreateAlias()
         {
+            // get list site
             var listSite = _siteService.GetAll();
             ViewBag.Site = listSite.ToList();
 
@@ -131,30 +131,46 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult CreateAlias(AliasInsertCriteria model)
         {
+            // get list site
             var listSite = _siteService.GetAll();
             ViewBag.Site = listSite.ToList();
 
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
 
-            ViewBag.Success = _aliasService.InsertOrUpdate(model);
+            // insert new alias
+            var command = _aliasService.InsertOrUpdate(model);
+
+            if (!command.IsSuccessful)
+            {
+                return View(model);
+            }
+
+            ViewBag.Success = command.IsSuccessful;
 
             return View(model);
         }
 
-        #endregion
+        #endregion Create
 
         #region Edit
 
         [HttpGet]
         public ActionResult EditAlias(int id)
         {
+            // get alias by id
+            var alias = _aliasService.Get(id);
+            if (ReferenceEquals(alias, null))
+            {
+                return RedirectToAction("NotFound", "CommondError");
+            }
+            ViewBag.Alias = alias;
+
+            // get list site
             var listSite = _siteService.GetAll();
             ViewBag.Site = listSite.ToList();
 
-            var alias = _aliasService.Get(id);
-            ViewBag.Alias = alias;
-
+            // get list site with alias
             var listSiteAlias = _siteService.GetByAlias(id);
             ViewBag.SiteAlias = listSiteAlias;
 
@@ -169,7 +185,14 @@ namespace Fanex.Maintenance.Controller
 
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
-            ViewBag.Success = _aliasService.InsertOrUpdate(model);
+
+            var command = _aliasService.InsertOrUpdate(model);
+
+            if (!command.IsSuccessful)
+            {
+                return View(model);
+            }
+            ViewBag.Success = command.IsSuccessful;
 
             var alias = _aliasService.Get(model.AliasId);
             ViewBag.Alias = alias;
@@ -180,9 +203,9 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
-        #endregion
+        #endregion Edit
 
-        #endregion
+        #endregion Manage Alias
 
         #region Connection
 
@@ -199,7 +222,7 @@ namespace Fanex.Maintenance.Controller
             return View(listConnection);
         }
 
-        #endregion
+        #endregion Manage
 
         #region Create
 
@@ -214,7 +237,6 @@ namespace Fanex.Maintenance.Controller
             {
                 Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
                 Value = d.Id.ToString()
-
             }).ToList();
 
             var listConnection = _connectionService.GetByAlias(id);
@@ -241,7 +263,6 @@ namespace Fanex.Maintenance.Controller
             {
                 Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
                 Value = d.Id.ToString()
-
             }).ToList();
 
             var listConnection = _connectionService.GetByAlias(model.AliasId);
@@ -259,7 +280,7 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        #endregion
+        #endregion Create
 
         #region Edit
 
@@ -329,9 +350,10 @@ namespace Fanex.Maintenance.Controller
 
             return View(model);
         }
-        #endregion
 
-        #endregion
+        #endregion Edit
+
+        #endregion Connection
 
         #region Site
 
@@ -373,7 +395,7 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        #endregion
+        #endregion Mange
 
         #region Create
 
@@ -391,7 +413,8 @@ namespace Fanex.Maintenance.Controller
             ViewBag.Success = _siteService.InsertOrUpdate(model);
             return View(model);
         }
-        #endregion
+
+        #endregion Create
 
         #region Edit
 
@@ -421,9 +444,10 @@ namespace Fanex.Maintenance.Controller
 
             return View(model);
         }
-        #endregion
 
-        #endregion
+        #endregion Edit
+
+        #endregion Site
 
         #region DB Server
 
@@ -447,7 +471,7 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
-        #endregion
+        #endregion Manage
 
         #region Create
 
@@ -467,7 +491,8 @@ namespace Fanex.Maintenance.Controller
 
             return View(model);
         }
-        #endregion
+
+        #endregion Create
 
         #region Edit
 
@@ -497,9 +522,10 @@ namespace Fanex.Maintenance.Controller
             ViewBag.Success = _databaseServerService.InsertOrUpdate(model);
             return View(model);
         }
-        #endregion
 
-        #endregion
+        #endregion Edit
+
+        #endregion DB Server
 
         #region Quick change connection from db server to other db server
 
@@ -517,7 +543,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult ChangeConnection(DatabaseServerGetSwitchConnectionCriteria model)
+        public ActionResult ChangeConnection(DatabaseServerGetConnectionFromDbServerCriteria model)
         {
             var listDatabaseServer = _databaseServerService.GetAll();
             ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
@@ -531,7 +557,7 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        #endregion
+        #endregion Quick change connection from db server to other db server
 
         #region Quick change second (backup) connection from db server
 
@@ -549,7 +575,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult ChangeSecondConnection(DatabaseServerGetSwitchSecondConnectionCriteria model)
+        public ActionResult ChangeSecondConnection(DatabaseServerGetSecondConnectionFromDbServerCriteria model)
         {
             var listDatabaseServer = _databaseServerService.GetAll();
             ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
@@ -563,7 +589,7 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        #endregion
+        #endregion Quick change second (backup) connection from db server
 
         #region Ajax
 
@@ -612,9 +638,9 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var check = _aliasService.UpdateStatus(aliasId, isActive);
+                var commond = _aliasService.UpdateStatus(aliasId, isActive);
 
-                return Json(check.ToString().ToLower());
+                return Json(commond.IsSuccessful.ToString().ToLower());
             }
 
             return Json(null);
@@ -699,6 +725,7 @@ namespace Fanex.Maintenance.Controller
 
             return Json(false);
         }
-        #endregion
+
+        #endregion Ajax
     }
 }

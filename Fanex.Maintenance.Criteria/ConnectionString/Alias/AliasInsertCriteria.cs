@@ -62,7 +62,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_Alia_Insert";
+            return "ConnectionString_Alias_Insert";
         }
     }
 }

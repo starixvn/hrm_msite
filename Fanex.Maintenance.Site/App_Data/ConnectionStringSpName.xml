@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
     <Function Name="Alias">
-        <Setting Key="ConnectionString_Alia_GetAll" SpName="ConnectionString_Alia_GetAll" DbName="connectionstring" Plain="1" />
-        <Setting Key="ConnectionString_Alia_Insert" SpName="ConnectionString_Alia_Insert" DbName="connectionstring" Plain="1" />
-        <Setting Key="ConnectionString_Alia_GetById" SpName="ConnectionString_Alia_GetById" DbName="connectionstring" Plain="1" />
-        <Setting Key="ConnectionString_Alia_UpdateStatus" SpName="ConnectionString_Alia_UpdateStatus" DbName="connectionstring" Plain="1" />
-        <Setting Key="ConnectionString_Alia_Update" SpName="ConnectionString_Alia_Update" DbName="connectionstring" Plain="1" />
-        <Setting Key="ConnectionString_Alia_GetBySite" SpName="ConnectionString_Alia_GetBySite" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Alias_GetAll" SpName="ConnectionString_Alias_GetAll" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Alias_Insert" SpName="ConnectionString_Alias_Insert" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Alias_GetById" SpName="ConnectionString_Alias_GetById" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Alias_UpdateStatus" SpName="ConnectionString_Alias_UpdateStatus" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Alias_Update" SpName="ConnectionString_Alias_Update" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Alias_GetBySite" SpName="ConnectionString_Alias_GetBySite" DbName="connectionstring" Plain="1" />
     </Function>
     <Function Name="Site">
         <Setting Key="ConnectionString_Site_GetAll" SpName="ConnectionString_Site_GetAll" DbName="connectionstring" Plain="1">
@@ -38,8 +38,8 @@
             <Mapping DataField="AliasId" ObjectProperty="Id" />
             <Mapping DataField="AliasName" ObjectProperty="Name" />
         </Setting>
-        <Setting Key="ConnectionString_DatabaseServer_GetSwitchConnection" SpName="ConnectionString_DatabaseServer_GetSwitchConnection" DbName="connectionstring" Plain="1" />
-        <Setting Key="ConnectionString_DatabaseServer_GetSwitchSecondConnection" SpName="ConnectionString_DatabaseServer_GetSwitchSecondConnection" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_DatabaseServer_GetConnectionFromDbServer" SpName="ConnectionString_DatabaseServer_GetConnectionFromDbServer" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_DatabaseServer_GetSecondConnectionFromDbServer" SpName="ConnectionString_DatabaseServer_GetSecondConnectionFromDbServer" DbName="connectionstring" Plain="1" />
     </Function>
     <Function Name="DatabaseServer">
         <Setting Key="ConnectionString_DatabaseServer_GetAll" SpName="ConnectionString_DatabaseServer_GetAll" DbName="connectionstring" Plain="1">

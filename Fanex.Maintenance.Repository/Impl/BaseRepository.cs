@@ -17,6 +17,7 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.Data;
     using Fanex.Maintenance.Core.Helper;
     using Fanex.NAP.Framework.Data;
+    using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// TODO: Update summary.
@@ -154,6 +155,23 @@ namespace Fanex.Maintenance.Repository.Impl
                 db.ExecuteNonQuery(criteria.GetSpParams());
                 return db.GetOuputParams();
             }
+        }
+
+        /// <summary>
+        /// get command result
+        /// </summary>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        public CommandResult GetCommandResult(Hashtable hash)
+        {
+            var errCode = hash["errcode"];
+            var errMsg = hash["errmsg"];
+
+            return new CommandResult
+            {
+                Code = (errCode is DBNull) ? 0 : Convert.ToInt32(errCode),
+                Message = (errMsg is DBNull) ? string.Empty : Convert.ToString(errMsg)
+            };
         }
     }
 }

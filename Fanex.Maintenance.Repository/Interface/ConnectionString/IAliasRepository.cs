@@ -24,6 +24,6 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
 
         Alias GetById(ICriteria criteria);
 
-        int InsertOrUpdate(ICriteria criteria);
+        ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria);
     }
 }

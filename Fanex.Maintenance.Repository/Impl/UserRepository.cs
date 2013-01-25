@@ -45,23 +45,6 @@ namespace Fanex.Maintenance.Repository.Impl
             {
                 throw ex;
             }
-        }
-
-        /// <summary>
-        /// Get error code and error message
-        /// </summary>
-        /// <param name="hash"></param>
-        /// <returns></returns>
-        protected CommandResult GetCommandResult(Hashtable hash)
-        {
-            var errCode = hash["errcode"];
-            var errMsg = hash["errmsg"];
-
-            return new CommandResult
-            {
-                Code = (errCode is DBNull) ? 0 : Convert.ToInt32(errCode),
-                Message = (errMsg is DBNull) ? string.Empty : Convert.ToString(errMsg)
-            };
-        }
+        }       
     }
 }

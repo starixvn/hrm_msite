@@ -1438,6 +1438,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server Error.
+        /// </summary>
+        public static string Server_Error {
+            get {
+                return ResourceManager.GetString("Server_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server IP.
         /// </summary>
         public static string Server_IP {

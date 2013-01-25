@@ -68,7 +68,6 @@
     <Compile Include="Impl\LogCategoryRepository.cs" />
     <Compile Include="Impl\DatabaseReportRepository.cs" />
     <Compile Include="Impl\LogRepository.cs" />
-    <Compile Include="Impl\UserRepository.cs" />
     <Compile Include="Interface\ConnectionString\IConnectionRepository.cs" />
     <Compile Include="Interface\ConnectionString\ISiteRepository.cs" />
     <Compile Include="Interface\ConnectionString\IAliasRepository.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="Interface\ILogCategoryRepository.cs" />
     <Compile Include="Interface\IDatabaseReportRepository.cs" />
     <Compile Include="Interface\ILogRepository.cs" />
-    <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Interface\JobManagement\IScheduleRepository.cs" />
     <Compile Include="Interface\JobManagement\IServerRepository.cs" />
     <Compile Include="Interface\JobManagement\IStepRepository.cs" />

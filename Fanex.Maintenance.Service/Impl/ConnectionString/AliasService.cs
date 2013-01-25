@@ -11,20 +11,20 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Entity.Model.ConnectionString;
+    using Fanex.Common.Helper;
     using Fanex.ConnectionString.Domain;
-    using Fanex.Logging;
     using Fanex.Maintenance.Criteria.ConnectionString.Alias;
     using Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer;
+    using Fanex.Maintenance.Criteria.Misc;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    public class AliasService : IAliasService
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    public class AliasService : BaseService, IAliasService
     {
         #region Member
 
@@ -61,30 +61,67 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
             return null;
         }
 
-        public bool InsertOrUpdate(ICriteria criteria)
+        public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
+            // check parameters
+            Check.Argument.IsNotNull(criteria, "criteria");
+
             try
             {
-                int check = _aliasRepository.InsertOrUpdate(criteria);
+                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                return check > 0;
+                if (criteria.IsValid() && logCriteria.IsValid())
+                {
+                    return _aliasRepository.InsertOrUpdate(criteria, logCriteria);
+                }
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
-            return false;
+            return null;
+        }
+
+        public ICommandResult UpdateStatus(int aliasId, bool isActive)
+        {
+            // check parameters
+            Check.Argument.IsNotNegativeOrZero(aliasId, "aliasId");
+            Check.Argument.IsNotNull(isActive, "isActive");
+
+            try
+            {
+                var criteria = new AliasUpdateStatusCriteria
+                {
+                    AliasId = aliasId,
+                    IsActive = isActive
+                };
+                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+
+                if (criteria.IsValid() && logCriteria.IsValid())
+                {
+                    return _aliasRepository.InsertOrUpdate(criteria, logCriteria);
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+
+            return null;
         }
 
         public Alias Get(int aliasId)
         {
+            // check parameters
+            Check.Argument.IsNotNegativeOrZero(aliasId, "aliasId");
+
             try
             {
                 var criteria = new AliasGetByIdCriteria
@@ -96,36 +133,17 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
             return null;
         }
 
-        public bool UpdateStatus(int aliasId, bool isActive)
-        {
-            try
-            {
-                var criteria = new AliasUpdateStatusCriteria
-                {
-                    AliasId = aliasId,
-                    IsActive = isActive
-                };
-
-                int check = _aliasRepository.InsertOrUpdate(criteria);
-
-                return check > 0;
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.Error(ex.Message, ex);
-            }
-
-            return false;
-        }
-
         public IEnumerable<Alias> GetBySite(int siteId)
         {
+            // check parameters
+            Check.Argument.IsNotNegativeOrZero(siteId, "siteId");
+
             try
             {
                 var criteria = new AliasGetBySiteCriteria
@@ -137,7 +155,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
             return null;
@@ -145,9 +163,13 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(int fromDbServerId, int toDbServerId)
         {
+            // check parameters
+            Check.Argument.IsNotNegativeOrZero(fromDbServerId, "fromDbServerId");
+            Check.Argument.IsNotNegativeOrZero(toDbServerId, "toDbServerId");
+
             try
             {
-                var criteria = new DatabaseServerGetSwitchConnectionCriteria
+                var criteria = new DatabaseServerGetConnectionFromDbServerCriteria
                 {
                     FromDbServerId = fromDbServerId,
                     ToDbServerId = toDbServerId
@@ -157,7 +179,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
             return null;
@@ -165,9 +187,12 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         public IEnumerable<AliasConnectionStringConnection> GetSwitchSecondConnection(int dbServerId)
         {
+            // check parameters
+            Check.Argument.IsNotNegativeOrZero(dbServerId, "dbServerId");
+
             try
             {
-                var criteria = new DatabaseServerGetSwitchSecondConnectionCriteria
+                var criteria = new DatabaseServerGetSecondConnectionFromDbServerCriteria
                 {
                     DbServerId = dbServerId
                 };
@@ -176,7 +201,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
             return null;

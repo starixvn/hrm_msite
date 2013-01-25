@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseController.cs" />
+    <Compile Include="CommondErrorController.cs" />
     <Compile Include="ConnectionStringController.cs" />
     <Compile Include="DatabaseReportController.cs" />
     <Compile Include="HomeController.cs" />
