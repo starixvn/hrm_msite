@@ -1,0 +1,142 @@
+﻿@using Fanex.Maintenance.Entity.Model.ConnectionString
+@model DatabaseServerGetSwitchSecondConnectionCriteria
+@{
+    ViewBag.Title = ViewResource.Change_Connection_FromDb;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listConnection = (List<AliasConnectionStringConnection>)ViewBag.ListConnection;
+    int i = 0;
+}
+@section Head {
+    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .form
+        {
+            background: none repeat scroll 0 0 transparent;
+            border: 0 none;
+            box-shadow: none;
+            padding: 10px 0 0;
+        }
+    </style>
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span>
+        @Html.ActionLink("← " + ViewResource.Back_To_List, "Alias", "ConnectionString", null, new { @class = "lnk" })
+    </h1>
+}
+@using (Html.BeginForm())
+{ 
+    <section id="filter-bar">
+        <div class="filter-form">
+            <div class="lbl-field width-auto">
+                @Html.LabelFor(m => m.DbServerId)
+            </div>
+            <div class="edit-field">
+                @Html.DropDownListFor(m => m.DbServerId, (List<SelectListItem>)ViewBag.DatabaseServer)
+            </div>
+            <div class="submit">
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
+    </section>
+}
+<table class="grid">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                <input type="checkbox" id="all" />
+            </th>
+            <th>
+                @ViewResource.Alias
+            </th>
+            <th>
+                @ViewResource.Connection_String
+            </th>
+            <th>
+                @ViewResource.Connection_String
+            </th>
+            <th>
+                @ViewResource.Change_Connection
+            </th>
+            <th>
+                @ViewResource.Edit_Connection
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!ReferenceEquals(listConnection, null))
+        {
+            var listFromConnection = listConnection.GroupBy(x => x.Alias.Id).ToList();
+
+            i = 0;
+            foreach (var itemFrom in listFromConnection)
+            {
+                string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
+
+                var listToConnection = itemFrom.Where(x => !string.IsNullOrEmpty(x.ToConnectionString.Connection)).ToList();
+                int countTo = listToConnection.Count();
+                i = countTo != 0 ? i + 1 : i;
+
+                int j = 0;
+                foreach (var item in listToConnection)
+                {
+            <tr>
+                @if (j == 0)
+                { 
+                    <td rowspan="@countTo">
+                        @i
+                    </td>
+                    <td rowspan="@countTo">
+                        <input type="checkbox" aid="@item.Alias.Id" name="alias" aname="@item.Alias.Name"/>
+                    </td>
+                    <td rowspan="@countTo">
+                        @item.Alias.Name
+                    </td>
+                    <td rowspan="@countTo">
+                        @item.FromConnectionString.Connection
+                    </td>
+                }
+                <td>
+                    @item.ToConnectionString.Connection
+                </td>
+                <td class="align-center">
+                    <input type="radio" name="@item.Alias.Name" checked="checked" cid="@item.ToConnectionString.Id" aid="@item.Alias.Id"/>
+                </td>
+                @if (j == 0)
+                { 
+                    <td rowspan="@countTo" class="align-center">
+                        <a href="#">Change</a>
+                    </td>
+                }
+            </tr>
+                j++;
+                }
+                j = 0;
+            }
+        }
+        @if (i == 0)
+        {
+            <tr>
+                <td colspan="10" class="align-center">
+                    @ViewResource.NoInformationAvailable
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (i != 0)
+{
+    <div id="change-connection">
+        <div class="form">
+            <div class="form-row">
+                <div class="edit-field">
+                    <input type="submit" value="@ViewResource.Save" id="btnChangeConnection" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/scripts/Connection/ChangeConnection.js" type="text/javascript"></script>

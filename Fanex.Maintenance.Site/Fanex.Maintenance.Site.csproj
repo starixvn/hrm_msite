@@ -1677,6 +1677,7 @@
     <Content Include="Views\ConnectionString\EditDbServer.cshtml" />
     <Content Include="Views\ConnectionString\GetSiteByDbServer.cshtml" />
     <Content Include="Views\ConnectionString\ChangeConnection.cshtml" />
+    <Content Include="Views\ConnectionString\ChangeSecondConnection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

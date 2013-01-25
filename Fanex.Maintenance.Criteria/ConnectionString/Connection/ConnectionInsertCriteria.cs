@@ -56,7 +56,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_ConnectionStrings_Insert";
+            return "ConnectionString_ConnectionString_Insert";
         }
     }
 }

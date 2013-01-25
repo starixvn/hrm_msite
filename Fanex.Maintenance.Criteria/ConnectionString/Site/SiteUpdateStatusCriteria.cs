@@ -31,7 +31,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_Sites_UpdateStatus";
+            return "ConnectionString_Site_UpdateStatus";
         }
     }
 }

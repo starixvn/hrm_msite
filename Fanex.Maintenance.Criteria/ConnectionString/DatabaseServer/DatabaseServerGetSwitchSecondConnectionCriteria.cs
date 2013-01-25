@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="DatabaseServerGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseServerGetSwitchSecondConnectionCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,7 +7,7 @@
 //   <change who="Edward.Nguyen" date="2013.1.21">Created</change>
 // </history>
 
-namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
+namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
 {
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
@@ -15,13 +15,10 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
     using Fanex.NAP.Framework.Data;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    public class AliasGetSwitchConnectionCriteria : CriteriaBase
+    public class DatabaseServerGetSwitchSecondConnectionCriteria : CriteriaBase
     {
-        [Display(Name = "From_DbServer", ResourceType = typeof(ViewResource))]
-        public int FromDbServerId { get; set; }
-
-        [Display(Name = "To_DbServer", ResourceType = typeof(ViewResource))]
-        public int ToDbServerId { get; set; }
+        [Display(Name = "Database_Server", ResourceType = typeof(ViewResource))]
+        public int DbServerId { get; set; }
 
         public override bool IsValid()
         {
@@ -30,7 +27,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_DatabaseServer_GetSwitchConnection";
+            return "ConnectionString_DatabaseServer_GetSwitchSecondConnection";
         }
     }
 }

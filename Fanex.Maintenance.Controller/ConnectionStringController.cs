@@ -517,7 +517,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult ChangeConnection(AliasGetSwitchConnectionCriteria model)
+        public ActionResult ChangeConnection(DatabaseServerGetSwitchConnectionCriteria model)
         {
             var listDatabaseServer = _databaseServerService.GetAll();
             ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
@@ -527,6 +527,38 @@ namespace Fanex.Maintenance.Controller
             }).ToList();
 
             var list = _aliasService.GetSwitchConnection(model.FromDbServerId, model.ToDbServerId);
+            ViewBag.ListConnection = list;
+            return View(model);
+        }
+
+        #endregion
+
+        #region Quick change second (backup) connection from db server
+
+        [HttpGet]
+        public ActionResult ChangeSecondConnection()
+        {
+            var listDatabaseServer = _databaseServerService.GetAll();
+            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
+            {
+                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
+                Value = d.Id.ToString()
+            }).ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangeSecondConnection(DatabaseServerGetSwitchSecondConnectionCriteria model)
+        {
+            var listDatabaseServer = _databaseServerService.GetAll();
+            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
+            {
+                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
+                Value = d.Id.ToString()
+            }).ToList();
+
+            var list = _aliasService.GetSwitchSecondConnection(model.DbServerId);
             ViewBag.ListConnection = list;
             return View(model);
         }

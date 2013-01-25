@@ -26,7 +26,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_ConnectionStrings_UpdateDefaultConnection";
+            return "ConnectionString_ConnectionString_UpdateDefaultConnection";
         }
     }
 }

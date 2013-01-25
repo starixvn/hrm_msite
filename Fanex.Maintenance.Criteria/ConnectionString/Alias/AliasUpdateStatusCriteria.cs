@@ -26,7 +26,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_Alias_UpdateStatus";
+            return "ConnectionString_Alia_UpdateStatus";
         }
     }
 }

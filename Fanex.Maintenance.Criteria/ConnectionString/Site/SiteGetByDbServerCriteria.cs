@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_Sites_GetByDbServer";
+            return "ConnectionString_Site_GetByDbServer";
         }
     }
 }

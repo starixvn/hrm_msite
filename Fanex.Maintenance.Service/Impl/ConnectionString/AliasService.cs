@@ -12,13 +12,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using System;
     using System.Collections.Generic;
     using Entity.Model.ConnectionString;
+    using Fanex.ConnectionString.Domain;
     using Fanex.Logging;
     using Fanex.Maintenance.Criteria.ConnectionString.Alias;
+    using Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using Fanex.ConnectionString.Domain;
 
     /// <summary>
     /// TODO: Update summary.
@@ -101,7 +102,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-
         public bool UpdateStatus(int aliasId, bool isActive)
         {
             try
@@ -124,7 +124,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return false;
         }
 
-
         public IEnumerable<Alias> GetBySite(int siteId)
         {
             try
@@ -144,15 +143,33 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-
         public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(int fromDbServerId, int toDbServerId)
         {
             try
             {
-                var criteria = new AliasGetSwitchConnectionCriteria
+                var criteria = new DatabaseServerGetSwitchConnectionCriteria
                 {
                     FromDbServerId = fromDbServerId,
                     ToDbServerId = toDbServerId
+                };
+
+                return _aliasRepository.GetSwitchConnection(criteria);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return null;
+        }
+
+        public IEnumerable<AliasConnectionStringConnection> GetSwitchSecondConnection(int dbServerId)
+        {
+            try
+            {
+                var criteria = new DatabaseServerGetSwitchSecondConnectionCriteria
+                {
+                    DbServerId = dbServerId
                 };
 
                 return _aliasRepository.GetSwitchConnection(criteria);

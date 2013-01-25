@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_ConnectionStrings_GetById";
+            return "ConnectionString_ConnectionString_GetById";
         }
     }
 }

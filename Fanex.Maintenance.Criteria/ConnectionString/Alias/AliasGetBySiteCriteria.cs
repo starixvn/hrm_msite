@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_Alias_GetBySite";
+            return "ConnectionString_Alia_GetBySite";
         }
     }
 }

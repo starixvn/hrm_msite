@@ -38,7 +38,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 
         public override string GetSettingKey()
         {
-            return "ConnectionString_Sites_Insert";
+            return "ConnectionString_Site_Insert";
         }
     }
 }

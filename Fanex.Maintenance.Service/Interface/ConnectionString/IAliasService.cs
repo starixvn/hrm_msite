@@ -25,6 +25,8 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
 
         IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(int fromDbServerId, int toDbServerId);
 
+        IEnumerable<AliasConnectionStringConnection> GetSwitchSecondConnection(int dbServerId);
+
         Alias Get(int aliasId);
 
         bool InsertOrUpdate(ICriteria criteria);
