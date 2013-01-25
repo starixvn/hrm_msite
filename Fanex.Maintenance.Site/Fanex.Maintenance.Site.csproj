@@ -221,6 +221,7 @@
     <Content Include="images\sprite_v.png" />
     <Content Include="scripts\Connection\Alias.js" />
     <Content Include="scripts\Connection\Connection.js" />
+    <Content Include="scripts\Connection\ChangeConnection.js" />
     <Content Include="scripts\Connection\DatabaseSever.js" />
     <Content Include="scripts\Connection\Site.js" />
     <Content Include="scripts\Connection\CreateAlias.js" />

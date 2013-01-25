@@ -20,6 +20,8 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.ConnectionString.Site;
     using Fanex.Maintenance.Service.Impl.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
+    using System.Text;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -650,6 +652,21 @@ namespace Fanex.Maintenance.Controller
             return View(listSite);
         }
 
+        [HttpPost]
+        public ActionResult ChangeConnectionFromDbServerToDbServer(string aliasConnection)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var criteria = new ConnectionChangeConnectionFromDbServerCriteria
+                {
+                    AliasConnection = aliasConnection
+                };
+
+                return Json(_connectionService.InsertOrUpdate(criteria));
+            }
+
+            return Json(false);
+        }
         #endregion
     }
 }

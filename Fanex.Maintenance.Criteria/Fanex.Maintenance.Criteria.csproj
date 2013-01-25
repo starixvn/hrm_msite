@@ -60,6 +60,7 @@
     <Compile Include="ConnectionString\Connection\ConnectionGetByIdCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionGetSecondaryConectionCriteria.cs" />
     <Compile Include="ConnectionString\Alias\AliasGetSwitchConnectionCriteria.cs" />
+    <Compile Include="ConnectionString\Connection\ConnectionChangeConnectionFromDbServerCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetByIdCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerUpdateStatusCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerUpdateCriteria.cs" />
