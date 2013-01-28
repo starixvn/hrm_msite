@@ -20,9 +20,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
+    using Fanex.Common.Helper;
+    using Fanex.Maintenance.Criteria.Misc;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    public class DatabaseServiceService : IDatabaseServerService
+    public class DatabaseServiceService : BaseService, IDatabaseServerService
     {
         #region Member
 
@@ -79,42 +81,48 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-        public bool InsertOrUpdate(ICriteria criteria)
+        public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
+            // check parameters
+            Check.Argument.IsNotNull(criteria, "criteria");
+
             try
             {
-                int check = _databaseServerRepository.InsertOrUpdate(criteria);
+                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                return check > 0;
+                if (criteria.IsValid() && logCriteria.IsValid())
+                {
+                    return _databaseServerRepository.InsertOrUpdate(criteria, logCriteria);
+                }
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
-            return false;
+            return null;
         }
 
-        public bool UpdateStatus(int dbServerId, bool isActive)
+        public ICommandResult UpdateStatus(ICriteria criteria)
         {
+            // check parameters
+            Check.Argument.IsNotNull(criteria, "criteria");
+
             try
             {
-                var criteria = new DatabaseServerUpdateStatusCriteria
+                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+
+                if (criteria.IsValid() && logCriteria.IsValid())
                 {
-                    DbServerId = dbServerId,
-                    IsActive = isActive
-                };
-
-                int check = _databaseServerRepository.InsertOrUpdate(criteria);
-
-                return check > 0;
+                    return _databaseServerRepository.InsertOrUpdate(criteria, logCriteria);
+                }
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
-            return false;
+            return null;
         }
 
         public DatabaseServer GetById(int id)

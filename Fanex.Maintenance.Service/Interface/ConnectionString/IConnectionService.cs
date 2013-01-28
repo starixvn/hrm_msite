@@ -24,8 +24,8 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
 
         ConnectionString GetById(int id);
 
-        bool UpdateDefaultConnection(int aliasId, int conectionId);
+        ICommandResult UpdateDefaultConnection(ICriteria criteria);
 
-        bool InsertOrUpdate(ICriteria criteria);
+        ICommandResult InsertOrUpdate(ICriteria criteria);
     }
 }

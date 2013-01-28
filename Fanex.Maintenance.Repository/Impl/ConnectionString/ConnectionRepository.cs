@@ -19,6 +19,8 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
+    using System.Collections;
+    using Fanex.Maintenance.Criteria.Misc;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionRepository : BaseRepository<ConnectionString>, IConnectionRepository
@@ -124,16 +126,19 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
-        public int InsertOrUpdate(ICriteria criteria)
+        public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
             try
             {
+                Hashtable hash = criteria.GetSpParams();
+                hash = logCriteria.AddSpParams(hash);
+                hash = (new ResultCriteria()).AddSpParams(hash);
+
                 using (var db = new ObjectDb(criteria.GetSettingKey()))
                 {
-                    var hsParam = criteria.GetSpParams();
-                    db.ExecuteNonQuery(hsParam);
+                    db.ExecuteNonQuery(hash);
 
-                    return 1;
+                    return GetCommandResult(hash);
                 }
             }
             catch (Exception ex)

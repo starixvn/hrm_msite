@@ -21,10 +21,12 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Entity.Model.ConnectionString;
     using Fanex.NAP.Framework.Data;
     using Fanex.Logging;
+    using Fanex.Common.Helper;
+    using Fanex.Maintenance.Criteria.Misc;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class SiteService : ISiteService
+    public class SiteService : BaseService, ISiteService
     {
         #region Member
 
@@ -126,43 +128,49 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         }
 
 
-        public bool InsertOrUpdate(ICriteria criteria)
+        public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
+            // check parameters
+            Check.Argument.IsNotNull(criteria, "criteria");
+
             try
             {
-                int check = _siteRepository.InsertOrUpdate(criteria);
+                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                return check > 0;
+                if (criteria.IsValid() && logCriteria.IsValid())
+                {
+                    return _siteRepository.InsertOrUpdate(criteria, logCriteria);
+                }
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
-            return false;
+            return null;
         }
 
 
-        public bool UpdateStatus(int siteId, bool isActive)
+        public ICommandResult UpdateStatus(ICriteria criteria)
         {
+            // check parameters
+            Check.Argument.IsNotNull(criteria, "criteria");
+
             try
             {
-                var criteria = new SiteUpdateStatusCriteria
+                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+
+                if (criteria.IsValid() && logCriteria.IsValid())
                 {
-                    SiteId = siteId,
-                    IsActive = isActive
-                };
-
-                int check = _siteRepository.InsertOrUpdate(criteria);
-
-                return check > 0;
+                    return _siteRepository.InsertOrUpdate(criteria, logCriteria);
+                }
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
-            return false;
+            return null;
         }
 
 

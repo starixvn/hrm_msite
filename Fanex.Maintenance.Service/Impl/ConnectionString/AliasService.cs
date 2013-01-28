@@ -89,19 +89,13 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-        public ICommandResult UpdateStatus(int aliasId, bool isActive)
+        public ICommandResult UpdateStatus(ICriteria criteria)
         {
             // check parameters
-            Check.Argument.IsNotNegativeOrZero(aliasId, "aliasId");
-            Check.Argument.IsNotNull(isActive, "isActive");
+            Check.Argument.IsNotNull(criteria, "criteria");
 
             try
             {
-                var criteria = new AliasUpdateStatusCriteria
-                {
-                    AliasId = aliasId,
-                    IsActive = isActive
-                };
                 LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
                 if (criteria.IsValid() && logCriteria.IsValid())

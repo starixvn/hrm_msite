@@ -28,6 +28,6 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
 
         IEnumerable<SiteAlias> GetSiteAlias(ICriteria criteria);
 
-        int InsertOrUpdate(ICriteria criteria);
+        ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria);
     }
 }

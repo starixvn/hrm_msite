@@ -16,11 +16,13 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using NAP.Framework.Data;
+    using System.Collections;
+    using Fanex.Maintenance.Criteria.Misc;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class SiteRepository : ISiteRepository
+    public class SiteRepository : BaseRepository<Site>, ISiteRepository
     {
         public IEnumerable<Site> Fetch(ICriteria criteria)
         {
@@ -73,17 +75,19 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
-        public int InsertOrUpdate(ICriteria criteria)
+        public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
             try
             {
+                Hashtable hash = criteria.GetSpParams();
+                hash = logCriteria.AddSpParams(hash);
+                hash = (new ResultCriteria()).AddSpParams(hash);
+
                 using (var db = new ObjectDb(criteria.GetSettingKey()))
                 {
-                    var hsParam = criteria.GetSpParams();
+                    db.ExecuteNonQuery(hash);
 
-                    db.ExecuteNonQuery(hsParam);
-
-                    return (int)hsParam["siteid"];
+                    return GetCommandResult(hash);
                 }
             }
             catch (Exception ex)

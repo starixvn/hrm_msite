@@ -1680,6 +1680,7 @@
     <Content Include="Views\ConnectionString\ChangeSecondConnection.cshtml" />
     <Content Include="Views\CommondError\Error.cshtml" />
     <Content Include="Views\CommondError\NotFound.cshtml" />
+    <Content Include="Views\ConnectionString\Log.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

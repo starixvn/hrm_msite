@@ -53,9 +53,9 @@ namespace Fanex.Maintenance.Controller
             )
         {
             _aliasService = aliasService ?? new AliasService { ServiceContext = ServiceContext };
-            _databaseServerService = databaseServerService ?? new DatabaseServiceService();
-            _siteService = siteService ?? new SiteService();
-            _connectionService = connectionService ?? new ConnectionService();
+            _databaseServerService = databaseServerService ?? new DatabaseServiceService { ServiceContext = ServiceContext };
+            _siteService = siteService ?? new SiteService { ServiceContext = ServiceContext };
+            _connectionService = connectionService ?? new ConnectionService { ServiceContext = ServiceContext };
         }
 
         #endregion Ctor
@@ -275,7 +275,12 @@ namespace Fanex.Maintenance.Controller
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
 
-            ViewBag.Success = _connectionService.InsertOrUpdate(model);
+            var commond = _connectionService.InsertOrUpdate(model);
+            if (!commond.IsSuccessful)
+            {
+                return View(model);
+            }
+            ViewBag.Success = commond.IsSuccessful;
 
             return View(model);
         }
@@ -288,6 +293,10 @@ namespace Fanex.Maintenance.Controller
         public ActionResult EditConnection(int id)
         {
             var connection = _connectionService.GetById(id);
+            if (ReferenceEquals(connection, null))
+            {
+                return RedirectToAction("NotFound", "CommondError");
+            }
 
             var listDbServer = _databaseServerService.GetAll();
             ViewBag.DbServer = listDbServer.Select(d => new SelectListItem
@@ -346,7 +355,12 @@ namespace Fanex.Maintenance.Controller
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
 
-            ViewBag.Success = _connectionService.InsertOrUpdate(model);
+            var commond = _connectionService.InsertOrUpdate(model);
+            if (!commond.IsSuccessful)
+            {
+                return View(model);
+            }
+            ViewBag.Success = commond.IsSuccessful;
 
             return View(model);
         }
@@ -410,7 +424,14 @@ namespace Fanex.Maintenance.Controller
         {
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
-            ViewBag.Success = _siteService.InsertOrUpdate(model);
+
+            var commond = _siteService.InsertOrUpdate(model);
+            if (!commond.IsSuccessful)
+            {
+                return View(model);
+            }
+            ViewBag.Success = commond.IsSuccessful;
+
             return View(model);
         }
 
@@ -440,7 +461,13 @@ namespace Fanex.Maintenance.Controller
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
 
-            ViewBag.Success = _siteService.InsertOrUpdate(model);
+            var commond = _siteService.InsertOrUpdate(model);
+            if (!commond.IsSuccessful)
+            {
+                return View(model);
+            }
+            ViewBag.Success = commond.IsSuccessful;
+
 
             return View(model);
         }
@@ -487,7 +514,14 @@ namespace Fanex.Maintenance.Controller
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
 
-            ViewBag.Success = _databaseServerService.InsertOrUpdate(model);
+            var commond = _databaseServerService.InsertOrUpdate(model);
+
+            if (!commond.IsSuccessful)
+            {
+                return View(model);
+            }
+
+            ViewBag.Success = commond.IsSuccessful;
 
             return View(model);
         }
@@ -519,7 +553,15 @@ namespace Fanex.Maintenance.Controller
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
 
-            ViewBag.Success = _databaseServerService.InsertOrUpdate(model);
+            var commond = _databaseServerService.InsertOrUpdate(model);
+
+            if (!commond.IsSuccessful)
+            {
+                return View(model);
+            }
+
+            ViewBag.Success = commond.IsSuccessful;
+
             return View(model);
         }
 
@@ -591,6 +633,16 @@ namespace Fanex.Maintenance.Controller
 
         #endregion Quick change second (backup) connection from db server
 
+        #region Log management
+
+        [HttpGet]
+        public ActionResult Log()
+        {
+            return View();
+        }
+
+        #endregion
+
         #region Ajax
 
         [HttpGet]
@@ -625,7 +677,15 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var check = _connectionService.UpdateDefaultConnection(aliasId, conectionId);
+                var model = new ConnectionUpdateDefaultCriteria
+                {
+                    AliasId = aliasId,
+                    ConnectionId = conectionId,
+                    Modifier = CurrentSession.UserId,
+                    ModifiedDate = DateTime.Now
+                };
+
+                var check = _connectionService.UpdateDefaultConnection(model);
 
                 return Json(check.ToString().ToLower());
             }
@@ -638,7 +698,14 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var commond = _aliasService.UpdateStatus(aliasId, isActive);
+                var model = new AliasUpdateStatusCriteria
+                {
+                    AliasId = aliasId,
+                    IsActive = isActive,
+                    ModifiedDate = DateTime.Now,
+                    Modifier = CurrentSession.UserId
+                };
+                var commond = _aliasService.UpdateStatus(model);
 
                 return Json(commond.IsSuccessful.ToString().ToLower());
             }
@@ -676,9 +743,17 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var check = _siteService.UpdateStatus(siteId, isActive);
+                var model = new SiteUpdateStatusCriteria
+                {
+                    IsActive = isActive,
+                    ModifiedDate = DateTime.Now,
+                    Modifier = CurrentSession.UserId,
+                    SiteId = siteId
+                };
 
-                return Json(check.ToString().ToLower());
+                var command = _siteService.UpdateStatus(model);
+
+                return Json(command.IsSuccessful.ToString().ToLower());
             }
 
             return Json(null);
@@ -689,9 +764,18 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var check = _databaseServerService.UpdateStatus(dbServerId, isActive);
+                var model = new DatabaseServerUpdateStatusCriteria
+                {
+                    DbServerId = dbServerId,
+                    IsActive = isActive,
+                    Modifier = CurrentSession.UserId,
+                    ModifiedDate = DateTime.Now
 
-                return Json(check.ToString().ToLower());
+                };
+
+                var commond = _databaseServerService.UpdateStatus(model);
+
+                return Json(commond.IsSuccessful.ToString().ToLower());
             }
 
             return Json(null);
@@ -717,7 +801,9 @@ namespace Fanex.Maintenance.Controller
             {
                 var criteria = new ConnectionChangeConnectionFromDbServerCriteria
                 {
-                    AliasConnection = aliasConnection
+                    AliasConnection = aliasConnection,
+                    ModifiedDate = DateTime.Now,
+                    Modifier = CurrentSession.UserId
                 };
 
                 return Json(_connectionService.InsertOrUpdate(criteria));

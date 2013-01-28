@@ -1,0 +1,25 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="ServiceContext.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2013.1.25">Created</change>
+// </history>
+
+namespace Fanex.Maintenance.Service.Impl
+{
+    using System.Diagnostics.CodeAnalysis;
+    using Fanex.Maintenance.Service.Interface;
+
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    public class ServiceContext : IServiceContext
+    {
+        /// <summary>
+        /// who perform a business action
+        /// </summary>
+        public int UserId { get; set; }
+
+        public string Ip { get; set; }
+    }
+}

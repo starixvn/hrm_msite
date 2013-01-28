@@ -12,11 +12,16 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
     using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
     using System.Text;
+    using System;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionChangeConnectionFromDbServerCriteria : CriteriaBase
     {
         private readonly string _formatXml = "<AliasConnection AliasId='{0}' ConnectionId='{1}'/>";
+
+        public int Modifier { get; set; }
+
+        public DateTime ModifiedDate { get; set; }
 
         public string Value
         {

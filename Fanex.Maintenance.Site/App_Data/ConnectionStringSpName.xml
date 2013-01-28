@@ -17,6 +17,7 @@
         <Setting Key="ConnectionString_Site_GetById" SpName="ConnectionString_Site_GetById" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Site_Insert" SpName="ConnectionString_Site_Insert" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Site_Update" SpName="ConnectionString_Site_Update" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Site_UpdateStatus" SpName="ConnectionString_Site_UpdateStatus" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Site_GetByDbServer" SpName="ConnectionString_Site_GetByDbServer" DbName="connectionstring" Plain="1" />
     </Function>
     <Function Name="ConnectionString">

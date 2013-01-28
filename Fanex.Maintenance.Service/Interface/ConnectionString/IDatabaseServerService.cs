@@ -29,8 +29,8 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
 
         DatabaseServer GetById(int id);
 
-        bool InsertOrUpdate(ICriteria criteria);
+        ICommandResult InsertOrUpdate(ICriteria criteria);
 
-        bool UpdateStatus(int dbServerId, bool isActive);
+        ICommandResult UpdateStatus(ICriteria criteria);
     }
 }

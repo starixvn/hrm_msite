@@ -18,11 +18,13 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.Data;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using NAP.Framework.Data;
+    using System.Collections;
+    using Fanex.Maintenance.Criteria.Misc;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class DatabaseServerRepository : IDatabaseServerRepository
+    public class DatabaseServerRepository : BaseRepository<DatabaseServer>, IDatabaseServerRepository
     {
         public IEnumerable<DatabaseServer> GetAll(ICriteria criteria)
         {
@@ -60,17 +62,19 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
-        public int InsertOrUpdate(ICriteria criteria)
+        public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
             try
             {
+                Hashtable hash = criteria.GetSpParams();
+                hash = logCriteria.AddSpParams(hash);
+                hash = (new ResultCriteria()).AddSpParams(hash);
+
                 using (var db = new ObjectDb(criteria.GetSettingKey()))
                 {
-                    var hsParam = criteria.GetSpParams();
+                    db.ExecuteNonQuery(hash);
 
-                    db.ExecuteNonQuery(hsParam);
-
-                    return (int)hsParam["dbserverid"];
+                    return GetCommandResult(hash);
                 }
             }
             catch (Exception ex)

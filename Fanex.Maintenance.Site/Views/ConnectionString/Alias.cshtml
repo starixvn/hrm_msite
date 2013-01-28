@@ -21,6 +21,7 @@
     <h1>
         <span class="title">@ViewBag.Title</span>
         @Html.ActionLink("+ Create New", "CreateAlias", "ConnectionString", null, new { @class = "lnk" })
+        @Html.ActionLink("-> Switch Backup Connection", "ChangeSecondConnection", "ConnectionString", null, new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm())
@@ -46,7 +47,7 @@
                 @Html.TextBoxFor(m => m.Alias)
             </div>
             <div class="submit">
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" />                
             </div>
         </div>
     </section>

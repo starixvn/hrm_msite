@@ -11,6 +11,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 {
     using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
+    using System;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionUpdateDefaultCriteria : CriteriaBase
@@ -18,6 +19,10 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
         public int AliasId { get; set; }
 
         public int ConnectionId { get; set; }
+
+        public int Modifier { get; set; }
+
+        public DateTime ModifiedDate { get; set; }
 
         public override bool IsValid()
         {
