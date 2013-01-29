@@ -16,6 +16,11 @@
             box-shadow: none;
             padding: 10px 0 0;
         }
+        
+        #filter-bar .filter-form .edit-field select
+        {
+            width: 200px;
+        }
     </style>
 }
 @section Headline {
@@ -31,7 +36,7 @@
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.DbServerId)
             </div>
-            <div class="edit-field">
+            <div class="edit-field width-200">
                 @Html.DropDownListFor(m => m.DbServerId, (List<SelectListItem>)ViewBag.DatabaseServer)
             </div>
             <div class="submit">

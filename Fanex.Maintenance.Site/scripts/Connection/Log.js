@@ -71,4 +71,14 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#FilterType').change(function () {
+        var filter = $(this).val();
+        if (filter == "4") {
+            $('#Name').attr('disabled', 'disabled');
+        }
+        else {
+            $('#Name').removeAttr('disabled');
+        }
+    });
 });

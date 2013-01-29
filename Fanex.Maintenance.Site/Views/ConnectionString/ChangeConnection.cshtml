@@ -16,12 +16,16 @@
             box-shadow: none;
             padding: 10px 0 0;
         }
+        #filter-bar .filter-form .edit-field select
+        {
+            width: 200px;
+        }
     </style>
 }
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
-         @Html.ActionLink("← " + ViewResource.Back_To_List, "Alias", "ConnectionString", null, new { @class = "lnk" })
+        @Html.ActionLink("← " + ViewResource.Back_To_List, "Alias", "ConnectionString", null, new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm())
@@ -31,13 +35,13 @@
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.FromDbServerId)
             </div>
-            <div class="edit-field">
+            <div class="edit-field width-200">
                 @Html.DropDownListFor(m => m.FromDbServerId, (List<SelectListItem>)ViewBag.DatabaseServer)
             </div>
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.ToDbServerId)
             </div>
-            <div class="edit-field">
+            <div class="edit-field width-200">
                 @Html.DropDownListFor(m => m.ToDbServerId, (List<SelectListItem>)ViewBag.DatabaseServer)
             </div>
             <div class="submit">
