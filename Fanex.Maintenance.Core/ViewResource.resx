@@ -699,4 +699,43 @@
   <data name="Server_Error" xml:space="preserve">
     <value>Server Error</value>
   </data>
+  <data name="Execute_SP_Log" xml:space="preserve">
+    <value>Execute SP Log</value>
+  </data>
+  <data name="Log_Management" xml:space="preserve">
+    <value>Log Management</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Log_Date" xml:space="preserve">
+    <value>Log Date</value>
+  </data>
+  <data name="Log_ID" xml:space="preserve">
+    <value>Log Id</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Field_Name" xml:space="preserve">
+    <value>Field Name</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Old_Value" xml:space="preserve">
+    <value>Old Value</value>
+  </data>
+  <data name="New_Value" xml:space="preserve">
+    <value>New Value</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
 </root>

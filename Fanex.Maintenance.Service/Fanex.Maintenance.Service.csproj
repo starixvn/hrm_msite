@@ -60,6 +60,7 @@
     <Compile Include="Impl\BaseService.cs" />
     <Compile Include="Impl\ConnectionString\AliasService.cs" />
     <Compile Include="Impl\ConnectionString\ConnectionService.cs" />
+    <Compile Include="Impl\ConnectionString\LogService.cs" />
     <Compile Include="Impl\ConnectionString\SiteService.cs" />
     <Compile Include="Impl\ConnectionString\DatabaseServiceService.cs" />
     <Compile Include="Impl\JobManagement\ScheduleService.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Impl\MailService.cs" />
     <Compile Include="Impl\ServiceContext.cs" />
     <Compile Include="Interface\ConnectionString\IConnectionService.cs" />
+    <Compile Include="Interface\ConnectionString\ILogService.cs" />
     <Compile Include="Interface\ConnectionString\ISiteService.cs" />
     <Compile Include="Interface\ConnectionString\IAliasService.cs" />
     <Compile Include="Interface\ConnectionString\IDatabaseServerService.cs" />

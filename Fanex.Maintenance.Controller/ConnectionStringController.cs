@@ -20,6 +20,9 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.ConnectionString.Site;
     using Fanex.Maintenance.Service.Impl.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
+    using Fanex.Maintenance.Criteria.ConnectionString.LogExecSp;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
+    using Fanex.NAP.Core.Helpers;
 
     /// <summary>
     /// TODO: Update summary.
@@ -36,12 +39,14 @@ namespace Fanex.Maintenance.Controller
 
         private readonly IConnectionService _connectionService;
 
+        private readonly ILogService _logService;
+
         #endregion Member
 
         #region Ctor
 
         public ConnectionStringController()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null)
         {
         }
 
@@ -49,13 +54,15 @@ namespace Fanex.Maintenance.Controller
             IAliasService aliasService,
             IDatabaseServerService databaseServerService,
             ISiteService siteService,
-            IConnectionService connectionService
+            IConnectionService connectionService,
+            ILogService logServer
             )
         {
             _aliasService = aliasService ?? new AliasService { ServiceContext = ServiceContext };
             _databaseServerService = databaseServerService ?? new DatabaseServiceService { ServiceContext = ServiceContext };
             _siteService = siteService ?? new SiteService { ServiceContext = ServiceContext };
             _connectionService = connectionService ?? new ConnectionService { ServiceContext = ServiceContext };
+            _logService = logServer ?? new LogService { ServiceContext = ServiceContext };
         }
 
         #endregion Ctor
@@ -636,11 +643,61 @@ namespace Fanex.Maintenance.Controller
         #region Log management
 
         [HttpGet]
-        public ActionResult Log()
+        public ActionResult Log(
+            int id = 1,
+            int size = 20,
+            string q = "",
+            string username = "",
+            DateTime? from = null,
+            DateTime? to = null,
+            int filterBy = 1)
         {
-            return View();
+            var criteria = new LogExecSpSearchCriteria
+            {
+                PageIndex = id,
+                PageSize = size,
+                Name = q,
+                Username = username,
+                From = from ?? DateTime.Now,
+                To = to ?? DateTime.Now.AddDays(1),
+                FilterType = filterBy
+            };
+
+
+            int totalLogs = 0;
+
+            criteria.Name = criteria.Name ?? string.Empty;
+
+            IQueryable<LogExecSp> listLog = _logService.SearchExecSp(
+                                                criteria.PageIndex,
+                                                criteria.PageSize,
+                                                out totalLogs,
+                                                criteria.Name,
+                                                criteria.Username,
+                                                criteria.From,
+                                                criteria.To,
+                                                criteria.FilterType);
+            ViewBag.ListLog = new PagerList<LogExecSp>(criteria.PageIndex, criteria.PageSize, totalLogs, listLog);
+
+            return View(criteria);
         }
 
+        [HttpPost]
+        public ActionResult Log(LogExecSpSearchCriteria model)
+        {
+            return RedirectToAction(
+             "Log",
+             new
+             {
+                 id = model.PageIndex,
+                 size = model.PageSize,
+                 q = model.Name,
+                 username = model.Username,
+                 from = model.From.ToString("MMM dd,yyyy"),
+                 to = model.To.ToString("MMM dd,yyyy"),
+                 filterBy = model.FilterType
+             });
+        }
         #endregion
 
         #region Ajax
@@ -812,6 +869,121 @@ namespace Fanex.Maintenance.Controller
             return Json(false);
         }
 
+        [HttpPost]
+        public ActionResult LogDetail(int id)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var log = _logService.GetById(id);
+
+                return View(log);
+            }
+
+            return View(new LogExecSp());
+        }
+
         #endregion Ajax
+
+        #region Partial view
+
+        public PartialViewResult _ConnectionLog_Alias_Insert(LogExecSp log)
+        {
+            var listSite = new List<LogData>();
+            var listData = _logService.GetValueAliasInsert(log, ref listSite);
+
+            ViewBag.ListSite = listSite;
+
+            return PartialView(listData);
+        }
+
+        public PartialViewResult _ConnectionLog_Alias_Update(LogExecSp log)
+        {
+            var listSite = new List<LogData>();
+            var listOldSite = new List<LogData>();
+
+            var listData = _logService.GetValueAliasUpdate(log, ref listSite, ref listOldSite);
+
+            ViewBag.ListSite = listSite;
+            ViewBag.ListOldSite = listOldSite;
+
+            return PartialView(listData);
+        }
+
+        public PartialViewResult _ConnectionLog_LogData(LogExecSp log)
+        {
+            var listData = new List<LogData>();
+
+            if (log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_Insert)
+            {
+                listData = _logService.GetValueConnectionInsert(log);
+
+                ViewBag.IsNew = true;
+
+                return PartialView(listData);
+            }
+
+            if (log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_Update
+                || log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_UpdateDefaultConnection)
+            {
+                listData = _logService.GetValueConnectionUpdate(log);
+
+                ViewBag.IsNew = false;
+
+                return PartialView(listData);
+            }
+
+            if (log.ActionId == (int)ConLogAction.ConnectionString_DatabaseServer_Insert)
+            {
+                listData = _logService.GetValueDatabaseServerInsert(log);
+
+                ViewBag.IsNew = true;
+
+                return PartialView(listData);
+            }
+
+            if (log.ActionId == (int)ConLogAction.ConnectionString_DatabaseServer_Update)
+            {
+                listData = _logService.GetValueDatabaseServerUpdate(log);
+
+                ViewBag.IsNew = false;
+
+                return PartialView(listData);
+            }
+
+            if (log.ActionId == (int)ConLogAction.ConnectionString_Site_Insert)
+            {
+                listData = _logService.GetValueSiteInsert(log);
+
+                ViewBag.IsNew = true;
+
+                return PartialView(listData);
+            }
+
+            if (log.ActionId == (int)ConLogAction.ConnectionString_Site_Update)
+            {
+                listData = _logService.GetValueSiteUpdate(log);
+
+                ViewBag.IsNew = false;
+
+                return PartialView(listData);
+            }
+
+            listData = _logService.GetValueUpdateStatus(log);
+
+            ViewBag.IsNew = false;
+
+            return PartialView(listData);
+        }
+
+        public PartialViewResult _ConnectionLog_LogData_ChangeConnection(LogExecSp log)
+        {
+            var listOld = new List<ConnectionString>();
+            var listConnection = _logService.GetValueChangeConnection(log, ref listOld);
+
+            ViewBag.ListOld = listOld;
+
+            return PartialView(listConnection);
+        }
+        #endregion
     }
 }

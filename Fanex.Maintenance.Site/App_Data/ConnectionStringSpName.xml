@@ -52,4 +52,8 @@
         <Setting Key="ConnectionString_DatabaseServer_UpdateStatus" SpName="ConnectionString_DatabaseServer_UpdateStatus" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_DatabaseServer_GetById" SpName="ConnectionString_DatabaseServer_GetById" DbName="connectionstring" Plain="1" />
     </Function>
+    <Function Name="LogExecSp">
+        <Setting Key="ConnectionString_LogExecSp_Search" SpName="ConnectionString_LogExecSp_Search" DbName="connectionstring" Plain="1"  />
+        <Setting Key="ConnectionString_LogExecSp_GetById" SpName="ConnectionString_LogExecSp_GetById" DbName="connectionstring" Plain="1"  />
+    </Function>
 </Functions>

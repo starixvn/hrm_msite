@@ -61,6 +61,8 @@
     <Compile Include="Model\ConnectionString\ConnectionStringConnection.cs" />
     <Compile Include="Model\ConnectionString\AliasConnectionStringConnection.cs" />
     <Compile Include="Model\ConnectionString\DatabaseServerSite.cs" />
+    <Compile Include="Model\ConnectionString\LogData.cs" />
+    <Compile Include="Model\ConnectionString\LogExecSp.cs" />
     <Compile Include="Model\ConnectionString\SiteAlias.cs" />
     <Compile Include="Model\CPUInfo.cs" />
     <Compile Include="Model\JobLog.cs" />

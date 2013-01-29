@@ -75,6 +75,15 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Web\AppSetting.cs" />
+    <None Include="Web\ConnectionString\ConLogAction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConLogAction.cs</LastGenOutput>
+    </None>
+    <Compile Include="Web\ConnectionString\ConLogAction.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConLogAction.tt</DependentUpon>
+    </Compile>
     <Compile Include="Web\Constants.cs" />
     <Compile Include="Web\HtmlHelperExtensions.cs" />
   </ItemGroup>
@@ -84,6 +93,9 @@
       <LastGenOutput>ViewResource.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

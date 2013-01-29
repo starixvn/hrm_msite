@@ -67,6 +67,8 @@
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerUpdateCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerInsertCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetAllCriteria.cs" />
+    <Compile Include="ConnectionString\LogExecSp\LogExecSpSearchCriteria.cs" />
+    <Compile Include="ConnectionString\LogExecSp\LogGetByIdCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteGetByDbServerCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteUpdateStatusCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteUpdateCriteria.cs" />

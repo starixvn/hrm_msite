@@ -182,6 +182,8 @@
     <Reference Include="UMControllerLibrary">
       <HintPath>..\_Dependencies\Others\UMControllerLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\UserLogin\Controllers\BaseController.cs" />
@@ -222,6 +224,7 @@
     <Content Include="scripts\Connection\Alias.js" />
     <Content Include="scripts\Connection\Connection.js" />
     <Content Include="scripts\Connection\ChangeConnection.js" />
+    <Content Include="scripts\Connection\Log.js" />
     <Content Include="scripts\Connection\DatabaseSever.js" />
     <Content Include="scripts\Connection\Site.js" />
     <Content Include="scripts\Connection\CreateAlias.js" />
@@ -1681,6 +1684,11 @@
     <Content Include="Views\CommondError\Error.cshtml" />
     <Content Include="Views\CommondError\NotFound.cshtml" />
     <Content Include="Views\ConnectionString\Log.cshtml" />
+    <Content Include="Views\ConnectionString\_ConnectionLog_Alias_Insert.cshtml" />
+    <Content Include="Views\ConnectionString\LogDetail.cshtml" />
+    <Content Include="Views\ConnectionString\_ConnectionLog_Alias_Update.cshtml" />
+    <Content Include="Views\ConnectionString\_ConnectionLog_LogData.cshtml" />
+    <Content Include="Views\ConnectionString\_ConnectionLog_LogData_ChangeConnection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
