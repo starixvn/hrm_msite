@@ -31,7 +31,7 @@ namespace Fanex.Maintenance.Controller
 
         protected readonly IServiceContext ServiceContext;
 
-        protected CurrentSession CurrentSession;
+        protected readonly CurrentSession CurrentSession;
 
         private ViewFlags _viewFlags;
 

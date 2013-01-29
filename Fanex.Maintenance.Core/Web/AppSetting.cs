@@ -143,7 +143,7 @@ namespace Fanex.Maintenance.Core.Web
         }
 
         /// <summary>
-        /// Notificatino server
+        /// Notification server
         /// </summary>
         public static bool NotifiServer
         {

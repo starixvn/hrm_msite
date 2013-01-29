@@ -11,22 +11,21 @@ namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.ConnectionString.Domain;
     using Fanex.Maintenance.Criteria.ConnectionString.Alias;
     using Fanex.Maintenance.Criteria.ConnectionString.Connection;
     using Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer;
+    using Fanex.Maintenance.Criteria.ConnectionString.LogExecSp;
     using Fanex.Maintenance.Criteria.ConnectionString.Site;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Service.Impl.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
-    using Fanex.Maintenance.Criteria.ConnectionString.LogExecSp;
-    using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.NAP.Core.Helpers;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ConnectionStringController : BaseController
     {
         #region Member
@@ -55,8 +54,7 @@ namespace Fanex.Maintenance.Controller
             IDatabaseServerService databaseServerService,
             ISiteService siteService,
             IConnectionService connectionService,
-            ILogService logServer
-            )
+            ILogService logServer)
         {
             _aliasService = aliasService ?? new AliasService { ServiceContext = ServiceContext };
             _databaseServerService = databaseServerService ?? new DatabaseServiceService { ServiceContext = ServiceContext };
@@ -67,6 +65,34 @@ namespace Fanex.Maintenance.Controller
 
         #endregion Ctor
 
+        #region Private
+
+        private List<SelectListItem> GetSelectListDatabaseServer(int? selectedId = null)
+        {
+            var listDatabaseServer = _databaseServerService.GetAll();
+
+            return listDatabaseServer.Select(d => new SelectListItem
+            {
+                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
+                Value = d.Id.ToString(),
+                Selected = selectedId != null ? d.Id == selectedId : false
+            }).ToList();
+        }
+
+        private List<SelectListItem> GetSelectListSite(int? selectedId = null)
+        {
+            var listSite = _siteService.GetAll();
+
+            return listSite.Select(s => new SelectListItem
+            {
+                Text = s.Name,
+                Value = s.Id.ToString(),
+                Selected = selectedId != null ? s.Id == selectedId : false
+            }).ToList();
+        }
+
+        #endregion
+
         #region Manage Alias
 
         #region Mange
@@ -74,20 +100,9 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult Alias()
         {
-            var listDatabaseServer = _databaseServerService.GetAll();
-            var listSite = _siteService.GetAll();
+            ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
-            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString()
-            }).ToList();
-
-            ViewBag.Site = listSite.Select(s => new SelectListItem
-            {
-                Text = s.Name,
-                Value = s.Id.ToString()
-            }).ToList();
+            ViewBag.Site = GetSelectListSite();
 
             var listAlias = _aliasService.GetAll();
             ViewBag.ListAlias = listAlias;
@@ -98,22 +113,9 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult Alias(AliasGetAllCriteria model)
         {
-            var listDatabaseServer = _databaseServerService.GetAll();
-            var listSite = _siteService.GetAll();
+            ViewBag.DatabaseServer = GetSelectListSite(model.DbServerId);
 
-            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString(),
-                Selected = model.DbServerId == d.Id
-            }).ToList();
-
-            ViewBag.Site = listSite.Select(s => new SelectListItem
-            {
-                Text = s.Name,
-                Value = s.Id.ToString(),
-                Selected = model.SiteId == s.Id
-            }).ToList();
+            ViewBag.Site = GetSelectListSite(model.SiteId);
 
             var listAlias = _aliasService.GetAll(model.Alias, model.DbServerId, model.SiteId);
             ViewBag.ListAlias = listAlias;
@@ -171,6 +173,7 @@ namespace Fanex.Maintenance.Controller
             {
                 return RedirectToAction("NotFound", "CommondError");
             }
+
             ViewBag.Alias = alias;
 
             // get list site
@@ -199,6 +202,7 @@ namespace Fanex.Maintenance.Controller
             {
                 return View(model);
             }
+
             ViewBag.Success = command.IsSuccessful;
 
             var alias = _aliasService.Get(model.AliasId);
@@ -239,12 +243,7 @@ namespace Fanex.Maintenance.Controller
             var alias = _aliasService.Get(id);
             ViewBag.Alias = alias;
 
-            var listDbServer = _databaseServerService.GetAll();
-            ViewBag.DbServer = listDbServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString()
-            }).ToList();
+            ViewBag.DbServer = GetSelectListDatabaseServer();
 
             var listConnection = _connectionService.GetByAlias(id);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
@@ -265,12 +264,7 @@ namespace Fanex.Maintenance.Controller
             var alias = _aliasService.Get(model.AliasId);
             ViewBag.Alias = alias;
 
-            var listDbServer = _databaseServerService.GetAll();
-            ViewBag.DbServer = listDbServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString()
-            }).ToList();
+            ViewBag.DbServer = GetSelectListDatabaseServer();
 
             var listConnection = _connectionService.GetByAlias(model.AliasId);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
@@ -287,6 +281,7 @@ namespace Fanex.Maintenance.Controller
             {
                 return View(model);
             }
+
             ViewBag.Success = commond.IsSuccessful;
 
             return View(model);
@@ -305,13 +300,7 @@ namespace Fanex.Maintenance.Controller
                 return RedirectToAction("NotFound", "CommondError");
             }
 
-            var listDbServer = _databaseServerService.GetAll();
-            ViewBag.DbServer = listDbServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString(),
-                Selected = d.Id == connection.Server.Id
-            }).ToList();
+            ViewBag.DbServer = GetSelectListDatabaseServer(connection.Server.Id);
 
             var listConnection = _connectionService.GetByAlias(connection.Alias.Id);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
@@ -343,13 +332,7 @@ namespace Fanex.Maintenance.Controller
         {
             var connection = _connectionService.GetById(model.ConnectionId);
 
-            var listDbServer = _databaseServerService.GetAll();
-            ViewBag.DbServer = listDbServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString(),
-                Selected = d.Id == connection.Server.Id
-            }).ToList();
+            ViewBag.DbServer = GetSelectListDatabaseServer(connection.Server.Id);
 
             var listConnection = _connectionService.GetByAlias(connection.Alias.Id);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
@@ -367,6 +350,7 @@ namespace Fanex.Maintenance.Controller
             {
                 return View(model);
             }
+
             ViewBag.Success = commond.IsSuccessful;
 
             return View(model);
@@ -387,11 +371,7 @@ namespace Fanex.Maintenance.Controller
 
             var listDatabaseServer = _databaseServerService.GetAll();
 
-            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString()
-            }).ToList();
+            ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
             ViewBag.ListSite = listSite;
 
@@ -405,11 +385,7 @@ namespace Fanex.Maintenance.Controller
 
             var listDatabaseServer = _databaseServerService.GetAll();
 
-            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString()
-            }).ToList();
+            ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
             ViewBag.ListSite = listSite;
 
@@ -437,6 +413,7 @@ namespace Fanex.Maintenance.Controller
             {
                 return View(model);
             }
+
             ViewBag.Success = commond.IsSuccessful;
 
             return View(model);
@@ -473,8 +450,8 @@ namespace Fanex.Maintenance.Controller
             {
                 return View(model);
             }
-            ViewBag.Success = commond.IsSuccessful;
 
+            ViewBag.Success = commond.IsSuccessful;
 
             return View(model);
         }
@@ -581,12 +558,7 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult ChangeConnection()
         {
-            var listDatabaseServer = _databaseServerService.GetAll();
-            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString()
-            }).ToList();
+            ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
             return View();
         }
@@ -594,12 +566,7 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult ChangeConnection(DatabaseServerGetConnectionFromDbServerCriteria model)
         {
-            var listDatabaseServer = _databaseServerService.GetAll();
-            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString()
-            }).ToList();
+            ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
             var list = _aliasService.GetSwitchConnection(model.FromDbServerId, model.ToDbServerId);
             ViewBag.ListConnection = list;
@@ -614,11 +581,7 @@ namespace Fanex.Maintenance.Controller
         public ActionResult ChangeSecondConnection()
         {
             var listDatabaseServer = _databaseServerService.GetAll();
-            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString()
-            }).ToList();
+            ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
             return View();
         }
@@ -627,11 +590,7 @@ namespace Fanex.Maintenance.Controller
         public ActionResult ChangeSecondConnection(DatabaseServerGetSecondConnectionFromDbServerCriteria model)
         {
             var listDatabaseServer = _databaseServerService.GetAll();
-            ViewBag.DatabaseServer = listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString()
-            }).ToList();
+            ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
             var list = _aliasService.GetSwitchSecondConnection(model.DbServerId);
             ViewBag.ListConnection = list;
@@ -662,7 +621,6 @@ namespace Fanex.Maintenance.Controller
                 To = to ?? DateTime.Now.AddDays(1),
                 FilterType = filterBy
             };
-
 
             int totalLogs = 0;
 
@@ -698,7 +656,8 @@ namespace Fanex.Maintenance.Controller
                  filterBy = model.FilterType
              });
         }
-        #endregion
+
+        #endregion Log management
 
         #region Ajax
 
@@ -827,7 +786,6 @@ namespace Fanex.Maintenance.Controller
                     IsActive = isActive,
                     Modifier = CurrentSession.UserId,
                     ModifiedDate = DateTime.Now
-
                 };
 
                 var commond = _databaseServerService.UpdateStatus(model);
@@ -984,6 +942,7 @@ namespace Fanex.Maintenance.Controller
 
             return PartialView(listConnection);
         }
-        #endregion
+
+        #endregion Partial view
     }
 }

@@ -15,7 +15,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionGetSecondaryConectionCriteria : CriteriaBase
     {
-        public int ConectionId { get; set; }
+        public int ConnectionId { get; set; }
 
         public override bool IsValid()
         {

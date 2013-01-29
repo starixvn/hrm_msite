@@ -68,7 +68,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             {
                 var criteria = new ConnectionGetByIdCriteria
                 {
-                    ConectionId = id
+                    ConnectionId = id
                 };
 
                 return _connectionRepository.GetById(criteria);
@@ -85,7 +85,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             {
                 var criteria = new ConnectionGetSecondaryConectionCriteria
                 {
-                    ConectionId = id
+                    ConnectionId = id
                 };
 
                 return _connectionRepository.GetSecondaryConection(criteria);
