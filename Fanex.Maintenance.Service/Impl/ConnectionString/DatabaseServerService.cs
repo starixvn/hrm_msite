@@ -56,7 +56,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                Logging.Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
             return null;
@@ -75,7 +75,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                Logging.Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
             return null;
@@ -138,7 +138,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                Logger.Log.Error(ex.Message, ex);
+                HandleException(ex);
             }
 
             return null;
