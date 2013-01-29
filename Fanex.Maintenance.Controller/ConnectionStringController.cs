@@ -57,7 +57,7 @@ namespace Fanex.Maintenance.Controller
             ILogService logServer)
         {
             _aliasService = aliasService ?? new AliasService { ServiceContext = ServiceContext };
-            _databaseServerService = databaseServerService ?? new DatabaseServiceService { ServiceContext = ServiceContext };
+            _databaseServerService = databaseServerService ?? new DatabaseServerService { ServiceContext = ServiceContext };
             _siteService = siteService ?? new SiteService { ServiceContext = ServiceContext };
             _connectionService = connectionService ?? new ConnectionService { ServiceContext = ServiceContext };
             _logService = logServer ?? new LogService { ServiceContext = ServiceContext };

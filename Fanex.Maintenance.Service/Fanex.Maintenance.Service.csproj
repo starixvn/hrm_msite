@@ -62,7 +62,7 @@
     <Compile Include="Impl\ConnectionString\ConnectionService.cs" />
     <Compile Include="Impl\ConnectionString\LogService.cs" />
     <Compile Include="Impl\ConnectionString\SiteService.cs" />
-    <Compile Include="Impl\ConnectionString\DatabaseServiceService.cs" />
+    <Compile Include="Impl\ConnectionString\DatabaseServerService.cs" />
     <Compile Include="Impl\JobManagement\ScheduleService.cs" />
     <Compile Include="Impl\JobManagement\JobService.cs" />
     <Compile Include="Impl\JobManagement\ServerService.cs" />

@@ -58,8 +58,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                throw ex;
+                HandleException(ex);
             }
+
+            return null;
         }
 
         public ConnectionString GetById(int id)
@@ -75,8 +77,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                throw ex;
+                HandleException(ex);
             }
+
+            return null;
         }
 
         public IEnumerable<ConnectionString> GetSecondaryConection(int id)
@@ -92,8 +96,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             }
             catch (Exception ex)
             {
-                throw ex;
+                HandleException(ex);
             }
+
+            return null;
         }
 
         public ICommandResult UpdateDefaultConnection(ICriteria criteria)

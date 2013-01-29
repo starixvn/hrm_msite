@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="DatabaseServiceService.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseServerService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Criteria.Misc;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    public class DatabaseServiceService : BaseService, IDatabaseServerService
+    public class DatabaseServerService : BaseService, IDatabaseServerService
     {
         #region Member
 
@@ -34,12 +34,12 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #region Ctor
 
-        public DatabaseServiceService()
+        public DatabaseServerService()
             : this(null)
         {
         }
 
-        public DatabaseServiceService(IDatabaseServerRepository databaseServerRepository)
+        public DatabaseServerService(IDatabaseServerRepository databaseServerRepository)
         {
             _databaseServerRepository = databaseServerRepository ?? new DatabaseServerRepository();
         }
