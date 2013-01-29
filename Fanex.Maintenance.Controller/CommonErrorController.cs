@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="CommondErrorController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="CommonErrorController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -13,7 +13,7 @@ namespace Fanex.Maintenance.Controller
     using System.Web.Mvc;
 
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
-    public class CommondErrorController : Controller
+    public class CommonErrorController : Controller
     {
         public ActionResult Error(string aspxErrorPath)
         {

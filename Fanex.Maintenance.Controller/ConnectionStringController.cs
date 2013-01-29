@@ -171,7 +171,7 @@ namespace Fanex.Maintenance.Controller
             var alias = _aliasService.Get(id);
             if (ReferenceEquals(alias, null))
             {
-                return RedirectToAction("NotFound", "CommondError");
+                return RedirectToAction("NotFound", "CommonError");
             }
 
             ViewBag.Alias = alias;
@@ -297,7 +297,7 @@ namespace Fanex.Maintenance.Controller
             var connection = _connectionService.GetById(id);
             if (ReferenceEquals(connection, null))
             {
-                return RedirectToAction("NotFound", "CommondError");
+                return RedirectToAction("NotFound", "CommonError");
             }
 
             ViewBag.DbServer = GetSelectListDatabaseServer(connection.Server.Id);
