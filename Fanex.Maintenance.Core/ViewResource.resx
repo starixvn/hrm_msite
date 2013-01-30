@@ -595,7 +595,7 @@
     <value>Change Connection</value>
   </data>
   <data name="Connection String" xml:space="preserve">
-    <value>Connecion String</value>
+    <value>Connection String</value>
   </data>
   <data name="Database_Server" xml:space="preserve">
     <value>Database Server</value>
@@ -661,7 +661,7 @@
     <value>Manage Connection</value>
   </data>
   <data name="Conection" xml:space="preserve">
-    <value>Conection</value>
+    <value>Connection</value>
   </data>
   <data name="IsDefault" xml:space="preserve">
     <value>Is Default</value>
@@ -737,5 +737,8 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
   </data>
 </root>

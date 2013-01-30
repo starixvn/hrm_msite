@@ -93,11 +93,11 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.Label(ViewResource.Active)
+                @Html.Label(ViewResource.Status)
             </div>
             <div class="edit-field">
                 @Html.CheckBoxFor(m => m.IsActive)
-                @Html.LabelFor(m => m.IsActive, ViewResource.IsActive)
+                @Html.LabelFor(m => m.IsActive, ViewResource.Active)
             </div>
         </div>
         <div class="form-row">

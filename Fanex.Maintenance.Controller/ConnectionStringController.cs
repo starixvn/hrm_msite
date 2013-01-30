@@ -276,13 +276,13 @@ namespace Fanex.Maintenance.Controller
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
 
-            var commond = _connectionService.InsertOrUpdate(model);
-            if (!commond.IsSuccessful)
+            var command = _connectionService.InsertOrUpdate(model);
+            if (!command.IsSuccessful)
             {
                 return View(model);
             }
 
-            ViewBag.Success = commond.IsSuccessful;
+            ViewBag.Success = command.IsSuccessful;
 
             return View(model);
         }
@@ -345,13 +345,13 @@ namespace Fanex.Maintenance.Controller
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
 
-            var commond = _connectionService.InsertOrUpdate(model);
-            if (!commond.IsSuccessful)
+            var command = _connectionService.InsertOrUpdate(model);
+            if (!command.IsSuccessful)
             {
                 return View(model);
             }
 
-            ViewBag.Success = commond.IsSuccessful;
+            ViewBag.Success = command.IsSuccessful;
 
             return View(model);
         }
@@ -408,13 +408,13 @@ namespace Fanex.Maintenance.Controller
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
 
-            var commond = _siteService.InsertOrUpdate(model);
-            if (!commond.IsSuccessful)
+            var command = _siteService.InsertOrUpdate(model);
+            if (!command.IsSuccessful)
             {
                 return View(model);
             }
 
-            ViewBag.Success = commond.IsSuccessful;
+            ViewBag.Success = command.IsSuccessful;
 
             return View(model);
         }
@@ -445,13 +445,13 @@ namespace Fanex.Maintenance.Controller
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
 
-            var commond = _siteService.InsertOrUpdate(model);
-            if (!commond.IsSuccessful)
+            var command = _siteService.InsertOrUpdate(model);
+            if (!command.IsSuccessful)
             {
                 return View(model);
             }
 
-            ViewBag.Success = commond.IsSuccessful;
+            ViewBag.Success = command.IsSuccessful;
 
             return View(model);
         }
@@ -498,14 +498,14 @@ namespace Fanex.Maintenance.Controller
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
 
-            var commond = _databaseServerService.InsertOrUpdate(model);
+            var command = _databaseServerService.InsertOrUpdate(model);
 
-            if (!commond.IsSuccessful)
+            if (!command.IsSuccessful)
             {
                 return View(model);
             }
 
-            ViewBag.Success = commond.IsSuccessful;
+            ViewBag.Success = command.IsSuccessful;
 
             return View(model);
         }
@@ -537,14 +537,14 @@ namespace Fanex.Maintenance.Controller
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
 
-            var commond = _databaseServerService.InsertOrUpdate(model);
+            var command = _databaseServerService.InsertOrUpdate(model);
 
-            if (!commond.IsSuccessful)
+            if (!command.IsSuccessful)
             {
                 return View(model);
             }
 
-            ViewBag.Success = commond.IsSuccessful;
+            ViewBag.Success = command.IsSuccessful;
 
             return View(model);
         }
@@ -701,9 +701,9 @@ namespace Fanex.Maintenance.Controller
                     ModifiedDate = DateTime.Now
                 };
 
-                var check = _connectionService.UpdateDefaultConnection(model);
+                var command = _connectionService.UpdateDefaultConnection(model);
 
-                return Json(check.ToString().ToLower());
+                return Json(command.IsSuccessful.ToString().ToLower());
             }
 
             return Json(null);
@@ -721,9 +721,9 @@ namespace Fanex.Maintenance.Controller
                     ModifiedDate = DateTime.Now,
                     Modifier = CurrentSession.UserId
                 };
-                var commond = _aliasService.UpdateStatus(model);
+                var command = _aliasService.UpdateStatus(model);
 
-                return Json(commond.IsSuccessful.ToString().ToLower());
+                return Json(command.IsSuccessful.ToString().ToLower());
             }
 
             return Json(null);
@@ -788,9 +788,9 @@ namespace Fanex.Maintenance.Controller
                     ModifiedDate = DateTime.Now
                 };
 
-                var commond = _databaseServerService.UpdateStatus(model);
+                var command = _databaseServerService.UpdateStatus(model);
 
-                return Json(commond.IsSuccessful.ToString().ToLower());
+                return Json(command.IsSuccessful.ToString().ToLower());
             }
 
             return Json(null);

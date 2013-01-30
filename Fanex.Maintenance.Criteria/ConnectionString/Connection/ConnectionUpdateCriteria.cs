@@ -20,11 +20,13 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
     {
         public int ConnectionId { get; set; }
 
+        [Required]
         [Display(Name = "Data_Source", ResourceType = typeof(ViewResource))]
         public int ServerId { get; set; }
 
         public int AliasId { get; set; }
 
+        [Required]
         [Display(Name = "Initial_Catalog", ResourceType = typeof(ViewResource))]
         public string InitialCatalog { get; set; }
 

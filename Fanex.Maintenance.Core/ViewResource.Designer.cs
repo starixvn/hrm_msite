@@ -295,7 +295,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Conection.
+        ///   Looks up a localized string similar to Connection.
         /// </summary>
         public static string Conection {
             get {
@@ -313,7 +313,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connecion String.
+        ///   Looks up a localized string similar to Connection String.
         /// </summary>
         public static string Connection_String {
             get {
@@ -1848,6 +1848,15 @@ namespace Fanex.Maintenance.Core {
         public static string Value {
             get {
                 return ResourceManager.GetString("Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
             }
         }
         

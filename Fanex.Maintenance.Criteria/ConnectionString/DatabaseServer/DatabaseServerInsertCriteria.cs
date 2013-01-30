@@ -12,14 +12,19 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
     using System;
     using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
+    using System.ComponentModel.DataAnnotations;
+    using Fanex.Maintenance.Core;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class DatabaseServerInsertCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
+        [Display(Name = "Server_IP", ResourceType = typeof(ViewResource))]
         public string ServerIp { get; set; }
 
         public string Description { get; set; }

@@ -10,6 +10,17 @@
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .form .form-row .lbl-field
+        {
+            font-family: Tahoma;
+            padding: 5px 25px 0 0;
+            text-align: right;
+            text-shadow: 0 1px #FAFAFA;
+            vertical-align: top;
+            width: 112px;
+        }
+    </style>
 }
 @section Headline {
     <h1>
@@ -35,7 +46,7 @@
                 @Html.DropDownListFor(m => m.ServerId, (List<SelectListItem>)ViewBag.DbServer)
             </div>
         </div>
-        <div class="form-row">
+        <div class="form-row required">
             <div class="lbl-field">
                 @Html.LabelFor(m => m.InitialCatalog)
             </div>
@@ -90,7 +101,7 @@
             </div>
             <div class="edit-field">
                 @Html.CheckBoxFor(m => m.IsDefault)
-                @Html.LabelFor(m => m.IsDefault, ViewResource.IsDefault)
+                @Html.LabelFor(m => m.IsDefault, ViewResource.Yes)
             </div>
         </div>
         <div class="form-row">

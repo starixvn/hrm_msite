@@ -66,9 +66,9 @@
             <th>
                 @ViewResource.Change_Connection
             </th>
-            <th>
+          @*  <th>
                 @ViewResource.Edit_Connection
-            </th>
+            </th>*@
         </tr>
     </thead>
     <tbody>
@@ -110,12 +110,12 @@
                 <td class="align-center">
                     <input type="radio" name="@item.Alias.Name" checked="checked" cid="@item.ToConnectionString.Id" aid="@item.Alias.Id"/>
                 </td>
-                @if (j == 0)
+               @* @if (j == 0)
                 { 
                     <td rowspan="@countTo" class="align-center">
                         <a href="#">Change</a>
                     </td>
-                }
+                }*@
             </tr>
                 j++;
                 }

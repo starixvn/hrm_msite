@@ -15,12 +15,14 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
     using System.Text;
     using Fanex.NAP.Framework.Data;
     using System.Diagnostics.CodeAnalysis;
+    using System.ComponentModel.DataAnnotations;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class SiteInsertCriteria : CriteriaBase
     {
         public int SiteId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
