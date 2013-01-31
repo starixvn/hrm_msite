@@ -360,7 +360,7 @@ namespace Fanex.Maintenance.Controller
                 IntegratedSecurity = connection.IntegratedSecurity,
                 IsDefault = connection.IsDefault,
                 Password = connection.Password,
-                PrimaryConnectionStringId = connection.PrimaryConnection != null ? connection.PrimaryConnection.Id : 0,
+                SecondaryConnectionId = connection.PrimaryConnection != null ? connection.PrimaryConnection.Id : 0,
                 ServerId = connection.Server.Id,
                 UserID = connection.UserID
             };

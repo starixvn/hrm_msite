@@ -80,8 +80,8 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
         [Display(Name = "IsDefault", ResourceType = typeof(ViewResource))]
         public bool IsDefault { get; set; }
 
-        [Display(Name = "Primary_Connection", ResourceType = typeof(ViewResource))]
-        public int? PrimaryConnectionStringId { get; set; }
+        [Display(Name = "Secondary_Connection", ResourceType = typeof(ViewResource))]
+        public int? SecondaryConnectionId { get; set; }
 
         public int Creator { get; set; }
 

@@ -17,7 +17,7 @@
             text-align: right;
             text-shadow: 0 1px #FAFAFA;
             vertical-align: top;
-            width: 112px;
+            width: 130px;
         }
     </style>
 }
@@ -88,10 +88,10 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.PrimaryConnectionStringId)
+                @Html.LabelFor(m => m.SecondaryConnectionId)
             </div>
             <div class="edit-field">
-                @Html.DropDownListFor(m => m.PrimaryConnectionStringId, (List<SelectListItem>)ViewBag.ListConnection, ViewResource.None)
+                @Html.DropDownListFor(m => m.SecondaryConnectionId, (List<SelectListItem>)ViewBag.ListConnection, ViewResource.None)
             </div>
         </div>
         <div class="form-row">

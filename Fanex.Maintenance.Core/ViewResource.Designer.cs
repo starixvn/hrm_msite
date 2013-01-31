@@ -1483,6 +1483,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Secondary Connection.
+        /// </summary>
+        public static string Secondary_Connection {
+            get {
+                return ResourceManager.GetString("Secondary_Connection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Seconds.
         /// </summary>
         public static string Seconds {
