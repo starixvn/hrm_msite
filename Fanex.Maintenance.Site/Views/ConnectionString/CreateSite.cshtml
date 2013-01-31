@@ -58,7 +58,7 @@
                 @if (!success)
                 {
                     <input type="submit" value="@ViewResource.Save" />
-                    <input type="reset" value="@ViewResource.Cancel" />  
+                    <button class="cancel" onclick="NAP.redirect('ConnectionString/Site', 0); return false;">@ViewResource.Cancel</button>
                 }
             </div>
         </div>
@@ -68,7 +68,7 @@
 {
     @if (success)
     {
-        string dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Conection, 3);
+        string dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Connection, 3);
 
         <script type="text/javascript">
             $(function () {

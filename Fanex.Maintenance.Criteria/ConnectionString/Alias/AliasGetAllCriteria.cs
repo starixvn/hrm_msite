@@ -17,6 +17,8 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasGetAllCriteria : CriteriaBase
     {
+        private string _alias;
+
         [Display(Name = "Database_Server", ResourceType = typeof(ViewResource))]
         public int? DbServerId { get; set; }
 
@@ -24,7 +26,17 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
         public int? SiteId { get; set; }
 
         [Display(Name = "Name", ResourceType = typeof(ViewResource))]
-        public string Alias { get; set; }
+        public string Alias
+        {
+            get
+            {
+                return _alias;
+            }
+            set
+            {
+                _alias = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
         public override bool IsValid()
         {

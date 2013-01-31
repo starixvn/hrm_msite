@@ -52,7 +52,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             {
                 var criteria = new DatabaseServerGetAllCriteria();
 
-                return _databaseServerRepository.GetAll(criteria);
+                if (criteria.IsValid())
+                {
+                    return _databaseServerRepository.GetAll(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -71,7 +74,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     Name = name
                 };
 
-                return _databaseServerRepository.GetWithNumOfSite(criteria);
+                if (criteria.IsValid())
+                {
+                    return _databaseServerRepository.GetWithNumOfSite(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -134,7 +140,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     DbServerId = id
                 };
 
-                return _databaseServerRepository.Get(criteria);
+                if (criteria.IsValid())
+                {
+                    return _databaseServerRepository.Get(criteria);
+                }
             }
             catch (Exception ex)
             {

@@ -10,17 +10,17 @@
 namespace Fanex.Maintenance.Repository.Impl.ConnectionString
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using Fanex.Common.Extensions;
     using Fanex.ConnectionString.Domain;
     using Fanex.Data;
+    using Fanex.Maintenance.Criteria.Misc;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using System.Collections;
-    using Fanex.Maintenance.Criteria.Misc;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionRepository : BaseRepository<ConnectionString>, IConnectionRepository
@@ -137,7 +137,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                 using (var db = new ObjectDb(criteria.GetSettingKey()))
                 {
                     db.ExecuteNonQuery(hash);
-
+                    
                     return GetCommandResult(hash);
                 }
             }

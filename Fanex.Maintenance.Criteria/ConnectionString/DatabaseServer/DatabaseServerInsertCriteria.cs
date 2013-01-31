@@ -18,16 +18,52 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class DatabaseServerInsertCriteria : CriteriaBase
     {
+        private string _name;
+
+        private string _serverIp;
+
+        private string _description;
+
         public int DbServerId { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
         [Required]
         [Display(Name = "Server_IP", ResourceType = typeof(ViewResource))]
-        public string ServerIp { get; set; }
+        public string ServerIp
+        {
+            get
+            {
+                return _serverIp;
+            }
+            set
+            {
+                _serverIp = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
-        public string Description { get; set; }
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
         public bool IsActive { get; set; }
 

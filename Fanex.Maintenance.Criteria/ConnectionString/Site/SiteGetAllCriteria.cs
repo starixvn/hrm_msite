@@ -17,7 +17,19 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class SiteGetAllCriteria : CriteriaBase
     {
-        public string Name { get; set; }
+        private string _name;
+
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
         [Display(Name = "Database_Server", ResourceType = typeof(ViewResource))]
         public int? DbServerId { get; set; }

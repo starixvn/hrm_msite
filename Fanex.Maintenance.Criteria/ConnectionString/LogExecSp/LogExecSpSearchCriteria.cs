@@ -18,9 +18,33 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class LogExecSpSearchCriteria : CriteriaBase
     {
-        public string Username { get; set; }
+        private string _username;
 
-        public string Name { get; set; }
+        private string _name;
+
+        public string Username
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                _username = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
         [DisplayFormat(DataFormatString = "{0:MMM dd,yyyy}", ApplyFormatInEditMode = true)]
         public DateTime From { get; set; }

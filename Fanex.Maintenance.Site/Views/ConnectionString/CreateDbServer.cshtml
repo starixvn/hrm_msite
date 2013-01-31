@@ -66,7 +66,7 @@
                 @if (!success)
                 {
                     <input type="submit" value="@ViewResource.Create" />
-                    <input type="reset" value="@ViewResource.Cancel" />  
+                    <button class="cancel" onclick="NAP.redirect('ConnectionString/DatabaseServer', 0); return false;">@ViewResource.Cancel</button> 
                 }
             </div>
         </div>

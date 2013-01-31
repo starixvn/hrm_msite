@@ -18,6 +18,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using NAP.Framework.Data;
     using System.Collections;
     using Fanex.Maintenance.Criteria.Misc;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -33,7 +34,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                     return db.Query<Site, Users, Site>(
                         (s, u) => { s.Modifier = u; return s; },
                         "ModifierUserId",
-                        criteria.GetSpParams());
+                        criteria.GetSpParams()).OrderBy(x => x.Name).ToList();
                 }
             }
             catch (Exception ex)
@@ -51,7 +52,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                     return db.Query<SiteAlias, Site, Users, SiteAlias>(
                         (sa, s, u) => { sa.Site = s; s.Modifier = u; return sa; },
                         "Id,ModifierUserId",
-                        criteria.GetSpParams());
+                        criteria.GetSpParams()).OrderBy(x => x.Site.Name).ToList();
                 }
             }
             catch (Exception ex)

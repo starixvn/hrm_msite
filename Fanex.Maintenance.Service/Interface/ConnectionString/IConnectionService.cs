@@ -24,8 +24,6 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
 
         ConnectionString GetById(int id);
 
-        ICommandResult UpdateDefaultConnection(ICriteria criteria);
-
         ICommandResult InsertOrUpdate(ICriteria criteria);
     }
 }

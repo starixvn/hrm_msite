@@ -47,6 +47,8 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         public IEnumerable<ConnectionStringConnection> GetByAlias(int aliasId)
         {
+            Check.Argument.IsNotNegativeOrZero(aliasId, "aliasid");
+
             try
             {
                 var criteria = new ConnectionGetByAliasCriteria
@@ -54,7 +56,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     AliasId = aliasId
                 };
 
-                return _connectionRepository.GetByAlais(criteria);
+                if (criteria.IsValid())
+                {
+                    return _connectionRepository.GetByAlais(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -66,6 +71,8 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         public ConnectionString GetById(int id)
         {
+            Check.Argument.IsNotNegativeOrZero(id, "id");
+
             try
             {
                 var criteria = new ConnectionGetByIdCriteria
@@ -73,7 +80,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     ConnectionId = id
                 };
 
-                return _connectionRepository.GetById(criteria);
+                if (criteria.IsValid())
+                {
+                    return _connectionRepository.GetById(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -85,6 +95,8 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         public IEnumerable<ConnectionString> GetSecondaryConection(int id)
         {
+            Check.Argument.IsNotNegativeOrZero(id, "id");
+
             try
             {
                 var criteria = new ConnectionGetSecondaryConectionCriteria
@@ -92,7 +104,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     ConnectionId = id
                 };
 
-                return _connectionRepository.GetSecondaryConection(criteria);
+                if (criteria.IsValid())
+                {
+                    return _connectionRepository.GetSecondaryConection(criteria);
+                }
             }
             catch (Exception ex)
             {

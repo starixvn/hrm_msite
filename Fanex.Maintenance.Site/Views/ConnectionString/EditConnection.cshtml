@@ -1,10 +1,10 @@
 ﻿@model ConnectionUpdateCriteria
 @{  
-    ViewBag.Title = ViewResource.Update + ViewResource.Conection;
+    ViewBag.Title = ViewResource.Update + ViewResource.Connection;
     Layout = "~/Views/Shared/_Layout.cshtml";    
 }
 @{
-    ViewBag.Title = string.Format("{0} {1}", ViewResource.Update, ViewResource.Conection);
+    ViewBag.Title = string.Format("{0} {1}", ViewResource.Update, ViewResource.Connection);
     bool success = ViewBag.Success != null && ViewBag.Success;    
 }
 @section Head {
@@ -122,7 +122,7 @@
 {
     @if (success)
     {
-        string dialogMsg = string.Format(ViewResource.UpSuccessMsg, ViewResource.Conection, 3);
+        string dialogMsg = string.Format(ViewResource.UpSuccessMsg, ViewResource.Connection, 3);
 
         <script type="text/javascript">
             $(function () {

@@ -11,18 +11,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Service.Interface.ConnectionString;
+    using Entity.Model.ConnectionString;
+    using Fanex.Common.Helper;
     using Fanex.ConnectionString.Domain;
     using Fanex.Maintenance.Criteria.ConnectionString.Site;
+    using Fanex.Maintenance.Criteria.Misc;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
-    using Entity.Model.ConnectionString;
+    using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Logging;
-    using Fanex.Common.Helper;
-    using Fanex.Maintenance.Criteria.Misc;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -58,7 +55,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     DbServerId = dbServerId
                 };
 
-                return _siteRepository.Fetch(criteria);
+                if (criteria.IsValid())
+                {
+                    return _siteRepository.Fetch(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -70,6 +70,8 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         public IEnumerable<Site> GetByAlias(int aliasId)
         {
+            Check.Argument.IsNotNegativeOrZero(aliasId, "aliasid");
+
             try
             {
                 var criteria = new SiteGetByAliasCriteria
@@ -77,7 +79,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     AliasId = aliasId
                 };
 
-                return _siteRepository.Fetch(criteria);
+                if (criteria.IsValid())
+                {
+                    return _siteRepository.Fetch(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -97,7 +102,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     DbServerId = dbServerId
                 };
 
-                return _siteRepository.GetSiteAlias(criteria);
+                if (criteria.IsValid())
+                {
+                    return _siteRepository.GetSiteAlias(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -117,7 +125,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     SiteId = id
                 };
 
-                return _siteRepository.Get(criteria);
+                if (criteria.IsValid())
+                {
+                    return _siteRepository.Get(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -183,7 +194,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     DbServerId = dbServerId
                 };
 
-                return _siteRepository.Fetch(criteria);
+                if (criteria.IsValid())
+                {
+                    return _siteRepository.Fetch(criteria);
+                }
             }
             catch (Exception ex)
             {

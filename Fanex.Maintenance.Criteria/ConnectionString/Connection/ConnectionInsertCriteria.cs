@@ -18,6 +18,12 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionInsertCriteria : CriteriaBase
     {
+        private string _initialCatalog;
+
+        private string _userId;
+
+        private string _freeText;
+
         public int ConnectionId { get; set; }
 
         [Required]
@@ -28,18 +34,48 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 
         [Required]
         [Display(Name = "Initial_Catalog", ResourceType = typeof(ViewResource))]
-        public string InitialCatalog { get; set; }
+        public string InitialCatalog
+        {
+            get
+            {
+                return _initialCatalog;
+            }
+            set
+            {
+                _initialCatalog = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
         [Display(Name = "Integrated_Security", ResourceType = typeof(ViewResource))]
         public bool IntegratedSecurity { get; set; }
 
         [Display(Name = "User_ID", ResourceType = typeof(ViewResource))]
-        public string UserID { get; set; }
+        public string UserID
+        {
+            get
+            {
+                return _userId;
+            }
+            set
+            {
+                _userId = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
         public string Password { get; set; }
 
         [Display(Name = "Free_Text", ResourceType = typeof(ViewResource))]
-        public string FreeText { get; set; }
+        public string FreeText
+        {
+            get
+            {
+                return _freeText;
+            }
+            set
+            {
+                _freeText = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
         [Display(Name = "IsDefault", ResourceType = typeof(ViewResource))]
         public bool IsDefault { get; set; }

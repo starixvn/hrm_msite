@@ -21,6 +21,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.NAP.Framework.Data;
     using System.Collections;
     using Fanex.Maintenance.Criteria.Misc;
+    using System.Linq;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasRepository : BaseRepository<Alias>, IAliasRepository
@@ -69,19 +70,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                            };
                        };
 
-                return this.Fetch<AliasConnectionString>(criteria, objMapFunc);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public Alias GetById(ICriteria criteria)
-        {
-            try
-            {
-                return Get<Alias>(criteria);
+                return this.Fetch<AliasConnectionString>(criteria, objMapFunc).OrderBy(x => x.Alias.Name).ToList();
             }
             catch (Exception ex)
             {
@@ -93,7 +82,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         {
             try
             {
-                return Fetch<Alias>(criteria);
+                return Fetch<Alias>(criteria).OrderBy(x => x.Name).ToList();
             }
             catch (Exception ex)
             {
@@ -155,13 +144,25 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                     };
                 };
 
-                return this.Fetch<AliasConnectionStringConnection>(criteria, objMapFunc);
+                return this.Fetch<AliasConnectionStringConnection>(criteria, objMapFunc).OrderBy(x => x.Alias.Name).ToList();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        public Alias GetById(ICriteria criteria)
+        {
+            try
+            {
+                return Get<Alias>(criteria);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }    
 
         public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {

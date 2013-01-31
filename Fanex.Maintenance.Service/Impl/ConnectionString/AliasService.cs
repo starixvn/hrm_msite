@@ -57,7 +57,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     SiteId = siteId
                 };
 
-                return _aliasRepository.GetAll(criteria);
+                if (criteria.IsValid())
+                {
+                    return _aliasRepository.GetAll(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -123,7 +126,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     AliasId = aliasId
                 };
 
-                return _aliasRepository.GetById(criteria);
+                if (criteria.IsValid())
+                {
+                    return _aliasRepository.GetById(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -145,7 +151,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     SiteId = siteId
                 };
 
-                return _aliasRepository.GetBySite(criteria);
+                if (criteria.IsValid())
+                {
+                    return _aliasRepository.GetBySite(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -169,7 +178,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     ToDbServerId = toDbServerId
                 };
 
-                return _aliasRepository.GetSwitchConnection(criteria);
+                if (criteria.IsValid())
+                {
+                    return _aliasRepository.GetSwitchConnection(criteria);
+                }
             }
             catch (Exception ex)
             {
@@ -191,7 +203,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
                     DbServerId = dbServerId
                 };
 
-                return _aliasRepository.GetSwitchConnection(criteria);
+                if (criteria.IsValid())
+                {
+                    return _aliasRepository.GetSwitchConnection(criteria);
+                }
             }
             catch (Exception ex)
             {

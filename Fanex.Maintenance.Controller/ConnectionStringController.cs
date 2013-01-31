@@ -67,8 +67,14 @@ namespace Fanex.Maintenance.Controller
 
         #region Private
 
+        /// <summary>
+        /// Get select list item of all database server
+        /// </summary>
+        /// <param name="selectedId"></param>
+        /// <returns></returns>
         private List<SelectListItem> GetSelectListDatabaseServer(int? selectedId = null)
         {
+            // get all
             var listDatabaseServer = _databaseServerService.GetAll();
 
             return listDatabaseServer.Select(d => new SelectListItem
@@ -79,8 +85,14 @@ namespace Fanex.Maintenance.Controller
             }).ToList();
         }
 
+        /// <summary>
+        /// Get select list item of all site
+        /// </summary>
+        /// <param name="selectedId"></param>
+        /// <returns></returns>
         private List<SelectListItem> GetSelectListSite(int? selectedId = null)
         {
+            // get all
             var listSite = _siteService.GetAll();
 
             return listSite.Select(s => new SelectListItem
@@ -91,7 +103,7 @@ namespace Fanex.Maintenance.Controller
             }).ToList();
         }
 
-        #endregion
+        #endregion Private
 
         #region Manage Alias
 
@@ -100,10 +112,13 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult Alias()
         {
+            // get all database server
             ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
+            // get all site
             ViewBag.Site = GetSelectListSite();
 
+            // get all alias
             var listAlias = _aliasService.GetAll();
             ViewBag.ListAlias = listAlias;
 
@@ -113,10 +128,13 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult Alias(AliasGetAllCriteria model)
         {
-            ViewBag.DatabaseServer = GetSelectListSite(model.DbServerId);
+            // get all database server with selected current database server
+            ViewBag.DatabaseServer = GetSelectListDatabaseServer(model.DbServerId);
 
+            // get all site with selected current site
             ViewBag.Site = GetSelectListSite(model.SiteId);
 
+            // get alias filter by site and database server
             var listAlias = _aliasService.GetAll(model.Alias, model.DbServerId, model.SiteId);
             ViewBag.ListAlias = listAlias;
 
@@ -190,12 +208,14 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult EditAlias(AliasUpdateCriteria model)
         {
+            // get all site
             var listSite = _siteService.GetAll();
             ViewBag.Site = listSite.ToList();
 
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
 
+            // update alias
             var command = _aliasService.InsertOrUpdate(model);
 
             if (!command.IsSuccessful)
@@ -225,6 +245,7 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult Connection(int id)
         {
+            // get all connection by alias id
             var listConnection = _connectionService.GetByAlias(id);
 
             var alias = _aliasService.Get(id);
@@ -240,11 +261,19 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult CreateConnection(int id)
         {
+            // get alias by id
             var alias = _aliasService.Get(id);
+            if (ReferenceEquals(alias, null))
+            {
+                return RedirectToAction("NotFound", "CommonError");
+            }
+
             ViewBag.Alias = alias;
 
+            // get database server
             ViewBag.DbServer = GetSelectListDatabaseServer();
 
+            // get connection for select secondary connection string
             var listConnection = _connectionService.GetByAlias(id);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
@@ -262,10 +291,17 @@ namespace Fanex.Maintenance.Controller
         public ActionResult CreateConnection(ConnectionInsertCriteria model)
         {
             var alias = _aliasService.Get(model.AliasId);
+            if (ReferenceEquals(alias, null))
+            {
+                return RedirectToAction("NotFound", "CommonError");
+            }
+
             ViewBag.Alias = alias;
 
+            // get database server
             ViewBag.DbServer = GetSelectListDatabaseServer();
 
+            // get list connection for select secondary connection string
             var listConnection = _connectionService.GetByAlias(model.AliasId);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
@@ -276,6 +312,7 @@ namespace Fanex.Maintenance.Controller
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
 
+            // insert new alias
             var command = _connectionService.InsertOrUpdate(model);
             if (!command.IsSuccessful)
             {
@@ -294,14 +331,17 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult EditConnection(int id)
         {
+            // get connection by id
             var connection = _connectionService.GetById(id);
             if (ReferenceEquals(connection, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
             }
 
+            // get database server
             ViewBag.DbServer = GetSelectListDatabaseServer(connection.Server.Id);
 
+            // get list connection by alias
             var listConnection = _connectionService.GetByAlias(connection.Alias.Id);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
@@ -310,6 +350,7 @@ namespace Fanex.Maintenance.Controller
                 Selected = connection.PrimaryConnection != null ? c.ConnectionString.Id == connection.PrimaryConnection.Id : false
             }).ToList();
 
+            // view model
             var model = new ConnectionUpdateCriteria
             {
                 AliasId = connection.Alias.Id,
@@ -330,7 +371,12 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult EditConnection(ConnectionUpdateCriteria model)
         {
+            // get connection by id
             var connection = _connectionService.GetById(model.ConnectionId);
+            if (ReferenceEquals(connection, null))
+            {
+                return RedirectToAction("NotFound", "CommonError");
+            }
 
             ViewBag.DbServer = GetSelectListDatabaseServer(connection.Server.Id);
 
@@ -345,6 +391,7 @@ namespace Fanex.Maintenance.Controller
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
 
+            // update connection string
             var command = _connectionService.InsertOrUpdate(model);
             if (!command.IsSuccessful)
             {
@@ -367,10 +414,10 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult Site()
         {
+            // get all site with number of alias by site
             var listSite = _siteService.GetSiteWithNumOfAlias();
 
-            var listDatabaseServer = _databaseServerService.GetAll();
-
+            // get all database server
             ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
             ViewBag.ListSite = listSite;
@@ -381,10 +428,10 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult Site(SiteGetAllCriteria model)
         {
+            // get all site by name and database server
             var listSite = _siteService.GetSiteWithNumOfAlias(model.Name, model.DbServerId);
 
-            var listDatabaseServer = _databaseServerService.GetAll();
-
+            // get all database server
             ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
             ViewBag.ListSite = listSite;
@@ -408,6 +455,7 @@ namespace Fanex.Maintenance.Controller
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
 
+            // insert new site
             var command = _siteService.InsertOrUpdate(model);
             if (!command.IsSuccessful)
             {
@@ -426,7 +474,12 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult EditSite(int id)
         {
+            // get site by id
             var site = _siteService.GetById(id);
+            if (ReferenceEquals(site, null))
+            {
+                return RedirectToAction("NotFound", "CommonError");
+            }
 
             var model = new SiteUpdateCriteria
             {
@@ -445,6 +498,7 @@ namespace Fanex.Maintenance.Controller
             model.Modifier = CurrentSession.UserId;
             model.ModifiedDate = DateTime.Now;
 
+            // update site
             var command = _siteService.InsertOrUpdate(model);
             if (!command.IsSuccessful)
             {
@@ -467,6 +521,7 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult DatabaseServer()
         {
+            // get all database server with number of site by database
             var listDbServer = _databaseServerService.GetWithNumOfSite();
             ViewBag.ListDbServer = listDbServer;
 
@@ -476,6 +531,7 @@ namespace Fanex.Maintenance.Controller
         [HttpPost]
         public ActionResult DatabaseServer(DatabaseServerGetAllCriteria model)
         {
+            // get all by name
             var listDbServer = _databaseServerService.GetWithNumOfSite(model.Name);
             ViewBag.ListDbServer = listDbServer;
 
@@ -498,6 +554,7 @@ namespace Fanex.Maintenance.Controller
             model.Creator = CurrentSession.UserId;
             model.CreatedDate = DateTime.Now;
 
+            // insert new
             var command = _databaseServerService.InsertOrUpdate(model);
 
             if (!command.IsSuccessful)
@@ -517,7 +574,12 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult EditDbServer(int id)
         {
+            // get by id
             var dbServer = _databaseServerService.GetById(id);
+            if (ReferenceEquals(dbServer, null))
+            {
+                return RedirectToAction("NotFound", "CommonError");
+            }
 
             var model = new DatabaseServerUpdateCriteria
             {
@@ -701,7 +763,7 @@ namespace Fanex.Maintenance.Controller
                     ModifiedDate = DateTime.Now
                 };
 
-                var command = _connectionService.UpdateDefaultConnection(model);
+                var command = _connectionService.InsertOrUpdate(model);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
@@ -721,7 +783,7 @@ namespace Fanex.Maintenance.Controller
                     ModifiedDate = DateTime.Now,
                     Modifier = CurrentSession.UserId
                 };
-                var command = _aliasService.UpdateStatus(model);
+                var command = _aliasService.InsertOrUpdate(model);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
@@ -767,7 +829,7 @@ namespace Fanex.Maintenance.Controller
                     SiteId = siteId
                 };
 
-                var command = _siteService.UpdateStatus(model);
+                var command = _siteService.InsertOrUpdate(model);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
@@ -788,7 +850,7 @@ namespace Fanex.Maintenance.Controller
                     ModifiedDate = DateTime.Now
                 };
 
-                var command = _databaseServerService.UpdateStatus(model);
+                var command = _databaseServerService.InsertOrUpdate(model);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }

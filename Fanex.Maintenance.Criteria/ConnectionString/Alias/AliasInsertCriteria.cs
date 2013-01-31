@@ -21,12 +21,35 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
     {
         private readonly string _formatXml = "<Sites SiteId='{0}'/>";
 
+        private string _name;
+        private string _description;
+
         public int AliasId { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
-        public string Description { get; set; }
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
+            }
+        }
 
         [Display(Name = "IsActive", ResourceType = typeof(ViewResource))]
         public bool IsActive { get; set; }

@@ -26,15 +26,15 @@
             <th>
                 @ViewResource.Initial_Catalog
             </th>
-            <th>
+            @*<th>
                 @ViewResource.Integrated_Security
-            </th>
+            </th>*@
             <th>
                 @ViewResource.User_ID
             </th>
-            <th>
+            @*<th>
                 @ViewResource.Password
-            </th>
+            </th>*@
             <th>
                 @ViewResource.Free_Text
             </th>
@@ -73,15 +73,15 @@
                 <td>
                     @item.ConnectionString.InitialCatalog
                 </td>
-                <td class="align-center">
+                @*<td class="align-center">
                     @item.ConnectionString.IntegratedSecurity.ToString()
-                </td>
+                </td>*@
                 <td>
                     @item.ConnectionString.UserID
                 </td>
-                <td>
+                @*<td>
                     @item.ConnectionString.Password
-                </td>
+                </td>*@
                 <td class="align-center">
                     @item.ConnectionString.FreeText
                 </td>
@@ -95,7 +95,7 @@
                         @ViewResource.N_A
                     }
                 </td>
-                <td>
+                <td class="align-center">
                     @item.ConnectionString.ModifiedDate.ToFullDateString()
                 </td>
                 <td class="align-center">

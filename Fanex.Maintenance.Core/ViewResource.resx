@@ -660,7 +660,7 @@
   <data name="Manage_Connection" xml:space="preserve">
     <value>Manage Connection</value>
   </data>
-  <data name="Conection" xml:space="preserve">
+  <data name="Connection" xml:space="preserve">
     <value>Connection</value>
   </data>
   <data name="IsDefault" xml:space="preserve">

@@ -33,7 +33,5 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
         Site GetById(int id);
 
         ICommandResult InsertOrUpdate(ICriteria criteria);
-
-        ICommandResult UpdateStatus(ICriteria criteria);
     }
 }

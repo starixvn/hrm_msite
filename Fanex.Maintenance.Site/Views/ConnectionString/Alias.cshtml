@@ -29,7 +29,7 @@
     <section id="filter-bar">
         <div class="filter-form">
             <div class="lbl-field width-auto">
-                @Html.LabelFor(m => m.DbServerId)
+                @Html.Label(ViewResource.Data_Source)
             </div>
             <div class="edit-field">
                 @Html.DropDownListFor(m => m.DbServerId, (List<SelectListItem>)ViewBag.DatabaseServer, ViewResource.All_Server)
@@ -75,13 +75,13 @@
             </th>
             <th>
                 @ViewResource.Active
+            </th>            
+            <th>
+                @ViewResource.Connection
             </th>
             <th>
-                @ViewResource.Change_Connection
-            </th>
-            <th>
-                @ViewResource.Edit_Connection
-            </th>
+                @ViewResource.Edit
+            </th
         </tr>
     </thead>
     <tbody>
@@ -97,7 +97,7 @@
                     @i
                 </td>
                 <td>
-                    @Html.ActionLink(item.Alias.Name, "EditAlias", new { id = item.Alias.Id })
+                    @item.Alias.Name
                 </td>
                 <td class="align-center">
                     @if (item.NumOfSite > 0)
@@ -122,7 +122,7 @@
                 <td>
                     @item.Alias.Modifier.Name
                 </td>
-                <td>
+                <td class="width-140 align-center">
                     @item.Alias.ModifiedDate.ToFullDateString()
                 </td>
                 <td class="align-center">
@@ -135,7 +135,7 @@
                         <input type="checkbox" aid="@item.Alias.Id" aname="@item.Alias.Name" class="update-status"/>
                     }
                 </td>
-                <td class="align-center">
+              @*  <td class="align-center">
                     @if (!string.IsNullOrWhiteSpace(item.ConnectionString.Connection))
                     {
                         <a href="#" class="change-connection" aid="@item.Alias.Id" aname="@item.Alias.Name">
@@ -145,10 +145,13 @@
                     {
                         @ViewResource.N_A
                     }
+                </td>*@
+                <td class="align-center">
+                    @Html.ActionLink("View", "Connection", new { id = item.Alias.Id })
                 </td>
                 <td class="align-center">
-                    @Html.ActionLink("Edit", "Connection", new { id = item.Alias.Id })
-                </td>
+                 @Html.ActionLink("Edit", "EditAlias", new { id = item.Alias.Id })
+                </td>                
             </tr>
             }
             if (i == 0)
