@@ -223,6 +223,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backup Connection String.
+        /// </summary>
+        public static string Backup_Connection_String {
+            get {
+                return ResourceManager.GetString("Backup_Connection_String", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet Count.
         /// </summary>
         public static string Bet_Count {
@@ -390,6 +399,15 @@ namespace Fanex.Maintenance.Core {
         public static string CREDIT_SITES {
             get {
                 return ResourceManager.GetString("CREDIT_SITES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Connection String.
+        /// </summary>
+        public static string Current_Connection_String {
+            get {
+                return ResourceManager.GetString("Current_Connection_String", resourceCulture);
             }
         }
         
@@ -1776,6 +1794,15 @@ namespace Fanex.Maintenance.Core {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Connection String.
+        /// </summary>
+        public static string To_Connection_String {
+            get {
+                return ResourceManager.GetString("To_Connection_String", resourceCulture);
             }
         }
         

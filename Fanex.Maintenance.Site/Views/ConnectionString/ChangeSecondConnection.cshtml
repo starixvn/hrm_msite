@@ -34,7 +34,7 @@
     <section id="filter-bar">
         <div class="filter-form">
             <div class="lbl-field width-auto">
-                @Html.LabelFor(m => m.DbServerId)
+                @Html.Label(ViewResource.From_DbServer)
             </div>
             <div class="edit-field width-200">
                 @Html.DropDownListFor(m => m.DbServerId, (List<SelectListItem>)ViewBag.DatabaseServer)
@@ -58,10 +58,10 @@
                 @ViewResource.Alias
             </th>
             <th>
-                @ViewResource.Connection_String
+                @ViewResource.Current_Connection_String
             </th>
             <th>
-                @ViewResource.Connection_String
+                @ViewResource.Backup_Connection_String
             </th>
             <th>
                 @ViewResource.Change_Connection

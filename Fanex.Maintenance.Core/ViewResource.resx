@@ -744,4 +744,13 @@
   <data name="Secondary_Connection" xml:space="preserve">
     <value>Secondary Connection</value>
   </data>
+  <data name="Backup_Connection_String" xml:space="preserve">
+    <value>Backup Connection String</value>
+  </data>
+  <data name="Current_Connection_String" xml:space="preserve">
+    <value>Current Connection String</value>
+  </data>
+  <data name="To_Connection_String" xml:space="preserve">
+    <value>To Connection String</value>
+  </data>
 </root>
