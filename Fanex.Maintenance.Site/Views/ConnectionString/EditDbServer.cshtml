@@ -9,6 +9,12 @@
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .form .form-row .rdo-field, .form .form-row .chk-field
+        {
+            padding: 3px 0 0;
+        }
+    </style>
 }
 @section Headline {
     <h1>
@@ -54,7 +60,7 @@
             <div class="lbl-field">
                 @Html.Label(ViewResource.Status)
             </div>
-            <div class="edit-field">
+            <div class="edit-field chk-field">
                 @Html.CheckBoxFor(m => m.IsActive)
                 @Html.LabelFor(m => m.IsActive, ViewResource.Active)
             </div>

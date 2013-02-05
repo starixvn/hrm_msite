@@ -20,6 +20,11 @@
             vertical-align: top;
             width: 130px;
         }
+        
+        .form .form-row .rdo-field, .form .form-row .chk-field
+        {
+            padding: 3px 0 0;
+        }
     </style>
 }
 @section Headline {
@@ -58,7 +63,7 @@
             <div class="lbl-field">
                 @Html.LabelFor(m => m.IntegratedSecurity)
             </div>
-            <div class="edit-field">
+            <div class="edit-field chk-field">
                 @Html.CheckBoxFor(m => m.IntegratedSecurity)
                 @Html.LabelFor(m => m.IntegratedSecurity, ViewResource.Yes)
             </div>
@@ -99,7 +104,7 @@
             <div class="lbl-field">
                 @Html.Label(ViewResource.Default)
             </div>
-            <div class="edit-field">
+            <div class="edit-field chk-field">
                 @Html.CheckBoxFor(m => m.IsDefault)
                 @Html.LabelFor(m => m.IsDefault, ViewResource.Yes)
             </div>

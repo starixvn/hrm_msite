@@ -1753,6 +1753,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switch Backup Connection.
+        /// </summary>
+        public static string Switch_Backup_Connection {
+            get {
+                return ResourceManager.GetString("Switch_Backup_Connection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time.
         /// </summary>
         public static string Time {

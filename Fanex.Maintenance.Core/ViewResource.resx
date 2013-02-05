@@ -753,4 +753,7 @@
   <data name="To_Connection_String" xml:space="preserve">
     <value>To Connection String</value>
   </data>
+  <data name="Switch_Backup_Connection" xml:space="preserve">
+    <value>Switch Backup Connection</value>
+  </data>
 </root>

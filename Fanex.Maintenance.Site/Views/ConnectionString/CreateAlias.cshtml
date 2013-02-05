@@ -39,6 +39,11 @@
         {
             margin: 5px 5px;
         }
+        
+        .form .form-row .rdo-field, .form .form-row .chk-field
+        {
+            padding: 3px 0 0;
+        }
     </style>
 }
 @section Headline {
@@ -95,7 +100,7 @@
             <div class="lbl-field">
                 @Html.Label(ViewResource.Status)
             </div>
-            <div class="edit-field">
+            <div class="edit-field chk-field">
                 @Html.CheckBoxFor(m => m.IsActive)
                 @Html.LabelFor(m => m.IsActive, ViewResource.Active)
             </div>

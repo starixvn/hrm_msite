@@ -115,7 +115,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/jquery.ui.button.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/themes/base/jquery.ui.core.css" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/jquery.effects.fade.js" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Site.dll" publishTime="01/31/2013 15:40:33" />
+    <file relUrl="bin/Fanex.Maintenance.Site.dll" publishTime="01/31/2013 17:02:21" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/minified/jquery.ui.effect-slide.min.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="themes/SqlJobManagement/MainContentPage.css" publishTime="10/26/2012 16:57:36" />
     <file relUrl="Views/ConnectionString/GetSiteByDbServer.cshtml" publishTime="01/29/2013 15:42:47" />
@@ -174,7 +174,7 @@
     <file relUrl="scripts/Plugin/jquery.treeview/jquery.treeview.css" publishTime="10/26/2012 16:57:35" />
     <file relUrl="Views/Mail/MailList.cshtml" publishTime="01/04/2013 09:29:24" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/demos/droppable/images/high_tatras3_min.jpg" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Controller.dll" publishTime="01/31/2013 15:40:32" />
+    <file relUrl="bin/Fanex.Maintenance.Controller.dll" publishTime="01/31/2013 15:58:18" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/demos/hide/default.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="Views/Mail/MailSetting.cshtml" publishTime="10/26/2012 16:57:35" />
     <file relUrl="Views/Mail/EditMailFunction.cshtml" publishTime="10/26/2012 16:57:35" />
@@ -184,7 +184,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/jquery.ui.effect-clip.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="themes/job/img/setting.png" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/demos/autocomplete/multiple-remote.html" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Core.dll" publishTime="01/31/2013 15:40:29" />
+    <file relUrl="bin/Fanex.Maintenance.Core.dll" publishTime="01/31/2013 15:58:15" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/themes/ui-lightness/jquery.ui.tabs.css" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/themes/base/images/ui-icons_222222_256x240.png" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/jquery.ui.effect.js" publishTime="10/26/2012 16:57:35" />
@@ -395,7 +395,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/i18n/jquery.ui.datepicker-ru.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="Views/DatabaseReport/UserOnlineChart.cshtml" publishTime="12/25/2012 10:58:21" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/i18n/jquery.ui.datepicker-da.js" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="Views/ConnectionString/EditConnection.cshtml" publishTime="01/31/2013 15:42:48" />
+    <file relUrl="Views/ConnectionString/EditConnection.cshtml" publishTime="01/31/2013 16:06:43" />
     <file relUrl="themes/assets/less/twbs-203/layouts.less" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/demos/sortable/placeholder.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="Areas/UserLogin/themes/img/welcome.png" publishTime="10/22/2012 16:46:39" />
@@ -539,7 +539,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/minified/i18n/jquery.ui.datepicker-vi.min.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/docs/accordion.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="themes/assets/js/backbone.min.js" publishTime="10/26/2012 16:57:36" />
-    <file relUrl="bin/Fanex.Maintenance.Criteria.pdb" publishTime="01/31/2013 15:40:29" />
+    <file relUrl="bin/Fanex.Maintenance.Criteria.pdb" publishTime="01/31/2013 15:58:15" />
     <file relUrl="themes/job/images/icn_security.png" publishTime="10/26/2012 16:57:36" />
     <file relUrl="Configurations/MailSection.config" publishTime="01/04/2013 09:29:24" />
     <file relUrl="scripts/Plugin/jquery.treeview/images/treeview-red.gif" publishTime="10/26/2012 16:57:35" />
@@ -575,14 +575,14 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/jquery.ui.dialog.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="themes/assets/less/twbs-203/code.less" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/demos/sortable/display-grid.html" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Service.pdb" publishTime="01/31/2013 15:40:31" />
+    <file relUrl="bin/Fanex.Maintenance.Service.pdb" publishTime="01/31/2013 15:58:17" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/demos/autocomplete/combobox.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/jquery.ui.effect-pulsate.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/minified/i18n/jquery.ui.datepicker-ca.min.js" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Service.dll" publishTime="01/31/2013 15:40:31" />
+    <file relUrl="bin/Fanex.Maintenance.Service.dll" publishTime="01/31/2013 15:58:17" />
     <file relUrl="themes/assets/less/font-awesome-ie7.less" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/demos/resizable/max-min.html" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Repository.pdb" publishTime="01/31/2013 15:40:30" />
+    <file relUrl="bin/Fanex.Maintenance.Repository.pdb" publishTime="01/31/2013 15:58:17" />
     <file relUrl="themes/job/images/icn_audio.png" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/themes/base/minified/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="10/26/2012 16:57:35" />
     <file relUrl="themes/assets/less/font-awesome.less" publishTime="10/26/2012 16:57:36" />
@@ -721,7 +721,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/i18n/jquery.ui.datepicker-lb.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/docs/position.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/demos/draggable/constrain-movement.html" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Controller.pdb" publishTime="01/31/2013 15:40:32" />
+    <file relUrl="bin/Fanex.Maintenance.Controller.pdb" publishTime="01/31/2013 15:58:18" />
     <file relUrl="themes/job/img/plus.png" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/themes/base/jquery.ui.autocomplete.css" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/docs/scale-effect.html" publishTime="10/26/2012 16:57:35" />
@@ -759,6 +759,7 @@
     <file relUrl="scripts/Plugin/jquery.treeview/images/treeview-gray.gif" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/i18n/jquery.ui.datepicker-pt.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/minified/jquery.ui.slider.min.js" publishTime="10/26/2012 16:57:35" />
+    <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="01/04/2013 09:29:24" />
     <file relUrl="scripts/lib/chosen/chosen.css" publishTime="10/26/2012 16:57:36" />
     <file relUrl="bin/System.Web.WebPages.xml" publishTime="10/26/2012 16:57:36" />
     <file relUrl="themes/assets/js/tw-bs-201/bootstrap-collapse.js" publishTime="10/26/2012 16:57:36" />
@@ -766,8 +767,8 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/themes/custom-theme/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="10/26/2012 16:57:35" />
     <file relUrl="Views/Mail/AddMailSetting.cshtml" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/demos/slider/colorpicker.html" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Entity.dll" publishTime="01/31/2013 15:40:30" />
-    <file relUrl="bin/Fanex.Maintenance.Core.pdb" publishTime="01/31/2013 15:40:29" />
+    <file relUrl="bin/Fanex.Maintenance.Entity.dll" publishTime="01/31/2013 15:58:16" />
+    <file relUrl="bin/Fanex.Maintenance.Core.pdb" publishTime="01/31/2013 15:58:15" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/demos/accordion/collapsible.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="bin/System.Net.Http.Formatting.dll" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/minified/jquery.ui.effect-highlight.min.js" publishTime="10/26/2012 16:57:35" />
@@ -883,7 +884,7 @@
     <file relUrl="Views/ConnectionString/Log.cshtml" publishTime="01/30/2013 11:10:12" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/themes/custom-theme/minified/images/ui-bg_highlight-soft_75_549cba_1x100.png" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/minified/jquery.ui.sortable.min.js" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="Views/ConnectionString/ChangeConnection.cshtml" publishTime="01/30/2013 10:58:16" />
+    <file relUrl="Views/ConnectionString/ChangeConnection.cshtml" publishTime="01/31/2013 15:58:09" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/docs/autocomplete.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="themes/assets/less/twbs-203/sprites.less" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/i18n/jquery.ui.datepicker-el.js" publishTime="10/26/2012 16:57:35" />
@@ -938,7 +939,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/demos/accordion/fillspace.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/jquery.effects.pulsate.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/demos/autocomplete/images/ui-anim_basic_16x16.gif" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="Views/ConnectionString/ChangeSecondConnection.cshtml" publishTime="01/30/2013 10:58:45" />
+    <file relUrl="Views/ConnectionString/ChangeSecondConnection.cshtml" publishTime="01/31/2013 15:57:49" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/themes/custom-theme/minified/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/external/jquery.bgiframe-2.1.2.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/i18n/jquery.ui.datepicker-eo.js" publishTime="10/26/2012 16:57:35" />
@@ -1268,7 +1269,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/css/custom-theme/images/ui-icons_faccdd_256x240.png" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/themes/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/i18n/jquery.ui.datepicker-zh-TW.js" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Site.pdb" publishTime="01/31/2013 15:40:33" />
+    <file relUrl="bin/Fanex.Maintenance.Site.pdb" publishTime="01/31/2013 17:02:19" />
     <file relUrl="scripts/Plugin/notification/jquery.toastmessage.css" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/jquery.ui.sortable.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/NotificationHub.js" publishTime="01/04/2013 09:29:24" />
@@ -1310,7 +1311,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/ui/jquery.ui.droppable.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="themes/assets/less/twbs-203/reset.less" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/themes/base/minified/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Entity.pdb" publishTime="01/31/2013 15:40:30" />
+    <file relUrl="bin/Fanex.Maintenance.Entity.pdb" publishTime="01/31/2013 15:58:16" />
     <file relUrl="Views/ConnectionString/GetConnectionByAlias.cshtml" publishTime="01/29/2013 15:42:47" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/i18n/jquery.ui.datepicker-ru.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/i18n/jquery.ui.datepicker-lb.js" publishTime="10/26/2012 16:57:35" />
@@ -1364,7 +1365,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/demos/tooltip/custom-content.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Mail/AddMailFunction.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/lib/jquery.numeric.js" publishTime="10/26/2012 16:57:36" />
-    <file relUrl="Views/ConnectionString/CreateConnection.cshtml" publishTime="01/31/2013 15:42:36" />
+    <file relUrl="Views/ConnectionString/CreateConnection.cshtml" publishTime="01/31/2013 16:06:32" />
     <file relUrl="scripts/Plugin/jquery-ui-1.8.23.custom/development-bundle/demos/images/icon-docs-info.gif" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/docs/slide-effect.html" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery.treeview/jquery.treeview.js" publishTime="10/26/2012 16:57:35" />
@@ -1372,7 +1373,7 @@
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/themes/custom-theme/jquery-ui.css" publishTime="10/26/2012 16:57:35" />
     <file relUrl="themes/job/images/icn_tags.png" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/themes/custom-theme/jquery.ui.tooltip.css" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Repository.dll" publishTime="01/31/2013 15:40:31" />
+    <file relUrl="bin/Fanex.Maintenance.Repository.dll" publishTime="01/31/2013 15:58:17" />
     <file relUrl="scripts/Job/Index.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="themes/job/img/hub.png" publishTime="10/26/2012 16:57:36" />
     <file relUrl="themes/select-site.less" publishTime="10/26/2012 16:57:36" />
@@ -1451,7 +1452,7 @@
     <file relUrl="themes/job/images/collapse-title.png" publishTime="10/26/2012 16:57:36" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/ui/jquery.ui.resizable.js" publishTime="10/26/2012 16:57:35" />
     <file relUrl="scripts/Plugin/jquery-ui-1.9.1.custom/development-bundle/AUTHORS.txt" publishTime="10/26/2012 16:57:35" />
-    <file relUrl="bin/Fanex.Maintenance.Criteria.dll" publishTime="01/31/2013 15:40:30" />
+    <file relUrl="bin/Fanex.Maintenance.Criteria.dll" publishTime="01/31/2013 15:58:16" />
     <file relUrl="themes/Authentication/_images/icUser.jpg" publishTime="10/26/2012 16:57:36" />
     <file relUrl="themes/assets/less/twbs-203/pager.less" publishTime="10/26/2012 16:57:36" />
     <file relUrl="themes/assets/css/font-awesome.css" publishTime="10/26/2012 16:57:36" />

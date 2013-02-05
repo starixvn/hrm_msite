@@ -25,6 +25,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Core.Helpers;
 
+    [Authorize]
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ConnectionStringController : BaseController
     {
