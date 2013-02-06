@@ -1707,3 +1707,36 @@ header .user-info .greeting.selected ul {
     top: 70px;
     visibility: visible;
 }
+.jpages {
+    border: 1px solid #BBBBBB;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 0 #FFFFFF;
+    float: right;
+    font-size: 0;
+    margin: 0;
+}
+.jpages a {
+    background-color: #DDDDDD;
+    color: #292929;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 11px;
+    padding: 5px 10px;
+    text-shadow: 0 1px 0 #EEEEEE;
+}
+.jpages a:hover {
+    background-color: #CCCCCC;
+    text-decoration: none;
+}
+.jpages a[disabled] {
+    background-image: none;
+    opacity: 0.35;
+}
+.jpages a[disabled]:hover {
+    background-color: #DDDDDD;
+    cursor: default;
+}
+.jpages a.jp-current, .jpages a.jp-current:hover {
+    background-color: #CCCCCC;
+    cursor: default;
+}

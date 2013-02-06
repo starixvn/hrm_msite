@@ -7,6 +7,13 @@
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .filter-form .edit-field input[type="datetime"]
+        {
+            height: 16px;
+            width: 80px;
+        }
+    </style>
 }
 @section Headline {
     <h1>
@@ -26,13 +33,13 @@
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.From)
             </div>
-            <div class="edit-field width-180">
+            <div class="edit-field ">
                 @Html.EditorFor(m => m.From)
             </div>
             <div class="lbl-field width-auto">
                 @Html.LabelFor(m => m.To)
             </div>
-            <div class="edit-field width-180">
+            <div class="edit-field ">
                 @Html.EditorFor(m => m.To)
             </div>
             <div class="lbl-field width-auto divName">

@@ -81,4 +81,31 @@ $(document).ready(function () {
             $('#Name').removeAttr('disabled');
         }
     });
+
+    // shows loading on change page
+    Log.form.submit(function () {
+        NAP.loadingBox.show();
+    });
+
+    // changes items/page
+    Log.grid.on('change', '.items-per-page', function () {
+        var $this = $(this),
+			pageSize = $this.val(),
+			username = $('#Username').val(),
+			from = $('#From').val(),
+			to = $('#To').val(),
+			name = $('#Name').val(),
+			filter = $('#FilterType').val();
+
+        var url = NAP.resolveClientUrl('ConnectionString/Log' +
+			'?q=' + name +
+			'&username=' + username +
+			'&from=' + from +
+			'&to=' + to +
+			'&filterBy=' + filter +
+			'&size=' + pageSize);
+
+        NAP.loadingBox.show();
+        window.location.replace(url);
+    });
 });
