@@ -1690,6 +1690,7 @@
     <Content Include="Views\ConnectionString\_ConnectionLog_Alias_Update.cshtml" />
     <Content Include="Views\ConnectionString\_ConnectionLog_LogData.cshtml" />
     <Content Include="Views\ConnectionString\_ConnectionLog_LogData_ChangeConnection.cshtml" />
+    <Content Include="Views\ConnectionString\ViewConnection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

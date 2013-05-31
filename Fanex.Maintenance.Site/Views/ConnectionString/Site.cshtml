@@ -44,9 +44,9 @@
             <th>
                 @ViewResource.Name
             </th>
-            <th>
+           @* <th>
                 @ViewResource.Alias
-            </th>
+            </th>*@
             <th>
                 @ViewResource.Description
             </th>
@@ -55,6 +55,9 @@
             </th>
             <th>
                 @ViewResource.Modified_Date
+            </th>
+            <th>
+                @ViewResource.Connection_String
             </th>
             <th>
                 @ViewResource.Active
@@ -79,7 +82,7 @@
                 <td>
                     @item.Site.Name
                 </td>
-                <td class="align-center">
+               @* <td class="align-center">
                     @if (item.NumOfAlias > 0)
                     {
                         <a href="#" sid="@item.Site.Id" class="num-alias" sname="@item.Site.Name">@item.NumOfAlias</a>
@@ -88,7 +91,7 @@
                     {
                         <span>0</span>
                     }
-                </td>
+                </td>*@
                 <td>
                     @item.Site.Description
                 </td>
@@ -97,6 +100,12 @@
                 </td>
                 <td class="align-center">
                     @item.Site.ModifiedDate.ToFullDateString()
+                </td>
+                <td class="align-center">
+                    @if (item.NumOfAlias > 0)
+                    { 
+                        <a href="#" sid="@item.Site.Id" class="site-con" sname="@item.Site.Name">@ViewResource.View</a>
+                    }
                 </td>
                 <td class="align-center">
                     @if (item.Site.IsActive)

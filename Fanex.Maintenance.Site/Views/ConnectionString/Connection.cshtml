@@ -21,22 +21,7 @@
                 #
             </th>
             <th>
-                @ViewResource.Data_Source
-            </th>
-            <th>
-                @ViewResource.Initial_Catalog
-            </th>
-            @*<th>
-                @ViewResource.Integrated_Security
-            </th>*@
-            <th>
-                @ViewResource.User_ID
-            </th>
-            @*<th>
-                @ViewResource.Password
-            </th>*@
-            <th>
-                @ViewResource.Free_Text
+                @ViewResource.Connection_String
             </th>
             <th>
                 @ViewResource.Modifier
@@ -68,22 +53,7 @@
                     @i
                 </td>
                 <td>
-                    @item.ConnectionString.Server.ServerIP
-                </td>
-                <td>
-                    @item.ConnectionString.InitialCatalog
-                </td>
-                @*<td class="align-center">
-                    @item.ConnectionString.IntegratedSecurity.ToString()
-                </td>*@
-                <td>
-                    @item.ConnectionString.UserID
-                </td>
-                @*<td>
-                    @item.ConnectionString.Password
-                </td>*@
-                <td class="align-center">
-                    @item.ConnectionString.FreeText
+                    @item.ConnectionString.Connection
                 </td>
                 <td class="align-center">
                     @if (item.ConnectionString.Modifier != null)

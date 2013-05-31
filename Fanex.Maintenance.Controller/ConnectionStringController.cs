@@ -297,6 +297,13 @@ namespace Fanex.Maintenance.Controller
                 return RedirectToAction("NotFound", "CommonError");
             }
 
+
+            var connection = _connectionService.GetByAlias(alias.Id);
+            if (!connection.Any())
+            {
+                model.IsDefault = true;
+            }
+
             ViewBag.Alias = alias;
 
             // get database server
@@ -513,6 +520,16 @@ namespace Fanex.Maintenance.Controller
 
         #endregion Edit
 
+        #region Connection
+
+        public ViewResult ViewConnection(int siteId)
+        {
+            var list = _aliasService.GetAll(string.Empty, null, siteId);
+
+            return View(list);
+        }
+
+        #endregion
         #endregion Site
 
         #region DB Server

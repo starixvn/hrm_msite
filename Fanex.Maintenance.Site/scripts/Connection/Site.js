@@ -23,6 +23,26 @@ var Site = function ($) {
             });
         },
 
+        ShowSiteConnection: function (siteId, siteName) {
+            $.ajax({
+                url: NAP.resolveClientUrl("ConnectionString/ViewConnection?siteId=" + siteId),
+                type: 'GET',
+                cache: false,
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    NAP.loadingBox.close();
+                },
+                success: function (result) {
+                    NAP.popup("Connection of site '" + siteName + "'", result);
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
+        },
+
         UpdateStatusSite: function (siteId, isActive) {
             $.ajax({
                 url: NAP.resolveClientUrl("ConnectionString/UpdateStatusSite"),
@@ -59,6 +79,14 @@ $(document).ready(function () {
         var siteName = $this.attr('sname');
 
         Site.ShowNumOfAlias(siteId, siteName);
+    });
+
+    $('.site-con').click(function () {
+        var $this = $(this);
+        var siteId = $this.attr('sid');
+        var siteName = $this.attr('sname');
+
+        Site.ShowSiteConnection(siteId, siteName);
     });
 
     Site.grid.on('mousedown', 'input[type=checkbox][sid]', function (e) {

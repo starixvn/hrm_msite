@@ -756,4 +756,7 @@
   <data name="Switch_Backup_Connection" xml:space="preserve">
     <value>Switch Backup Connection</value>
   </data>
+  <data name="Export_Connection" xml:space="preserve">
+    <value>Export Connection</value>
+  </data>
 </root>
