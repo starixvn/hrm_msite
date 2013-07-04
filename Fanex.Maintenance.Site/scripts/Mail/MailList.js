@@ -29,6 +29,8 @@ $(document).ready(function () {
                 else {
                     NAP.headlineMsgBox.showInfo("Resend Faild !", { closeBtn: false });
                 }
+
+                window.location.href = window.location.href;
             },
             error: function (xhr, status, err) {
                 NAP.handleAjaxError(xhr, status, err);
@@ -144,7 +146,7 @@ $(document).ready(function () {
         var from = $('#From').val();
         var to = $('#To').val();
         var size = $('#size').val();
-                
+
         $.ajax({
             url: NAP.resolveClientUrl("Mail/MailListPagi"),
             data: { applicationID: appId, from: from, to: to, page: AddMailConfigPopUp.page, size: size },

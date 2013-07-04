@@ -104,7 +104,7 @@
 					
             <tr class="@row_class">
                 <td class="align-center">
-                    @(i++)
+                    @(Model.Page * Model.Size + i++)
                 </td>
                 <td>
                     @*<a href="#" class="logMessage" logid="@logitem.LogId"></a>*@@logitem.Message
