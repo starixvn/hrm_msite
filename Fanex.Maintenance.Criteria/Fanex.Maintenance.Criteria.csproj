@@ -104,7 +104,6 @@
     <Compile Include="Misc\ResultCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\GetUserOnlineCriteria.cs" />
-    <Compile Include="User\UserLoginCriteria.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

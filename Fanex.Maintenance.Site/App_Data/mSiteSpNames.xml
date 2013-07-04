@@ -10,7 +10,7 @@
         <Setting Key="Lrf_GetSystemNameStatistic" SpName="Lrf_GetSystemNameStatistic" DbName="Licensee" />
         <Setting Key="Lrf_GetNonFunctionStatistic" SpName="Lrf_GetNonFunctionStatistic" DbName="Licensee" />
 
-        <Setting Key="Acc_LoginAdmin" SpName="Acc_LoginAdmin" DbName="main" />
+        <!--<Setting Key="Acc_LoginAdmin" SpName="Acc_LoginAdmin" DbName="main" />-->
     </Function>
     <Function Name="Licensee">
         <Setting Key="Lrf_SelBalanceUpDay" SpName="Lrf_SelBalanceUpDay" DbName="licensee_archive" />
