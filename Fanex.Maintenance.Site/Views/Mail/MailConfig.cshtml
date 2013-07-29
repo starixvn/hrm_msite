@@ -46,6 +46,9 @@
             <th>
                 @ViewResource.Mail_Setting
             </th>
+             <th>
+                @ViewResource.FromMail
+            </th>
             <th>
                 @ViewResource.View_Report
             </th>
@@ -75,6 +78,9 @@
                 </td>
                 <td>
                     @mailItem.Setting.SettingName
+                </td>
+                <td class="align-center">
+                    @(string.IsNullOrEmpty(mailItem.MailFrom) ? mailItem.Setting.Username : mailItem.MailFrom)
                 </td>
                 <td class="align-center">
                     <div class="action-wrp">

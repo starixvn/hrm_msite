@@ -54,6 +54,14 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
+                @Html.LabelFor(m => m.MailFrom)
+            </div>
+            <div class="edit-field">
+                @Html.TextBoxFor(m => m.MailFrom)                
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="lbl-field">
             </div>
             <div class="edit-field">
                 @if (!success)

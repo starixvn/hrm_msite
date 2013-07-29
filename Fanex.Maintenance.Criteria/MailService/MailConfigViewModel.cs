@@ -39,6 +39,9 @@ namespace Fanex.Maintenance.Criteria.MailService
         [Display(Name = "Description", ResourceType = typeof(ViewResource))]
         public string Description { get; set; }
 
+        [Display(Name = "MailFrom", ResourceType = typeof(ViewResource))]
+        public string MailFrom { get; set; }
+
         public MailConfigViewModel()
         {
         }
@@ -49,6 +52,7 @@ namespace Fanex.Maintenance.Criteria.MailService
             this.Description = mailSetting.Description;
             this.SettingId = mailSetting.Setting.SettingID;
             this.AppId = mailSetting.AppID;
+            this.MailFrom = string.IsNullOrEmpty(mailSetting.MailFrom) ? mailSetting.Setting.Username : mailSetting.MailFrom;
         }
 
         public MailConfig GetMailConfig()
@@ -58,6 +62,7 @@ namespace Fanex.Maintenance.Criteria.MailService
                 AppID = this.AppId,
                 AppName = this.AppName,
                 Description = this.Description,
+                MailFrom = this.MailFrom,
                 Setting = new MailSetting
                 {
                     SettingID = this.SettingId

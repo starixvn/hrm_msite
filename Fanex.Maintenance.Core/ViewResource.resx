@@ -600,7 +600,7 @@
   <data name="Database_Server" xml:space="preserve">
     <value>Database Server</value>
   </data>
-  <data name="Edit Connection" xml:space="preserve">
+  <data name="EditConnection" xml:space="preserve">
     <value>Edit Connection</value>
   </data>
   <data name="Manage_Alias" xml:space="preserve">
@@ -758,5 +758,11 @@
   </data>
   <data name="Export_Connection" xml:space="preserve">
     <value>Export Connection</value>
+  </data>
+  <data name="FromMail" xml:space="preserve">
+    <value>From Mail</value>
+  </data>
+  <data name="MailFrom" xml:space="preserve">
+    <value>Mail From</value>
   </data>
 </root>

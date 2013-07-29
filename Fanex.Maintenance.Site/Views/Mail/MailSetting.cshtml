@@ -74,7 +74,7 @@
                     @mailItem.Password
                 </td>
                 <td class="align-center">
-                    <input type="checkbox" value="@mailItem.Password" disabled="disabled" />
+                    <input type="checkbox" value="@mailItem.Password" disabled="disabled" @(mailItem.IsAuth ? "checked='checked'" : string.Empty) />
                 </td>
                 <td class="align-center">
                     <div class="action-wrp">
