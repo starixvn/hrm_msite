@@ -107,7 +107,12 @@
                     @(Model.Page * Model.Size + i++)
                 </td>
                 <td>
-                    @*<a href="#" class="logMessage" logid="@logitem.LogId"></a>*@@logitem.Message
+                    <div class="message" data-logId="@logitem.LogId">
+                        @logitem.Message
+                    </div>
+                    <div class="hiden">
+                        @Html.Raw(logitem.FormattedMessage.Replace("\n", "<br/>"))
+                    </div>
                 </td>
                 <td class="align-center">
                     @foreach (var item in logitem.Category)
@@ -122,6 +127,10 @@
                     @logitem.TimeStamp
                 </td>
             </tr>
+@*<tr data-logId="@logitem.LogId" class="hiden">
+                <td colspan="5">
+                </td>
+            </tr>*@
                 }
             }
             else

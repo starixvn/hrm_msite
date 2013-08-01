@@ -45,5 +45,7 @@ namespace Fanex.Maintenance.Entity.Model
         public List<LogCategory> Category { get; set; }
 
         public string Message { get; set; }
+
+        public string FormattedMessage { get; set; }
     }
 }

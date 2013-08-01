@@ -24,20 +24,20 @@
 
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
 
-            if (AppSetting.NotifiJob)
-            {
-                NotificationWorker notificationWorker = new NotificationWorker(AppSetting.GetDataNotifyInterval);
-                notificationWorker.Start();
-            }
+            //if (AppSetting.NotifiJob)
+            //{
+            //    NotificationWorker notificationWorker = new NotificationWorker(AppSetting.GetDataNotifyInterval);
+            //    notificationWorker.Start();
+            //}
 
-            if (AppSetting.NotifiServer)
-            {
-                CpuUtilizationWorker cpuUtilizationWorker = new CpuUtilizationWorker(AppSetting.GetCpuUtilizationInterval);
-                cpuUtilizationWorker.Start();
+            //if (AppSetting.NotifiServer)
+            //{
+            //    CpuUtilizationWorker cpuUtilizationWorker = new CpuUtilizationWorker(AppSetting.GetCpuUtilizationInterval);
+            //    cpuUtilizationWorker.Start();
 
-                MemoryUtilizationWorker memoryUtilizationWorker = new MemoryUtilizationWorker(AppSetting.GetMemoryUtilizationInterval);
-                memoryUtilizationWorker.Start();
-            }
+            //    MemoryUtilizationWorker memoryUtilizationWorker = new MemoryUtilizationWorker(AppSetting.GetMemoryUtilizationInterval);
+            //    memoryUtilizationWorker.Start();
+            //}
         }
     }
 }

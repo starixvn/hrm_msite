@@ -84,5 +84,13 @@ $(document).ready(function () {
         }
     });
 
+    $('.message').bind('click', function () {
+        var logId = $(this).attr('data-logId');
+        $('.hiden').hide();
+        $('.message').show();
+        $(this).hide();
+        $(this).next().show();
+    });
+
     Index.UpdateNavigation();
 });
