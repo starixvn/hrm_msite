@@ -121,6 +121,11 @@ namespace Fanex.Maintenance.Controller
             });
             list.Add(new SelectListItem
             {
+                Text = "Information",
+                Value = "Information"
+            });
+            list.Add(new SelectListItem
+            {
                 Text = "Verbose",
                 Value = "Verbose"
             });
