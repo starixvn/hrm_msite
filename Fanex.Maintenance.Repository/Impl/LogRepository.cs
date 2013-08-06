@@ -14,6 +14,7 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.Data;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.NAP.Framework.Data;
+    using Fanex.Maintenance.Criteria.Log;
 
     /// <summary>
     /// Log repository
@@ -25,18 +26,24 @@ namespace Fanex.Maintenance.Repository.Impl
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        public override IEnumerable<Log> Fetch(ICriteria criteria)
+        public IEnumerable<Log> GetLog(ref GetLogCriteria criteria)
         {
             try
             {
                 using (var db = new ObjectDb(criteria.GetSettingKey()))
                 {
-                    return db.Query<Log, LogCategory, Log>((m, c) =>
+                    var param = criteria.GetSpParams();
+
+                    var list = db.Query<Log, LogCategory, Log>((m, c) =>
                     {
                         m.Category = new List<LogCategory>();
                         m.Category.Add(c);
                         return m;
-                    }, "CategoryID,CategoryName", criteria.GetSpParams());
+                    }, "CategoryID,CategoryName", param);
+
+                    criteria.TotalRows = Convert.ToInt32(param["totalrows"]);
+
+                    return list;
                 }
             }
             catch (Exception ex)

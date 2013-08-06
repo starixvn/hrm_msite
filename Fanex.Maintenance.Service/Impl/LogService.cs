@@ -151,7 +151,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// Get list logs
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Log> GetLogs()
+        public IEnumerable<Log> GetLogs(ref int totalRows)
         {
             GetLogCriteria criteria = new GetLogCriteria
             {
@@ -163,7 +163,11 @@ namespace Fanex.Maintenance.Service.Impl
                 Severity = this._severity
             };
 
-            return _logRepository.Fetch(criteria);
+            var list = _logRepository.GetLog(ref criteria);
+
+            totalRows = criteria.TotalRows;
+
+            return list;
         }
 
         /// <summary>

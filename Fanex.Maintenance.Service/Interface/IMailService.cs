@@ -70,7 +70,7 @@ namespace Fanex.Maintenance.Service.Interface
         /// Get list mail by date
         /// </summary>
         /// <returns></returns>
-        List<MailRecord> GetListMailByDate();
+        List<MailRecord> GetListMailByDate(ref int totalRows);
 
         /// <summary>
         /// Get mail by mail id
@@ -139,5 +139,12 @@ namespace Fanex.Maintenance.Service.Interface
         /// <param name="func"></param>
         /// <returns></returns>
         bool StoreFunction(MailFunction func);
+
+        /// <summary>
+        /// Get history mail error
+        /// </summary>
+        /// <param name="mailId"></param>
+        /// <returns></returns>
+        List<MailError> GetError(int mailId);
     }
 }

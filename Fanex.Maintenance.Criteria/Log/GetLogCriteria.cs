@@ -31,6 +31,8 @@ namespace Fanex.Maintenance.Criteria.Log
 
         public int Size { get; set; }
 
+        public int TotalRows { get; set; }
+
         public override bool IsValid()
         {
             return true;

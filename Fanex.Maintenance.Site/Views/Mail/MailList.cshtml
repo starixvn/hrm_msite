@@ -6,45 +6,6 @@
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
-    <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
-    <script type="text/x-jsrender" id="templateContentEmail">
-        <tr class="{{if #index%2==0 }}alt{{/if}}">
-            <td class="align-center">    
-                {{:#index+1}}           
-            </td>
-            <td>
-                <a href="#" class="emailMessage" mailid="{{:MailID}}">
-                    {{:Subject}}
-                </a>
-            </td>
-            <td title="{{:Config.Setting.SettingName}}">
-            {{:Config.AppName}}
-            </td>
-            <td>
-                {{: MailTo}}
-            </td>
-            <td title="{{:MailCc}}">{{if MailCc.indexOf(',') > 0}}
-                {{:#data.MailCc.substring(0,#data.MailCc.indexOf(','))}}
-            {{/if}}</td>
-            <td>
-                {{: MailDate}}
-            </td>
-             <td>
-                {{: MailUpdatedDate}}
-            </td>
-            <td>
-                {{: SentSuccess}}
-            </td>
-            <td>
-                {{: SentFail}}
-            </td>
-            <td class="align-center {{if SentSuccess == 0}}mailfail{{/if}}">
-                <div class="action-wrp">
-                    <a href="#" title="Resend" class="resendmail" mailid="{{:MailID}}">Resend</a>
-                </div>
-            </td>
-        </tr>      
-    </script>
 }
 @section Headline {
     <h1>
@@ -80,127 +41,12 @@
                 @Html.TextBox("To", string.Empty, new { @style = "width:90px;margin-right:5px;" })
             </div>
             <div class="submit">
-                <input type="submit" value="Submit" />
+                <input type="button" value="Submit" id="submit" />
             </div>
         </div>
     </section>
-    <div class="pagesize">
-        Page Size :
-        @Html.DropDownList("size", (List<SelectListItem>)ViewBag.PageSize)
+    <div id="gridId" class="freegrid  content-grid">
     </div>
-    <table class="grid">
-        <thead>
-            <tr>
-                <th>
-                    #
-                </th>
-                <th>
-                    @ViewResource.Subject
-                </th>
-                <th>
-                    @ViewResource.Application_Name
-                </th>
-                <th>
-                    @ViewResource.Mail_To
-                </th>
-                <th>
-                    @ViewResource.Mail_Cc
-                </th>
-                <th>
-                    @ViewResource.Created_Date
-                </th>
-                <th>
-                    @ViewResource.Latest_Send_Date
-                </th>
-                <th>
-                    @ViewResource.Send_Success
-                </th>
-                <th>
-                    @ViewResource.Send_Fail
-                </th>
-                <th>
-                    @ViewResource.Resend
-                </th>
-            </tr>
-        </thead>
-        <tbody id="contentMailList">
-            @{
-    int i = 1;
-    if (!ReferenceEquals(Model, null) && Model.Count > 0)
-    {
-        foreach (MailRecord mailItem in Model)
-        {
-            string row_class = i % 2 == 0 ? "alt" : string.Empty;
-            //string row_fail=mailItem.SentSuccess==0  
-                <tr class="@row_class">
-                    <td class="align-center">
-                        @(i++)
-                    </td>
-                    <td>
-                        <a href="#" class="emailMessage" mailid="@mailItem.MailID">
-                            @mailItem.Subject
-                        </a>
-                    </td>
-                    <td title="@mailItem.Config.Setting.SettingName">
-                        @mailItem.Config.AppName
-                    </td>
-                    <td>
-                        @Html.Raw(mailItem.MailTo)
-                    </td>
-                    <td>
-                        @if (mailItem.MailCc.IndexOf(',') > 0)
-                        {
-                            @mailItem.MailCc.Substring(0, mailItem.MailCc.IndexOf(','))
-                        }
-                        else
-                        {
-                            @mailItem.MailCc
-                        }
-                    </td>
-                    <td>
-                        @mailItem.MailDate
-                    </td>
-                    <td>
-                        @mailItem.MailUpdatedDate
-                    </td>
-                    <td>
-                        @mailItem.SentSuccess
-                    </td>
-                    <td>
-                        @mailItem.SentFail
-                    </td>
-                    <td class="align-center @(mailItem.SentSuccess == 0 ? "mailfail" : string.Empty)">
-                        <div class="action-wrp">
-                            <a href="#" title="Resend" class="resendmail" mailid="@mailItem.MailID">Resend</a>
-                        </div>
-                    </td>
-                </tr>               
-        }
-    }
-    else
-    {
-                <tr>
-                    <td class="align-center" colspan="10">
-                        Not found !
-                    </td>
-                </tr>
-    }
-            }
-        </tbody>
-        <tfoot>
-            @if (Model.Count > 0)
-            {
-                <tr>
-                    <td class="align-right tdpaging" colspan="10">
-                        <div class="pagingcontainer">
-                            <a href="#" class="pagiPre pagingitem">← Prev</a> <a href="#" class="pagiNext pagingitem">
-                                Next →</a>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tfoot>
-    </table>
 }
 @Html.Hidden("dateFrom", (string)ViewBag.DateFrom)
 @Html.Hidden("dateTo", (string)ViewBag.DateTo)
@@ -229,6 +75,7 @@
                 buttonImageOnly: true,
                 dateFormat: "dd/mm/yy"
             });
-        });        
+
+        });
     </script>
 }

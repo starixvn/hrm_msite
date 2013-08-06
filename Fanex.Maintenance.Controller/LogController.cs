@@ -155,13 +155,6 @@ namespace Fanex.Maintenance.Controller
 
             InitPageSize();
 
-            ////Get logs by date
-            //IEnumerable<Log> listLogs = _logService.With(0, "All")
-            //    .From(DateTime.Now)
-            //    .To(DateTime.Now.AddDays(1))
-            //    .WithPagination(0, 10)
-            //    .GetLogs();
-
             ViewBag.ListLog = null;
 
             GetLogCriteria criteria = new GetLogCriteria
@@ -193,16 +186,20 @@ namespace Fanex.Maintenance.Controller
 
             criteria.CategoryId = criteria.CategoryId ?? 0;
 
+            var totalRows = 0;
+
             ////Get logs by date
             IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)
                 .WithPagination(criteria.Page, criteria.Size)
-                .GetLogs();
+                .GetLogs(ref totalRows);
 
-            ViewBag.ListLog = listLogs;
-
-            return View(criteria);
+            return Json(new
+            {
+                TotalRows = totalRows,
+                ListLog = listLogs
+            });
         }
 
         /// <summary>

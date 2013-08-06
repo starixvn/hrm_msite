@@ -12,6 +12,7 @@ namespace Fanex.Maintenance.Entity.Model
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Web;
 
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Log
@@ -47,5 +48,21 @@ namespace Fanex.Maintenance.Entity.Model
         public string Message { get; set; }
 
         public string FormattedMessage { get; set; }
+
+        public string FullMessage
+        {
+            get
+            {
+                return HttpUtility.HtmlEncode(FormattedMessage);
+            }
+        }
+
+        public string LogDate
+        {
+            get
+            {
+                return this.TimeStamp.ToString("MMM dd,yyyy hh:mm:ss");
+            }
+        }
     }
 }

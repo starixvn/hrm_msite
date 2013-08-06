@@ -184,6 +184,8 @@ namespace Fanex.Maintenance.Controller
 
             InitMailStatus();
 
+            var totalRows = 0;
+
             ViewBag.DateFrom = DateTime.Now.ToString("dd/MM/yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
 
@@ -193,7 +195,7 @@ namespace Fanex.Maintenance.Controller
                 .ToDate(DateTime.Now.AddDays(1).ToShortDateString())
                 .WithStatus(0)
                 .WithPagination(1, 10)
-                .GetListMailByDate();
+                .GetListMailByDate(ref totalRows);
 
             return View(listMail);
         }
@@ -215,6 +217,8 @@ namespace Fanex.Maintenance.Controller
 
             InitMailStatus();
 
+            var totalRows = 0;
+
             DateTime dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1);
 
@@ -224,7 +228,7 @@ namespace Fanex.Maintenance.Controller
                 .ToDate(dateTo.ToString())
                 .WithStatus(mailStatus)
                 .WithPagination(1, size)
-                .GetListMailByDate();
+                .GetListMailByDate(ref totalRows);
 
             ViewBag.DateFrom = from;
             ViewBag.DateTo = to;
@@ -651,6 +655,23 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
+        /// Get mail error
+        /// </summary>
+        /// <param name="mailId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetError(int mailId)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                List<MailError> mail = _mailServer.GetError(mailId);
+                return View(mail);
+            }
+
+            return View(new List<MailError>());
+        }
+
+        /// <summary>
         /// Get list mail pagination
         /// </summary>
         /// <param name="from"></param>
@@ -660,21 +681,28 @@ namespace Fanex.Maintenance.Controller
         /// <param name="applicationID"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult MailListPagi(string from, string to, int page, int size, int applicationID = 0)
+        public ActionResult MailListPagi(int status, string from, string to, int page = 0, int size = 50, int applicationID = 0)
         {
             InitDataMailConfig();
 
-            DateTime dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1);
+            var totalRows = 0;
+
+            DateTime dateFrom = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
+            DateTime dateTo = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1) : DateTime.Now.AddDays(1);
 
             List<MailRecord> listMail = new List<MailRecord>();
             listMail = _mailServer.WithApp(applicationID)
                 .FromDate(dateFrom.ToString())
                 .ToDate(dateTo.ToString())
                 .WithPagination(page, size)
-                .GetListMailByDate();
+                .WithStatus(status)
+                .GetListMailByDate(ref totalRows);
 
-            return Json(listMail);
+            return Json(new
+            {
+                TotalRows = totalRows,
+                ListMail = listMail
+            });
         }
 
         /// <summary>

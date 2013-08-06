@@ -148,14 +148,14 @@ namespace Fanex.Maintenance.Service.Impl
         /// Get list mail from date to date
         /// </summary>
         /// <returns></returns>
-        public List<MailRecord> GetListMailByDate()
+        public List<MailRecord> GetListMailByDate(ref int totalRows)
         {
             var mails = new List<MailRecord>();
             using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
             {
                 var dateTime = DateTime.Parse(_byDate);
                 var dateTimeTo = DateTime.Parse(_toDate);
-                var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, _page, _counter, _mailStatus);
+                var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, ref totalRows, _page, _counter, _mailStatus);
                 if (data != null)
                 {
                     mails = data.Select(mailRecord =>
@@ -379,6 +379,18 @@ namespace Fanex.Maintenance.Service.Impl
             }
 
             return this;
+        }
+
+
+        public List<MailError> GetError(int mailId)
+        {
+            List<MailError> mailList = new List<MailError>();
+            using (var client = new MailDeliver())
+            {
+                mailList = client.GetListError(mailId).ToList();
+            }
+
+            return mailList;
         }
     }
 }
