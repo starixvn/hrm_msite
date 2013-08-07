@@ -889,7 +889,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Auth.
+        ///   Looks up a localized string similar to SSL.
         /// </summary>
         public static string IsAuth {
             get {
