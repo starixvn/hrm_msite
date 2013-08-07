@@ -37,7 +37,7 @@
                         bodyData.push({
                             Columns:
                         [
-                            { Name: "No", Value: count++ },
+                            { Name: "No", Value: pageSize * (index - 1) + count++ },
                             { Name: "Subject", Value: "<a href='#' class='emailMessage' data-mailid='" + value.MailID + "'>" + value.Subject + "</a>" },
                             { Name: "ApplicationName", Value: value.Config.AppName },
                             { Name: "MailTo", Value: value.MailTo.split(',').join('<br/>') },
