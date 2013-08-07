@@ -96,6 +96,7 @@
     <Compile Include="DatabaseReport\GetCreditDataToValidateCriteria.cs" />
     <Compile Include="DatabaseReport\GetBalanceUpDayCriteria.cs" />
     <Compile Include="DatabaseReport\GetDepositDataToValidateCriteria.cs" />
+    <Compile Include="Log\GetAllMachinesCriteria.cs" />
     <Compile Include="Log\GetLogCriteria.cs" />
     <Compile Include="MailService\MailConfigViewModel.cs" />
     <Compile Include="MailService\MailFunctionViewModel.cs" />

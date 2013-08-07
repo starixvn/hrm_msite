@@ -19,6 +19,8 @@ namespace Fanex.Maintenance.Criteria.Log
     {
         public int? CategoryId { get; set; }
 
+        public int? MachineId { get; set; }
+
         public string Severity { get; set; }
 
         [DataType(DataType.Date)]

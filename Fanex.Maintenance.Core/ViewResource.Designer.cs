@@ -196,6 +196,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string AllSelection {
+            get {
+                return ResourceManager.GetString("AllSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Application.
         /// </summary>
         public static string Application_Name {
@@ -1011,6 +1020,15 @@ namespace Fanex.Maintenance.Core {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Machine.
+        /// </summary>
+        public static string Machine {
+            get {
+                return ResourceManager.GetString("Machine", resourceCulture);
             }
         }
         

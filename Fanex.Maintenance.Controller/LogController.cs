@@ -37,6 +37,11 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         private readonly LogCategoryService _categoryService;
 
+        /// <summary>
+        /// Machine Service
+        /// </summary>
+        private readonly MachineService _machineService;
+
         #endregion Member
 
         #region Ctor
@@ -45,7 +50,7 @@ namespace Fanex.Maintenance.Controller
         /// Parameter less Controller
         /// </summary>
         public LogController()
-            : this(null, null)
+            : this(null, null, null)
         {
         }
 
@@ -54,10 +59,11 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <param name="logService"></param>
         /// <param name="categoryService"></param>
-        public LogController(LogService logService, LogCategoryService categoryService)
+        public LogController(LogService logService, LogCategoryService categoryService, MachineService machineService)
         {
             _logService = logService ?? LogService.Create();
             _categoryService = categoryService ?? LogCategoryService.Create();
+            _machineService = machineService ?? MachineService.Create();
         }
 
         #endregion Ctor
@@ -143,6 +149,14 @@ namespace Fanex.Maintenance.Controller
                 Text = c.CategoryName,
                 Value = c.CategoryID.ToString()
             }).ToList();
+
+            ////Get All Machines
+            IEnumerable<Machine> machines = _machineService.GetAll();
+            ViewBag.Machines = machines.Select(m => new SelectListItem
+            {
+                Text = m.MachineName,
+                Value = m.MachineId.ToString()
+            }).ToList();
         }
 
         #endregion Private
@@ -165,6 +179,7 @@ namespace Fanex.Maintenance.Controller
             GetLogCriteria criteria = new GetLogCriteria
             {
                 CategoryId = 0,
+                MachineId = 0,
                 From = DateTime.Now,
                 To = DateTime.Now,
                 Page = 0,
@@ -190,11 +205,12 @@ namespace Fanex.Maintenance.Controller
             InitPageSize();
 
             criteria.CategoryId = criteria.CategoryId ?? 0;
+            criteria.MachineId = criteria.MachineId ?? 0;
 
             var totalRows = 0;
 
             ////Get logs by date
-            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.Severity)
+            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.MachineId, criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)
                 .WithPagination(criteria.Page, criteria.Size)

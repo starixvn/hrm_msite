@@ -32,6 +32,8 @@ namespace Fanex.Maintenance.Service.Impl
 
         private int? _categoryId;
 
+        private int? _machineId;
+
         private string _severity;
 
         private DateTime _dateFrom;
@@ -53,6 +55,7 @@ namespace Fanex.Maintenance.Service.Impl
         {
             _categoryId = 0;
             _severity = "All";
+            _machineId = 0;
             _dateFrom = DateTime.Now;
             _dateTo = DateTime.Now.AddDays(-1);
             _page = 0;
@@ -91,6 +94,22 @@ namespace Fanex.Maintenance.Service.Impl
         public LogService With(int? categoryId, string severity)
         {
             this._categoryId = categoryId;
+            this._severity = severity;
+
+            return this;
+        }
+
+        /// <summary>
+        /// By CategoryId, MachineId and Severity
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="machineId"></param>
+        /// <param name="severity"></param>
+        /// <returns></returns>
+        public LogService With(int? categoryId, int? machineId, string severity)
+        {
+            this._categoryId = categoryId;
+            this._machineId = machineId;
             this._severity = severity;
 
             return this;
@@ -160,7 +179,8 @@ namespace Fanex.Maintenance.Service.Impl
                 To = this._dateTo,
                 Page = this._page,
                 Size = this._size,
-                Severity = this._severity
+                Severity = this._severity,
+                MachineId = this._machineId
             };
 
             var list = _logRepository.GetLog(ref criteria);

@@ -19,35 +19,45 @@
 {  
     <section id="filter-bar">
         <div class="filter-form">
-            <div class="lbl-field width-auto">
-                @Html.Label(@ViewResource.Category)
+            <div class="filter-row">
+                <div class="lbl-field width-auto">
+                    @Html.Label(ViewResource.Category)
+                </div>
+                <div class="edit-field width-300">
+                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, ViewResource.AllSelection, new { @class = "width-300" })
+                </div>
+                <div class="lbl-field width-auto">
+                    @Html.LabelFor(m => m.Severity)
+                </div>
+                <div class="edit-field">
+                    @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity)
+                </div>
+                <div class="lbl-field width-auto">
+                    @Html.Label(ViewResource.Machine)
+                </div>
+                <div class="edit-field width-180">
+                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, ViewResource.AllSelection, new { @class="width-180" })
+                </div>
+                <div class="lbl-field width-auto">
+                    @Html.LabelFor(m => m.From)
+                </div>
+                <div class="edit-field width-140">
+                    @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
+                </div>
+                <div class="lbl-field width-auto">
+                    @Html.LabelFor(m => m.To)
+                </div>
+                <div class="edit-field width-140">
+                    @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
+                </div>
             </div>
-            <div class="edit-field">
-                @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, "All")
-            </div>
-            <div class="lbl-field width-auto">
-                @Html.LabelFor(m => m.Severity)
-            </div>
-            <div class="edit-field">
-                @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity)
-            </div>
-            <div class="lbl-field width-auto">
-                @Html.LabelFor(m => m.From)
-            </div>
-            <div class="edit-field">
-                @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
-            </div>
-            <div class="lbl-field width-auto">
-                @Html.LabelFor(m => m.To)
-            </div>
-            <div class="edit-field">
-                @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
-            </div>
-            <div class="submit">
-                <input type="button" value="Submit" id="submit" />
-            </div>
-            <div class="submit">
-                <input type="button" value="Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())" id="btnRemoveLog" />
+            <div class="filter-row" style="float: right;">
+                <div class="submit width-auto">
+                    <input type="button" value="Submit" id="submit" />
+                </div>
+                <div class="submit width-auto">
+                    <input type="button" value="Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())" id="btnRemoveLog" />
+                </div>
             </div>
         </div>
     </section>
