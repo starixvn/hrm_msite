@@ -55,14 +55,17 @@
                         customPager: true,
                         pagerOption: {
                             itemsPerPage: pageSize,
-                            maxItemsPerPage: 100,
+                            itemsPerPageArray: [50, 100, 500],
                             currentPage: index - 1,
                             totalItem: result.TotalRows,
                             startPerPage: 50,
-                            pageStep: 10,
                             pagerSelectCallBack: Logs.reRenderAfterPaged
                         },
+<<<<<<< HEAD
                         gridExpandHeight: 270
+=======
+                        gridExpandHeight: 240
+>>>>>>> master
                     };
 
                     $("#gridId").fanexGrid(gridOption);

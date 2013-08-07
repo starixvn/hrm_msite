@@ -37,17 +37,18 @@
                         bodyData.push({
                             Columns:
                         [
-                            { Name: "No", Value: count++ },
+                            { Name: "No", Value: pageSize * (index - 1) + count++ },
                             { Name: "Subject", Value: "<a href='#' class='emailMessage' data-mailid='" + value.MailID + "'>" + value.Subject + "</a>" },
                             { Name: "ApplicationName", Value: value.Config.AppName },
-                            { Name: "MailTo", Value: value.MailTo },
+                            { Name: "MailTo", Value: value.MailTo.split(',').join('<br/>') },
                             //                            { Name: "MailCc", Value: "" },
                             {Name: "CreatedDate", Value: value.MailDate },
                             { Name: "LatestSendDate", Value: value.MailUpdatedDate },
                             { Name: "SendSuccess", Value: value.SentSuccess },
                             { Name: "SendFail", Value: linkSendFail },
                             { Name: "Resend", Value: "<a href='#' class='resendmail " + classFail + "' data-mailid='" + value.MailID + "'>Resend</a>" }
-                        ]
+                        ],
+                            CssClass: value.SentSuccess == 0 ? "mailfail" : ""
                         });
                     });
 
@@ -69,14 +70,13 @@
                         customPager: true,
                         pagerOption: {
                             itemsPerPage: pageSize,
-                            maxItemsPerPage: 100,
+                            itemsPerPageArray: [50, 100, 500],
                             currentPage: index - 1,
                             totalItem: result.TotalRows,
                             startPerPage: 50,
-                            pageStep: 10,
                             pagerSelectCallBack: MailList.reRenderAfterPaged
                         },
-                        gridExpandHeight: 270
+                        gridExpandHeight: 230
                     };
 
                     $("#gridId").fanexGrid(gridOption);
