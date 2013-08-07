@@ -61,11 +61,7 @@
                             startPerPage: 50,
                             pagerSelectCallBack: Logs.reRenderAfterPaged
                         },
-<<<<<<< HEAD
                         gridExpandHeight: 270
-=======
-                        gridExpandHeight: 240
->>>>>>> master
                     };
 
                     $("#gridId").fanexGrid(gridOption);
@@ -84,8 +80,6 @@
 } (jQuery);
 
 $(document).ready(function () {
-    $('#CategoryId').select2();
-    $('#MachineId').select2();
     $('.logMessage').live('click', function () {
         var logId = $(this).attr("logid");
         $.ajax({
