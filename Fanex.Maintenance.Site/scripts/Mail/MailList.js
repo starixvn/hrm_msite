@@ -47,7 +47,8 @@
                             { Name: "SendSuccess", Value: value.SentSuccess },
                             { Name: "SendFail", Value: linkSendFail },
                             { Name: "Resend", Value: "<a href='#' class='resendmail " + classFail + "' data-mailid='" + value.MailID + "'>Resend</a>" }
-                        ]
+                        ],
+                            CssClass: value.SentSuccess == 0 ? "mailfail" : ""
                         });
                     });
 

@@ -12,7 +12,8 @@
 }
 @section Headline {
     <h1>
-        <span class="title">@ViewBag.Title</span>
+        <span class="title">@ViewBag.Title</span> <a href="#" id="btnRemoveLog" class="lnk">
+            Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())</a>
     </h1>
 }
 @using (Html.BeginForm())
@@ -23,8 +24,8 @@
                 <div class="lbl-field width-auto">
                     @Html.Label(ViewResource.Category)
                 </div>
-                <div class="edit-field width-300">
-                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, ViewResource.AllSelection, new { @class = "width-300" })
+                <div class="edit-field width-200">
+                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, ViewResource.AllSelection, new { @class = "width-200" })
                 </div>
                 <div class="lbl-field width-auto">
                     @Html.LabelFor(m => m.Severity)
@@ -36,7 +37,7 @@
                     @Html.Label(ViewResource.Machine)
                 </div>
                 <div class="edit-field width-180">
-                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, ViewResource.AllSelection, new { @class="width-180" })
+                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, ViewResource.AllSelection, new { @class = "width-180" })
                 </div>
                 <div class="lbl-field width-auto">
                     @Html.LabelFor(m => m.From)
@@ -50,13 +51,8 @@
                 <div class="edit-field width-140">
                     @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-            </div>
-            <div class="filter-row" style="float: right;">
                 <div class="submit width-auto">
                     <input type="button" value="Submit" id="submit" />
-                </div>
-                <div class="submit width-auto">
-                    <input type="button" value="Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())" id="btnRemoveLog" />
                 </div>
             </div>
         </div>
