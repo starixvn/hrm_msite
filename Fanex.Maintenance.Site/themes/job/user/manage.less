@@ -28,13 +28,84 @@
 	}
 }
 
-#filter-bar .filter-form .edit-field {
-    display: inline;
-    float: left;
-    margin: 0 3px;
-    width: 140px;
-}
+#filter-bar .filter-form {
+    padding: 10px 0;
+	float: left;
+	color: @text;
 
+	.filter-row {
+		display: inline;
+		float: left;
+		clear: left;
+		margin-bottom: 10px;
+	}
+
+	.filter-cell {
+		display: inline;
+		float: left;
+		margin-bottom: 3px;
+	}
+
+	.lbl-field, .edit-field, .submit {
+		* {
+			vertical-align: middle;
+		}
+	}
+
+	.lbl-field {
+		font-weight: bold;
+		text-align: right;
+		padding: 2px 0;
+		font-family: Tahoma;
+	}
+
+	.edit-field {
+	    display: inline;
+		float: left;
+		margin: 0 3px;
+		width: 140px;
+
+		input[type=text], input[type=datetime], select {				
+			padding: 3px 5px 4px;
+			border: 1px solid @brand_color;
+			font-size: .9em;
+			color: @text;
+		}
+		input[type=text] {
+			width: 120px;
+			height: 16px;
+		}
+		input[type=datetime] {
+			width: 100px;
+			height: 16px;
+		}
+		select {
+			width: 130px;
+			height: 25px;
+
+			option {
+				padding: 4px 8px;
+				background: @body_bg;
+				border-top: 1px solid @white;
+				border-bottom: 1px solid @body_bg - #222;
+			}
+		}
+		input, select {
+			&:active, &:focus {
+				border: @brand_color 1px solid;
+				.box_shadow(0 0 2px @brand_color);
+			}
+		}
+	}
+
+	.submit {
+		input[type=submit], .btn-submit {
+			.button(@filter_submit);
+			font-size: .85em;
+			text-shadow: 0 1px rgba(0, 0, 0, 0.5);
+		}
+	}
+}
 
 .pagingitem
 {

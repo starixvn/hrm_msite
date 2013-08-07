@@ -71,6 +71,7 @@
     <Compile Include="Impl\LogCategoryService.cs" />
     <Compile Include="Impl\DatabaseReportService.cs" />
     <Compile Include="Impl\LogService.cs" />
+    <Compile Include="Impl\MachineService.cs" />
     <Compile Include="Impl\MailService.cs" />
     <Compile Include="Impl\ServiceContext.cs" />
     <Compile Include="Interface\ConnectionString\IConnectionService.cs" />

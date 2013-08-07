@@ -3,6 +3,7 @@
     return {
         generateData: function (pageSize, index) {
             var categoryId = $('#CategoryId').val();
+            var machineId = $('#MachineId').val();
             var severity = $('#Severity').val();
             var from = $('#From').val();
             var to = $('#To').val();
@@ -11,7 +12,7 @@
 
             $.ajax({
                 url: NAP.resolveClientUrl("Log/Index"),
-                data: { CategoryId: categoryId, Severity: severity, From: from, To: to, Page: index, Size: pageSize },
+                data: { CategoryId: categoryId, MachineId: machineId, Severity: severity, From: from, To: to, Page: index, Size: pageSize },
                 type: 'POST',
                 dataType: 'JSON',
                 cache: false,

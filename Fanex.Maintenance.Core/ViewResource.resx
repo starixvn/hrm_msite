@@ -765,4 +765,10 @@
   <data name="MailFrom" xml:space="preserve">
     <value>Mail From</value>
   </data>
+  <data name="Machine" xml:space="preserve">
+    <value>Machine</value>
+  </data>
+  <data name="AllSelection" xml:space="preserve">
+    <value>All</value>
+  </data>
 </root>
