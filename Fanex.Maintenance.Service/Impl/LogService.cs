@@ -34,6 +34,8 @@ namespace Fanex.Maintenance.Service.Impl
 
         private int? _machineId;
 
+        private bool? _isProduction;
+
         private string _severity;
 
         private DateTime _dateFrom;
@@ -106,11 +108,12 @@ namespace Fanex.Maintenance.Service.Impl
         /// <param name="machineId"></param>
         /// <param name="severity"></param>
         /// <returns></returns>
-        public LogService With(int? categoryId, int? machineId, string severity)
+        public LogService With(int? categoryId, int? machineId, bool? isProduction, string severity)
         {
             this._categoryId = categoryId;
             this._machineId = machineId;
             this._severity = severity;
+            this._isProduction = isProduction;
 
             return this;
         }
@@ -180,7 +183,8 @@ namespace Fanex.Maintenance.Service.Impl
                 Page = this._page,
                 Size = this._size,
                 Severity = this._severity,
-                MachineId = this._machineId
+                MachineId = this._machineId,
+                IsProduction = this._isProduction
             };
 
             var list = _logRepository.GetLog(ref criteria);

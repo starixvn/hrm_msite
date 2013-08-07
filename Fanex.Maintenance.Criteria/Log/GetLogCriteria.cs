@@ -23,6 +23,8 @@ namespace Fanex.Maintenance.Criteria.Log
 
         public string Severity { get; set; }
 
+        public bool? IsProduction { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime From { get; set; }
 

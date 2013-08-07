@@ -7,12 +7,22 @@
             var severity = $('#Severity').val();
             var from = $('#From').val();
             var to = $('#To').val();
+            var isProduction = $('#IsProduction').val();
 
             index++;
 
             $.ajax({
                 url: NAP.resolveClientUrl("Log/Index"),
-                data: { CategoryId: categoryId, MachineId: machineId, Severity: severity, From: from, To: to, Page: index, Size: pageSize },
+                data: {
+                    CategoryId: categoryId,
+                    MachineId: machineId,
+                    Severity: severity,
+                    From: from,
+                    To: to,
+                    IsProduction: isProduction,
+                    Page: index,
+                    Size: pageSize 
+                },
                 type: 'POST',
                 dataType: 'JSON',
                 cache: false,
@@ -47,8 +57,8 @@
                             { HeaderText: "Message", Width: 700, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
                             { HeaderText: "Category", Width: 100, Name: "Category", HeaderAlign: "center", CellAlign: "left" },
                             { HeaderText: "Severity", Width: 100, Name: "Severity", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "MachineName", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Timestamp", Width: 130, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
+                            { HeaderText: "Machine Name", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "left" },
+                            { HeaderText: "Time (GMT+7)", Width: 130, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
                         ],
                         bodyRows: bodyData,
                         showPager: true,

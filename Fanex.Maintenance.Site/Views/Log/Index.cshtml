@@ -23,39 +23,54 @@
     <section id="filter-bar">
         <div class="filter-form">
             <div class="filter-row">
-                <div class="lbl-field width-auto">
+                <div class="lbl-field width-80">
                     @Html.Label(ViewResource.Category)
                 </div>
                 <div class="edit-field width-200">
                     @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-200" })
                 </div>
-                <div class="lbl-field width-auto">
+                <div class="lbl-field width-80">
                     @Html.LabelFor(m => m.Severity)
                 </div>
-                <div class="edit-field">
+                <div class="edit-field width-140">
                     @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity)
                 </div>
-                <div class="lbl-field width-auto">
+                <div class="lbl-field width-80">
                     @Html.Label(ViewResource.Machine)
                 </div>
-                <div class="edit-field width-180">
-                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, new { @class = "width-180" })
+                <div class="edit-field width-140">
+                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, new { @class = "width-140" })
+                </div>     
+                <div class="lbl-field width-120">
+                    <label>Machine Type</label>
                 </div>
-                <div class="lbl-field width-auto">
+                <div class="edit-field width-120">
+                    @Html.DropDownListFor(m => m.IsProduction, (List<SelectListItem>)ViewBag.MachineTypes)
+                </div>     
+                <div class="submit width-120 align-right">
+                    <input type="button" value="Submit" id="submit" />
+                </div>      
+            </div>
+            <div class="filter-row">
+                <div class="lbl-field width-80">
+                    <label>Status</label>
+                </div>
+                <div class="edit-field width-200">
+                    @Html.DropDownListFor(m => m.IsProduction, (List<SelectListItem>)ViewBag.LogStatus)
+                </div>
+                <div class="lbl-field width-80">
                     @Html.LabelFor(m => m.From)
                 </div>
                 <div class="edit-field width-140">
                     @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                <div class="lbl-field width-auto">
+                <div class="lbl-field width-80">
                     @Html.LabelFor(m => m.To)
                 </div>
-                <div class="edit-field width-140">
+                <div class="edit-field width-180">
                     @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                <div class="submit width-auto">
-                    <input type="button" value="Submit" id="submit" />
-                </div>
+                
             </div>
         </div>
     </section>

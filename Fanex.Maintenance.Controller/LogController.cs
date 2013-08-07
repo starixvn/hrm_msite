@@ -104,9 +104,59 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init data for View
+        /// Init Machine Types data
         /// </summary>
-        private void InitDataView()
+        private void InitMachineTypes()
+        {
+            List<SelectListItem> machineTypes = new List<SelectListItem>();
+            machineTypes.Add(new SelectListItem
+            {
+                Text = "All",
+                Value = "null"
+            });
+            machineTypes.Add(new SelectListItem
+            {
+                Text = "Production",
+                Value = "true"
+            });
+            machineTypes.Add(new SelectListItem
+            {
+                Text = "UAT",
+                Value = "false"
+            });
+
+            ViewBag.MachineTypes = machineTypes;
+        }
+
+        /// <summary>
+        /// Init Log Status data
+        /// </summary>
+        private void InitLogStatus()
+        {
+            List<SelectListItem> logStatus = new List<SelectListItem>();
+            logStatus.Add(new SelectListItem
+            {
+                Text = "All",
+                Value = "null"
+            });
+            logStatus.Add(new SelectListItem
+            {
+                Text = "Unread",
+                Value = "true"
+            });
+            logStatus.Add(new SelectListItem
+            {
+                Text = "Read",
+                Value = "false"
+            });
+
+            ViewBag.LogStatus = logStatus;
+        }
+
+        /// <summary>
+        /// Init Severities data
+        /// </summary>
+        private void InitSeverities()
         {
             ////Init Serverrity
             List<SelectListItem> list = new List<SelectListItem>();
@@ -141,6 +191,16 @@ namespace Fanex.Maintenance.Controller
                 Value = "Warning"
             });
             ViewBag.ListSeverity = list;
+        }
+
+        /// <summary>
+        /// Init data for View
+        /// </summary>
+        private void InitDataView()
+        {
+            InitSeverities();
+            InitMachineTypes();
+            InitLogStatus();
 
             ////Default selection for drop-down
             SelectListItem defaultSelection = new SelectListItem
@@ -190,6 +250,7 @@ namespace Fanex.Maintenance.Controller
             {
                 CategoryId = 0,
                 MachineId = 0,
+                IsProduction = null,
                 From = DateTime.Now,
                 To = DateTime.Now,
                 Page = 0,
@@ -217,7 +278,7 @@ namespace Fanex.Maintenance.Controller
             var totalRows = 0;
 
             ////Get logs by date
-            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.MachineId, criteria.Severity)
+            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.MachineId, criteria.IsProduction, criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)
                 .WithPagination(criteria.Page, criteria.Size)
