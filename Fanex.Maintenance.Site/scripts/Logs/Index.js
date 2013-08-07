@@ -61,11 +61,7 @@
                             startPerPage: 50,
                             pagerSelectCallBack: Logs.reRenderAfterPaged
                         },
-<<<<<<< HEAD
-                        gridExpandHeight: 270
-=======
                         gridExpandHeight: 240
->>>>>>> master
                     };
 
                     $("#gridId").fanexGrid(gridOption);
