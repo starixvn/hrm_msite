@@ -45,9 +45,9 @@
                         columns: [
                             { HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Message", Width: 700, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Category", Width: 100, Name: "Category", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Severity", Width: 100, Name: "Severity", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "MachineName", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "left" },
+                            { HeaderText: "Category", Width: 100, Name: "Category", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Severity", Width: 100, Name: "Severity", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "MachineName", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Timestamp", Width: 130, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
                         ],
                         bodyRows: bodyData,

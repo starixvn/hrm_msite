@@ -53,7 +53,7 @@ namespace Fanex.Maintenance.Entity.Model
         {
             get
             {
-                return HttpUtility.HtmlEncode(FormattedMessage);
+                return this.FormattedMessage.Replace("\n", "<br/>");
             }
         }
 

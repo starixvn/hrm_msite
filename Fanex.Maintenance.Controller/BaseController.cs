@@ -17,6 +17,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Web.Session;
     using Fanex.Maintenance.Service.Interface;
     using Fanex.Maintenance.Service.Impl;
+    using System;
 
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class BaseController : Controller
@@ -75,6 +76,18 @@ namespace Fanex.Maintenance.Controller
             {
                 return _issiteLogin;
             }
+        }
+
+        protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
+        {
+            return new JsonResult()
+            {
+                Data = data,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding,
+                JsonRequestBehavior = behavior,
+                MaxJsonLength = Int32.MaxValue
+            };
         }
     }
 }
