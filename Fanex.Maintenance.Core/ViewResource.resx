@@ -163,7 +163,7 @@
     <value>The Name field can only contain A-Z, a-z, 0-9, underscore, and spaces.</value>
   </data>
   <data name="IsAuth" xml:space="preserve">
-    <value>Is Auth</value>
+    <value>SSL</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
