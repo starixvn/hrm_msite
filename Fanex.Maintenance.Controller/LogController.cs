@@ -142,21 +142,31 @@ namespace Fanex.Maintenance.Controller
             });
             ViewBag.ListSeverity = list;
 
+            ////Default selection for drop-down
+            SelectListItem defaultSelection = new SelectListItem
+            {
+                Text = "All",
+                Value = "0",
+                Selected = true
+            };
+
             ////Get Category from DB
-            IEnumerable<LogCategory> listCategory = _categoryService.GetAll();
-            ViewBag.ListCategory = listCategory.Select(c => new SelectListItem
+            List<SelectListItem> listCategory = _categoryService.GetAll().Select(c => new SelectListItem
             {
                 Text = c.CategoryName,
                 Value = c.CategoryID.ToString()
             }).ToList();
+            listCategory.Insert(0, defaultSelection);
+            ViewBag.ListCategory = listCategory;
 
             ////Get All Machines
-            IEnumerable<Machine> machines = _machineService.GetAll();
-            ViewBag.Machines = machines.Select(m => new SelectListItem
+            List<SelectListItem> machines = _machineService.GetAll().Select(m => new SelectListItem
             {
                 Text = m.MachineName,
                 Value = m.MachineId.ToString()
             }).ToList();
+            machines.Insert(0, defaultSelection);
+            ViewBag.Machines = machines;
         }
 
         #endregion Private
@@ -203,10 +213,7 @@ namespace Fanex.Maintenance.Controller
             InitDataView();
 
             InitPageSize();
-
-            criteria.CategoryId = criteria.CategoryId ?? 0;
-            criteria.MachineId = criteria.MachineId ?? 0;
-
+                       
             var totalRows = 0;
 
             ////Get logs by date

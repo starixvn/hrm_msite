@@ -27,7 +27,7 @@
                     @Html.Label(ViewResource.Category)
                 </div>
                 <div class="edit-field width-200">
-                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, ViewResource.AllSelection, new { @class = "width-200" })
+                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-200" })
                 </div>
                 <div class="lbl-field width-auto">
                     @Html.LabelFor(m => m.Severity)
@@ -39,7 +39,7 @@
                     @Html.Label(ViewResource.Machine)
                 </div>
                 <div class="edit-field width-180">
-                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, ViewResource.AllSelection, new { @class = "width-180" })
+                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, new { @class = "width-180" })
                 </div>
                 <div class="lbl-field width-auto">
                     @Html.LabelFor(m => m.From)

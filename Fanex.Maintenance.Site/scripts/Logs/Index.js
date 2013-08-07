@@ -80,6 +80,8 @@
 } (jQuery);
 
 $(document).ready(function () {
+    $('#CategoryId').select2();
+    $('#MachineId').select2();
     $('.logMessage').live('click', function () {
         var logId = $(this).attr("logid");
         $.ajax({
