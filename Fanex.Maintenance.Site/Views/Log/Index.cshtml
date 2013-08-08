@@ -9,6 +9,8 @@
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
     <link href="~/scripts/Plugin/Fanex.Grid/Fanex.Grid.css" rel="stylesheet" type="text/css" />
     <link href="~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/Plugin/Select2/select2.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/Plugin/Select2/select2-custom.css" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
@@ -18,42 +20,57 @@
 }
 @using (Html.BeginForm())
 {  
-    <section id="filter-bar">
+    <section id="filter-bar" style="width: 98%">
         <div class="filter-form">
             <div class="filter-row">
-                <div class="lbl-field width-auto">
+                <div class="lbl-field width-80">
                     @Html.Label(ViewResource.Category)
                 </div>
                 <div class="edit-field width-200">
-                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, ViewResource.AllSelection, new { @class = "width-200" })
+                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-200" })
                 </div>
-                <div class="lbl-field width-auto">
+                <div class="lbl-field width-80">
                     @Html.LabelFor(m => m.Severity)
                 </div>
-                <div class="edit-field">
+                <div class="edit-field width-140">
                     @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity)
                 </div>
-                <div class="lbl-field width-auto">
+                <div class="lbl-field width-80">
                     @Html.Label(ViewResource.Machine)
                 </div>
-                <div class="edit-field width-180">
-                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, ViewResource.AllSelection, new { @class = "width-180" })
+                <div class="edit-field width-140">
+                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, new { @class = "width-140" })
+                </div>     
+                <div class="lbl-field width-120">
+                    <label>Machine Type</label>
                 </div>
-                <div class="lbl-field width-auto">
+                <div class="edit-field width-120">
+                    @Html.DropDownListFor(m => m.IsProduction, (List<SelectListItem>)ViewBag.MachineTypes)
+                </div>     
+                <div class="submit width-120 align-right">
+                    <input type="button" value="Submit" id="submit" />
+                </div>      
+            </div>
+            <div class="filter-row">
+                <div class="lbl-field width-80">
+                    @Html.Label(ViewResource.Status)
+                </div>
+                <div class="edit-field width-200">
+                    @Html.DropDownListFor(m => m.IsMonitored, (List<SelectListItem>)ViewBag.LogStatus)
+                </div>
+                <div class="lbl-field width-80">
                     @Html.LabelFor(m => m.From)
                 </div>
                 <div class="edit-field width-140">
                     @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                <div class="lbl-field width-auto">
+                <div class="lbl-field width-80">
                     @Html.LabelFor(m => m.To)
                 </div>
-                <div class="edit-field width-140">
+                <div class="edit-field width-180">
                     @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                <div class="submit width-auto">
-                    <input type="button" value="Submit" id="submit" />
-                </div>
+                
             </div>
         </div>
     </section>
@@ -64,6 +81,7 @@
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
     <script src="~/scripts/Logs/Index.js" type="text/javascript"></script>
+    <script src="~/scripts/Plugin/Select2/select2.js" type="text/javascript"></script>
     <script type="text/javascript">
         var dateNow = $("#dateNow").val();
 

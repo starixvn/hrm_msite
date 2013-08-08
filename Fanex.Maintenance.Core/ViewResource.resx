@@ -768,7 +768,31 @@
   <data name="Machine" xml:space="preserve">
     <value>Machine</value>
   </data>
-  <data name="AllSelection" xml:space="preserve">
-    <value>All</value>
+  <data name="LogStatus_Monitored" xml:space="preserve">
+    <value>Monitored</value>
+  </data>
+  <data name="LogStatus_Unmonitored" xml:space="preserve">
+    <value>Unmonitored</value>
+  </data>
+  <data name="MachineType_Production" xml:space="preserve">
+    <value>Production</value>
+  </data>
+  <data name="MachineType_UAT" xml:space="preserve">
+    <value>UAT</value>
+  </data>
+  <data name="Severity_Critical" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="Severity_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Severity_Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Severity_Verbose" xml:space="preserve">
+    <value>Verbose</value>
+  </data>
+  <data name="Severity_Warning" xml:space="preserve">
+    <value>Warning</value>
   </data>
 </root>
