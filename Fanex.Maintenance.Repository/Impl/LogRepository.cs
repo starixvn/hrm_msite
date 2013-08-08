@@ -88,5 +88,30 @@ namespace Fanex.Maintenance.Repository.Impl
 
             return row;
         }
+
+        /// <summary>
+        /// Update log's monitor status
+        /// </summary>
+        /// <param name="logId"></param>
+        /// <param name="monitoringUserId"></param>
+        /// <param name="isMonitored"></param>
+        /// <returns></returns>
+        public int MonitorLog(long logId, int? monitoringUserId, bool isMonitored)
+        {
+            int row = 0;
+            try
+            {
+                using (ObjectDb db = new ObjectDb("Logging_Monitor"))
+                {
+                    row = db.ExecuteNonQuery(new { LogId = logId, @MonitoringUserId = monitoringUserId, IsMonitored = isMonitored });
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return row;
+        }
     }
 }

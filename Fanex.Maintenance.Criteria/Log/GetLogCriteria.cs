@@ -25,6 +25,8 @@ namespace Fanex.Maintenance.Criteria.Log
 
         public bool? IsProduction { get; set; }
 
+        public bool? IsMonitored { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime From { get; set; }
 

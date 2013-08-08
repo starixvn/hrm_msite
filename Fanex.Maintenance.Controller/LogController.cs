@@ -6,6 +6,7 @@
 // <history>
 //   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
 //   <change who="Ricky.Nguyen" date="2012.10.16">Stylecop</change>
+//   <change who="Jason.Ly" date="2013.8.7">Modify Get Logs</change>
 // </history>
 
 namespace Fanex.Maintenance.Controller
@@ -15,6 +16,7 @@ namespace Fanex.Maintenance.Controller
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
+    using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Criteria.Log;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
@@ -111,17 +113,17 @@ namespace Fanex.Maintenance.Controller
             List<SelectListItem> machineTypes = new List<SelectListItem>();
             machineTypes.Add(new SelectListItem
             {
-                Text = "All",
+                Text = ViewResource.All,
                 Value = "null"
             });
             machineTypes.Add(new SelectListItem
             {
-                Text = "Production",
+                Text = ViewResource.MachineType_Production,
                 Value = "true"
             });
             machineTypes.Add(new SelectListItem
             {
-                Text = "UAT",
+                Text = ViewResource.MachineType_UAT,
                 Value = "false"
             });
 
@@ -136,17 +138,17 @@ namespace Fanex.Maintenance.Controller
             List<SelectListItem> logStatus = new List<SelectListItem>();
             logStatus.Add(new SelectListItem
             {
-                Text = "All",
+                Text = ViewResource.All,
                 Value = "null"
             });
             logStatus.Add(new SelectListItem
             {
-                Text = "Unread",
+                Text = ViewResource.LogStatus_Monitored,
                 Value = "true"
             });
             logStatus.Add(new SelectListItem
             {
-                Text = "Read",
+                Text = ViewResource.LogStatus_Unmonitored,
                 Value = "false"
             });
 
@@ -158,36 +160,36 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         private void InitSeverities()
         {
-            ////Init Serverrity
+            ////Init Serverity
             List<SelectListItem> list = new List<SelectListItem>();
             list.Add(new SelectListItem
             {
-                Text = "All",
+                Text = ViewResource.All,
                 Value = "All"
             });
             list.Add(new SelectListItem
             {
-                Text = "Critical",
+                Text = ViewResource.Severity_Critical,
                 Value = "Critical"
             });
             list.Add(new SelectListItem
             {
-                Text = "Error",
+                Text = ViewResource.Severity_Error,
                 Value = "Error"
             });
             list.Add(new SelectListItem
             {
-                Text = "Information",
+                Text = ViewResource.Severity_Information,
                 Value = "Information"
             });
             list.Add(new SelectListItem
             {
-                Text = "Verbose",
+                Text = ViewResource.Severity_Verbose,
                 Value = "Verbose"
             });
             list.Add(new SelectListItem
             {
-                Text = "Warning",
+                Text = ViewResource.Severity_Warning,
                 Value = "Warning"
             });
             ViewBag.ListSeverity = list;
@@ -205,7 +207,7 @@ namespace Fanex.Maintenance.Controller
             ////Default selection for drop-down
             SelectListItem defaultSelection = new SelectListItem
             {
-                Text = "All",
+                Text = ViewResource.All,
                 Value = "0",
                 Selected = true
             };
@@ -251,6 +253,7 @@ namespace Fanex.Maintenance.Controller
                 CategoryId = 0,
                 MachineId = 0,
                 IsProduction = null,
+                IsMonitored = null,
                 From = DateTime.Now,
                 To = DateTime.Now,
                 Page = 0,
@@ -278,7 +281,8 @@ namespace Fanex.Maintenance.Controller
             var totalRows = 0;
 
             ////Get logs by date
-            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.MachineId, criteria.IsProduction, criteria.Severity)
+            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.MachineId, 
+                                                         criteria.IsProduction, criteria.IsMonitored, criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)
                 .WithPagination(criteria.Page, criteria.Size)
@@ -326,6 +330,28 @@ namespace Fanex.Maintenance.Controller
             }
 
             return Json(0);
+        }
+
+        /// <summary>
+        /// Update log's monitored status
+        /// </summary>
+        /// <param name="logId"></param>
+        /// <param name="isMonitored"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult MonitorLog(long logId, bool isMonitored)
+        {
+            string updatedUsername = string.Empty;
+
+            if (Request.IsAjaxRequest())
+            {
+                int? userId = this.CurrentSession.UserId;
+                userId = isMonitored ? userId : null;
+                int affectedRows = _logService.MonitorLog(logId, userId, isMonitored);
+                updatedUsername = affectedRows != 0 ? this.CurrentSession.Username : string.Empty;
+            }
+
+            return Json(updatedUsername);
         }
 
         #endregion Ajax

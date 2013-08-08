@@ -49,6 +49,10 @@ namespace Fanex.Maintenance.Entity.Model
 
         public string FormattedMessage { get; set; }
 
+        public string MonitoringUser { get; set; }
+
+        public bool IsMonitored { get; set; }
+
         public string FullMessage
         {
             get

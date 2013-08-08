@@ -29,12 +29,14 @@ namespace Fanex.Maintenance.Service.Impl
         #region Ctor
 
         #region Properties
-
+        
         private int? _categoryId;
 
         private int? _machineId;
 
         private bool? _isProduction;
+
+        private bool? _isMonitored;
 
         private string _severity;
 
@@ -108,12 +110,13 @@ namespace Fanex.Maintenance.Service.Impl
         /// <param name="machineId"></param>
         /// <param name="severity"></param>
         /// <returns></returns>
-        public LogService With(int? categoryId, int? machineId, bool? isProduction, string severity)
+        public LogService With(int? categoryId, int? machineId, bool? isProduction, bool? isMonitored, string severity)
         {
             this._categoryId = categoryId;
             this._machineId = machineId;
             this._severity = severity;
             this._isProduction = isProduction;
+            this._isMonitored = isMonitored;
 
             return this;
         }
@@ -155,7 +158,7 @@ namespace Fanex.Maintenance.Service.Impl
 
             return this;
         }
-
+        
         /// <summary>
         /// Get message detail
         /// </summary>
@@ -184,7 +187,8 @@ namespace Fanex.Maintenance.Service.Impl
                 Size = this._size,
                 Severity = this._severity,
                 MachineId = this._machineId,
-                IsProduction = this._isProduction
+                IsProduction = this._isProduction,
+                IsMonitored = this._isMonitored
             };
 
             var list = _logRepository.GetLog(ref criteria);
@@ -201,6 +205,18 @@ namespace Fanex.Maintenance.Service.Impl
         public int RemoveLogs()
         {
             return _logRepository.DeleteLogs(this._dateFrom);
+        }
+
+        /// <summary>
+        /// Update log's monitored status
+        /// </summary>
+        /// <param name="logId"></param>
+        /// <param name="monitoringUserId"></param>
+        /// <param name="isMonitored"></param>
+        /// <returns></returns>
+        public int MonitorLog(long logId, int? monitoringUserId, bool isMonitored)
+        {
+            return _logRepository.MonitorLog(logId, monitoringUserId, isMonitored);
         }
     }
 }

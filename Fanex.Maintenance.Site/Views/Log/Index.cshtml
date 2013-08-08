@@ -20,7 +20,7 @@
 }
 @using (Html.BeginForm())
 {  
-    <section id="filter-bar">
+    <section id="filter-bar" style="width: 98%">
         <div class="filter-form">
             <div class="filter-row">
                 <div class="lbl-field width-80">
@@ -53,10 +53,10 @@
             </div>
             <div class="filter-row">
                 <div class="lbl-field width-80">
-                    <label>Status</label>
+                    @Html.Label(ViewResource.Status)
                 </div>
                 <div class="edit-field width-200">
-                    @Html.DropDownListFor(m => m.IsProduction, (List<SelectListItem>)ViewBag.LogStatus)
+                    @Html.DropDownListFor(m => m.IsMonitored, (List<SelectListItem>)ViewBag.LogStatus)
                 </div>
                 <div class="lbl-field width-80">
                     @Html.LabelFor(m => m.From)

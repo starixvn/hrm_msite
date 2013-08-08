@@ -8,6 +8,7 @@
             var from = $('#From').val();
             var to = $('#To').val();
             var isProduction = $('#IsProduction').val();
+            var isMonitored = $('#IsMonitored').val();
 
             index++;
 
@@ -17,6 +18,7 @@
                     CategoryId: categoryId,
                     MachineId: machineId,
                     Severity: severity,
+                    IsMonitored: isMonitored,
                     From: from,
                     To: to,
                     IsProduction: isProduction,
@@ -42,10 +44,12 @@
                             Columns:
                         [
                             { Name: "No", Value: pageSize * (index - 1) + count++ },
+                            { Name: "IsMonitored", Value: "<input type='checkbox' data-logid='" + value.LogId + "' class='monitored'" + (value.IsMonitored ? " checked='true'" : "") + " />" },
                             { Name: "Message", Value: "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" },
                             { Name: "Category", Value: value.Category[0].CategoryName },
                             { Name: "Severity", Value: value.Severity },
                             { Name: "MachineName", Value: value.MachineName },
+                            { Name: "MonitoringUser", Value: "<span id='monitoringUser" + value.LogId + "'>" + (value.MonitoringUser == null ? "" : value.MonitoringUser) + "</span>" },
                             { Name: "Timestamp", Value: value.LogDate }
                         ]
                         });
@@ -54,11 +58,13 @@
                     var gridOption = {
                         columns: [
                             { HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Message", Width: 700, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
+                            { HeaderText: "Monitored", Width: 50, Name: "IsMonitored", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Message", Width: 583, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
                             { HeaderText: "Category", Width: 100, Name: "Category", HeaderAlign: "center", CellAlign: "left" },
                             { HeaderText: "Severity", Width: 100, Name: "Severity", HeaderAlign: "center", CellAlign: "left" },
                             { HeaderText: "Machine Name", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Time (GMT+7)", Width: 130, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
+                            { HeaderText: "Monitoring User", Width: 95, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "left" },
+                            { HeaderText: "Time (GMT+7)", Width: 120, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
                         ],
                         bodyRows: bodyData,
                         showPager: true,
@@ -144,6 +150,22 @@ $(document).ready(function () {
         $('.message').show();
         $(this).hide();
         $('#' + logId).show();
+    });
+
+    $('.monitored').live('click', function () {
+        var logId = $(this).attr('data-logId');
+        var isMonitored = $(this).prop('checked');
+
+        $.ajax({
+            type: "POST",
+            url: "Log/MonitorLog",
+            data: { logId: logId, isMonitored: isMonitored },
+            success: function (data) {
+                var monitoringUser = $('#monitoringUser' + logId);
+                if (monitoringUser)
+                    monitoringUser.text(data);
+            }
+        });
     });
 
     Logs.generateData(50, 0);
