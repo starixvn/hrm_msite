@@ -77,7 +77,7 @@
                             startPerPage: 50,
                             pagerSelectCallBack: Logs.reRenderAfterPaged
                         },
-                        gridExpandHeight: 270
+                        gridExpandHeight: 320
                     };
 
                     $("#gridId").fanexGrid(gridOption);
