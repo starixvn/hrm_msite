@@ -6,6 +6,9 @@
         <Setting Key="Logging_Del" SpName="IS_DeleteLog" DbName="customer_log" Plain="1" />
         <Setting Key="Logging_Monitor" SpName="IS_MonitorLog" DbName="customer_log" Plain="1" />
         <Setting Key="Logging_Machine_SelectAll" SpName="IS_SelLogMachine_ALL" DbName="customer_log"  Plain="1" />
+        <Setting Key="Logging_Machine_ByType" SpName="IS_SelLogMachine_ByType" DbName="customer_log"  Plain="1" />
+        <Setting Key="Logging_InsertMachine" SpName="IS_InsertMachine" DbName="customer_log"  Plain="1" />
+        <Setting Key="Logging_UpdateMachine" SpName="IS_UpdateMachine" DbName="customer_log"  Plain="1" />
         <Setting Key="lrf_GetLicenseeStatistic" SpName="lrf_GetLicenseeStatistic" DbName="Licensee" />
         <Setting Key="Lrf_GetFunctionStatistic" SpName="Lrf_GetFunctionStatistic" DbName="Licensee" />
         <Setting Key="Lrf_BrowserStatistic" SpName="Lrf_BrowserStatistic" DbName="Licensee" />

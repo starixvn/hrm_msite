@@ -55,5 +55,55 @@ namespace Fanex.Maintenance.Service.Impl
 
             return _machineRepository.Fetch(criteria);
         }
+
+        /// <summary>
+        /// Get machines by machine type
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Machine> GetByType(bool? machineType)
+        {
+            GetMachinesByTypeCriteria criteria = new GetMachinesByTypeCriteria
+            {
+                MachineType = machineType
+            };
+
+            return _machineRepository.Fetch(criteria);
+        }
+
+        /// <summary>
+        /// Insert machine
+        /// </summary>
+        /// <param name="machineName"></param>
+        /// <param name="machineType"></param>
+        /// <param name="timeZone"></param>
+        /// <returns></returns>
+        public CommandResult InsertMachine(string machineName, bool machineType, short timeZone)
+        {
+            InsertMachineCriteria criteria = new InsertMachineCriteria
+            {
+                MachineName = machineName,
+                IsProduction = machineType,
+                Timezone = timeZone
+            };
+
+            return _machineRepository.InsertMachine(criteria);
+        }
+
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="machineType"></param>
+        /// <param name="timeZone"></param>
+        /// <returns></returns>
+        public CommandResult InsertMachine(bool machineType, short timeZone)
+        {
+            UpdateMachineCriteria criteria = new UpdateMachineCriteria
+            {
+                IsProduction = machineType,
+                Timezone = timeZone
+            };
+
+            return _machineRepository.UpdateMachine(criteria);
+        }
     }
 }

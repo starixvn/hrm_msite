@@ -17,5 +17,9 @@ namespace Fanex.Maintenance.Entity.Model
         public int MachineId { get; set; }
 
         public string MachineName { get; set; }
+
+        public bool IsProduction { get; set; }
+
+        public short TimeZone { get; set; }
     }
 }

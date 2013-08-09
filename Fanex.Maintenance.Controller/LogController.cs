@@ -220,15 +220,6 @@ namespace Fanex.Maintenance.Controller
             }).ToList();
             listCategory.Insert(0, defaultSelection);
             ViewBag.ListCategory = listCategory;
-
-            ////Get All Machines
-            List<SelectListItem> machines = _machineService.GetAll().Select(m => new SelectListItem
-            {
-                Text = m.MachineName,
-                Value = m.MachineId.ToString()
-            }).ToList();
-            machines.Insert(0, defaultSelection);
-            ViewBag.Machines = machines;
         }
 
         #endregion Private

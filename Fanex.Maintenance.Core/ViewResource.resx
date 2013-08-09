@@ -795,4 +795,13 @@
   <data name="Severity_Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="AppLogs" xml:space="preserve">
+    <value>App Logs</value>
+  </data>
+  <data name="AppLogs_MangeMachines" xml:space="preserve">
+    <value>Manage Machines</value>
+  </data>
+  <data name="AppLogs_ViewLog" xml:space="preserve">
+    <value>View Log</value>
+  </data>
 </root>

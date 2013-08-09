@@ -233,6 +233,7 @@
     <Content Include="scripts\Job\ServerManagement.js" />
     <Content Include="scripts\Job\LeftMenuPage.js" />
     <Content Include="scripts\Job\Index.js" />
+    <Content Include="scripts\lib\custom-datepicker.js" />
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\jquery.qtip-1.0.0-rc3.min.js" />
     <Content Include="scripts\lib\jquery.signalR-1.0.0-rc1.min.js" />

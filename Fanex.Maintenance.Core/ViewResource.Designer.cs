@@ -205,6 +205,33 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to App Logs.
+        /// </summary>
+        public static string AppLogs {
+            get {
+                return ResourceManager.GetString("AppLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Machines.
+        /// </summary>
+        public static string AppLogs_MangeMachines {
+            get {
+                return ResourceManager.GetString("AppLogs_MangeMachines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Log.
+        /// </summary>
+        public static string AppLogs_ViewLog {
+            get {
+                return ResourceManager.GetString("AppLogs_ViewLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back To List.
         /// </summary>
         public static string Back_To_List {

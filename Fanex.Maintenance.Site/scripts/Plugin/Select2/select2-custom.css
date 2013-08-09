@@ -19,6 +19,7 @@
 }
 .select2-drop {
     border-radius: 0px;
+    border: 1px solid #549cba;
 }
 .select2-drop:active {
     border: 1px solid #549cba;
@@ -26,7 +27,9 @@
 .select2-search input {
     margin-top: 4px;
 }
-.select2-dropdown-open .select2-choice 
-{
+.select2-dropdown-open .select2-choice {
     background-color: white;
+}
+.ui-datepicker .ui-datepicker-header {
+    height: 26px;
 }

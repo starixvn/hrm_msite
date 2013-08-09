@@ -98,6 +98,9 @@
     <Compile Include="DatabaseReport\GetDepositDataToValidateCriteria.cs" />
     <Compile Include="Log\GetAllMachinesCriteria.cs" />
     <Compile Include="Log\GetLogCriteria.cs" />
+    <Compile Include="Log\GetMachinesByTypeCriteria.cs" />
+    <Compile Include="Log\InsertMachineCriteria.cs" />
+    <Compile Include="Log\UpdateMachineCriteria.cs" />
     <Compile Include="MailService\MailConfigViewModel.cs" />
     <Compile Include="MailService\MailFunctionViewModel.cs" />
     <Compile Include="MailService\MailSettingViewModel.cs" />
