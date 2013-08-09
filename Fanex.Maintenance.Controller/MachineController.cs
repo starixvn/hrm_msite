@@ -9,21 +9,18 @@
 
 namespace Fanex.Maintenance.Controller
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Criteria.Log;
+    using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
-using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// Machine Controller
     /// </summary>
     [Authorize]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MachineController : BaseController
     {
         #region Member
@@ -58,7 +55,7 @@ using Fanex.Maintenance.Entity.Model;
         #region Private
 
         /// <summary>
-        /// Init Machine Types data
+        /// Initialize Machine Types data
         /// </summary>
         private void InitMachineTypes()
         {
@@ -137,6 +134,7 @@ using Fanex.Maintenance.Entity.Model;
             {
                 ViewBag.Success = _machineService.UpdateMachine(machine.MachineId, machine.IsProduction, machine.TimeZone);
             }
+
             return View(machine);
         }
 
@@ -167,6 +165,7 @@ using Fanex.Maintenance.Entity.Model;
             {
                 ViewBag.Success = _machineService.InsertMachine(machine.MachineName, machine.IsProduction, machine.TimeZone);
             }
+
             return View(machine);
         }
         
