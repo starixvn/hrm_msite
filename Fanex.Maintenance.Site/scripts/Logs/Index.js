@@ -81,6 +81,8 @@
                     };
 
                     $("#gridId").fanexGrid(gridOption);
+                    $('.message').on('click', Logs.clickMessage);
+                    $('.monitored').on('click', Logs.monitorLog);
                 },
                 error: function (xhr, status, err) {
                     NAP.handleAjaxError(xhr, status, err);
@@ -118,6 +120,7 @@
         monitorLog: function () {
             var logId = $(this).attr('data-logId');
             var isMonitored = $(this).prop('checked');
+            var chk = $(this);
 
             $.ajax({
                 type: "POST",
@@ -125,6 +128,7 @@
                 data: { logId: logId, isMonitored: isMonitored },
                 success: function (data) {
                     var monitoringUser = $('#monitoringUser' + logId);
+                    chk.hide();
                     if (monitoringUser)
                         monitoringUser.text(data);
                 }
@@ -180,6 +184,7 @@
 
 $(document).ready(function () {
     Logs.bindEventHandlers();
+
     $('.logMessage').live('click', function () {
         var logId = $(this).attr("logid");
         $.ajax({
@@ -204,6 +209,6 @@ $(document).ready(function () {
             }
         });
     });
-
+    
     Logs.generateData(50, 0);
 });
