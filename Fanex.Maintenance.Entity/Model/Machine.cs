@@ -10,16 +10,19 @@
 namespace Fanex.Maintenance.Entity.Model
 {
     using System.Diagnostics.CodeAnalysis;
+    using System.ComponentModel.DataAnnotations;
 
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Machine
     {
         public int MachineId { get; set; }
 
+        [Required]
         public string MachineName { get; set; }
 
         public bool IsProduction { get; set; }
 
+        [Range(-12, 12)]
         public short TimeZone { get; set; }
     }
 }

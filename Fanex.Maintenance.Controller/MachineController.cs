@@ -17,6 +17,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Criteria.Log;
     using Fanex.Maintenance.Service.Impl;
+using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
     /// Machine Controller
@@ -64,11 +65,6 @@ namespace Fanex.Maintenance.Controller
             List<SelectListItem> machineTypes = new List<SelectListItem>();
             machineTypes.Add(new SelectListItem
             {
-                Text = ViewResource.All,
-                Value = "null"
-            });
-            machineTypes.Add(new SelectListItem
-            {
                 Text = ViewResource.MachineType_Production,
                 Value = "true"
             });
@@ -88,26 +84,85 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get machines
         /// </summary>
+        /// <param name="machineType"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(bool? machineType = null)
         {
-            ViewBag.ListLog = null;
+            var machines = _machineService.GetByType(machineType);
+            ViewBag.Machines = machines;
+            ViewBag.MachineType = machineType;
+            InitMachineTypes();
 
-            GetLogCriteria criteria = new GetLogCriteria
+            return View(machines);
+        }
+
+        /// <summary>
+        /// Get machines
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Index(GetMachinesByTypeCriteria criteria)
+        {
+            return Index(criteria.MachineType);
+        }
+
+        /// <summary>
+        /// Edit machine
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult EditMachine(int id)
+        {
+            var machine = _machineService.GetMachine(id);
+            return View(machine);
+        }
+
+        /// <summary>
+        /// Edit machine
+        /// </summary>
+        /// <param name="machine"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditMachine(Machine machine)
+        {
+            if (ModelState.IsValid)
             {
-                CategoryId = 0,
-                MachineId = 0,
-                IsProduction = null,
-                IsMonitored = null,
-                From = DateTime.Now,
-                To = DateTime.Now,
-                Page = 0,
-                Size = 10,
-                Severity = "All"
-            };
+                ViewBag.Success = _machineService.UpdateMachine(machine.MachineId, machine.IsProduction, machine.TimeZone);
+            }
+            return View(machine);
+        }
 
-            return View(criteria);
+        /// <summary>
+        /// Insert machine
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult InsertMachine()
+        {
+            var machine = new Machine
+            {
+                IsProduction = false,
+                TimeZone = 7
+            };
+            return View(machine);
+        }
+
+        /// <summary>
+        /// Insert machine
+        /// </summary>
+        /// <param name="machine"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult InsertMachine(Machine machine)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.Success = _machineService.InsertMachine(machine.MachineName, machine.IsProduction, machine.TimeZone);
+            }
+            return View(machine);
         }
         
         #endregion Action

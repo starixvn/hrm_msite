@@ -802,6 +802,21 @@
     <value>Manage Machines</value>
   </data>
   <data name="AppLogs_ViewLog" xml:space="preserve">
-    <value>View Log</value>
+    <value>View Logs</value>
+  </data>
+  <data name="InsertMachine" xml:space="preserve">
+    <value>Insert Machine</value>
+  </data>
+  <data name="IsProduction" xml:space="preserve">
+    <value>Is Production</value>
+  </data>
+  <data name="MachineType" xml:space="preserve">
+    <value>Machine Type</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Time Zone</value>
+  </data>
+  <data name="EditMachine" xml:space="preserve">
+    <value>Edit Machine Information</value>
   </data>
 </root>

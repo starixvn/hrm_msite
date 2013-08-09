@@ -1454,6 +1454,7 @@
     <Content Include="themes\job\img\actions\dd\step.png" />
     <Content Include="themes\job\img\actions\dd\stop.png" />
     <Content Include="themes\job\img\actions\dd\viewlog.png" />
+    <Content Include="themes\job\img\actions\tick-ico-16.png" />
     <Content Include="themes\job\img\minus.png" />
     <Content Include="themes\job\img\plus.png" />
     <Content Include="themes\job\img\tick.png" />
@@ -1735,6 +1736,9 @@
     <Content Include="Views\ConnectionString\_ConnectionLog_LogData_ChangeConnection.cshtml" />
     <Content Include="Views\ConnectionString\ViewConnection.cshtml" />
     <Content Include="Views\Mail\GetError.cshtml" />
+    <Content Include="Views\Machine\Index.cshtml" />
+    <Content Include="Views\Machine\EditMachine.cshtml" />
+    <Content Include="Views\Machine\InsertMachine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
