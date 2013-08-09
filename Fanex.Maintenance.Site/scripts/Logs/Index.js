@@ -82,7 +82,7 @@
 
                     $("#gridId").fanexGrid(gridOption);
                     $('.message').on('click', Logs.clickMessage);
-                    $('.monitored').on('click', Logs.monitorLog);
+                    $('.monitored').on('mousedown', Logs.monitorLog);
                 },
                 error: function (xhr, status, err) {
                     NAP.handleAjaxError(xhr, status, err);
@@ -99,6 +99,12 @@
                 $.ajax({
                     type: "POST",
                     url: "Log/RemoveLog",
+                    beforeSend: function () {
+                        NAP.loadingBox.show();
+                    },
+                    complete: function () {
+                        NAP.loadingBox.close();
+                    },
                     success: function (data) {
                         if (data == 0)
                             NAP.headlineMsgBox.showInfo("No log removed !", { closeBtn: false });
@@ -106,6 +112,9 @@
                             NAP.headlineMsgBox.showInfo("Removed " + data + " logs !", { closeBtn: false });
                         }
                         $("#btnRemoveLog").attr("disabled", "true");
+                    },
+                    error: function (xhr, status, err) {
+                        NAP.handleAjaxError(xhr, status, err);
                     }
                 });
             }
@@ -118,27 +127,44 @@
             $('#' + logId).show();
         },
         monitorLog: function () {
-            var logId = $(this).attr('data-logId');
-            var isMonitored = $(this).prop('checked');
             var chk = $(this);
+            NAP.headlineMsgBox.confirm('Are you sure that this log is being handled', function () {
+                var logId = chk.attr('data-logId');
+                var isMonitored = !chk.is(':checked')
 
-            $.ajax({
-                type: "POST",
-                url: "Log/MonitorLog",
-                data: { logId: logId, isMonitored: isMonitored },
-                success: function (data) {
-                    var monitoringUser = $('#monitoringUser' + logId);
-                    chk.hide();
-                    if (monitoringUser)
-                        monitoringUser.text(data);
-                }
-            });
+                $.ajax({
+                    type: "POST",
+                    url: "Log/MonitorLog",
+                    data: { logId: logId, isMonitored: isMonitored },
+                    beforeSend: function () {
+                        NAP.loadingBox.show();
+                    },
+                    complete: function () {
+                        NAP.loadingBox.close();
+                    },
+                    success: function (data) {
+                        var monitoringUser = $('#monitoringUser' + logId);
+                        chk.hide();
+                        if (monitoringUser)
+                            monitoringUser.text(data);
+                    },
+                    error: function (xhr, status, err) {
+                        NAP.handleAjaxError(xhr, status, err);
+                    }
+                });
+            }, { model: true, closeBtn: false, position: ['top:420', 'center'] });
         },
         getMachinesByType: function (machineType) {
             $.ajax({
                 type: "GET",
                 url: "Machine/GetMachinesByType",
                 data: { machineType: machineType },
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    NAP.loadingBox.close();
+                },
                 success: function (data) {
                     if (data.length > 0) {
                         var ddlMachines = $('#MachineId');
@@ -149,6 +175,9 @@
 
                         $('#MachineId').select2();
                     }
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
                 }
             });
         },
