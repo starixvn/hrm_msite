@@ -233,6 +233,7 @@
     <Content Include="scripts\Job\ServerManagement.js" />
     <Content Include="scripts\Job\LeftMenuPage.js" />
     <Content Include="scripts\Job\Index.js" />
+    <Content Include="scripts\lib\custom-datepicker.js" />
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\jquery.qtip-1.0.0-rc3.min.js" />
     <Content Include="scripts\lib\jquery.signalR-1.0.0-rc1.min.js" />
@@ -1345,6 +1346,11 @@
     <Content Include="scripts\Plugin\notification\jquery.bt.js" />
     <Content Include="scripts\Plugin\notification\jquery.toastmessage.css" />
     <Content Include="scripts\Plugin\notification\jquery.toastmessage.js" />
+    <Content Include="scripts\Plugin\Select2\select2-custom.css" />
+    <Content Include="scripts\Plugin\Select2\select2-spinner.gif" />
+    <Content Include="scripts\Plugin\Select2\select2.css" />
+    <Content Include="scripts\Plugin\Select2\select2.js" />
+    <Content Include="scripts\Plugin\Select2\select2.png" />
     <Content Include="scripts\SqlJobManagement\LeftMenuPage.js" />
     <Content Include="scripts\_Layout.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />
@@ -1448,6 +1454,7 @@
     <Content Include="themes\job\img\actions\dd\step.png" />
     <Content Include="themes\job\img\actions\dd\stop.png" />
     <Content Include="themes\job\img\actions\dd\viewlog.png" />
+    <Content Include="themes\job\img\actions\tick-ico-16.png" />
     <Content Include="themes\job\img\minus.png" />
     <Content Include="themes\job\img\plus.png" />
     <Content Include="themes\job\img\tick.png" />
@@ -1729,6 +1736,9 @@
     <Content Include="Views\ConnectionString\_ConnectionLog_LogData_ChangeConnection.cshtml" />
     <Content Include="Views\ConnectionString\ViewConnection.cshtml" />
     <Content Include="Views\Mail\GetError.cshtml" />
+    <Content Include="Views\Machine\Index.cshtml" />
+    <Content Include="Views\Machine\EditMachine.cshtml" />
+    <Content Include="Views\Machine\InsertMachine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

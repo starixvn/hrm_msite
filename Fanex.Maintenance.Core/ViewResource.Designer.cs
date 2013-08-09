@@ -196,20 +196,38 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All.
-        /// </summary>
-        public static string AllSelection {
-            get {
-                return ResourceManager.GetString("AllSelection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Application.
         /// </summary>
         public static string Application_Name {
             get {
                 return ResourceManager.GetString("Application_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App Logs.
+        /// </summary>
+        public static string AppLogs {
+            get {
+                return ResourceManager.GetString("AppLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Machines.
+        /// </summary>
+        public static string AppLogs_MangeMachines {
+            get {
+                return ResourceManager.GetString("AppLogs_MangeMachines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Logs.
+        /// </summary>
+        public static string AppLogs_ViewLog {
+            get {
+                return ResourceManager.GetString("AppLogs_ViewLog", resourceCulture);
             }
         }
         
@@ -601,6 +619,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Machine Information.
+        /// </summary>
+        public static string EditMachine {
+            get {
+                return ResourceManager.GetString("EditMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
         public static string Enabled {
@@ -853,6 +880,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insert Machine.
+        /// </summary>
+        public static string InsertMachine {
+            get {
+                return ResourceManager.GetString("InsertMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Integrated Security.
         /// </summary>
         public static string Integrated_Security {
@@ -903,6 +939,15 @@ namespace Fanex.Maintenance.Core {
         public static string IsDefault {
             get {
                 return ResourceManager.GetString("IsDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Production.
+        /// </summary>
+        public static string IsProduction {
+            get {
+                return ResourceManager.GetString("IsProduction", resourceCulture);
             }
         }
         
@@ -1024,6 +1069,24 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Monitored.
+        /// </summary>
+        public static string LogStatus_Monitored {
+            get {
+                return ResourceManager.GetString("LogStatus_Monitored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unmonitored.
+        /// </summary>
+        public static string LogStatus_Unmonitored {
+            get {
+                return ResourceManager.GetString("LogStatus_Unmonitored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Machine.
         /// </summary>
         public static string Machine {
@@ -1038,6 +1101,33 @@ namespace Fanex.Maintenance.Core {
         public static string Machine_Name {
             get {
                 return ResourceManager.GetString("Machine_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Machine Type.
+        /// </summary>
+        public static string MachineType {
+            get {
+                return ResourceManager.GetString("MachineType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Production.
+        /// </summary>
+        public static string MachineType_Production {
+            get {
+                return ResourceManager.GetString("MachineType_Production", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UAT.
+        /// </summary>
+        public static string MachineType_UAT {
+            get {
+                return ResourceManager.GetString("MachineType_UAT", resourceCulture);
             }
         }
         
@@ -1645,6 +1735,60 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Severity.
+        /// </summary>
+        public static string Severity {
+            get {
+                return ResourceManager.GetString("Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critical.
+        /// </summary>
+        public static string Severity_Critical {
+            get {
+                return ResourceManager.GetString("Severity_Critical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Severity_Error {
+            get {
+                return ResourceManager.GetString("Severity_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Severity_Information {
+            get {
+                return ResourceManager.GetString("Severity_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verbose.
+        /// </summary>
+        public static string Severity_Verbose {
+            get {
+                return ResourceManager.GetString("Severity_Verbose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string Severity_Warning {
+            get {
+                return ResourceManager.GetString("Severity_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show.
         /// </summary>
         public static string Show {
@@ -1830,6 +1974,15 @@ namespace Fanex.Maintenance.Core {
         public static string Timestamp {
             get {
                 return ResourceManager.GetString("Timestamp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Zone.
+        /// </summary>
+        public static string TimeZone {
+            get {
+                return ResourceManager.GetString("TimeZone", resourceCulture);
             }
         }
         

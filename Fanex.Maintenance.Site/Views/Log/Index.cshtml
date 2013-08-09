@@ -1,7 +1,7 @@
 ﻿@using Fanex.Maintenance.Criteria.Log
 @model GetLogCriteria
 @{
-    ViewBag.Title = "View Logs";
+    ViewBag.Title = ViewResource.AppLogs_ViewLog;
     Layout = "~/Views/Shared/_Layout.cshtml";
     IEnumerable<Log> listLog = (IEnumerable<Log>)ViewBag.ListLog;
 }
@@ -9,51 +9,67 @@
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
     <link href="~/scripts/Plugin/Fanex.Grid/Fanex.Grid.css" rel="stylesheet" type="text/css" />
     <link href="~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/Plugin/Select2/select2.css" rel="stylesheet" type="text/css" />
+    <link href="~/scripts/Plugin/Select2/select2-custom.css" rel="stylesheet" type="text/css" />
 }
 @section Headline {
     <h1>
-        <span class="title">@ViewBag.Title</span> <a href="#" id="btnRemoveLog" class="lnk">
-            Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())</a>
+        <span class="title">@ViewBag.Title</span> 
+        <a href="#" id="btnRemoveLog" class="lnk">
+            Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())
+        </a>
     </h1>
 }
 @using (Html.BeginForm())
 {  
-    <section id="filter-bar">
+    <section id="filter-bar" style="width: 98%">
         <div class="filter-form">
             <div class="filter-row">
-                <div class="lbl-field width-auto">
-                    @Html.Label(ViewResource.Category)
+                <div class="lbl-field width-80">
+                    @Html.LabelFor(m => m.CategoryId, ViewResource.Category)
                 </div>
                 <div class="edit-field width-200">
-                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, ViewResource.AllSelection, new { @class = "width-200" })
+                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-200" })
                 </div>
-                <div class="lbl-field width-auto">
-                    @Html.LabelFor(m => m.Severity)
+                <div class="lbl-field width-120">
+                    @Html.LabelFor(m => m.IsProduction, ViewResource.MachineType)
                 </div>
-                <div class="edit-field">
-                    @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity)
+                <div class="edit-field width-160">
+                    @Html.DropDownListFor(m => m.IsProduction, (List<SelectListItem>)ViewBag.MachineTypes, new { @class = "width-160" })
+                </div>     
+                <div class="lbl-field width-80">
+                    @Html.LabelFor(m => m.MachineId, ViewResource.Machine)
                 </div>
-                <div class="lbl-field width-auto">
-                    @Html.Label(ViewResource.Machine)
+                <div class="edit-field width-200">
+                    @*@Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, new { @class = "width-140" })*@
+                    <select id="MachineId" name="MachineId" class="width-200"></select>
+                </div>  
+                   
+            </div>
+            <div class="filter-row">
+                <div class="lbl-field width-80">
+                    @Html.LabelFor(m => m.Severity, ViewResource.Severity)
                 </div>
-                <div class="edit-field width-180">
-                    @Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, ViewResource.AllSelection, new { @class = "width-180" })
+                <div class="edit-field width-200">
+                    @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity, new { @class = "width-200" })
+                </div>   
+                <div class="lbl-field width-120">
+                    @Html.LabelFor(m => m.IsMonitored, ViewResource.Status)
                 </div>
-                <div class="lbl-field width-auto">
-                    @Html.LabelFor(m => m.From)
+                <div class="edit-field width-160">
+                    @Html.DropDownListFor(m => m.IsMonitored, (List<SelectListItem>)ViewBag.LogStatus, new { @class = "width-160" })
                 </div>
-                <div class="edit-field width-140">
-                    @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
+                <div class="lbl-field width-80">
+                    @Html.LabelFor(m => m.From, ViewResource.Date)
                 </div>
-                <div class="lbl-field width-auto">
-                    @Html.LabelFor(m => m.To)
+                <div class="edit-field width-200">
+                    @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:155px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                <div class="edit-field width-140">
-                    @Html.TextBox("To", Model.To.ToString("MMM dd,yyyy"), new { @style = "width:90px;margin-right:5px;", @autocomplete = "off" })
-                </div>
-                <div class="submit width-auto">
-                    <input type="button" value="Submit" id="submit" />
-                </div>
+                <div class="submit width-100 align-right">
+                    <input type="button" value="@ViewResource.Submit" id="submit" />
+                </div>   
+            </div>
+            <div class="filter-row">
             </div>
         </div>
     </section>
@@ -64,37 +80,13 @@
 @Html.Hidden("imagePath", (string)@Url.Content("~/images/calendar.gif"))
 @section Foot {
     <script src="~/scripts/Logs/Index.js" type="text/javascript"></script>
+    <script src="~/scripts/Plugin/Select2/select2.js" type="text/javascript"></script>
+    <script src="~/scripts/lib/custom-datepicker.js" type="text/javascript"></script>
     <script type="text/javascript">
         var dateNow = $("#dateNow").val();
 
         $(function () {
-
-            $("#From").datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 1,
-                dateFormat: "M dd,yy",
-                showOn: "button",
-                buttonImage: $('#imagePath').val(),
-                buttonText: "From",
-                buttonImageOnly: true,
-                onSelect: function (selectedDate) {
-                    $("#To").datepicker("option", "minDate", selectedDate);
-                    //                    $("#To").val($(this).val());
-                }
-            });
-            $("#To").datepicker({
-                defaultDate: "+1w",
-                changeMonth: true,
-                numberOfMonths: 1,
-                dateFormat: "M dd,yy",
-                showOn: "button",
-                buttonImage: $('#imagePath').val(),
-                buttonText: "To",
-                buttonImageOnly: true,
-                onSelect: function (selectedDate) {
-                }
-            });
+            
         });        
     </script>
 }
