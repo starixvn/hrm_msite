@@ -205,6 +205,33 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to App Logs.
+        /// </summary>
+        public static string AppLogs {
+            get {
+                return ResourceManager.GetString("AppLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Machines.
+        /// </summary>
+        public static string AppLogs_MangeMachines {
+            get {
+                return ResourceManager.GetString("AppLogs_MangeMachines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Logs.
+        /// </summary>
+        public static string AppLogs_ViewLog {
+            get {
+                return ResourceManager.GetString("AppLogs_ViewLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back To List.
         /// </summary>
         public static string Back_To_List {
@@ -592,6 +619,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Machine Information.
+        /// </summary>
+        public static string EditMachine {
+            get {
+                return ResourceManager.GetString("EditMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
         public static string Enabled {
@@ -844,6 +880,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insert Machine.
+        /// </summary>
+        public static string InsertMachine {
+            get {
+                return ResourceManager.GetString("InsertMachine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Integrated Security.
         /// </summary>
         public static string Integrated_Security {
@@ -894,6 +939,15 @@ namespace Fanex.Maintenance.Core {
         public static string IsDefault {
             get {
                 return ResourceManager.GetString("IsDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Production.
+        /// </summary>
+        public static string IsProduction {
+            get {
+                return ResourceManager.GetString("IsProduction", resourceCulture);
             }
         }
         
@@ -1047,6 +1101,15 @@ namespace Fanex.Maintenance.Core {
         public static string Machine_Name {
             get {
                 return ResourceManager.GetString("Machine_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Machine Type.
+        /// </summary>
+        public static string MachineType {
+            get {
+                return ResourceManager.GetString("MachineType", resourceCulture);
             }
         }
         
@@ -1672,6 +1735,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Severity.
+        /// </summary>
+        public static string Severity {
+            get {
+                return ResourceManager.GetString("Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Critical.
         /// </summary>
         public static string Severity_Critical {
@@ -1902,6 +1974,15 @@ namespace Fanex.Maintenance.Core {
         public static string Timestamp {
             get {
                 return ResourceManager.GetString("Timestamp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Zone.
+        /// </summary>
+        public static string TimeZone {
+            get {
+                return ResourceManager.GetString("TimeZone", resourceCulture);
             }
         }
         
