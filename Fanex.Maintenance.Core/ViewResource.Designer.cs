@@ -1735,6 +1735,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Severity.
+        /// </summary>
+        public static string Severity {
+            get {
+                return ResourceManager.GetString("Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Critical.
         /// </summary>
         public static string Severity_Critical {
@@ -1875,15 +1884,6 @@ namespace Fanex.Maintenance.Core {
         public static string Step_Name {
             get {
                 return ResourceManager.GetString("Step_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

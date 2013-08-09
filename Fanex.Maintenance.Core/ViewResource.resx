@@ -819,4 +819,7 @@
   <data name="EditMachine" xml:space="preserve">
     <value>Edit Machine Information</value>
   </data>
+  <data name="Severity" xml:space="preserve">
+    <value>Severity</value>
+  </data>
 </root>

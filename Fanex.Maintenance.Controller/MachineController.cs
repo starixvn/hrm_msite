@@ -65,6 +65,11 @@ using Fanex.Maintenance.Entity.Model;
             List<SelectListItem> machineTypes = new List<SelectListItem>();
             machineTypes.Add(new SelectListItem
             {
+                Text = ViewResource.All,
+                Value = "null"
+            });
+            machineTypes.Add(new SelectListItem
+            {
                 Text = ViewResource.MachineType_Production,
                 Value = "true"
             });

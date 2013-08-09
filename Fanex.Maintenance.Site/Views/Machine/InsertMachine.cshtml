@@ -27,7 +27,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.MachineName)
+                @Html.LabelFor(m => m.MachineName, ViewResource.Machine_Name)
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.MachineName)
@@ -35,7 +35,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.IsProduction)
+                @Html.LabelFor(m => m.IsProduction, ViewResource.IsProduction)
             </div>
             <div class="edit-field">
                 @Html.EditorFor(m => m.IsProduction)
@@ -43,7 +43,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.TimeZone)
+                @Html.LabelFor(m => m.TimeZone, ViewResource.TimeZone)
             </div>
             <div class="edit-field">
                 @Html.EditorFor(m => m.TimeZone)

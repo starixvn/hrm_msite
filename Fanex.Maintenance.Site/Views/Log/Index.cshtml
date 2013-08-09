@@ -26,19 +26,19 @@
         <div class="filter-form">
             <div class="filter-row">
                 <div class="lbl-field width-80">
-                    @Html.Label(ViewResource.Category)
+                    @Html.LabelFor(m => m.CategoryId, ViewResource.Category)
                 </div>
                 <div class="edit-field width-200">
                     @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-200" })
                 </div>
                 <div class="lbl-field width-120">
-                    <label>@ViewResource.MachineType</label>
+                    @Html.LabelFor(m => m.IsProduction, ViewResource.MachineType)
                 </div>
                 <div class="edit-field width-160">
                     @Html.DropDownListFor(m => m.IsProduction, (List<SelectListItem>)ViewBag.MachineTypes, new { @class = "width-160" })
                 </div>     
                 <div class="lbl-field width-80">
-                    @Html.Label(ViewResource.Machine)
+                    @Html.LabelFor(m => m.MachineId, ViewResource.Machine)
                 </div>
                 <div class="edit-field width-200">
                     @*@Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, new { @class = "width-140" })*@
@@ -48,19 +48,19 @@
             </div>
             <div class="filter-row">
                 <div class="lbl-field width-80">
-                    @Html.LabelFor(m => m.Severity)
+                    @Html.LabelFor(m => m.Severity, ViewResource.Severity)
                 </div>
                 <div class="edit-field width-200">
                     @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity, new { @class = "width-200" })
                 </div>   
                 <div class="lbl-field width-120">
-                    @Html.Label(ViewResource.Status)
+                    @Html.LabelFor(m => m.IsMonitored, ViewResource.Status)
                 </div>
                 <div class="edit-field width-160">
                     @Html.DropDownListFor(m => m.IsMonitored, (List<SelectListItem>)ViewBag.LogStatus, new { @class = "width-160" })
                 </div>
                 <div class="lbl-field width-80">
-                    @Html.LabelFor(m => m.From)
+                    @Html.LabelFor(m => m.From, ViewResource.Date)
                 </div>
                 <div class="edit-field width-200">
                     @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:155px;margin-right:5px;", @autocomplete = "off" })
