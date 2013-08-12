@@ -128,7 +128,7 @@
             var chk = $(this);
             NAP.headlineMsgBox.confirm('Are you sure that this log is being handled', function () {
                 var logId = chk.attr('data-logId');
-                var isMonitored = !chk.is(':checked')
+                var isMonitored = chk.is(':checked')
 
                 $.ajax({
                     type: "POST",
