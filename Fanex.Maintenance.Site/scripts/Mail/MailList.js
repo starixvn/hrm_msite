@@ -55,14 +55,14 @@
                     var gridOption = {
                         columns: [
                             { HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Subject", Width: 320, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Application Name", Width: 100, Name: "ApplicationName", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Mail To", Width: 200, Name: "MailTo", HeaderAlign: "center", CellAlign: "left" },
+                            { HeaderText: "Subject", Width: 350, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
+                            { HeaderText: "Application Name", Width: 100, Name: "ApplicationName", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Mail To", Width: 250, Name: "MailTo", HeaderAlign: "center", CellAlign: "left" },
                         //                            { HeaderText: "Mail Cc", Width: 100, Name: "MailCc", HeaderAlign: "center", CellAlign: "left" },
                             {HeaderText: "Created Date", Width: 130, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Latest Send Date", Width: 130, Name: "LatestSendDate", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Success", Width: 80, Name: "SendSuccess", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Fail", Width: 80, Name: "SendFail", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Success", Width: 50, Name: "SendSuccess", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Fail", Width: 40, Name: "SendFail", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Resend", Width: 70, Name: "Resend", HeaderAlign: "center", CellAlign: "center" }
                         ],
                         bodyRows: bodyData,

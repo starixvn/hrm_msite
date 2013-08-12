@@ -60,8 +60,8 @@
                             { HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Monitored", Width: 50, Name: "IsMonitored", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Message", Width: 583, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Category", Width: 100, Name: "Category", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Severity", Width: 100, Name: "Severity", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Category", Width: 120, Name: "Category", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Severity", Width: 80, Name: "Severity", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Machine Name", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Monitoring User", Width: 95, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Time (GMT+7)", Width: 120, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
