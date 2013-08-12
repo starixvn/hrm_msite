@@ -38,14 +38,20 @@
                     var data = eval(result.ListLog);
                     var bodyData = [];
                     var count = 1;
+                    var categoryName = "";
+
                     $.each(data, function (key, value) {
+
+                        if (value.Category != null) {
+                            categoryName = value.Category[0].CategoryName;
+                        }
 
                         bodyData.push({
                             Columns:
                         [
                             { Name: "No", Value: pageSize * (index - 1) + count++ },
                             { Name: "Message", Value: "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" },
-                            { Name: "Category", Value: value.Category[0].CategoryName },
+                            { Name: "Category", Value: categoryName },
                             { Name: "Severity", Value: value.Severity },
                             { Name: "MachineName", Value: value.MachineName },
                             { Name: "MonitoringUser", Value: "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" },
@@ -56,7 +62,7 @@
 
                     var gridOption = {
                         columns: [
-                            { HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "#", Width: 25, Name: "No", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Message", Width: 640, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
                             { HeaderText: "Category", Width: 120, Name: "Category", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Severity", Width: 80, Name: "Severity", HeaderAlign: "center", CellAlign: "center" },
@@ -236,6 +242,6 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     Logs.generateData(50, 0);
 });
