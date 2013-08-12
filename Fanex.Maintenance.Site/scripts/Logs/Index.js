@@ -44,12 +44,11 @@
                             Columns:
                         [
                             { Name: "No", Value: pageSize * (index - 1) + count++ },
-                            { Name: "IsMonitored", Value: value.IsMonitored ? "" : "<input type='checkbox' data-logid='" + value.LogId + "' class='monitored' />" },
                             { Name: "Message", Value: "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" },
                             { Name: "Category", Value: value.Category[0].CategoryName },
                             { Name: "Severity", Value: value.Severity },
                             { Name: "MachineName", Value: value.MachineName },
-                            { Name: "MonitoringUser", Value: "<span id='monitoringUser" + value.LogId + "'>" + (value.MonitoringUser == null ? "" : value.MonitoringUser) + "</span>" },
+                            { Name: "MonitoringUser", Value: "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" },
                             { Name: "Timestamp", Value: value.LogDate }
                         ]
                         });
@@ -58,12 +57,11 @@
                     var gridOption = {
                         columns: [
                             { HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Monitored", Width: 50, Name: "IsMonitored", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Message", Width: 583, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
+                            { HeaderText: "Message", Width: 640, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
                             { HeaderText: "Category", Width: 120, Name: "Category", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Severity", Width: 80, Name: "Severity", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Machine Name", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Monitoring User", Width: 95, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Monitoring User", Width: 102, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Time (GMT+7)", Width: 120, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
                         ],
                         bodyRows: bodyData,
