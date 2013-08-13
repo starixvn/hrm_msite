@@ -66,8 +66,8 @@
                             { HeaderText: "Message", Width: 640, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
                             { HeaderText: "Category", Width: 120, Name: "Category", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Severity", Width: 80, Name: "Severity", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Machine Name", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Monitoring User", Width: 102, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Server Name", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Monitor ?", Width: 102, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Time (GMT+7)", Width: 120, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
                         ],
                         bodyRows: bodyData,
@@ -130,6 +130,7 @@
             $(this).hide();
             $('#' + logId).show();
         },
+
         monitorLog: function () {
             var chk = $(this);
             NAP.headlineMsgBox.confirm('Are you sure that this log is being handled', function () {
@@ -158,6 +159,7 @@
                 });
             }, { model: true, closeBtn: false, position: ['top:420', 'center'] });
         },
+
         getMachinesByType: function (machineType) {
             $.ajax({
                 type: "GET",
@@ -172,12 +174,20 @@
                 success: function (data) {
                     if (data.length > 0) {
                         var ddlMachines = $('#MachineId');
-                        ddlMachines.find('option').remove();
-                        for (var i = 0; i < data.length; i++) {
-                            ddlMachines.append($('<option>', { value: data[i].Value, text: data[i].Text }));
-                        }
 
-                        $('#MachineId').select2();
+                        //                        ddlMachines.find('option').remove();
+                        //                        
+                        //                        for (var i = 0; i < data.length; i++) {
+                        //                            ddlMachines.append($('<option>', { value: data[i].Value, text: data[i].Text }));
+                        //                        }
+                        $.each(data, function (key, value) {
+                            ddlMachines.append('<optgroup label="UAT">');
+                            $.each(value, function (keyMachine, valueMachine) {
+                                ddlMachines.append($('<option>', { value: valueMachine.MachineId, text: valueMachine.MachineName }));
+                            });
+                            ddlMachines.append('</optgroup>');
+                        });
+//                        $('#MachineId').select2();
                     }
                 },
                 error: function (xhr, status, err) {
@@ -185,10 +195,12 @@
                 }
             });
         },
+
         getMachines: function () {
             var machineType = $('#IsProduction').val();
             Logs.getMachinesByType(machineType);
         },
+
         bindEventHandlers: function () {
             Logs.getMachines(0);
             $('#CategoryId').select2();

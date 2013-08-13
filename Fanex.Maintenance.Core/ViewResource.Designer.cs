@@ -214,7 +214,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage Machines.
+        ///   Looks up a localized string similar to Manage Servers.
         /// </summary>
         public static string AppLogs_MangeMachines {
             get {

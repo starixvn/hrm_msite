@@ -799,7 +799,7 @@
     <value>App Logs</value>
   </data>
   <data name="AppLogs_MangeMachines" xml:space="preserve">
-    <value>Manage Machines</value>
+    <value>Manage Servers</value>
   </data>
   <data name="AppLogs_ViewLog" xml:space="preserve">
     <value>View Logs</value>

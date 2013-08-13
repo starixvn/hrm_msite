@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Jason.Ly" date="2013.8.8">Created</change>
+//   <change who="Edward.Nguyen" date="2013.8.12">Edit GetMachineByType</change>
 // </history>
 
 namespace Fanex.Maintenance.Controller
@@ -168,7 +169,7 @@ namespace Fanex.Maintenance.Controller
 
             return View(machine);
         }
-        
+
         #endregion Action
 
         #region Ajax
@@ -181,24 +182,14 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public JsonResult GetMachinesByType(bool? machineType)
         {
+            var machines = new List<Machine>();
+
             if (Request.IsAjaxRequest())
             {
-                List<SelectListItem> machines = _machineService.GetByType(machineType).Select(m => new SelectListItem
-                {
-                    Text = m.MachineName,
-                    Value = m.MachineId.ToString()
-                }).ToList();
-                machines.Insert(0, new SelectListItem
-                {
-                    Text = ViewResource.All,
-                    Value = "0",
-                    Selected = true
-                });
-
-                return Json(machines, JsonRequestBehavior.AllowGet);
+                machines = _machineService.GetByType(machineType).ToList();
             }
 
-            return Json(0, JsonRequestBehavior.AllowGet);
+            return Json(machines.GroupBy(x => x.IsProduction).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         #endregion Ajax
