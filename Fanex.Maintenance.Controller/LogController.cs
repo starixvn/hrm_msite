@@ -201,7 +201,7 @@ namespace Fanex.Maintenance.Controller
         private void InitDataView()
         {
             InitSeverities();
-            InitMachineTypes();
+            //InitMachineTypes();
             InitLogStatus();
 
             ////Default selection for drop-down

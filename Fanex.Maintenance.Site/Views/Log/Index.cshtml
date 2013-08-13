@@ -14,10 +14,8 @@
 }
 @section Headline {
     <h1>
-        <span class="title">@ViewBag.Title</span> 
-        <a href="#" id="btnRemoveLog" class="lnk">
-            Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString())
-        </a>
+        <span class="title">@ViewBag.Title</span> <a href="#" id="btnRemoveLog" class="lnk">
+            Remove (Before date @DateTime.Now.AddDays(-5).ToShortDateString()) </a>
     </h1>
 }
 @using (Html.BeginForm())
@@ -25,51 +23,39 @@
     <section id="filter-bar" style="width: 98%">
         <div class="filter-form">
             <div class="filter-row">
-                <div class="lbl-field width-80">
+                <div class="lbl-field width-auto">
                     @Html.LabelFor(m => m.CategoryId, ViewResource.Category)
                 </div>
-                <div class="edit-field width-200">
-                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-200" })
-                </div>
-                <div class="lbl-field width-120">
-                    @Html.LabelFor(m => m.IsProduction, ViewResource.MachineType)
-                </div>
-                <div class="edit-field width-160">
-                    @Html.DropDownListFor(m => m.IsProduction, (List<SelectListItem>)ViewBag.MachineTypes, new { @class = "width-160" })
-                </div>     
-                <div class="lbl-field width-80">
+                <div class="edit-field width-180">
+                    @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-180" })
+                </div>    
+                <div class="lbl-field width-70">
                     @Html.LabelFor(m => m.MachineId, ViewResource.Machine)
                 </div>
-                <div class="edit-field width-200">
-                    @*@Html.DropDownListFor(m => m.MachineId, (List<SelectListItem>)ViewBag.Machines, new { @class = "width-140" })*@
-                    <select id="MachineId" name="MachineId" class="width-200"></select>
+                <div class="edit-field width-160">
+                    <select id="MachineId" name="MachineId" class="width-160"></select>
                 </div>  
-                   
-            </div>
-            <div class="filter-row">
-                <div class="lbl-field width-80">
+                <div class="lbl-field width-70">
                     @Html.LabelFor(m => m.Severity, ViewResource.Severity)
                 </div>
-                <div class="edit-field width-200">
-                    @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity, new { @class = "width-200" })
+                <div class="edit-field width-100">
+                    @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity, new { @class = "width-100" })
                 </div>   
-                <div class="lbl-field width-120">
+                <div class="lbl-field width-60">
                     @Html.LabelFor(m => m.IsMonitored, ViewResource.Status)
                 </div>
-                <div class="edit-field width-160">
-                    @Html.DropDownListFor(m => m.IsMonitored, (List<SelectListItem>)ViewBag.LogStatus, new { @class = "width-160" })
+                <div class="edit-field width-120">
+                    @Html.DropDownListFor(m => m.IsMonitored, (List<SelectListItem>)ViewBag.LogStatus, new { @class = "width-120" })
                 </div>
-                <div class="lbl-field width-80">
+                <div class="lbl-field width-50">
                     @Html.LabelFor(m => m.From, ViewResource.Date)
                 </div>
                 <div class="edit-field width-200">
                     @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:155px;margin-right:5px;", @autocomplete = "off" })
                 </div>
-                <div class="submit width-100 align-right">
+                <div class="submit width-80 align-right">
                     <input type="button" value="@ViewResource.Submit" id="submit" />
                 </div>   
-            </div>
-            <div class="filter-row">
             </div>
         </div>
     </section>
@@ -82,11 +68,4 @@
     <script src="~/scripts/Logs/Index.js" type="text/javascript"></script>
     <script src="~/scripts/Plugin/Select2/select2.js" type="text/javascript"></script>
     <script src="~/scripts/lib/custom-datepicker.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        var dateNow = $("#dateNow").val();
-
-        $(function () {
-            
-        });        
-    </script>
 }

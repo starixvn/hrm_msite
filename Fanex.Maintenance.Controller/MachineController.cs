@@ -189,7 +189,7 @@ namespace Fanex.Maintenance.Controller
                 machines = _machineService.GetByType(machineType).ToList();
             }
 
-            return Json(machines.GroupBy(x => x.IsProduction).ToList(), JsonRequestBehavior.AllowGet);
+            return Json(machines, JsonRequestBehavior.AllowGet);
         }
 
         #endregion Ajax

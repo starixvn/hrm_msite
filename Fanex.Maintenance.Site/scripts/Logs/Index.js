@@ -7,9 +7,10 @@
             var severity = $('#Severity').val();
             var from = $('#From').datepicker('option', 'dateFrom');
             var to = $('#From').datepicker('option', 'dateTo');
-            var isProduction = $('#IsProduction').val();
+            var isProduction = null;
             var isMonitored = $('#IsMonitored').val();
 
+            machineId = machineId == null ? 0 : machineId;
             index++;
 
             $.ajax({
@@ -44,6 +45,8 @@
 
                         if (value.Category != null) {
                             categoryName = value.Category[0].CategoryName;
+                        } else {
+                            categoryName = ""
                         }
 
                         bodyData.push({
@@ -63,11 +66,11 @@
                     var gridOption = {
                         columns: [
                             { HeaderText: "#", Width: 25, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Message", Width: 640, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
+                            { HeaderText: "Message", Width: 652, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
                             { HeaderText: "Category", Width: 120, Name: "Category", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Severity", Width: 80, Name: "Severity", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Server Name", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Monitor ?", Width: 102, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Handled By", Width: 100, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Time (GMT+7)", Width: 120, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
                         ],
                         bodyRows: bodyData,
@@ -174,20 +177,28 @@
                 success: function (data) {
                     if (data.length > 0) {
                         var ddlMachines = $('#MachineId');
+                        var uatGroup = $('<optgroup>').attr('label', 'UAT');
+                        var productionGroup = $('<optgroup>').attr('label', 'Production');
+                        var optionItem;
 
-                        //                        ddlMachines.find('option').remove();
-                        //                        
-                        //                        for (var i = 0; i < data.length; i++) {
-                        //                            ddlMachines.append($('<option>', { value: data[i].Value, text: data[i].Text }));
-                        //                        }
+                        ddlMachines.empty();
+                        ddlMachines.append($('<option>', { value: '0', text: 'All' }));
+
                         $.each(data, function (key, value) {
-                            ddlMachines.append('<optgroup label="UAT">');
-                            $.each(value, function (keyMachine, valueMachine) {
-                                ddlMachines.append($('<option>', { value: valueMachine.MachineId, text: valueMachine.MachineName }));
-                            });
-                            ddlMachines.append('</optgroup>');
+                            optionItem = $('<option>', { value: value.MachineId, text: value.MachineName });
+                            if (value.IsProduction) {
+                                productionGroup.append(optionItem);
+                            } else {
+                                uatGroup.append(optionItem);
+                            }
                         });
-//                        $('#MachineId').select2();
+
+                        if (productionGroup[0].childElementCount > 0)
+                            ddlMachines.append(productionGroup);
+                        if (uatGroup[0].childElementCount > 0)
+                            ddlMachines.append(uatGroup);
+
+                        ddlMachines.select2();
                     }
                 },
                 error: function (xhr, status, err) {
@@ -205,7 +216,6 @@
             Logs.getMachines(0);
             $('#CategoryId').select2();
             $("#btnRemoveLog").bind("click", Logs.removeLog);
-            $('#IsProduction').bind('change', Logs.getMachines);
             $('#submit').live('click', function () {
                 Logs.generateData(50, 0);
             });
