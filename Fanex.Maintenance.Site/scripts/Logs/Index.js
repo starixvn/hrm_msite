@@ -27,6 +27,14 @@
             var isProduction = null;
             var isMonitored = Logs.ddlStatus.val();
 
+            if (machineId == 'UAT') {
+                isProduction = false;
+                machineId = 0;
+            } else if (machineId == 'Production') {
+                isProduction = true;
+                machineId = 0;
+            }
+
             machineId = machineId == null ? 0 : machineId;
             index++;
 
@@ -101,7 +109,7 @@
                             startPerPage: 50,
                             pagerSelectCallBack: Logs.reRenderAfterPaged
                         },
-                        gridExpandHeight: 320
+                        gridExpandHeight: 270
                     };
 
                     $("#gridId").fanexGrid(gridOption);
@@ -145,10 +153,8 @@
         },
         clickMessage: function () {
             var logId = $(this).attr('data-logId');
-            $('.hiden').hide();
-            $('.message').show();
-            $(this).hide();
-            $('#' + logId).show();
+            var message = $('#' + logId).text();
+            NAP.popup('Detail', message);
         },
         monitorLog: function () {
             var $this = $(this);
@@ -194,9 +200,8 @@
                 },
                 success: function (data) {
                     if (data.length > 0) {
-                        //var ddlMachines = $('#MachineId');
-                        var uatGroup = $('<optgroup>').attr('label', 'UAT');
-                        var productionGroup = $('<optgroup>').attr('label', 'Production');
+                        var uatGroup = $('<optgroup>').attr('label', 'UAT').append($('<option>', { value: 'UAT', text: 'All UAT' }));
+                        var productionGroup = $('<optgroup>').attr('label', 'Production').append($('<option>', { value: 'Production', text: 'All Production' }));
                         var optionItem;
 
                         Logs.ddlMachine.empty();
@@ -211,9 +216,9 @@
                             }
                         });
 
-                        if (productionGroup[0].childElementCount > 0)
+                        if (productionGroup[0].childElementCount > 1)
                             Logs.ddlMachine.append(productionGroup);
-                        if (uatGroup[0].childElementCount > 0)
+                        if (uatGroup[0].childElementCount > 1)
                             Logs.ddlMachine.append(uatGroup);
 
                         Logs.ddlMachine.select2();
