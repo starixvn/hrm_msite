@@ -1,14 +1,31 @@
 ﻿var Logs = function ($) {
 
     return {
+        ddlCategory: null,
+        ddlMachine: null,
+        ddlSeverity: null,
+        ddlStatus: null,
+        dpkFrom: null,
+        btnRemoveLog: null,
+        btnSubmit: null,
+
+        init: function () {
+            Logs.ddlCategory = $('#CategoryId');
+            Logs.ddlMachine = $('#MachineId');
+            Logs.ddlSeverity = $('#Severity');
+            Logs.ddlStatus = $('#IsMonitored');
+            Logs.dpkFrom = $('#From');
+            Logs.btnRemoveLog = $("#btnRemoveLog");
+            Logs.btnSubmit = $('#submit');
+        },
         generateData: function (pageSize, index) {
-            var categoryId = $('#CategoryId').val();
-            var machineId = $('#MachineId').val();
-            var severity = $('#Severity').val();
-            var from = $('#From').datepicker('option', 'dateFrom');
-            var to = $('#From').datepicker('option', 'dateTo');
+            var categoryId = Logs.ddlCategory.val();
+            var machineId = Logs.ddlMachine.val();
+            var severity = Logs.ddlSeverity.val();
+            var from = Logs.dpkFrom.datepicker('option', 'dateFrom');
+            var to = Logs.dpkFrom.datepicker('option', 'dateTo');
             var isProduction = null;
-            var isMonitored = $('#IsMonitored').val();
+            var isMonitored = Logs.ddlStatus.val();
 
             machineId = machineId == null ? 0 : machineId;
             index++;
@@ -89,7 +106,7 @@
 
                     $("#gridId").fanexGrid(gridOption);
                     $('.message').on('click', Logs.clickMessage);
-                    $('.monitored').on('mousedown', Logs.monitorLog);
+                    $('.monitored').on('click', Logs.monitorLog);
                 },
                 error: function (xhr, status, err) {
                     NAP.handleAjaxError(xhr, status, err);
@@ -118,7 +135,7 @@
                         else {
                             NAP.headlineMsgBox.showInfo("Removed " + data + " logs !", { closeBtn: false });
                         }
-                        $("#btnRemoveLog").attr("disabled", "true");
+                        Logs.btnRemoveLog.attr("disabled", "true");
                     },
                     error: function (xhr, status, err) {
                         NAP.handleAjaxError(xhr, status, err);
@@ -133,12 +150,14 @@
             $(this).hide();
             $('#' + logId).show();
         },
-
         monitorLog: function () {
-            var chk = $(this);
+            var $this = $(this);
+            var isMonitored = $this.is(':checked');
+
+            $this.prop('checked', !isMonitored).change();
+
             NAP.headlineMsgBox.confirm('Are you sure that this log is being handled', function () {
-                var logId = chk.attr('data-logId');
-                var isMonitored = chk.is(':checked')
+                var logId = $this.attr('data-logId');
 
                 $.ajax({
                     type: "POST",
@@ -152,7 +171,7 @@
                     },
                     success: function (data) {
                         var monitoringUser = $('#monitoringUser' + logId);
-                        chk.hide();
+                        $this.hide();
                         if (monitoringUser)
                             monitoringUser.text(data);
                     },
@@ -162,7 +181,6 @@
                 });
             }, { model: true, closeBtn: false, position: ['top:420', 'center'] });
         },
-
         getMachinesByType: function (machineType) {
             $.ajax({
                 type: "GET",
@@ -176,13 +194,13 @@
                 },
                 success: function (data) {
                     if (data.length > 0) {
-                        var ddlMachines = $('#MachineId');
+                        //var ddlMachines = $('#MachineId');
                         var uatGroup = $('<optgroup>').attr('label', 'UAT');
                         var productionGroup = $('<optgroup>').attr('label', 'Production');
                         var optionItem;
 
-                        ddlMachines.empty();
-                        ddlMachines.append($('<option>', { value: '0', text: 'All' }));
+                        Logs.ddlMachine.empty();
+                        Logs.ddlMachine.append($('<option>', { value: '0', text: 'All' }));
 
                         $.each(data, function (key, value) {
                             optionItem = $('<option>', { value: value.MachineId, text: value.MachineName });
@@ -194,11 +212,11 @@
                         });
 
                         if (productionGroup[0].childElementCount > 0)
-                            ddlMachines.append(productionGroup);
+                            Logs.ddlMachine.append(productionGroup);
                         if (uatGroup[0].childElementCount > 0)
-                            ddlMachines.append(uatGroup);
+                            Logs.ddlMachine.append(uatGroup);
 
-                        ddlMachines.select2();
+                        Logs.ddlMachine.select2();
                     }
                 },
                 error: function (xhr, status, err) {
@@ -214,12 +232,12 @@
 
         bindEventHandlers: function () {
             Logs.getMachines(0);
-            $('#CategoryId').select2();
-            $("#btnRemoveLog").bind("click", Logs.removeLog);
-            $('#submit').live('click', function () {
+            Logs.ddlCategory.select2();
+            Logs.btnRemoveLog.bind("click", Logs.removeLog);
+            Logs.btnSubmit.live('click', function () {
                 Logs.generateData(50, 0);
             });
-            $("#From").datepicker({
+            Logs.dpkFrom.datepicker({
                 defaultDate: "+1w",
                 changeMonth: true,
                 numberOfMonths: 2,
@@ -238,6 +256,7 @@
 } (jQuery);
 
 $(document).ready(function () {
+    Logs.init();
     Logs.bindEventHandlers();
 
     $('.logMessage').live('click', function () {
