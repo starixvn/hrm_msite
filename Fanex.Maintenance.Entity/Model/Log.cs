@@ -57,7 +57,7 @@ namespace Fanex.Maintenance.Entity.Model
         {
             get
             {
-                return this.FormattedMessage.Replace("\n", "<br/>");
+                return this.FormattedMessage.Replace("\n", "&lt;br/&gt;");
             }
         }
 
