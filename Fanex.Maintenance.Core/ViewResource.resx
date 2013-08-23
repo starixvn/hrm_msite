@@ -769,10 +769,10 @@
     <value>Machine</value>
   </data>
   <data name="LogStatus_Monitored" xml:space="preserve">
-    <value>Monitored</value>
+    <value>Handlded</value>
   </data>
   <data name="LogStatus_Unmonitored" xml:space="preserve">
-    <value>Unmonitored</value>
+    <value>Unhandled</value>
   </data>
   <data name="MachineType_Production" xml:space="preserve">
     <value>Production</value>

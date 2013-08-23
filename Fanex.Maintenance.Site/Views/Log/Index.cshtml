@@ -28,19 +28,20 @@
                 </div>
                 <div class="edit-field width-180">
                     @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-180" })
-                </div>    
+                </div>
                 <div class="lbl-field width-70">
                     @Html.LabelFor(m => m.MachineId, ViewResource.Machine)
                 </div>
                 <div class="edit-field width-160">
-                    <select id="MachineId" name="MachineId" class="width-160"></select>
-                </div>  
+                    <select id="MachineId" name="MachineId" class="width-160">
+                    </select>
+                </div>
                 <div class="lbl-field width-70">
                     @Html.LabelFor(m => m.Severity, ViewResource.Severity)
                 </div>
                 <div class="edit-field width-100">
                     @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity, new { @class = "width-100" })
-                </div>   
+                </div>
                 <div class="lbl-field width-60">
                     @Html.LabelFor(m => m.IsMonitored, ViewResource.Status)
                 </div>
@@ -55,7 +56,7 @@
                 </div>
                 <div class="submit width-80 align-right">
                     <input type="button" value="@ViewResource.Submit" id="submit" />
-                </div>   
+                </div>
             </div>
         </div>
     </section>

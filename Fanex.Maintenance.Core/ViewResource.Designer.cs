@@ -1069,7 +1069,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Monitored.
+        ///   Looks up a localized string similar to Handlded.
         /// </summary>
         public static string LogStatus_Monitored {
             get {
@@ -1078,7 +1078,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unmonitored.
+        ///   Looks up a localized string similar to Unhandled.
         /// </summary>
         public static string LogStatus_Unmonitored {
             get {

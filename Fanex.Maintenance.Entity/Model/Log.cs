@@ -65,7 +65,7 @@ namespace Fanex.Maintenance.Entity.Model
         {
             get
             {
-                return this.TimeStamp.ToString("MMM dd,yyyy hh:mm:ss");
+                return this.TimeStamp.ToString("MMM dd,yyyy hh:mm:ss tt");
             }
         }
     }

@@ -192,7 +192,7 @@ namespace Fanex.Maintenance.Controller
             List<MailRecord> listMail = new List<MailRecord>();
             listMail = this._mailServer.WithApp(id)
                 .FromDate(DateTime.Now.ToShortDateString())
-                .ToDate(DateTime.Now.AddDays(1).ToShortDateString())
+                .ToDate(DateTime.Now.ToShortDateString())
                 .WithStatus(0)
                 .WithPagination(1, 10)
                 .GetListMailByDate(ref totalRows);
@@ -220,7 +220,7 @@ namespace Fanex.Maintenance.Controller
             var totalRows = 0;
 
             DateTime dateFrom = DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1);
+            DateTime dateTo = DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             List<MailRecord> listMail = new List<MailRecord>();
             listMail = this._mailServer.WithApp(applicationID)
@@ -688,7 +688,7 @@ namespace Fanex.Maintenance.Controller
             var totalRows = 0;
 
             DateTime dateFrom = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
-            DateTime dateTo = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddDays(1) : DateTime.Now.AddDays(1);
+            DateTime dateTo = !string.IsNullOrWhiteSpace(from) ? DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture) : DateTime.Now;
 
             List<MailRecord> listMail = new List<MailRecord>();
             listMail = _mailServer.WithApp(applicationID)

@@ -95,8 +95,8 @@
                             { HeaderText: "Category", Width: 120, Name: "Category", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Severity", Width: 80, Name: "Severity", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Server Name", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Handled By", Width: 100, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Time (GMT+7)", Width: 120, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
+                            { HeaderText: "Handled By", Width: 80, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Time (GMT+7)", Width: 130, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
                         ],
                         bodyRows: bodyData,
                         showPager: true,
