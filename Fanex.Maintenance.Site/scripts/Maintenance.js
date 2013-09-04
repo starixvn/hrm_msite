@@ -92,7 +92,8 @@ var NAP = function ($) {
         },
         popup: function (title, html) {
             NAP.dialogPopup.html(html).dialog({
-                width: '850px',
+                width: 850,
+                height: 600,
                 modal: true,
                 position: ['center', 160]
             });
