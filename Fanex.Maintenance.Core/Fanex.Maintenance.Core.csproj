@@ -61,6 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\SiteFunctionKeys.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteFunctionKeys.tt</DependentUpon>
+    </Compile>
     <Compile Include="Configurations\MailSection.cs" />
     <Compile Include="Configurations\DatabaseServersSection.cs" />
     <Compile Include="Configurations\SpNameSection.cs" />
@@ -75,6 +80,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Web\AppSetting.cs" />
+    <None Include="Business\SiteFunctionKeys.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SiteFunctionKeys.cs</LastGenOutput>
+    </None>
     <None Include="Web\ConnectionString\ConLogAction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ConLogAction.cs</LastGenOutput>

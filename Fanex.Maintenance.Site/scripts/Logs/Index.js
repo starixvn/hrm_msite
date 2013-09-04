@@ -62,59 +62,42 @@
                 },
                 success: function (result) {
                     var data = eval(result.ListLog);
-                    var bodyData = [];
                     var count = 1;
-                    var categoryName = "";
 
                     $.each(data, function (key, value) {
 
-                        if (value.Category != null) {
-                            categoryName = value.Category[0].CategoryName;
-                        } else {
-                            categoryName = ""
-                        }
+                        var content = "<tr><td>"
+                        + (pageSize * (index - 1) + count++) + "</td><td>"
+                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" + "</td><td>"
+                        + value.Category[0].CategoryName + "</td><td>"
+                        + value.Severity + "</td><td>"
+                        + value.MachineName + "</td><td>"
+                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + "</td><td>"
+                        + value.LogDate + "</td></tr>";
 
-                        bodyData.push({
-                            Columns:
-                        [
-                            { Name: "No", Value: pageSize * (index - 1) + count++ },
-                            { Name: "Message", Value: "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" },
-                            { Name: "Category", Value: categoryName },
-                            { Name: "Severity", Value: value.Severity },
-                            { Name: "MachineName", Value: value.MachineName },
-                            { Name: "MonitoringUser", Value: "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" },
-                            { Name: "Timestamp", Value: value.LogDate }
-                        ]
-                        });
+                        $('#content').append(content);
                     });
 
-                    var gridOption = {
-                        columns: [
-                            { HeaderText: "#", Width: 25, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Message", Width: 652, Name: "Message", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Category", Width: 120, Name: "Category", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Severity", Width: 80, Name: "Severity", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Server Name", Width: 100, Name: "MachineName", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Handled By", Width: 80, Name: "MonitoringUser", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Time (GMT+7)", Width: 130, Name: "Timestamp", HeaderAlign: "center", CellAlign: "center" }
-                        ],
-                        bodyRows: bodyData,
-                        showPager: true,
-                        customPager: true,
-                        pagerOption: {
-                            itemsPerPage: pageSize,
-                            itemsPerPageArray: [50, 100, 500],
-                            currentPage: index - 1,
-                            totalItem: result.TotalRows,
-                            startPerPage: 50,
-                            pagerSelectCallBack: Logs.reRenderAfterPaged
-                        },
-                        gridExpandHeight: 270
-                    };
-
-                    $("#gridId").fanexGrid(gridOption);
                     $('.message').on('click', Logs.clickMessage);
                     $('.monitored').on('click', Logs.monitorLog);
+
+                    $('#pagination').fanexPagination(result.TotalRows, {
+                        itemsPerPage: pageSize,
+                        startPerPage: 50,
+                        itemsPerPageArray: [50, 100, 500],
+                        numDisplayEntries: 5,
+                        currentPage: index - 1,
+                        numEdgeEntries: 3,
+                        linkTo: "javascript:void(0)",
+                        prevText: "&lt;",
+                        nextText: "&gt;",
+                        ellipseText: "...",
+                        prevShowAlways: true,
+                        nextShowAlways: true,
+                        maxTtemsPerPage: 100,
+                        showDetail: true,
+                        callback: Logs.reRenderAfterPaged
+                    });
                 },
                 error: function (xhr, status, err) {
                     NAP.handleAjaxError(xhr, status, err);
@@ -255,6 +238,71 @@
                 dateFrom: new Date(),
                 dateTo: new Date()
             }).datepicker('init', '#From');
+        },
+
+        initFreeHeader: function () {
+           
+            var clonedHeaderRow;
+            $(".persist-area").each(function () {
+                clonedHeaderRow = $(".persist-header", this);
+                clonedHeaderRow
+					 .before(clonedHeaderRow.clone())
+					 .css({ "width": clonedHeaderRow.width() })
+					 .addClass("floatingHeader")
+					 .removeClass("persist-header");
+            });
+
+            $(window)
+				.scroll(Logs.updateTableHeaders)
+				.trigger("scroll");
+            $(window).resize(function () {
+                Logs.updateTableHeaders();
+            });
+        },
+
+        updateTableHeaders: function () {
+            if ($(".persist-area").val() != undefined) {
+                var widthspace = $(".persist-area").width();
+
+                $('.floatingHeader').width(widthspace);
+                var left = $('table thead tr:first').position()["left"];
+                $(".persist-area").each(function () {
+                    var el = $(this),
+						offset = el.offset(),
+						scrollTop = $(window).scrollTop(),
+						floatingHeader = $(".floatingHeader", this);
+                    if ((scrollTop > offset.top) && (scrollTop < offset.top + el.height())) {
+                        floatingHeader.css({
+                            "visibility": "visible",
+                            "left": (left - $(window).scrollLeft()),
+                            "z-index": "34"
+                        });
+                    } else {
+                        floatingHeader.css({
+                            "visibility": "hidden"
+                        });
+                    };
+                });
+
+                var i = 0;
+
+                var persistheader = $("table.persist-area thead.persist-header tr td");
+                var floatingheader = $("table.persist-area thead.floatingHeader tr td");
+
+                if (persistheader.length <= 0) {
+                    persistheader = $("table.persist-area thead.persist-header tr th");
+                }
+
+                if (floatingheader.length <= 0) {
+                    floatingheader = $("table.persist-area thead.floatingHeader tr th");
+                }
+
+                persistheader.each(function () {
+                    var x = $(this).width();
+                    $(floatingheader[i]).width(x);
+                    i++;
+                });
+            }
         }
     };
 
@@ -263,6 +311,7 @@
 $(document).ready(function () {
     Logs.init();
     Logs.bindEventHandlers();
+    Logs.initFreeHeader();
 
     $('.logMessage').live('click', function () {
         var logId = $(this).attr("logid");

@@ -42,6 +42,12 @@
     <Reference Include="Accessibility">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="BundleTransformer.Core">
+      <HintPath>..\packages\BundleTransformer.Core.1.7.27\lib\net40\BundleTransformer.Core.dll</HintPath>
+    </Reference>
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.3.0.5\lib\dotless.Core.dll</HintPath>
     </Reference>
@@ -130,6 +136,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -183,10 +192,14 @@
     <Reference Include="UMControllerLibrary">
       <HintPath>..\_Dependencies\Others\UMControllerLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
     <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\UserLogin\Controllers\BaseController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
@@ -283,6 +296,19 @@
     <Content Include="scripts\Mail\AddMailConfig.js" />
     <Content Include="scripts\Mail\MailList.js" />
     <Content Include="scripts\Maintenance.js" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\.gitignore" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\css\bootstrap-2.3.2.min.css" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\css\bootstrap-multiselect.css" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\css\prettify.css" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\img\glyphicons-halflings-white.png" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\img\glyphicons-halflings.png" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\index.html" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\js\bootstrap-2.3.2.min.js" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\js\bootstrap-multiselect.js" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\js\jquery-2.0.1.min.js" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\js\knockout-2.3.0.js" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\js\prettify.js" />
+    <Content Include="scripts\Plugin\bootstrap-multiselect\knockout-examples.html" />
     <Content Include="scripts\Plugin\Fanex.Grid\Fanex.Grid.Convert.js" />
     <Content Include="scripts\Plugin\Fanex.Grid\Fanex.Grid.css" />
     <Content Include="scripts\Plugin\Fanex.Grid\Fanex.Grid.js" />
@@ -1556,6 +1582,8 @@
     <Content Include="Configurations\MailSection.config" />
     <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
     <Content Include="Areas\UserLogin\Views\Common\Offline.cshtml" />
+    <None Include="scripts\Plugin\bootstrap-multiselect\less\bootstrap-multiselect.less" />
+    <None Include="scripts\Plugin\bootstrap-multiselect\README.md" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\autocomplete\search.php" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\tabs\ajax\content3-slow.php" />
     <None Include="scripts\Plugin\jquery-ui-1.8.23.custom\development-bundle\demos\tabs\ajax\content4-broken.php" />

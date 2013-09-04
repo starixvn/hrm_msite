@@ -33,12 +33,21 @@
                             linkSendFail = "<a href='#' class='errormail' data-mailid='" + value.MailID + "'>" + value.SentFail + "</a>";
                         }
 
+                        var linkResend = "<a href='#' class='resendmail " + classFail + "' data-mailid='" + value.MailID + "'>Resend</a>";
+                        if (value.IsEncrypt || result.HasResend == "0") {
+                            linkResend = "";
+                        }
+
+                        var linkViewDetail = value.Subject;
+                        if (result.HasViewDetail == "1") {
+                            linkViewDetail = "<a href='#' class='emailMessage' data-mailid='" + value.MailID + "'>" + value.Subject + "</a>";
+                        }
 
                         bodyData.push({
                             Columns:
                         [
                             { Name: "No", Value: pageSize * (index - 1) + count++ },
-                            { Name: "Subject", Value: "<a href='#' class='emailMessage' data-mailid='" + value.MailID + "'>" + value.Subject + "</a>" },
+                            { Name: "Subject", Value: linkViewDetail },
                             { Name: "ApplicationName", Value: value.Config.AppName },
                             { Name: "MailTo", Value: value.MailTo.split(',').join('<br/>') },
                             //                            { Name: "MailCc", Value: "" },
@@ -46,7 +55,7 @@
                             { Name: "LatestSendDate", Value: value.MailUpdatedDate },
                             { Name: "SendSuccess", Value: value.SentSuccess },
                             { Name: "SendFail", Value: linkSendFail },
-                            { Name: "Resend", Value: "<a href='#' class='resendmail " + classFail + "' data-mailid='" + value.MailID + "'>Resend</a>" }
+                            { Name: "Resend", Value: linkResend }
                         ],
                             CssClass: value.SentSuccess == 0 ? "mailfail" : ""
                         });

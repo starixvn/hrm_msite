@@ -1,10 +1,19 @@
-﻿namespace Fanex.Maintenance.Site
+﻿// --------------------------------------------------------------------------
+// <copyright file="Global.asax.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2013.8.30">Created</change>
+// </history>
+
+namespace Fanex.Maintenance.Site
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
+    using System.Web.Optimization;
     using System.Web.Routing;
-    using Fanex.Maintenance.Controller.Worker;
-    using Fanex.Maintenance.Core.Web;
+    using Fanex.Maintenance.Site.App_Start;
     using Microsoft.AspNet.SignalR;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode,
@@ -21,6 +30,7 @@
             //WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
 

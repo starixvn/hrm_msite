@@ -19,6 +19,10 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.MailService;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.Core.Business;
 
     /// <summary>
     /// Mail Controller
@@ -33,6 +37,8 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         private readonly IMailService _mailServer;
 
+        private readonly IUserService _userService;
+
         #endregion
 
         #region Ctor
@@ -41,7 +47,7 @@ namespace Fanex.Maintenance.Controller
         /// Mail Service Parameter less controller
         /// </summary>
         public MailController()
-            : this(null)
+            : this(null, null)
         {
         }
 
@@ -49,9 +55,10 @@ namespace Fanex.Maintenance.Controller
         /// Mail Controller
         /// </summary>
         /// <param name="mailService"></param>
-        public MailController(IMailService mailService)
+        public MailController(IMailService mailService, IUserService userService)
         {
             this._mailServer = mailService ?? MailService.Create();
+            this._userService = userService ?? new UserService();
         }
 
         #endregion
@@ -626,6 +633,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="mailId"></param>
         /// <returns></returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ResendMail, Policy = Constant.Policy.Host)]
         public ActionResult ResendMail(int mailId)
         {
             if (Request.IsAjaxRequest())
@@ -643,6 +651,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="mailId"></param>
         /// <returns></returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailDetails, Policy = Constant.Policy.Read)]
         public ActionResult GetMessage(int mailId)
         {
             if (Request.IsAjaxRequest())
@@ -698,9 +707,14 @@ namespace Fanex.Maintenance.Controller
                 .WithStatus(status)
                 .GetListMailByDate(ref totalRows);
 
+            var policyViewDetail = _userService.GetUserSiteFunctionKeyPolicy(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ViewMailDetails);
+            var policyResend = _userService.GetUserSiteFunctionKeyPolicy(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ResendMail);
+
             return Json(new
             {
                 TotalRows = totalRows,
+                HasViewDetail = policyViewDetail,
+                HasResend = policyResend,
                 ListMail = listMail
             });
         }
