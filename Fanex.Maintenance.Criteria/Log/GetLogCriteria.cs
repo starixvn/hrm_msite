@@ -39,6 +39,9 @@ namespace Fanex.Maintenance.Criteria.Log
 
         public int TotalRows { get; set; }
 
+        [SpParam(Ignored = true)]
+        public bool GroupMessage { get; set; }
+
         public override bool IsValid()
         {
             return true;

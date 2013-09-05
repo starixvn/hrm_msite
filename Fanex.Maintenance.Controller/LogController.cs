@@ -268,16 +268,43 @@ namespace Fanex.Maintenance.Controller
             InitDataView();
 
             InitPageSize();
-                       
+
             var totalRows = 0;
 
             ////Get logs by date
-            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.MachineId, 
+            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.MachineId,
                                                          criteria.IsProduction, criteria.IsMonitored, criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)
                 .WithPagination(criteria.Page, criteria.Size)
                 .GetLogs(ref totalRows);
+
+            if (criteria.GroupMessage)
+            {
+                var listGroup = listLogs.GroupBy(m => m.Message);
+
+                var listLogGroup = new List<Log>();
+
+                foreach (var itemGroup in listGroup)
+                {
+                    var tempGroup = itemGroup.FirstOrDefault();
+                    tempGroup.GroupMessageIds = tempGroup.LogId + ";";
+                    tempGroup.CountGroupMessage = 1;
+                    foreach (var item in itemGroup)
+                    {
+                        tempGroup.GroupMessageIds += item.LogId + ";";
+                        tempGroup.CountGroupMessage += 1;
+                    }
+
+                    listLogGroup.Add(tempGroup);
+                }
+
+                return Json(new
+                {
+                    TotalRows = totalRows - (listLogs.Count() - listGroup.Count()),
+                    ListLog = listLogGroup
+                });
+            }
 
             return Json(new
             {
@@ -330,7 +357,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="isMonitored"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult MonitorLog(long logId, bool isMonitored)
+        public ActionResult MonitorLog(string logId, bool isMonitored)
         {
             string updatedUsername = string.Empty;
 

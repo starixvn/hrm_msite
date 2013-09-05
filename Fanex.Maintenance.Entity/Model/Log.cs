@@ -68,5 +68,9 @@ namespace Fanex.Maintenance.Entity.Model
                 return this.TimeStamp.ToString("MMM dd,yyyy hh:mm:ss tt");
             }
         }
+
+        public string GroupMessageIds { get; set; }
+
+        public int CountGroupMessage { get; set; }
     }
 }

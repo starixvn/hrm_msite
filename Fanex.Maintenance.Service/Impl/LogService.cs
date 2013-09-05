@@ -214,7 +214,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <param name="monitoringUserId"></param>
         /// <param name="isMonitored"></param>
         /// <returns></returns>
-        public int MonitorLog(long logId, int? monitoringUserId, bool isMonitored)
+        public int MonitorLog(string logId, int? monitoringUserId, bool isMonitored)
         {
             return _logRepository.MonitorLog(logId, monitoringUserId, isMonitored);
         }

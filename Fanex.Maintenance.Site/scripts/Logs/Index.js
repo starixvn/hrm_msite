@@ -8,6 +8,7 @@
         dpkFrom: null,
         btnRemoveLog: null,
         btnSubmit: null,
+        chbGroupMessage: null,
 
         init: function () {
             Logs.ddlCategory = $('#CategoryId');
@@ -17,6 +18,7 @@
             Logs.dpkFrom = $('#From');
             Logs.btnRemoveLog = $("#btnRemoveLog");
             Logs.btnSubmit = $('#submit');
+            Logs.chbGroupMessage = $('#GroupMessage');
         },
         generateData: function (pageSize, index) {
             var categoryId = Logs.ddlCategory.val();
@@ -49,7 +51,8 @@
                     To: to,
                     IsProduction: isProduction,
                     Page: index,
-                    Size: pageSize
+                    Size: pageSize,
+                    GroupMessage: Logs.chbGroupMessage.is(":checked")
                 },
                 type: 'POST',
                 dataType: 'JSON',
@@ -63,16 +66,21 @@
                 success: function (result) {
                     var data = eval(result.ListLog);
                     var count = 1;
-
+                    $('#content').html('');
                     $.each(data, function (key, value) {
+
+                        var countMessage = "";
+                        if (value.CountGroupMessage > 0) {
+                            countMessage = "<div>(" + value.CountGroupMessage + " Message)</div>";
+                        }
 
                         var content = "<tr><td>"
                         + (pageSize * (index - 1) + count++) + "</td><td>"
-                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" + "</td><td>"
-                        + value.Category[0].CategoryName + "</td><td>"
-                        + value.Severity + "</td><td>"
-                        + value.MachineName + "</td><td>"
-                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + "</td><td>"
+                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" + "</td><td class='align-center'>"
+                        + value.Category[0].CategoryName + "</td><td class='align-center'>"
+                        + value.Severity + "</td><td class='align-center'>"
+                        + value.MachineName + "</td><td class='align-center'>"
+                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td><td class='align-center'>"
                         + value.LogDate + "</td></tr>";
 
                         $('#content').append(content);
@@ -146,7 +154,7 @@
             $this.prop('checked', !isMonitored).change();
 
             NAP.headlineMsgBox.confirm('Are you sure that this log is being handled', function () {
-                var logId = $this.attr('data-logId');
+                var logId = $this.attr('data-logIds');
 
                 $.ajax({
                     type: "POST",
@@ -159,10 +167,7 @@
                         NAP.loadingBox.close();
                     },
                     success: function (data) {
-                        var monitoringUser = $('#monitoringUser' + logId);
-                        $this.hide();
-                        if (monitoringUser)
-                            monitoringUser.text(data);
+                        $('#submit').click();
                     },
                     error: function (xhr, status, err) {
                         NAP.handleAjaxError(xhr, status, err);
@@ -241,7 +246,7 @@
         },
 
         initFreeHeader: function () {
-           
+
             var clonedHeaderRow;
             $(".persist-area").each(function () {
                 clonedHeaderRow = $(".persist-header", this);
@@ -275,7 +280,8 @@
                         floatingHeader.css({
                             "visibility": "visible",
                             "left": (left - $(window).scrollLeft()),
-                            "z-index": "34"
+                            "z-index": "34",
+                            "margin-left": "10px"
                         });
                     } else {
                         floatingHeader.css({

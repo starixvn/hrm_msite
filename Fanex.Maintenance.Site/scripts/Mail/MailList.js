@@ -48,7 +48,7 @@
                         [
                             { Name: "No", Value: pageSize * (index - 1) + count++ },
                             { Name: "Subject", Value: linkViewDetail },
-                            { Name: "ApplicationName", Value: value.Config.AppName },
+                            { Name: "ApplicationName", Value: '<span title="' + value.Config.Setting.SettingName + '">' + value.Config.AppName + '</span>' },
                             { Name: "MailTo", Value: value.MailTo.split(',').join('<br/>') },
                             //                            { Name: "MailCc", Value: "" },
                             {Name: "CreatedDate", Value: value.MailDate },
@@ -64,8 +64,8 @@
                     var gridOption = {
                         columns: [
                             { HeaderText: "#", Width: 35, Name: "No", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Subject", Width: 350, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
-                            { HeaderText: "Application Name", Width: 100, Name: "ApplicationName", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Subject", Width: 380, Name: "Subject", HeaderAlign: "center", CellAlign: "left" },
+                            { HeaderText: "Application", Width: 100, Name: "ApplicationName", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Mail To", Width: 250, Name: "MailTo", HeaderAlign: "center", CellAlign: "left" },
                         //                            { HeaderText: "Mail Cc", Width: 100, Name: "MailCc", HeaderAlign: "center", CellAlign: "left" },
                             {HeaderText: "Created Date", Width: 130, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center" },
@@ -85,7 +85,7 @@
                             startPerPage: 50,
                             pagerSelectCallBack: MailList.reRenderAfterPaged
                         },
-                        gridExpandHeight: 230
+                        gridExpandHeight: 260
                     };
 
                     $("#gridId").fanexGrid(gridOption);

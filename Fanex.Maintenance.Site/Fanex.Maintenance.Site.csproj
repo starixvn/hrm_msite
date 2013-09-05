@@ -1344,6 +1344,7 @@
     <Content Include="scripts\Plugin\jquery-ui-1.9.1.custom\js\jquery-1.8.2.js" />
     <Content Include="scripts\Plugin\jquery-ui-1.9.1.custom\js\jquery-ui-1.9.1.custom.js" />
     <Content Include="scripts\Plugin\jquery-ui-1.9.1.custom\js\jquery-ui-1.9.1.custom.min.js" />
+    <Content Include="scripts\Plugin\jquery.cookie.js" />
     <Content Include="scripts\Plugin\jquery.treeview\images\ajax-loader.gif" />
     <Content Include="scripts\Plugin\jquery.treeview\images\file.gif" />
     <Content Include="scripts\Plugin\jquery.treeview\images\folder-closed.gif" />
@@ -1372,6 +1373,7 @@
     <Content Include="scripts\Plugin\notification\jquery.bt.js" />
     <Content Include="scripts\Plugin\notification\jquery.toastmessage.css" />
     <Content Include="scripts\Plugin\notification\jquery.toastmessage.js" />
+    <Content Include="scripts\Plugin\RefreshCountDown.js" />
     <Content Include="scripts\Plugin\Select2\select2-custom.css" />
     <Content Include="scripts\Plugin\Select2\select2-spinner.gif" />
     <Content Include="scripts\Plugin\Select2\select2.css" />
@@ -1481,6 +1483,12 @@
     <Content Include="themes\job\img\actions\dd\stop.png" />
     <Content Include="themes\job\img\actions\dd\viewlog.png" />
     <Content Include="themes\job\img\actions\tick-ico-16.png" />
+    <Content Include="themes\job\img\btLoading.gif" />
+    <Content Include="themes\job\img\btnCountDown-hover.png" />
+    <Content Include="themes\job\img\btnCountDown.png" />
+    <Content Include="themes\job\img\btRefresh.png" />
+    <Content Include="themes\job\img\btRefresh_new.png" />
+    <Content Include="themes\job\img\btRefresh_new_disabled.png" />
     <Content Include="themes\job\img\minus.png" />
     <Content Include="themes\job\img\plus.png" />
     <Content Include="themes\job\img\tick.png" />
@@ -1767,6 +1775,7 @@
     <Content Include="Views\Machine\Index.cshtml" />
     <Content Include="Views\Machine\EditMachine.cshtml" />
     <Content Include="Views\Machine\InsertMachine.cshtml" />
+    <None Include="themes\job\RefreshCountDown.less" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
