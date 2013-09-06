@@ -20,6 +20,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.Log;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
+    using System.Configuration;
 
     /// <summary>
     /// Log Controller
@@ -281,12 +282,13 @@ namespace Fanex.Maintenance.Controller
 
             if (criteria.GroupMessage)
             {
-                var listGroup = listLogs.GroupBy(m => m.Message);
+                var listGroup = listLogs.GroupBy(m => new { m.Message, m.Severity, m.MachineName, m.TimeGroup, m.CategoryName });
 
                 var listLogGroup = new List<Log>();
 
                 foreach (var itemGroup in listGroup)
                 {
+                    var countMonitored = 0;
                     var tempGroup = itemGroup.FirstOrDefault();
                     tempGroup.GroupMessageIds = tempGroup.LogId + ";";
                     tempGroup.CountGroupMessage = 1;
@@ -294,7 +296,14 @@ namespace Fanex.Maintenance.Controller
                     {
                         tempGroup.GroupMessageIds += item.LogId + ";";
                         tempGroup.CountGroupMessage += 1;
+
+                        if (!item.IsMonitored)
+                        {
+                            countMonitored++;
+                        }
                     }
+
+                    tempGroup.IsMonitored = countMonitored > 0 ? false : tempGroup.IsMonitored;
 
                     listLogGroup.Add(tempGroup);
                 }

@@ -95,6 +95,9 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/scripts/lib/custom-datepicker.js",
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.js"));
 
+            bundles.Add(new ScriptBundle("~/scripts/recheckin").Include(
+              "~/Areas/UserLogin/scripts/ReCheckIn.js"));
+
             #endregion js
 
             bundles.FileSetOrderList.Clear();
