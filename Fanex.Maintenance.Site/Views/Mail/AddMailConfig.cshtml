@@ -9,8 +9,7 @@
     bool success = ViewBag.Success != null && ViewBag.Success;    
 }
 @section Head {
-    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
-    <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
+    @Styles.Render("~/css/manage")
     <script type="text/x-jsrender" id="templateMailSetting">
         <option value="{{:SettingID}}">{{:SettingName}}</option>
     </script>
@@ -62,7 +61,7 @@
                 </div>
             </div>
         </div>
-          <div class="form-row">
+        <div class="form-row">
             <div class="lbl-field">
                 @Html.LabelFor(m => m.MailFrom)
             </div>
@@ -85,7 +84,7 @@
 }
 @section Foot
 {
-    <script src="~/scripts/Mail/AddMailConfig.js" type="text/javascript"></script>
+    @Scripts.Render("~/scripts/add-mail-config")
     <script type="text/javascript">
         $(function () {
             $('input[type=reset]').bind('click', function () {

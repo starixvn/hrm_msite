@@ -13,15 +13,7 @@
     <title>@ViewBag.Title</title>
     <meta http-equiv="cleartype" content="on" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    @Styles.Render("~/css/commond")
-    <script src="~/scripts/lib/jquery-1.8.0.min.js" type="text/javascript"></script>
-    <script src="~/scripts/lib/modernizr-2.6.1.js" type="text/javascript"></script>
-    <script src="~/themes/assets/js/prettify.min.js" type="text/javascript"></script>
-    <script src="~/themes/assets/js/underscore.min.js" type="text/javascript"></script>
-    @*<script src="~/scripts/Plugin/notification/jquery.toastmessage.js" type="text/javascript"></script>
-    <script src="~/scripts/lib/jquery.signalR-1.0.0-rc1.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="~/signalr/hubs"></script>
-    <script src="~/scripts/NotificationHub.js" type="text/javascript"></script>*@
+    @Styles.Render("~/css/common")
     @if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)
     { 
         <script src="~/Areas/UserLogin/scripts/ReCheckIn.js" type="text/javascript"></script>
@@ -109,15 +101,5 @@
 </body>
 </html>
 @Html.Hidden("NapAdminRoot", Url.Content("~/"))
-<script src="~/scripts/lib/jquery-ui-1.8.23.min.js" type="text/javascript"></script>
-<script src="~/scripts/lib/jquery.validate.min.js" type="text/javascript"></script>
-<script src="~/scripts/lib/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
-<script src="~/scripts/lib/tipsy/tipsy-1.0.0.min.js" type="text/javascript"></script>
-<script src="~/scripts/lib/msgbox/msgbox-0.0.1.min.js" type="text/javascript"></script>
-<script src="~/scripts/Maintenance.js" type="text/javascript"></script>
-<script src="~/scripts/_Layout.js" type="text/javascript"></script>
-<link href="~/scripts/lib/chosen/chosen.css" rel="stylesheet" type="text/css" />
-<script src="~/scripts/lib/chosen/chosen.jquery.js" type="text/javascript"></script>
-<script src="~/scripts/Plugin/Fanex.Grid/Fanex.Grid.js" type="text/javascript"></script>
-<script src="~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.js" type="text/javascript"></script>
+@Scripts.Render("~/scripts/common")
 @RenderSection("Foot", false)

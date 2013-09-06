@@ -18,7 +18,7 @@ namespace Fanex.Maintenance.Core.Configurations
     public class DatabaseServersSection : ConfigurationSection
     {
         /// <summary>
-        /// List Server
+        /// Gets List Server
         /// </summary>
         [ConfigurationProperty("servers", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(ServerCollection),
@@ -34,7 +34,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// List Server ForGet Resource
+        /// Gets List Server ForGet Resource
         /// </summary>
         [ConfigurationProperty("resourceservers", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(ServerCollection),
@@ -50,7 +50,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Create static instance for reference
+        /// Gets create static instance for reference
         /// </summary>
         public static DatabaseServersSection Instance
         {
@@ -108,7 +108,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Create New Element
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return Configuration Element</returns>
         protected override ConfigurationElement CreateNewElement()
         {
             return new ServerElement();
@@ -118,7 +118,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// Get Element Key
         /// </summary>
         /// <param name="element"></param>
-        /// <returns></returns>
+        /// <returns>Return object</returns>
         protected override object GetElementKey(ConfigurationElement element)
         {
             return ((ServerElement)element).ServerIp + ((ServerElement)element).ServerName + ((ServerElement)element).ConnectionString;
@@ -222,7 +222,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Sql Server Agent Status
+        /// Server Agent Status
         /// </summary>
         /// These property below not in config file
         public int SqlServerAgentStatus { get; set; }

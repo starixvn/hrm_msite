@@ -192,3 +192,36 @@ a:link, a:visited {
 .selected-message{
 	background: #FFFFDB;
 }
+
+.floatingHeader 
+        {
+	        z-index: 20;
+	        position: fixed;
+	        top: 0;
+	        border-bottom: 1px solid #b7c7cf;
+	        left: 0 !important;
+        }
+        
+        /* FIX IE */
+        .eq-ie8 .floatingHeader {
+	        top: -10px;
+	        left: 11px !important;
+        }
+
+        .eq-ie7 {
+	        #box_header .editor, .box_header .editor {
+
+		        INPUT[type=text] {
+			        height: 12px;
+		        }
+
+		         INPUT[type=button], INPUT[type=submit] {
+			        height: 20px;
+			        padding-top: 1px;
+		        }
+	        }
+
+	        thead.floatingHeader {
+		        display: none;
+	        }
+        }

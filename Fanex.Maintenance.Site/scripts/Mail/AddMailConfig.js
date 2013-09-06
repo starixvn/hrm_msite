@@ -1,4 +1,4 @@
-﻿var AddMailConfigPopUp = function ($) {
+﻿var AddMailConfig = function ($) {
 
     return {
 

@@ -9,7 +9,7 @@
     bool success = ViewBag.Success != null && ViewBag.Success;    
 }
 @section Head {
-    <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/css/manage")
 }
 @section Headline {
     <h1>
@@ -33,7 +33,7 @@
                 @Html.LabelFor(m => m.AppName)
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.AppName)                
+                @Html.TextBoxFor(m => m.AppName)
             </div>
         </div>
         <div class="form-row">
@@ -41,7 +41,7 @@
                 @Html.LabelFor(m => m.Description)
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.Description)                
+                @Html.TextBoxFor(m => m.Description)
             </div>
         </div>
         <div class="form-row">
@@ -57,7 +57,7 @@
                 @Html.LabelFor(m => m.MailFrom)
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.MailFrom)                
+                @Html.TextBoxFor(m => m.MailFrom)
             </div>
         </div>
         <div class="form-row">

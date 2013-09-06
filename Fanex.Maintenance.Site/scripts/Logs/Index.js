@@ -155,6 +155,9 @@
 
             NAP.headlineMsgBox.confirm('Are you sure that this log is being handled', function () {
                 var logId = $this.attr('data-logIds');
+                if (logId == "null") {
+                    logId = $this.attr('data-logId');
+                }
 
                 $.ajax({
                     type: "POST",

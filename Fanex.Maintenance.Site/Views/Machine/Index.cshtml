@@ -8,24 +8,24 @@
 }
 @section Headline {
     <h1>
-        <span class="title">@ViewResource.AppLogs_MangeMachines</span> 
-        @Html.ActionLink(ViewResource.InsertMachine, "InsertMachine", "Machine", new { @class="lnk" })
+        <span class="title">@ViewResource.AppLogs_MangeMachines</span>
+        @Html.ActionLink("+ Create New", "InsertMachine", "Machine", new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm())
 {
-    <section id="filter-bar">                 
-		<div class="filter-form">	
+    <section id="filter-bar">
+        <div class="filter-form">
             <div class="lbl-field width-auto">
-			    @Html.Label(ViewResource.MachineType)
-		    </div>
-            <div class="edit-field">				
+                @Html.Label(ViewResource.MachineType)
+            </div>
+            <div class="edit-field">
                 @Html.DropDownList("MachineType", (List<SelectListItem>)ViewBag.MachineTypes)
-		    </div>	                                          
+            </div>
             <div class="submit">
-				    <input type="submit" value="@ViewResource.Submit" />                  
-		    </div>                                           
-		</div>  
+                <input type="submit" value="@ViewResource.Submit" />
+            </div>
+        </div>
     </section>
 }
 <table class="grid" style="width: 96.8%">
@@ -58,27 +58,32 @@
                 {
                     string row_class = i % 2 == 0 ? "alt" : string.Empty;
 					
-                    <tr class="@row_class">
-                        <td class="align-center">@i</td>
-                        <td>@machine.MachineName</td>
-                        <td class="align-center">GMT (@(machine.TimeZone > 0 ? "+" + machine.TimeZone : machine.TimeZone.ToString()))</td>
-                        <td>@(machine.IsProduction ? Html.Raw("<span class='btn-check'/>") : Html.Raw(string.Empty))</td>
-                        <td class="align-center">
-                            <div class="action-wrp">
-                                @Html.ActionLink("Machine", "EditMachine", new { id = machine.MachineId }, new { @class = "btn-edit" })
-                            </div>
-                        </td>
-                    </tr>
-                    i++;               
+            <tr class="@row_class">
+                <td class="align-center">@i
+                </td>
+                <td>@machine.MachineName
+                </td>
+                <td class="align-center">
+                    GMT (@(machine.TimeZone > 0 ? "+" + machine.TimeZone : machine.TimeZone.ToString()))
+                </td>
+                <td>@(machine.IsProduction ? Html.Raw("<span class='btn-check'/>") : Html.Raw(string.Empty))
+                </td>
+                <td class="align-center">
+                    <div class="action-wrp">
+                        @Html.ActionLink("Machine", "EditMachine", new { id = machine.MachineId }, new { @class = "btn-edit" })
+                    </div>
+                </td>
+            </tr>
+                    i++;
                 }
             }
             else
             {
-                <tr>
-                    <td colspan="5">
-                        @ViewResource.NoInformationAvailable
-                    </td>
-                </tr>
+            <tr>
+                <td colspan="5">
+                    @ViewResource.NoInformationAvailable
+                </td>
+            </tr>
             }
         }
     </tbody>

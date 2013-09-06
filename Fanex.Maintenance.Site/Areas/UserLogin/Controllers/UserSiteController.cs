@@ -1,10 +1,10 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GroupController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="UserSiteController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Edward.Nguyen" date="2012.8.28">Add properties _currentContext</change>
+//   <change who="Edward.Nguyen" date="2013.9.6">Created</change>
 // </history>
 
 namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
@@ -18,7 +18,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Session;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// User site controller.
+    /// </summary>
     public class UserSiteController : BaseController
     {
         #region members
@@ -47,6 +49,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         #region actions
 
+        /// <summary>
+        /// Get sites.
+        /// </summary>
+        /// <returns>Return view site list.</returns>
         public ActionResult Site()
         {
             if (HttpContext.User.Identity.IsAuthenticated && _currentSession.UserId > 0)
@@ -62,6 +68,11 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             return RedirectToAction("logout", "login");
         }
 
+        /// <summary>
+        /// SSO to selected sites.
+        /// </summary>
+        /// <param name="id">Site url id.</param>
+        /// <returns>Redirect to site.</returns>
         [HttpGet]
         public ActionResult Forward(string id)
         {
@@ -71,7 +82,8 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             string time = _userService.UserSSOGetTime();
 
             return new RedirectResult(
-                string.Format("{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}",
+                string.Format(
+                    "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}",
                     siteUrl.Url.Trim(),
                     Cryptography.CfsEnCrypt(_currentSession.UserId.ToString()),
                     Cryptography.CfsEnCrypt(_currentSession.OnUserId.ToString()),

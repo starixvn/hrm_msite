@@ -21,7 +21,7 @@
             @Html.LabelFor(m => m.AppName)
         </div>
         <div class="edit-field">
-            @Html.TextBoxFor(m => m.AppName)            
+            @Html.TextBoxFor(m => m.AppName)
         </div>
     </div>
     <div class="form-row">
@@ -29,7 +29,7 @@
             @Html.LabelFor(m => m.Description)
         </div>
         <div class="edit-field">
-            @Html.TextBoxFor(m => m.Description)            
+            @Html.TextBoxFor(m => m.Description)
         </div>
     </div>
     <div class="form-row">
@@ -49,4 +49,4 @@
         </div>
     </div>
 </div>
-<script src="~/scripts/Mail/AddMailConfigPopUp.js" type="text/javascript"></script>
+@Scripts.Render("~/scripts/add-mail-config-popup")

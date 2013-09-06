@@ -9,8 +9,7 @@
     bool success = ViewBag.Success != null && ViewBag.Success;    
 }
 @section Head {
-   <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
-    <script src="~/scripts/lib/jsrender.js" type="text/javascript"></script>
+    @Styles.Render("~/css/manage")
     <script type="text/x-jsrender" id="templateMailSetting">
         <option value="{{:SettingID}}">{{:SettingName}}</option>
     </script>
@@ -87,7 +86,7 @@
 }
 @section Foot
 {
-    <script src="/scripts/Mail/AddMailFunction.js" type="text/javascript"></script>
+    @Scripts.Render("~/scripts/add-mail-function")
     <script type="text/javascript">
         $(function () {
             $('input[type=reset]').bind('click', function () {

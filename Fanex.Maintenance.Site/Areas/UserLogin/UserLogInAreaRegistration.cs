@@ -1,18 +1,19 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="UserControlAreaRegistration.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="UserLogInAreaRegistration.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Edward.Nguyen" date="2012.8.28">Add properties _currentContext</change>
+//   <change who="Edward.Nguyen" date="2013.9.6">Created</change>
 // </history>
 
 namespace Fanex.NAP.Hub.Areas.UserLogin
 {
     using System.Web.Mvc;
-    using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// User Login Area.
+    /// </summary>
     public class UserLoginAreaRegistration : AreaRegistration
     {
         public override string AreaName
@@ -23,6 +24,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin
             }
         }
 
+        /// <summary>
+        /// Register Area.
+        /// </summary>
+        /// <param name="context">Area Registration Context.</param>
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
