@@ -96,14 +96,14 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <param name="monitoringUserId"></param>
         /// <param name="isMonitored"></param>
         /// <returns></returns>
-        public int MonitorLog(string logId, int? monitoringUserId, bool isMonitored)
+        public int MonitorLog(int logId, int? monitoringUserId, bool isMonitored)
         {
             int row = 0;
             try
             {
                 using (ObjectDb db = new ObjectDb("Logging_Monitor"))
                 {
-                    row = db.ExecuteNonQuery(new { LogIds = logId, @MonitoringUserId = monitoringUserId, IsMonitored = isMonitored });
+                    row = db.ExecuteNonQuery(new { LogId = logId, @MonitoringUserId = monitoringUserId, IsMonitored = isMonitored });
                 }
             }
             catch (Exception e)

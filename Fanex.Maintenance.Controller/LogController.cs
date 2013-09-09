@@ -280,40 +280,40 @@ namespace Fanex.Maintenance.Controller
                 .WithPagination(criteria.Page, criteria.Size)
                 .GetLogs(ref totalRows);
 
-            if (criteria.GroupMessage)
-            {
-                var listGroup = listLogs.GroupBy(m => new { m.Message, m.Severity, m.MachineName, m.TimeGroup, m.CategoryName });
+            //if (criteria.GroupMessage)
+            //{
+            //    var listGroup = listLogs.GroupBy(m => new { m.Message, m.Severity, m.MachineName, m.TimeGroup, m.CategoryName });
 
-                var listLogGroup = new List<Log>();
+            //    var listLogGroup = new List<Log>();
 
-                foreach (var itemGroup in listGroup)
-                {
-                    var countMonitored = 0;
-                    var tempGroup = itemGroup.FirstOrDefault();
-                    tempGroup.GroupMessageIds = tempGroup.LogId + ";";
-                    tempGroup.CountGroupMessage = 1;
-                    foreach (var item in itemGroup)
-                    {
-                        tempGroup.GroupMessageIds += item.LogId + ";";
-                        tempGroup.CountGroupMessage += 1;
+            //    foreach (var itemGroup in listGroup)
+            //    {
+            //        var countMonitored = 0;
+            //        var tempGroup = itemGroup.FirstOrDefault();
+            //        tempGroup.GroupMessageIds = tempGroup.LogId + ";";
+            //        tempGroup.CountGroupMessage = 1;
+            //        foreach (var item in itemGroup)
+            //        {
+            //            tempGroup.GroupMessageIds += item.LogId + ";";
+            //            tempGroup.CountGroupMessage += 1;
 
-                        if (!item.IsMonitored)
-                        {
-                            countMonitored++;
-                        }
-                    }
+            //            if (!item.IsMonitored)
+            //            {
+            //                countMonitored++;
+            //            }
+            //        }
 
-                    tempGroup.IsMonitored = countMonitored > 0 ? false : tempGroup.IsMonitored;
+            //        tempGroup.IsMonitored = countMonitored > 0 ? false : tempGroup.IsMonitored;
 
-                    listLogGroup.Add(tempGroup);
-                }
+            //        listLogGroup.Add(tempGroup);
+            //    }
 
-                return Json(new
-                {
-                    TotalRows = totalRows - (listLogs.Count() - listGroup.Count()),
-                    ListLog = listLogGroup
-                });
-            }
+            //    return Json(new
+            //    {
+            //        TotalRows = totalRows,
+            //        ListLog = listLogGroup
+            //    });
+            //}
 
             return Json(new
             {
@@ -366,7 +366,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="isMonitored"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult MonitorLog(string logId, bool isMonitored)
+        public ActionResult MonitorLog(int logId, bool isMonitored)
         {
             string updatedUsername = string.Empty;
 

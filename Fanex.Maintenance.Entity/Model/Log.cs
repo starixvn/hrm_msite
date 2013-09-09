@@ -71,26 +71,6 @@ namespace Fanex.Maintenance.Entity.Model
 
         public string GroupMessageIds { get; set; }
 
-        public int CountGroupMessage { get; set; }
-
-        public string TimeGroup
-        {
-            get
-            {
-                var timeStamp = this.TimeStamp;
-
-                var time = timeStamp.ToString("dd/MM/yyyy HH");
-
-                return "";
-            }
-        }
-
-        public string CategoryName
-        {
-            get
-            {
-                return this.Category[0].CategoryName;
-            }
-        }
+        public int NumMessage { get; set; }
     }
 }

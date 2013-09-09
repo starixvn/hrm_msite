@@ -52,7 +52,7 @@
                     IsProduction: isProduction,
                     Page: index,
                     Size: pageSize,
-                    GroupMessage: Logs.chbGroupMessage.is(":checked")
+                    GroupMessage: true
                 },
                 type: 'POST',
                 dataType: 'JSON',
@@ -70,18 +70,26 @@
                     $.each(data, function (key, value) {
 
                         var countMessage = "";
-                        if (value.CountGroupMessage > 0) {
-                            countMessage = "<div>(" + value.CountGroupMessage + " Message)</div>";
+                        if (value.NumMessage > 0) {
+                            countMessage = "<div>(" + value.NumMessage + " Message)</div>";
                         }
 
+                        //                        var content = "<tr><td>"
+                        //                        + (pageSize * (index - 1) + count++) + "</td><td>"
+                        //                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" + "</td><td class='align-center'>"
+                        //                        + value.Category[0].CategoryName + "</td><td class='align-center'>"
+                        //                        + value.Severity + "</td><td class='align-center'>"
+                        //                        + value.MachineName + "</td><td class='align-center'>"
+                        //                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td><td class='align-center'>"
+                        //                        + value.LogDate + "</td></tr>";
+
+                        var logInfo = "<span class='loginfo'>CATEGORY : " + value.Category[0].CategoryName + " | SEVERITY : " + value.Severity + " | MACHINE : " + value.MachineName + "</span>";
+                        var timeInfo = "<span class='timeinfo'>" + value.LogDate + "</span><br/>";
                         var content = "<tr><td>"
                         + (pageSize * (index - 1) + count++) + "</td><td>"
-                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" + "</td><td class='align-center'>"
-                        + value.Category[0].CategoryName + "</td><td class='align-center'>"
-                        + value.Severity + "</td><td class='align-center'>"
-                        + value.MachineName + "</td><td class='align-center'>"
-                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td><td class='align-center'>"
-                        + value.LogDate + "</td></tr>";
+                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + logInfo + timeInfo + value.Message.substring(0, 500) + "</div>" + "</td>"
+                        + "<td class='align-center'>"
+                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td></tr>";
 
                         $('#content').append(content);
                     });
@@ -95,7 +103,7 @@
                         itemsPerPageArray: [50, 100, 500],
                         numDisplayEntries: 5,
                         currentPage: index - 1,
-                        numEdgeEntries: 3,
+                        numEdgeEntries: 1,
                         linkTo: "javascript:void(0)",
                         prevText: "&lt;",
                         nextText: "&gt;",
@@ -170,7 +178,10 @@
                         NAP.loadingBox.close();
                     },
                     success: function (data) {
-                        $('#submit').click();
+                        var monitoringUser = $('#monitoringUser' + logId);
+                        $this.hide();
+                        if (monitoringUser)
+                            monitoringUser.text(data);
                     },
                     error: function (xhr, status, err) {
                         NAP.handleAjaxError(xhr, status, err);

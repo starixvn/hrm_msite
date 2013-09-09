@@ -2,9 +2,9 @@
 <Functions>
     <Function Name="Log">
         <Setting Key="Logging_Category_SelAll" SpName="IS_SelLogCategory_ALL" DbName="customer_log"  Plain="1" />
-        <Setting Key="Logging_Sel_Padding" SpName="IS_SelLogPadding_All" DbName="customer_log" Plain="1" />
+        <Setting Key="Logging_Sel_Padding" SpName="IS_SelLogPadding_All_xtest" DbName="customer_log" Plain="1" />
         <Setting Key="Logging_Del" SpName="IS_DeleteLog" DbName="customer_log" Plain="1" />
-        <Setting Key="Logging_Monitor" SpName="Acc_AppLog_MonitorLogUpd" DbName="customer_log" Plain="1" />
+        <Setting Key="Logging_Monitor" SpName="Acc_AppLog_MonitorLogUpd_xtest" DbName="customer_log" Plain="1" />
         <Setting Key="Logging_Machine_SelectAll" SpName="IS_SelLogMachine_ALL" DbName="customer_log"  Plain="1" />
         <Setting Key="Logging_Machine_ByType" SpName="IS_SelLogMachine_ByType" DbName="customer_log"  Plain="1" />
         <Setting Key="Logging_Machine_ById" SpName="IS_SelLogMachine_ById" DbName="customer_log"  Plain="1" />

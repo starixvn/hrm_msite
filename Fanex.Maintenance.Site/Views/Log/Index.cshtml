@@ -25,11 +25,18 @@
                 <div class="edit-field width-180">
                     @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.ListCategory, new { @class = "width-180" })
                 </div>
-                <div class="lbl-field width-70">
+                <div class="lbl-field width-60">
                     @Html.LabelFor(m => m.Severity, ViewResource.Severity)
                 </div>
                 <div class="edit-field width-120">
                     @Html.DropDownListFor(m => m.Severity, (List<SelectListItem>)ViewBag.ListSeverity, new { @class = "width-120" })
+                </div>
+                <div class="lbl-field width-60">
+                    @Html.LabelFor(m => m.MachineId, ViewResource.Machine)
+                </div>
+                <div class="edit-field width-180">
+                    <select id="MachineId" name="MachineId" class="width-180">
+                    </select>
                 </div>
                 <div class="lbl-field width-50">
                     @Html.LabelFor(m => m.From, ViewResource.Date)
@@ -38,33 +45,22 @@
                     @Html.TextBox("From", Model.From.ToString("MMM dd,yyyy"), new { @style = "width:155px;margin-right:5px;", @autocomplete = "off" })
                 </div>
                 <div class="lbl-field width-50">
-                    @Html.CheckBoxFor(m => m.GroupMessage)
-                </div>
-                <div class="lbl-field width-auto">
-                    <label for="GroupMessage">
-                        Group Message (1 Hour)</label>
-                </div>
-            </div>
-            <div class="filter-row">
-                <div class="lbl-field width-60">
-                    @Html.LabelFor(m => m.MachineId, ViewResource.Machine)
-                </div>
-                <div class="edit-field width-180">
-                    <select id="MachineId" name="MachineId" class="width-180">
-                    </select>
-                </div>
-                <div class="lbl-field width-70">
                     @Html.LabelFor(m => m.IsMonitored, ViewResource.Status)
                 </div>
-                <div class="edit-field width-120">
-                    @Html.DropDownListFor(m => m.IsMonitored, (List<SelectListItem>)ViewBag.LogStatus, new { @class = "width-120" })
+                <div class="edit-field width-100">
+                    @Html.DropDownListFor(m => m.IsMonitored, (List<SelectListItem>)ViewBag.LogStatus, new { @class = "width-100" })
                 </div>
+                <div class="submit">
+                    <input type="button" value="@ViewResource.Submit" id="submit" />
+                </div>
+            </div>
+            @*<div class="filter-row">
                 <div class="lbl-field width-50">
                 </div>
                 <div class="submit width-80">
                     <input type="button" value="@ViewResource.Submit" id="submit" />
                 </div>
-            </div>
+            </div>*@
         </div>
     </section>
     @Html.HiddenFor(m => m.Page)   
@@ -77,22 +73,10 @@
                     #
                 </th>
                 <th>
-                    Message
+                    Message (Time GMT+7)
                 </th>
-                <th>
-                    Category
-                </th>
-                <th>
-                    Severity
-                </th>
-                <th>
-                    Server Name
-                </th>
-                <th>
+                <th class="width-100">
                     Handled By
-                </th>
-                <th>
-                    Time (GMT+7)
                 </th>
             </tr>
         </thead>
