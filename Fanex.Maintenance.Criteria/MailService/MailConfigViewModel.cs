@@ -35,12 +35,15 @@ namespace Fanex.Maintenance.Criteria.MailService
             ErrorMessageResourceName = "InvalidNameValidationMsg",
             ErrorMessageResourceType = typeof(ViewResource))]
         public string AppName { get; set; }
-                
+
         [Display(Name = "Description", ResourceType = typeof(ViewResource))]
         public string Description { get; set; }
 
         [Display(Name = "MailFrom", ResourceType = typeof(ViewResource))]
         public string MailFrom { get; set; }
+
+        [Display(Name = "IsEncrypt", ResourceType = typeof(ViewResource))]
+        public bool IsEncrypt { get; set; }
 
         public MailConfigViewModel()
         {
@@ -53,6 +56,7 @@ namespace Fanex.Maintenance.Criteria.MailService
             this.SettingId = mailSetting.Setting.SettingID;
             this.AppId = mailSetting.AppID;
             this.MailFrom = string.IsNullOrEmpty(mailSetting.MailFrom) ? mailSetting.Setting.Username : mailSetting.MailFrom;
+            this.IsEncrypt = mailSetting.IsEncrypt;
         }
 
         public MailConfig GetMailConfig()
@@ -63,6 +67,7 @@ namespace Fanex.Maintenance.Criteria.MailService
                 AppName = this.AppName,
                 Description = this.Description,
                 MailFrom = this.MailFrom,
+                IsEncrypt = this.IsEncrypt,
                 Setting = new MailSetting
                 {
                     SettingID = this.SettingId

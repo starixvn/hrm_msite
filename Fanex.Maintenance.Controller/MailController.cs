@@ -345,6 +345,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(int id = 0)
         {
             var mailSetting = _mailServer.GetSetting(id);
@@ -353,6 +354,9 @@ namespace Fanex.Maintenance.Controller
 
             List<MailConfig> listMailConfig = new List<MailConfig>();
             listMailConfig = _mailServer.GetListConfig(serverIp);
+
+            var policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ApplicationManagement);
+            ViewBag.Policy = policy;
 
             return View(listMailConfig);
         }
@@ -363,12 +367,16 @@ namespace Fanex.Maintenance.Controller
         /// <param name="serverIp"></param>
         /// <returns></returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(string serverIp = "")
         {
             InitDataIpServer(serverIp);
 
             List<MailConfig> listMailConfig = new List<MailConfig>();
             listMailConfig = this._mailServer.GetListConfig(serverIp);
+
+            var policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ApplicationManagement);
+            ViewBag.Policy = policy;
 
             return View(listMailConfig);
         }
@@ -378,6 +386,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig()
         {
             InitDataMailSetting();
@@ -391,6 +400,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig(MailConfigViewModel model)
         {
             InitDataMailSetting();
@@ -425,6 +435,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(int id)
         {
             InitDataMailSetting();
@@ -443,6 +454,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(MailConfigViewModel model)
         {
             InitDataMailSetting();

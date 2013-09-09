@@ -943,6 +943,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Encrypt.
+        /// </summary>
+        public static string IsEncrypt {
+            get {
+                return ResourceManager.GetString("IsEncrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Production.
         /// </summary>
         public static string IsProduction {

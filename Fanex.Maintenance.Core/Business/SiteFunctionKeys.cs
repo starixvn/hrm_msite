@@ -7,7 +7,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 9/4/2013 4:36:42 PM
+// Lasted generated date: 9/9/2013 2:49:39 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -33,6 +33,8 @@ public static class SiteFunctionKeys
     public const string DatabaseServer = "DatabaseServer";
 
     public const string DataIntegrity = "DataIntegrity";
+
+    public const string EncryptApplicationEmail = "EncryptApplicationEmail";
 
     public const string LogManagement = "LogManagement";
 

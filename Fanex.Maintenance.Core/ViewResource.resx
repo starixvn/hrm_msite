@@ -822,4 +822,7 @@
   <data name="Severity" xml:space="preserve">
     <value>Severity</value>
   </data>
+  <data name="IsEncrypt" xml:space="preserve">
+    <value>Is Encrypt</value>
+  </data>
 </root>
