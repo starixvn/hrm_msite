@@ -6,6 +6,7 @@
         ddlSeverity: null,
         ddlStatus: null,
         dpkFrom: null,
+        dpkTo: null,
         btnRemoveLog: null,
         btnSubmit: null,
         chbGroupMessage: null,
@@ -16,6 +17,7 @@
             Logs.ddlSeverity = $('#Severity');
             Logs.ddlStatus = $('#IsMonitored');
             Logs.dpkFrom = $('#From');
+            Logs.dpkTo = $('#To');
             Logs.btnRemoveLog = $("#btnRemoveLog");
             Logs.btnSubmit = $('#submit');
             Logs.chbGroupMessage = $('#GroupMessage');
@@ -24,8 +26,8 @@
             var categoryId = Logs.ddlCategory.val();
             var machineId = Logs.ddlMachine.val();
             var severity = Logs.ddlSeverity.val();
-            var from = Logs.dpkFrom.datepicker('option', 'dateFrom');
-            var to = Logs.dpkFrom.datepicker('option', 'dateTo');
+            var from = Logs.dpkFrom.val();
+            var to = Logs.dpkTo.val();
             var isProduction = null;
             var isMonitored = Logs.ddlStatus.val();
 
@@ -83,15 +85,15 @@
                         //                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td><td class='align-center'>"
                         //                        + value.LogDate + "</td></tr>";
 
-                        var logInfo = "<span class='loginfo'>"
+                        var logInfo = "<div class='loginfo'>"
                             + "<span class='category-info'>Category : <a class='category-filter' href='#' data-categoryid='" + value.Category.CategoryID + "'>" + value.Category.CategoryName + "</a></span>"
                             + "<span class='severity-info'>Severity : <b>" + value.Severity + "</b></span>"
-                            + "<span class='machine-info'>MACHINE : <a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + (value.Machine.IsProduction ? "PRO" : "UAT") + "</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></span>"
+                            + "<span class='machine-info'>Machine : <a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + (value.Machine.IsProduction ? "PRO" : "UAT") + "</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></span>"
                             + "<span class='timeinfo'>Time : <b>" + value.LogDate + "</b></span>"
-                            + "<span class='monitor-info' id='monitoringUser" + value.LogId + "'>Handle : " + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' id='chbMonitor" + value.LogId + "' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />  ") + countMessage + "</span>"
-                        + "</span><br/><br/>";
+                            + "<span class='monitor-info' id='monitoringUser" + value.LogId + "'>Handle : " + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' id='chbMonitor" + value.LogId + "' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />  ") + "</span>"
+                        + "</div>";
 
-                        var content = "<tr><td>"
+                        var content = "<tr><td title='" + value.Message + "'>"
                         + logInfo + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message.substring(0, 300) + "</div>" + "</td></tr>";
 
                         $('#content').append(content);
@@ -290,16 +292,24 @@
             Logs.dpkFrom.datepicker({
                 defaultDate: "+1w",
                 changeMonth: true,
-                numberOfMonths: 2,
+                numberOfMonths: 1,
                 dateFormat: "M dd,yy",
                 showOn: "button",
                 buttonImage: $('#imagePath').val(),
                 buttonText: "From",
-                buttonImageOnly: true,
-                isDateRange: true,
-                dateFrom: new Date(),
-                dateTo: new Date()
+                buttonImageOnly: true
             }).datepicker('init', '#From');
+
+            Logs.dpkTo.datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 1,
+                dateFormat: "M dd,yy",
+                showOn: "button",
+                buttonImage: $('#imagePath').val(),
+                buttonText: "From",
+                buttonImageOnly: true
+            }).datepicker('init', '#To');
         },
 
         initFreeHeader: function () {

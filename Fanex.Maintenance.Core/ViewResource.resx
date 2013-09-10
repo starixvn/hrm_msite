@@ -148,7 +148,7 @@
     <value>Edit</value>
   </data>
   <data name="From" xml:space="preserve">
-    <value>From Date</value>
+    <value>From</value>
   </data>
   <data name="Function_Name" xml:space="preserve">
     <value>Function</value>
@@ -337,7 +337,7 @@
     <value>Status</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value>To Date</value>
+    <value>To</value>
   </data>
   <data name="ScheduleAcEndDate" xml:space="preserve">
     <value>Active End Date</value>

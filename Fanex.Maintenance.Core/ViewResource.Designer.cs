@@ -790,7 +790,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to From Date.
+        ///   Looks up a localized string similar to From.
         /// </summary>
         public static string From {
             get {
@@ -2005,7 +2005,7 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To Date.
+        ///   Looks up a localized string similar to To.
         /// </summary>
         public static string To {
             get {

@@ -43,7 +43,7 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/themes/job/user/manage.less");
 
             bundles.AddAndInclude("~/css/log",
-                "~/themes/job/user/manage.less",
+                "~/themes/job/log/manage.less",
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.css",
                 "~/scripts/Plugin/Select2/select2.css",
                 "~/scripts/Plugin/Select2/select2-custom.css");
