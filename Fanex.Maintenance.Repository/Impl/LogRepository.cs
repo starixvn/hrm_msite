@@ -34,12 +34,12 @@ namespace Fanex.Maintenance.Repository.Impl
                 {
                     var param = criteria.GetSpParams();
 
-                    var list = db.Query<Log, LogCategory, Log>((m, c) =>
+                    var list = db.Query<Log, LogCategory, Machine, Log>((l, c, m) =>
                     {
-                        m.Category = new List<LogCategory>();
-                        m.Category.Add(c);
-                        return m;
-                    }, "CategoryID,CategoryName", param);
+                        l.Category = c;
+                        l.Machine = m;
+                        return l;
+                    }, "CategoryID,MachineId", param);
 
                     criteria.TotalRows = Convert.ToInt32(param["totalrows"]);
 
@@ -96,14 +96,14 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <param name="monitoringUserId"></param>
         /// <param name="isMonitored"></param>
         /// <returns></returns>
-        public int MonitorLog(int logId, int? monitoringUserId, bool isMonitored)
+        public int MonitorLog(string logIds, int? monitoringUserId, bool isMonitored)
         {
             int row = 0;
             try
             {
                 using (ObjectDb db = new ObjectDb("Logging_Monitor"))
                 {
-                    row = db.ExecuteNonQuery(new { LogId = logId, @MonitoringUserId = monitoringUserId, IsMonitored = isMonitored });
+                    row = db.ExecuteNonQuery(new { LogIds = logIds, @MonitoringUserId = monitoringUserId, IsMonitored = isMonitored });
                 }
             }
             catch (Exception e)

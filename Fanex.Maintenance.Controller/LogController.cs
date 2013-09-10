@@ -366,7 +366,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="isMonitored"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult MonitorLog(int logId, bool isMonitored)
+        public ActionResult MonitorLog(string logId, bool isMonitored)
         {
             string updatedUsername = string.Empty;
 

@@ -27,8 +27,6 @@ namespace Fanex.Maintenance.Entity.Model
 
         public DateTime TimeStamp { get; set; }
 
-        public string MachineName { get; set; }
-
         public string AppDomainName { get; set; }
 
         public int Priority { get; set; }
@@ -42,8 +40,6 @@ namespace Fanex.Maintenance.Entity.Model
         public string Win32ThreadId { get; set; }
 
         public string ThreadName { get; set; }
-
-        public List<LogCategory> Category { get; set; }
 
         public string Message { get; set; }
 
@@ -72,5 +68,9 @@ namespace Fanex.Maintenance.Entity.Model
         public string GroupMessageIds { get; set; }
 
         public int NumMessage { get; set; }
+
+        public LogCategory Category { get; set; }
+
+        public Machine Machine { get; set; }
     }
 }

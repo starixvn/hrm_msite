@@ -71,7 +71,7 @@
 
                         var countMessage = "";
                         if (value.NumMessage > 0) {
-                            countMessage = "<div>(" + value.NumMessage + " Message)</div>";
+                            countMessage = " (" + value.NumMessage + " Message)";
                         }
 
                         //                        var content = "<tr><td>"
@@ -83,19 +83,23 @@
                         //                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td><td class='align-center'>"
                         //                        + value.LogDate + "</td></tr>";
 
-                        var logInfo = "<span class='loginfo'>CATEGORY : " + value.Category[0].CategoryName + " | SEVERITY : " + value.Severity + " | MACHINE : " + value.MachineName + "</span>";
-                        var timeInfo = "<span class='timeinfo'>" + value.LogDate + "</span><br/>";
+                        var logInfo = "<span class='loginfo'>"
+                            + "<span class='category-info'>Category : <a class='category-filter' href='#' data-categoryid='" + value.Category.CategoryID + "'>" + value.Category.CategoryName + "</a></span>"
+                            + "<span class='severity-info'>Severity : <b>" + value.Severity + "</b></span>"
+                            + "<span class='machine-info'>MACHINE : <a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + (value.Machine.IsProduction ? "PRO" : "UAT") + "</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></span>"
+                            + "<span class='timeinfo'>Time : <b>" + value.LogDate + "</b></span>"
+                            + "<span class='monitor-info' id='monitoringUser" + value.LogId + "'>Handle : " + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' id='chbMonitor" + value.LogId + "' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />  ") + countMessage + "</span>"
+                        + "</span><br/><br/>";
+
                         var content = "<tr><td>"
-                        + (pageSize * (index - 1) + count++) + "</td><td>"
-                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + logInfo + timeInfo + value.Message.substring(0, 500) + "</div>" + "</td>"
-                        + "<td class='align-center'>"
-                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td></tr>";
+                        + logInfo + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message.substring(0, 300) + "</div>" + "</td></tr>";
 
                         $('#content').append(content);
                     });
 
                     $('.message').on('click', Logs.clickMessage);
                     $('.monitored').on('click', Logs.monitorLog);
+                    $('#chbMonitorAll').on('click', Logs.monitorAllLog);
 
                     $('#pagination').fanexPagination(result.TotalRows, {
                         itemsPerPage: pageSize,
@@ -178,10 +182,10 @@
                         NAP.loadingBox.close();
                     },
                     success: function (data) {
-                        var monitoringUser = $('#monitoringUser' + logId);
-                        $this.hide();
+                        var monitoringUser = $('#chbMonitor' + logId);
+
                         if (monitoringUser)
-                            monitoringUser.text(data);
+                            monitoringUser.replaceWith('<span>' + data + '</span>');
                     },
                     error: function (xhr, status, err) {
                         NAP.handleAjaxError(xhr, status, err);
@@ -189,6 +193,45 @@
                 });
             }, { model: true, closeBtn: false, position: ['top:420', 'center'] });
         },
+
+        monitorAllLog: function () {
+            var $this = $(this);
+            var isMonitored = $this.is(':checked');
+
+            $this.prop('checked', !isMonitored).change();
+
+            NAP.headlineMsgBox.confirm('Are you sure that these logs are being handled', function () {
+                var logids = "";
+                $('.monitored').each(function (index) {
+                    logids += $(this).attr('data-logid') + ",";
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "Log/MonitorLog",
+                    data: { logId: logids, isMonitored: isMonitored },
+                    beforeSend: function () {
+                        NAP.loadingBox.show();
+                    },
+                    complete: function () {
+                        NAP.loadingBox.close();
+                    },
+                    success: function (data) {
+                        $('.monitored').each(function (index) {
+                            var logId = $(this).attr('data-logid');
+                            var monitoringUser = $('#chbMonitor' + logId);
+
+                            if (monitoringUser)
+                                monitoringUser.replaceWith('<span>' + data + '</span>');
+                        });
+                    },
+                    error: function (xhr, status, err) {
+                        NAP.handleAjaxError(xhr, status, err);
+                    }
+                });
+            }, { model: true, closeBtn: false, position: ['top:420', 'center'] });
+        },
+
         getMachinesByType: function (machineType) {
             $.ajax({
                 type: "GET",
@@ -356,6 +399,25 @@ $(document).ready(function () {
                 NAP.handleAjaxError(xhr, status, err);
             }
         });
+    });
+
+    $('.category-filter').live('click', function () {
+        var categoryId = $(this).attr('data-categoryid');
+        $('#CategoryId').select2('val', categoryId);
+        $('#submit').click();
+    });
+
+    $('.machine-filter').live('click', function () {
+        var machineId = $(this).attr('data-machineid');
+        $('#MachineId').select2('val', machineId);
+        $('#submit').click();
+    });
+
+    $('.machinetype-filter').live('click', function () {
+        var isProduction = $(this).attr('data-machinetype');
+        var val = isProduction == "true" ? "Production" : "UAT";
+        $('#MachineId').select2('val', val);
+        $('#submit').click();
     });
 
     Logs.generateData(50, 0);

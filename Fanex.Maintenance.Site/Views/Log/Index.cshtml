@@ -69,15 +69,17 @@
     <table class="grid persist-area">
         <thead class="persist-header">
             <tr>
-                <th>
+                @*<th>
                     #
+                </th>*@
+                <th style="text-align: left;">
+                    <input type="checkbox" id="chbMonitorAll" />
+                    <label for="chbMonitorAll">
+                        Handle all message log</label>
                 </th>
-                <th>
-                    Message (Time GMT+7)
-                </th>
-                <th class="width-100">
+                @*<th class="width-100">
                     Handled By
-                </th>
+                </th>*@
             </tr>
         </thead>
         <tbody id="content">
