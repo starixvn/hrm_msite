@@ -73,28 +73,28 @@
 
                         var countMessage = "";
                         if (value.NumMessage > 0) {
-                            countMessage = " (" + value.NumMessage + " Message)";
+                            countMessage = "<br/>(" + value.NumMessage + " Message)";
                         }
 
-                        //                        var content = "<tr><td>"
-                        //                        + (pageSize * (index - 1) + count++) + "</td><td>"
-                        //                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message + "</div>" + "</td><td class='align-center'>"
-                        //                        + value.Category[0].CategoryName + "</td><td class='align-center'>"
-                        //                        + value.Severity + "</td><td class='align-center'>"
-                        //                        + value.MachineName + "</td><td class='align-center'>"
-                        //                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td><td class='align-center'>"
-                        //                        + value.LogDate + "</td></tr>";
+                        var content = "<tr title='" + value.Message + "'><td>"
+                        + (pageSize * (index - 1) + count++) + "</td><td>"
+                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message.substring(0, 300) + "</div>" + "</td><td class='align-center'>"
+                        + "<a class='category-filter' href='#' data-categoryid='" + value.Category.CategoryID + "'>" + value.Category.CategoryName + "</a></td><td class='align-center'>"
+                        + "<a class='severity-filter " + value.Severity + "' href='#'><b>" + value.Severity + "</b></a></td><td class='align-center'>"
+                        + "<a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></td><td class='align-center'>"
+                        + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td><td class='align-center'>"
+                        + value.LogDate + "</td></tr>";
 
-                        var logInfo = "<div class='loginfo'>"
-                            + "<span class='category-info'>Category : <a class='category-filter' href='#' data-categoryid='" + value.Category.CategoryID + "'>" + value.Category.CategoryName + "</a></span>"
-                            + "<span class='severity-info'>Severity : <b>" + value.Severity + "</b></span>"
-                            + "<span class='machine-info'>Machine : <a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + (value.Machine.IsProduction ? "PRO" : "UAT") + "</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></span>"
-                            + "<span class='timeinfo'>Time : <b>" + value.LogDate + "</b></span>"
-                            + "<span class='monitor-info' id='monitoringUser" + value.LogId + "'>Handle : " + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' id='chbMonitor" + value.LogId + "' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />  ") + "</span>"
-                        + "</div>";
+                        //                        var logInfo = "<div class='loginfo'>"
+                        //                            + "<span class='category-info'>Category : <a class='category-filter' href='#' data-categoryid='" + value.Category.CategoryID + "'>" + value.Category.CategoryName + "</a></span>"
+                        //                            + "<span class='severity-info'>Severity : <b>" + value.Severity + "</b></span>"
+                        //                            + "<span class='machine-info'>Machine : <a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + (value.Machine.IsProduction ? "PRO" : "UAT") + "</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></span>"
+                        //                            + "<span class='timeinfo'>Time : <b>" + value.LogDate + "</b></span>"
+                        //                            + "<span class='monitor-info' id='monitoringUser" + value.LogId + "'>Handle : " + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' id='chbMonitor" + value.LogId + "' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />  ") + "</span>"
+                        //                        + "</div>";
 
-                        var content = "<tr><td title='" + value.Message + "'>"
-                        + logInfo + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message.substring(0, 300) + "</div>" + "</td></tr>";
+                        //                        var content = "<tr><td title='" + value.Message + "'>"
+                        //                        + logInfo + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message.substring(0, 300) + "</div>" + "</td></tr>";
 
                         $('#content').append(content);
                     });
@@ -125,6 +125,10 @@
                     NAP.handleAjaxError(xhr, status, err);
                 }
             });
+        },
+
+        replaceAll: function (find, replace, str) {
+            return str.replace(new RegExp(find, 'g'), replace);
         },
 
         reRenderAfterPaged: function (page_index, itemsPerPage, jq) {
@@ -427,6 +431,12 @@ $(document).ready(function () {
         var isProduction = $(this).attr('data-machinetype');
         var val = isProduction == "true" ? "Production" : "UAT";
         $('#MachineId').select2('val', val);
+        $('#submit').click();
+    });
+
+    $('.severity-filter').live('click', function () {
+        var severity = $(this).text();
+        $('#Severity').val(severity);
         $('#submit').click();
     });
 
