@@ -66,6 +66,8 @@
                     NAP.loadingBox.close();
                 },
                 success: function (result) {
+                    NAP.loadingBox.show();
+
                     var data = eval(result.ListLog);
                     var count = 1;
                     $('#content').html('');
@@ -78,7 +80,7 @@
 
                         var content = "<tr title='" + value.Message + "'><td>"
                         + (pageSize * (index - 1) + count++) + "</td><td>"
-                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + value.Message.substring(0, 300) + "</div>" + "</td><td class='align-center'>"
+                        + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + Logs.replaceAll('<br>', '', value.Message).substring(0, 300) + "</div>" + "</td><td class='align-center'>"
                         + "<a class='category-filter' href='#' data-categoryid='" + value.Category.CategoryID + "'>" + value.Category.CategoryName + "</a></td><td class='align-center'>"
                         + "<a class='severity-filter " + value.Severity + "' href='#'><b>" + value.Severity + "</b></a></td><td class='align-center'>"
                         + "<a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></td><td class='align-center'>"
@@ -120,6 +122,8 @@
                         showDetail: true,
                         callback: Logs.reRenderAfterPaged
                     });
+
+                    NAP.loadingBox.close();
                 },
                 error: function (xhr, status, err) {
                     NAP.handleAjaxError(xhr, status, err);
