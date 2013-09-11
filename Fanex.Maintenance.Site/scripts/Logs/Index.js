@@ -83,7 +83,7 @@
                         + "<div class='hiden selected-message' id='" + value.LogId + "'>" + value.FullMessage + "</div><div data-logid='" + value.LogId + "' class='message'>" + Logs.replaceAll('<br>', '', value.Message).substring(0, 300) + "</div>" + "</td><td class='align-center'>"
                         + "<a class='category-filter' href='#' data-categoryid='" + value.Category.CategoryID + "'>" + value.Category.CategoryName + "</a></td><td class='align-center'>"
                         + "<a class='severity-filter " + value.Severity + "' href='#'><b>" + value.Severity + "</b></a></td><td class='align-center'>"
-                        + "<a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></td><td class='align-center'>"
+                        + "<a href='#' class='machinetype-filter' data-machinetype='" + value.Machine.IsProduction + "'>" + (value.Machine.IsProduction ? "PRO" : "UAT") + "</a> \\ <a class='machine-filter' href='#' data-machineid='" + value.Machine.MachineId + "'>" + value.Machine.MachineName + "</a></td><td class='align-center'>"
                         + "<span id='monitoringUser" + value.LogId + "'>" + (value.IsMonitored ? value.MonitoringUser : "<input type='checkbox' data-logids='" + value.GroupMessageIds + "' data-logid='" + value.LogId + "' class='monitored' />") + "</span>" + countMessage + "</td><td class='align-center'>"
                         + value.LogDate + "</td></tr>";
 
