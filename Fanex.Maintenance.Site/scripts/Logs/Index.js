@@ -192,7 +192,7 @@
                         NAP.loadingBox.close();
                     },
                     success: function (data) {
-                        var monitoringUser = $('#chbMonitor' + logId);
+                        var monitoringUser = $('#monitoringUser' + logId);
 
                         if (monitoringUser)
                             monitoringUser.replaceWith('<span>' + data + '</span>');
@@ -229,7 +229,7 @@
                     success: function (data) {
                         $('.monitored').each(function (index) {
                             var logId = $(this).attr('data-logid');
-                            var monitoringUser = $('#chbMonitor' + logId);
+                            var monitoringUser = $('#monitoringUser' + logId);
 
                             if (monitoringUser)
                                 monitoringUser.replaceWith('<span>' + data + '</span>');
