@@ -26,6 +26,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
+    using Fanex.NAP.Core.Configuration;
 
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class LoginController : BaseController
@@ -70,7 +71,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         private void CreateUserMenu(User user)
         {
-            _currentSession.MenuItemList = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
+            _currentSession.Menu = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
                                                                                     user.Id,
                                                                                     SiteId,
                                                                                     Environment,
@@ -114,6 +115,12 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         public ActionResult Index()
         {
             var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
+
+            if (!NapSettings.Settings.IsNapHub && !this.IsSiteLogin)
+            {
+                // if login-directly feature is disabled then redirect users to NAP Hub
+                return Redirect(NapSettings.Settings.HubUrl);
+            }
 
             if (maintenanceInfo.IsDowntime)
             {
@@ -186,7 +193,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                 #region redirects user
 
                                 // if the user login directly, not through NAP Hub
-                                if (this.IsSiteLogin == 1)
+                                if (this.IsSiteLogin)
                                 {
                                     #region checks if logging-in user is active on this site
 
