@@ -9,9 +9,9 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
-    using System;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasUpdateStatusCriteria : CriteriaBase

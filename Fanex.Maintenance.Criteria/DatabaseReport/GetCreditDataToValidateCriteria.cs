@@ -11,9 +11,7 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
 {
     using System;
     using Fanex.NAP.Framework.Data;
-    using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetCreditDataToValidateBettingCriteria : CriteriaBase
     {
         public DateTime Date { get; set; }
@@ -31,7 +29,6 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetCreditDataToValidateDWCriteria : GetCreditDataToValidateBettingCriteria
     {      
         public override string GetSettingKey()

@@ -9,8 +9,8 @@
 
 namespace Fanex.Maintenance.Criteria.Job
 {
-    using Fanex.NAP.Framework.Data;
     using System.Diagnostics.CodeAnalysis;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

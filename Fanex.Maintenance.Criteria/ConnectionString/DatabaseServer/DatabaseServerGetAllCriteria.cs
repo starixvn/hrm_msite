@@ -23,6 +23,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
             {
                 return _name;
             }
+
             set
             {
                 _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

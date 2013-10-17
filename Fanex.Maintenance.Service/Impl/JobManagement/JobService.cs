@@ -11,22 +11,20 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.Logging;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Criteria.Job;
+    using Fanex.Maintenance.Entity.Domain;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
-    using Fanex.Maintenance.Entity.Domain;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class JobService : IJobService
     {
         #region Member

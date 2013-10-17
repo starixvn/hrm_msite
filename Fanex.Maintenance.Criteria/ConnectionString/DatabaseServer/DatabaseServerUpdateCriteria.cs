@@ -10,10 +10,10 @@
 namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
-    using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
+    using Fanex.NAP.Framework.Data;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class DatabaseServerUpdateCriteria : CriteriaBase
@@ -33,6 +33,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
             {
                 return _name;
             }
+
             set
             {
                 _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
@@ -47,6 +48,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
             {
                 return _serverIp;
             }
+
             set
             {
                 _serverIp = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
@@ -59,6 +61,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
             {
                 return _description;
             }
+
             set
             {
                 _description = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

@@ -10,10 +10,10 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using System;
-    using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
-    using Fanex.Maintenance.Core;
     using System.Diagnostics.CodeAnalysis;
+    using Fanex.Maintenance.Core;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

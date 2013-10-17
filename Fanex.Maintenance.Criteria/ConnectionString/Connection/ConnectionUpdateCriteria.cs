@@ -40,6 +40,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
             {
                 return _initialCatalog;
             }
+
             set
             {
                 _initialCatalog = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
@@ -56,12 +57,12 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
             {
                 return _userId;
             }
+
             set
             {
                 _userId = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
             }
         }
-
 
         public string Password { get; set; }
 
@@ -72,6 +73,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
             {
                 return _freeText;
             }
+
             set
             {
                 _freeText = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

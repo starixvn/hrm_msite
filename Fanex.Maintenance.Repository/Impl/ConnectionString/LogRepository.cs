@@ -10,14 +10,13 @@
 namespace Fanex.Maintenance.Repository.Impl.ConnectionString
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using Fanex.Maintenance.Repository.Interface.ConnectionString;
-    using Fanex.Maintenance.Entity.Model.ConnectionString;
-    using Fanex.NAP.Framework.Data;
     using Fanex.Data;
-    using System.Collections;
+    using Fanex.Maintenance.Entity.Model.ConnectionString;
+    using Fanex.Maintenance.Repository.Interface.ConnectionString;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

@@ -15,10 +15,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using System.Data;
     using Fanex.Common.Extensions;
     using Fanex.Logging;
+    using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Interface.JobManagement;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Maintenance.Core.Web;
 
     /// <summary>
     /// TODO: Update summary.
@@ -101,7 +101,6 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
             return new List<SqlServerLog>();
         }
-
 
         public IEnumerable<SqlServerLog> GetAllSqlLogOnDate(ICriteria sqlLogCriteria, string serverIp, bool isAgent)
         {

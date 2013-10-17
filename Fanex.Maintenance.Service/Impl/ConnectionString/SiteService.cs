@@ -20,6 +20,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -115,7 +116,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-
         public Site GetById(int id)
         {
             try
@@ -137,7 +137,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
             return null;
         }
-
 
         public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
@@ -161,7 +160,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-
         public ICommandResult UpdateStatus(ICriteria criteria)
         {
             // check parameters
@@ -183,7 +181,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
             return null;
         }
-
 
         public IEnumerable<Site> GetByDbServer(int dbServerId)
         {

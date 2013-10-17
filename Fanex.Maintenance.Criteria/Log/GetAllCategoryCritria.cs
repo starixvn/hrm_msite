@@ -10,9 +10,7 @@
 namespace Fanex.Maintenance.Criteria.Log
 {
     using Fanex.NAP.Framework.Data;
-    using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetAllCategoryCritria : CriteriaBase
     {
         public override bool IsValid()

@@ -34,6 +34,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
             {
                 return _name;
             }
+
             set
             {
                 _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
@@ -46,6 +47,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
             {
                 return _description;
             }
+
             set
             {
                 _description = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

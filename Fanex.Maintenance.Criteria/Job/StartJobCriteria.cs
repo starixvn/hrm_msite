@@ -10,12 +10,10 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using Fanex.NAP.Framework.Data;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class StartJobCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "Job_Name")]
@@ -28,7 +26,8 @@ namespace Fanex.Maintenance.Criteria.Job
         public int? ErrorFlag { get; set; }
 
         /// <summary>
-        /// The target server on which to start the job. server_name is nvarchar(128), with a default of NULL. server_name must be one of the target servers to which the job is currently targeted.
+        /// The target server on which to start the job. server_name is nvarchar(128), with a default of NULL. 
+        /// server_name must be one of the target servers to which the job is currently targeted.
         /// </summary>
         [SpParam(SqlParamName = "Server_Name")]
         public string ServerName { get; set; }

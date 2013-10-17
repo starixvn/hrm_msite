@@ -38,7 +38,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             _logRepository = logRepository ?? new LogRepository();
         }
 
-        public IQueryable<LogExecSp> SearchExecSp(int pageIndex, int pageSize, out int totalRows, string name, string username, DateTime from, DateTime to, int filterBy = 0)
+        public IQueryable<LogExecSp> SearchExecSp(
+            int pageIndex, 
+            int pageSize, 
+            out int totalRows, 
+            string name, 
+            string username, 
+            DateTime from, 
+            DateTime to, 
+            int filterBy = 0)
         {
             IQueryable<LogExecSp> logList = null;
             totalRows = 0;

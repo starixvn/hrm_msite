@@ -32,6 +32,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
             {
                 return _alias;
             }
+
             set
             {
                 _alias = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

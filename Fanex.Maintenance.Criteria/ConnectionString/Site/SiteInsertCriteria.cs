@@ -10,12 +10,9 @@
 namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using Fanex.NAP.Framework.Data;
-    using System.Diagnostics.CodeAnalysis;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using Fanex.NAP.Framework.Data;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class SiteInsertCriteria : CriteriaBase
@@ -33,6 +30,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
             {
                 return _name;
             }
+
             set
             {
                 _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
@@ -45,6 +43,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
             {
                 return _description;
             }
+
             set
             {
                 _description = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

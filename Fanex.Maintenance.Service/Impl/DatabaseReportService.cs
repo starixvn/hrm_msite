@@ -16,12 +16,10 @@ namespace Fanex.Maintenance.Service.Impl
     using Fanex.Maintenance.Criteria.User;
     using Fanex.Maintenance.Repository.Impl;
     using Fanex.Maintenance.Service.Interface;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class DatabaseReportService : IDatabaseReportService
     {
         #region Member
@@ -214,7 +212,8 @@ namespace Fanex.Maintenance.Service.Impl
 
                 foreach (DataRow dr in drs)
                 {
-                    data += ChangeHourToMinute(dr["logdate"].ToString()) + ";" + dr["super"] + ";" + dr["master"] + ";" + dr["agent"] + ";" + dr["accounting"] + ";" + dr["affiliate"] + "^";
+                    data += ChangeHourToMinute(dr["logdate"].ToString()) + ";" + dr["super"] + ";" + dr["master"] + ";" 
+                        + dr["agent"] + ";" + dr["accounting"] + ";" + dr["affiliate"] + "^";
                 }
 
                 data = data.Substring(0, data.Length - 1);

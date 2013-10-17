@@ -131,7 +131,6 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             return serverStatus;
         }
 
-
         public CPUInfo GetServerCpuUtilization(ICriteria criteria, string connectionString)
         {
             CPUInfo cpuInfo = new CPUInfo
@@ -163,7 +162,6 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
             return cpuInfo;
         }
-
 
         public MemoryInfo GetServerMemoryUtilization(ICriteria criteria, string connectionString)
         {

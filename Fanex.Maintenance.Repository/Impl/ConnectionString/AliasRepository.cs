@@ -10,18 +10,18 @@
 namespace Fanex.Maintenance.Repository.Impl.ConnectionString
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Fanex.Common.Extensions;
     using Fanex.ConnectionString.Domain;
     using Fanex.Data;
+    using Fanex.Maintenance.Criteria.Misc;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using System.Collections;
-    using Fanex.Maintenance.Criteria.Misc;
-    using System.Linq;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AliasRepository : BaseRepository<Alias>, IAliasRepository

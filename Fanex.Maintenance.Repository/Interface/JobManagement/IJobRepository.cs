@@ -9,10 +9,10 @@
 
 namespace Fanex.Maintenance.Repository.Interface.JobManagement
 {
+    using System.Collections;
     using System.Collections.Generic;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.NAP.Framework.Data;
-    using System.Collections;
 
     /// <summary>
     /// TODO: Update summary.

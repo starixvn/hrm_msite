@@ -12,15 +12,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using Fanex.Common.Helper;
     using Fanex.ConnectionString.Domain;
     using Fanex.Maintenance.Criteria.ConnectionString.Connection;
+    using Fanex.Maintenance.Criteria.Misc;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Common.Helper;
-    using Fanex.Maintenance.Criteria.Misc;
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionService : BaseService, IConnectionService

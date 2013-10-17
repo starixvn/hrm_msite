@@ -28,6 +28,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
             {
                 return _username;
             }
+
             set
             {
                 _username = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
@@ -40,6 +41,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
             {
                 return _name;
             }
+
             set
             {
                 _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
