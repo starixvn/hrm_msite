@@ -11,7 +11,6 @@ namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.ConnectionString.Domain;
@@ -26,7 +25,6 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Helpers;
 
     [Authorize]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ConnectionStringController : BaseController
     {
         #region Member
@@ -65,46 +63,6 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion Ctor
-
-        #region Private
-
-        /// <summary>
-        /// Get select list item of all database server
-        /// </summary>
-        /// <param name="selectedId"></param>
-        /// <returns></returns>
-        private List<SelectListItem> GetSelectListDatabaseServer(int? selectedId = null)
-        {
-            // get all
-            var listDatabaseServer = _databaseServerService.GetAll();
-
-            return listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString(),
-                Selected = selectedId != null ? d.Id == selectedId : false
-            }).ToList();
-        }
-
-        /// <summary>
-        /// Get select list item of all site
-        /// </summary>
-        /// <param name="selectedId"></param>
-        /// <returns></returns>
-        private List<SelectListItem> GetSelectListSite(int? selectedId = null)
-        {
-            // get all
-            var listSite = _siteService.GetAll();
-
-            return listSite.Select(s => new SelectListItem
-            {
-                Text = s.Name,
-                Value = s.Id.ToString(),
-                Selected = selectedId != null ? s.Id == selectedId : false
-            }).ToList();
-        }
-
-        #endregion Private
 
         #region Manage Alias
 
@@ -953,7 +911,6 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_Insert)
             {
                 listData = _logService.GetValueConnectionInsert(log);
-
                 ViewBag.IsNew = true;
 
                 return PartialView(listData);
@@ -963,7 +920,6 @@ namespace Fanex.Maintenance.Controller
                 || log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_UpdateDefaultConnection)
             {
                 listData = _logService.GetValueConnectionUpdate(log);
-
                 ViewBag.IsNew = false;
 
                 return PartialView(listData);
@@ -972,7 +928,6 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_DatabaseServer_Insert)
             {
                 listData = _logService.GetValueDatabaseServerInsert(log);
-
                 ViewBag.IsNew = true;
 
                 return PartialView(listData);
@@ -981,7 +936,6 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_DatabaseServer_Update)
             {
                 listData = _logService.GetValueDatabaseServerUpdate(log);
-
                 ViewBag.IsNew = false;
 
                 return PartialView(listData);
@@ -990,7 +944,6 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_Site_Insert)
             {
                 listData = _logService.GetValueSiteInsert(log);
-
                 ViewBag.IsNew = true;
 
                 return PartialView(listData);
@@ -999,14 +952,12 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_Site_Update)
             {
                 listData = _logService.GetValueSiteUpdate(log);
-
                 ViewBag.IsNew = false;
 
                 return PartialView(listData);
             }
 
             listData = _logService.GetValueUpdateStatus(log);
-
             ViewBag.IsNew = false;
 
             return PartialView(listData);
@@ -1023,5 +974,45 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion Partial view
+        #region Private
+
+        /// <summary>
+        /// Get select list item of all database server
+        /// </summary>
+        /// <param name="selectedId"></param>
+        /// <returns></returns>
+        private List<SelectListItem> GetSelectListDatabaseServer(int? selectedId = null)
+        {
+            // get all
+            var listDatabaseServer = _databaseServerService.GetAll();
+
+            return listDatabaseServer.Select(d => new SelectListItem
+            {
+                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
+                Value = d.Id.ToString(),
+                Selected = selectedId != null ? d.Id == selectedId : false
+            }).ToList();
+        }
+
+        /// <summary>
+        /// Get select list item of all site
+        /// </summary>
+        /// <param name="selectedId"></param>
+        /// <returns></returns>
+        private List<SelectListItem> GetSelectListSite(int? selectedId = null)
+        {
+            // get all
+            var listSite = _siteService.GetAll();
+
+            return listSite.Select(s => new SelectListItem
+            {
+                Text = s.Name,
+                Value = s.Id.ToString(),
+                Selected = selectedId != null ? s.Id == selectedId : false
+            }).ToList();
+        }
+
+        #endregion Private
+
     }
 }

@@ -9,12 +9,9 @@
 
 namespace Fanex.Maintenance.Repository.Interface
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public interface IDatabaseReportRepository
     {
     }

@@ -13,7 +13,6 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Common.Extensions;
     using Fanex.ConnectionString.Domain;
     using Fanex.Data;
@@ -22,7 +21,6 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionRepository : BaseRepository<ConnectionString>, IConnectionRepository
     {
         public IEnumerable<ConnectionString> GetSecondaryConection(ICriteria criteria)

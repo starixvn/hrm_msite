@@ -10,11 +10,12 @@
 namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Text;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Change connection from DB server criteria.
+    /// </summary>
     public class ConnectionChangeConnectionFromDbServerCriteria : CriteriaBase
     {
         private readonly string _formatXml = "<AliasConnection AliasId='{0}' ConnectionId='{1}'/>";

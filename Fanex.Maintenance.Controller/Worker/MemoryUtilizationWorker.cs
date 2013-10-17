@@ -10,7 +10,6 @@
 namespace Fanex.Maintenance.Controller.Worker
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using Fanex.Logging;
     using Fanex.Maintenance.Controller.Hubs;
@@ -24,7 +23,6 @@ namespace Fanex.Maintenance.Controller.Worker
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MemoryUtilizationWorker : BaseWorker
     {
         private IHubContext _hubContext;

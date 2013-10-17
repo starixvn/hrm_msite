@@ -22,6 +22,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
 
+    /// <summary>
+    /// SSO controller.
+    /// </summary>
     public class SSOController : BaseController
     {
         #region members

@@ -21,10 +21,9 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Index Page
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         public ActionResult Index()
         {
-            //home
             return View();
         }
     }

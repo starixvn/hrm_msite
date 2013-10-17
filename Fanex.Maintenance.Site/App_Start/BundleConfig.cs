@@ -14,6 +14,9 @@ namespace Fanex.Maintenance.Site.App_Start
     using BundleTransformer.Core.Orderers;
     using BundleTransformer.Core.Transformers;
 
+    /// <summary>
+    /// Bundle config.
+    /// </summary>
     public class BundleConfig
     {
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
@@ -101,6 +104,9 @@ namespace Fanex.Maintenance.Site.App_Start
         }
     }
 
+    /// <summary>
+    /// Bundle extensions
+    /// </summary>
     internal static class BundleExtensions
     {
         public static void AddAndInclude(this BundleCollection bundles, string bundleVirtualPath, params string[] virtualPaths)

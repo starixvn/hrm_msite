@@ -109,9 +109,6 @@ namespace Fanex.Maintenance.Controller
         {
             ViewBag.ListServer = GetServer();
 
-            //DateTime fromDate = getAllScheduleCriteria.From == null ? DateTime.Now : getAllScheduleCriteria.From;
-            //DateTime toDate = string.IsNullOrEmpty(To) ? DateTime.Now : DateTime.ParseExact(To, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
             getAllScheduleCriteria.From = getAllScheduleCriteria.From <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.From;
             getAllScheduleCriteria.To = getAllScheduleCriteria.To <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.To;
 

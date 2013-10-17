@@ -11,11 +11,12 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Connection update criteria.
+    /// </summary>
     public class ConnectionUpdateCriteria : CriteriaBase
     {
         private string _initialCatalog;

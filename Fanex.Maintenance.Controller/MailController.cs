@@ -19,10 +19,10 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.MailService;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;
+    using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Core.Business;
 
     /// <summary>
     /// Mail Controller
@@ -59,117 +59,6 @@ namespace Fanex.Maintenance.Controller
         {
             this._mailServer = mailService ?? MailService.Create();
             this._userService = userService ?? new UserService();
-        }
-
-        #endregion
-
-        #region InitData
-
-        /// <summary>
-        /// Init Page Size
-        /// </summary>
-        private void InitPageSize()
-        {
-            List<SelectListItem> listPageSize = new List<SelectListItem>();
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "10",
-                Value = "10"
-            });
-
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "30",
-                Value = "30"
-            });
-
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "50",
-                Value = "50"
-            });
-
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "100",
-                Value = "100"
-            });
-
-            ViewBag.PageSize = listPageSize;
-        }
-
-        /// <summary>
-        /// Init list mail status for view
-        /// </summary>
-        private void InitMailStatus()
-        {
-            List<SelectListItem> listMailStatus = new List<SelectListItem>();
-            listMailStatus.Add(new SelectListItem
-            {
-                Text = MailStatus.All.ToString(),
-                Value = ((int)MailStatus.All).ToString()
-            });
-
-            listMailStatus.Add(new SelectListItem
-            {
-                Text = MailStatus.Fail.ToString(),
-                Value = ((int)MailStatus.Fail).ToString()
-            });
-
-            listMailStatus.Add(new SelectListItem
-            {
-                Text = MailStatus.Success.ToString(),
-                Value = ((int)MailStatus.Success).ToString()
-            });
-
-            ViewBag.MailStatus = listMailStatus;
-        }
-
-        /// <summary>
-        /// Init list mail config for view
-        /// </summary>
-        private void InitDataMailConfig(int appId = 0)
-        {
-            List<MailConfig> listConfig = new List<MailConfig>();
-            listConfig = _mailServer.GetListConfig(string.Empty);
-
-            ViewBag.ListMailConfig = listConfig.Select(c => new SelectListItem
-            {
-                Text = c.AppName,
-                Value = c.AppID.ToString(),
-                Selected = c.AppID == appId
-            }).ToList();
-        }
-
-        /// <summary>
-        /// Init list mail setting for view
-        /// </summary>
-        private void InitDataMailSetting()
-        {
-            List<MailSetting> listMailSetting = new List<MailSetting>();
-            listMailSetting = _mailServer.GetListSetting();
-            ViewBag.ListMailSetting = listMailSetting.Select(s => new SelectListItem
-            {
-                Text = s.SettingName,
-                Value = s.SettingID.ToString(),
-            }).ToList();
-        }
-
-        /// <summary>
-        /// Init list server ip for view
-        /// </summary>
-        private void InitDataIpServer(string serverIp = "")
-        {
-            List<MailSetting> listMailSetting = new List<MailSetting>();
-            listMailSetting = _mailServer.GetListSetting();
-            listMailSetting = listMailSetting.GroupBy(s => s.Server).Select(s => s.First()).ToList();
-
-            ViewBag.ListServerIp = listMailSetting.Select(s => new SelectListItem
-            {
-                Text = s.Server,
-                Value = s.Server,
-                Selected = s.Server == serverIp
-            }).ToList();
         }
 
         #endregion
@@ -767,5 +656,116 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
         #endregion
+        #region InitData
+
+        /// <summary>
+        /// Init Page Size
+        /// </summary>
+        private void InitPageSize()
+        {
+            List<SelectListItem> listPageSize = new List<SelectListItem>();
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "10",
+                Value = "10"
+            });
+
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "30",
+                Value = "30"
+            });
+
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "50",
+                Value = "50"
+            });
+
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "100",
+                Value = "100"
+            });
+
+            ViewBag.PageSize = listPageSize;
+        }
+
+        /// <summary>
+        /// Init list mail status for view
+        /// </summary>
+        private void InitMailStatus()
+        {
+            List<SelectListItem> listMailStatus = new List<SelectListItem>();
+            listMailStatus.Add(new SelectListItem
+            {
+                Text = MailStatus.All.ToString(),
+                Value = ((int)MailStatus.All).ToString()
+            });
+
+            listMailStatus.Add(new SelectListItem
+            {
+                Text = MailStatus.Fail.ToString(),
+                Value = ((int)MailStatus.Fail).ToString()
+            });
+
+            listMailStatus.Add(new SelectListItem
+            {
+                Text = MailStatus.Success.ToString(),
+                Value = ((int)MailStatus.Success).ToString()
+            });
+
+            ViewBag.MailStatus = listMailStatus;
+        }
+
+        /// <summary>
+        /// Init list mail config for view
+        /// </summary>
+        private void InitDataMailConfig(int appId = 0)
+        {
+            List<MailConfig> listConfig = new List<MailConfig>();
+            listConfig = _mailServer.GetListConfig(string.Empty);
+
+            ViewBag.ListMailConfig = listConfig.Select(c => new SelectListItem
+            {
+                Text = c.AppName,
+                Value = c.AppID.ToString(),
+                Selected = c.AppID == appId
+            }).ToList();
+        }
+
+        /// <summary>
+        /// Init list mail setting for view
+        /// </summary>
+        private void InitDataMailSetting()
+        {
+            List<MailSetting> listMailSetting = new List<MailSetting>();
+            listMailSetting = _mailServer.GetListSetting();
+            ViewBag.ListMailSetting = listMailSetting.Select(s => new SelectListItem
+            {
+                Text = s.SettingName,
+                Value = s.SettingID.ToString(),
+            }).ToList();
+        }
+
+        /// <summary>
+        /// Init list server ip for view
+        /// </summary>
+        private void InitDataIpServer(string serverIp = "")
+        {
+            List<MailSetting> listMailSetting = new List<MailSetting>();
+            listMailSetting = _mailServer.GetListSetting();
+            listMailSetting = listMailSetting.GroupBy(s => s.Server).Select(s => s.First()).ToList();
+
+            ViewBag.ListServerIp = listMailSetting.Select(s => new SelectListItem
+            {
+                Text = s.Server,
+                Value = s.Server,
+                Selected = s.Server == serverIp
+            }).ToList();
+        }
+
+        #endregion
+
     }
 }

@@ -11,11 +11,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class LogExecSpSearchCriteria : CriteriaBase
     {
         private string _username;

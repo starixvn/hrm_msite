@@ -14,6 +14,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Insert database server criteria.
+    /// </summary>
     public class DatabaseServerInsertCriteria : CriteriaBase
     {
         private string _name;

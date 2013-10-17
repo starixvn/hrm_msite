@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Core.Configurations
         {
             get
             {
-                var databaseServers =  ConfigurationManager.GetSection("DatabaseServersSection") as DatabaseServersSection;
+                var databaseServers = ConfigurationManager.GetSection("DatabaseServersSection") as DatabaseServersSection;
                 return databaseServers;
             }
         }

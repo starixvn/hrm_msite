@@ -11,7 +11,6 @@ namespace Fanex.Maintenance.Core.Web
 {
     using System;
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web;
     using Fanex.Common;
@@ -20,7 +19,6 @@ namespace Fanex.Maintenance.Core.Web
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class AppSetting
     {
         /// <summary>

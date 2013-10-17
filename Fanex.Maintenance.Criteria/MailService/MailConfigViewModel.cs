@@ -10,18 +10,26 @@
 namespace Fanex.Maintenance.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
     using MailDeliver.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailConfigViewModel
     {
         public MailConfigViewModel()
         {
+        }
+
+        public MailConfigViewModel(MailConfig mailSetting)
+        {
+            this.AppName = mailSetting.AppName;
+            this.Description = mailSetting.Description;
+            this.SettingId = mailSetting.Setting.SettingID;
+            this.AppId = mailSetting.AppID;
+            this.MailFrom = string.IsNullOrEmpty(mailSetting.MailFrom) ? mailSetting.Setting.Username : mailSetting.MailFrom;
+            this.IsEncrypt = mailSetting.IsEncrypt;
         }
         
         public int AppId { get; set; }
@@ -48,16 +56,6 @@ namespace Fanex.Maintenance.Criteria.MailService
 
         [Display(Name = "IsEncrypt", ResourceType = typeof(ViewResource))]
         public bool IsEncrypt { get; set; }
-
-        public MailConfigViewModel(MailConfig mailSetting)
-        {
-            this.AppName = mailSetting.AppName;
-            this.Description = mailSetting.Description;
-            this.SettingId = mailSetting.Setting.SettingID;
-            this.AppId = mailSetting.AppID;
-            this.MailFrom = string.IsNullOrEmpty(mailSetting.MailFrom) ? mailSetting.Setting.Username : mailSetting.MailFrom;
-            this.IsEncrypt = mailSetting.IsEncrypt;
-        }
 
         public MailConfig GetMailConfig()
         {

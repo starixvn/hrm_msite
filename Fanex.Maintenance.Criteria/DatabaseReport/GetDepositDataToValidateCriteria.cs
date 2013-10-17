@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get deposit data to validate licensee winloss criteria.
+    /// </summary>
     public class GetDepositDataToValidateLicenseeWLCriteria : CriteriaBase
     {
         public DateTime Date { get; set; }
@@ -29,6 +32,9 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
+    /// <summary>
+    /// Get deposit data to validate sum winloss criteria.
+    /// </summary>
     public class GetDepositDataToValidateSumWLCriteria : GetDepositDataToValidateLicenseeWLCriteria
     {
         public override string GetSettingKey()
@@ -37,6 +43,9 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
+    /// <summary>
+    /// Get deposit data to validate sum winloss old criteria.
+    /// </summary>
     public class GetDepositDataToValidateSumWLOldCriteria : GetDepositDataToValidateLicenseeWLCriteria
     {
         public override string GetSettingKey()
@@ -45,6 +54,9 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
+    /// <summary>
+    /// Get deposit data to validate betting criteria.
+    /// </summary>
     public class GetDepositDataToValidateBettingCriteria : GetDepositDataToValidateLicenseeWLCriteria
     {
         public override string GetSettingKey()
@@ -53,6 +65,9 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
+    /// <summary>
+    /// Get deposit data to validate data warehouse criteria.
+    /// </summary>
     public class GetDepositDataToValidateDWCriteria : GetDepositDataToValidateLicenseeWLCriteria
     {
         public override string GetSettingKey()

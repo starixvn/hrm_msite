@@ -68,6 +68,133 @@ namespace Fanex.Maintenance.Controller
 
         #endregion Ctor
 
+        #region Action
+
+        /// <summary>
+        /// Get log
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Index()
+        {
+            InitDataView();
+
+            InitPageSize();
+
+            ViewBag.ListLog = null;
+
+            GetLogCriteria criteria = new GetLogCriteria
+            {
+                CategoryId = 0,
+                MachineId = 0,
+                IsProduction = null,
+                IsMonitored = null,
+                From = DateTime.Now,
+                To = DateTime.Now,
+                Page = 0,
+                Size = 10,
+                Severity = "All"
+            };
+
+            return View(criteria);
+        }
+
+        /// <summary>
+        /// Get log
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Index(GetLogCriteria criteria)
+        {
+            InitDataView();
+            InitPageSize();
+
+            var totalRows = 0;
+
+            ////Get logs by date
+            IEnumerable<Log> listLogs = _logService.With(
+                criteria.CategoryId, 
+                criteria.MachineId,
+                criteria.IsProduction, 
+                criteria.
+                IsMonitored, 
+                criteria.Severity)
+                .From(criteria.From)
+                .To(criteria.To)
+                .WithPagination(criteria.Page, criteria.Size)
+                .GetLogs(ref totalRows);
+
+            return Json(new
+            {
+                TotalRows = totalRows,
+                ListLog = listLogs
+            });
+        }
+
+        /// <summary>
+        /// Get details message
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetLogMessage(int id)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                string message = string.Empty;
+                message = _logService.GetMessage(id);
+                return Json(message);
+            }
+
+            return Json(null);
+        }
+
+        #endregion Action
+
+        #region Ajax
+
+        /// <summary>
+        /// Remove Log
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult RemoveLog()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return Json(_logService.From(DateTime.Now.AddDays(-5)).RemoveLogs());
+            }
+
+            return Json(0);
+        }
+
+        /// <summary>
+        /// Update log's monitored status
+        /// </summary>
+        /// <param name="logId"></param>
+        /// <param name="isMonitored"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult MonitorLog(string logId, bool isMonitored)
+        {
+            string updatedUsername = string.Empty;
+
+            if (Request.IsAjaxRequest())
+            {
+                int? userId = this.CurrentSession.UserId;
+                userId = isMonitored ? userId : null;
+                int affectedRows = _logService.MonitorLog(logId, userId, isMonitored);
+                updatedUsername = affectedRows != 0 ? this.CurrentSession.Username : string.Empty;
+            }
+
+            return Json(updatedUsername);
+        }
+
+        #endregion Ajax
+
         #region Private
 
         /// <summary>
@@ -221,163 +348,5 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion Private
-
-        #region Action
-
-        /// <summary>
-        /// Get log
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult Index()
-        {
-            InitDataView();
-
-            InitPageSize();
-
-            ViewBag.ListLog = null;
-
-            GetLogCriteria criteria = new GetLogCriteria
-            {
-                CategoryId = 0,
-                MachineId = 0,
-                IsProduction = null,
-                IsMonitored = null,
-                From = DateTime.Now,
-                To = DateTime.Now,
-                Page = 0,
-                Size = 10,
-                Severity = "All"
-            };
-
-            return View(criteria);
-        }
-
-        /// <summary>
-        /// Get log
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult Index(GetLogCriteria criteria)
-        {
-            InitDataView();
-
-            InitPageSize();
-
-            var totalRows = 0;
-
-            ////Get logs by date
-            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.MachineId,
-                                                         criteria.IsProduction, criteria.IsMonitored, criteria.Severity)
-                .From(criteria.From)
-                .To(criteria.To)
-                .WithPagination(criteria.Page, criteria.Size)
-                .GetLogs(ref totalRows);
-
-            //if (criteria.GroupMessage)
-            //{
-            //    var listGroup = listLogs.GroupBy(m => new { m.Message, m.Severity, m.MachineName, m.TimeGroup, m.CategoryName });
-
-            //    var listLogGroup = new List<Log>();
-
-            //    foreach (var itemGroup in listGroup)
-            //    {
-            //        var countMonitored = 0;
-            //        var tempGroup = itemGroup.FirstOrDefault();
-            //        tempGroup.GroupMessageIds = tempGroup.LogId + ";";
-            //        tempGroup.CountGroupMessage = 1;
-            //        foreach (var item in itemGroup)
-            //        {
-            //            tempGroup.GroupMessageIds += item.LogId + ";";
-            //            tempGroup.CountGroupMessage += 1;
-
-            //            if (!item.IsMonitored)
-            //            {
-            //                countMonitored++;
-            //            }
-            //        }
-
-            //        tempGroup.IsMonitored = countMonitored > 0 ? false : tempGroup.IsMonitored;
-
-            //        listLogGroup.Add(tempGroup);
-            //    }
-
-            //    return Json(new
-            //    {
-            //        TotalRows = totalRows,
-            //        ListLog = listLogGroup
-            //    });
-            //}
-
-            return Json(new
-            {
-                TotalRows = totalRows,
-                ListLog = listLogs
-            });
-        }
-
-        /// <summary>
-        /// Get details message
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult GetLogMessage(int id)
-        {
-            if (Request.IsAjaxRequest())
-            {
-                string message = string.Empty;
-                message = _logService.GetMessage(id);
-                return Json(message);
-            }
-
-            return Json(null);
-        }
-
-        #endregion Action
-
-        #region Ajax
-
-        /// <summary>
-        /// Remove Log
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult RemoveLog()
-        {
-            if (Request.IsAjaxRequest())
-            {
-                return Json(_logService.From(DateTime.Now.AddDays(-5)).RemoveLogs());
-            }
-
-            return Json(0);
-        }
-
-        /// <summary>
-        /// Update log's monitored status
-        /// </summary>
-        /// <param name="logId"></param>
-        /// <param name="isMonitored"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult MonitorLog(string logId, bool isMonitored)
-        {
-            string updatedUsername = string.Empty;
-
-            if (Request.IsAjaxRequest())
-            {
-                int? userId = this.CurrentSession.UserId;
-                userId = isMonitored ? userId : null;
-                int affectedRows = _logService.MonitorLog(logId, userId, isMonitored);
-                updatedUsername = affectedRows != 0 ? this.CurrentSession.Username : string.Empty;
-            }
-
-            return Json(updatedUsername);
-        }
-
-        #endregion Ajax
     }
 }

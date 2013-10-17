@@ -14,7 +14,7 @@ namespace Fanex.Maintenance.Controller.Worker
     using Fanex.NAP.Core.Service.Interface;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Base worker.
     /// </summary>
     public class BaseWorker
     {
@@ -27,8 +27,6 @@ namespace Fanex.Maintenance.Controller.Worker
             _workerThread = new Thread(Run);
             _maintenceService = new MaintainanceService();
         }
-
-        protected bool IsStop { get; set; }
 
         public void Start()
         {
@@ -61,5 +59,7 @@ namespace Fanex.Maintenance.Controller.Worker
         protected virtual void Run()
         {
         }
+
+        protected bool IsStop { get; set; }
     }
 }

@@ -10,9 +10,7 @@
 namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Job : IEntity<int, string>
     {
         public Guid JobId { get; set; }

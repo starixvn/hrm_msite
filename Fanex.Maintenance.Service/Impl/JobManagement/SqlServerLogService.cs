@@ -11,7 +11,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Logging;
@@ -26,7 +25,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SqlServerLogService : ISqlServerLogService
     {
         private readonly ISqlServerLogRepository _sqlServerLogRepository;
@@ -50,15 +48,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             _sqlServerLogRepository = sqlServerLogRepository ?? new SqlServerLogRepository();
         }
 
-        /// <summary>
-        /// Create sql server service
-        /// </summary>
-        /// <returns></returns>
-        public static ISqlServerLogService Create()
-        {
-            return new SqlServerLogService();
-        }
-
         #endregion Ctor
 
         #region Properties
@@ -72,6 +61,15 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public int? ErrorLevel { get; set; }
 
         #endregion Properties
+
+        /// <summary>
+        /// Create sql server service
+        /// </summary>
+        /// <returns></returns>
+        public static ISqlServerLogService Create()
+        {
+            return new SqlServerLogService();
+        }
 
         /// <summary>
         /// Get Log With Date Range

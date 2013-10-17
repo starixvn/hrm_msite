@@ -57,43 +57,39 @@ namespace Fanex.Maintenance.Core.Helper
             switch (getType)
             {
                 case (int)ServerType.Normal:
+                    foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                     {
-                        foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+                        if (server.ServerIp == serverIp)
                         {
-                            if (server.ServerIp == serverIp)
+                            if (server.Plain == "1")
                             {
-                                if (server.Plain == "1")
-                                {
-                                    connectionString = server.ConnectionString;
-                                }
-                                else
-                                {
-                                    connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
-                                }
-
-                                break;
+                                connectionString = server.ConnectionString;
                             }
+                            else
+                            {
+                                connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
+                            }
+
+                            break;
                         }
                     }
                     break;
 
                 case (int)ServerType.Resource:
+                    foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
                     {
-                        foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
+                        if (server.ServerIp == serverIp)
                         {
-                            if (server.ServerIp == serverIp)
+                            if (server.Plain == "1")
                             {
-                                if (server.Plain == "1")
-                                {
-                                    connectionString = server.ConnectionString;
-                                }
-                                else
-                                {
-                                    connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
-                                }
-
-                                break;
+                                connectionString = server.ConnectionString;
                             }
+                            else
+                            {
+                                connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
+                            }
+
+                            break;
                         }
                     }
                     break;

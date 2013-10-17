@@ -10,10 +10,8 @@
 namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class DatabaseServerUpdateStatusCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }

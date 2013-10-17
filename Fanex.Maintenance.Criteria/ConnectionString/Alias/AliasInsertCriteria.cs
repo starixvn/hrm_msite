@@ -15,6 +15,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Alias insert criteria.
+    /// </summary>
     public class AliasInsertCriteria : CriteriaBase
     {
         private readonly string _formatXml = "<Sites SiteId='{0}'/>";

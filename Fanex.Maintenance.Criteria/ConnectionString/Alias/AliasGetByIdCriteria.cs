@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Alias get by ID criteria.
+    /// </summary>
     public class AliasGetByIdCriteria : CriteriaBase
     {
         public int AliasId { get; set; }

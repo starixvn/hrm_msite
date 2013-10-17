@@ -9,12 +9,9 @@
 
 namespace Fanex.Maintenance.Entity.Model
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class NotifyInfo
     {
         public string ServerIp { get; set; }

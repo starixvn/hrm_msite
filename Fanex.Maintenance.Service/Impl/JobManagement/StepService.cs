@@ -10,7 +10,6 @@
 namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core.Web;
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Model;
@@ -21,7 +20,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class StepService : IStepService
     {
         #region Member

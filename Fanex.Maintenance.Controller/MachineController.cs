@@ -53,35 +53,6 @@ namespace Fanex.Maintenance.Controller
 
         #endregion Constructor
 
-        #region Private
-
-        /// <summary>
-        /// Initialize Machine Types data
-        /// </summary>
-        private void InitMachineTypes()
-        {
-            List<SelectListItem> machineTypes = new List<SelectListItem>();
-            machineTypes.Add(new SelectListItem
-            {
-                Text = ViewResource.All,
-                Value = "null"
-            });
-            machineTypes.Add(new SelectListItem
-            {
-                Text = ViewResource.MachineType_Production,
-                Value = "true"
-            });
-            machineTypes.Add(new SelectListItem
-            {
-                Text = ViewResource.MachineType_UAT,
-                Value = "false"
-            });
-
-            ViewBag.MachineTypes = machineTypes;
-        }
-
-        #endregion Private
-
         #region Action
 
         /// <summary>
@@ -193,5 +164,34 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion Ajax
+
+        #region Private
+
+        /// <summary>
+        /// Initialize Machine Types data
+        /// </summary>
+        private void InitMachineTypes()
+        {
+            List<SelectListItem> machineTypes = new List<SelectListItem>();
+            machineTypes.Add(new SelectListItem
+            {
+                Text = ViewResource.All,
+                Value = "null"
+            });
+            machineTypes.Add(new SelectListItem
+            {
+                Text = ViewResource.MachineType_Production,
+                Value = "true"
+            });
+            machineTypes.Add(new SelectListItem
+            {
+                Text = ViewResource.MachineType_UAT,
+                Value = "false"
+            });
+
+            ViewBag.MachineTypes = machineTypes;
+        }
+
+        #endregion Private
     }
 }

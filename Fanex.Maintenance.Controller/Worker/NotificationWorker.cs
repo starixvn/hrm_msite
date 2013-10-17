@@ -11,7 +11,6 @@ namespace Fanex.Maintenance.Controller.Worker
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using Fanex.Logging;
     using Fanex.Maintenance.Controller.Hubs;
@@ -26,7 +25,6 @@ namespace Fanex.Maintenance.Controller.Worker
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class NotificationWorker : BaseWorker
     {
         private int _getDataInterval;
@@ -202,16 +200,16 @@ namespace Fanex.Maintenance.Controller.Worker
             List<NotifyInfo> notifyInformaitons = new List<NotifyInfo>();
             DateTime tempDatetime = DateTime.Now;
             bool isBreak = false;
+
             foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
             {
                 _jobService = JobService.Create();
-                IEnumerable<JobSchedule> jobs = _jobService
-                    .FromServer(server.ServerIp)
-                    .GetJobs();
+                IEnumerable<JobSchedule> jobs = _jobService.FromServer(server.ServerIp).GetJobs();
 
                 _jobService
                     .WithStartRunDate(LastJobLogNotificationTime)
                     .WithEndRunDate(DateTime.Now.AddDays(1));
+
                 foreach (JobSchedule job in jobs)
                 {
                     //// Get All job Log with daterange and job name
@@ -240,7 +238,6 @@ namespace Fanex.Maintenance.Controller.Worker
 
                                 //// Send mail
                                 SendMailForJobStepError(job, jobLogs, server.ServerIp);
-
                                 isBreak = true;
 
                                 break;

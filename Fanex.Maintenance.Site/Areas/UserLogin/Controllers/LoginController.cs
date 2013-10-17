@@ -11,7 +11,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
@@ -27,7 +26,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// Login controller.
+    /// </summary>
     public class LoginController : BaseController
     {
         #region members
@@ -102,7 +103,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                             if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
                             {
-                                #region allows user login
+                                // allows user login
 
                                 #region check-in user
 
@@ -195,8 +196,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                 }
 
                                 #endregion redirects user
-
-                                #endregion allows user login
                             }
                             else
                             {

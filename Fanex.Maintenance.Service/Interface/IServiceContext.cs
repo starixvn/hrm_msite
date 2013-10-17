@@ -9,9 +9,6 @@
 
 namespace Fanex.Maintenance.Service.Interface
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public interface IServiceContext
     {
         /// <summary>

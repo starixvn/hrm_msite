@@ -18,19 +18,34 @@ namespace Fanex.Maintenance.Criteria.MailService
     /// </summary>
     public class MailSettingViewModel
     {
+        public MailSettingViewModel()
+        {
+        }
+
+        public MailSettingViewModel(MailSetting mailSetting)
+        {
+            this.SettingName = mailSetting.SettingName;
+            this.SettingId = mailSetting.SettingID;
+            this.Server = mailSetting.Server;
+            this.Port = mailSetting.Port;
+            this.Username = mailSetting.Username;
+            this.Password = mailSetting.Password;
+            this.IsAuth = mailSetting.IsAuth;
+        }
+        
         public int SettingId { get; set; }
                 
         [Display(Name = "Setting_Name", ResourceType = typeof(ViewResource))]
         [StringLength(50, MinimumLength = 2,
             ErrorMessageResourceName = "InputLengthValidationMsg",
-            ErrorMessageResourceType = typeof(ViewResource))]        
+            ErrorMessageResourceType = typeof(ViewResource))]
         public string SettingName { get; set; }
 
         [Required]
         [Display(Name = "Server", ResourceType = typeof(ViewResource))]
         [StringLength(50, MinimumLength = 2,
             ErrorMessageResourceName = "InputLengthValidationMsg",
-            ErrorMessageResourceType = typeof(ViewResource))]        
+            ErrorMessageResourceType = typeof(ViewResource))]
         public string Server { get; set; }
 
         [Required]
@@ -49,22 +64,7 @@ namespace Fanex.Maintenance.Criteria.MailService
 
         [Display(Name = "IsAuth", ResourceType = typeof(ViewResource))]
         public bool IsAuth { get; set; }
-
-        public MailSettingViewModel()
-        {
-        }
-
-        public MailSettingViewModel(MailSetting mailSetting)
-        {
-            this.SettingName = mailSetting.SettingName;
-            this.SettingId = mailSetting.SettingID;
-            this.Server = mailSetting.Server;
-            this.Port = mailSetting.Port;
-            this.Username = mailSetting.Username;
-            this.Password = mailSetting.Password;
-            this.IsAuth = mailSetting.IsAuth;
-        }
-
+        
         public MailSetting GetMailSetting()
         {
             MailSetting mailSetting = new MailSetting

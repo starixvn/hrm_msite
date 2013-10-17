@@ -11,12 +11,13 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using System.Text;
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Alias update criteria.
+    /// </summary>
     public class AliasUpdateCriteria : CriteriaBase
     {
         private readonly string _formatXml = "<Sites SiteId='{0}'/>";

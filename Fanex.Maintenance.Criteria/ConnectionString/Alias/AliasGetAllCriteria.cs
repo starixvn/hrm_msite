@@ -13,6 +13,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Alias get all criteria.
+    /// </summary>
     public class AliasGetAllCriteria : CriteriaBase
     {
         private string _alias;

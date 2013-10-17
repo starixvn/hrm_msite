@@ -10,10 +10,8 @@
 namespace Fanex.Maintenance.Criteria.Misc
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class LogExecSpCriteria : CriteriaBase
     {
         public int CurrentUserId { get; set; }
