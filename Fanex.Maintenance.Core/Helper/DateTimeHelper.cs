@@ -11,13 +11,11 @@
 namespace Fanex.Maintenance.Core.Helper
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class DateTimeHelper
     {
         /// <summary>
@@ -28,6 +26,7 @@ namespace Fanex.Maintenance.Core.Helper
         public static string GetFullTime(int timeValue)
         {
             string strTime = timeValue.ToString();
+
             if (strTime.Length < 6)
             {
                 int count = 6 - strTime.Length;
@@ -37,10 +36,12 @@ namespace Fanex.Maintenance.Core.Helper
                 }
             }
 
-            strTime = DateTime.ParseExact(strTime,
-                    "HHmmss",
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.None).ToString("HH:mm:ss tt");
+            strTime = DateTime.ParseExact(
+                strTime,
+                "HHmmss",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None).ToString("HH:mm:ss tt");
+
             return strTime;
         }
 
@@ -51,10 +52,11 @@ namespace Fanex.Maintenance.Core.Helper
         /// <returns></returns>
         public static DateTime GetFullDate(string dateString)
         {
-            DateTime fullDate = dateString.Length == 8 ? DateTime.ParseExact(dateString,
-                                "yyyyMMdd",
-                                CultureInfo.InvariantCulture,
-                                DateTimeStyles.None) : DateTime.MinValue;
+            DateTime fullDate = dateString.Length == 8 ? DateTime.ParseExact(
+                dateString,
+                "yyyyMMdd",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None) : DateTime.MinValue;
 
             return fullDate;
         }
@@ -78,10 +80,12 @@ namespace Fanex.Maintenance.Core.Helper
                     }
                 }
 
-                DateTime fullDatetime = DateTime.ParseExact(dateNumber.ToString() + " " + strTime,
+                DateTime fullDatetime = DateTime.ParseExact(
+                    dateNumber.ToString() + " " + strTime,
                     "yyyyMMdd HHmmss",
                     CultureInfo.InvariantCulture,
                     DateTimeStyles.None);
+
                 return fullDatetime;
             }
         }

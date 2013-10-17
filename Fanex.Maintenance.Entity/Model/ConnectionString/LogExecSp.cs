@@ -40,6 +40,5 @@ namespace Fanex.Maintenance.Entity.Model.ConnectionString
         public string Items { get; set; }
 
         public string SubItems { get; set; }
-
     }
 }

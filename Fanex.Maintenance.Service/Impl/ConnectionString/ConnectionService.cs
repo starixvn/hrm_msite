@@ -11,7 +11,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Common.Helper;
     using Fanex.ConnectionString.Domain;
     using Fanex.Maintenance.Criteria.ConnectionString.Connection;
@@ -22,7 +21,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ConnectionService : BaseService, IConnectionService
     {
         #region Member

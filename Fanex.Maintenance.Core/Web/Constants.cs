@@ -13,60 +13,6 @@ namespace Fanex.Maintenance.Core.Web
     using System.Collections.Generic;
 
     /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    public static class Constants
-    {
-        /// <summary>
-        /// Job Constant
-        /// </summary>
-        public const string JOB = "JOB";
-
-        /// <summary>
-        /// Steps Constant
-        /// </summary>
-        public const string STEPS = "STEPS";
-
-        /// <summary>
-        /// SCEDULES
-        /// </summary>
-        public const string SCEDULES = "SCEDULES";
-
-        /// <summary>
-        /// Targets Constant
-        /// </summary>
-        public const string TARGETS = "TARGETS";
-
-        /// <summary>
-        /// Full Constant
-        /// </summary>
-        public const string FULL = "FULL";
-
-        public static readonly List<int> NOTIFY_WHEN_JOB_STATUS = new List<int>
-        {
-            0,
-            3
-        };
-
-        /// <summary>
-        /// Freq Interval Values
-        /// </summary>
-        public static string[] FreqIntervalValues = new string[]
-        {
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Day",
-            "Weekday",
-            "Weekend day"
-        };
-    }
-
-    /// <summary>
     /// Status job
     /// </summary>
     public enum Status
@@ -175,5 +121,59 @@ namespace Fanex.Maintenance.Core.Web
     {
         Normal = 0,
         Resource = 1
+    }
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public static class Constants
+    {
+        /// <summary>
+        /// Job Constant
+        /// </summary>
+        public const string JOB = "JOB";
+
+        /// <summary>
+        /// Steps Constant
+        /// </summary>
+        public const string STEPS = "STEPS";
+
+        /// <summary>
+        /// SCEDULES
+        /// </summary>
+        public const string SCEDULES = "SCEDULES";
+
+        /// <summary>
+        /// Targets Constant
+        /// </summary>
+        public const string TARGETS = "TARGETS";
+
+        /// <summary>
+        /// Full Constant
+        /// </summary>
+        public const string FULL = "FULL";
+
+        public static readonly List<int> NOTIFY_WHEN_JOB_STATUS = new List<int>
+        {
+            0,
+            3
+        };
+
+        /// <summary>
+        /// Freq Interval Values
+        /// </summary>
+        public static string[] FreqIntervalValues = new string[]
+        {
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Day",
+            "Weekday",
+            "Weekend day"
+        };
     }
 }

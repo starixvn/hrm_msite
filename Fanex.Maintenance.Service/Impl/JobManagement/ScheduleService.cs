@@ -39,6 +39,23 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #endregion Member
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        private ScheduleService()
+            : this(null)
+        {
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="scheduleRepository"></param>
+        private ScheduleService(IScheduleRepository scheduleRepository)
+        {
+            _scheduleRepository = scheduleRepository ?? new ScheduleRepository();
+        }
+
         #region Properties
 
         public string ServerIp { get; set; }
@@ -57,25 +74,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #endregion Properties
 
-        #region Ctor
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        private ScheduleService()
-            : this(null)
-        {
-        }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="scheduleRepository"></param>
-        private ScheduleService(IScheduleRepository scheduleRepository)
-        {
-            _scheduleRepository = scheduleRepository ?? new ScheduleRepository();
-        }
-
         /// <summary>
         /// Create schedule service
         /// </summary>
@@ -84,8 +82,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         {
             return new ScheduleService();
         }
-
-        #endregion Ctor
 
         /// <summary>
         /// Search Schedule with Server IP
@@ -171,15 +167,15 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         public IEnumerable<ScheduleDetail> GetSchedules()
         {
             List<ScheduleDetail> schedules = new List<ScheduleDetail>();
+
             try
             {
                 //// Get All Schedule from Database
                 if (!string.IsNullOrEmpty(ServerIp))
                 {
-                    schedules.AddRange(_scheduleRepository.GetAllSchedule(new GetAllScheduleCriteria
-                    {
-                        ScheduleName = ScheduleName
-                    }, ServerIp));
+                    schedules.AddRange(_scheduleRepository.GetAllSchedule(
+                        new GetAllScheduleCriteria { ScheduleName = ScheduleName }, 
+                        ServerIp));
                 }
                 else
                 {
@@ -188,23 +184,25 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
                     foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                     {
-                        listTask[taskIndex] = Task.Factory.StartNew<IEnumerable<ScheduleDetail>>(param
-                        =>
-                        {
-                            ScheduleParamForTask scheduleParamForTask = (ScheduleParamForTask)param;
-                            return _scheduleRepository.GetAllSchedule(new GetAllScheduleCriteria
+                        listTask[taskIndex] = Task.Factory.StartNew<IEnumerable<ScheduleDetail>>(
+                            param =>
                             {
-                                ScheduleName = scheduleParamForTask.ScheduleName
-                            }, scheduleParamForTask.ServerIp);
-                        }, new ScheduleParamForTask
-                        {
-                            ScheduleName = ScheduleName,
-                            ServerIp = server.ServerIp
-                        });
+                                ScheduleParamForTask scheduleParamForTask = (ScheduleParamForTask)param;
+                                return _scheduleRepository.GetAllSchedule(
+                                    new GetAllScheduleCriteria { ScheduleName = scheduleParamForTask.ScheduleName }, 
+                                    scheduleParamForTask.ServerIp);
+                            }, 
+                            new ScheduleParamForTask
+                            {
+                                ScheduleName = ScheduleName,
+                                ServerIp = server.ServerIp
+                            });
+
                         taskIndex++;
                     }
 
                     Task.WaitAll(listTask);
+
                     for (int i = 0; i < listTask.Length; i++)
                     {
                         schedules.AddRange(listTask[i].Result);

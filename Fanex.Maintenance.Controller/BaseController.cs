@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Class1.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,24 +9,20 @@
 
 namespace Fanex.Maintenance.Controller
 {
-    using System.Diagnostics.CodeAnalysis;
+    using System;
     using System.Web.Mvc;
+    using Fanex.Maintenance.Service.Impl;
+    using Fanex.Maintenance.Service.Interface;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
-    using Fanex.Maintenance.Service.Interface;
-    using Fanex.Maintenance.Service.Impl;
-    using System;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class BaseController : Controller
     {
         protected readonly string Environment = NapSettings.Settings.Environment;
 
         protected readonly int SiteId = NapSettings.Settings.SiteId;
-
-        private int _issiteLogin = NapSettings.Settings.IsSiteLogin;
 
         protected readonly CurrentContext CurrentContext;
 
@@ -34,20 +30,9 @@ namespace Fanex.Maintenance.Controller
 
         protected readonly CurrentSession CurrentSession;
 
+        private int _issiteLogin = NapSettings.Settings.IsSiteLogin;
+
         private ViewFlags _viewFlags;
-
-        protected ViewFlags ViewFlags
-        {
-            get
-            {
-                return ViewBag.ViewFlags;
-            }
-
-            set
-            {
-                ViewBag.ViewFlags = _viewFlags = value;
-            }
-        }
 
         public BaseController()
         {
@@ -64,6 +49,19 @@ namespace Fanex.Maintenance.Controller
             {
                 IsReCheckin = NapSettings.Settings.ReCheckIn
             };
+        }
+
+        protected ViewFlags ViewFlags
+        {
+            get
+            {
+                return ViewBag.ViewFlags;
+            }
+
+            set
+            {
+                ViewBag.ViewFlags = _viewFlags = value;
+            }
         }
 
         /// <summary>

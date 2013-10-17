@@ -10,9 +10,9 @@
 namespace Fanex.Maintenance.Service.Interface.ConnectionString
 {
     using System.Collections.Generic;
+    using Fanex.ConnectionString.Domain;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using Fanex.ConnectionString.Domain;
 
     /// <summary>
     /// TODO: Update summary.

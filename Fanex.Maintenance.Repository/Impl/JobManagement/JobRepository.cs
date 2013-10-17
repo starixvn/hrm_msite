@@ -109,12 +109,14 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                             {
                                 JobId = reader.To<Guid>("job_id"),
                                 Name = reader.ToString("job_name")
-                            } : new Job(),
+                            } 
+                            : new Job(),
                             Step = !reader.IsDBNull("step_id") ? new Step
                             {
                                 Id = reader.ToInt("step_id"),
                                 Name = reader.ToString("step_name")
-                            } : new Step(),
+                            } 
+                            : new Step(),
                             SqlMessageId = reader.ToInt("sql_message_id"),
                             SqlSeverity = reader.ToInt("sql_severity"),
                             Message = reader.ToString("message"),
@@ -122,13 +124,6 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                             RunDate = reader.ToInt("run_date"),
                             RunTime = reader.ToInt("run_time"),
                             RunDuration = reader.ToInt("run_duration"),
-                            //OperatorIdEmailed = !reader.IsDBNull("operator_emailed") ?
-                            //                        reader.ToInt("operator_emailed") : 0,
-                            //OperatorIdNetsend = !reader.IsDBNull("operator_netsent") ?
-                            //                        reader.ToInt("operator_netsent") : 0,
-                            //OperatorIdPaged = !reader.IsDBNull("operator_paged") ?
-                            //                        reader.ToInt("operator_paged") : 0,
-                            //RetriesAttempted = reader.ToInt("retries_attempted"),
                             Server = reader.ToString("server")
                         };
                     };

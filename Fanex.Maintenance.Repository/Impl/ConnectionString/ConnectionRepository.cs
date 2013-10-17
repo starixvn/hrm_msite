@@ -86,12 +86,14 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                                 Id = reader.ToInt("DbServerId"),
                                 Name = reader.ToString("ServerName"),
                                 ServerIP = reader.ToString("ServerIP")
-                            } : new DatabaseServer(),
+                            } 
+                            : new DatabaseServer(),
                             Modifier = !reader.IsDBNull("ModifierUserId") ? new Users
                             {
                                 Id = reader.ToInt("ModifierUserId"),
                                 Name = reader.ToString("ModifierUsername")
-                            } : new Users(),
+                            } 
+                            : new Users(),
                             ModifiedDate = !reader.IsDBNull("ModifiedDate") ? reader.ToDateTime("ModifiedDate") : DateTime.Now,
                             IsDefault = reader.ToBool("IsDefault")
                         },
@@ -116,8 +118,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                     return db.QueryEntity<ConnectionString, DatabaseServer, Alias, ConnectionString, ConnectionString>(
                         (c, d, a, c1) => { c.Server = d; c.Alias = a; c.PrimaryConnection = c1; return c; },
                         "ServerId,AliasId,PrimaryConectionId",
-                        criteria.GetSpParams()
-                        );
+                        criteria.GetSpParams());
                 }
             }
             catch (Exception ex)

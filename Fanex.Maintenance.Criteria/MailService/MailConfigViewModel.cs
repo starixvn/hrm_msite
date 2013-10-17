@@ -20,6 +20,10 @@ namespace Fanex.Maintenance.Criteria.MailService
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailConfigViewModel
     {
+        public MailConfigViewModel()
+        {
+        }
+        
         public int AppId { get; set; }
 
         [Required]
@@ -44,10 +48,6 @@ namespace Fanex.Maintenance.Criteria.MailService
 
         [Display(Name = "IsEncrypt", ResourceType = typeof(ViewResource))]
         public bool IsEncrypt { get; set; }
-
-        public MailConfigViewModel()
-        {
-        }
 
         public MailConfigViewModel(MailConfig mailSetting)
         {

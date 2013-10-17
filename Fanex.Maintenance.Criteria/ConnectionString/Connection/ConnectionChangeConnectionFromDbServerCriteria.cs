@@ -45,6 +45,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 
                 return strXml.ToString();
             }
+
             set
             {
                 Value = value;

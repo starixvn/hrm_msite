@@ -11,7 +11,6 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Entity.Model.ConnectionString;
     using Fanex.Common.Helper;
     using Fanex.ConnectionString.Domain;
@@ -23,14 +22,9 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class AliasService : BaseService, IAliasService
     {
-        #region Member
-
         private readonly IAliasRepository _aliasRepository;
-
-        #endregion Member
 
         #region Ctor
 

@@ -10,12 +10,10 @@
 namespace Fanex.Maintenance.Entity.Model
 {
     using Fanex.Maintenance.Entity.Domain;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ScheduleDetail : Schedule
     {
         public int JobCount { get; set; }
@@ -27,7 +25,6 @@ namespace Fanex.Maintenance.Entity.Model
         public string FreqSubIntervalCombine { get; set; }
     }
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ScheduleParamForTask
     {
         public string ScheduleName { get; set; }

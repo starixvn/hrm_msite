@@ -21,9 +21,7 @@ namespace Fanex.Maintenance.Core.Helper
         /// <param name="mailSubject"></param>
         /// <param name="mailTitle"></param>
         /// <param name="mailBody"></param>
-        public static void SendMail(string mailSubject = "", 
-            string mailTitle = "", 
-            string mailBody = "")
+        public static void SendMail(string mailSubject = "", string mailTitle = "", string mailBody = "")
         {
             try
             {

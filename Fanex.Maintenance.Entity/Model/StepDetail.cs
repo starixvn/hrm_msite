@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ISteps.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="StepDetail.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -10,10 +10,8 @@
 namespace Fanex.Maintenance.Entity.Model
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Entity.Domain;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class StepDetail : IEntity<int, string>
     {
         /// <summary>

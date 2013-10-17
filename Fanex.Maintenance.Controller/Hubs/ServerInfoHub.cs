@@ -9,20 +9,18 @@
 
 namespace Fanex.Maintenance.Controller.Hubs
 {
+    using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core.Configurations;
+    using Fanex.Maintenance.Core.Helper;
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Microsoft.AspNet.SignalR.Hubs;
-    using Fanex.Maintenance.Core.Helper;
-    using System;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ServerInfoHub : Hub
     {
         public void SendData(string data)
@@ -58,7 +56,6 @@ namespace Fanex.Maintenance.Controller.Hubs
             }
 
             Clients.All.firstMessage(resourceInfoes);
-            //Clients.firstMessage(resourceInfoes);
         }
     }
 }

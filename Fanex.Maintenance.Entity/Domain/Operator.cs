@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IOperators.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Operator.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,9 +9,6 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Operator : IEntity<int, string>
     {
         /// <summary>

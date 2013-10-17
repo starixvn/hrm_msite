@@ -9,10 +9,8 @@
 
 namespace Fanex.Maintenance.Entity.Model
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.ComponentModel.DataAnnotations;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Machine
     {
         public int MachineId { get; set; }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ISchedules.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Schedule.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,9 +11,7 @@
 namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class Schedule : IEntity<int, string>
     {
         public string ScheduleUId { get; set; }

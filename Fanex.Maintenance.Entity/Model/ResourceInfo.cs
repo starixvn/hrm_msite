@@ -1,18 +1,19 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ResourceInfo.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="ResourceInfo.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Ricky.Nguyen" date="2013.1.4">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Entity.Model
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ResourceInfo
     {
         public float SqlCpuPercent { get; set; }

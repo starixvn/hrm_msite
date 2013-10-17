@@ -31,10 +31,6 @@ namespace Fanex.Maintenance.Controller.Worker
     {
         private int _getDataInterval;
 
-        public static DateTime LastSqlAgentLogNotificationTime { get; set; }
-
-        public static DateTime LastJobLogNotificationTime { get; set; }
-
         private IJobService _jobService;
 
         private ISqlServerLogService _sqlServerLogService;
@@ -93,9 +89,7 @@ namespace Fanex.Maintenance.Controller.Worker
 
         private string _rowEvenStyle = "align=\"center\" valign=\"Middle\" style=\"background-color:#f2f2f2;min-height:25px\"";
 
-        public NotificationWorker(
-            long getDataInterval = 60000)
-            : base()
+        public NotificationWorker(long getDataInterval = 60000) : base()
         {
             _getDataInterval = (int)getDataInterval;
             _jobService = JobService.Create();
@@ -104,6 +98,10 @@ namespace Fanex.Maintenance.Controller.Worker
             LastSqlAgentLogNotificationTime = DateTime.Now;
             LastJobLogNotificationTime = DateTime.Now;
         }
+
+        public static DateTime LastSqlAgentLogNotificationTime { get; set; }
+
+        public static DateTime LastJobLogNotificationTime { get; set; }
 
         /// <summary>
         /// Run Until stop thread

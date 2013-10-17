@@ -19,8 +19,7 @@ namespace Fanex.Maintenance.Site.App_Start
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            #region css
-
+            // css
             bundles.AddAndInclude(
                 "~/css/common",
                 "~/themes/reset.css",
@@ -33,25 +32,25 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/scripts/Plugin/notification/jquery.toastmessage.css",
                 "~/scripts/lib/chosen/chosen.css");
 
-            bundles.AddAndInclude("~/css/mail-list",
+            bundles.AddAndInclude(
+                "~/css/mail-list",
                 "~/themes/job/user/manage.less",
                 "~/themes/job/RefreshCountDown.less",
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Grid.css",
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.css");
 
-            bundles.AddAndInclude("~/css/manage",
+            bundles.AddAndInclude(
+                "~/css/manage",
                 "~/themes/job/user/manage.less");
 
-            bundles.AddAndInclude("~/css/log",
+            bundles.AddAndInclude(
+                "~/css/log",
                 "~/themes/job/log/manage.less",
                 "~/scripts/Plugin/Fanex.Grid/Fanex.Pagination.css",
                 "~/scripts/Plugin/Select2/select2.css",
                 "~/scripts/Plugin/Select2/select2-custom.css");
 
-            #endregion css
-
-            #region js
-
+            // js
             bundles.Add(new ScriptBundle("~/scripts/common").Include(
                 "~/scripts/lib/jquery-1.8.0.min.js",
                 "~/scripts/lib/modernizr-2.6.1.js",
@@ -98,17 +97,13 @@ namespace Fanex.Maintenance.Site.App_Start
             bundles.Add(new ScriptBundle("~/scripts/recheckin").Include(
               "~/Areas/UserLogin/scripts/ReCheckIn.js"));
 
-            #endregion js
-
             bundles.FileSetOrderList.Clear();
         }
     }
 
     internal static class BundleExtensions
     {
-        public static void AddAndInclude(
-            this BundleCollection bundles,
-            string bundleVirtualPath, params string[] virtualPaths)
+        public static void AddAndInclude(this BundleCollection bundles, string bundleVirtualPath, params string[] virtualPaths)
         {
             bundles.Add(new Bundle(bundleVirtualPath)
             {

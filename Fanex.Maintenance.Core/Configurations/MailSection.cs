@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SpNameSection.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="MailSection.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -10,26 +10,23 @@
 namespace Fanex.Maintenance.Core.Configurations
 {
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailSection : ConfigurationSection
     {
         /// <summary>
         /// List Sp Name
         /// </summary>
         [ConfigurationProperty("Mails", IsDefaultCollection = false)]
-        [ConfigurationCollection(typeof(MailCollection),
-            AddItemName = "add")]
+        [ConfigurationCollection(typeof(MailCollection), AddItemName = "add")]
         public MailCollection Mails
         {
             get
             {
-                var mailCollection =
-                    (MailCollection)base["Mails"];
+                var mailCollection = (MailCollection)base["Mails"];
+
                 return mailCollection;
             }
         }
@@ -41,8 +38,7 @@ namespace Fanex.Maintenance.Core.Configurations
         {
             get
             {
-                var mailSection =
-                 ConfigurationManager.GetSection("MailSection") as MailSection;
+                var mailSection = ConfigurationManager.GetSection("MailSection") as MailSection;
                 return mailSection;
             }
         }
@@ -51,7 +47,6 @@ namespace Fanex.Maintenance.Core.Configurations
     /// <summary>
     /// Sp Name Collection
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailCollection : ConfigurationElementCollection
     {
         /// <summary>
@@ -136,7 +131,6 @@ namespace Fanex.Maintenance.Core.Configurations
     /// <summary>
     /// Sp name element
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailElement : ConfigurationElement
     {
         /// <summary>

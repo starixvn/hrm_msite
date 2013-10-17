@@ -101,7 +101,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
         }
 
-
         public ServerStatus GetServerStatus(string connectionString)
         {
             try

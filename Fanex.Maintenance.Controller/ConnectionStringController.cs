@@ -297,7 +297,6 @@ namespace Fanex.Maintenance.Controller
                 return RedirectToAction("NotFound", "CommonError");
             }
 
-
             var connection = _connectionService.GetByAlias(alias.Id);
             if (!connection.Any())
             {

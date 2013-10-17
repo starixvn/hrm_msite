@@ -19,13 +19,7 @@ namespace Fanex.Maintenance.Service.Impl
     /// </summary>
     public class MachineService
     {
-        #region Member
-
         private readonly MachineRepository _machineRepository = new MachineRepository();
-
-        #endregion Member
-
-        #region Constructor
 
         /// <summary>
         /// Constructor
@@ -42,8 +36,6 @@ namespace Fanex.Maintenance.Service.Impl
         {
             return new MachineService();
         }
-
-        #endregion Constructor
 
         /// <summary>
         /// Get all machines

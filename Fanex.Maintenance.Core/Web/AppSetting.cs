@@ -39,17 +39,7 @@ namespace Fanex.Maintenance.Core.Web
 
         private static long _getCpuUtilizationInterval = 2000;
 
-        public static long GetCpuUtilizationInterval
-        {
-            get { return AppSetting._getCpuUtilizationInterval; }
-        }
-
         private static long _getMemoryUtilizationInterval = 2000;
-
-        public static long GetMemoryUtilizationInterval
-        {
-            get { return AppSetting._getMemoryUtilizationInterval; }
-        }
 
         private static bool _notifiServer = false;
 
@@ -72,6 +62,16 @@ namespace Fanex.Maintenance.Core.Web
             {
                 Logger.Log.Error(ex.ToString(), ex);
             }
+        }
+
+        public static long GetCpuUtilizationInterval
+        {
+            get { return AppSetting._getCpuUtilizationInterval; }
+        }
+
+        public static long GetMemoryUtilizationInterval
+        {
+            get { return AppSetting._getMemoryUtilizationInterval; }
         }
 
         /// <summary>

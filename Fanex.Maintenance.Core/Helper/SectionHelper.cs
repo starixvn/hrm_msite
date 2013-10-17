@@ -51,9 +51,7 @@ namespace Fanex.Maintenance.Core.Helper
         /// <param name="serverName">Server Name</param>
         /// <param name="getType">Get Server Type</param>
         /// <returns>Connection String maps with server name</returns>
-        public static string GetConnectionStringFromServerIp(
-            string serverIp = "",
-            int getType = 0)
+        public static string GetConnectionStringFromServerIp(string serverIp = "", int getType = 0)
         {
             string connectionString = string.Empty;
             switch (getType)
@@ -77,8 +75,8 @@ namespace Fanex.Maintenance.Core.Helper
                             }
                         }
                     }
-
                     break;
+
                 case (int)ServerType.Resource:
                     {
                         foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
@@ -98,7 +96,6 @@ namespace Fanex.Maintenance.Core.Helper
                             }
                         }
                     }
-
                     break;
             }
 
@@ -131,6 +128,7 @@ namespace Fanex.Maintenance.Core.Helper
         public static string GetSpNameFromSpKey(string storeProcedureKey)
         {
             string storeProcedureName = string.Empty;
+
             foreach (SpNameElement sp in SpNameSection.Instance.SpNames)
             {
                 if (sp.Key == storeProcedureKey)

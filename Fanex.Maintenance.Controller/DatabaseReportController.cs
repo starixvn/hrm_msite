@@ -12,7 +12,6 @@ namespace Fanex.Maintenance.Controller
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web.Mvc;
     using Fanex.DataValidation.Service.Implement;
@@ -25,7 +24,6 @@ namespace Fanex.Maintenance.Controller
     /// Database report controller
     /// </summary>
     [Authorize]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class DatabaseReportController : BaseController
     {
         #region Member

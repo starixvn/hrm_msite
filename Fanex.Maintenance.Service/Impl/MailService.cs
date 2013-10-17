@@ -11,7 +11,6 @@ namespace Fanex.Maintenance.Service.Impl
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.MailDeliver.MailClient.API;
     using Fanex.MailDeliver.Model;
@@ -20,21 +19,19 @@ namespace Fanex.Maintenance.Service.Impl
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailService : IMailService
     {
-        #region Member
-
         private int _appId;
+
         private string _byDate;
+
         private string _toDate;
+
         private int _page;
+
         private int _counter;
+
         private MailStatus _mailStatus;
-
-        #endregion Member
-
-        #region Ctor
 
         /// <summary>
         /// Constructor
@@ -52,8 +49,6 @@ namespace Fanex.Maintenance.Service.Impl
             return new MailService();
         }
 
-        #endregion Ctor
-
         /// <summary>
         /// Get list mail config filter by server ip
         /// </summary>
@@ -62,6 +57,7 @@ namespace Fanex.Maintenance.Service.Impl
         public List<MailConfig> GetListConfig(string ip = "")
         {
             var configs = new List<MailConfig>();
+
             using (var client = new MailDeliver())
             {
                 var data = client.GetListConfig(ip);
@@ -131,6 +127,7 @@ namespace Fanex.Maintenance.Service.Impl
         public List<MailRecord> GetListMail()
         {
             var mails = new List<MailRecord>();
+
             using (var client = new MailDeliver())
             {
                 var dateTime = DateTime.Parse(_byDate);
@@ -151,11 +148,13 @@ namespace Fanex.Maintenance.Service.Impl
         public List<MailRecord> GetListMailByDate(ref int totalRows)
         {
             var mails = new List<MailRecord>();
+
             using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
             {
                 var dateTime = DateTime.Parse(_byDate);
                 var dateTimeTo = DateTime.Parse(_toDate);
                 var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, ref totalRows, _page, _counter, _mailStatus);
+
                 if (data != null)
                 {
                     mails = data.Select(mailRecord =>
@@ -179,6 +178,7 @@ namespace Fanex.Maintenance.Service.Impl
         public MailRecord GetMail(int mailID)
         {
             MailRecord mail = null;
+
             using (var client = new MailDeliver())
             {
                 mail = client.GetMail(mailID);
@@ -194,6 +194,7 @@ namespace Fanex.Maintenance.Service.Impl
         public List<MailSetting> GetListSetting()
         {
             var settings = new List<MailSetting>();
+
             using (var client = new MailDeliver())
             {
                 var data = client.GetListSetting();
@@ -213,6 +214,7 @@ namespace Fanex.Maintenance.Service.Impl
         public List<MailFunction> GetListFunction()
         {
             var functions = new List<MailFunction>();
+
             using (var client = new MailDeliver())
             {
                 var data = client.GetListFuntion();
@@ -256,6 +258,7 @@ namespace Fanex.Maintenance.Service.Impl
         public bool StoreSetting(MailSetting setting)
         {
             bool result = false;
+
             if (setting != null)
             {
                 using (var client = new MailDeliver())
@@ -276,6 +279,7 @@ namespace Fanex.Maintenance.Service.Impl
         public bool StoreConfig(MailConfig config)
         {
             bool result = false;
+
             if (config != null)
             {
                 using (var client = new MailDeliver())
@@ -296,6 +300,7 @@ namespace Fanex.Maintenance.Service.Impl
         public bool StoreFunction(MailFunction func)
         {
             bool result = false;
+
             if (func != null)
             {
                 using (var client = new MailDeliver())
@@ -316,6 +321,7 @@ namespace Fanex.Maintenance.Service.Impl
         public MailSetting GetSetting(int settingId)
         {
             MailSetting mail = null;
+
             using (var client = new MailDeliver())
             {
                 mail = client.GetSetting(settingId);
@@ -332,6 +338,7 @@ namespace Fanex.Maintenance.Service.Impl
         public MailConfig GetConfig(int configId)
         {
             MailConfig mail = null;
+
             using (var client = new MailDeliver())
             {
                 mail = client.GetConfig(configId);
@@ -348,6 +355,7 @@ namespace Fanex.Maintenance.Service.Impl
         public MailFunction GetFunction(int functionId)
         {
             MailFunction mail = null;
+
             using (var client = new MailDeliver())
             {
                 mail = client.GetFunction(functionId);
@@ -381,10 +389,10 @@ namespace Fanex.Maintenance.Service.Impl
             return this;
         }
 
-
         public List<MailError> GetError(int mailId)
         {
             List<MailError> mailList = new List<MailError>();
+
             using (var client = new MailDeliver())
             {
                 mailList = client.GetListError(mailId).ToList();

@@ -22,81 +22,7 @@ namespace Fanex.Maintenance.Service.Impl
     /// </summary>
     public class DatabaseReportService : IDatabaseReportService
     {
-        #region Member
-
         private readonly DatabaseReportRepository _databaseReportRepository = new DatabaseReportRepository();
-
-        #endregion Member
-
-        /// <summary>
-        /// Get user online daily
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public DataTable GetUserOnlineDaily(DateTime date)
-        {
-            var criteria = new GetUserOnlineDailyCriteria
-            {
-                Date = date
-            };
-
-            return _databaseReportRepository.GetDataTable(criteria);
-        }
-
-        /// <summary>
-        /// Get list user online
-        /// </summary>
-        /// <param name="top"></param>
-        /// <returns></returns>
-        public DataTable GetUserOnline(int top)
-        {
-            var criteria = new GetUserOnlineCriteria
-            {
-            };
-
-            return _databaseReportRepository.GetDataTable(criteria);
-        }
-
-        /// <summary>
-        /// Generate data table
-        /// </summary>
-        /// <param name="dtb"></param>
-        /// <param name="rowNumber"></param>
-        /// <returns></returns>
-        private static DataTable GenerateDataTable(DataTable dtb, int rowNumber)
-        {
-            string _datetime = dtb.Rows[0]["logdate"].ToString();
-            for (int i = 0; i < rowNumber; i++)
-            {
-                string _date = _datetime.Substring(0, _datetime.IndexOf(" ")).Trim();
-                string _hour = _datetime.Substring(_datetime.IndexOf(" "), _datetime.Length - _datetime.IndexOf(" ")).Trim();
-                string[] arr = _hour.Split(':');
-                DataRow dr = dtb.NewRow();
-                if (Convert.ToInt32(arr[1]) == 60)
-                {
-                    int myhour = Convert.ToInt32(arr[0]) + AppSetting.Minute;
-                    int myminute = Convert.ToInt32(arr[1]) / 60;
-                    _datetime = _date + " " + (myhour < 10 ? "0" + myhour.ToString() : myhour.ToString()) + ":" + (myminute < 10 ? "0" + myminute.ToString() : myminute.ToString());
-                }
-                else
-                {
-                    int _minute = Convert.ToInt32(arr[1]) + AppSetting.Minute;
-
-                    _datetime = _date + " " + arr[0] + ":" + (_minute < 10 ? "0" + _minute.ToString() : _minute.ToString());
-                }
-
-                dr[0] = _datetime;
-                dr[1] = "-1";
-                dr[2] = "-1";
-                dr[3] = "-1";
-                dr[4] = "-1";
-                dr[5] = "-1";
-                dr[6] = "-1";
-                dtb.Rows.Add(dr);
-            }
-
-            return dtb;
-        }
 
         /// <summary>
         /// Change hour to minute
@@ -136,6 +62,35 @@ namespace Fanex.Maintenance.Service.Impl
             return hour.ToString() + ":" + min.ToString();
         }
 
+        /// <summary>
+        /// Get user online daily
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public DataTable GetUserOnlineDaily(DateTime date)
+        {
+            var criteria = new GetUserOnlineDailyCriteria
+            {
+                Date = date
+            };
+
+            return _databaseReportRepository.GetDataTable(criteria);
+        }
+
+        /// <summary>
+        /// Get list user online
+        /// </summary>
+        /// <param name="top"></param>
+        /// <returns></returns>
+        public DataTable GetUserOnline(int top)
+        {
+            var criteria = new GetUserOnlineCriteria
+            {
+            };
+
+            return _databaseReportRepository.GetDataTable(criteria);
+        }
+
         #region Generate Template
 
         /// <summary>
@@ -146,6 +101,7 @@ namespace Fanex.Maintenance.Service.Impl
         public string GenerateTemplateUserDaily(DataTable data)
         {
             StringBuilder _s = new StringBuilder();
+
             foreach (DataRow dr in data.Rows)
             {
                 _s.Append("<tr class=\"row1h\">");
@@ -175,6 +131,7 @@ namespace Fanex.Maintenance.Service.Impl
         public string GenerateTemplateUser(DataTable data, int show)
         {
             StringBuilder _s = new StringBuilder();
+
             foreach (DataRow i in data.Rows)
             {
                 _s.Append("<tr class=\"row1h\">");
@@ -223,5 +180,49 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         #endregion Generate Template
+
+        /// <summary>
+        /// Generate data table
+        /// </summary>
+        /// <param name="dtb"></param>
+        /// <param name="rowNumber"></param>
+        /// <returns></returns>
+        private static DataTable GenerateDataTable(DataTable dtb, int rowNumber)
+        {
+            string _datetime = dtb.Rows[0]["logdate"].ToString();
+
+            for (int i = 0; i < rowNumber; i++)
+            {
+                string _date = _datetime.Substring(0, _datetime.IndexOf(" ")).Trim();
+                string _hour = _datetime.Substring(_datetime.IndexOf(" "), _datetime.Length - _datetime.IndexOf(" ")).Trim();
+                string[] arr = _hour.Split(':');
+                DataRow dr = dtb.NewRow();
+
+                if (Convert.ToInt32(arr[1]) == 60)
+                {
+                    int myhour = Convert.ToInt32(arr[0]) + AppSetting.Minute;
+                    int myminute = Convert.ToInt32(arr[1]) / 60;
+                    _datetime = _date + " " + (myhour < 10 ? "0" + myhour.ToString() : myhour.ToString()) + ":" + (myminute < 10 ? "0" + myminute.ToString() : myminute.ToString());
+                }
+                else
+                {
+                    int _minute = Convert.ToInt32(arr[1]) + AppSetting.Minute;
+
+                    _datetime = _date + " " + arr[0] + ":" + (_minute < 10 ? "0" + _minute.ToString() : _minute.ToString());
+                }
+
+                dr[0] = _datetime;
+                dr[1] = "-1";
+                dr[2] = "-1";
+                dr[3] = "-1";
+                dr[4] = "-1";
+                dr[5] = "-1";
+                dr[6] = "-1";
+
+                dtb.Rows.Add(dr);
+            }
+
+            return dtb;
+        }
     }
 }

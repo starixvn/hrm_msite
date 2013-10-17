@@ -11,12 +11,10 @@
 namespace Fanex.Maintenance.Entity.Model
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SqlServerLog
     {
         public DateTime LogDate { get; set; }
@@ -28,7 +26,6 @@ namespace Fanex.Maintenance.Entity.Model
         public string ServerIp { get; set; }
     }
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SqlLogServerParamForTask
     {
         public int LogType { get; set; }
@@ -36,7 +33,6 @@ namespace Fanex.Maintenance.Entity.Model
         public string ServerIp { get; set; }
     }
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SqlLogSpParamForTask
     {
         public int P1 { get; set; }

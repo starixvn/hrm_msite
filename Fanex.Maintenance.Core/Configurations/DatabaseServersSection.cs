@@ -18,17 +18,27 @@ namespace Fanex.Maintenance.Core.Configurations
     public class DatabaseServersSection : ConfigurationSection
     {
         /// <summary>
+        /// Gets create static instance for reference
+        /// </summary>
+        public static DatabaseServersSection Instance
+        {
+            get
+            {
+                var databaseServers =  ConfigurationManager.GetSection("DatabaseServersSection") as DatabaseServersSection;
+                return databaseServers;
+            }
+        }
+        
+        /// <summary>
         /// Gets List Server
         /// </summary>
         [ConfigurationProperty("servers", IsDefaultCollection = false)]
-        [ConfigurationCollection(typeof(ServerCollection),
-            AddItemName = "add")]
+        [ConfigurationCollection(typeof(ServerCollection), AddItemName = "add")]
         public ServerCollection Servers
         {
             get
             {
-                var serverCollection = (ServerCollection)base["servers"];
-                
+                var serverCollection = (ServerCollection)base["servers"];                
                 return serverCollection;
             }
         }
@@ -37,8 +47,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// Gets List Server ForGet Resource
         /// </summary>
         [ConfigurationProperty("resourceservers", IsDefaultCollection = false)]
-        [ConfigurationCollection(typeof(ServerCollection),
-            AddItemName = "add")]
+        [ConfigurationCollection(typeof(ServerCollection), AddItemName = "add")]
         public ServerCollection ResourceServers
         {
             get
@@ -46,20 +55,6 @@ namespace Fanex.Maintenance.Core.Configurations
                 var resourceServerCollection = (ServerCollection)base["resourceservers"];
 
                 return resourceServerCollection;
-            }
-        }
-
-        /// <summary>
-        /// Gets create static instance for reference
-        /// </summary>
-        public static DatabaseServersSection Instance
-        {
-            get
-            {
-                var databaseServers =
-                 ConfigurationManager.GetSection("DatabaseServersSection") as DatabaseServersSection;
-                
-                return databaseServers;
             }
         }
     }

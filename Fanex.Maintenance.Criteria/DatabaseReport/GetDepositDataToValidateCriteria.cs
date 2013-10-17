@@ -10,10 +10,8 @@
 namespace Fanex.Maintenance.Criteria.DatabaseReport
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetDepositDataToValidateLicenseeWLCriteria : CriteriaBase
     {
         public DateTime Date { get; set; }
@@ -31,7 +29,6 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetDepositDataToValidateSumWLCriteria : GetDepositDataToValidateLicenseeWLCriteria
     {
         public override string GetSettingKey()
@@ -40,7 +37,6 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetDepositDataToValidateSumWLOldCriteria : GetDepositDataToValidateLicenseeWLCriteria
     {
         public override string GetSettingKey()
@@ -49,7 +45,6 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetDepositDataToValidateBettingCriteria : GetDepositDataToValidateLicenseeWLCriteria
     {
         public override string GetSettingKey()
@@ -58,7 +53,6 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetDepositDataToValidateDWCriteria : GetDepositDataToValidateLicenseeWLCriteria
     {
         public override string GetSettingKey()

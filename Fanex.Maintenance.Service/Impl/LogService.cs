@@ -11,7 +11,6 @@ namespace Fanex.Maintenance.Service.Impl
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Criteria.Log;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl;
@@ -19,17 +18,10 @@ namespace Fanex.Maintenance.Service.Impl
     /// <summary>
     /// Log service
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class LogService
     {
-        #region Member
-
         private readonly LogRepository _logRepository = new LogRepository();
 
-        #region Ctor
-
-        #region Properties
-        
         private int? _categoryId;
 
         private int? _machineId;
@@ -47,10 +39,6 @@ namespace Fanex.Maintenance.Service.Impl
         private int _page;
 
         private int _size;
-
-        #endregion Member
-
-        #endregion
 
         /// <summary>
         /// Constructor
@@ -74,8 +62,6 @@ namespace Fanex.Maintenance.Service.Impl
         {
             return new LogService();
         }
-
-        #endregion Ctor
 
         /// <summary>
         /// By categoryId

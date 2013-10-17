@@ -44,7 +44,8 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
                                    {
                                        Id = reader.ToInt("ModifierUserId"),
                                        Name = reader.ToString("ModifierUsername")
-                                   } : new Users(),
+                                   } 
+                                   : new Users(),
                                    ModifiedDate = !reader.IsDBNull("ModifiedDate") ? reader.ToDateTime("ModifiedDate") : DateTime.Now
                                },
                                ConnectionString = new ConnectionString

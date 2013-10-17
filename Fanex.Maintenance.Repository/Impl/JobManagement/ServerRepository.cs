@@ -52,8 +52,8 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 {
                     while (reader.Read())
                     {
-                        resourceInfo.MemoryUsage = (float)Math.Round((reader.ToFloat("MemoryUsage") / 1024), 2);
-                        resourceInfo.TotalMemory = (float)Math.Round((reader.ToFloat("TotalMemory") / 1024), 2);
+                        resourceInfo.MemoryUsage = (float)Math.Round(reader.ToFloat("MemoryUsage") / 1024, 2);
+                        resourceInfo.TotalMemory = (float)Math.Round(reader.ToFloat("TotalMemory") / 1024, 2);
                         resourceInfo.SystemCpuPercent = reader.ToFloat("system_cpu_utilization");
                         resourceInfo.SqlCpuPercent = reader.ToFloat("sql_cpu_utilization");
                         resourceInfo.EventTime = reader.ToDateTime("EventTime");
@@ -183,8 +183,8 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 {
                     while (reader.Read())
                     {
-                        memoryInfo.MemoryUsage = (float)Math.Round((reader.ToFloat("MemoryUsage") / 1024), 2);
-                        memoryInfo.TotalMemory = (float)Math.Round((reader.ToFloat("TotalMemory") / 1024), 2);
+                        memoryInfo.MemoryUsage = (float)Math.Round(reader.ToFloat("MemoryUsage") / 1024, 2);
+                        memoryInfo.TotalMemory = (float)Math.Round(reader.ToFloat("TotalMemory") / 1024, 2);
                         break;
                     }
                 }

@@ -10,26 +10,23 @@
 namespace Fanex.Maintenance.Core.Configurations
 {
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SpNameSection : ConfigurationSection
     {
         /// <summary>
         /// List Sp Name
         /// </summary>
         [ConfigurationProperty("spList", IsDefaultCollection = false)]
-        [ConfigurationCollection(typeof(SpNameCollection),
-            AddItemName = "add")]
+        [ConfigurationCollection(typeof(SpNameCollection), AddItemName = "add")]
         public SpNameCollection SpNames
         {
             get
             {
-                var storeProcedureNameCollection =
-                    (SpNameCollection)base["spList"];
+                var storeProcedureNameCollection = (SpNameCollection)base["spList"];
+
                 return storeProcedureNameCollection;
             }
         }
@@ -41,8 +38,8 @@ namespace Fanex.Maintenance.Core.Configurations
         {
             get
             {
-                var storeProcedureNameSection =
-                 ConfigurationManager.GetSection("SpNameSection") as SpNameSection;
+                var storeProcedureNameSection = ConfigurationManager.GetSection("SpNameSection") as SpNameSection;
+
                 return storeProcedureNameSection;
             }
         }
@@ -51,7 +48,6 @@ namespace Fanex.Maintenance.Core.Configurations
     /// <summary>
     /// Sp Name Collection
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SpNameCollection : ConfigurationElementCollection
     {
         /// <summary>
@@ -136,7 +132,6 @@ namespace Fanex.Maintenance.Core.Configurations
     /// <summary>
     /// Sp name element
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class SpNameElement : ConfigurationElement
     {
         /// <summary>

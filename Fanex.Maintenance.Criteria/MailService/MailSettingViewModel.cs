@@ -10,14 +10,12 @@
 namespace Fanex.Maintenance.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
     using MailDeliver.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailSettingViewModel
     {
         public int SettingId { get; set; }

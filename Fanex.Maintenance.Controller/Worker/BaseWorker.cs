@@ -10,20 +10,17 @@
 namespace Fanex.Maintenance.Controller.Worker
 {
     using System.Threading;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class BaseWorker
     {
         private Thread _workerThread;
-        private IMaintainanceService _maintenceService;
 
-        protected bool IsStop { get; set; }
+        private IMaintainanceService _maintenceService;
 
         public BaseWorker()
         {
@@ -31,9 +28,7 @@ namespace Fanex.Maintenance.Controller.Worker
             _maintenceService = new MaintainanceService();
         }
 
-        protected virtual void Run()
-        {
-        }
+        protected bool IsStop { get; set; }
 
         public void Start()
         {
@@ -61,6 +56,10 @@ namespace Fanex.Maintenance.Controller.Worker
 
                 return downtimeInfo.IsDowntime;
             }
+        }
+
+        protected virtual void Run()
+        {
         }
     }
 }

@@ -47,12 +47,14 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                         OnSuccessStep = !reader.IsDBNull("on_success_step_id") ? new Step
                         {
                             Id = reader.ToInt("on_success_step_id")
-                        } : new Step(),
+                        } 
+                        : new Step(),
                         OnFailAction = reader.ToString("on_fail_action"),
                         OnFailStep = !reader.IsDBNull("on_fail_step_id") ? new Step
                         {
                             Id = reader.ToInt("on_fail_step_id")
-                        } : new Step(),
+                        } 
+                        : new Step(),
                         Server = reader.ToString("server"),
                         DatabaseName = reader.ToString("database_user_name"),
                         RetryAttempts = reader.ToInt("retry_attempts"),

@@ -360,14 +360,16 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
                     if (indexOutCome == 0)
                     {
-                        list.Insert(0, new JobLog
-                        {
-                            Step = new Step
+                        list.Insert(
+                            0, 
+                            new JobLog
                             {
-                                Id = 0,
-                                Name = "(Job outcome)"
-                            }
-                        });
+                                Step = new Step
+                                {
+                                    Id = 0,
+                                    Name = "(Job outcome)"
+                                }
+                            });
                     }
                 }
 

@@ -10,19 +10,16 @@
 namespace Fanex.Maintenance.Controller.Worker
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
-    using System.Threading.Tasks;
     using Fanex.Logging;
     using Fanex.Maintenance.Controller.Hubs;
     using Fanex.Maintenance.Core.Configurations;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl.JobManagement;
     using Fanex.Maintenance.Service.Interface.JobManagement;
-    using Microsoft.AspNet.SignalR.Hubs;
     using Microsoft.AspNet.SignalR;
-    using Fanex.Maintenance.Core.Web;
+    using Microsoft.AspNet.SignalR.Hubs;
 
     /// <summary>
     /// TODO: Update summary.
@@ -30,19 +27,17 @@ namespace Fanex.Maintenance.Controller.Worker
     [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MemoryUtilizationWorker : BaseWorker
     {
-        private int _getDataInterval { get; set; }
-
-        private IServerService _serverService { get; set; }
-
         private IHubContext _hubContext;
 
-        public MemoryUtilizationWorker(
-            long getDataInterval = 10000)
-            : base()
+        public MemoryUtilizationWorker(long getDataInterval = 10000) : base()
         {
             _getDataInterval = (int)getDataInterval;
             _serverService = ServerService.Create();
         }
+
+        private int _getDataInterval { get; set; }
+
+        private IServerService _serverService { get; set; }
 
         /// <summary>
         /// Run main function
@@ -101,6 +96,5 @@ namespace Fanex.Maintenance.Controller.Worker
                 Logger.Log.Error(ex.ToString(), ex);
             }
         }
-
     }
 }
