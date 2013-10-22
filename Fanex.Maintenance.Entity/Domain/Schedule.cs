@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
 
+    /// <summary>
+    /// Schedule.
+    /// </summary>
     public class Schedule : IEntity<int, string>
     {
         public string ScheduleUId { get; set; }
@@ -30,7 +33,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 16 = Monthly
         /// 32 = Monthly, relative to freq_interval
         /// 64 = Runs when the SQL Server Agent service starts
-        /// 128 = Runs when the computer is idle
+        /// 128 = Runs when the computer is idle.
         /// </summary>
         public int FreqType { get; set; }
 
@@ -38,11 +41,8 @@ namespace Fanex.Maintenance.Entity.Domain
         /// Days that the job is executed. Depends on the value of freq_type.
         /// The default value is 0, which indicates that freq_interval is unused.
         /// Value of freq_type              Effect on freq_interval
-        ///
         /// 1 (once)                        freq_interval is unused (0)
-        ///
         /// 4 (daily)                       Every freq_interval days
-        ///
         /// 8 (weekly)                      freq_interval is one or more of the following:
         ///                                 1 = Sunday
         ///                                 2 = Monday
@@ -51,9 +51,7 @@ namespace Fanex.Maintenance.Entity.Domain
         ///                                 16 = Thursday
         ///                                 32 = Friday
         ///                                 64 = Saturday
-        ///
         /// 16 (monthly)                    On the freq_interval day of the month
-        ///
         /// 32 (monthly, relative)          freq_interval is one of the following:
         ///                                 1 = Sunday
         ///                                 2 = Monday
@@ -67,7 +65,7 @@ namespace Fanex.Maintenance.Entity.Domain
         ///                                 10 = Weekend day
         ///
         /// 64 (starts when SQL Server Agent service starts) freq_interval is unused (0)
-        /// 128 (runs when computer is idle) freq_interval is unused (0)
+        /// 128 (runs when computer is idle) freq_interval is unused (0).
         /// </summary>
         public int FreqInterval { get; set; }
 
@@ -76,7 +74,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 1 At the specified time
         /// 2 Seconds
         /// 4 Minutes
-        /// 8 Hours
+        /// 8 Hours.
         /// </summary>
         public int FreqSubdayType { get; set; }
 
@@ -93,7 +91,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 2 = Second
         /// 4 = Third
         /// 8 = Fourth
-        /// 16 = Last
+        /// 16 = Last.
         /// </summary>
         public int FreqRelativeInterval { get; set; }
 

@@ -15,7 +15,7 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Alias service interface.
     /// </summary>
     public interface IAliasService
     {

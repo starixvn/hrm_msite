@@ -13,6 +13,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get all site criteria.
+    /// </summary>
     public class SiteGetAllCriteria : CriteriaBase
     {
         private string _name;

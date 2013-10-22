@@ -14,45 +14,18 @@ namespace Fanex.Maintenance.Service.Interface
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Database report service interface.
     /// </summary>
     public interface IDatabaseReportService
     { 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
         DataTable GetUserOnlineDaily(DateTime date);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="top"></param>
-        /// <returns></returns>
-        DataTable GetUserOnline(int top);        
+        DataTable GetUserOnline(int top);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
         string GenerateTemplateUserDaily(DataTable data);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="show"></param>
-        /// <returns></returns>
         string GenerateTemplateUser(DataTable data, int show);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dtb"></param>
-        /// <param name="show"></param>
-        /// <returns></returns>
         string GenerateDataChart(DataTable dtb, int show);
     }
 }

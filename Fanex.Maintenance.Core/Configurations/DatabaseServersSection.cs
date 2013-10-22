@@ -13,12 +13,12 @@ namespace Fanex.Maintenance.Core.Configurations
     using System.Configuration;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Database servers section.
     /// </summary>
     public class DatabaseServersSection : ConfigurationSection
     {
         /// <summary>
-        /// Gets create static instance for reference
+        /// Gets create static instance for reference.
         /// </summary>
         public static DatabaseServersSection Instance
         {
@@ -30,7 +30,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
         
         /// <summary>
-        /// Gets List Server
+        /// Gets List Server.
         /// </summary>
         [ConfigurationProperty("servers", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(ServerCollection), AddItemName = "add")]
@@ -38,13 +38,13 @@ namespace Fanex.Maintenance.Core.Configurations
         {
             get
             {
-                var serverCollection = (ServerCollection)base["servers"];                
+                var serverCollection = (ServerCollection)base["servers"];
                 return serverCollection;
             }
         }
 
         /// <summary>
-        /// Gets List Server ForGet Resource
+        /// Gets List Server ForGet Resource.
         /// </summary>
         [ConfigurationProperty("resourceservers", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(ServerCollection), AddItemName = "add")]
@@ -60,19 +60,19 @@ namespace Fanex.Maintenance.Core.Configurations
     }
 
     /// <summary>
-    /// Server Collection, map to collection in config file
+    /// Server Collection, map to collection in config file.
     /// </summary>
     public class ServerCollection : ConfigurationElementCollection
     {
         /// <summary>
-        /// Controller
+        /// Controller.
         /// </summary>
         public ServerCollection()
         {
         }
 
         /// <summary>
-        /// Collection Type
+        /// Collection Type.
         /// </summary>
         public override ConfigurationElementCollectionType CollectionType
         {
@@ -83,16 +83,16 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Add Element
+        /// Add Element.
         /// </summary>
-        /// <param name="mappingElement"></param>
+        /// <param name="mappingElement">Mapping element.</param>
         public void Add(ServerElement mappingElement)
         {
             BaseAdd(mappingElement);
         }
 
         /// <summary>
-        /// Base Add
+        /// Base Add.
         /// </summary>
         /// <param name="element"></param>
         protected override void BaseAdd(ConfigurationElement element)
@@ -101,26 +101,27 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Create New Element
+        /// Create new element.
         /// </summary>
-        /// <returns>Return Configuration Element</returns>
+        /// <returns>Server element.</returns>
         protected override ConfigurationElement CreateNewElement()
         {
             return new ServerElement();
         }
 
         /// <summary>
-        /// Get Element Key
+        /// Get element key.
         /// </summary>
         /// <param name="element"></param>
-        /// <returns>Return object</returns>
+        /// <returns>Return object.</returns>
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((ServerElement)element).ServerIp + ((ServerElement)element).ServerName + ((ServerElement)element).ConnectionString;
+            return ((ServerElement)element).ServerIp + ((ServerElement)element).ServerName 
+                + ((ServerElement)element).ConnectionString;
         }
 
         /// <summary>
-        /// Get Element
+        /// Get Element.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
@@ -144,12 +145,12 @@ namespace Fanex.Maintenance.Core.Configurations
     }
 
     /// <summary>
-    /// Server Element
+    /// Server Element.
     /// </summary>
     public class ServerElement : ConfigurationElement
     {
         /// <summary>
-        /// Connection String attribute
+        /// Connection String attribute.
         /// </summary>
         [ConfigurationProperty("ConnectionString", IsRequired = true, IsKey = true)]
         public string ConnectionString
@@ -166,7 +167,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Server Name Attribute
+        /// Server Name Attribute.
         /// </summary>
         [ConfigurationProperty("ServerName", IsRequired = true)]
         public string ServerName
@@ -183,7 +184,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Server Ip Attribute
+        /// Server Ip Attribute.
         /// </summary>
         [ConfigurationProperty("ServerIp", IsRequired = true)]
         public string ServerIp
@@ -200,7 +201,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Plain or Encrypted
+        /// Plain or Encrypted.
         /// </summary>
         [ConfigurationProperty("Plain", IsRequired = true)]
         public string Plain
@@ -217,7 +218,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Server Agent Status
+        /// Server Agent Status.
         /// </summary>
         /// These property below not in config file
         public int SqlServerAgentStatus { get; set; }

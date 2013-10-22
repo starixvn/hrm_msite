@@ -24,6 +24,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     /// </summary>
     public class DatabaseServerRepository : BaseRepository<DatabaseServer>, IDatabaseServerRepository
     {
+        /// <summary>
+        /// Get all database server.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of database server.</returns>
         public IEnumerable<DatabaseServer> GetAll(ICriteria criteria)
         {
             try
@@ -42,6 +47,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Get database server with number of site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of database server site.</returns>
         public IEnumerable<DatabaseServerSite> GetWithNumOfSite(ICriteria criteria)
         {
             try
@@ -60,6 +70,12 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Insert or update database server.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="logCriteria">Log criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
             try
@@ -81,6 +97,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Get database server.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Database server.</returns>
         public DatabaseServer Get(ICriteria criteria)
         {
             try

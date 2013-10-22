@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SiteGetAllCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SiteGetByAliasCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get site by alias criteria.
+    /// </summary>
     public class SiteGetByAliasCriteria : CriteriaBase
     {
         public int AliasId { get; set; }

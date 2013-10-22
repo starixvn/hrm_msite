@@ -105,7 +105,7 @@ namespace Fanex.Maintenance.Site.App_Start
     }
 
     /// <summary>
-    /// Bundle extensions
+    /// Bundle extensions.
     /// </summary>
     internal static class BundleExtensions
     {
@@ -124,6 +124,7 @@ namespace Fanex.Maintenance.Site.App_Start
             var applicationPath = request.PhysicalApplicationPath;
             var virtualDir = request.ApplicationPath;
             virtualDir = virtualDir == "/" ? virtualDir : (virtualDir + "/");
+
             return path.Replace(applicationPath, virtualDir).Replace(@"\", "/");
         }
     }

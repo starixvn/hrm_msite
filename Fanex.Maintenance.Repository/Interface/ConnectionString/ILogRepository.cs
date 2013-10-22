@@ -14,7 +14,7 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Log repository interface.
     /// </summary>
     public interface ILogRepository
     {

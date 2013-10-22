@@ -64,7 +64,11 @@ namespace Fanex.Maintenance.Criteria.MailService
 
         [Display(Name = "IsAuth", ResourceType = typeof(ViewResource))]
         public bool IsAuth { get; set; }
-        
+
+        /// <summary>
+        /// Get mail setting.
+        /// </summary>
+        /// <returns></returns>
         public MailSetting GetMailSetting()
         {
             MailSetting mailSetting = new MailSetting

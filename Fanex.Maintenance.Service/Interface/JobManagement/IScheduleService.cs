@@ -15,57 +15,22 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
     using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Schedule service interface.
     /// </summary>
     public interface IScheduleService
     {
-        /// <summary>
-        /// From server
-        /// </summary>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
         IScheduleService WithServer(string serverIp);
 
-        /// <summary>
-        /// Filter by freq
-        /// </summary>
-        /// <param name="freqType"></param>
-        /// <returns></returns>
         IScheduleService WithFreqType(int? freqType);
 
-        /// <summary>
-        /// Filter by freg sub
-        /// </summary>
-        /// <param name="freqSubType"></param>
-        /// <returns></returns>
         IScheduleService WithFreqSubType(int? freqSubType);
 
-        /// <summary>
-        /// Filter by schedule name
-        /// </summary>
-        /// <param name="scheduleName"></param>
-        /// <returns></returns>
         IScheduleService WithScheduleName(string scheduleName);
 
-        /// <summary>
-        /// Filter by date time type
-        /// </summary>
-        /// <param name="searchDateType"></param>
-        /// <returns></returns>
         IScheduleService WithSearchDateType(int? searchDateType);
 
-        /// <summary>
-        /// Filter by date range
-        /// </summary>
-        /// <param name="fromDate"></param>
-        /// <param name="toDate"></param>
-        /// <returns></returns>
         IScheduleService WithDateRange(DateTime? fromDate, DateTime? toDate);
 
-        /// <summary>
-        /// Get schedule
-        /// </summary>
-        /// <returns></returns>
         IEnumerable<ScheduleDetail> GetSchedules();
     }
 }

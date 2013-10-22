@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Criteria.Misc
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Execute SP log criteria.
+    /// </summary>
     public class LogExecSpCriteria : CriteriaBase
     {
         public int CurrentUserId { get; set; }

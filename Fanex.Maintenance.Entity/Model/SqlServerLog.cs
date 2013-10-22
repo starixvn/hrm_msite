@@ -13,7 +13,7 @@ namespace Fanex.Maintenance.Entity.Model
     using System;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// SQL server log.
     /// </summary>
     public class SqlServerLog
     {
@@ -26,6 +26,9 @@ namespace Fanex.Maintenance.Entity.Model
         public string ServerIp { get; set; }
     }
 
+    /// <summary>
+    /// SQL server log parameter for task.
+    /// </summary>
     public class SqlLogServerParamForTask
     {
         public int LogType { get; set; }
@@ -33,6 +36,9 @@ namespace Fanex.Maintenance.Entity.Model
         public string ServerIp { get; set; }
     }
 
+    /// <summary>
+    /// SQL server log SP paramater for task.
+    /// </summary>
     public class SqlLogSpParamForTask
     {
         public int P1 { get; set; }

@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get credit data to validate betting.
+    /// </summary>
     public class GetCreditDataToValidateBettingCriteria : CriteriaBase
     {
         public DateTime Date { get; set; }
@@ -29,6 +32,9 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
         }
     }
 
+    /// <summary>
+    /// Get credit data to validate DW.
+    /// </summary>
     public class GetCreditDataToValidateDWCriteria : GetCreditDataToValidateBettingCriteria
     {      
         public override string GetSettingKey()

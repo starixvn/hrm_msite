@@ -38,6 +38,18 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             _logRepository = logRepository ?? new LogRepository();
         }
 
+        /// <summary>
+        /// Search execute SP log.
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="totalRows">Number of rows.</param>
+        /// <param name="name"></param>
+        /// <param name="username"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="filterBy"></param>
+        /// <returns></returns>
         public IQueryable<LogExecSp> SearchExecSp(
             int pageIndex, 
             int pageSize, 
@@ -77,6 +89,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return logList;
         }
 
+        /// <summary>
+        /// Get log by ID.
+        /// </summary>
+        /// <param name="logId"></param>
+        /// <returns></returns>
         public LogExecSp GetById(int logId)
         {
             try
@@ -101,6 +118,12 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get value alias insert.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <param name="listSite"></param>
+        /// <returns>List of log data.</returns>
         public List<LogData> GetValueAliasInsert(LogExecSp logExecSp, ref List<LogData> listSite)
         {
             var listLogData = new List<LogData>();
@@ -141,7 +164,17 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return listLogData;
         }
 
-        public List<LogData> GetValueAliasUpdate(LogExecSp logExecSp, ref List<LogData> listSite, ref List<LogData> listOldSite)
+        /// <summary>
+        /// Get update alias value.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <param name="listSite"></param>
+        /// <param name="listOldSite"></param>
+        /// <returns>List of log data.</returns>
+        public List<LogData> GetValueAliasUpdate(
+            LogExecSp logExecSp, 
+            ref List<LogData> listSite, 
+            ref List<LogData> listOldSite)
         {
             var listLogData = new List<LogData>();
 
@@ -202,6 +235,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return listLogData;
         }
 
+        /// <summary>
+        /// Get update status value.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <returns>List of log data.</returns>
         public List<LogData> GetValueUpdateStatus(LogExecSp logExecSp)
         {
             var listLogData = new List<LogData>();
@@ -225,6 +263,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return listLogData;
         }
 
+        /// <summary>
+        /// Get insert connection value.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <returns>List of log data.</returns>
         public List<LogData> GetValueConnectionInsert(LogExecSp logExecSp)
         {
             var listLog = new List<LogData>();
@@ -275,6 +318,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return listLog;
         }
 
+        /// <summary>
+        /// Get update connection value.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <returns>List of log data.</returns>
         public List<LogData> GetValueConnectionUpdate(LogExecSp logExecSp)
         {
             var listLog = new List<LogData>();
@@ -340,6 +388,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return listLog;
         }
 
+        /// <summary>
+        /// Get insert database server value.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <returns>List of log data.</returns>
         public List<LogData> GetValueDatabaseServerInsert(LogExecSp logExecSp)
         {
             var listLog = new List<LogData>();
@@ -377,6 +430,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return listLog;
         }
 
+        /// <summary>
+        /// Get update database server value.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <returns>List of log data.</returns>
         public List<LogData> GetValueDatabaseServerUpdate(LogExecSp logExecSp)
         {
             var listLog = new List<LogData>();
@@ -421,6 +479,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return listLog;
         }
 
+        /// <summary>
+        /// Get insert site value.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <returns>List of log data.</returns>
         public List<LogData> GetValueSiteInsert(LogExecSp logExecSp)
         {
             var listLog = new List<LogData>();
@@ -452,6 +515,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return listLog;
         }
 
+        /// <summary>
+        /// Get update site value.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <returns>List of log data.</returns>
         public List<LogData> GetValueSiteUpdate(LogExecSp logExecSp)
         {
             var listLog = new List<LogData>();
@@ -489,6 +557,12 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return listLog;
         }
 
+        /// <summary>
+        /// Get change connection value.
+        /// </summary>
+        /// <param name="logExecSp">Execute SP log.</param>
+        /// <param name="listOld"></param>
+        /// <returns>List of connection string.</returns>
         public List<ConnectionString> GetValueChangeConnection(LogExecSp logExecSp, ref List<ConnectionString> listOld)
         {
             var listConnection = new List<ConnectionString>();
@@ -561,10 +635,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         }
 
         /// <summary>
-        /// Decode xml of [f_EncodeXMLValue]
+        /// Decode XML value.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">Encoded XML value.</param>
+        /// <returns>XML value.</returns>
         public string DecodeXMLValue(string value)
         {
             if (!string.IsNullOrEmpty(value))

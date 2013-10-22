@@ -26,10 +26,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     public class SqlServerLogRepository : BaseRepository<SqlServerLog>, ISqlServerLogRepository
     {
         /// <summary>
-        /// Get All Sql Server Log With specific Date
+        /// Get All Sql Server Log With specific Date.
         /// </summary>
         /// <param name="sqlServerLogCriteria"></param>
-        /// <param name="serverIp"></param>
+        /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
         public IEnumerable<SqlServerLog> GetAllSqlServerLogOnDate(ICriteria sqlServerLogCriteria, string serverIp)
         {
@@ -64,10 +64,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get All Sql Agent Log With Specific Date
+        /// Get All Sql Agent Log With Specific Date.
         /// </summary>
         /// <param name="sqlAgentLogCriteria"></param>
-        /// <param name="serverIp"></param>
+        /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
         public IEnumerable<SqlServerLog> GetAllSqlAgentLogOnDate(ICriteria sqlAgentLogCriteria, string serverIp)
         {
@@ -102,6 +102,13 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             return new List<SqlServerLog>();
         }
 
+        /// <summary>
+        /// Get all SQL log on date.
+        /// </summary>
+        /// <param name="sqlLogCriteria"></param>
+        /// <param name="serverIp"></param>
+        /// <param name="isAgent"></param>
+        /// <returns></returns>
         public IEnumerable<SqlServerLog> GetAllSqlLogOnDate(ICriteria sqlLogCriteria, string serverIp, bool isAgent)
         {
             try

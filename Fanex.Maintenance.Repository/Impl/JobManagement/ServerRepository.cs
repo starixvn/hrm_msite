@@ -19,15 +19,15 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Server repository.
     /// </summary>
     public class ServerRepository : BaseRepository<ResourceInfo>, IServerRepository
     {
         /// <summary>
-        /// Get Resource information of database
+        /// Get Resource information of database.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverIp"></param>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
         /// <returns></returns>
         public ResourceInfo GetServerResourceInfo(ICriteria criteria, string connectionString)
         {
@@ -66,10 +66,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Server information, Cpu Core, Total ram
+        /// Get Server information, Cpu Core, Total ram.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverIp"></param>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
         public ServerFullInfo GetServerFullInformation(ICriteria criteria, string serverIp)
         {
@@ -100,11 +100,11 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Server Status like SqlServerAgent Status
+        /// Get Server Status like SqlServerAgent Status.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverIp"></param>
-        /// <returns>Current Server Status</returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Current Server Status.</returns>
         public ServerStatus GetServerStatus(ICriteria criteria, string connectionString)
         {
             ServerStatus serverStatus = new ServerStatus();
@@ -131,6 +131,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             return serverStatus;
         }
 
+        /// <summary>
+        /// Get server CPU utilization.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Current Server Status.</returns>
         public CPUInfo GetServerCpuUtilization(ICriteria criteria, string connectionString)
         {
             CPUInfo cpuInfo = new CPUInfo
@@ -163,6 +169,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             return cpuInfo;
         }
 
+        /// <summary>
+        /// Get server memory utilization.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Current Server Status.</returns>
         public MemoryInfo GetServerMemoryUtilization(ICriteria criteria, string connectionString)
         {
             MemoryInfo memoryInfo = new MemoryInfo

@@ -45,17 +45,17 @@ namespace Fanex.Maintenance.Criteria.Job
         public int? p1 { get; set; }
 
         /// <summary>
-        /// Log file type: 1 or NULL = error log, 2 = SQL Agent log 
+        /// Log file type: 1 or NULL = error log, 2 = SQL Agent log.
         /// </summary>
         public int? p2 { get; set; }
 
         /// <summary>
-        /// Search string 1: String one you want to search for 
+        /// Search string 1: String one you want to search for.
         /// </summary>
         public string p3 { get; set; }
 
         /// <summary>
-        /// Search string 2: String two you want to search for to further refine the results
+        /// Search string 2: String two you want to search for to further refine the results.
         /// </summary>
         public string p4 { get; set; }
 

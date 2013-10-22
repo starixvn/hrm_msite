@@ -24,10 +24,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     public class StepRepository : BaseRepository<Step>, IStepRepository
     {
         /// <summary>
-        /// Get step by job name
+        /// Get step by job name.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverName"></param>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverName">Server name.</param>
         /// <returns></returns>
         public IEnumerable<StepDetail> GetStepByJob(ICriteria criteria, string serverName)
         {

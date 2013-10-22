@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
 
+    /// <summary>
+    /// Step.
+    /// </summary>
     public class Step : IEntity<int, string>
     {
         /// <summary>
@@ -104,7 +107,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 1 = Succeeded
         /// 2 = Retry
         /// 3 = Canceled
-        /// 5 = Unknown
+        /// 5 = Unknown.
         /// </summary>
         public int LastRunOutCome { get; set; }
 

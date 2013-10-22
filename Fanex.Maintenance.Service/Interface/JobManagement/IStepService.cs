@@ -13,28 +13,14 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
     using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Step service interface.
     /// </summary>
     public interface IStepService
     {
-        /// <summary>
-        /// From server
-        /// </summary>
-        /// <param name="serverName"></param>
-        /// <returns></returns>
         IStepService FromServer(string serverName);
 
-        /// <summary>
-        /// Filter by job name
-        /// </summary>
-        /// <param name="jobName"></param>
-        /// <returns></returns>
         IStepService WithJob(string jobName);
 
-        /// <summary>
-        /// Get step
-        /// </summary>
-        /// <returns></returns>
         IEnumerable<StepDetail> GetSteps();
     }
 }

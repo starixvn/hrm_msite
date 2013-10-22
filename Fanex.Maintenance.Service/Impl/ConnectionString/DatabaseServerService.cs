@@ -21,6 +21,9 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Database server service.
+    /// </summary>
     public class DatabaseServerService : BaseService, IDatabaseServerService
     {
         #region Member
@@ -43,6 +46,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #endregion
 
+        /// <summary>
+        /// Get all database server.
+        /// </summary>
+        /// <returns>List of database server.</returns>
         public IEnumerable<DatabaseServer> GetAll()
         {
             try
@@ -62,6 +69,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get database server with number of site.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>List of database server site.</returns>
         public IEnumerable<DatabaseServerSite> GetWithNumOfSite(string name = "")
         {
             try
@@ -84,6 +96,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Insert or update database server.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
             // check parameters
@@ -106,6 +123,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Update database server status.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult UpdateStatus(ICriteria criteria)
         {
             // check parameters
@@ -128,6 +150,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get database server by ID.
+        /// </summary>
+        /// <param name="value"></param>
         public DatabaseServer GetById(int id)
         {
             try

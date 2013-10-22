@@ -11,12 +11,12 @@ namespace Fanex.Maintenance.Core.Helper
     using Fanex.Maintenance.Core.Configurations;
     
     /// <summary>
-    /// TODO: Update summary.
+    /// Mail helper.
     /// </summary>
     public class MailHelper
     {
         /// <summary>
-        /// Send mail with list mail in configuration file
+        /// Send mail with list mail in configuration file.
         /// </summary>
         /// <param name="mailSubject"></param>
         /// <param name="mailTitle"></param>

@@ -10,37 +10,37 @@
 namespace Fanex.Maintenance.Core.TemplateReport
 {
     /// <summary>
-    /// Block
+    /// Block.
     /// </summary>
     public class Block
     {
         /// <summary>
-        /// BgSBBA
+        /// BgSBBA.
         /// </summary>
         public string BgSBBA { get; set; }
 
         /// <summary>
-        /// Bg Sports book
+        /// Bg Sports book.
         /// </summary>
         public string BgSportsbook { get; set; }
 
         /// <summary>
-        /// BgBA
+        /// BgBA.
         /// </summary>
         public string BgBA { get; set; }
 
         /// <summary>
-        /// BgRacing
+        /// BgRacing.
         /// </summary>
         public string BgRacing { get; set; }
 
         /// <summary>
-        /// BgNumberGame
+        /// BgNumberGame.
         /// </summary>
         public string BgNumberGame { get; set; }
 
         /// <summary>
-        /// SetBackgrounds
+        /// SetBackgrounds.
         /// </summary>
         /// <param name="bgSBBA"></param>
         /// <param name="bgSportsbook"></param>

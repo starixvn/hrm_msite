@@ -1,4 +1,4 @@
-﻿// <copyright file="FunctionKeys.cs" company="Nexcel Solutions Vietnam">
+﻿// <copyright file="ConLogAction.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved. 
 // </copyright>
 //
@@ -7,7 +7,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 1/28/2013 6:18:35 PM
+// Lasted generated date: 10/22/2013 11:32:47 AM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 

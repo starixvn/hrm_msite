@@ -13,6 +13,9 @@ namespace Fanex.Maintenance.Criteria.Log
     using System.ComponentModel.DataAnnotations;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get log criteria.
+    /// </summary>
     public class GetLogCriteria : CriteriaBase
     {
         public int? CategoryId { get; set; }

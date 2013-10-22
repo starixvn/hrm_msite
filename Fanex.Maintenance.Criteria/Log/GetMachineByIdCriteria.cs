@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Criteria.Log
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get machine by ID criteria.
+    /// </summary>
     public class GetMachineByIdCriteria : CriteriaBase
     {
         public int MachineId { get; set; }

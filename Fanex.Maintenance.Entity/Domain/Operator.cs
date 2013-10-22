@@ -9,6 +9,9 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
+    /// <summary>
+    /// Operator.
+    /// </summary>
     public class Operator : IEntity<int, string>
     {
         /// <summary>

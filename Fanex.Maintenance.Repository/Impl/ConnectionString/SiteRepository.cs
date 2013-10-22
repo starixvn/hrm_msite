@@ -25,6 +25,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     /// </summary>
     public class SiteRepository : BaseRepository<Site>, ISiteRepository
     {
+        /// <summary>
+        /// Fetch site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of site.</returns>
         public IEnumerable<Site> Fetch(ICriteria criteria)
         {
             try
@@ -43,6 +48,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Get site alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of site alias.</returns>
         public IEnumerable<SiteAlias> GetSiteAlias(ICriteria criteria)
         {
             try
@@ -61,6 +71,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Get site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Site object.</returns>
         public Site Get(ICriteria criteria)
         {
             try
@@ -76,6 +91,12 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Insert or update site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="logCriteria">Log criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
             try

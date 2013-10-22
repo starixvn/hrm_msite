@@ -15,6 +15,9 @@ namespace Fanex.Maintenance.Service.Impl
     using Fanex.Maintenance.Criteria.Misc;
     using Fanex.Maintenance.Service.Interface;
 
+    /// <summary>
+    /// Base service.
+    /// </summary>
     public class BaseService : IBaseService
     {
         public IServiceContext ServiceContext { get; set; }

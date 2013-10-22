@@ -14,6 +14,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Search execute SP log criteria.
+    /// </summary>
     public class LogExecSpSearchCriteria : CriteriaBase
     {
         private string _username;

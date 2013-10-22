@@ -19,10 +19,16 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Log repository.
     /// </summary>
     public class LogRepository : BaseRepository<LogExecSp>, ILogRepository
     {
+        /// <summary>
+        /// Fetch log.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="totalRows">Number of rows.</param>
+        /// <returns>List of log execute SP.</returns>
         public IEnumerable<LogExecSp> Fetch(ICriteria criteria, out int totalRows)
         {
             try
@@ -44,6 +50,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Get log by ID.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Log execute SP.</returns>
         public LogExecSp GetById(ICriteria criteria)
         {
             try

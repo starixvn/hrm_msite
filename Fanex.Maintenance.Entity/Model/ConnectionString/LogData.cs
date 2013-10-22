@@ -9,6 +9,9 @@
 
 namespace Fanex.Maintenance.Entity.Model.ConnectionString
 {
+    /// <summary>
+    /// Log data.
+    /// </summary>
     public class LogData
     {
         public string FieldName { get; set; }

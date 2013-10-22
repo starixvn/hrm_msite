@@ -46,6 +46,12 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #endregion
 
+        /// <summary>
+        /// Get all sites.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="dbServerId">Database server ID.</param>
+        /// <returns>List of site.</returns>
         public IEnumerable<Site> GetAll(string name = "", int? dbServerId = null)
         {
             try
@@ -69,6 +75,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get site by alias.
+        /// </summary>
+        /// <param name="aliasId"></param>]
+        /// <returns>List of site.</returns>
         public IEnumerable<Site> GetByAlias(int aliasId)
         {
             Check.Argument.IsNotNegativeOrZero(aliasId, "aliasid");
@@ -93,6 +104,12 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get site with number of alias.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="dbServerId">Database server ID.</param>
+        /// <returns>List of site alias.</returns>
         public IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? dbServerId = null)
         {
             try
@@ -116,6 +133,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get site by ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Site object.</returns>
         public Site GetById(int id)
         {
             try
@@ -138,6 +160,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Insert or update site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
             // check parameters
@@ -160,6 +187,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Update site status.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult UpdateStatus(ICriteria criteria)
         {
             // check parameters
@@ -182,6 +214,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get site by database server.
+        /// </summary>
+        /// <param name="dbServerId">Database server ID.</param>
+        /// <returns>List of site.</returns>
         public IEnumerable<Site> GetByDbServer(int dbServerId)
         {
             try

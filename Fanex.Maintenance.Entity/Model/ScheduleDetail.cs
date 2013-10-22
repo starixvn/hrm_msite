@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Entity.Model
     using Fanex.Maintenance.Entity.Domain;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Schedule detail.
     /// </summary>
     public class ScheduleDetail : Schedule
     {
@@ -25,6 +25,9 @@ namespace Fanex.Maintenance.Entity.Model
         public string FreqSubIntervalCombine { get; set; }
     }
 
+    /// <summary>
+    /// Schedule parameter for task.
+    /// </summary>
     public class ScheduleParamForTask
     {
         public string ScheduleName { get; set; }

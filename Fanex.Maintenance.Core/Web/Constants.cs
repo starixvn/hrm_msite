@@ -13,7 +13,7 @@ namespace Fanex.Maintenance.Core.Web
     using System.Collections.Generic;
 
     /// <summary>
-    /// Status job
+    /// Status job.
     /// </summary>
     public enum Status
     {
@@ -23,7 +23,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Current execution status of job
+    /// Current execution status of job.
     /// </summary>
     public enum ExecutionStatus
     {
@@ -43,7 +43,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Last run date and next run date
+    /// Last run date and next run date.
     /// </summary>
     public enum DateType
     {
@@ -52,7 +52,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Frequent Time to of Schedule
+    /// Frequent Time to of Schedule.
     /// </summary>
     public enum FrequentTime : int
     {
@@ -66,7 +66,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Frequen Sub Time of Schedule
+    /// Frequen Sub Time of Schedule.
     /// </summary>
     public enum FrequentSubTime : int
     {
@@ -77,7 +77,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Search schedule by Date Type
+    /// Search schedule by Date Type.
     /// </summary>
     public enum SearchDate : int
     {
@@ -87,7 +87,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Step run status
+    /// Step run status.
     /// </summary>
     public enum StepRunStatus
     {
@@ -96,7 +96,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Server Log Type
+    /// Server Log Type.
     /// </summary>
     public enum LogType : int
     {
@@ -105,7 +105,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Error Type
+    /// Error Type.
     /// </summary>
     public enum ErrorType : int
     {
@@ -115,7 +115,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Server Type for get Connection String
+    /// Server Type for get Connection String.
     /// </summary>
     public enum ServerType : int
     {
@@ -129,27 +129,27 @@ namespace Fanex.Maintenance.Core.Web
     public static class Constants
     {
         /// <summary>
-        /// Job Constant
+        /// Job Constant.
         /// </summary>
         public const string JOB = "JOB";
 
         /// <summary>
-        /// Steps Constant
+        /// Steps Constant.
         /// </summary>
         public const string STEPS = "STEPS";
 
         /// <summary>
-        /// SCEDULES
+        /// SCEDULES.
         /// </summary>
         public const string SCEDULES = "SCEDULES";
 
         /// <summary>
-        /// Targets Constant
+        /// Targets Constant.
         /// </summary>
         public const string TARGETS = "TARGETS";
 
         /// <summary>
-        /// Full Constant
+        /// Full Constant.
         /// </summary>
         public const string FULL = "FULL";
 
@@ -160,7 +160,7 @@ namespace Fanex.Maintenance.Core.Web
         };
 
         /// <summary>
-        /// Freq Interval Values
+        /// Freq Interval Values.
         /// </summary>
         public static string[] FreqIntervalValues = new string[]
         {

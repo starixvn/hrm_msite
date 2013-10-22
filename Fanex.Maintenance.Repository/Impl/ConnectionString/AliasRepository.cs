@@ -22,8 +22,16 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Alias repository.
+    /// </summary>
     public class AliasRepository : BaseRepository<Alias>, IAliasRepository
     {
+        /// <summary>
+        /// Get all alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of alias connection string.</returns>
         public IEnumerable<AliasConnectionString> GetAll(ICriteria criteria)
         {
             Func<IDataReader, AliasConnectionString> objMapFunc = (reader) =>
@@ -70,11 +78,21 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             return this.Fetch<AliasConnectionString>(criteria, objMapFunc).OrderBy(x => x.Alias.Name).ToList();
         }
 
+        /// <summary>
+        /// Get alias by site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of alias.</returns>
         public IEnumerable<Alias> GetBySite(ICriteria criteria)
         {
             return Fetch<Alias>(criteria).OrderBy(x => x.Name).ToList();
         }
 
+        /// <summary>
+        /// Get switch connection alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of alias connection string connection.</returns>
         public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(ICriteria criteria)
         {
             try
@@ -137,6 +155,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Get alias by ID.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Alias object.</returns>
         public Alias GetById(ICriteria criteria)
         {
             try
@@ -147,8 +170,14 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             {
                 throw ex;
             }
-        }    
+        }
 
+        /// <summary>
+        /// Insert or update alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="logCriteria">Log criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
             try

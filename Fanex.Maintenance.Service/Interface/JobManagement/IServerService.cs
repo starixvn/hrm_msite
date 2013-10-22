@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
     using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Server service interface.
     /// </summary>
     public interface IServerService
     {

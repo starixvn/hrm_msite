@@ -59,7 +59,7 @@ namespace Fanex.Maintenance.Controller
         /// Get machines
         /// </summary>
         /// <param name="machineType"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Index(bool? machineType = null)
         {
@@ -75,7 +75,7 @@ namespace Fanex.Maintenance.Controller
         /// Get machines
         /// </summary>
         /// <param name="criteria"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Index(GetMachinesByTypeCriteria criteria)
         {
@@ -86,7 +86,7 @@ namespace Fanex.Maintenance.Controller
         /// Edit machine
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMachine(int id)
         {
@@ -98,7 +98,7 @@ namespace Fanex.Maintenance.Controller
         /// Edit machine
         /// </summary>
         /// <param name="machine"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMachine(Machine machine)
         {
@@ -113,7 +113,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Insert machine
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult InsertMachine()
         {
@@ -129,7 +129,7 @@ namespace Fanex.Maintenance.Controller
         /// Insert machine
         /// </summary>
         /// <param name="machine"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult InsertMachine(Machine machine)
         {

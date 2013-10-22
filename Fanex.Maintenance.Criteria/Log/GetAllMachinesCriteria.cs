@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Criteria.Log
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get all machines criteria.
+    /// </summary>
     public class GetAllMachinesCriteria : CriteriaBase
     {
         public override string GetSettingKey()

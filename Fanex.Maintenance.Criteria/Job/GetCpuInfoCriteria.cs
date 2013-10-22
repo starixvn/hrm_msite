@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Criteria.Job
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get CPU information.
     /// </summary>
     public class GetCpuInfoCriteria : CriteriaBase
     {

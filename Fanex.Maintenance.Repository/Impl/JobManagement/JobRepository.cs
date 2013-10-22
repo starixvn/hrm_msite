@@ -20,15 +20,15 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Job repository.
     /// </summary>
     public class JobRepository : BaseRepository<Job>, IJobRepository
     {
         /// <summary>
-        /// Get all job
+        /// Get all job.
         /// </summary>
-        /// <param name="criteria">filter by</param>
-        /// <param name="serverIp">server get job</param>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
         public IEnumerable<JobSchedule> GetAllJob(ICriteria criteria, string serverIp)
         {
@@ -37,42 +37,42 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 Func<IDataReader, JobSchedule> objMapFunc = (reader) =>
                 {
                     return new JobSchedule
+                        {
+                            ExecuteStatus = reader.ToInt("current_execution_status"),
+                            LastRunDate = reader.ToInt("last_run_date"),
+                            LastRunTime = reader.ToInt("last_run_time"),
+                            NextRunDate = reader.ToInt("next_run_date"),
+                            NextRunTime = reader.ToInt("next_run_time"),
+                            Job = new Job
                             {
-                                ExecuteStatus = reader.ToInt("current_execution_status"),
-                                LastRunDate = reader.ToInt("last_run_date"),
-                                LastRunTime = reader.ToInt("last_run_time"),
-                                NextRunDate = reader.ToInt("next_run_date"),
-                                NextRunTime = reader.ToInt("next_run_time"),
-                                Job = new Job
+                                Category = new JobCategory
                                 {
-                                    Category = new JobCategory
-                                    {
-                                        Name = reader.ToString("category")
-                                    },
-                                    DateCreated = reader.ToDateTime("date_created"),
-                                    DateModified = reader.ToDateTime("date_modified"),
-                                    DeleteLevel = reader.ToInt("delete_level"),
-                                    Description = reader.ToString("description"),
-                                    Enable = reader.ToInt("enabled"),
-                                    JobId = reader.To<Guid>("job_id"),
-                                    Name = reader.ToString("name"),
-                                    NotifyEmailOperator = new Operator
-                                    {
-                                        Name = reader.ToString("notify_email_operator")
-                                    },
-                                    NotifyLevelEmail = reader.ToInt("notify_level_email"),
-                                    NotifyLevelEventLog = reader.ToInt("notify_level_eventlog"),
-                                    NotifyLevelNetsend = reader.ToInt("notify_level_netsend"),
-                                    NotifyLevelPage = reader.ToInt("notify_level_page"),
-                                    OrinatingServer = new OrinatingServer
-                                    {
-                                        Name = reader.ToString("originating_server")
-                                    },
-                                    StartStepId = reader.ToInt("start_step_id"),
-                                    VersionNumber = reader.ToInt("version_number")
+                                    Name = reader.ToString("category")
                                 },
-                                ServerIp = serverIp
-                            };
+                                DateCreated = reader.ToDateTime("date_created"),
+                                DateModified = reader.ToDateTime("date_modified"),
+                                DeleteLevel = reader.ToInt("delete_level"),
+                                Description = reader.ToString("description"),
+                                Enable = reader.ToInt("enabled"),
+                                JobId = reader.To<Guid>("job_id"),
+                                Name = reader.ToString("name"),
+                                NotifyEmailOperator = new Operator
+                                {
+                                    Name = reader.ToString("notify_email_operator")
+                                },
+                                NotifyLevelEmail = reader.ToInt("notify_level_email"),
+                                NotifyLevelEventLog = reader.ToInt("notify_level_eventlog"),
+                                NotifyLevelNetsend = reader.ToInt("notify_level_netsend"),
+                                NotifyLevelPage = reader.ToInt("notify_level_page"),
+                                OrinatingServer = new OrinatingServer
+                                {
+                                    Name = reader.ToString("originating_server")
+                                },
+                                StartStepId = reader.ToInt("start_step_id"),
+                                VersionNumber = reader.ToInt("version_number")
+                            },
+                            ServerIp = serverIp
+                        };
                 };
 
                 return this.Fetch<JobSchedule>(criteria, serverIp, objMapFunc);
@@ -82,10 +82,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get log of job
+        /// Get log of job.
         /// </summary>
-        /// <param name="criteria">filter by</param>
-        /// <param name="serverIp">server</param>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
         public IEnumerable<JobLog> GetJobLog(ICriteria criteria, string serverIp)
         {
@@ -133,10 +133,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Start job idle
+        /// Start job idle.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverIp"></param>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
         public Hashtable StartJob(ICriteria criteria, string serverIp)
         {
@@ -149,9 +149,9 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Stop job executing
+        /// Stop job executing.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp"></param>
         /// <returns></returns>
         public Hashtable StopJob(ICriteria criteria, string serverIp)

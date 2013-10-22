@@ -24,6 +24,9 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Core.Helpers;
 
+    /// <summary>
+    /// Connection string controller.
+    /// </summary>
     [Authorize]
     public class ConnectionStringController : BaseController
     {
@@ -68,6 +71,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Mange
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Alias()
         {
@@ -84,6 +91,11 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Alias(AliasGetAllCriteria model)
         {
@@ -104,6 +116,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Create
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult CreateAlias()
         {
@@ -114,6 +130,11 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult CreateAlias(AliasInsertCriteria model)
         {
@@ -141,6 +162,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Edit
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditAlias(int id)
         {
@@ -164,6 +190,11 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditAlias(AliasUpdateCriteria model)
         {
@@ -201,6 +232,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Manage
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Connection(int id)
         {
@@ -217,6 +253,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Create
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult CreateConnection(int id)
         {
@@ -246,6 +287,11 @@ namespace Fanex.Maintenance.Controller
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult CreateConnection(ConnectionInsertCriteria model)
         {
@@ -293,6 +339,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Edit
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditConnection(int id)
         {
@@ -333,6 +384,11 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditConnection(ConnectionUpdateCriteria model)
         {
@@ -376,6 +432,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Mange
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Site()
         {
@@ -390,6 +450,11 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Site(SiteGetAllCriteria model)
         {
@@ -408,12 +473,21 @@ namespace Fanex.Maintenance.Controller
 
         #region Create
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult CreateSite()
         {
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult CreateSite(SiteInsertCriteria model)
         {
@@ -436,6 +510,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Edit
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditSite(int id)
         {
@@ -457,6 +536,11 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditSite(SiteUpdateCriteria model)
         {
@@ -479,6 +563,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Connection
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ViewResult ViewConnection(int siteId)
         {
             var list = _aliasService.GetAll(string.Empty, null, siteId);
@@ -493,6 +582,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Manage
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult DatabaseServer()
         {
@@ -503,6 +596,11 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult DatabaseServer(DatabaseServerGetAllCriteria model)
         {
@@ -517,12 +615,21 @@ namespace Fanex.Maintenance.Controller
 
         #region Create
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult CreateDbServer()
         {
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult CreateDbServer(DatabaseServerInsertCriteria model)
         {
@@ -546,6 +653,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Edit
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditDbServer(int id)
         {
@@ -568,6 +680,11 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditDbServer(DatabaseServerUpdateCriteria model)
         {
@@ -592,6 +709,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Quick change connection from db server to other db server
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult ChangeConnection()
         {
@@ -600,6 +721,11 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult ChangeConnection(DatabaseServerGetConnectionFromDbServerCriteria model)
         {
@@ -614,6 +740,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Quick change second (backup) connection from db server
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult ChangeSecondConnection()
         {
@@ -623,6 +753,11 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ChangeSecondConnection(DatabaseServerGetSecondConnectionFromDbServerCriteria model)
         {
@@ -638,6 +773,17 @@ namespace Fanex.Maintenance.Controller
 
         #region Log management
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="value"></param>
+        /// <param name="value"></param>
+        /// <param name="value"></param>
+        /// <param name="value"></param>
+        /// <param name="value"></param>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Log(
             int id = 1,
@@ -677,6 +823,11 @@ namespace Fanex.Maintenance.Controller
             return View(criteria);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Log(LogExecSpSearchCriteria model)
         {
@@ -698,6 +849,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Ajax
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetSiteByAlias(int id)
         {
@@ -711,6 +867,10 @@ namespace Fanex.Maintenance.Controller
             return View(listSite);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetConnectionByAlias(int id)
         {
@@ -725,8 +885,12 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UpdateDefaultConenction(int aliasId, int conectionId)
+        public ActionResult UpdateDefaultConnection(int aliasId, int conectionId)
         {
             if (Request.IsAjaxRequest())
             {
@@ -746,6 +910,12 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UpdateStatusAlias(int aliasId, bool isActive)
         {
@@ -766,18 +936,28 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult GetSecondaryConection(int id)
+        public ActionResult GetSecondaryConnection(int id)
         {
-            var listConection = new List<ConnectionString>();
+            var listConnection = new List<ConnectionString>();
             if (Request.IsAjaxRequest())
             {
-                listConection = _connectionService.GetSecondaryConection(id).ToList();
+                listConnection = _connectionService.GetSecondaryConnection(id).ToList();
             }
 
-            return View(listConection);
+            return View(listConnection);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetAliasBySite(int id)
         {
@@ -791,6 +971,12 @@ namespace Fanex.Maintenance.Controller
             return View(listAlias);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UpdateStatusSite(int siteId, bool isActive)
         {
@@ -812,6 +998,12 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UpdateStatusDbServer(int dbServerId, bool isActive)
         {
@@ -833,6 +1025,11 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetSiteByDbServer(int id)
         {
@@ -846,6 +1043,11 @@ namespace Fanex.Maintenance.Controller
             return View(listSite);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult ChangeConnectionFromDbServerToDbServer(string aliasConnection)
         {
@@ -864,6 +1066,11 @@ namespace Fanex.Maintenance.Controller
             return Json(false);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult LogDetail(int id)
         {
@@ -881,6 +1088,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Partial view
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public PartialViewResult _ConnectionLog_Alias_Insert(LogExecSp log)
         {
             var listSite = new List<LogData>();
@@ -891,6 +1103,11 @@ namespace Fanex.Maintenance.Controller
             return PartialView(listData);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public PartialViewResult _ConnectionLog_Alias_Update(LogExecSp log)
         {
             var listSite = new List<LogData>();
@@ -904,6 +1121,11 @@ namespace Fanex.Maintenance.Controller
             return PartialView(listData);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public PartialViewResult _ConnectionLog_LogData(LogExecSp log)
         {
             var listData = new List<LogData>();
@@ -963,6 +1185,11 @@ namespace Fanex.Maintenance.Controller
             return PartialView(listData);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public PartialViewResult _ConnectionLog_LogData_ChangeConnection(LogExecSp log)
         {
             var listOld = new List<ConnectionString>();
@@ -977,7 +1204,7 @@ namespace Fanex.Maintenance.Controller
         #region Private
 
         /// <summary>
-        /// Get select list item of all database server
+        /// Get select list item of all database server.
         /// </summary>
         /// <param name="selectedId"></param>
         /// <returns></returns>
@@ -1013,6 +1240,5 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion Private
-
     }
 }

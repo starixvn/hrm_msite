@@ -18,7 +18,7 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Site service interface.
     /// </summary>
     public interface ISiteService
     {

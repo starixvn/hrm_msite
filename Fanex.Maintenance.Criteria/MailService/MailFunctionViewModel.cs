@@ -18,6 +18,18 @@ namespace Fanex.Maintenance.Criteria.MailService
     /// </summary>
     public class MailFunctionViewModel
     {
+        public MailFunctionViewModel()
+        {
+        }
+
+        public MailFunctionViewModel(MailFunction mailFunction)
+        {
+            this.ConfigId = mailFunction.Config.AppID;
+            this.SettingId = mailFunction.Setting.SettingID;
+            this.FunctionId = mailFunction.FuncID;
+            this.FunctionName = mailFunction.FuncName;
+        }
+
         public int FunctionId { get; set; }
 
         [Required]
@@ -38,18 +50,10 @@ namespace Fanex.Maintenance.Criteria.MailService
             ErrorMessageResourceType = typeof(ViewResource))]
         public string FunctionName { get; set; }
 
-        public MailFunctionViewModel()
-        {
-        }
-
-        public MailFunctionViewModel(MailFunction mailFunction)
-        {
-            this.ConfigId = mailFunction.Config.AppID;
-            this.SettingId = mailFunction.Setting.SettingID;
-            this.FunctionId = mailFunction.FuncID;
-            this.FunctionName = mailFunction.FuncName;
-        }
-
+        /// <summary>
+        /// Get mail function.
+        /// </summary>
+        /// <returns></returns>
         public MailFunction GetMailFunction()
         {
             MailFunction mailFunction = new MailFunction

@@ -26,10 +26,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     public class ScheduleRepository : BaseRepository<ScheduleDetail>, IScheduleRepository
     {
         /// <summary>
-        /// Read Schedules from Database
+        /// Get all schedule.
         /// </summary>
-        /// <param name="scheduleCriteria"></param>
-        /// <param name="serverName"></param>
+        /// <param name="scheduleCriteria">Schedule criteria.</param>
+        /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
         public IEnumerable<ScheduleDetail> GetAllSchedule(ICriteria scheduleCriteria, string serverIp)
         {
@@ -61,7 +61,9 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
                 if (!string.IsNullOrEmpty(serverIp))
                 {
-                    IEnumerable<ScheduleDetail> schedules = Fetch<ScheduleDetail>(scheduleCriteria, serverIp, mapObjectFunc);
+                    IEnumerable<ScheduleDetail> schedules = 
+                        Fetch<ScheduleDetail>(scheduleCriteria, serverIp, mapObjectFunc);
+
                     schedules.ForEach(schedule =>
                     {
                         schedule.ServerIp = serverIp;

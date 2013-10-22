@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="LogController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="RouteConfig.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -13,12 +13,12 @@ namespace Fanex.Maintenance.Site
     using System.Web.Routing;
 
     /// <summary>
-    ///
+    /// Route configuration.
     /// </summary>
     public class RouteConfig
     {
         /// <summary>
-        ///
+        /// Register routes.
         /// </summary>
         /// <param name="routes"></param>
         public static void RegisterRoutes(RouteCollection routes)

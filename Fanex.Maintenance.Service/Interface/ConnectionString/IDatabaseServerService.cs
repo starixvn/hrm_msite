@@ -15,11 +15,11 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Database server service interface.
     /// </summary>
     public interface IDatabaseServerService
     {
-        IEnumerable<DatabaseServer> GetAll();        
+        IEnumerable<DatabaseServer> GetAll();
 
         IEnumerable<DatabaseServerSite> GetWithNumOfSite(string name = "");
 

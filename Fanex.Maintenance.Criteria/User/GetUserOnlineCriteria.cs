@@ -13,7 +13,7 @@ namespace Fanex.Maintenance.Criteria.User
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get user online criteria.
     /// </summary>
     public class GetUserOnlineCriteria : CriteriaBase
     {
@@ -30,6 +30,9 @@ namespace Fanex.Maintenance.Criteria.User
         }
     }
 
+    /// <summary>
+    /// Get user online daily criteria.
+    /// </summary>
     public class GetUserOnlineDailyCriteria : CriteriaBase
     {    
         public DateTime Date { get; set; }

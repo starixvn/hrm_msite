@@ -9,6 +9,9 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
+    /// <summary>
+    /// Job category.
+    /// </summary>
     public class JobCategory : IEntity<int, string>
     {
         public int Class { get; set; }

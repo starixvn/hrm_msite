@@ -14,33 +14,14 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// SQL Server log repository.
     /// </summary>
     public interface ISqlServerLogRepository
     {
-        /// <summary>
-        /// Get sql server log by date
-        /// </summary>
-        /// <param name="sqlServerLogCriteria"></param>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
         IEnumerable<SqlServerLog> GetAllSqlServerLogOnDate(ICriteria sqlServerLogCriteria, string serverIp);
 
-        /// <summary>
-        /// Get agent log by date
-        /// </summary>
-        /// <param name="sqlAgentLogCriteria"></param>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
         IEnumerable<SqlServerLog> GetAllSqlAgentLogOnDate(ICriteria sqlAgentLogCriteria, string serverIp);
 
-        /// <summary>
-        /// Get server log or agent log
-        /// </summary>
-        /// <param name="sqlCriteria"></param>
-        /// <param name="serverIp"></param>
-        /// <param name="isAgent"></param>
-        /// <returns></returns>
         IEnumerable<SqlServerLog> GetAllSqlLogOnDate(ICriteria sqlCriteria, string serverIp, bool isAgent);
     }
 }

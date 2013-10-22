@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConnectionGetSecondaryConectionCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConnectionGetSecondaryConnectionCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,7 +11,10 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 {
     using Fanex.NAP.Framework.Data;
 
-    public class ConnectionGetSecondaryConectionCriteria : CriteriaBase
+    /// <summary>
+    /// Get secondary connection criteria.
+    /// </summary>
+    public class ConnectionGetSecondaryConnectionCriteria : CriteriaBase
     {
         public int ConnectionId { get; set; }
 

@@ -10,7 +10,7 @@
 namespace Fanex.Maintenance.Repository.Interface
 {
     /// <summary>
-    /// 
+    /// Log category repository.
     /// </summary>
     public interface ILogCategoryRepository
     {

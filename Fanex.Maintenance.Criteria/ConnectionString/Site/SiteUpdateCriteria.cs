@@ -13,6 +13,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
     using System.ComponentModel.DataAnnotations;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Update site criteria.
+    /// </summary>
     public class SiteUpdateCriteria : CriteriaBase
     {
         private string _name;

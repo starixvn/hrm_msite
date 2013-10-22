@@ -21,6 +21,9 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Connection service.
+    /// </summary>
     public class ConnectionService : BaseService, IConnectionService
     {
         #region Member
@@ -43,6 +46,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #endregion Ctor
 
+        /// <summary>
+        /// Get connection by alias.
+        /// </summary>
+        /// <param name="aliasId"></param>
+        /// <returns>List of connection of connection string.</returns>
         public IEnumerable<ConnectionStringConnection> GetByAlias(int aliasId)
         {
             Check.Argument.IsNotNegativeOrZero(aliasId, "aliasid");
@@ -56,7 +64,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
                 if (criteria.IsValid())
                 {
-                    return _connectionRepository.GetByAlais(criteria);
+                    return _connectionRepository.GetByAlias(criteria);
                 }
             }
             catch (Exception ex)
@@ -67,6 +75,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get connection by ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Connection string.</returns>
         public ConnectionString GetById(int id)
         {
             Check.Argument.IsNotNegativeOrZero(id, "id");
@@ -91,20 +104,25 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-        public IEnumerable<ConnectionString> GetSecondaryConection(int id)
+        /// <summary>
+        /// Get secondary connection.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>List of connection string.</returns>
+        public IEnumerable<ConnectionString> GetSecondaryConnection(int id)
         {
             Check.Argument.IsNotNegativeOrZero(id, "id");
 
             try
             {
-                var criteria = new ConnectionGetSecondaryConectionCriteria
+                var criteria = new ConnectionGetSecondaryConnectionCriteria
                 {
                     ConnectionId = id
                 };
 
                 if (criteria.IsValid())
                 {
-                    return _connectionRepository.GetSecondaryConection(criteria);
+                    return _connectionRepository.GetSecondaryConnection(criteria);
                 }
             }
             catch (Exception ex)
@@ -115,6 +133,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Update default connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult UpdateDefaultConnection(ICriteria criteria)
         {
             // check parameters
@@ -137,6 +160,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Insert or update connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
             // check parameters

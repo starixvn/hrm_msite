@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get balance up day.
     /// </summary>
     public class GetBalanceUpDayCriteria : CriteriaBase
     {

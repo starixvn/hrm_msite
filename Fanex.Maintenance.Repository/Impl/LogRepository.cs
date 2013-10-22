@@ -17,14 +17,14 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Log repository
+    /// Log repository.
     /// </summary>
     public class LogRepository : ReadonlyRepository<Log>
     {
         /// <summary>
-        /// Override return Logs
+        /// Override return Logs.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns></returns>
         public IEnumerable<Log> GetLog(ref GetLogCriteria criteria)
         {
@@ -34,12 +34,15 @@ namespace Fanex.Maintenance.Repository.Impl
                 {
                     var param = criteria.GetSpParams();
 
-                    var list = db.Query<Log, LogCategory, Machine, Log>((l, c, m) =>
-                    {
-                        l.Category = c;
-                        l.Machine = m;
-                        return l;
-                    }, "CategoryID,MachineId", param);
+                    var list = db.Query<Log, LogCategory, Machine, Log>(
+                        (l, c, m) =>
+                        {
+                            l.Category = c;
+                            l.Machine = m;
+                            return l;
+                        }, 
+                        "CategoryID,MachineId", 
+                        param);
 
                     criteria.TotalRows = Convert.ToInt32(param["totalrows"]);
 
@@ -53,27 +56,27 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// Get details message of log
+        /// Get details message of log.
         /// </summary>
-        /// <param name="logId"></param>
+        /// <param name="logId">Log ID.</param>
         /// <returns></returns>
         public string GetLogMessage(long logId)
         {
             using (ObjectDb db = new ObjectDb("Logging_SelMessage"))
             {
-                string temp = db.ExecuteScalar(new { logid = logId }).ToString();
-                return temp;
+                return db.ExecuteScalar(new { logid = logId }).ToString();
             }
         }
 
         /// <summary>
-        /// Remove log
+        /// Remove log.
         /// </summary>
-        /// <param name="from"></param>
+        /// <param name="from">From datetime.</param>
         /// <returns></returns>
         public int DeleteLogs(DateTime from)
         {
             int row = 0;
+
             try
             {
                 using (ObjectDb db = new ObjectDb("Logging_Del"))
@@ -90,11 +93,11 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// Update log's monitor status
+        /// Update log's monitor status.
         /// </summary>
-        /// <param name="logId"></param>
-        /// <param name="monitoringUserId"></param>
-        /// <param name="isMonitored"></param>
+        /// <param name="logIds">Log IDs.</param>
+        /// <param name="monitoringUserId">Monitoring user ID.</param>
+        /// <param name="isMonitored">Is monitored or not.</param>
         /// <returns></returns>
         public int MonitorLog(string logIds, int? monitoringUserId, bool isMonitored)
         {

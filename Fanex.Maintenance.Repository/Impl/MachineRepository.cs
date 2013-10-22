@@ -19,14 +19,14 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Machine Repository
+    /// Machine Repository.
     /// </summary>
     public class MachineRepository : BaseRepository<Machine>
     {
         /// <summary>
-        /// Return Machine list
+        /// Return Machine list.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns></returns>
         public override IEnumerable<Machine> Fetch(ICriteria criteria)
         {
@@ -45,9 +45,9 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// Insert machine
+        /// Insert machine.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns></returns>
         public CommandResult InsertMachine(InsertMachineCriteria criteria)
         {
@@ -69,9 +69,9 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// Update machine
+        /// Update machine.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns></returns>
         public CommandResult UpdateMachine(UpdateMachineCriteria criteria)
         {

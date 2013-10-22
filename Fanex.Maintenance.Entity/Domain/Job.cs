@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
 
+    /// <summary>
+    /// The job class.
+    /// </summary>
     public class Job : IEntity<int, string>
     {
         public Guid JobId { get; set; }
@@ -38,7 +41,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
+        /// 3 = Whenever the job completes (regardless of the job outcome).
         /// </summary>
         public int NotifyLevelEventLog { get; set; }
 
@@ -47,7 +50,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
+        /// 3 = Whenever the job completes (regardless of the job outcome).
         /// </summary>
         public int NotifyLevelEmail { get; set; }
 
@@ -56,7 +59,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
+        /// 3 = Whenever the job completes (regardless of the job outcome).
         /// </summary>
         public int NotifyLevelNetsend { get; set; }
 
@@ -65,7 +68,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
+        /// 3 = Whenever the job completes (regardless of the job outcome).
         /// </summary>
         public int NotifyLevelPage { get; set; }
 
@@ -89,7 +92,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
+        /// 3 = Whenever the job completes (regardless of the job outcome).
         /// </summary>
         public int DeleteLevel { get; set; }
 

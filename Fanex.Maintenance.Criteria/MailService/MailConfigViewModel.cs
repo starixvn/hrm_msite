@@ -57,6 +57,10 @@ namespace Fanex.Maintenance.Criteria.MailService
         [Display(Name = "IsEncrypt", ResourceType = typeof(ViewResource))]
         public bool IsEncrypt { get; set; }
 
+        /// <summary>
+        /// Get mail config.
+        /// </summary>
+        /// <returns></returns>
         public MailConfig GetMailConfig()
         {
             MailConfig mailConfig = new MailConfig

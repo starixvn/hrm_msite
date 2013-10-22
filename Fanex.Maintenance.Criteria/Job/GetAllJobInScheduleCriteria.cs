@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Criteria.Job
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get all job in schedule.
     /// </summary>
     public class GetAllJobInScheduleCriteria : CriteriaBase
     {

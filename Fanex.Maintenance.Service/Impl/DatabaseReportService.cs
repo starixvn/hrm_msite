@@ -25,7 +25,7 @@ namespace Fanex.Maintenance.Service.Impl
         private readonly DatabaseReportRepository _databaseReportRepository = new DatabaseReportRepository();
 
         /// <summary>
-        /// Change hour to minute
+        /// Change hour to minute.
         /// </summary>
         /// <param name="_dateTime"></param>
         /// <returns></returns>
@@ -40,7 +40,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Split date to hour
+        /// Split date to hour.
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
@@ -50,7 +50,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Change minute to hour
+        /// Change minute to hour.
         /// </summary>
         /// <param name="minute"></param>
         /// <returns></returns>
@@ -63,7 +63,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get user online daily
+        /// Get user online daily.
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
@@ -78,7 +78,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get list user online
+        /// Get list user online.
         /// </summary>
         /// <param name="top"></param>
         /// <returns></returns>
@@ -94,7 +94,7 @@ namespace Fanex.Maintenance.Service.Impl
         #region Generate Template
 
         /// <summary>
-        /// Generate template user daily list
+        /// Generate template user daily list.
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -123,7 +123,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Generate template user list
+        /// Generate template user list.
         /// </summary>
         /// <param name="data"></param>
         /// <param name="show"></param>
@@ -149,7 +149,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Generate chart
+        /// Generate chart.
         /// </summary>
         /// <param name="dtb"></param>
         /// <param name="show"></param>
@@ -182,7 +182,7 @@ namespace Fanex.Maintenance.Service.Impl
         #endregion Generate Template
 
         /// <summary>
-        /// Generate data table
+        /// Generate data table.
         /// </summary>
         /// <param name="dtb"></param>
         /// <param name="rowNumber"></param>

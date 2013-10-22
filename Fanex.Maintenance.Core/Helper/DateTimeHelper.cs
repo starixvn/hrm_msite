@@ -14,15 +14,15 @@ namespace Fanex.Maintenance.Core.Helper
     using System.Globalization;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Date time helper.
     /// </summary>
     public class DateTimeHelper
     {
         /// <summary>
-        /// Get Full time String from integer
+        /// Get full time String from integer.
         /// </summary>
-        /// <param name="timeValue">contains time value by integer, example 092113 is 09:21:13</param>
-        /// <returns>fulltime string</returns>
+        /// <param name="timeValue">Time value by integer, example 092113 is 09:21:13.</param>
+        /// <returns>Fulltime string.</returns>
         public static string GetFullTime(int timeValue)
         {
             string strTime = timeValue.ToString();
@@ -30,6 +30,7 @@ namespace Fanex.Maintenance.Core.Helper
             if (strTime.Length < 6)
             {
                 int count = 6 - strTime.Length;
+
                 for (int i = 0; i < count; i++)
                 {
                     strTime = strTime.Insert(0, "0");
@@ -37,18 +38,18 @@ namespace Fanex.Maintenance.Core.Helper
             }
 
             strTime = DateTime.ParseExact(
-                strTime,
-                "HHmmss",
-                CultureInfo.InvariantCulture,
+                strTime, 
+                "HHmmss", 
+                CultureInfo.InvariantCulture, 
                 DateTimeStyles.None).ToString("HH:mm:ss tt");
 
             return strTime;
         }
 
         /// <summary>
-        /// Get Full date time string from
+        /// Get full date string.
         /// </summary>
-        /// <param name="dateTimeString">dateTime String from Database, it is </param>
+        /// <param name="dateString">Date string.</param>
         /// <returns></returns>
         public static DateTime GetFullDate(string dateString)
         {
@@ -61,6 +62,12 @@ namespace Fanex.Maintenance.Core.Helper
             return fullDate;
         }
 
+        /// <summary>
+        /// Get full date time string.
+        /// </summary>
+        /// <param name="dateNumber">Date number.</param>
+        /// <param name="timeNumber">Time number.</param>
+        /// <returns></returns>
         public static DateTime GetFullDatetime(int dateNumber = 0, int timeNumber = 0)
         {
             if (dateNumber == 0 && timeNumber == 0)
@@ -71,9 +78,11 @@ namespace Fanex.Maintenance.Core.Helper
             {
                 //// check format time correct HHmmss
                 string strTime = timeNumber.ToString();
+
                 if (strTime.Length < 6)
                 {
                     int count = 6 - strTime.Length;
+
                     for (int i = 0; i < count; i++)
                     {
                         strTime = strTime.Insert(0, "0");

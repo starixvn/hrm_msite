@@ -12,12 +12,12 @@ namespace Fanex.Maintenance.Site
     using System.Web.Http;
 
     /// <summary>
-    ///
+    /// Web API configuration.
     /// </summary>
     public static class WebApiConfig
     {
         /// <summary>
-        ///
+        /// Register.
         /// </summary>
         /// <param name="config"></param>
         public static void Register(HttpConfiguration config)

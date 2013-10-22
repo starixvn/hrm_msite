@@ -31,14 +31,14 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #region Member
 
         /// <summary>
-        /// Schedule repository
+        /// Schedule repository.
         /// </summary>
         private readonly IScheduleRepository _scheduleRepository;
 
         #endregion Member
 
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
         private ScheduleService()
             : this(null)
@@ -46,7 +46,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
         /// <param name="scheduleRepository"></param>
         private ScheduleService(IScheduleRepository scheduleRepository)
@@ -73,7 +73,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #endregion Properties
 
         /// <summary>
-        /// Create schedule service
+        /// Create schedule service.
         /// </summary>
         /// <returns></returns>
         public static IScheduleService Create()
@@ -82,9 +82,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Search Schedule with Server IP
+        /// Search Schedule with Server IP.
         /// </summary>
-        /// <param name="serverIp"></param>
+        /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
         public IScheduleService WithServer(string serverIp)
         {
@@ -94,7 +94,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Search Schedule with Freq Type
+        /// Search Schedule with Freq Type.
         /// </summary>
         /// <param name="freqType"></param>
         /// <returns></returns>
@@ -106,7 +106,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Search Schedule with Freq Sub Type
+        /// Search Schedule with Freq Sub Type.
         /// </summary>
         /// <param name="freqSubType"></param>
         /// <returns></returns>
@@ -118,9 +118,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Search Schedule with Schedule Name
+        /// Search Schedule with Schedule Name.
         /// </summary>
-        /// <param name="scheduleName"></param>
+        /// <param name="scheduleName">Schedule name.</param>
         /// <returns></returns>
         public IScheduleService WithScheduleName(string scheduleName)
         {
@@ -133,10 +133,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Search Schedule with Date Range
+        /// Search Schedule with Date Range.
         /// </summary>
-        /// <param name="fromDate"></param>
-        /// <param name="toDate"></param>
+        /// <param name="fromDate">Start date range.</param>
+        /// <param name="toDate">End date range.</param>
         /// <returns></returns>
         public IScheduleService WithDateRange(DateTime? fromDate, DateTime? toDate)
         {
@@ -147,9 +147,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Search Schedule with Date
+        /// Search Schedule with Date.
         /// </summary>
-        /// <param name="searchDateType">Search Date Type</param>
+        /// <param name="searchDateType">Search date type.</param>
         /// <returns></returns>
         public IScheduleService WithSearchDateType(int? searchDateType)
         {
@@ -159,9 +159,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Schedule with filtered
+        /// Get Schedule with filtered.
         /// </summary>
-        /// <returns>List Schedule satisfy filter</returns>
+        /// <returns>List Schedule satisfy filter.</returns>
         public IEnumerable<ScheduleDetail> GetSchedules()
         {
             List<ScheduleDetail> schedules = new List<ScheduleDetail>();
@@ -226,10 +226,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Filter schedule with conditions
+        /// Filter schedule with conditions.
         /// </summary>
-        /// <param name="schedule">Schedule need be filtered</param>
-        /// <returns>Satisfy or not</returns>
+        /// <param name="schedule">Schedule need be filtered.</param>
+        /// <returns>Satisfy or not.</returns>
         private bool FilterSchedule(ScheduleDetail schedule)
         {
             bool choose = true;
@@ -277,11 +277,12 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Combine Freq and Interval to a string
+        /// Combine Freq and Interval to a string.
         /// </summary>
-        /// <param name="freq">Freq Value</param>
-        /// <param name="freqInterval">Freq Interval Value</param>
-        /// <returns>String combined</returns>
+        /// <param name="freq">Freq Value.</param>
+        /// <param name="freqInterval">Freq Interval Value.</param>
+        /// <param name="activeStartTime">Active start time.</param>
+        /// <returns>String combined.</returns>
         private string CombineFreqAndFreqInterval(int freq, int freqInterval, int activeStartTime)
         {
             string combinedString = string.Empty;
@@ -291,21 +292,27 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 case (int)FrequentTime.OneTimeOnly:
                     combinedString += ViewResource.FreqOneTime;
                     break;
+
                 case (int)FrequentTime.Daily:
                     combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.Daily);
                     break;
+
                 case (int)FrequentTime.Weekly:
                     combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.Weekly);
                     break;
+
                 case (int)FrequentTime.Monthly:
                     combinedString += Enum.GetName(typeof(FrequentTime), FrequentTime.Monthly);
                     break;
+
                 case (int)FrequentTime.MonlyRelative:
                     combinedString += ViewResource.FreqMonthlyRelative;
                     break;
+
                 case (int)FrequentTime.SqlAgentStart:
                     combinedString += ViewResource.FreqAgentStart;
                     break;
+
                 case (int)FrequentTime.ComputerIdle:
                     combinedString += ViewResource.FreqComputerIdle;
                     break;
@@ -316,26 +323,30 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Freq Interval string
+        /// Get Freq Interval string.
         /// </summary>
-        /// <param name="freq">Freq Value</param>
-        /// <param name="freqInterval">Freq Interval Value</param>
-        /// <returns>String combine Schedule Freq</returns>
+        /// <param name="freq">Freq Value.</param>
+        /// <param name="freqInterval">Freq Interval Value.</param>
+        /// <param name="activeStartTime">Active start time.</param>
+        /// <returns>String combine Schedule Freq.</returns>
         private string GetFreqIntervalValue(int freq, int freqInterval, int activeStartTime)
         {
             string freqIntervalName = string.Empty;
             int index = 0;
+
             switch (freq)
             {
                 case (int)FrequentTime.OneTimeOnly:
-                    //freqIntervalName = DateTimeHelper.GetFullTime(activeStartTime);
-
+                    // freqIntervalName = DateTimeHelper.GetFullTime(activeStartTime);
                     break;
+
                 case (int)FrequentTime.Daily:
                     freqIntervalName = Convert.ToString(freqInterval);
                     break;
+
                 case (int)FrequentTime.Weekly:
                     string hexValue = Convert.ToString(freqInterval, 2);
+
                     foreach (var charValue in hexValue)
                     {
                         if (charValue == '1')
@@ -347,9 +358,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                     }
 
                     break;
+
                 case (int)FrequentTime.MonlyRelative:
                     freqIntervalName = Constants.FreqIntervalValues[freqInterval];
-
                     break;
             }
 
@@ -362,27 +373,31 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Combine FreqSub and Interval To String for showing in View
+        /// Combine FreqSub and Interval To String for showing in View.
         /// </summary>
-        /// <param name="freqSub">Freq Sub Value</param>
-        /// <param name="freqSubInreval">Freq Sub Interval</param>
-        /// <param name="activeStartTime">Active start</param>
-        /// <returns>Combined Freq Name</returns>
-        private string CombineFreqSubAndFreqSubInterval(int freqSub, int freqSubInreval, int activeStartTime)
+        /// <param name="freqSub">Freq Sub Value.</param>
+        /// <param name="freqSubInterval">Freq Sub Interval.</param>
+        /// <param name="activeStartTime">Active start.</param>
+        /// <returns>Combined Freq Name.</returns>
+        private string CombineFreqSubAndFreqSubInterval(int freqSub, int freqSubInterval, int activeStartTime)
         {
             string combinedString = string.Empty;
             string tempString = string.Empty;
+
             switch (freqSub)
             {
                 case (int)FrequentSubTime.SpecificTime:
                     combinedString += ViewResource.FreqSubSpecificTime;
                     break;
+
                 case (int)FrequentSubTime.Seconds:
                     combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Seconds);
                     break;
+
                 case (int)FrequentSubTime.Minutes:
                     combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Minutes);
                     break;
+
                 case (int)FrequentSubTime.Hours:
                     combinedString += Enum.GetName(typeof(FrequentSubTime), FrequentSubTime.Hours);
                     break;

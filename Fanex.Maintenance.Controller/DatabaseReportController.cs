@@ -21,7 +21,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Interface;
 
     /// <summary>
-    /// Database report controller
+    /// Database report controller.
     /// </summary>
     [Authorize]
     public class DatabaseReportController : BaseController
@@ -38,7 +38,7 @@ namespace Fanex.Maintenance.Controller
         #region Ctor
 
         /// <summary>
-        /// Parameter less constructor
+        /// Parameter less constructor.
         /// </summary>
         public DatabaseReportController()
             : this(null)
@@ -46,7 +46,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Constructor with service input
+        /// Constructor with service input.
         /// </summary>
         /// <param name="databaseReportService"></param>
         public DatabaseReportController(IDatabaseReportService databaseReportService)
@@ -57,9 +57,9 @@ namespace Fanex.Maintenance.Controller
         #endregion Ctor
 
         /// <summary>
-        /// Data Integrity Return view
+        /// Data Integrity Return view.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult DataIntegrity()
         {
@@ -98,9 +98,9 @@ namespace Fanex.Maintenance.Controller
         }        
 
         /// <summary>
-        /// User Online Daily
+        /// User Online Daily.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult UserOnlineDaily()
         {
@@ -111,10 +111,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// User Online Daily by date
+        /// User Online Daily by date.
         /// </summary>
         /// <param name="date"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UserOnlineDaily(string date)
         {
@@ -126,9 +126,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// User online
+        /// User online.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult UserOnline()
         {
@@ -138,10 +138,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get list of user online with size
+        /// Get list of user online with size.
         /// </summary>
         /// <param name="size"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UserOnline(int size)
         {
@@ -155,9 +155,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// User online chart report
+        /// User online chart report.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult UserOnlineChart()
         {
@@ -167,10 +167,10 @@ namespace Fanex.Maintenance.Controller
         #region Ajax
 
         /// <summary>
-        /// User online chart report with size
+        /// User online chart report with size.
         /// </summary>
         /// <param name="size"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UserOnlineChart(int size)
         {

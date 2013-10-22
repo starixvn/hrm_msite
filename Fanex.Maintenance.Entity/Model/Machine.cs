@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Entity.Model
 {
     using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// Machine.
+    /// </summary>
     public class Machine
     {
         public int MachineId { get; set; }

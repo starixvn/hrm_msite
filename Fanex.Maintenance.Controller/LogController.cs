@@ -21,7 +21,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Impl;
 
     /// <summary>
-    /// Log Controller
+    /// Log controller
     /// </summary>
     [Authorize]
     public class LogController : BaseController
@@ -73,7 +73,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get log
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Index()
         {
@@ -105,7 +105,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="criteria"></param>
         /// <param name="from"></param>
         /// <param name="to"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Index(GetLogCriteria criteria)
         {
@@ -119,8 +119,7 @@ namespace Fanex.Maintenance.Controller
                 criteria.CategoryId, 
                 criteria.MachineId,
                 criteria.IsProduction, 
-                criteria.
-                IsMonitored, 
+                criteria.IsMonitored, 
                 criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)
@@ -138,7 +137,7 @@ namespace Fanex.Maintenance.Controller
         /// Get details message
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetLogMessage(int id)
         {

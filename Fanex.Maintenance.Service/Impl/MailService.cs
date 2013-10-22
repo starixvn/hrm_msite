@@ -23,7 +23,7 @@ namespace Fanex.Maintenance.Service.Impl
     {
         private int _appId;
 
-        private string _byDate;
+        private string _fromDate;
 
         private string _toDate;
 
@@ -34,26 +34,26 @@ namespace Fanex.Maintenance.Service.Impl
         private MailStatus _mailStatus;
 
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
         private MailService()
         {
         }
 
         /// <summary>
-        /// Create mail service
+        /// Create mail service.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Mail service.</returns>
         public static MailService Create()
         {
             return new MailService();
         }
 
         /// <summary>
-        /// Get list mail config filter by server ip
+        /// Get list mail config filter by server ip.
         /// </summary>
-        /// <param name="ip">if ip=null get all</param>
-        /// <returns></returns>
+        /// <param name="ip">If ip=null get all.</param>
+        /// <returns>List of mail config.</returns>
         public List<MailConfig> GetListConfig(string ip = "")
         {
             var configs = new List<MailConfig>();
@@ -71,10 +71,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// By application id
+        /// By application id.
         /// </summary>
         /// <param name="appId"></param>
-        /// <returns></returns>
+        /// <returns>Mail service.</returns>
         public IMailService WithApp(int appId)
         {
             this._appId = appId;
@@ -83,22 +83,22 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// From date
+        /// From date.
         /// </summary>
         /// <param name="byDate"></param>
-        /// <returns></returns>
-        public IMailService FromDate(string byDate)
+        /// <returns>Mail service.</returns>
+        public IMailService FromDate(string fromDate)
         {
-            this._byDate = byDate;
+            this._fromDate = fromDate;
 
             return this;
         }
 
         /// <summary>
-        /// To date
+        /// To date.
         /// </summary>
-        /// <param name="toDate"></param>
-        /// <returns></returns>
+        /// <param name="toDate">To date.</param>
+        /// <returns>Mail service.</returns>
         public IMailService ToDate(string toDate)
         {
             this._toDate = toDate;
@@ -107,11 +107,11 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Pagination
+        /// Pagination.
         /// </summary>
         /// <param name="page"></param>
         /// <param name="counter"></param>
-        /// <returns></returns>
+        /// <returns>Mail service.</returns>
         public IMailService WithPagination(int page, int counter)
         {
             this._page = page;
@@ -121,16 +121,16 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get list mail
+        /// Get list mail.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of mail record.</returns>
         public List<MailRecord> GetListMail()
         {
             var mails = new List<MailRecord>();
 
             using (var client = new MailDeliver())
             {
-                var dateTime = DateTime.Parse(_byDate);
+                var dateTime = DateTime.Parse(_fromDate);
                 var data = client.GetListMail(_appId, dateTime, _page, _counter);
                 if (data != null)
                 {
@@ -142,16 +142,17 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get list mail from date to date
+        /// Get list mail from date to date.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="totalRows">Number of rows.</param>
+        /// <returns>List of mail record.</returns>
         public List<MailRecord> GetListMailByDate(ref int totalRows)
         {
             var mails = new List<MailRecord>();
 
             using (var client = new Fanex.MailDeliver.MailClient.API.MailDeliver())
             {
-                var dateTime = DateTime.Parse(_byDate);
+                var dateTime = DateTime.Parse(_fromDate);
                 var dateTimeTo = DateTime.Parse(_toDate);
                 var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, ref totalRows, _page, _counter, _mailStatus);
 
@@ -171,10 +172,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get detail mail by mail id
+        /// Get detail mail by mail id.
         /// </summary>
-        /// <param name="mailID"></param>
-        /// <returns></returns>
+        /// <param name="mailID">Mail ID.</param>
+        /// <returns>Mail record.</returns>
         public MailRecord GetMail(int mailID)
         {
             MailRecord mail = null;
@@ -188,9 +189,9 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get list mail setting
+        /// Get list mail setting.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of mail setting.</returns>
         public List<MailSetting> GetListSetting()
         {
             var settings = new List<MailSetting>();
@@ -208,9 +209,9 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get list mail function
+        /// Get list mail function.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of mail function.</returns>
         public List<MailFunction> GetListFunction()
         {
             var functions = new List<MailFunction>();
@@ -228,10 +229,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// ReSend mail
+        /// ReSend mail.
         /// </summary>
         /// <param name="mailID"></param>
-        /// <returns></returns>
+        /// <returns>Send result.</returns>
         public bool SendMail(long mailID)
         {
             try
@@ -251,7 +252,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Insert new mail setting
+        /// Insert new mail setting.
         /// </summary>
         /// <param name="setting"></param>
         /// <returns></returns>
@@ -272,7 +273,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Insert new mail config
+        /// Insert new mail config.
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
@@ -293,7 +294,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Insert new mail function
+        /// Insert new mail function.
         /// </summary>
         /// <param name="func"></param>
         /// <returns></returns>
@@ -314,7 +315,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get mail setting by setting id
+        /// Get mail setting by setting id.
         /// </summary>
         /// <param name="settingId"></param>
         /// <returns></returns>
@@ -331,7 +332,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get mail config by config id
+        /// Get mail config by config id.
         /// </summary>
         /// <param name="configId"></param>
         /// <returns></returns>
@@ -348,7 +349,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get mail function by function id
+        /// Get mail function by function id.
         /// </summary>
         /// <param name="functionId"></param>
         /// <returns></returns>
@@ -365,7 +366,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// By Status mail
+        /// By Status mail.
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
@@ -389,6 +390,11 @@ namespace Fanex.Maintenance.Service.Impl
             return this;
         }
 
+        /// <summary>
+        /// Get error.
+        /// </summary>
+        /// <param name="mailId">Mail ID.</param>
+        /// <returns>List of mail error.</returns>
         public List<MailError> GetError(int mailId)
         {
             List<MailError> mailList = new List<MailError>();

@@ -17,17 +17,43 @@ namespace Fanex.Maintenance.Core.Web
     using Fanex.Logging;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Site Name.
+    /// </summary>
+    public static class SiteName
+    {
+        /// <summary>
+        /// Agent Name.
+        /// </summary>
+        public static string _Agent = "Agent";
+
+        /// <summary>
+        /// Accounting Name.
+        /// </summary>
+        public static string _Accounting = "Accounting";
+
+        /// <summary>
+        /// Affiliate Name.
+        /// </summary>
+        public static string _Affiliate = "Affiliate";
+
+        /// <summary>
+        /// Array Site.
+        /// </summary>
+        public static string[] Arr = { _Agent, _Accounting, _Affiliate };
+    }
+
+    /// <summary>
+    /// App setting.
     /// </summary>
     public class AppSetting
     {
         /// <summary>
-        /// Is Virtual
+        /// Is Virtual.
         /// </summary>
         private static string _isVirtualDir = "false";
 
         /// <summary>
-        /// Minute
+        /// Minute.
         /// </summary>
         private static int _minute = 10;
 
@@ -73,7 +99,7 @@ namespace Fanex.Maintenance.Core.Web
         }
 
         /// <summary>
-        /// Is Virtual Directory
+        /// Is Virtual Directory.
         /// </summary>
         public static bool IsVirtualDirectory
         {
@@ -84,7 +110,7 @@ namespace Fanex.Maintenance.Core.Web
         }
 
         /// <summary>
-        /// Minute
+        /// Minute.
         /// </summary>
         public static int Minute
         {
@@ -111,7 +137,7 @@ namespace Fanex.Maintenance.Core.Web
         }
 
         /// <summary>
-        /// Culture Info
+        /// Culture Info.
         /// </summary>
         public static CultureInfo Culture
         {
@@ -122,7 +148,7 @@ namespace Fanex.Maintenance.Core.Web
         }
 
         /// <summary>
-        /// Context
+        /// Context.
         /// </summary>
         public static HttpContext Context
         {
@@ -133,7 +159,7 @@ namespace Fanex.Maintenance.Core.Web
         }
 
         /// <summary>
-        /// Notification job
+        /// Notification job.
         /// </summary>
         public static bool NotifiJob
         {
@@ -141,7 +167,7 @@ namespace Fanex.Maintenance.Core.Web
         }
 
         /// <summary>
-        /// Notification server
+        /// Notification server.
         /// </summary>
         public static bool NotifiServer
         {
@@ -150,48 +176,22 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Site Name
-    /// </summary>
-    public static class SiteName
-    {
-        /// <summary>
-        /// Agent Name
-        /// </summary>
-        public static string _Agent = "Agent";
-
-        /// <summary>
-        /// Accounting Name
-        /// </summary>
-        public static string _Accounting = "Accounting";
-
-        /// <summary>
-        /// Affiliate Name
-        /// </summary>
-        public static string _Affiliate = "Affiliate";
-
-        /// <summary>
-        /// Array Site
-        /// </summary>
-        public static string[] Arr = { _Agent, _Accounting, _Affiliate };
-    }
-
-    /// <summary>
-    /// Result
+    /// Result.
     /// </summary>
     public class RESULT
     {
         /// <summary>
-        /// Is Success
+        /// Is Success.
         /// </summary>
         public bool IsSuccess = true;
 
         /// <summary>
-        /// Is DataOk
+        /// Is DataOk.
         /// </summary>
         public bool IsDataOK = false;
 
         /// <summary>
-        /// Error Message
+        /// Error Message.
         /// </summary>
         public string ErrMsg = string.Empty;
     }

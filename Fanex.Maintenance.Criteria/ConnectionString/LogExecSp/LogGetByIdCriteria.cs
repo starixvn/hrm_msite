@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get log by ID criteria.
+    /// </summary>
     public class LogGetByIdCriteria : CriteriaBase
     {
         public int LogId { get; set; }

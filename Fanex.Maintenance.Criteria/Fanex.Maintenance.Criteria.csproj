@@ -58,7 +58,7 @@
     <Compile Include="ConnectionString\Connection\ConnectionInsertCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionUpdateCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionGetByIdCriteria.cs" />
-    <Compile Include="ConnectionString\Connection\ConnectionGetSecondaryConectionCriteria.cs" />
+    <Compile Include="ConnectionString\Connection\ConnectionGetSecondaryConnectionCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetSecondConnectionFromDbServerCriteria.cs" />
     <Compile Include="ConnectionString\DatabaseServer\DatabaseServerGetConnectionFromDbServerCriteria.cs" />
     <Compile Include="ConnectionString\Connection\ConnectionChangeConnectionFromDbServerCriteria.cs" />
@@ -92,7 +92,7 @@
     <Compile Include="Job\ServiceControlCriteria.cs" />
     <Compile Include="Job\StartJobCriteria.cs" />
     <Compile Include="Job\StopJobCriteria.cs" />
-    <Compile Include="Log\GetAllCategoryCritria.cs" />
+    <Compile Include="Log\GetAllCategoryCriteria.cs" />
     <Compile Include="DatabaseReport\GetCreditDataToValidateCriteria.cs" />
     <Compile Include="DatabaseReport\GetBalanceUpDayCriteria.cs" />
     <Compile Include="DatabaseReport\GetDepositDataToValidateCriteria.cs" />

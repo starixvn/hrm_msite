@@ -14,11 +14,14 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Connection service interface.
+    /// </summary>
     public interface IConnectionService
     {
         IEnumerable<ConnectionStringConnection> GetByAlias(int aliasId);
 
-        IEnumerable<ConnectionString> GetSecondaryConection(int id);
+        IEnumerable<ConnectionString> GetSecondaryConnection(int id);
 
         ConnectionString GetById(int id);
 

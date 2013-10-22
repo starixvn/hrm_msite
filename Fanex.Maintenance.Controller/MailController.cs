@@ -70,7 +70,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get mail list
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult MailList(int id = 0)
         {
@@ -103,7 +103,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="to"></param>
         /// <param name="applicationID">if application id = 0 get all</param>
         /// <param name="mailStatus"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult MailList(string from, string to, int applicationID = 0, int mailStatus = 0, int size = 10)
         {
@@ -139,7 +139,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get all mail setting
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult MailSetting()
         {
@@ -151,7 +151,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add mail setting
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailSetting()
         {
@@ -162,7 +162,7 @@ namespace Fanex.Maintenance.Controller
         /// Add mail setting
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailSetting(MailSettingViewModel model)
         {
@@ -182,7 +182,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add mail setting popup
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailSettingPopUp()
         {
@@ -193,7 +193,7 @@ namespace Fanex.Maintenance.Controller
         /// Edit mail setting
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMailSetting(int id)
         {
@@ -208,7 +208,7 @@ namespace Fanex.Maintenance.Controller
         /// Edit mail setting
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMailSetting(MailSettingViewModel model)
         {
@@ -232,7 +232,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get all mail config
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(int id = 0)
@@ -254,7 +254,7 @@ namespace Fanex.Maintenance.Controller
         /// Get mail config filter by server ip
         /// </summary>
         /// <param name="serverIp"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(string serverIp = "")
@@ -273,7 +273,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add new mail config
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig()
@@ -287,7 +287,7 @@ namespace Fanex.Maintenance.Controller
         /// Add new mail config
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig(MailConfigViewModel model)
@@ -309,7 +309,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add new mail config popup
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailConfigPopUp()
         {
@@ -322,7 +322,7 @@ namespace Fanex.Maintenance.Controller
         /// Edit mail config by config id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(int id)
@@ -341,7 +341,7 @@ namespace Fanex.Maintenance.Controller
         /// Edit mail config
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(MailConfigViewModel model)
@@ -367,7 +367,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get all mail function
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult MailFunction()
         {
@@ -380,7 +380,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add new mail function
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailFunction()
         {
@@ -395,7 +395,7 @@ namespace Fanex.Maintenance.Controller
         /// Add new mail function
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailFunction(MailFunctionViewModel model)
         {
@@ -419,7 +419,7 @@ namespace Fanex.Maintenance.Controller
         /// Edit mail function
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMailFunction(int id)
         {
@@ -439,7 +439,7 @@ namespace Fanex.Maintenance.Controller
         /// Edit mail function
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMailFunction(MailFunctionViewModel model)
         {
@@ -473,7 +473,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="isAutho"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailSettingPopUp(string server, int port, string username, string password, bool isAutho)
         {
@@ -502,7 +502,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="appName"></param>
         /// <param name="description"></param>
         /// <param name="settingId"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailConfigPopUp(string appName, string description, int settingId)
         {
@@ -532,7 +532,7 @@ namespace Fanex.Maintenance.Controller
         /// Resend mail
         /// </summary>
         /// <param name="mailId"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ResendMail, Policy = Constant.Policy.Host)]
         public ActionResult ResendMail(int mailId)
@@ -550,7 +550,7 @@ namespace Fanex.Maintenance.Controller
         /// Get message detail of mail
         /// </summary>
         /// <param name="mailId"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailDetails, Policy = Constant.Policy.Read)]
         public ActionResult GetMessage(int mailId)
@@ -568,7 +568,7 @@ namespace Fanex.Maintenance.Controller
         /// Get mail error
         /// </summary>
         /// <param name="mailId"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetError(int mailId)
         {
@@ -589,7 +589,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="page"></param>
         /// <param name="size"></param>
         /// <param name="applicationID"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult MailListPagi(int status, string from, string to, int page = 0, int size = 50, int applicationID = 0)
         {
@@ -623,7 +623,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get list mail setting
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetMailSetting()
         {
@@ -641,7 +641,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get list mail config
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetMailConfig()
         {

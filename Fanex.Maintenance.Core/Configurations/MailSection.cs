@@ -12,12 +12,24 @@ namespace Fanex.Maintenance.Core.Configurations
     using System.Configuration;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Mail section.
     /// </summary>
     public class MailSection : ConfigurationSection
     {
         /// <summary>
-        /// List Sp Name
+        /// Static instance for Reference.
+        /// </summary>
+        public static MailSection Instance
+        {
+            get
+            {
+                var mailSection = ConfigurationManager.GetSection("MailSection") as MailSection;
+                return mailSection;
+            }
+        }
+        
+        /// <summary>
+        /// List Sp Name.
         /// </summary>
         [ConfigurationProperty("Mails", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(MailCollection), AddItemName = "add")]
@@ -30,34 +42,22 @@ namespace Fanex.Maintenance.Core.Configurations
                 return mailCollection;
             }
         }
-
-        /// <summary>
-        /// Static instance for Reference
-        /// </summary>
-        public static MailSection Instance
-        {
-            get
-            {
-                var mailSection = ConfigurationManager.GetSection("MailSection") as MailSection;
-                return mailSection;
-            }
-        }
     }
 
     /// <summary>
-    /// Sp Name Collection
+    /// Sp Name Collection.
     /// </summary>
     public class MailCollection : ConfigurationElementCollection
     {
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
         public MailCollection()
         {
         }
 
         /// <summary>
-        /// Collection Type
+        /// Collection Type.
         /// </summary>
         public override ConfigurationElementCollectionType CollectionType
         {
@@ -68,16 +68,16 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Add Element
+        /// Add Element.
         /// </summary>
-        /// <param name="mappingElement"></param>
+        /// <param name="mappingElement">Mapping element.</param>
         public void Add(MailElement mappingElement)
         {
             BaseAdd(mappingElement);
         }
 
         /// <summary>
-        /// Base Add
+        /// Base Add.
         /// </summary>
         /// <param name="element"></param>
         protected override void BaseAdd(ConfigurationElement element)
@@ -86,7 +86,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Create new Element
+        /// Create new Element.
         /// </summary>
         /// <returns></returns>
         protected override ConfigurationElement CreateNewElement()
@@ -95,7 +95,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Get Element Key
+        /// Get Element Key.
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
@@ -105,7 +105,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Get Element with index
+        /// Get Element with index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
@@ -129,12 +129,12 @@ namespace Fanex.Maintenance.Core.Configurations
     }
 
     /// <summary>
-    /// Sp name element
+    /// Sp name element.
     /// </summary>
     public class MailElement : ConfigurationElement
     {
         /// <summary>
-        /// Key Attribute
+        /// Key Attribute.
         /// </summary>
         [ConfigurationProperty("To", IsRequired = true, IsKey = true)]
         public string To
@@ -151,7 +151,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Name Attribute
+        /// Name Attribute.
         /// </summary>
         [ConfigurationProperty("From", IsRequired = true)]
         public string From

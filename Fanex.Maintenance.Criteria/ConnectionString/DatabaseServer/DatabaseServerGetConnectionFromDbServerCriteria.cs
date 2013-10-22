@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="DatabaseServerGetSwitchConnectionCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseServerGetConnectionFromDbServerCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -13,6 +13,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get database server connection from DB server criteria.
+    /// </summary>
     public class DatabaseServerGetConnectionFromDbServerCriteria : CriteriaBase
     {
         [Display(Name = "From_DbServer", ResourceType = typeof(ViewResource))]

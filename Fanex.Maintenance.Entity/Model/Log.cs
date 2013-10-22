@@ -13,6 +13,9 @@ namespace Fanex.Maintenance.Entity.Model
     using System.Collections.Generic;
     using System.Web;
 
+    /// <summary>
+    /// Log.
+    /// </summary>
     public class Log
     {
         public long LogId { get; set; }

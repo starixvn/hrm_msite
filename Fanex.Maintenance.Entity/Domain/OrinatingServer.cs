@@ -9,6 +9,9 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
+    /// <summary>
+    /// Orinating server.
+    /// </summary>
     public class OrinatingServer : IEntity<int, string>
     {
         public int MasterServer { get; set; }

@@ -69,6 +69,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         #region sign in
 
+        /// <summary>
+        /// Index page.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Index()
         {
@@ -82,6 +86,12 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Index page.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Index(string username, string password)
@@ -241,6 +251,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         #region sign out
 
+        /// <summary>
+        /// Log out.
+        /// </summary>
+        /// <returns>Action result.</returns>
         public ActionResult LogOut()
         {
             DoSignOut();
@@ -252,6 +266,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         #region re check in
 
+        /// <summary>
+        /// Recheck login.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
@@ -284,12 +302,20 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         #region helpers
 
+        /// <summary>
+        /// Create user menu.
+        /// </summary>
+        /// <param name="user"></param>
         private void CreateUserMenu(User user)
         {
             _currentSession.MenuItemList = 
                 (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(user.Id, SiteId, Environment, true);
         }
 
+        /// <summary>
+        /// Create auth information.
+        /// </summary>
+        /// <param name="user"></param>
         private void CreateAuthInfo(User user)
         {
             var currentDomain = CurrentContext.GetCurrentDomain();
@@ -319,6 +345,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             Response.Cookies.Add(authCookie);
         }
 
+        /// <summary>
+        /// Sign out.
+        /// </summary>
         private void DoSignOut()
         {
             _userService.UserLogOut(new LogOutUserCriteria

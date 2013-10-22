@@ -13,7 +13,7 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Server repository.
     /// </summary>
     public interface IServerRepository
     {

@@ -16,14 +16,14 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Log category
+    /// Log category.
     /// </summary>
     public class LogCategoryRepository : ReadonlyRepository<LogCategory>
     {
         /// <summary>
-        /// Override return Category
+        /// Override return Category.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns></returns>
         public override IEnumerable<LogCategory> Fetch(ICriteria criteria)
         {

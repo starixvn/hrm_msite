@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Entity.Model
     using System;
     using Fanex.Maintenance.Entity.Domain;
 
+    /// <summary>
+    /// Step detail.
+    /// </summary>
     public class StepDetail : IEntity<int, string>
     {
         /// <summary>
@@ -105,7 +108,7 @@ namespace Fanex.Maintenance.Entity.Model
         /// 1 = Succeeded
         /// 2 = Retry
         /// 3 = Canceled
-        /// 5 = Unknown
+        /// 5 = Unknown.
         /// </summary>
         public int LastRunOutCome { get; set; }
 

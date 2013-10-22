@@ -25,7 +25,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #region Member
 
         /// <summary>
-        /// Step repository
+        /// Step repository.
         /// </summary>
         private readonly IStepRepository _stepRepository = new StepRepository();
 
@@ -42,7 +42,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #region Ctor
 
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
         private StepService()
             : this(null)
@@ -50,7 +50,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
         /// <param name="stepRepository"></param>
         private StepService(IStepRepository stepRepository)
@@ -62,9 +62,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Create step service
+        /// Create step service.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Step service.</returns>
         public static IStepService Create()
         {
             return new StepService();
@@ -73,10 +73,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #endregion
 
         /// <summary>
-        /// get from server
+        /// Get from server.
         /// </summary>
-        /// <param name="serverName"></param>
-        /// <returns></returns>
+        /// <param name="serverName">Server name.</param>
+        /// <returns>Step service.</returns>
         public IStepService FromServer(string serverName)
         {
             this._serverName = serverName;
@@ -85,10 +85,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter by job name
+        /// Filter by job name.
         /// </summary>
         /// <param name="jobName"></param>
-        /// <returns></returns>
+        /// <returns>Step service.</returns>
         public IStepService WithJob(string jobName)
         {
             this._jobName = jobName;
@@ -97,9 +97,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// get step
+        /// Get step.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of step detail.</returns>
         public IEnumerable<StepDetail> GetSteps()
         {
             var criteria = new GetListJobCriteria

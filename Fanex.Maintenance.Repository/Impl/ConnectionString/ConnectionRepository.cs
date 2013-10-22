@@ -21,9 +21,17 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Connection repository.
+    /// </summary>
     public class ConnectionRepository : BaseRepository<ConnectionString>, IConnectionRepository
     {
-        public IEnumerable<ConnectionString> GetSecondaryConection(ICriteria criteria)
+        /// <summary>
+        /// Get secondary connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of connection string.</returns>
+        public IEnumerable<ConnectionString> GetSecondaryConnection(ICriteria criteria)
         {
             try
             {
@@ -58,7 +66,12 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
-        public IEnumerable<ConnectionStringConnection> GetByAlais(ICriteria criteria)
+        /// <summary>
+        /// Get connection by alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of connection string connection.</returns>
+        public IEnumerable<ConnectionStringConnection> GetByAlias(ICriteria criteria)
         {
             try
             {
@@ -107,6 +120,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Get connection by ID.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Connection string.</returns>
         public ConnectionString GetById(ICriteria criteria)
         {
             try
@@ -125,6 +143,12 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
             }
         }
 
+        /// <summary>
+        /// Insert or update connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="logCriteria">Log criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
             try
