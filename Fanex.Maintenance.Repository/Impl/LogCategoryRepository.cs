@@ -24,7 +24,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// Override return Category.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <returns></returns>
+        /// <returns>List of log category.</returns>
         public override IEnumerable<LogCategory> Fetch(ICriteria criteria)
         {
             try

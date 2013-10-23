@@ -23,7 +23,7 @@ namespace Fanex.Maintenance.Controller.Worker
     using Microsoft.AspNet.SignalR;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Notification worker.
     /// </summary>
     public class NotificationWorker : BaseWorker
     {
@@ -145,9 +145,9 @@ namespace Fanex.Maintenance.Controller.Worker
         }
 
         /// <summary>
-        /// Get Sql Agent Log For notifications.
+        /// Get SQL Agent Log For notifications.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of notify info.</returns>
         private IEnumerable<NotifyInfo> GetSqlAgentLogs()
         {
             //// Get all agent log
@@ -192,7 +192,7 @@ namespace Fanex.Maintenance.Controller.Worker
         /// <summary>
         /// Get Job For notification.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of notify info.</returns>
         private IEnumerable<NotifyInfo> GetJobLogs()
         {
             //// Initial variables
@@ -261,9 +261,9 @@ namespace Fanex.Maintenance.Controller.Worker
         }
 
         /// <summary>
-        /// Send mail for Sql Agent Error.
+        /// Send mail for SQL Agent Error.
         /// </summary>
-        /// <param name="sqlServerLogs"></param>
+        /// <param name="sqlServerLogs">List of SQL server log.</param>
         /// <param name="serverIp">Server IP address.</param>
         private void SendMailForSqlAgentError(IEnumerable<SqlServerLog> sqlServerLogs, string serverIp)
         {
@@ -295,10 +295,10 @@ namespace Fanex.Maintenance.Controller.Worker
         }
 
         /// <summary>
-        /// Send mail for job step error
+        /// Send mail for job step error.
         /// </summary>
-        /// <param name="job"></param>
-        /// <param name="jobLogs"></param>
+        /// <param name="job">Job schedule.</param>
+        /// <param name="jobLogs">List of job logs.</param>
         /// <param name="serverIp">Server IP address.</param>
         private void SendMailForJobStepError(JobSchedule job, IEnumerable<JobLog> jobLogs, string serverIp)
         {
@@ -336,7 +336,6 @@ namespace Fanex.Maintenance.Controller.Worker
         /// <summary>
         /// Get Server status.
         /// </summary>
-        /// <returns>List of ServerStatus</returns>
         private void UpdateServerStatus()
         {
             try
@@ -344,6 +343,7 @@ namespace Fanex.Maintenance.Controller.Worker
                 string mailSubject = "Error: Sql Agent Stopped on " + DateTime.Now.ToShortDateString();
                 string mailTitle = "Error: Sql Agent Stopped on " + DateTime.Now.ToShortDateString();
                 string mailBody = string.Empty;
+
                 foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
                 {
                     ServerStatus serverStatus = _serverService.GetServerStatus(server.ConnectionString);

@@ -20,6 +20,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Gets create static instance for reference.
         /// </summary>
+        /// <value>Database server section.</value>
         public static DatabaseServersSection Instance
         {
             get
@@ -28,10 +29,7 @@ namespace Fanex.Maintenance.Core.Configurations
                 return databaseServers;
             }
         }
-        
-        /// <summary>
-        /// Gets List Server.
-        /// </summary>
+
         [ConfigurationProperty("servers", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(ServerCollection), AddItemName = "add")]
         public ServerCollection Servers
@@ -43,9 +41,6 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
-        /// <summary>
-        /// Gets List Server ForGet Resource.
-        /// </summary>
         [ConfigurationProperty("resourceservers", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(ServerCollection), AddItemName = "add")]
         public ServerCollection ResourceServers
@@ -64,16 +59,10 @@ namespace Fanex.Maintenance.Core.Configurations
     /// </summary>
     public class ServerCollection : ConfigurationElementCollection
     {
-        /// <summary>
-        /// Controller.
-        /// </summary>
         public ServerCollection()
         {
         }
 
-        /// <summary>
-        /// Collection Type.
-        /// </summary>
         public override ConfigurationElementCollectionType CollectionType
         {
             get
@@ -86,7 +75,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// Get Element.
         /// </summary>
         /// <param name="index">Index value.</param>
-        /// <returns></returns>
+        /// <returns>Server element.</returns>
         public ServerElement this[int index]
         {
             get
@@ -205,7 +194,6 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
-        /// These property below not in config file
         public int SqlServerAgentStatus { get; set; }
     }
 }

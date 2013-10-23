@@ -21,9 +21,6 @@ namespace Fanex.Maintenance.Service.Impl
     {
         private readonly LogCategoryRepository _categoryRepository = new LogCategoryRepository();
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         private LogCategoryService()
         {
         }

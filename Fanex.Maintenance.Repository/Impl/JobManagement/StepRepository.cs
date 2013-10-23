@@ -28,7 +28,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="serverName">Server name.</param>
-        /// <returns></returns>
+        /// <returns>List of step detail.</returns>
         public IEnumerable<StepDetail> GetStepByJob(ICriteria criteria, string serverName)
         {
             if (criteria.IsValid())

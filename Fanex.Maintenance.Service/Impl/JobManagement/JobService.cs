@@ -63,18 +63,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #region Ctor
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         private JobService()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="jobRepository"></param>
         private JobService(IJobRepository jobRepository)
         {
             _jobRepository = jobRepository ?? new JobRepository();
@@ -111,7 +104,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter by status of job.
         /// </summary>
-        /// <param name="status"></param>
+        /// <param name="status">Job status.</param>
         /// <returns>Job service object.</returns>
         public IJobService WithStatus(int? status)
         {
@@ -123,7 +116,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// From server.
         /// </summary>
-        /// <param name="serverName"></param>
+        /// <param name="serverName">Server name.</param>
         /// <returns>Job service object.</returns>
         public IJobService FromServer(string serverName)
         {
@@ -171,7 +164,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter by last run date.
         /// </summary>
-        /// <param name="lastRunDate"></param>
+        /// <param name="lastRunDate">Last run date.</param>
         /// <returns>Job service.</returns>
         public IJobService WithLastRunDate(DateTime? lastRunDate)
         {
@@ -183,7 +176,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter buy next run date.
         /// </summary>
-        /// <param name="nextRunDate"></param>
+        /// <param name="nextRunDate">Next run date.</param>
         /// <returns>Job service object.</returns>
         public IJobService WithNextRunDate(DateTime? nextRunDate)
         {
@@ -195,7 +188,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter by start run date.
         /// </summary>
-        /// <param name="startRunDate"></param>
+        /// <param name="startRunDate">Start run date.</param>
         /// <returns>Job service.</returns>
         public IJobService WithStartRunDate(DateTime? startRunDate)
         {
@@ -213,7 +206,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter by end run date.
         /// </summary>
-        /// <param name="endRunDate"></param>
+        /// <param name="endRunDate">End run date.</param>
         /// <returns>Job service object.</returns>
         public IJobService WithEndRunDate(DateTime? endRunDate)
         {
@@ -231,7 +224,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter by job ID.
         /// </summary>
-        /// <param name="guid"></param>
+        /// <param name="guid">Job GUID.</param>
         /// <returns>Job service object.</returns>
         public IJobService WithJobId(string guid)
         {
@@ -243,7 +236,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter by step name.
         /// </summary>
-        /// <param name="stepName"></param>
+        /// <param name="stepName">Step name.</param>
         /// <returns>Job service object.</returns>
         public IJobService WithStepName(string stepName)
         {

@@ -1,8 +1,11 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="MailHelper.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="MailHelper.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Ricky.Nguyen" date="2012.10.24">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Core.Helper
 {
@@ -18,9 +21,9 @@ namespace Fanex.Maintenance.Core.Helper
         /// <summary>
         /// Send mail with list mail in configuration file.
         /// </summary>
-        /// <param name="mailSubject"></param>
-        /// <param name="mailTitle"></param>
-        /// <param name="mailBody"></param>
+        /// <param name="mailSubject">Mail subject.</param>
+        /// <param name="mailTitle">Mail title.</param>
+        /// <param name="mailBody">Mail body.</param>
         public static void SendMail(string mailSubject = "", string mailTitle = "", string mailBody = "")
         {
             try

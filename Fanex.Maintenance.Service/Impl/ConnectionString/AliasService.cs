@@ -46,9 +46,9 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get all alias.
         /// </summary>
-        /// <param name="alias"></param>
+        /// <param name="alias">Alias string.</param>
         /// <param name="databaseServerId">Database server ID.</param>
-        /// <param name="siteId"></param>
+        /// <param name="siteId">Site ID.</param>
         /// <returns>List of alias.</returns>
         public IEnumerable<AliasConnectionString> GetAll(
             string alias = "", 
@@ -194,8 +194,8 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get switch connection alias.
         /// </summary>
-        /// <param name="fromDbServerId"></param>
-        /// <param name="toDbServerId"></param>
+        /// <param name="fromDbServerId">From DB server ID.</param>
+        /// <param name="toDbServerId">To DB server ID.</param>
         /// <returns>List of alias connection string.</returns>
         public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(int fromDbServerId, int toDbServerId)
         {

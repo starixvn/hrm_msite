@@ -33,9 +33,6 @@ namespace Fanex.Maintenance.Service.Impl
 
         private MailStatus _mailStatus;
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         private MailService()
         {
         }
@@ -52,7 +49,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get list mail config filter by server ip.
         /// </summary>
-        /// <param name="ip">If ip=null get all.</param>
+        /// <param name="ip">IP address.</param>
         /// <returns>List of mail config.</returns>
         public List<MailConfig> GetListConfig(string ip = "")
         {
@@ -73,7 +70,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// By application id.
         /// </summary>
-        /// <param name="appId"></param>
+        /// <param name="appId">Application ID.</param>
         /// <returns>Mail service.</returns>
         public IMailService WithApp(int appId)
         {
@@ -109,8 +106,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Pagination.
         /// </summary>
-        /// <param name="page"></param>
-        /// <param name="counter"></param>
+        /// <param name="page">Page index.</param>
+        /// <param name="counter">Counter value.</param>
         /// <returns>Mail service.</returns>
         public IMailService WithPagination(int page, int counter)
         {
@@ -231,7 +228,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// ReSend mail.
         /// </summary>
-        /// <param name="mailID"></param>
+        /// <param name="mailID">Mail ID.</param>
         /// <returns>Send result.</returns>
         public bool SendMail(long mailID)
         {
@@ -254,8 +251,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Insert new mail setting.
         /// </summary>
-        /// <param name="setting"></param>
-        /// <returns></returns>
+        /// <param name="setting">Mail setting.</param>
+        /// <returns>Success or not.</returns>
         public bool StoreSetting(MailSetting setting)
         {
             bool result = false;
@@ -275,8 +272,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Insert new mail config.
         /// </summary>
-        /// <param name="config"></param>
-        /// <returns></returns>
+        /// <param name="config">Mail config.</param>
+        /// <returns>Success or not.</returns>
         public bool StoreConfig(MailConfig config)
         {
             bool result = false;
@@ -297,7 +294,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// Insert new mail function.
         /// </summary>
         /// <param name="func"></param>
-        /// <returns></returns>
+        /// <returns>Success or not.</returns>
         public bool StoreFunction(MailFunction func)
         {
             bool result = false;
@@ -317,8 +314,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get mail setting by setting id.
         /// </summary>
-        /// <param name="settingId"></param>
-        /// <returns></returns>
+        /// <param name="settingId">Setting ID.</param>
+        /// <returns>Mail setting.</returns>
         public MailSetting GetSetting(int settingId)
         {
             MailSetting mail = null;
@@ -334,8 +331,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get mail config by config id.
         /// </summary>
-        /// <param name="configId"></param>
-        /// <returns></returns>
+        /// <param name="configId">Configuration ID.</param>
+        /// <returns>Mail config.</returns>
         public MailConfig GetConfig(int configId)
         {
             MailConfig mail = null;
@@ -351,8 +348,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get mail function by function id.
         /// </summary>
-        /// <param name="functionId"></param>
-        /// <returns></returns>
+        /// <param name="functionId">Function ID.</param>
+        /// <returns>Mail function.</returns>
         public MailFunction GetFunction(int functionId)
         {
             MailFunction mail = null;
@@ -368,8 +365,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// By Status mail.
         /// </summary>
-        /// <param name="status"></param>
-        /// <returns></returns>
+        /// <param name="status">Mail status.</param>
+        /// <returns>Mail service.</returns>
         public IMailService WithStatus(int status)
         {
             if (status == 0)

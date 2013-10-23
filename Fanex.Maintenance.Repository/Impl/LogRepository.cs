@@ -25,7 +25,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// Override return Logs.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <returns></returns>
+        /// <returns>List of log.</returns>
         public IEnumerable<Log> GetLog(ref GetLogCriteria criteria)
         {
             try
@@ -59,7 +59,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// Get details message of log.
         /// </summary>
         /// <param name="logId">Log ID.</param>
-        /// <returns></returns>
+        /// <returns>Log message.</returns>
         public string GetLogMessage(long logId)
         {
             using (ObjectDb db = new ObjectDb("Logging_SelMessage"))
@@ -72,7 +72,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// Remove log.
         /// </summary>
         /// <param name="from">From datetime.</param>
-        /// <returns></returns>
+        /// <returns>Number of deleted rows.</returns>
         public int DeleteLogs(DateTime from)
         {
             int row = 0;
@@ -98,10 +98,11 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <param name="logIds">Log IDs.</param>
         /// <param name="monitoringUserId">Monitoring user ID.</param>
         /// <param name="isMonitored">Is monitored or not.</param>
-        /// <returns></returns>
+        /// <returns>Number of rows.</returns>
         public int MonitorLog(string logIds, int? monitoringUserId, bool isMonitored)
         {
             int row = 0;
+
             try
             {
                 using (ObjectDb db = new ObjectDb("Logging_Monitor"))

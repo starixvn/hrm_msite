@@ -87,7 +87,7 @@ namespace Fanex.Maintenance.Controller
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
                 JsonRequestBehavior = behavior,
-                MaxJsonLength = Int32.MaxValue
+                MaxJsonLength = int.MaxValue
             };
         }
     }

@@ -37,18 +37,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #endregion Member
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         private ScheduleService()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="scheduleRepository"></param>
         private ScheduleService(IScheduleRepository scheduleRepository)
         {
             _scheduleRepository = scheduleRepository ?? new ScheduleRepository();
@@ -96,7 +89,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Search Schedule with Freq Type.
         /// </summary>
-        /// <param name="freqType"></param>
+        /// <param name="freqType">Frequency type.</param>
         /// <returns>Schedule service.</returns>
         public IScheduleService WithFreqType(int? freqType)
         {
@@ -108,7 +101,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Search Schedule with Freq Sub Type.
         /// </summary>
-        /// <param name="freqSubType"></param>
+        /// <param name="freqSubType">Freuency sub type.</param>
         /// <returns>Schedule service.</returns>
         public IScheduleService WithFreqSubType(int? freqSubType)
         {

@@ -43,19 +43,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Ctor
 
-        /// <summary>
-        /// Mail Service Parameter less controller.
-        /// </summary>
         public MailController()
             : this(null, null)
         {
         }
 
-        /// <summary>
-        /// Mail Controller.
-        /// </summary>
-        /// <param name="mailService">Mail service.</param>
-        /// <param name="userService">User service.</param>
         public MailController(IMailService mailService, IUserService userService)
         {
             this._mailServer = mailService ?? MailService.Create();
@@ -101,10 +93,10 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get mail list.
         /// </summary>
-        /// <param name="from"></param>
+        /// <param name="from">From DateTime string.</param>
         /// <param name="to"></param>
-        /// <param name="applicationID">if application id = 0 get all.</param>
-        /// <param name="mailStatus"></param>
+        /// <param name="applicationID">If application id = 0 get all.</param>
+        /// <param name="mailStatus">Mail status.</param>
         /// <param name="size"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
@@ -164,7 +156,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add mail setting.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Mail setting view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailSetting(MailSettingViewModel model)
@@ -210,7 +202,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit mail setting.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Mail setting view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMailSetting(MailSettingViewModel model)
@@ -255,7 +247,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get mail config filter by server ip.
+        /// Get mail config filter by server IP.
         /// </summary>
         /// <param name="serverIp">Server IP address.</param>
         /// <returns>Action result.</returns>
@@ -290,7 +282,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add new mail config.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Mail config view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
@@ -344,7 +336,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit mail config.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Mail config view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
@@ -398,7 +390,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add new mail function.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Mail function view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailFunction(MailFunctionViewModel model)
@@ -442,7 +434,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit mail function.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Mail function view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMailFunction(MailFunctionViewModel model)
@@ -503,9 +495,9 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add mail config for popup view.
         /// </summary>
-        /// <param name="appName"></param>
-        /// <param name="description"></param>
-        /// <param name="settingId"></param>
+        /// <param name="appName">Application name.</param>
+        /// <param name="description">Mail config description.</param>
+        /// <param name="settingId">Setting ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailConfigPopUp(string appName, string description, int settingId)
@@ -589,11 +581,11 @@ namespace Fanex.Maintenance.Controller
         /// Get list mail pagination.
         /// </summary>
         /// <param name="status"></param>
-        /// <param name="from"></param>
+        /// <param name="from">From DateTime string.</param>
         /// <param name="to"></param>
         /// <param name="page"></param>
         /// <param name="size"></param>
-        /// <param name="applicationID"></param>
+        /// <param name="applicationID">Application ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult MailListPagi(
@@ -670,7 +662,7 @@ namespace Fanex.Maintenance.Controller
         #region InitData
 
         /// <summary>
-        /// Init Page Size.
+        /// Initialize Page Size.
         /// </summary>
         private void InitPageSize()
         {
@@ -703,7 +695,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init list mail status for view.
+        /// Initialize list mail status for view.
         /// </summary>
         private void InitMailStatus()
         {
@@ -730,9 +722,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init list mail config for view.
+        /// Initialize list mail config for view.
         /// </summary>
-        /// <param name="appId"></param>
+        /// <param name="appId">Application ID.</param>
         private void InitDataMailConfig(int appId = 0)
         {
             List<MailConfig> listConfig = new List<MailConfig>();
@@ -747,7 +739,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init list mail setting for view.
+        /// Initialize list mail setting for view.
         /// </summary>
         private void InitDataMailSetting()
         {
@@ -761,7 +753,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init list server ip for view.
+        /// Initialize list server ip for view.
         /// </summary>
         /// <param name="serverIp">Server IP address.</param>
         private void InitDataIpServer(string serverIp = "")

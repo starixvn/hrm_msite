@@ -60,7 +60,7 @@ namespace Fanex.Maintenance.Criteria.MailService
         /// <summary>
         /// Get mail config.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Mail config.</returns>
         public MailConfig GetMailConfig()
         {
             MailConfig mailConfig = new MailConfig

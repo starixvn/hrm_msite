@@ -102,7 +102,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Database server.</returns>
-        public DatabaseServer Get(ICriteria criteria)
+        public override DatabaseServer Get(ICriteria criteria)
         {
             try
             {

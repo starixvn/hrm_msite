@@ -59,7 +59,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="server"></param>
         /// <param name="jobname">Job name.</param>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Index(string type = "", string server = "", string jobname = "", string id = "")
         {
@@ -106,7 +106,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Schedule List With Filter.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult ScheduleManagement(GetAllScheduleCriteria criteria)
@@ -136,8 +136,8 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Job Management Page.
         /// </summary>
-        /// <param name="scheduleId"></param>
-        /// <param name="server"></param>
+        /// <param name="scheduleId">Schedule ID.</param>
+        /// <param name="server">Server IP address.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult JobManagement(int? scheduleId, string server = "")
@@ -205,10 +205,10 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Start a job.
         /// </summary>
-        /// <param name="server"></param>
+        /// <param name="server">Server.</param>
         /// <param name="jobName">Job name.</param>
-        /// <param name="stepName"></param>
-        /// <returns></returns>
+        /// <param name="stepName">Step name.</param>
+        /// <returns>Json result.</returns>
         [HttpPost]
         public JsonResult StartJob(string server, string jobName, string stepName)
         {
@@ -228,7 +228,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <param name="server"></param>
         /// <param name="jobName">Job name.</param>
-        /// <returns></returns>
+        /// <returns>Json result.</returns>
         [HttpPost]
         public JsonResult StopJob(string server, string jobName)
         {
@@ -246,7 +246,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <param name="server"></param>
         /// <param name="jobName">Job name.</param>
-        /// <returns></returns>
+        /// <returns>Json result.</returns>
         [HttpPost]
         public JsonResult GetJob(string server, string jobName)
         {
@@ -439,7 +439,7 @@ namespace Fanex.Maintenance.Controller
         /// Get Server Log With Filter.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult ServerLogManagement(GetSqlServerLogCriteria criteria)
         {
@@ -467,7 +467,7 @@ namespace Fanex.Maintenance.Controller
 
         #region Sql Agent Log Management
         /// <summary>
-        /// Get Sql Server Agent Log.
+        /// Get SQL Server Agent Log.
         /// </summary>
         /// <param name="server"></param>
         /// <param name="top"></param>
@@ -495,7 +495,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get Sql Server Agent Log With Filter.
+        /// Get SQL Server Agent Log With Filter.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Action result.</returns>
@@ -582,7 +582,7 @@ namespace Fanex.Maintenance.Controller
         /// Get server resource info.
         /// </summary>
         /// <param name="serverIp">Server IP address.</param>
-        /// <returns></returns>
+        /// <returns>Json result.</returns>
         [HttpPost]
         public JsonResult GetServerResourceInfo(string serverIp)
         {
@@ -618,8 +618,8 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Schedule Ajax.
         /// </summary>
-        /// <param name="server"></param>
-        /// <returns></returns>
+        /// <param name="server">Server IP address.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetSchedule(string server)
         {
@@ -638,8 +638,8 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Job Ajax.
         /// </summary>
-        /// <param name="server"></param>
-        /// <returns></returns>
+        /// <param name="server">Server name.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetJobByServer(string server)
         {
@@ -667,7 +667,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get List Server From Config File.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of selected list item.</returns>
         private List<SelectListItem> GetServer()
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -684,7 +684,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init for Page size.
+        /// Initialize for Page size.
         /// </summary>
         private void InitPageSize()
         {

@@ -28,7 +28,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="connectionString">Connection string.</param>
-        /// <returns></returns>
+        /// <returns>Resource info.</returns>
         public ResourceInfo GetServerResourceInfo(ICriteria criteria, string connectionString)
         {
             ResourceInfo resourceInfo = new ResourceInfo
@@ -70,7 +70,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp">Server IP.</param>
-        /// <returns></returns>
+        /// <returns>Server full info.</returns>
         public ServerFullInfo GetServerFullInformation(ICriteria criteria, string serverIp)
         {
             ServerFullInfo serverFullInfo = new ServerFullInfo();
@@ -100,7 +100,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Server Status like SqlServerAgent Status.
+        /// Get Server Status like SQL Server Agent Status.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="connectionString">Connection string.</param>

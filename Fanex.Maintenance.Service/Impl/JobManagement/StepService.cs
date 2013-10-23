@@ -41,18 +41,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #region Ctor
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         private StepService()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="stepRepository"></param>
         private StepService(IStepRepository stepRepository)
         {
             _stepRepository = stepRepository ?? new StepRepository();

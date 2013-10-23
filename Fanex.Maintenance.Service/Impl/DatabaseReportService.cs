@@ -28,7 +28,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// Change hour to minute.
         /// </summary>
         /// <param name="dateTime">DateTime string.</param>
-        /// <returns></returns>
+        /// <returns>Minute string.</returns>
         public static string ChangeHourToMinute(string dateTime)
         {
             string ngay = dateTime.Substring(0, dateTime.IndexOf(" "));
@@ -42,8 +42,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Split date to hour.
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="date">Date string.</param>
+        /// <returns>Hour string.</returns>
         public static string SplitDateToHour(string date)
         {
             return date = date.Substring(date.Length - 5, 5);
@@ -52,8 +52,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Change minute to hour.
         /// </summary>
-        /// <param name="minute"></param>
-        /// <returns></returns>
+        /// <param name="minute">Minute string.</param>
+        /// <returns>Hour string.</returns>
         public static string ChangeMinuteToHour(int minute)
         {
             int hour = minute / 60;
@@ -65,8 +65,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get user online daily.
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="date">Date string.</param>
+        /// <returns>Data table.</returns>
         public DataTable GetUserOnlineDaily(DateTime date)
         {
             var criteria = new GetUserOnlineDailyCriteria
@@ -80,8 +80,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get list user online.
         /// </summary>
-        /// <param name="top"></param>
-        /// <returns></returns>
+        /// <param name="top">Top.</param>
+        /// <returns>Data table.</returns>
         public DataTable GetUserOnline(int top)
         {
             var criteria = new GetUserOnlineCriteria
@@ -96,8 +96,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Generate template user daily list.
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="data">Template data.</param>
+        /// <returns>Template string.</returns>
         public string GenerateTemplateUserDaily(DataTable data)
         {
             StringBuilder _s = new StringBuilder();
@@ -125,10 +125,9 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Generate template user list.
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="show"></param>
-        /// <returns></returns>
-        public string GenerateTemplateUser(DataTable data, int show)
+        /// <param name="data">Template data.</param>
+        /// <returns>Template string.</returns>
+        public string GenerateTemplateUser(DataTable data)
         {
             StringBuilder _s = new StringBuilder();
 
@@ -151,9 +150,9 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Generate chart.
         /// </summary>
-        /// <param name="dtb"></param>
-        /// <param name="show"></param>
-        /// <returns></returns>
+        /// <param name="dtb">Data table.</param>
+        /// <param name="show">Number of rows.</param>
+        /// <returns>Result string.</returns>
         public string GenerateDataChart(DataTable dtb, int show)
         {
             string data = string.Empty;
@@ -184,9 +183,9 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Generate data table.
         /// </summary>
-        /// <param name="dtb"></param>
-        /// <param name="rowNumber"></param>
-        /// <returns></returns>
+        /// <param name="dtb">Data table.</param>
+        /// <param name="rowNumber">Row number.</param>
+        /// <returns>Data table.</returns>
         private static DataTable GenerateDataTable(DataTable dtb, int rowNumber)
         {
             string _datetime = dtb.Rows[0]["logdate"].ToString();

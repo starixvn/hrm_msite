@@ -29,7 +29,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp">Server IP.</param>
-        /// <returns>List of job schedule</returns>
+        /// <returns>List of job schedule.</returns>
         public IEnumerable<JobSchedule> GetAllJob(ICriteria criteria, string serverIp)
         {
             if (criteria.IsValid())
@@ -136,8 +136,8 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// Start job idle.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <param name="serverIp">Server IP.</param>
-        /// <returns></returns>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <returns>Command result.</returns>
         public Hashtable StartJob(ICriteria criteria, string serverIp)
         {
             if (criteria.IsValid())
@@ -152,8 +152,8 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// Stop job executing.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <returns>Command result.</returns>
         public Hashtable StopJob(ICriteria criteria, string serverIp)
         {
             if (criteria.IsValid())

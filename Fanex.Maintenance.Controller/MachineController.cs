@@ -34,18 +34,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Constructor
 
-        /// <summary>
-        /// Parameter less Controller.
-        /// </summary>
         public MachineController()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Machine Controller with services defined.
-        /// </summary>
-        /// <param name="machineService">Machine service.</param>
         public MachineController(MachineService machineService)
         {
             _machineService = machineService ?? MachineService.Create();
@@ -97,7 +90,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit machine.
         /// </summary>
-        /// <param name="machine"></param>
+        /// <param name="machine">The machine.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMachine(Machine machine)
@@ -128,7 +121,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Insert machine.
         /// </summary>
-        /// <param name="machine"></param>
+        /// <param name="machine">The machine.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult InsertMachine(Machine machine)
@@ -149,7 +142,7 @@ namespace Fanex.Maintenance.Controller
         /// Get machines.
         /// </summary>
         /// <param name="machineType">Machine type.</param>
-        /// <returns></returns>
+        /// <returns>Json result.</returns>
         [HttpGet]
         public JsonResult GetMachinesByType(bool? machineType)
         {

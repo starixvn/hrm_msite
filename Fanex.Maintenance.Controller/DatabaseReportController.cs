@@ -37,18 +37,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Ctor
 
-        /// <summary>
-        /// Parameter less constructor.
-        /// </summary>
         public DatabaseReportController()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Constructor with service input.
-        /// </summary>
-        /// <param name="databaseReportService">Database report service.</param>
         public DatabaseReportController(IDatabaseReportService databaseReportService)
         {
             _databaseReportService = databaseReportService ?? new DatabaseReportService();
@@ -113,7 +106,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// User Online Daily by date.
         /// </summary>
-        /// <param name="date"></param>
+        /// <param name="date">Date value.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UserOnlineDaily(string date)
@@ -133,7 +126,7 @@ namespace Fanex.Maintenance.Controller
         public ActionResult UserOnline()
         {
             DataTable userOnlineTable = _databaseReportService.GetUserOnline(30);
-            ViewBag.UserOnlineData = _databaseReportService.GenerateTemplateUser(userOnlineTable, 30);
+            ViewBag.UserOnlineData = _databaseReportService.GenerateTemplateUser(userOnlineTable);
             return View();
         }
 
@@ -148,7 +141,7 @@ namespace Fanex.Maintenance.Controller
             if (Request.IsAjaxRequest())
             {
                 DataTable userOnlineTable = _databaseReportService.GetUserOnline(size);
-                return Json(_databaseReportService.GenerateTemplateUser(userOnlineTable, size));
+                return Json(_databaseReportService.GenerateTemplateUser(userOnlineTable));
             }
 
             return Json(null);
@@ -186,9 +179,9 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get deposit integrity.
         /// </summary>
-        /// <param name="filter"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="filter">Draw filter.</param>
+        /// <param name="date">Date string.</param>
+        /// <returns>Result string.</returns>
         [HttpPost]
         public string GetDepositIntegrity(int filter = 1, string date = "")
         {
@@ -212,9 +205,9 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get credit integrity.
         /// </summary>
-        /// <param name="filter"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="filter">Draw filter.</param>
+        /// <param name="date">Date string.</param>
+        /// <returns>Result string.</returns>
         [HttpPost]
         public string GetCreditIntegrity(int filter = 1, string date = "")
         {

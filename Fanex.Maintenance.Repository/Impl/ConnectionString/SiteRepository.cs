@@ -30,7 +30,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>List of site.</returns>
-        public IEnumerable<Site> Fetch(ICriteria criteria)
+        public override IEnumerable<Site> Fetch(ICriteria criteria)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Site object.</returns>
-        public Site Get(ICriteria criteria)
+        public override Site Get(ICriteria criteria)
         {
             try
             {

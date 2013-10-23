@@ -41,15 +41,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Search execute SP log.
         /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
+        /// <param name="pageIndex">Page index.</param>
+        /// <param name="pageSize">Page size.</param>
         /// <param name="totalRows">Number of rows.</param>
-        /// <param name="name"></param>
-        /// <param name="username"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="filterBy"></param>
-        /// <returns></returns>
+        /// <param name="name">Log name.</param>
+        /// <param name="username">Username.</param>
+        /// <param name="from">From DateTime.</param>
+        /// <param name="to">To DateTime.</param>
+        /// <param name="filterBy">Filter options.</param>
+        /// <returns>List of execute SP log.</returns>
         public IQueryable<LogExecSp> SearchExecSp(
             int pageIndex, 
             int pageSize, 
@@ -92,8 +92,8 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get log by ID.
         /// </summary>
-        /// <param name="logId"></param>
-        /// <returns></returns>
+        /// <param name="logId">Execute SP log ID.</param>
+        /// <returns>Execute SP log.</returns>
         public LogExecSp GetById(int logId)
         {
             try
@@ -122,7 +122,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// Get value alias insert.
         /// </summary>
         /// <param name="logExecSp">Execute SP log.</param>
-        /// <param name="listSite"></param>
+        /// <param name="listSite">List site.</param>
         /// <returns>List of log data.</returns>
         public List<LogData> GetValueAliasInsert(LogExecSp logExecSp, ref List<LogData> listSite)
         {

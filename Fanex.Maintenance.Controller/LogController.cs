@@ -46,20 +46,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Ctor
 
-        /// <summary>
-        /// Parameter less Controller.
-        /// </summary>
         public LogController()
             : this(null, null, null)
         {
         }
 
-        /// <summary>
-        /// Log Controller with services defined.
-        /// </summary>
-        /// <param name="logService">Log service.</param>
-        /// <param name="categoryService">Category service.</param>
-        /// <param name="machineService">Machine service.</param>
         public LogController(LogService logService, LogCategoryService categoryService, MachineService machineService)
         {
             _logService = logService ?? LogService.Create();
@@ -79,7 +70,6 @@ namespace Fanex.Maintenance.Controller
         public ActionResult Index()
         {
             InitDataView();
-
             InitPageSize();
 
             ViewBag.ListLog = null;
@@ -157,7 +147,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Remove Log.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult RemoveLog()
         {
@@ -172,9 +162,9 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Update log's monitored status.
         /// </summary>
-        /// <param name="logId"></param>
-        /// <param name="isMonitored"></param>
-        /// <returns></returns>
+        /// <param name="logId">Log ID.</param>
+        /// <param name="isMonitored">Is monitored or not.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult MonitorLog(string logId, bool isMonitored)
         {
@@ -196,7 +186,7 @@ namespace Fanex.Maintenance.Controller
         #region Private
 
         /// <summary>
-        /// Init Page Size.
+        /// Initialize Page Size.
         /// </summary>
         private void InitPageSize()
         {
@@ -229,7 +219,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Machine Types data
+        /// Initialize Machine Types data.
         /// </summary>
         private void InitMachineTypes()
         {
@@ -254,7 +244,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Log Status data.
+        /// Initialize Log Status data.
         /// </summary>
         private void InitLogStatus()
         {
@@ -279,7 +269,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Severities data.
+        /// Initialize Severities data.
         /// </summary>
         private void InitSeverities()
         {
@@ -319,7 +309,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init data for View.
+        /// Initialize data for View.
         /// </summary>
         private void InitDataView()
         {

@@ -27,7 +27,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// Return Machine list.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <returns></returns>
+        /// <returns>List of machine.</returns>
         public override IEnumerable<Machine> Fetch(ICriteria criteria)
         {
             try
@@ -48,7 +48,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// Insert machine.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <returns></returns>
+        /// <returns>Command result.</returns>
         public CommandResult InsertMachine(InsertMachineCriteria criteria)
         {
             try
@@ -72,7 +72,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// Update machine.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        /// <returns></returns>
+        /// <returns>Command result.</returns>
         public CommandResult UpdateMachine(UpdateMachineCriteria criteria)
         {
             try

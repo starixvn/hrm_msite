@@ -31,18 +31,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #region Ctor
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         private SqlServerLogService()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="sqlServerLogRepository"></param>
         private SqlServerLogService(ISqlServerLogRepository sqlServerLogRepository)
         {
             _sqlServerLogRepository = sqlServerLogRepository ?? new SqlServerLogRepository();
@@ -63,7 +56,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #endregion Properties
 
         /// <summary>
-        /// Create sql server service.
+        /// Create SQL server service.
         /// </summary>
         /// <returns>SQL Server log service.</returns>
         public static ISqlServerLogService Create()
@@ -182,7 +175,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Get Log with error level: Error, Warning or Information.
         /// </summary>
-        /// <param name="errorLevel"></param>
+        /// <param name="errorLevel">Error level.</param>
         /// <returns>SQL Server log service.</returns>
         public ISqlServerLogService WithErrorLevel(int? errorLevel)
         {

@@ -19,6 +19,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Static instance for Reference.
         /// </summary>
+        /// <value>SP name section.</value>
         public static SpNameSection Instance
         {
             get
@@ -32,6 +33,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// List Sp Name.
         /// </summary>
+        /// <value>SP name collection.</value>
         [ConfigurationProperty("spList", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(SpNameCollection), AddItemName = "add")]
         public SpNameCollection SpNames
@@ -50,16 +52,10 @@ namespace Fanex.Maintenance.Core.Configurations
     /// </summary>
     public class SpNameCollection : ConfigurationElementCollection
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         public SpNameCollection()
         {
         }
 
-        /// <summary>
-        /// Collection Type.
-        /// </summary>
         public override ConfigurationElementCollectionType CollectionType
         {
             get
@@ -71,8 +67,8 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Get Element with index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">Index value.</param>
+        /// <returns>SP name element.</returns>
         public SpNameElement this[int index]
         {
             get
@@ -103,7 +99,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Base Add.
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="element">Configuration element.</param>
         protected override void BaseAdd(ConfigurationElement element)
         {
             BaseAdd(element, false);
@@ -112,7 +108,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Create new Element.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Configuration element.</returns>
         protected override ConfigurationElement CreateNewElement()
         {
             return new SpNameElement();
@@ -122,7 +118,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// Get Element Key.
         /// </summary>
         /// <param name="element"></param>
-        /// <returns></returns>
+        /// <returns>Returned object.</returns>
         protected override object GetElementKey(ConfigurationElement element)
         {
             return ((SpNameElement)element).Key + ((SpNameElement)element).Name;

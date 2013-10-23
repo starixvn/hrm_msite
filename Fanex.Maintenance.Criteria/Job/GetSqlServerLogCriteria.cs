@@ -40,24 +40,24 @@ namespace Fanex.Maintenance.Criteria.Job
         public int? PageIndex { get; set; }
 
         /// <summary>
-        /// Value of error log file you want to read: 0 = current, 1 = Archive #1, 2 = Archive #2, etc... 
+        /// Gets or sets value of error log file you want to read: 0 = current, 1 = Archive #1, 2 = Archive #2, etc... 
         /// </summary>
-        public int? p1 { get; set; }
+        public int? P1 { get; set; }
 
         /// <summary>
-        /// Log file type: 1 or NULL = error log, 2 = SQL Agent log.
+        /// Gets or sets log file type: 1 or NULL = error log, 2 = SQL Agent log.
         /// </summary>
-        public int? p2 { get; set; }
+        public int? P2 { get; set; }
 
         /// <summary>
-        /// Search string 1: String one you want to search for.
+        /// Gets or sets search string 1: String one you want to search for.
         /// </summary>
-        public string p3 { get; set; }
+        public string P3 { get; set; }
 
         /// <summary>
-        /// Search string 2: String two you want to search for to further refine the results.
+        /// Gets or sets search string 2: String two you want to search for to further refine the results.
         /// </summary>
-        public string p4 { get; set; }
+        public string P4 { get; set; }
 
         public override bool IsValid()
         {

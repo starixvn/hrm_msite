@@ -52,9 +52,6 @@ namespace Fanex.Maintenance.Core.Web
         /// </summary>
         private static string _isVirtualDir = "false";
 
-        /// <summary>
-        /// Minute.
-        /// </summary>
         private static int _minute = 10;
 
         private static long _getDataNotifyInterval = 60000;
@@ -98,9 +95,6 @@ namespace Fanex.Maintenance.Core.Web
             get { return AppSetting._getMemoryUtilizationInterval; }
         }
 
-        /// <summary>
-        /// Is Virtual Directory.
-        /// </summary>
         public static bool IsVirtualDirectory
         {
             get
@@ -109,9 +103,6 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Minute.
-        /// </summary>
         public static int Minute
         {
             get
@@ -136,9 +127,6 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Culture Info.
-        /// </summary>
         public static CultureInfo Culture
         {
             get
@@ -147,9 +135,6 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Context.
-        /// </summary>
         public static HttpContext Context
         {
             get
@@ -158,17 +143,11 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Notification job.
-        /// </summary>
         public static bool NotifiJob
         {
             get { return _notifiJob; }
         }
 
-        /// <summary>
-        /// Notification server.
-        /// </summary>
         public static bool NotifiServer
         {
             get { return _notifiServer; }

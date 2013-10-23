@@ -25,19 +25,19 @@ namespace Fanex.Maintenance.Entity.Domain
         public string Description { get; set; }
 
         /// <summary>
-        /// ID of the step in the job where execution should begin.
+        /// Gets or sets ID of the step in the job where execution should begin.
         /// </summary>
         public int StartStepId { get; set; }
 
         public JobCategory Category { get; set; }
 
         /// <summary>
-        /// Security identifier number (SID) of the job owner.
+        /// Gets or sets Security identifier number (SID) of the job owner.
         /// </summary>
         public byte[] OwerSid { get; set; }
 
         /// <summary>
-        ///  Bitmask indicating under what circumstances a notification event should be logged to the Microsoft Windows application log:
+        /// Gets or sets bitmask indicating under what circumstances a notification event should be logged to the Microsoft Windows application log:
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
@@ -46,7 +46,7 @@ namespace Fanex.Maintenance.Entity.Domain
         public int NotifyLevelEventLog { get; set; }
 
         /// <summary>
-        /// Bitmask indicating under what circumstances a notification e-mail should be sent when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances a notification e-mail should be sent when a job completes:
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
@@ -55,7 +55,7 @@ namespace Fanex.Maintenance.Entity.Domain
         public int NotifyLevelEmail { get; set; }
 
         /// <summary>
-        /// Bitmask indicating under what circumstances a network message should be sent when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances a network message should be sent when a job completes:
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
@@ -64,7 +64,7 @@ namespace Fanex.Maintenance.Entity.Domain
         public int NotifyLevelNetsend { get; set; }
 
         /// <summary>
-        /// Bitmask indicating under what circumstances a page should be sent when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances a page should be sent when a job completes:
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
@@ -73,22 +73,22 @@ namespace Fanex.Maintenance.Entity.Domain
         public int NotifyLevelPage { get; set; }
 
         /// <summary>
-        /// E-mail name of the operator to notify.
+        /// Gets or sets email name of the operator to notify.
         /// </summary>
         public Operator NotifyEmailOperator { get; set; }
 
         /// <summary>
-        /// ID of the computer or user used when sending network messages.
+        /// Gets or sets ID of the computer or user used when sending network messages.
         /// </summary>
         public Operator NotifyNetsendOperator { get; set; }
 
         /// <summary>
-        /// ID of the computer or user used when sending a page.
+        /// Gets or sets ID of the computer or user used when sending a page.
         /// </summary>
         public Operator NotifyPageOperator { get; set; }
 
         /// <summary>
-        ///  Bitmask indicating under what circumstances the job should be deleted when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances the job should be deleted when a job completes:
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails

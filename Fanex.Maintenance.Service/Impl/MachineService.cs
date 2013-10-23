@@ -21,9 +21,6 @@ namespace Fanex.Maintenance.Service.Impl
     {
         private readonly MachineRepository _machineRepository = new MachineRepository();
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         private MachineService()
         {
         }
@@ -81,9 +78,9 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Insert machine.
         /// </summary>
-        /// <param name="machineName"></param>
+        /// <param name="machineName">Machine name.</param>
         /// <param name="machineType">Machine type.</param>
-        /// <param name="timeZone"></param>
+        /// <param name="timeZone">Machine time zone.</param>
         /// <returns>Command result.</returns>
         public CommandResult InsertMachine(string machineName, bool machineType, short timeZone)
         {
@@ -100,9 +97,9 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Update machine.
         /// </summary>
-        /// <param name="machineId"></param>
+        /// <param name="machineId">Machine ID.</param>
         /// <param name="machineType">Machine type.</param>
-        /// <param name="timeZone"></param>
+        /// <param name="timeZone">Machine time zone.</param>
         /// <returns>Command result.</returns>
         public CommandResult UpdateMachine(int machineId, bool machineType, short timeZone)
         {

@@ -21,7 +21,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Schedule repository..
     /// </summary>
     public class ScheduleRepository : BaseRepository<ScheduleDetail>, IScheduleRepository
     {
@@ -30,7 +30,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// </summary>
         /// <param name="scheduleCriteria">Schedule criteria.</param>
         /// <param name="serverIp">Server IP.</param>
-        /// <returns></returns>
+        /// <returns>List of schedule detail.</returns>
         public IEnumerable<ScheduleDetail> GetAllSchedule(ICriteria scheduleCriteria, string serverIp)
         {
             try

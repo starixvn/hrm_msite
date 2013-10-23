@@ -21,8 +21,9 @@ namespace Fanex.Maintenance.Site.App_Start
     {
         /// <summary>
         /// Register bundles.
-        /// For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
+        /// For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725.
         /// </summary>
+        /// <param name="bundles">Bundle collection.</param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             // css

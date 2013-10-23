@@ -7,10 +7,13 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 10/23/2013 9:36:04 AM
+// Lasted generated date: 10/23/2013 3:07:46 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
+/// <summary>
+/// Connection log action.
+/// </summary>
 [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification="Generated code")]
 [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification="Generated code")]
 public enum ConLogAction

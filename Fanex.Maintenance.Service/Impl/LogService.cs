@@ -40,9 +40,6 @@ namespace Fanex.Maintenance.Service.Impl
 
         private int _size;
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         private LogService()
         {
             _categoryId = 0;
@@ -125,7 +122,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// To date.
         /// </summary>
         /// <param name="toDate">To date.</param>
-        /// <returns></returns>
+        /// <returns>Log service object.</returns>
         public LogService To(DateTime toDate)
         {
             this._dateTo = toDate;
@@ -136,8 +133,8 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Pagination.
         /// </summary>
-        /// <param name="page"></param>
-        /// <param name="size"></param>
+        /// <param name="page">Page index.</param>
+        /// <param name="size">Page size.</param>
         /// <returns>Log service object.</returns>
         public LogService WithPagination(int page, int size)
         {
@@ -190,7 +187,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Remove log before date.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Command result.</returns>
         public int RemoveLogs()
         {
             return _logRepository.DeleteLogs(this._dateFrom);
@@ -202,7 +199,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <param name="logIds">Log IDs.</param>
         /// <param name="monitoringUserId">Monitoring user ID.</param>
         /// <param name="isMonitored">Is monitored or not.</param>
-        /// <returns></returns>
+        /// <returns>Command result.</returns>
         public int MonitorLog(string logIds, int? monitoringUserId, bool isMonitored)
         {
             return _logRepository.MonitorLog(logIds, monitoringUserId, isMonitored);

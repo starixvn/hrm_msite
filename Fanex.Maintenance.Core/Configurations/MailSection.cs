@@ -19,6 +19,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Static instance for Reference.
         /// </summary>
+        /// <value>Mail section.</value>
         public static MailSection Instance
         {
             get
@@ -31,6 +32,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// List Sp Name.
         /// </summary>
+        /// <value>Mail collection.</value>
         [ConfigurationProperty("Mails", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(MailCollection), AddItemName = "add")]
         public MailCollection Mails
@@ -45,13 +47,10 @@ namespace Fanex.Maintenance.Core.Configurations
     }
 
     /// <summary>
-    /// Sp Name Collection.
+    /// Mail Collection.
     /// </summary>
     public class MailCollection : ConfigurationElementCollection
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
         public MailCollection()
         {
         }
@@ -111,7 +110,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Create new Element.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Configuration element.</returns>
         protected override ConfigurationElement CreateNewElement()
         {
             return new MailElement();
@@ -121,7 +120,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// Get Element Key.
         /// </summary>
         /// <param name="element"></param>
-        /// <returns></returns>
+        /// <returns>Returned object.</returns>
         protected override object GetElementKey(ConfigurationElement element)
         {
             return ((MailElement)element).From + ((MailElement)element).To + ((MailElement)element).BCC + ((MailElement)element).CC;

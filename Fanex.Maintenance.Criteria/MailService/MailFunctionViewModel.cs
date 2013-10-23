@@ -53,7 +53,7 @@ namespace Fanex.Maintenance.Criteria.MailService
         /// <summary>
         /// Get mail function.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Mail function.</returns>
         public MailFunction GetMailFunction()
         {
             MailFunction mailFunction = new MailFunction

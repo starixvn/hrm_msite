@@ -81,8 +81,8 @@ namespace Fanex.Maintenance.Controller.Worker
         /// </summary>
         private void GetListResourceInfo()
         {
-            //List<ResourceInfo> resourceInfoes = new List<ResourceInfo>();
             _hubContext = GlobalHost.ConnectionManager.GetHubContext<ServerInfoHub>();
+
             foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
             {
                 Task.Factory.StartNew(UpdateResourceInfoToClient, server);
