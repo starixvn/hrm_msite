@@ -63,7 +63,7 @@ namespace Fanex.Maintenance.Controller
         #region Action
 
         /// <summary>
-        /// Get log.
+        /// Log list page.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]

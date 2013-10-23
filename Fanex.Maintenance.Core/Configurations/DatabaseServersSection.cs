@@ -95,7 +95,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Add Element.
+        /// Add mapping element.
         /// </summary>
         /// <param name="mappingElement">Mapping element.</param>
         public void Add(ServerElement mappingElement)
@@ -104,7 +104,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Base Add.
+        /// Base add configuration element.
         /// </summary>
         /// <param name="element">Configuration element.</param>
         protected override void BaseAdd(ConfigurationElement element)

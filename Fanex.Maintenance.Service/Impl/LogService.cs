@@ -196,7 +196,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Update log's monitored status.
         /// </summary>
-        /// <param name="logIds">Log IDs.</param>
+        /// <param name="logIds">Log object IDs.</param>
         /// <param name="monitoringUserId">Monitoring user ID.</param>
         /// <param name="isMonitored">Is monitored or not.</param>
         /// <returns>Command result.</returns>

@@ -251,7 +251,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         #region sign out
 
         /// <summary>
-        /// Log out.
+        /// User logout.
         /// </summary>
         /// <returns>Action result.</returns>
         public ActionResult LogOut()

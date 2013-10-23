@@ -779,9 +779,9 @@ namespace Fanex.Maintenance.Controller
         /// View log.
         /// </summary>
         /// <param name="id">Page index.</param>
-        /// <param name="size">Page size.</param>
-        /// <param name="q">Log name.</param>
-        /// <param name="username">User name.</param>
+        /// <param name="size">Number of items per page.</param>
+        /// <param name="q">Log name filter.</param>
+        /// <param name="username">Username filter.</param>
         /// <param name="from">From DateTime.</param>
         /// <param name="to">To DateTime.</param>
         /// <param name="filterBy">Draw filter.</param>

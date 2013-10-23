@@ -405,7 +405,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Stop Job.
+        /// Stop schedule job.
         /// </summary>
         /// <returns>Command result.</returns>
         public CommandResult StopJob()

@@ -31,66 +31,80 @@ namespace Fanex.Maintenance.Entity.Domain
         /// <summary>
         /// Gets or sets Security identifier number (SID) of the job owner.
         /// </summary>
+        /// <value>Byte array.</value>
         public byte[] OwerSid { get; set; }
 
         /// <summary>
-        /// Gets or sets bitmask indicating under what circumstances a notification event should be logged to the Microsoft Windows application log:
+        /// Gets or sets bitmask indicating under what circumstances a notification event should be logged to the Microsoft Windows application log.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
         /// 3 = Whenever the job completes (regardless of the job outcome).
-        /// </summary>
+        /// </value>
         public int NotifyLevelEventLog { get; set; }
 
         /// <summary>
-        /// Gets or sets bitmask indicating under what circumstances a notification e-mail should be sent when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances a notification e-mail should be sent when a job completes.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
         /// 3 = Whenever the job completes (regardless of the job outcome).
-        /// </summary>
+        /// </value>
         public int NotifyLevelEmail { get; set; }
 
         /// <summary>
-        /// Gets or sets bitmask indicating under what circumstances a network message should be sent when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances a network message should be sent when a job completes.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
         /// 3 = Whenever the job completes (regardless of the job outcome).
-        /// </summary>
+        /// </value>
         public int NotifyLevelNetsend { get; set; }
 
         /// <summary>
-        /// Gets or sets bitmask indicating under what circumstances a page should be sent when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances a page should be sent when a job completes.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
         /// 3 = Whenever the job completes (regardless of the job outcome).
-        /// </summary>
+        /// </value>
         public int NotifyLevelPage { get; set; }
 
         /// <summary>
         /// Gets or sets email name of the operator to notify.
         /// </summary>
+        /// <value>Operator object.</value>
         public Operator NotifyEmailOperator { get; set; }
 
         /// <summary>
         /// Gets or sets ID of the computer or user used when sending network messages.
         /// </summary>
+        /// <value>Operator object.</value>
         public Operator NotifyNetsendOperator { get; set; }
 
         /// <summary>
         /// Gets or sets ID of the computer or user used when sending a page.
         /// </summary>
+        /// <value>Operator object.</value>
         public Operator NotifyPageOperator { get; set; }
 
         /// <summary>
-        /// Gets or sets bitmask indicating under what circumstances the job should be deleted when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances the job should be deleted when a job completes.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
         /// 3 = Whenever the job completes (regardless of the job outcome).
-        /// </summary>
+        /// </value>
         public int DeleteLevel { get; set; }
 
         public DateTime DateCreated { get; set; }

@@ -55,9 +55,9 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Main Content Page.
         /// </summary>
-        /// <param name="type">Job type.</param>
+        /// <param name="type">Schedule job type.</param>
         /// <param name="server">Server name.</param>
-        /// <param name="jobname">Job name.</param>
+        /// <param name="jobname">Schedule job name.</param>
         /// <param name="id">Job object ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -206,7 +206,7 @@ namespace Fanex.Maintenance.Controller
         /// Start a job.
         /// </summary>
         /// <param name="server">Server name.</param>
-        /// <param name="jobName">Job name.</param>
+        /// <param name="jobName">Schedule job name.</param>
         /// <param name="stepName">Step name.</param>
         /// <returns>Json result.</returns>
         [HttpPost]
@@ -227,7 +227,7 @@ namespace Fanex.Maintenance.Controller
         /// Stop a job.
         /// </summary>
         /// <param name="serverName">Server name.</param>
-        /// <param name="jobName">Job name.</param>
+        /// <param name="jobName">Schedule job name.</param>
         /// <returns>Json result.</returns>
         [HttpPost]
         public JsonResult StopJob(string serverName, string jobName)
@@ -235,6 +235,7 @@ namespace Fanex.Maintenance.Controller
             CommandResult commandResult = _jobService.FromServer(serverName)
                 .WithJob(jobName)
                 .StopJob();
+
             return Json(new
             {
                 Status = commandResult
@@ -245,7 +246,7 @@ namespace Fanex.Maintenance.Controller
         /// Get Job Information after start or stop.
         /// </summary>
         /// <param name="serverName">Server name.</param>
-        /// <param name="jobName">Job name.</param>
+        /// <param name="jobName">Schdule job name.</param>
         /// <returns>Json result.</returns>
         [HttpPost]
         public JsonResult GetJob(string serverName, string jobName)
@@ -279,9 +280,9 @@ namespace Fanex.Maintenance.Controller
         #region StepManagement
 
         /// <summary>
-        /// Get Step.
+        /// Get step list.
         /// </summary>
-        /// <param name="jobName">Job name.</param>
+        /// <param name="jobName">Schduel job name.</param>
         /// <param name="serverName">Server name.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -305,7 +306,7 @@ namespace Fanex.Maintenance.Controller
         /// Get Job Log.
         /// </summary>
         /// <param name="top">Number of items.</param>
-        /// <param name="job">Job name.</param>
+        /// <param name="job">Schedule job name.</param>
         /// <param name="server">Server name.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
