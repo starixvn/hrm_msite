@@ -312,7 +312,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         }
 
         /// <summary>
-        /// Create auth information.
+        /// Create authorize information.
         /// </summary>
         /// <param name="user">Current login user.</param>
         private void CreateAuthInfo(User user)

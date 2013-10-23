@@ -155,7 +155,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Result.
+    /// Result constants.
     /// </summary>
     public class RESULT
     {

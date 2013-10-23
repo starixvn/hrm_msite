@@ -136,7 +136,7 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// Execute command to Db.
+        /// Execute command.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp">Server IP.</param>

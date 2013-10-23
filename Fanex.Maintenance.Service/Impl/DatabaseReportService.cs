@@ -80,7 +80,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get list user online.
         /// </summary>
-        /// <param name="top">Top.</param>
+        /// <param name="top">Number of users.</param>
         /// <returns>Data table.</returns>
         public DataTable GetUserOnline(int top)
         {

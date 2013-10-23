@@ -94,7 +94,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// To date.
         /// </summary>
-        /// <param name="toDate">To date.</param>
+        /// <param name="toDate">To date string.</param>
         /// <returns>Mail service.</returns>
         public IMailService ToDate(string toDate)
         {
@@ -104,7 +104,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Pagination.
+        /// Pagination items.
         /// </summary>
         /// <param name="page">Page index.</param>
         /// <param name="counter">Counter value.</param>
@@ -171,7 +171,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get detail mail by mail id.
         /// </summary>
-        /// <param name="mailID">Mail ID.</param>
+        /// <param name="mailID">Mail object ID.</param>
         /// <returns>Mail record.</returns>
         public MailRecord GetMail(int mailID)
         {

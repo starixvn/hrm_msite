@@ -76,7 +76,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// By categoryId and Severity.
         /// </summary>
         /// <param name="categoryId">Category ID.</param>
-        /// <param name="severity">Severity.</param>
+        /// <param name="severity">Severity level.</param>
         /// <returns>Log service object.</returns>
         public LogService With(int? categoryId, string severity)
         {
@@ -93,7 +93,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <param name="machineId">Machine ID.</param>
         /// <param name="isProduction">Production or not.</param>
         /// <param name="isMonitored">Monitored or not.</param>
-        /// <param name="severity">Severity.</param>
+        /// <param name="severity">Severity level.</param>
         /// <returns>Log service object.</returns>
         public LogService With(int? categoryId, int? machineId, bool? isProduction, bool? isMonitored, string severity)
         {
@@ -121,7 +121,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// To date.
         /// </summary>
-        /// <param name="toDate">To date.</param>
+        /// <param name="toDate">To date value.</param>
         /// <returns>Log service object.</returns>
         public LogService To(DateTime toDate)
         {
@@ -131,7 +131,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Pagination.
+        /// Pagination items.
         /// </summary>
         /// <param name="page">Page index.</param>
         /// <param name="size">Page size.</param>
@@ -147,7 +147,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get message detail.
         /// </summary>
-        /// <param name="logId">Log ID.</param>
+        /// <param name="logId">Log object ID.</param>
         /// <returns>Message string.</returns>
         public string GetMessage(long logId)
         {

@@ -58,7 +58,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         }
 
         /// <summary>
-        /// Get site.
+        /// Get site object.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Site object.</returns>

@@ -103,7 +103,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Get SQL server logs.
         /// </summary>
-        /// <param name="logType">Log type.</param>
+        /// <param name="logType">SQL Server log type.</param>
         /// <returns>List of SQL Server log.</returns>
         public IEnumerable<SqlServerLog> GetSqlServerLogs(int logType = 1)
         {
@@ -187,7 +187,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Get Log By SpecificDate And Server IP.
         /// </summary>
-        /// <param name="logType">Log type.</param>
+        /// <param name="logType">SQL Server log type.</param>
         /// <param name="serverIp">Server IP address.</param>
         /// <returns>List of SQL Server log.</returns>
         private IEnumerable<SqlServerLog> GetLogBySpecificDateAndServerIp(int logType, string serverIp)

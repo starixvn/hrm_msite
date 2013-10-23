@@ -10,7 +10,7 @@
 namespace Fanex.Maintenance.Entity.Domain
 {
     /// <summary>
-    /// Operator.
+    /// Mail operator.
     /// </summary>
     public class Operator : IEntity<int, string>
     {

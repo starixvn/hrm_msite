@@ -35,7 +35,7 @@ namespace Fanex.Maintenance.Controller
         /// Not found page.
         /// </summary>
         /// <param name="aspxErrorPath">Error path.</param>
-        /// <param name="url">URL.</param>
+        /// <param name="url">Request URL.</param>
         /// <returns>Action result.</returns>
         public ActionResult NotFound(string aspxErrorPath, string url)
         {

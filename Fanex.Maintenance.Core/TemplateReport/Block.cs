@@ -10,7 +10,7 @@
 namespace Fanex.Maintenance.Core.TemplateReport
 {
     /// <summary>
-    /// Block.
+    /// Template block.
     /// </summary>
     public class Block
     {
@@ -45,7 +45,7 @@ namespace Fanex.Maintenance.Core.TemplateReport
         public string BgNumberGame { get; set; }
 
         /// <summary>
-        /// SetBackgrounds.
+        /// Set backgrounds.
         /// </summary>
         /// <param name="bgSBBA">Background Sportsbook BA.</param>
         /// <param name="bgSportsbook">Background Sportsbook.</param>

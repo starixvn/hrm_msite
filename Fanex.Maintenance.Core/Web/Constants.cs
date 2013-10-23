@@ -127,7 +127,7 @@ namespace Fanex.Maintenance.Core.Web
     }
 
     /// <summary>
-    /// Frequen Sub Time of Schedule.
+    /// Frequent Sub Time of Schedule.
     /// </summary>
     public enum FrequentSubTime : int
     {
@@ -258,9 +258,9 @@ namespace Fanex.Maintenance.Core.Web
         public const string STEPS = "STEPS";
 
         /// <summary>
-        /// SCEDULES.
+        /// Schedules Constant.
         /// </summary>
-        public const string SCEDULES = "SCEDULES";
+        public const string SCHEDULES = "SCHEDULES";
 
         /// <summary>
         /// Targets Constant.

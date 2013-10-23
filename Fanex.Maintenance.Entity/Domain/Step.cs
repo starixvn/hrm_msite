@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Entity.Domain
     using System;
 
     /// <summary>
-    /// Step.
+    /// Job step class.
     /// </summary>
     public class Step : IEntity<int, string>
     {

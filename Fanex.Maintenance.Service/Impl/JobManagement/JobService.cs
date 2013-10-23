@@ -128,7 +128,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter by job name.
         /// </summary>
-        /// <param name="jobName">Job name.</param>
+        /// <param name="jobName">Job service name.</param>
         /// <returns>Job service object.</returns>
         public IJobService WithJob(string jobName)
         {
@@ -224,7 +224,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter by job ID.
         /// </summary>
-        /// <param name="guid">Job GUID.</param>
+        /// <param name="guid">Job GUID string.</param>
         /// <returns>Job service object.</returns>
         public IJobService WithJobId(string guid)
         {

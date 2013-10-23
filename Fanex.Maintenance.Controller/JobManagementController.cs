@@ -205,7 +205,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Start a job.
         /// </summary>
-        /// <param name="server">Server.</param>
+        /// <param name="server">Server name.</param>
         /// <param name="jobName">Job name.</param>
         /// <param name="stepName">Step name.</param>
         /// <returns>Json result.</returns>

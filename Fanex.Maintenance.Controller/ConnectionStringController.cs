@@ -781,7 +781,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">Page index.</param>
         /// <param name="size">Page size.</param>
         /// <param name="q">Log name.</param>
-        /// <param name="username">Username.</param>
+        /// <param name="username">User name.</param>
         /// <param name="from">From DateTime.</param>
         /// <param name="to">To DateTime.</param>
         /// <param name="filterBy">Draw filter.</param>
@@ -1194,8 +1194,8 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Change connection.
         /// </summary>
-        /// <param name="log"></param>
-        /// <returns>Partial view result.></returns>
+        /// <param name="log">Execute SP log.</param>
+        /// <returns>Partial view result.</returns>
         public PartialViewResult _ConnectionLog_LogData_ChangeConnection(LogExecSp log)
         {
             var listOld = new List<ConnectionString>();

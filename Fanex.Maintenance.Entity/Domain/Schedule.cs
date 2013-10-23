@@ -63,7 +63,6 @@ namespace Fanex.Maintenance.Entity.Domain
         ///                                 8 = Day
         ///                                 9 = Weekday
         ///                                 10 = Weekend day
-        ///
         /// 64 (starts when SQL Server Agent service starts) freq_interval is unused (0)
         /// 128 (runs when computer is idle) freq_interval is unused (0).
         /// </summary>

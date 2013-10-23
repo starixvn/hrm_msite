@@ -42,10 +42,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// Search execute SP log.
         /// </summary>
         /// <param name="pageIndex">Page index.</param>
-        /// <param name="pageSize">Page size.</param>
+        /// <param name="pageSize">Number of items per page.</param>
         /// <param name="totalRows">Number of rows.</param>
-        /// <param name="name">Log name.</param>
-        /// <param name="username">Username.</param>
+        /// <param name="name">Log name filter.</param>
+        /// <param name="username">Username filter.</param>
         /// <param name="from">From DateTime.</param>
         /// <param name="to">To DateTime.</param>
         /// <param name="filterBy">Filter options.</param>

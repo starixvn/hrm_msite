@@ -91,7 +91,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get log.
+        /// Get log page.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Action result.</returns>

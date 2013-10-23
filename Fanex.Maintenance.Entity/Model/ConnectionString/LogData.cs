@@ -10,7 +10,7 @@
 namespace Fanex.Maintenance.Entity.Model.ConnectionString
 {
     /// <summary>
-    /// Log data.
+    /// Log data model.
     /// </summary>
     public class LogData
     {

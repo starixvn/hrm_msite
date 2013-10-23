@@ -17,7 +17,7 @@ namespace Fanex.Maintenance.Site
     public static class WebApiConfig
     {
         /// <summary>
-        /// Register.
+        /// Register route.
         /// </summary>
         /// <param name="config">HTTP configuration.</param>
         public static void Register(HttpConfiguration config)

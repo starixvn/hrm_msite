@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Entity.Model
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Machine.
+    /// Machine model.
     /// </summary>
     public class Machine
     {
