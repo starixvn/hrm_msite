@@ -73,7 +73,7 @@ namespace Fanex.Maintenance.Entity.Domain
         public int FreqInterval { get; set; }
 
         /// <summary>
-        /// Gets or sets units for the freq_subday_interval. Can be one of the following values:
+        /// Gets or sets units for the freq_subday_interval. Can be one of the following values.
         /// </summary>
         /// <value>
         /// 1 At the specified time
@@ -135,7 +135,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// Gets or sets time on any day between active_start_date and active_end_date that job stops executing.
         /// Time is formatted HHMMSS, using a 24-hour clock.
         /// </summary>
-        /// <value></value>
+        /// <value>Active end time.</value>
         public int ActiveEndTime { get; set; }
 
         public DateTime DateCreated { get; set; }

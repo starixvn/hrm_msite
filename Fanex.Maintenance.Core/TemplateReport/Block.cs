@@ -47,23 +47,23 @@ namespace Fanex.Maintenance.Core.TemplateReport
         /// <summary>
         /// Set backgrounds.
         /// </summary>
-        /// <param name="bgSBBA">Background Sportsbook BA.</param>
-        /// <param name="bgSportsbook">Background Sportsbook.</param>
-        /// <param name="bgBA">Background BA.</param>
-        /// <param name="bgRacing">Background Racing.</param>
-        /// <param name="bgNumberGame">Background Number Game.</param>
+        /// <param name="backgroundSBBA">Background Sportsbook BA.</param>
+        /// <param name="backgroundSportsbook">Background Sportsbook.</param>
+        /// <param name="backgroundBA">Background BA.</param>
+        /// <param name="backgroundRacing">Background Racing.</param>
+        /// <param name="backgroundNumberGame">Background Number Game.</param>
         public void SetBackgrounds(
-            ref string bgSBBA,
-            ref string bgSportsbook,
-            ref string bgBA,
-            ref string bgRacing,
-            ref string bgNumberGame)
+            ref string backgroundSBBA,
+            ref string backgroundSportsbook,
+            ref string backgroundBA,
+            ref string backgroundRacing,
+            ref string backgroundNumberGame)
         {
-            bgSBBA = this.BgSBBA;
-            bgSportsbook = this.BgSportsbook;
-            bgBA = this.BgBA;
-            bgRacing = this.BgRacing;
-            bgNumberGame = this.BgNumberGame;
+            backgroundSBBA = this.BgSBBA;
+            backgroundSportsbook = this.BgSportsbook;
+            backgroundBA = this.BgBA;
+            backgroundRacing = this.BgRacing;
+            backgroundNumberGame = this.BgNumberGame;
         }
     }
 }
