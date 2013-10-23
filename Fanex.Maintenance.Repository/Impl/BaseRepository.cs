@@ -73,8 +73,8 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <summary>
         /// Fetch Data from Criteria.
         /// </summary>
-        /// <typeparam name="S">Class.</typeparam>
-        /// <param name="criteria">Criteria.</param>
+        /// <typeparam name="S">The class type.</typeparam>
+        /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp">Server Name will be executed sp.</param>
         /// <param name="mapObjectFunction">Read data reader and pass object.</param>
         /// <param name="serverType">Server type.</param>

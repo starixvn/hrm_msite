@@ -13,7 +13,7 @@ namespace Fanex.Maintenance.Entity.Domain
     using System;
 
     /// <summary>
-    /// Schedule.
+    /// Job schedule.
     /// </summary>
     public class Schedule : IEntity<int, string>
     {

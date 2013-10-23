@@ -66,7 +66,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Server information, Cpu Core, Total ram.
+        /// Get Server information, CPU Core, Total ram.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp">Server IP.</param>

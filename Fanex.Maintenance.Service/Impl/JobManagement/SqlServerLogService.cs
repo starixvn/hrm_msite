@@ -89,7 +89,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Log With Server Ip.
+        /// Get Log With Server IP.
         /// </summary>
         /// <param name="serverIp">Server IP.</param>
         /// <returns>SQL Server log service.</returns>
@@ -185,7 +185,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Log By SpecificDate And ServerIp.
+        /// Get Log By SpecificDate And Server IP.
         /// </summary>
         /// <param name="logType">Log type.</param>
         /// <param name="serverIp">Server IP address.</param>

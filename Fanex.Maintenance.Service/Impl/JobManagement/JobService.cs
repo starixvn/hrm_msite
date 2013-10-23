@@ -249,7 +249,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get jobs.
+        /// Get job schedule.
         /// </summary>
         /// <returns>List of job schedule.</returns>
         public IEnumerable<JobSchedule> GetJobs()
@@ -435,7 +435,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Stop Job.
+        /// Stop Job schedule.
         /// </summary>
         /// <param name="scheduleId">Schedule ID.</param>
         /// <returns>Job service.</returns>

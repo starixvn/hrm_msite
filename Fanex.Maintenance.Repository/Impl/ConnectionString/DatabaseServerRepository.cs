@@ -9,7 +9,6 @@
 
 namespace Fanex.Maintenance.Repository.Impl.ConnectionString
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using Entity.Model.ConnectionString;
@@ -31,19 +30,12 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// <returns>List of database server.</returns>
         public IEnumerable<DatabaseServer> GetAll(ICriteria criteria)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    return db.Query<DatabaseServer, Users, DatabaseServer>(
-                        (d, u) => { d.Modifier = u; return d; },
-                        "ModifierId",
-                        criteria.GetSpParams());
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return db.Query<DatabaseServer, Users, DatabaseServer>(
+                    (d, u) => { d.Modifier = u; return d; },
+                    "ModifierId",
+                    criteria.GetSpParams());
             }
         }
 
@@ -54,19 +46,12 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// <returns>List of database server site.</returns>
         public IEnumerable<DatabaseServerSite> GetWithNumOfSite(ICriteria criteria)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    return db.Query<DatabaseServerSite, DatabaseServer, Users, DatabaseServerSite>(
-                        (ds, s, u) => { ds.DatabaseServer = s; s.Modifier = u; return ds; },
-                        "Id,ModifierId",
-                        criteria.GetSpParams());
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return db.Query<DatabaseServerSite, DatabaseServer, Users, DatabaseServerSite>(
+                    (ds, s, u) => { ds.DatabaseServer = s; s.Modifier = u; return ds; },
+                    "Id,ModifierId",
+                    criteria.GetSpParams());
             }
         }
 
@@ -78,22 +63,16 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
-            try
-            {
-                Hashtable hash = criteria.GetSpParams();
-                hash = logCriteria.AddSpParams(hash);
-                hash = (new ResultCriteria()).AddSpParams(hash);
+            Hashtable hash = criteria.GetSpParams();
 
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    db.ExecuteNonQuery(hash);
+            hash = logCriteria.AddSpParams(hash);
+            hash = (new ResultCriteria()).AddSpParams(hash);
 
-                    return GetCommandResult(hash);
-                }
-            }
-            catch (Exception ex)
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                throw ex;
+                db.ExecuteNonQuery(hash);
+
+                return GetCommandResult(hash);
             }
         }
 
@@ -104,19 +83,12 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// <returns>Database server.</returns>
         public override DatabaseServer Get(ICriteria criteria)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    return db.QueryEntity<DatabaseServer, Users, DatabaseServer>(
-                        (d, u) => { d.Modifier = u; return d; },
-                        "ModifierId",
-                        criteria.GetSpParams());
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return db.QueryEntity<DatabaseServer, Users, DatabaseServer>(
+                    (d, u) => { d.Modifier = u; return d; },
+                    "ModifierId",
+                    criteria.GetSpParams());
             }
         }
     }

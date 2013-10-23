@@ -31,22 +31,15 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// <returns>List of log execute SP.</returns>
         public IEnumerable<LogExecSp> Fetch(ICriteria criteria, out int totalRows)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    Hashtable hash = criteria.GetSpParams();
+                Hashtable hash = criteria.GetSpParams();
 
-                    var logList = db.Query<LogExecSp>(hash);
+                var logList = db.Query<LogExecSp>(hash);
 
-                    totalRows = Convert.ToInt32(hash["totalrows"]);
+                totalRows = Convert.ToInt32(hash["totalrows"]);
 
-                    return logList.AsQueryable();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return logList.AsQueryable();
             }
         }
 
@@ -57,18 +50,11 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// <returns>Log execute SP.</returns>
         public LogExecSp GetById(ICriteria criteria)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    Hashtable hash = criteria.GetSpParams();
+                Hashtable hash = criteria.GetSpParams();
 
-                    return db.QueryEntity<LogExecSp>(hash);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return db.QueryEntity<LogExecSp>(hash);
             }
         }
     }

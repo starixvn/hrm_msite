@@ -27,16 +27,9 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <returns>List of log category.</returns>
         public override IEnumerable<LogCategory> Fetch(ICriteria criteria)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    return db.Query<LogCategory>();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return db.Query<LogCategory>();
             }
         }
     }

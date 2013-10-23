@@ -165,7 +165,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Update alias.
         /// </summary>
-        /// <param name="id">Alias ID.</param>
+        /// <param name="id">Alias object ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditAlias(int id)

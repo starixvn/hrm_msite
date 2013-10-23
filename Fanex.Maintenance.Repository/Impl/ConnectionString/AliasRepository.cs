@@ -95,64 +95,57 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// <returns>List of alias connection string connection.</returns>
         public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(ICriteria criteria)
         {
-            try
+            Func<IDataReader, AliasConnectionStringConnection> objMapFunc = (reader) =>
             {
-                Func<IDataReader, AliasConnectionStringConnection> objMapFunc = (reader) =>
+                return new AliasConnectionStringConnection
                 {
-                    return new AliasConnectionStringConnection
+                    Alias = new Alias
                     {
+                        Id = reader.ToInt("AliasId"),
+                        Name = reader.ToString("Name")
+                    },
+                    FromConnectionString = new ConnectionString
+                    {
+                        Id = reader.ToInt("ConnectionStringId"),
                         Alias = new Alias
                         {
                             Id = reader.ToInt("AliasId"),
                             Name = reader.ToString("Name")
                         },
-                        FromConnectionString = new ConnectionString
+                        InitialCatalog = reader.ToString("InitialCatalog"),
+                        IntegratedSecurity = reader.ToBool("IntegratedSecurity"),
+                        UserID = reader.ToString("UserId"),
+                        Password = reader.ToString("Password"),
+                        FreeText = reader.ToString("FreeText"),
+                        Server = new DatabaseServer
                         {
-                            Id = reader.ToInt("ConnectionStringId"),
-                            Alias = new Alias
-                            {
-                                Id = reader.ToInt("AliasId"),
-                                Name = reader.ToString("Name")
-                            },
-                            InitialCatalog = reader.ToString("InitialCatalog"),
-                            IntegratedSecurity = reader.ToBool("IntegratedSecurity"),
-                            UserID = reader.ToString("UserId"),
-                            Password = reader.ToString("Password"),
-                            FreeText = reader.ToString("FreeText"),
-                            Server = new DatabaseServer
-                            {
-                                Id = reader.ToInt("DbServerId"),
-                                ServerIP = reader.ToString("ServerIP")
-                            }
-                        },
-                        ToConnectionString = new ConnectionString
-                        {
-                            Id = reader.ToInt("ToConnectionStringId"),
-                            Alias = new Alias
-                            {
-                                Id = reader.ToInt("AliasId"),
-                                Name = reader.ToString("Name")
-                            },
-                            InitialCatalog = reader.ToString("ToInitialCatalog"),
-                            IntegratedSecurity = reader.ToBool("ToIntegratedSecurity"),
-                            UserID = reader.ToString("ToUserId"),
-                            Password = reader.ToString("ToPassword"),
-                            FreeText = reader.ToString("ToFreeText"),
-                            Server = new DatabaseServer
-                            {
-                                Id = reader.ToInt("ToDbServerId"),
-                                ServerIP = reader.ToString("ToServerIP")
-                            }
+                            Id = reader.ToInt("DbServerId"),
+                            ServerIP = reader.ToString("ServerIP")
                         }
-                    };
+                    },
+                    ToConnectionString = new ConnectionString
+                    {
+                        Id = reader.ToInt("ToConnectionStringId"),
+                        Alias = new Alias
+                        {
+                            Id = reader.ToInt("AliasId"),
+                            Name = reader.ToString("Name")
+                        },
+                        InitialCatalog = reader.ToString("ToInitialCatalog"),
+                        IntegratedSecurity = reader.ToBool("ToIntegratedSecurity"),
+                        UserID = reader.ToString("ToUserId"),
+                        Password = reader.ToString("ToPassword"),
+                        FreeText = reader.ToString("ToFreeText"),
+                        Server = new DatabaseServer
+                        {
+                            Id = reader.ToInt("ToDbServerId"),
+                            ServerIP = reader.ToString("ToServerIP")
+                        }
+                    }
                 };
+            };
 
-                return this.Fetch<AliasConnectionStringConnection>(criteria, objMapFunc).OrderBy(x => x.Alias.Name).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return this.Fetch<AliasConnectionStringConnection>(criteria, objMapFunc).OrderBy(x => x.Alias.Name).ToList();
         }
 
         /// <summary>
@@ -162,14 +155,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// <returns>Alias object.</returns>
         public Alias GetById(ICriteria criteria)
         {
-            try
-            {
-                return Get<Alias>(criteria);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return Get<Alias>(criteria);
         }
 
         /// <summary>
@@ -180,22 +166,15 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
-            try
-            {
-                Hashtable hash = criteria.GetSpParams();
-                hash = logCriteria.AddSpParams(hash);
-                hash = (new ResultCriteria()).AddSpParams(hash);
+            Hashtable hash = criteria.GetSpParams();
+            hash = logCriteria.AddSpParams(hash);
+            hash = (new ResultCriteria()).AddSpParams(hash);
 
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    db.ExecuteNonQuery(hash);
-
-                    return GetCommandResult(hash);
-                }
-            }
-            catch (Exception ex)
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                throw ex;
+                db.ExecuteNonQuery(hash);
+
+                return GetCommandResult(hash);
             }
         }
     }

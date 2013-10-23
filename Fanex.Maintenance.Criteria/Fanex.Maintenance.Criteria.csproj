@@ -77,6 +77,7 @@
     <Compile Include="ConnectionString\Site\SiteGetByAliasCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteGetAllCriteria.cs" />
     <Compile Include="DatabaseReport\DataIntegrityViewModel.cs" />
+    <Compile Include="DatabaseReport\GetCreditDataToValidateDWCriteria.cs" />
     <Compile Include="Job\GetCpuUtilizationCriteria.cs" />
     <Compile Include="Job\GetMemoryInfoCriteria.cs" />
     <Compile Include="Job\GetReadSQLLogCriteria.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="Job\StartJobCriteria.cs" />
     <Compile Include="Job\StopJobCriteria.cs" />
     <Compile Include="Log\GetAllCategoryCriteria.cs" />
-    <Compile Include="DatabaseReport\GetCreditDataToValidateCriteria.cs" />
+    <Compile Include="DatabaseReport\GetCreditDataToValidateBettingCriteria.cs" />
     <Compile Include="DatabaseReport\GetBalanceUpDayCriteria.cs" />
     <Compile Include="DatabaseReport\GetDepositDataToValidateCriteria.cs" />
     <Compile Include="Log\GetAllMachinesCriteria.cs" />

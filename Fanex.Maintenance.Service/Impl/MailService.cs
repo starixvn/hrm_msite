@@ -47,7 +47,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get list mail config filter by server ip.
+        /// Get list mail config filter by server IP.
         /// </summary>
         /// <param name="ip">IP address.</param>
         /// <returns>List of mail config.</returns>
@@ -228,7 +228,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// ReSend mail.
         /// </summary>
-        /// <param name="mailID">Mail ID.</param>
+        /// <param name="mailID">Mail object ID.</param>
         /// <returns>Send result.</returns>
         public bool SendMail(long mailID)
         {
@@ -390,7 +390,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get error.
         /// </summary>
-        /// <param name="mailId">Mail ID.</param>
+        /// <param name="mailId">Mail object ID.</param>
         /// <returns>List of mail error.</returns>
         public List<MailError> GetError(int mailId)
         {

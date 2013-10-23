@@ -37,7 +37,7 @@ namespace Fanex.Maintenance.Entity.Model
     }
 
     /// <summary>
-    /// SQL server log SP paramater for task.
+    /// SQL server log SP parameter for task.
     /// </summary>
     public class SqlLogSpParamForTask
     {

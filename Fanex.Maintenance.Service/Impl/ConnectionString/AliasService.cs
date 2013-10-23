@@ -48,7 +48,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// </summary>
         /// <param name="alias">Alias string.</param>
         /// <param name="databaseServerId">Database server ID.</param>
-        /// <param name="siteId">Site ID.</param>
+        /// <param name="siteId">Site object ID.</param>
         /// <returns>List of alias.</returns>
         public IEnumerable<AliasConnectionString> GetAll(
             string alias = "", 

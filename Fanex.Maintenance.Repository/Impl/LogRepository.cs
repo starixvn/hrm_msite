@@ -28,37 +28,30 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <returns>List of log.</returns>
         public IEnumerable<Log> GetLog(ref GetLogCriteria criteria)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    var param = criteria.GetSpParams();
+                var param = criteria.GetSpParams();
 
-                    var list = db.Query<Log, LogCategory, Machine, Log>(
-                        (l, c, m) =>
-                        {
-                            l.Category = c;
-                            l.Machine = m;
-                            return l;
-                        }, 
-                        "CategoryID,MachineId", 
-                        param);
+                var list = db.Query<Log, LogCategory, Machine, Log>(
+                    (l, c, m) =>
+                    {
+                        l.Category = c;
+                        l.Machine = m;
+                        return l;
+                    }, 
+                    "CategoryID,MachineId", 
+                    param);
 
-                    criteria.TotalRows = Convert.ToInt32(param["totalrows"]);
+                criteria.TotalRows = Convert.ToInt32(param["totalrows"]);
 
-                    return list;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return list;
             }
         }
 
         /// <summary>
         /// Get details message of log.
         /// </summary>
-        /// <param name="logId">Log ID.</param>
+        /// <param name="logId">Log object ID.</param>
         /// <returns>Log message.</returns>
         public string GetLogMessage(long logId)
         {
@@ -71,22 +64,15 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <summary>
         /// Remove log.
         /// </summary>
-        /// <param name="from">From datetime.</param>
+        /// <param name="from">From DateTime.</param>
         /// <returns>Number of deleted rows.</returns>
         public int DeleteLogs(DateTime from)
         {
             int row = 0;
 
-            try
+            using (ObjectDb db = new ObjectDb("Logging_Del"))
             {
-                using (ObjectDb db = new ObjectDb("Logging_Del"))
-                {
-                    row = db.ExecuteNonQuery(new { from = from });
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
+                row = db.ExecuteNonQuery(new { from = from });
             }
 
             return row;
@@ -95,7 +81,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <summary>
         /// Update log's monitor status.
         /// </summary>
-        /// <param name="logIds">Log IDs.</param>
+        /// <param name="logIds">Log object IDs.</param>
         /// <param name="monitoringUserId">Monitoring user ID.</param>
         /// <param name="isMonitored">Is monitored or not.</param>
         /// <returns>Number of rows.</returns>
@@ -103,16 +89,9 @@ namespace Fanex.Maintenance.Repository.Impl
         {
             int row = 0;
 
-            try
+            using (ObjectDb db = new ObjectDb("Logging_Monitor"))
             {
-                using (ObjectDb db = new ObjectDb("Logging_Monitor"))
-                {
-                    row = db.ExecuteNonQuery(new { LogIds = logIds, @MonitoringUserId = monitoringUserId, IsMonitored = isMonitored });
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
+                row = db.ExecuteNonQuery(new { LogIds = logIds, @MonitoringUserId = monitoringUserId, IsMonitored = isMonitored });
             }
 
             return row;

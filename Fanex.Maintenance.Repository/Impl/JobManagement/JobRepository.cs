@@ -89,47 +89,40 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// <returns>List of job log.</returns>
         public IEnumerable<JobLog> GetJobLog(ICriteria criteria, string serverIp)
         {
-            try
+            if (criteria.IsValid())
             {
-                if (criteria.IsValid())
+                Func<IDataReader, JobLog> objMapFunc = (reader) =>
                 {
-                    Func<IDataReader, JobLog> objMapFunc = (reader) =>
+                    return new JobLog
                     {
-                        return new JobLog
+                        InstanceId = reader.ToInt("instance_id"),
+                        Job = !reader.IsDBNull("job_id") ? new Job
                         {
-                            InstanceId = reader.ToInt("instance_id"),
-                            Job = !reader.IsDBNull("job_id") ? new Job
-                            {
-                                JobId = reader.To<Guid>("job_id"),
-                                Name = reader.ToString("job_name")
-                            } 
-                            : new Job(),
-                            Step = !reader.IsDBNull("step_id") ? new Step
-                            {
-                                Id = reader.ToInt("step_id"),
-                                Name = reader.ToString("step_name")
-                            } 
-                            : new Step(),
-                            SqlMessageId = reader.ToInt("sql_message_id"),
-                            SqlSeverity = reader.ToInt("sql_severity"),
-                            Message = reader.ToString("message"),
-                            RunSatus = reader.ToInt("run_status"),
-                            RunDate = reader.ToInt("run_date"),
-                            RunTime = reader.ToInt("run_time"),
-                            RunDuration = reader.ToInt("run_duration"),
-                            Server = reader.ToString("server")
-                        };
+                            JobId = reader.To<Guid>("job_id"),
+                            Name = reader.ToString("job_name")
+                        } 
+                        : new Job(),
+                        Step = !reader.IsDBNull("step_id") ? new Step
+                        {
+                            Id = reader.ToInt("step_id"),
+                            Name = reader.ToString("step_name")
+                        } 
+                        : new Step(),
+                        SqlMessageId = reader.ToInt("sql_message_id"),
+                        SqlSeverity = reader.ToInt("sql_severity"),
+                        Message = reader.ToString("message"),
+                        RunSatus = reader.ToInt("run_status"),
+                        RunDate = reader.ToInt("run_date"),
+                        RunTime = reader.ToInt("run_time"),
+                        RunDuration = reader.ToInt("run_duration"),
+                        Server = reader.ToString("server")
                     };
+                };
 
-                    return this.Fetch<JobLog>(criteria, serverIp, objMapFunc);
-                }
+                return this.Fetch<JobLog>(criteria, serverIp, objMapFunc);
+            }
 
-                return null;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return null;
         }
 
         /// <summary>

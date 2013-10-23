@@ -751,7 +751,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Initialize list server ip for view.
+        /// Initialize list server IP for view.
         /// </summary>
         /// <param name="serverIp">Server IP address.</param>
         private void InitDataIpServer(string serverIp = "")

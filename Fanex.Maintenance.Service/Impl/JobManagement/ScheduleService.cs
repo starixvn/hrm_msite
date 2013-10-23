@@ -101,7 +101,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Search Schedule with Freq Sub Type.
         /// </summary>
-        /// <param name="freqSubType">Freuency sub type.</param>
+        /// <param name="freqSubType">Frequency sub type.</param>
         /// <returns>Schedule service.</returns>
         public IScheduleService WithFreqSubType(int? freqSubType)
         {

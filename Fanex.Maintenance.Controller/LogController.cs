@@ -160,7 +160,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Update log's monitored status.
         /// </summary>
-        /// <param name="logId">Log ID.</param>
+        /// <param name="logId">Log object ID.</param>
         /// <param name="isMonitored">Is monitored or not.</param>
         /// <returns>Action result.</returns>
         [HttpPost]

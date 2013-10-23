@@ -52,7 +52,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Create.
+        /// Create log service.
         /// </summary>
         /// <returns>Log service object.</returns>
         public static LogService Create()

@@ -106,7 +106,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Base Add.
         /// </summary>
-        /// <param name="element">Configuraion element.</param>
+        /// <param name="element">Configuration element.</param>
         protected override void BaseAdd(ConfigurationElement element)
         {
             BaseAdd(element, false);
@@ -115,7 +115,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Create new element.
         /// </summary>
-        /// <returns>Configuraion element.</returns>
+        /// <returns>Configuration element.</returns>
         protected override ConfigurationElement CreateNewElement()
         {
             return new ServerElement();
@@ -124,7 +124,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Get element key.
         /// </summary>
-        /// <param name="element">Configuraion element.</param>
+        /// <param name="element">Configuration element.</param>
         /// <returns>Return object.</returns>
         protected override object GetElementKey(ConfigurationElement element)
         {

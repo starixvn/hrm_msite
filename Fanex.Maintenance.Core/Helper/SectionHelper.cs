@@ -103,7 +103,7 @@ namespace Fanex.Maintenance.Core.Helper
         }
 
         /// <summary>
-        /// Get Server Ip From server Name.
+        /// Get Server IP From server Name.
         /// </summary>
         /// <param name="serverName">Server name.</param>
         /// <returns>Server IP string.</returns>

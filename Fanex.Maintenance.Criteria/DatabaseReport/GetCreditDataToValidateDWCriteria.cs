@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetCreditDataToValidateCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetCreditDataToValidateDWCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -13,33 +13,13 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Get credit data to validate betting.
-    /// </summary>
-    public class GetCreditDataToValidateBettingCriteria : CriteriaBase
-    {
-        public DateTime Date { get; set; }
-
-        public int DrawFilter { get; set; }
-
-        public override string GetSettingKey()
-        {
-            return "GET_CreditDataToValidate_Betting";
-        }
-
-        public override bool IsValid()
-        {
-            return true;
-        }
-    }
-
-    /// <summary>
     /// Get credit data to validate DW.
     /// </summary>
     public class GetCreditDataToValidateDWCriteria : GetCreditDataToValidateBettingCriteria
-    {      
+    {
         public override string GetSettingKey()
         {
             return "GET_CreditDataToValidate_DW";
-        }       
-    }  
+        }
+    }
 }
