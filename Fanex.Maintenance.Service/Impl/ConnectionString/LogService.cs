@@ -168,8 +168,8 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// Get update alias value.
         /// </summary>
         /// <param name="logExecSp">Execute SP log.</param>
-        /// <param name="listSite"></param>
-        /// <param name="listOldSite"></param>
+        /// <param name="listSite">List of site log data.</param>
+        /// <param name="listOldSite">List of site old log data.</param>
         /// <returns>List of log data.</returns>
         public List<LogData> GetValueAliasUpdate(
             LogExecSp logExecSp, 
@@ -561,7 +561,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// Get change connection value.
         /// </summary>
         /// <param name="logExecSp">Execute SP log.</param>
-        /// <param name="listOld"></param>
+        /// <param name="listOld">Old list of connection string.</param>
         /// <returns>List of connection string.</returns>
         public List<ConnectionString> GetValueChangeConnection(LogExecSp logExecSp, ref List<ConnectionString> listOld)
         {

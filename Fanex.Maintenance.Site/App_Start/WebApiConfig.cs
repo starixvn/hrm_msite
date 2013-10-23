@@ -19,7 +19,7 @@ namespace Fanex.Maintenance.Site
         /// <summary>
         /// Register.
         /// </summary>
-        /// <param name="config"></param>
+        /// <param name="config">HTTP configuration.</param>
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(

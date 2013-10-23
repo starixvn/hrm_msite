@@ -63,13 +63,13 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get mail list.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="appId">Application ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult MailList(int id = 0)
+        public ActionResult MailList(int appId = 0)
         {
             InitPageSize();
-            InitDataMailConfig(id);
+            InitDataMailConfig(appId);
             InitMailStatus();
 
             var totalRows = 0;
@@ -78,7 +78,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
 
             List<MailRecord> listMail = new List<MailRecord>();
-            listMail = this._mailServer.WithApp(id)
+            listMail = this._mailServer.WithApp(appId)
                 .FromDate(DateTime.Now.ToShortDateString())
                 .ToDate(DateTime.Now.ToShortDateString())
                 .WithStatus(0)
@@ -92,10 +92,10 @@ namespace Fanex.Maintenance.Controller
         /// Get mail list.
         /// </summary>
         /// <param name="from">From DateTime string.</param>
-        /// <param name="to"></param>
+        /// <param name="to">To DateTime string.</param>
         /// <param name="applicationID">If application id = 0 get all.</param>
         /// <param name="mailStatus">Mail status.</param>
-        /// <param name="size"></param>
+        /// <param name="size">Number of items.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult MailList(string from, string to, int applicationID = 0, int mailStatus = 0, int size = 10)
@@ -185,7 +185,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit mail setting.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Setting ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMailSetting(int id)
@@ -225,7 +225,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get all mail config.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Setting ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
@@ -315,7 +315,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit mail config by config id.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Mail config ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
@@ -412,7 +412,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit mail function.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Mail function ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMailFunction(int id)
@@ -462,14 +462,19 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Add mail setting for popup view.
         /// </summary>
-        /// <param name="server"></param>
-        /// <param name="port"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="isAutho"></param>
+        /// <param name="server">Server IP address.</param>
+        /// <param name="port">Pot number.</param>
+        /// <param name="username">Current username.</param>
+        /// <param name="password">Current password.</param>
+        /// <param name="isAutho">Is authorizedor not.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult AddMailSettingPopUp(string server, int port, string username, string password, bool isAutho)
+        public ActionResult AddMailSettingPopUp(
+            string server, 
+            int port, 
+            string username, 
+            string password, 
+            bool isAutho)
         {
             if (Request.IsAjaxRequest())
             {
@@ -578,11 +583,11 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get list mail pagination.
         /// </summary>
-        /// <param name="status"></param>
+        /// <param name="status">Mail status.</param>
         /// <param name="from">From DateTime string.</param>
-        /// <param name="to"></param>
-        /// <param name="page"></param>
-        /// <param name="size"></param>
+        /// <param name="to">To DateTime string.</param>
+        /// <param name="page">Page index.</param>
+        /// <param name="size">Page size.</param>
         /// <param name="applicationID">Application ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]

@@ -85,13 +85,13 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Schedule Management Page.
         /// </summary>
-        /// <param name="server"></param>
+        /// <param name="serverIp">Server IP address.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult ScheduleManagement(string server)
+        public ActionResult ScheduleManagement(string serverIp)
         {
             ViewBag.ListServer = GetServer();
-            ViewBag.ListSchedule = _scheduleService.WithServer(server)
+            ViewBag.ListSchedule = _scheduleService.WithServer(serverIp)
                 .GetSchedules();
             ViewBag.DateFrom = DateTime.Now.ToString("MMM dd, yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MMM dd, yyyy");
@@ -226,13 +226,13 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Stop a job.
         /// </summary>
-        /// <param name="server"></param>
+        /// <param name="serverName">Server name.</param>
         /// <param name="jobName">Job name.</param>
         /// <returns>Json result.</returns>
         [HttpPost]
-        public JsonResult StopJob(string server, string jobName)
+        public JsonResult StopJob(string serverName, string jobName)
         {
-            CommandResult commandResult = _jobService.FromServer(server)
+            CommandResult commandResult = _jobService.FromServer(serverName)
                 .WithJob(jobName)
                 .StopJob();
             return Json(new
@@ -244,13 +244,13 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Job Information after start or stop.
         /// </summary>
-        /// <param name="server"></param>
+        /// <param name="serverName">Server name.</param>
         /// <param name="jobName">Job name.</param>
         /// <returns>Json result.</returns>
         [HttpPost]
-        public JsonResult GetJob(string server, string jobName)
+        public JsonResult GetJob(string serverName, string jobName)
         {
-            JobSchedule jobSchedule = _jobService.FromServer(server)
+            JobSchedule jobSchedule = _jobService.FromServer(serverName)
                 .WithJob(jobName)
                 .GetJobs()
                 .FirstOrDefault();
@@ -281,18 +281,18 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Step.
         /// </summary>
-        /// <param name="job"></param>
-        /// <param name="server"></param>
+        /// <param name="jobName">Job name.</param>
+        /// <param name="serverName">Server name.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult StepManagement(string job, string server)
+        public ActionResult StepManagement(string jobName, string serverName)
         {
             List<StepDetail> listStep = _stepService
-                                .WithJob(job)
-                                .FromServer(server)
+                                .WithJob(jobName)
+                                .FromServer(serverName)
                                 .GetSteps().ToList();
 
-            ViewBag.JobName = job;
+            ViewBag.JobName = jobName;
 
             return View(listStep);
         }
@@ -304,9 +304,9 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Job Log.
         /// </summary>
-        /// <param name="top"></param>
-        /// <param name="job"></param>
-        /// <param name="server"></param>
+        /// <param name="top">Number of items.</param>
+        /// <param name="job">Job name.</param>
+        /// <param name="server">Server name.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult JobLogManagement(int top = 0, string job = "", string server = "")
@@ -413,14 +413,14 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Server Log.
         /// </summary>
-        /// <param name="server"></param>
+        /// <param name="serverIp">Server IP address.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult ServerLogManagement(string server)
+        public ActionResult ServerLogManagement(string serverIp)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
                 .FromDate(DateTime.Now.Date)
                 .ToDate(DateTime.Now.AddDays(1))
                 .GetSqlServerLogs().Take(100);
@@ -431,7 +431,7 @@ namespace Fanex.Maintenance.Controller
                 {
                     PageIndex = 0,
                     PageSize = 100,
-                    Server = server
+                    Server = serverIp
                 });
         }
 
@@ -469,28 +469,28 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get SQL Server Agent Log.
         /// </summary>
-        /// <param name="server"></param>
-        /// <param name="top"></param>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <param name="top">Number of items.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult AgentLogManagement(string server, int top = 0)
+        public ActionResult AgentLogManagement(string serverIp, int top = 0)
         {
             InitPageSize();
+
             ViewBag.ListServer = GetServer();
-            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
                 .FromDate(DateTime.Now.Date)
                 .ToDate(DateTime.Now.AddDays(1))
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
             ViewBag.DateFrom = DateTime.Now.ToString("MMM dd, yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MMM dd, yyyy");
-
             ViewBag.Top = top;
 
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = 0,
                 PageSize = 100,
-                Server = server
+                Server = serverIp
             });
         }
 

@@ -235,7 +235,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 catch (Exception ex)
                 {
                     LogService.Error(ex.Message, ex);
-                    throw ex;
+                    throw;
                 }
             }
             else
@@ -304,7 +304,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <summary>
         /// Create user menu.
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">Current login user.</param>
         private void CreateUserMenu(User user)
         {
             _currentSession.MenuItemList = 
@@ -314,7 +314,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <summary>
         /// Create auth information.
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">Current login user.</param>
         private void CreateAuthInfo(User user)
         {
             var currentDomain = CurrentContext.GetCurrentDomain();

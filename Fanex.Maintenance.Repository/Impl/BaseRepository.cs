@@ -111,6 +111,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// <summary>
         /// Fetch item.
         /// </summary>
+        /// <typeparam name="S">Object class.</typeparam>
         /// <param name="criteria">The criteria.</param>
         /// <param name="mapObjectFunction">Map object function.</param>
         /// <returns>List of object.</returns>

@@ -293,7 +293,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Insert new mail function.
         /// </summary>
-        /// <param name="func"></param>
+        /// <param name="func">Mail function.</param>
         /// <returns>Success or not.</returns>
         public bool StoreFunction(MailFunction func)
         {

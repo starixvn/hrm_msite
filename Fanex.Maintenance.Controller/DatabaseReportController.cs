@@ -133,14 +133,14 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get list of user online with size.
         /// </summary>
-        /// <param name="size"></param>
+        /// <param name="top">Number of users.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UserOnline(int size)
+        public ActionResult UserOnline(int top)
         {
             if (Request.IsAjaxRequest())
             {
-                DataTable userOnlineTable = _databaseReportService.GetUserOnline(size);
+                DataTable userOnlineTable = _databaseReportService.GetUserOnline(top);
                 return Json(_databaseReportService.GenerateTemplateUser(userOnlineTable));
             }
 
@@ -162,15 +162,15 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// User online chart report with size.
         /// </summary>
-        /// <param name="size"></param>
+        /// <param name="top">Number of users.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UserOnlineChart(int size)
+        public ActionResult UserOnlineChart(int top)
         {
             if (Request.IsAjaxRequest())
             {
-                DataTable userOnlineTable = _databaseReportService.GetUserOnline(size);
-                return Json(_databaseReportService.GenerateDataChart(userOnlineTable, size));
+                DataTable userOnlineTable = _databaseReportService.GetUserOnline(top);
+                return Json(_databaseReportService.GenerateDataChart(userOnlineTable, top));
             }
 
             return Json(null);

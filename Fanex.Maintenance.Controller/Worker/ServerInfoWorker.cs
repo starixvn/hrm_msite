@@ -92,7 +92,7 @@ namespace Fanex.Maintenance.Controller.Worker
         /// <summary>
         /// Get Resource info and return to client.
         /// </summary>
-        /// <param name="server"></param>
+        /// <param name="server">Server element.</param>
         private void UpdateResourceInfoToClient(object server)
         {
             try

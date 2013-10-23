@@ -24,9 +24,6 @@ namespace Fanex.Maintenance.Entity.Domain
 
         public string Description { get; set; }
 
-        /// <summary>
-        /// Gets or sets ID of the step in the job where execution should begin.
-        /// </summary>
         public int StartStepId { get; set; }
 
         public JobCategory Category { get; set; }

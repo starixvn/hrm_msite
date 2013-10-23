@@ -20,7 +20,7 @@ namespace Fanex.Maintenance.Site
         /// <summary>
         /// Register routes.
         /// </summary>
-        /// <param name="routes"></param>
+        /// <param name="routes">Route collection.</param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

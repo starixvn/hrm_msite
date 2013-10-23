@@ -102,7 +102,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Base Add.
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="element">Configuration element.</param>
         protected override void BaseAdd(ConfigurationElement element)
         {
             BaseAdd(element, false);
@@ -120,7 +120,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Get Element Key.
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="element">Configuration element.</param>
         /// <returns>Returned object.</returns>
         protected override object GetElementKey(ConfigurationElement element)
         {

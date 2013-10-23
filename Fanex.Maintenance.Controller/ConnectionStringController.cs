@@ -779,7 +779,7 @@ namespace Fanex.Maintenance.Controller
         /// View log.
         /// </summary>
         /// <param name="id">Page index.</param>
-        /// <param name="size">Page size</param>
+        /// <param name="size">Page size.</param>
         /// <param name="q">Log name.</param>
         /// <param name="username">Username.</param>
         /// <param name="from">From DateTime.</param>
@@ -1097,7 +1097,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Insert connection log alias.
         /// </summary>
-        /// <param name="log"></param>
+        /// <param name="log">Log execute SP.</param>
         /// <returns>Partial view result.</returns>
         public PartialViewResult _ConnectionLog_Alias_Insert(LogExecSp log)
         {
@@ -1112,7 +1112,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Update connection log alias.
         /// </summary>
-        /// <param name="log"></param>
+        /// <param name="log">Log execute SP.</param>
         /// <returns>Partial view result.</returns>
         public PartialViewResult _ConnectionLog_Alias_Update(LogExecSp log)
         {
@@ -1130,7 +1130,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// View log data.
         /// </summary>
-        /// <param name="log"></param>
+        /// <param name="log">Log execute SP.</param>
         /// <returns>Partial view result.</returns>
         public PartialViewResult _ConnectionLog_LogData(LogExecSp log)
         {
@@ -1195,7 +1195,7 @@ namespace Fanex.Maintenance.Controller
         /// Change connection.
         /// </summary>
         /// <param name="log"></param>
-        /// <returnsPartial view result.></returns>
+        /// <returns>Partial view result.></returns>
         public PartialViewResult _ConnectionLog_LogData_ChangeConnection(LogExecSp log)
         {
             var listOld = new List<ConnectionString>();

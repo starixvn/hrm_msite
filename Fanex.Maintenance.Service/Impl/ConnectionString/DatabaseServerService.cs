@@ -72,7 +72,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get database server with number of site.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Database server name.</param>
         /// <returns>List of database server site.</returns>
         public IEnumerable<DatabaseServerSite> GetWithNumOfSite(string name = "")
         {
@@ -154,6 +154,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// Get database server by ID.
         /// </summary>
         /// <param name="id">DB server ID.</param>
+        /// <returns>Database server.</returns>
         public DatabaseServer GetById(int id)
         {
             try

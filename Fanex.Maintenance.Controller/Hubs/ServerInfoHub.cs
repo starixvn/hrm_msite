@@ -26,7 +26,7 @@ namespace Fanex.Maintenance.Controller.Hubs
         /// <summary>
         /// Send data.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">Mail data.</param>
         public void data(string data)
         {
             try

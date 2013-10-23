@@ -473,8 +473,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Get job buy schedule name.
         /// </summary>
-        /// <param name="schedule"></param>
-        /// <param name="server"></param>
+        /// <param name="schedule">Schedule name.</param>
+        /// <param name="server">Server name.</param>
         /// <returns>List of job schedule.</returns>
         private IEnumerable<JobSchedule> GetJobBySchedule(string schedule, string server)
         {

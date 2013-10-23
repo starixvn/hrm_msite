@@ -133,7 +133,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <summary>
         /// Create auth information.
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">Current login user.</param>
         private void CreateAuthInfo(User user)
         {
             var currentDomain = CurrentContext.GetCurrentDomain();

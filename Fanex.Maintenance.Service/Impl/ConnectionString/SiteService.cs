@@ -49,7 +49,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get all sites.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Site object name.</param>
         /// <param name="databaseServerId">Database server ID.</param>
         /// <returns>List of site.</returns>
         public IEnumerable<Site> GetAll(string name = "", int? databaseServerId = null)
@@ -107,7 +107,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get site with number of alias.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Site object name.</param>
         /// <param name="databaseServerId">Database server ID.</param>
         /// <returns>List of site alias.</returns>
         public IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? databaseServerId = null)

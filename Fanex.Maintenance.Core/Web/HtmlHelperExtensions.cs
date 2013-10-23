@@ -89,8 +89,8 @@ namespace Fanex.Maintenance.Core.Web
         /// Converts the value of the current System.DateTime object to its equivalent string
         /// representation using the specified format.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="time"></param>
+        /// <param name="value">Date value.</param>
+        /// <param name="time">Time value.</param>
         /// <param name="dateFormat">Date format.</param>
         /// <param name="timeFormat">Time format.</param>
         /// <returns>HTML string.</returns>
@@ -135,7 +135,7 @@ namespace Fanex.Maintenance.Core.Web
         /// <summary>
         /// Paste Execute Type to Html String.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">Execution status.</param>
         /// <returns>HTML string.</returns>
         public static IHtmlString ToExecutionString(this int value)
         {
