@@ -164,7 +164,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get alias by site.
         /// </summary>
-        /// <param name="siteId"></param>
+        /// <param name="siteId">Site object ID.</param>
         /// <returns>List of alias.</returns>
         public IEnumerable<Alias> GetBySite(int siteId)
         {

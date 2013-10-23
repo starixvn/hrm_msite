@@ -125,16 +125,14 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get details message.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Log message ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetLogMessage(int id)
         {
             if (Request.IsAjaxRequest())
             {
-                string message = string.Empty;
-                message = _logService.GetMessage(id);
-                return Json(message);
+                return Json(_logService.GetMessage(id));
             }
 
             return Json(null);

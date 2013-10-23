@@ -70,7 +70,7 @@ namespace Fanex.Maintenance.Entity.Domain
         public int NetsendAddress { get; set; }
 
         /// <summary>
-        /// Date that the most recent network message was last sent to the specified operator ID.
+        /// Gets or sets date that the most recent network message was last sent to the specified operator ID.
         /// </summary>
         public int LastNetsendDate { get; set; }
 

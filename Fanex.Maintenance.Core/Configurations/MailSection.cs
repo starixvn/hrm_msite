@@ -17,7 +17,7 @@ namespace Fanex.Maintenance.Core.Configurations
     public class MailSection : ConfigurationSection
     {
         /// <summary>
-        /// Static instance for Reference.
+        /// Gets static instance for Reference.
         /// </summary>
         /// <value>Mail section.</value>
         public static MailSection Instance
@@ -30,7 +30,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
         
         /// <summary>
-        /// List Sp Name.
+        /// Gets list Sp Name.
         /// </summary>
         /// <value>Mail collection.</value>
         [ConfigurationProperty("Mails", IsDefaultCollection = false)]
@@ -58,6 +58,7 @@ namespace Fanex.Maintenance.Core.Configurations
         /// <summary>
         /// Collection Type.
         /// </summary>
+        /// <value>Configuration element collection type.</value>
         public override ConfigurationElementCollectionType CollectionType
         {
             get

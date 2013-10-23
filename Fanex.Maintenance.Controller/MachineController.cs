@@ -78,7 +78,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit machine.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Machine ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMachine(int id)

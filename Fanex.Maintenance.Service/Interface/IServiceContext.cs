@@ -14,9 +14,6 @@ namespace Fanex.Maintenance.Service.Interface
     /// </summary>
     public interface IServiceContext
     {
-        /// <summary>
-        /// Who perform a business action.
-        /// </summary>
         int UserId { get; set; }
 
         string Ip { get; set; }

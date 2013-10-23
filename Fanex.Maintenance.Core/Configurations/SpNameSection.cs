@@ -17,7 +17,7 @@ namespace Fanex.Maintenance.Core.Configurations
     public class SpNameSection : ConfigurationSection
     {
         /// <summary>
-        /// Static instance for Reference.
+        /// Gets static instance for Reference.
         /// </summary>
         /// <value>SP name section.</value>
         public static SpNameSection Instance
@@ -31,7 +31,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
         
         /// <summary>
-        /// List Sp Name.
+        /// Gets list Sp Name.
         /// </summary>
         /// <value>SP name collection.</value>
         [ConfigurationProperty("spList", IsDefaultCollection = false)]

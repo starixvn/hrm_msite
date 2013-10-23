@@ -78,7 +78,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get connection by ID.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Connection ID.</param>
         /// <returns>Connection string.</returns>
         public ConnectionString GetById(int id)
         {
@@ -107,7 +107,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get secondary connection.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Connection ID.</param>
         /// <returns>List of connection string.</returns>
         public IEnumerable<ConnectionString> GetSecondaryConnection(int id)
         {

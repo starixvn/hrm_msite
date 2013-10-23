@@ -63,7 +63,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Get machine by machine id.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Machine ID.</param>
         /// <returns>Machine object.</returns>
         public Machine GetMachine(int id)
         {

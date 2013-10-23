@@ -165,7 +165,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Update alias.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Alias ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditAlias(int id)
@@ -235,15 +235,15 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Connection list.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="aliasId">Alias object ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult Connection(int id)
+        public ActionResult Connection(int aliasId)
         {
             // get all connection by alias id
-            var listConnection = _connectionService.GetByAlias(id);
+            var listConnection = _connectionService.GetByAlias(aliasId);
 
-            var alias = _aliasService.Get(id);
+            var alias = _aliasService.Get(aliasId);
             ViewBag.Alias = alias;
 
             return View(listConnection);
@@ -256,25 +256,24 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Create connection.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="aliasId">Alias object ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult CreateConnection(int id)
+        public ActionResult CreateConnection(int aliasId)
         {
             // get alias by id
-            var alias = _aliasService.Get(id);
+            var alias = _aliasService.Get(aliasId);
+
             if (ReferenceEquals(alias, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
             }
 
             ViewBag.Alias = alias;
-
-            // get database server
             ViewBag.DbServer = GetSelectListDatabaseServer();
 
             // get connection for select secondary connection string
-            var listConnection = _connectionService.GetByAlias(id);
+            var listConnection = _connectionService.GetByAlias(aliasId);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
                 Value = c.ConnectionString.Id.ToString(),
@@ -283,7 +282,7 @@ namespace Fanex.Maintenance.Controller
 
             return View(new ConnectionInsertCriteria
             {
-                AliasId = id
+                AliasId = aliasId
             });
         }
 
@@ -342,13 +341,14 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit connection.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Connection ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditConnection(int id)
         {
             // get connection by id
             var connection = _connectionService.GetById(id);
+
             if (ReferenceEquals(connection, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
@@ -513,13 +513,14 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Update site.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Site object ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditSite(int id)
         {
             // get site by id
             var site = _siteService.GetById(id);
+
             if (ReferenceEquals(site, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
@@ -566,7 +567,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// View connection.
         /// </summary>
-        /// <param name="siteId"></param>
+        /// <param name="siteId">Site object ID.</param>
         /// <returns>View result.</returns>
         public ViewResult ViewConnection(int siteId)
         {
@@ -656,7 +657,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit database server.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">DB server ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditDbServer(int id)
@@ -777,13 +778,13 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// View log.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="size"></param>
-        /// <param name="q"></param>
-        /// <param name="username"></param>
+        /// <param name="id">Page index.</param>
+        /// <param name="size">Page size</param>
+        /// <param name="q">Log name.</param>
+        /// <param name="username">Username.</param>
         /// <param name="from">From DateTime.</param>
-        /// <param name="to"></param>
-        /// <param name="filterBy"></param>
+        /// <param name="to">To DateTime.</param>
+        /// <param name="filterBy">Draw filter.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Log(
@@ -853,16 +854,16 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get site by alias.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="aliasId">Alias object ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult GetSiteByAlias(int id)
+        public ActionResult GetSiteByAlias(int aliasId)
         {
             var listSite = new List<Site>();
 
             if (Request.IsAjaxRequest())
             {
-                listSite = _siteService.GetByAlias(id).ToList();
+                listSite = _siteService.GetByAlias(aliasId).ToList();
             }
 
             return View(listSite);
@@ -871,15 +872,15 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get connection by alias.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="aliasId">Alias object ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult GetConnectionByAlias(int id)
+        public ActionResult GetConnectionByAlias(int aliasId)
         {
             if (Request.IsAjaxRequest())
             {
-                var listConnection = _connectionService.GetByAlias(id);
-                ViewBag.AliasId = id;
+                var listConnection = _connectionService.GetByAlias(aliasId);
+                ViewBag.AliasId = aliasId;
 
                 return View(listConnection);
             }
@@ -943,12 +944,13 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get secondary connection.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Connection ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetSecondaryConnection(int id)
         {
             var listConnection = new List<ConnectionString>();
+
             if (Request.IsAjaxRequest())
             {
                 listConnection = _connectionService.GetSecondaryConnection(id).ToList();
@@ -960,7 +962,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get alias by site.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Site object ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetAliasBySite(int id)
@@ -978,7 +980,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Update site status.
         /// </summary>
-        /// <param name="siteId"></param>
+        /// <param name="siteId">Site object ID.</param>
         /// <param name="isActive">Is active or not.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
@@ -1073,7 +1075,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Log detail page.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Log object ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult LogDetail(int id)

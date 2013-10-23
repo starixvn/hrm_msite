@@ -136,7 +136,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get site by ID.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Site object ID.</param>
         /// <returns>Site object.</returns>
         public Site GetById(int id)
         {

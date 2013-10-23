@@ -69,9 +69,7 @@ namespace Fanex.Maintenance.Controller
         public ActionResult MailList(int id = 0)
         {
             InitPageSize();
-
             InitDataMailConfig(id);
-
             InitMailStatus();
 
             var totalRows = 0;
@@ -527,7 +525,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Resend mail.
         /// </summary>
-        /// <param name="mailId"></param>
+        /// <param name="mailId">Mail object ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ResendMail, Policy = Constant.Policy.Host)]
@@ -545,7 +543,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get message detail of mail.
         /// </summary>
-        /// <param name="mailId"></param>
+        /// <param name="mailId">Mail object ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailDetails, Policy = Constant.Policy.Read)]
@@ -563,7 +561,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get mail error.
         /// </summary>
-        /// <param name="mailId"></param>
+        /// <param name="mailId">Mail object ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetError(int mailId)

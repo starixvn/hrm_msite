@@ -114,7 +114,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                             if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
                             {
                                 // allows user login
-
                                 #region check-in user
 
                                 var criteria = new UserCheckInUserCriteria

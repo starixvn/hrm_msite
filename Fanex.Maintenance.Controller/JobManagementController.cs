@@ -55,10 +55,10 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Main Content Page.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="server"></param>
+        /// <param name="type">Job type.</param>
+        /// <param name="server">Server name.</param>
         /// <param name="jobname">Job name.</param>
-        /// <param name="id"></param>
+        /// <param name="id">Job object ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Index(string type = "", string server = "", string jobname = "", string id = "")

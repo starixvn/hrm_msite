@@ -55,9 +55,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Indicates whether the current site allows users login directly.
-        /// If "0", users must login through NAP Hub.
+        /// Gets whether the current site allows users login directly.
         /// </summary>
+        /// <value>0 : login through NAP Hub.</value>
         public int IsSiteLogin
         {
             get

@@ -153,7 +153,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get database server by ID.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">DB server ID.</param>
         public DatabaseServer GetById(int id)
         {
             try

@@ -75,7 +75,7 @@ namespace Fanex.Maintenance.Entity.Domain
         public string OutputFileName { get; set; }
 
         /// <summary>
-        /// Outcome of the previous execution of the job step.
+        /// Gets or sets outcome of the previous execution of the job step.
         /// 0 = Failed
         /// 1 = Succeeded
         /// 2 = Retry

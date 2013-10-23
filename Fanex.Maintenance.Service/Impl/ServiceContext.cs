@@ -16,9 +16,6 @@ namespace Fanex.Maintenance.Service.Impl
     /// </summary>
     public class ServiceContext : IServiceContext
     {
-        /// <summary>
-        /// Who perform a business action.
-        /// </summary>
         public int UserId { get; set; }
 
         public string Ip { get; set; }

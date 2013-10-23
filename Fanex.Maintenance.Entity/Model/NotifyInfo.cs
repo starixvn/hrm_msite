@@ -14,12 +14,19 @@ namespace Fanex.Maintenance.Entity.Model
     /// </summary>
     public enum NotifyType : int
     {
+        /// <summary>
+        /// Agent log notify.
+        /// </summary>
         AgentLog = 1,
+
+        /// <summary>
+        /// Job notify.
+        /// </summary>
         Job = 2
     }
     
     /// <summary>
-    /// TODO: Update summary.
+    /// Notify info.
     /// </summary>
     public class NotifyInfo
     {
