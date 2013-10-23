@@ -38,7 +38,7 @@ namespace Fanex.Maintenance.Controller.Worker
         private IServerService _serverService { get; set; }
 
         /// <summary>
-        /// Run main function
+        /// Run main function.
         /// </summary>
         protected override void Run()
         {
@@ -66,7 +66,7 @@ namespace Fanex.Maintenance.Controller.Worker
         }
 
         /// <summary>
-        /// Get List Server Resource info
+        /// Get List Server Resource info.
         /// </summary>
         private void GetListCpuUtilization()
         {

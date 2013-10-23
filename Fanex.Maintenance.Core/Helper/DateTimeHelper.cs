@@ -50,7 +50,7 @@ namespace Fanex.Maintenance.Core.Helper
         /// Get full date string.
         /// </summary>
         /// <param name="dateString">Date string.</param>
-        /// <returns></returns>
+        /// <returns>DateTime value.</returns>
         public static DateTime GetFullDate(string dateString)
         {
             DateTime fullDate = dateString.Length == 8 ? DateTime.ParseExact(
@@ -67,7 +67,7 @@ namespace Fanex.Maintenance.Core.Helper
         /// </summary>
         /// <param name="dateNumber">Date number.</param>
         /// <param name="timeNumber">Time number.</param>
-        /// <returns></returns>
+        /// <returns>DateTime value.</returns>
         public static DateTime GetFullDatetime(int dateNumber = 0, int timeNumber = 0)
         {
             if (dateNumber == 0 && timeNumber == 0)

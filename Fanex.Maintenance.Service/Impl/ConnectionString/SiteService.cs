@@ -50,16 +50,16 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// Get all sites.
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="dbServerId">Database server ID.</param>
+        /// <param name="databaseServerId">Database server ID.</param>
         /// <returns>List of site.</returns>
-        public IEnumerable<Site> GetAll(string name = "", int? dbServerId = null)
+        public IEnumerable<Site> GetAll(string name = "", int? databaseServerId = null)
         {
             try
             {
                 var criteria = new SiteGetAllCriteria
                 {
                     Name = name,
-                    DbServerId = dbServerId
+                    DbServerId = databaseServerId
                 };
 
                 if (criteria.IsValid())
@@ -78,7 +78,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get site by alias.
         /// </summary>
-        /// <param name="aliasId"></param>]
+        /// <param name="aliasId">Connection string alias ID.</param>]
         /// <returns>List of site.</returns>
         public IEnumerable<Site> GetByAlias(int aliasId)
         {
@@ -108,16 +108,16 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// Get site with number of alias.
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="dbServerId">Database server ID.</param>
+        /// <param name="databaseServerId">Database server ID.</param>
         /// <returns>List of site alias.</returns>
-        public IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? dbServerId = null)
+        public IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? databaseServerId = null)
         {
             try
             {
                 var criteria = new SiteGetAllCriteria
                 {
                     Name = name,
-                    DbServerId = dbServerId
+                    DbServerId = databaseServerId
                 };
 
                 if (criteria.IsValid())
@@ -217,15 +217,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get site by database server.
         /// </summary>
-        /// <param name="dbServerId">Database server ID.</param>
+        /// <param name="databaseServerId">Database server ID.</param>
         /// <returns>List of site.</returns>
-        public IEnumerable<Site> GetByDbServer(int dbServerId)
+        public IEnumerable<Site> GetByDbServer(int databaseServerId)
         {
             try
             {
                 var criteria = new SiteGetByDbServerCriteria
                 {
-                    DbServerId = dbServerId
+                    DbServerId = databaseServerId
                 };
 
                 if (criteria.IsValid())

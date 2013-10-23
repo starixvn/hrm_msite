@@ -47,17 +47,20 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// Get all alias.
         /// </summary>
         /// <param name="alias"></param>
-        /// <param name="dbServerId">Database server ID.</param>
+        /// <param name="databaseServerId">Database server ID.</param>
         /// <param name="siteId"></param>
         /// <returns>List of alias.</returns>
-        public IEnumerable<AliasConnectionString> GetAll(string alias = "", int? dbServerId = null, int? siteId = null)
+        public IEnumerable<AliasConnectionString> GetAll(
+            string alias = "", 
+            int? databaseServerId = null, 
+            int? siteId = null)
         {
             try
             {
                 var criteria = new AliasGetAllCriteria
                 {
                     Alias = alias,
-                    DbServerId = dbServerId,
+                    DbServerId = databaseServerId,
                     SiteId = siteId
                 };
 
@@ -131,7 +134,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get alias.
         /// </summary>
-        /// <param name="aliasId"></param>
+        /// <param name="aliasId">Connection string alias ID.</param>
         /// <returns>Alias object.</returns>
         public Alias Get(int aliasId)
         {
@@ -224,18 +227,18 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get switch second connection alias.
         /// </summary>
-        /// <param name="dbServerId">Database server ID.</param>
+        /// <param name="databaseServerId">Database server ID.</param>
         /// <returns>List of alias connection string.</returns>
-        public IEnumerable<AliasConnectionStringConnection> GetSwitchSecondConnection(int dbServerId)
+        public IEnumerable<AliasConnectionStringConnection> GetSwitchSecondConnection(int databaseServerId)
         {
             // check parameters
-            Check.Argument.IsNotNegativeOrZero(dbServerId, "dbServerId");
+            Check.Argument.IsNotNegativeOrZero(databaseServerId, "dbServerId");
 
             try
             {
                 var criteria = new DatabaseServerGetSecondConnectionFromDbServerCriteria
                 {
-                    DbServerId = dbServerId
+                    DbServerId = databaseServerId
                 };
 
                 if (criteria.IsValid())

@@ -61,7 +61,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <param name="userId"></param>
         /// <param name="onuserId"></param>
         /// <param name="time"></param>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Index(string userId, string onuserId, string time)

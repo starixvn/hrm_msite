@@ -83,6 +83,29 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
+        /// Get Element.
+        /// </summary>
+        /// <param name="index">Index value.</param>
+        /// <returns></returns>
+        public ServerElement this[int index]
+        {
+            get
+            {
+                return (ServerElement)BaseGet(index);
+            }
+
+            set
+            {
+                if (BaseGet(index) != null)
+                {
+                    BaseRemoveAt(index);
+                }
+
+                BaseAdd(index, value);
+            }
+        }
+
+        /// <summary>
         /// Add Element.
         /// </summary>
         /// <param name="mappingElement">Mapping element.</param>
@@ -119,29 +142,6 @@ namespace Fanex.Maintenance.Core.Configurations
             return ((ServerElement)element).ServerIp + ((ServerElement)element).ServerName 
                 + ((ServerElement)element).ConnectionString;
         }
-
-        /// <summary>
-        /// Get Element.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public ServerElement this[int index]
-        {
-            get
-            {
-                return (ServerElement)BaseGet(index);
-            }
-
-            set
-            {
-                if (BaseGet(index) != null)
-                {
-                    BaseRemoveAt(index);
-                }
-
-                BaseAdd(index, value);
-            }
-        }
     }
 
     /// <summary>
@@ -149,9 +149,6 @@ namespace Fanex.Maintenance.Core.Configurations
     /// </summary>
     public class ServerElement : ConfigurationElement
     {
-        /// <summary>
-        /// Connection String attribute.
-        /// </summary>
         [ConfigurationProperty("ConnectionString", IsRequired = true, IsKey = true)]
         public string ConnectionString
         {
@@ -166,9 +163,6 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
-        /// <summary>
-        /// Server Name Attribute.
-        /// </summary>
         [ConfigurationProperty("ServerName", IsRequired = true)]
         public string ServerName
         {
@@ -183,9 +177,6 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
-        /// <summary>
-        /// Server Ip Attribute.
-        /// </summary>
         [ConfigurationProperty("ServerIp", IsRequired = true)]
         public string ServerIp
         {
@@ -200,9 +191,6 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
-        /// <summary>
-        /// Plain or Encrypted.
-        /// </summary>
         [ConfigurationProperty("Plain", IsRequired = true)]
         public string Plain
         {
@@ -217,9 +205,6 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
-        /// <summary>
-        /// Server Agent Status.
-        /// </summary>
         /// These property below not in config file
         public int SqlServerAgentStatus { get; set; }
     }

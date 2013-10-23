@@ -19,7 +19,10 @@ namespace Fanex.Maintenance.Site.App_Start
     /// </summary>
     public class BundleConfig
     {
-        // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
+        /// <summary>
+        /// Register bundles.
+        /// For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
+        /// </summary>
         public static void RegisterBundles(BundleCollection bundles)
         {
             // css

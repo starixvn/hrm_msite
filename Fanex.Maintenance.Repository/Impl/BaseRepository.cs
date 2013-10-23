@@ -48,7 +48,7 @@ namespace Fanex.Maintenance.Repository.Impl
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="serverName">Server name.</param>
-        /// <returns></returns>
+        /// <returns>Data table.</returns>
         public virtual DataTable GetDataTable(ICriteria criteria, string serverName)
         {
             DbSetting setting = new DbSetting

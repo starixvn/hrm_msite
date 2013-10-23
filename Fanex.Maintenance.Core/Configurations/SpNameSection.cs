@@ -69,6 +69,29 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
+        /// Get Element with index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public SpNameElement this[int index]
+        {
+            get
+            {
+                return (SpNameElement)BaseGet(index);
+            }
+
+            set
+            {
+                if (BaseGet(index) != null)
+                {
+                    BaseRemoveAt(index);
+                }
+
+                BaseAdd(index, value);
+            }
+        }
+
+        /// <summary>
         /// Add Element.
         /// </summary>
         /// <param name="mappingElement">Mapping element.</param>
@@ -104,29 +127,6 @@ namespace Fanex.Maintenance.Core.Configurations
         {
             return ((SpNameElement)element).Key + ((SpNameElement)element).Name;
         }
-
-        /// <summary>
-        /// Get Element with index.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public SpNameElement this[int index]
-        {
-            get
-            {
-                return (SpNameElement)BaseGet(index);
-            }
-
-            set
-            {
-                if (BaseGet(index) != null)
-                {
-                    BaseRemoveAt(index);
-                }
-
-                BaseAdd(index, value);
-            }
-        }
     }
 
     /// <summary>
@@ -134,9 +134,6 @@ namespace Fanex.Maintenance.Core.Configurations
     /// </summary>
     public class SpNameElement : ConfigurationElement
     {
-        /// <summary>
-        /// Key Attribute.
-        /// </summary>
         [ConfigurationProperty("Key", IsRequired = true, IsKey = true)]
         public string Key
         {
@@ -151,9 +148,6 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
-        /// <summary>
-        /// Name Attribute.
-        /// </summary>
         [ConfigurationProperty("Name", IsRequired = true)]
         public string Name
         {

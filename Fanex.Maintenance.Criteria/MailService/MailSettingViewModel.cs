@@ -68,7 +68,7 @@ namespace Fanex.Maintenance.Criteria.MailService
         /// <summary>
         /// Get mail setting.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Mail setting.</returns>
         public MailSetting GetMailSetting()
         {
             MailSetting mailSetting = new MailSetting

@@ -85,7 +85,7 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// From date.
         /// </summary>
-        /// <param name="byDate"></param>
+        /// <param name="fromDate">From date.</param>
         /// <returns>Mail service.</returns>
         public IMailService FromDate(string fromDate)
         {

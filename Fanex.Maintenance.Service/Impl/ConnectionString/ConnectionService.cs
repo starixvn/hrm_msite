@@ -49,7 +49,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <summary>
         /// Get connection by alias.
         /// </summary>
-        /// <param name="aliasId"></param>
+        /// <param name="aliasId">Connection string alias ID.</param>
         /// <returns>List of connection of connection string.</returns>
         public IEnumerable<ConnectionStringConnection> GetByAlias(int aliasId)
         {

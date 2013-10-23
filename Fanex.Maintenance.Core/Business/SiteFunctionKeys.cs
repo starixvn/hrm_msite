@@ -7,11 +7,12 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 10/22/2013 11:19:55 AM
+// Lasted generated date: 10/23/2013 9:34:31 AM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")] 
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification="Generated code")]
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification="Generated code")]
 public static class SiteFunctionKeys
 {
     public const string Administration = "Administration";

@@ -27,12 +27,12 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Change hour to minute.
         /// </summary>
-        /// <param name="_dateTime"></param>
+        /// <param name="dateTime">DateTime string.</param>
         /// <returns></returns>
-        public static string ChangeHourToMinute(string _dateTime)
+        public static string ChangeHourToMinute(string dateTime)
         {
-            string ngay = _dateTime.Substring(0, _dateTime.IndexOf(" "));
-            string hour = _dateTime.Substring(_dateTime.IndexOf(" "), _dateTime.Length - _dateTime.IndexOf(" "));
+            string ngay = dateTime.Substring(0, dateTime.IndexOf(" "));
+            string hour = dateTime.Substring(dateTime.IndexOf(" "), dateTime.Length - dateTime.IndexOf(" "));
             string[] arrList = hour.Split(":".ToCharArray());
             int minute = (Convert.ToInt32(arrList[0]) * 60) + Convert.ToInt32(arrList[1]);
 

@@ -23,7 +23,7 @@ namespace Fanex.Maintenance.Service.Interface
 
         IMailService WithStatus(int status);
 
-        IMailService FromDate(string byDate);
+        IMailService FromDate(string fromDate);
 
         IMailService ToDate(string toDate);
 

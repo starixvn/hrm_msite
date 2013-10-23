@@ -68,6 +68,29 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
+        /// Get Element with index.
+        /// </summary>
+        /// <param name="index">Index value.</param>
+        /// <returns>Mail element.</returns>
+        public MailElement this[int index]
+        {
+            get
+            {
+                return (MailElement)BaseGet(index);
+            }
+
+            set
+            {
+                if (BaseGet(index) != null)
+                {
+                    BaseRemoveAt(index);
+                }
+
+                BaseAdd(index, value);
+            }
+        }
+
+        /// <summary>
         /// Add Element.
         /// </summary>
         /// <param name="mappingElement">Mapping element.</param>
@@ -103,29 +126,6 @@ namespace Fanex.Maintenance.Core.Configurations
         {
             return ((MailElement)element).From + ((MailElement)element).To + ((MailElement)element).BCC + ((MailElement)element).CC;
         }
-
-        /// <summary>
-        /// Get Element with index.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public MailElement this[int index]
-        {
-            get
-            {
-                return (MailElement)BaseGet(index);
-            }
-
-            set
-            {
-                if (BaseGet(index) != null)
-                {
-                    BaseRemoveAt(index);
-                }
-
-                BaseAdd(index, value);
-            }
-        }
     }
 
     /// <summary>
@@ -133,9 +133,6 @@ namespace Fanex.Maintenance.Core.Configurations
     /// </summary>
     public class MailElement : ConfigurationElement
     {
-        /// <summary>
-        /// Key Attribute.
-        /// </summary>
         [ConfigurationProperty("To", IsRequired = true, IsKey = true)]
         public string To
         {
@@ -150,9 +147,6 @@ namespace Fanex.Maintenance.Core.Configurations
             }
         }
 
-        /// <summary>
-        /// Name Attribute.
-        /// </summary>
         [ConfigurationProperty("From", IsRequired = true)]
         public string From
         {

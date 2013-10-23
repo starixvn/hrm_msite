@@ -28,10 +28,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// <summary>
         /// Get All Sql Server Log With specific Date.
         /// </summary>
-        /// <param name="sqlServerLogCriteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
-        public IEnumerable<SqlServerLog> GetAllSqlServerLogOnDate(ICriteria sqlServerLogCriteria, string serverIp)
+        public IEnumerable<SqlServerLog> GetAllSqlServerLogOnDate(ICriteria criteria, string serverIp)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
                 if (!string.IsNullOrEmpty(serverIp))
                 {
-                    IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(sqlServerLogCriteria, serverIp, mapObjectFunc);
+                    IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(criteria, serverIp, mapObjectFunc);
                     serverLogs.ForEach(serverLog =>
                     {
                         serverLog.ServerIp = serverIp;
@@ -66,10 +66,10 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// <summary>
         /// Get All Sql Agent Log With Specific Date.
         /// </summary>
-        /// <param name="sqlAgentLogCriteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp">Server IP.</param>
         /// <returns></returns>
-        public IEnumerable<SqlServerLog> GetAllSqlAgentLogOnDate(ICriteria sqlAgentLogCriteria, string serverIp)
+        public IEnumerable<SqlServerLog> GetAllSqlAgentLogOnDate(ICriteria criteria, string serverIp)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
                 if (!string.IsNullOrEmpty(serverIp))
                 {
-                    IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(sqlAgentLogCriteria, serverIp, mapObjectFunc);
+                    IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(criteria, serverIp, mapObjectFunc);
                     serverLogs.ForEach(serverLog =>
                     {
                         serverLog.ServerIp = serverIp;
@@ -105,11 +105,11 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// <summary>
         /// Get all SQL log on date.
         /// </summary>
-        /// <param name="sqlLogCriteria"></param>
-        /// <param name="serverIp"></param>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverIp">Server IP address.</param>
         /// <param name="isAgent"></param>
         /// <returns></returns>
-        public IEnumerable<SqlServerLog> GetAllSqlLogOnDate(ICriteria sqlLogCriteria, string serverIp, bool isAgent)
+        public IEnumerable<SqlServerLog> GetAllSqlLogOnDate(ICriteria criteria, string serverIp, bool isAgent)
         {
             try
             {
@@ -142,7 +142,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
 
                 if (!string.IsNullOrEmpty(serverIp))
                 {
-                    IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(sqlLogCriteria, serverIp, mapObjectFunc, (int)ServerType.Resource);
+                    IEnumerable<SqlServerLog> serverLogs = Fetch<SqlServerLog>(criteria, serverIp, mapObjectFunc, (int)ServerType.Resource);
                     serverLogs.ForEach(serverLog =>
                     {
                         serverLog.ServerIp = serverIp;

@@ -17,9 +17,9 @@ namespace Fanex.Maintenance.Controller
     public class CommonErrorController : Controller
     {
         /// <summary>
-        /// 
+        /// Error page.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="aspxErrorPath">Error path.</param>
         /// <returns>Action result.</returns>
         public ActionResult Error(string aspxErrorPath)
         {
@@ -32,10 +32,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Not found page.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
+        /// <param name="aspxErrorPath">Error path.</param>
+        /// <param name="url">URL.</param>
         /// <returns>Action result.</returns>
         public ActionResult NotFound(string aspxErrorPath, string url)
         {

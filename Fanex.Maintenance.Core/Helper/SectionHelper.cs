@@ -106,7 +106,7 @@ namespace Fanex.Maintenance.Core.Helper
         /// Get Server Ip From server Name.
         /// </summary>
         /// <param name="serverName">Server name.</param>
-        /// <returns></returns>
+        /// <returns>Server IP string.</returns>
         public static string GetServerIpFromServerName(string serverName)
         {
             foreach (ServerElement server in DatabaseServersSection.Instance.Servers)

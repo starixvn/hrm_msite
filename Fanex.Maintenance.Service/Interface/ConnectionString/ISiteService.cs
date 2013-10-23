@@ -22,13 +22,13 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     /// </summary>
     public interface ISiteService
     {
-        IEnumerable<Site> GetAll(string name = "", int? dbServerId = null);
+        IEnumerable<Site> GetAll(string name = "", int? databaseServerId = null);
 
-        IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? dbServerId = null);
+        IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? databaseServerId = null);
 
         IEnumerable<Site> GetByAlias(int aliasId);
 
-        IEnumerable<Site> GetByDbServer(int dbServerId);
+        IEnumerable<Site> GetByDbServer(int databaseServerId);
 
         Site GetById(int id);
 

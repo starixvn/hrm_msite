@@ -75,7 +75,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Create schedule service.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Schedule service.</returns>
         public static IScheduleService Create()
         {
             return new ScheduleService();
@@ -85,7 +85,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// Search Schedule with Server IP.
         /// </summary>
         /// <param name="serverIp">Server IP.</param>
-        /// <returns></returns>
+        /// <returns>Schedule service.</returns>
         public IScheduleService WithServer(string serverIp)
         {
             this.ServerIp = serverIp;
@@ -97,7 +97,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// Search Schedule with Freq Type.
         /// </summary>
         /// <param name="freqType"></param>
-        /// <returns></returns>
+        /// <returns>Schedule service.</returns>
         public IScheduleService WithFreqType(int? freqType)
         {
             this.FreqType = freqType != null ? (int)freqType : 0;
@@ -109,7 +109,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// Search Schedule with Freq Sub Type.
         /// </summary>
         /// <param name="freqSubType"></param>
-        /// <returns></returns>
+        /// <returns>Schedule service.</returns>
         public IScheduleService WithFreqSubType(int? freqSubType)
         {
             this.FreSubType = freqSubType != null ? (int)freqSubType : 0;
@@ -121,7 +121,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// Search Schedule with Schedule Name.
         /// </summary>
         /// <param name="scheduleName">Schedule name.</param>
-        /// <returns></returns>
+        /// <returns>Schedule service.</returns>
         public IScheduleService WithScheduleName(string scheduleName)
         {
             if (!string.IsNullOrEmpty(scheduleName))
@@ -137,7 +137,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// </summary>
         /// <param name="fromDate">Start date range.</param>
         /// <param name="toDate">End date range.</param>
-        /// <returns></returns>
+        /// <returns>Schedule service.</returns>
         public IScheduleService WithDateRange(DateTime? fromDate, DateTime? toDate)
         {
             this.FromDate = fromDate != null ? (DateTime)fromDate : DateTime.Now;
@@ -150,7 +150,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// Search Schedule with Date.
         /// </summary>
         /// <param name="searchDateType">Search date type.</param>
-        /// <returns></returns>
+        /// <returns>Schedule service.</returns>
         public IScheduleService WithSearchDateType(int? searchDateType)
         {
             this.SearchDateType = searchDateType != null ? (int)searchDateType : 0;

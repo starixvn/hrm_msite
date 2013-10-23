@@ -29,7 +29,7 @@ namespace Fanex.Maintenance.Controller
         #region Member
 
         /// <summary>
-        /// Database report service
+        /// Database report service.
         /// </summary>
         private readonly IDatabaseReportService _databaseReportService;
 
@@ -48,7 +48,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Constructor with service input.
         /// </summary>
-        /// <param name="databaseReportService"></param>
+        /// <param name="databaseReportService">Database report service.</param>
         public DatabaseReportController(IDatabaseReportService databaseReportService)
         {
             _databaseReportService = databaseReportService ?? new DatabaseReportService();
@@ -183,6 +183,12 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// Get deposit integrity.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         [HttpPost]
         public string GetDepositIntegrity(int filter = 1, string date = "")
         {
@@ -203,6 +209,12 @@ namespace Fanex.Maintenance.Controller
             return string.Empty;
         }
 
+        /// <summary>
+        /// Get credit integrity.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         [HttpPost]
         public string GetCreditIntegrity(int filter = 1, string date = "")
         {

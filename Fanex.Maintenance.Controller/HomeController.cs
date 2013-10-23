@@ -13,13 +13,13 @@ namespace Fanex.Maintenance.Controller
     using System.Web.Mvc;
 
     /// <summary>
-    /// Home Controller
+    /// Home Controller.
     /// </summary>
     [Authorize]
     public class HomeController : BaseController
     {        
         /// <summary>
-        /// Index Page
+        /// Index Page.
         /// </summary>
         /// <returns>Action result.</returns>
         public ActionResult Index()

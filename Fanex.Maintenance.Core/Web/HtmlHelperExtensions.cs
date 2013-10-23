@@ -25,10 +25,10 @@ namespace Fanex.Maintenance.Core.Web
         /// Converts the value of the current System.DateTime object to its equivalent string
         /// representation using the specified format.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">DateTime value.</param>
         /// <param name="dateFormat">Date format.</param>
         /// <param name="timeFormat">Time format.</param>
-        /// <returns></returns>
+        /// <returns>HTML string.</returns>
         public static IHtmlString ToFullDateString(
             this DateTime value,
             string dateFormat = "MMM dd, yyyy",
@@ -40,11 +40,11 @@ namespace Fanex.Maintenance.Core.Web
         /// <summary>
         /// Convert the Date value and combine with time(int) value to specific format for showing on view.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="time"></param>
+        /// <param name="value">DateTime value.</param>
+        /// <param name="time">Time value.</param>
         /// <param name="dateFormat">Date format.</param>
         /// <param name="timeFormat">Time format.</param>
-        /// <returns></returns>
+        /// <returns>HTML string.</returns>
         public static IHtmlString ToFullDateWithTimeAdded(
             this DateTime value,
             int time = 0,
@@ -79,7 +79,7 @@ namespace Fanex.Maintenance.Core.Web
         /// </summary>
         /// <param name="value">DateTime value.</param>
         /// <param name="dateFormat">Date format.</param>
-        /// <returns></returns>
+        /// <returns>HTML string.</returns>
         public static IHtmlString ToDateString(this DateTime value, string dateFormat = "MMM dd, yyyy")
         {
             return new HtmlString(value.ToString(dateFormat));
@@ -93,7 +93,7 @@ namespace Fanex.Maintenance.Core.Web
         /// <param name="time"></param>
         /// <param name="dateFormat">Date format.</param>
         /// <param name="timeFormat">Time format.</param>
-        /// <returns></returns>
+        /// <returns>HTML string.</returns>
         public static IHtmlString ToFullDateString(
             this int value,
             int time,
@@ -136,7 +136,7 @@ namespace Fanex.Maintenance.Core.Web
         /// Paste Execute Type to Html String.
         /// </summary>
         /// <param name="value"></param>
-        /// <returns></returns>
+        /// <returns>HTML string.</returns>
         public static IHtmlString ToExecutionString(this int value)
         {
             string htmlValue = string.Empty;

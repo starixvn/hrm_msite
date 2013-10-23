@@ -55,10 +55,10 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Main Content Page.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
+        /// <param name="type"></param>
+        /// <param name="server"></param>
+        /// <param name="jobname">Job name.</param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
         public ActionResult Index(string type = "", string server = "", string jobname = "", string id = "")
@@ -106,28 +106,28 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Schedule List With Filter.
         /// </summary>
-        /// <param name="getAllScheduleCriteria"></param>
+        /// <param name="criteria"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult ScheduleManagement(GetAllScheduleCriteria getAllScheduleCriteria)
+        public ActionResult ScheduleManagement(GetAllScheduleCriteria criteria)
         {
             ViewBag.ListServer = GetServer();
 
-            getAllScheduleCriteria.From = getAllScheduleCriteria.From <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.From;
-            getAllScheduleCriteria.To = getAllScheduleCriteria.To <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.To;
+            criteria.From = criteria.From <= DateTime.MinValue ? DateTime.Now : criteria.From;
+            criteria.To = criteria.To <= DateTime.MinValue ? DateTime.Now : criteria.To;
 
-            ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MMM dd, yyyy");
-            ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MMM dd, yyyy");
+            ViewBag.DateFrom = criteria.From.ToString("MMM dd, yyyy");
+            ViewBag.DateTo = criteria.To.ToString("MMM dd, yyyy");
 
-            ViewBag.ListSchedule = _scheduleService.WithScheduleName(getAllScheduleCriteria.ScheduleName)
-                .WithServer(getAllScheduleCriteria.Server)
-                .WithSearchDateType(getAllScheduleCriteria.SearchDateType)
-                .WithDateRange(getAllScheduleCriteria.From, getAllScheduleCriteria.To)
-                .WithFreqType(getAllScheduleCriteria.FreqType)
-                .WithFreqSubType(getAllScheduleCriteria.FreqSubType)
+            ViewBag.ListSchedule = _scheduleService.WithScheduleName(criteria.ScheduleName)
+                .WithServer(criteria.Server)
+                .WithSearchDateType(criteria.SearchDateType)
+                .WithDateRange(criteria.From, criteria.To)
+                .WithFreqType(criteria.FreqType)
+                .WithFreqSubType(criteria.FreqSubType)
                 .GetSchedules();
 
-            return View(getAllScheduleCriteria);
+            return View(criteria);
         }
         #endregion
 
@@ -136,8 +136,8 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Job Management Page.
         /// </summary>
+        /// <param name="scheduleId"></param>
         /// <param name="server"></param>
-        /// <param name="schedule"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult JobManagement(int? scheduleId, string server = "")
@@ -173,7 +173,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get List Job with filter.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult JobManagement(GetListJobCriteria criteria)
@@ -206,8 +206,8 @@ namespace Fanex.Maintenance.Controller
         /// Start a job.
         /// </summary>
         /// <param name="server"></param>
-        /// <param name="jobName"></param>
-        /// <param name="value"></param>
+        /// <param name="jobName">Job name.</param>
+        /// <param name="stepName"></param>
         /// <returns></returns>
         [HttpPost]
         public JsonResult StartJob(string server, string jobName, string stepName)
@@ -227,7 +227,7 @@ namespace Fanex.Maintenance.Controller
         /// Stop a job.
         /// </summary>
         /// <param name="server"></param>
-        /// <param name="jobName"></param>
+        /// <param name="jobName">Job name.</param>
         /// <returns></returns>
         [HttpPost]
         public JsonResult StopJob(string server, string jobName)
@@ -245,7 +245,7 @@ namespace Fanex.Maintenance.Controller
         /// Get Job Information after start or stop.
         /// </summary>
         /// <param name="server"></param>
-        /// <param name="jobName"></param>
+        /// <param name="jobName">Job name.</param>
         /// <returns></returns>
         [HttpPost]
         public JsonResult GetJob(string server, string jobName)
@@ -304,7 +304,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Job Log.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="top"></param>
         /// <param name="job"></param>
         /// <param name="server"></param>
         /// <returns>Action result.</returns>
@@ -357,7 +357,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Job log with Filter.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult JobLogManagement(GetListJobCriteria criteria)
@@ -438,7 +438,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Server Log With Filter.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult ServerLogManagement(GetSqlServerLogCriteria criteria)
@@ -470,7 +470,7 @@ namespace Fanex.Maintenance.Controller
         /// Get Sql Server Agent Log.
         /// </summary>
         /// <param name="server"></param>
-        /// <param name="value"></param>
+        /// <param name="top"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AgentLogManagement(string server, int top = 0)
@@ -497,7 +497,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get Sql Server Agent Log With Filter.
         /// </summary>
-        /// <param name="criteria"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AgentLogManagement(GetSqlServerLogCriteria criteria)
@@ -566,9 +566,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Server detail.
         /// </summary>
-        /// <param name="serverIp"></param>
+        /// <param name="serverIp">Server IP address.</param>
         /// <returns>Action result.</returns>
         public ActionResult ServerDetail(string serverIp)
         {
@@ -578,6 +578,11 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Get server resource info.
+        /// </summary>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult GetServerResourceInfo(string serverIp)
         {

@@ -110,7 +110,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// 
+        /// Get server status.
         /// </summary>
         /// <param name="connectionString">Connection string.</param>
         /// <returns>Server status.</returns>

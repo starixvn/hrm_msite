@@ -29,7 +29,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp">Server IP.</param>
-        /// <returns></returns>
+        /// <returns>List of job schedule</returns>
         public IEnumerable<JobSchedule> GetAllJob(ICriteria criteria, string serverIp)
         {
             if (criteria.IsValid())
@@ -86,7 +86,7 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="serverIp">Server IP.</param>
-        /// <returns></returns>
+        /// <returns>List of job log.</returns>
         public IEnumerable<JobLog> GetJobLog(ICriteria criteria, string serverIp)
         {
             try

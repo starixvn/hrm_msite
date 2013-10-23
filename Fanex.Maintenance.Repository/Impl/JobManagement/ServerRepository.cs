@@ -40,13 +40,13 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 EventTime = DateTime.Now
             };
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = connectionString,
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {
@@ -75,13 +75,13 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         {
             ServerFullInfo serverFullInfo = new ServerFullInfo();
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = SectionHelper.GetConnectionStringFromServerIp(serverIp, (int)ServerType.Resource),
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {
@@ -109,13 +109,13 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         {
             ServerStatus serverStatus = new ServerStatus();
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = connectionString,
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {
@@ -146,13 +146,13 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 EventTime = DateTime.Now
             };
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = connectionString,
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {
@@ -183,13 +183,13 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 TotalMemory = 0
             };
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = connectionString,
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {

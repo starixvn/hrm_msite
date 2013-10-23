@@ -21,24 +21,24 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Impl;
 
     /// <summary>
-    /// Log controller
+    /// Log controller.
     /// </summary>
     [Authorize]
     public class LogController : BaseController
     {
         #region Member
         /// <summary>
-        /// Log Service
+        /// Log Service.
         /// </summary>
         private readonly LogService _logService;
 
         /// <summary>
-        /// Log Category Service
+        /// Log Category Service.
         /// </summary>
         private readonly LogCategoryService _categoryService;
 
         /// <summary>
-        /// Machine Service
+        /// Machine Service.
         /// </summary>
         private readonly MachineService _machineService;
 
@@ -47,7 +47,7 @@ namespace Fanex.Maintenance.Controller
         #region Ctor
 
         /// <summary>
-        /// Parameter less Controller
+        /// Parameter less Controller.
         /// </summary>
         public LogController()
             : this(null, null, null)
@@ -55,10 +55,11 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Log Controller with services defined
+        /// Log Controller with services defined.
         /// </summary>
-        /// <param name="logService"></param>
-        /// <param name="categoryService"></param>
+        /// <param name="logService">Log service.</param>
+        /// <param name="categoryService">Category service.</param>
+        /// <param name="machineService">Machine service.</param>
         public LogController(LogService logService, LogCategoryService categoryService, MachineService machineService)
         {
             _logService = logService ?? LogService.Create();
@@ -71,7 +72,7 @@ namespace Fanex.Maintenance.Controller
         #region Action
 
         /// <summary>
-        /// Get log
+        /// Get log.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -100,11 +101,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get log
+        /// Get log.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
+        /// <param name="criteria">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Index(GetLogCriteria criteria)
@@ -134,7 +133,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get details message
+        /// Get details message.
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Action result.</returns>
@@ -156,7 +155,7 @@ namespace Fanex.Maintenance.Controller
         #region Ajax
 
         /// <summary>
-        /// Remove Log
+        /// Remove Log.
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -171,7 +170,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Update log's monitored status
+        /// Update log's monitored status.
         /// </summary>
         /// <param name="logId"></param>
         /// <param name="isMonitored"></param>
@@ -197,7 +196,7 @@ namespace Fanex.Maintenance.Controller
         #region Private
 
         /// <summary>
-        /// Init Page Size
+        /// Init Page Size.
         /// </summary>
         private void InitPageSize()
         {
@@ -255,7 +254,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Log Status data
+        /// Init Log Status data.
         /// </summary>
         private void InitLogStatus()
         {
@@ -280,7 +279,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Severities data
+        /// Init Severities data.
         /// </summary>
         private void InitSeverities()
         {
@@ -320,15 +319,14 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init data for View
+        /// Init data for View.
         /// </summary>
         private void InitDataView()
         {
             InitSeverities();
-            //InitMachineTypes();
             InitLogStatus();
 
-            ////Default selection for drop-down
+            // Default selection for drop-down
             SelectListItem defaultSelection = new SelectListItem
             {
                 Text = ViewResource.All,
@@ -336,7 +334,7 @@ namespace Fanex.Maintenance.Controller
                 Selected = true
             };
 
-            ////Get Category from DB
+            // Get Category from DB
             List<SelectListItem> listCategory = _categoryService.GetAll().Select(c => new SelectListItem
             {
                 Text = c.CategoryName,

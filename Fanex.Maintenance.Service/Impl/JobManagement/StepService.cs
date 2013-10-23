@@ -87,7 +87,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Filter by job name.
         /// </summary>
-        /// <param name="jobName"></param>
+        /// <param name="jobName">Job name.</param>
         /// <returns>Step service.</returns>
         public IStepService WithJob(string jobName)
         {

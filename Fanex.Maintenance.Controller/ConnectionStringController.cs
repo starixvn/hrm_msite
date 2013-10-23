@@ -72,7 +72,7 @@ namespace Fanex.Maintenance.Controller
         #region Mange
 
         /// <summary>
-        /// 
+        /// Alias list.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -92,9 +92,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Alias list.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Alias(AliasGetAllCriteria model)
@@ -117,7 +117,7 @@ namespace Fanex.Maintenance.Controller
         #region Create
 
         /// <summary>
-        /// 
+        /// Create alias.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -131,9 +131,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Create alias.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult CreateAlias(AliasInsertCriteria model)
@@ -163,9 +163,9 @@ namespace Fanex.Maintenance.Controller
         #region Edit
 
         /// <summary>
-        /// 
+        /// Update alias.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditAlias(int id)
@@ -191,9 +191,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Update alias.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditAlias(AliasUpdateCriteria model)
@@ -233,9 +233,9 @@ namespace Fanex.Maintenance.Controller
         #region Manage
 
         /// <summary>
-        /// 
+        /// Connection list.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Connection(int id)
@@ -254,9 +254,9 @@ namespace Fanex.Maintenance.Controller
         #region Create
 
         /// <summary>
-        /// 
+        /// Create connection.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult CreateConnection(int id)
@@ -288,9 +288,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Create connection.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult CreateConnection(ConnectionInsertCriteria model)
@@ -340,9 +340,9 @@ namespace Fanex.Maintenance.Controller
         #region Edit
 
         /// <summary>
-        /// 
+        /// Edit connection.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditConnection(int id)
@@ -385,9 +385,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Edit connection.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditConnection(ConnectionUpdateCriteria model)
@@ -433,7 +433,7 @@ namespace Fanex.Maintenance.Controller
         #region Mange
 
         /// <summary>
-        /// 
+        /// Site list.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -451,9 +451,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Site list.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Site(SiteGetAllCriteria model)
@@ -474,7 +474,7 @@ namespace Fanex.Maintenance.Controller
         #region Create
 
         /// <summary>
-        /// 
+        /// Create site.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -484,9 +484,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Create site.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult CreateSite(SiteInsertCriteria model)
@@ -511,9 +511,9 @@ namespace Fanex.Maintenance.Controller
         #region Edit
 
         /// <summary>
-        /// 
+        /// Update site.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditSite(int id)
@@ -537,9 +537,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Update site.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditSite(SiteUpdateCriteria model)
@@ -564,9 +564,9 @@ namespace Fanex.Maintenance.Controller
         #region Connection
 
         /// <summary>
-        /// 
+        /// View connection.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="siteId"></param>
         /// <returns></returns>
         public ViewResult ViewConnection(int siteId)
         {
@@ -583,7 +583,7 @@ namespace Fanex.Maintenance.Controller
         #region Manage
 
         /// <summary>
-        /// 
+        /// Database server list.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -597,9 +597,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Database server list.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult DatabaseServer(DatabaseServerGetAllCriteria model)
@@ -616,7 +616,7 @@ namespace Fanex.Maintenance.Controller
         #region Create
 
         /// <summary>
-        /// 
+        /// Create database server.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -626,9 +626,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Create database server.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult CreateDbServer(DatabaseServerInsertCriteria model)
@@ -654,36 +654,37 @@ namespace Fanex.Maintenance.Controller
         #region Edit
 
         /// <summary>
-        /// 
+        /// Edit database server.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditDbServer(int id)
         {
             // get by id
-            var dbServer = _databaseServerService.GetById(id);
-            if (ReferenceEquals(dbServer, null))
+            var databaseServer = _databaseServerService.GetById(id);
+
+            if (ReferenceEquals(databaseServer, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
             }
 
             var model = new DatabaseServerUpdateCriteria
             {
-                DbServerId = dbServer.Id,
-                Description = dbServer.Description,
-                IsActive = dbServer.IsActive,
-                Name = dbServer.Name,
-                ServerIp = dbServer.ServerIP
+                DbServerId = databaseServer.Id,
+                Description = databaseServer.Description,
+                IsActive = databaseServer.IsActive,
+                Name = databaseServer.Name,
+                ServerIp = databaseServer.ServerIP
             };
 
             return View(model);
         }
 
         /// <summary>
-        /// 
+        /// Edit database server.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditDbServer(DatabaseServerUpdateCriteria model)
@@ -710,7 +711,7 @@ namespace Fanex.Maintenance.Controller
         #region Quick change connection from db server to other db server
 
         /// <summary>
-        /// 
+        /// Change connection.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -722,9 +723,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Change connection.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult ChangeConnection(DatabaseServerGetConnectionFromDbServerCriteria model)
@@ -741,7 +742,7 @@ namespace Fanex.Maintenance.Controller
         #region Quick change second (backup) connection from db server
 
         /// <summary>
-        /// 
+        /// Change second connection.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -754,9 +755,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Change second connection.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult ChangeSecondConnection(DatabaseServerGetSecondConnectionFromDbServerCriteria model)
@@ -774,15 +775,15 @@ namespace Fanex.Maintenance.Controller
         #region Log management
 
         /// <summary>
-        /// 
+        /// View log.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
+        /// <param name="size"></param>
+        /// <param name="q"></param>
+        /// <param name="username"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="filterBy"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Log(
@@ -824,9 +825,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Search log.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="model"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Log(LogExecSpSearchCriteria model)
@@ -850,9 +851,9 @@ namespace Fanex.Maintenance.Controller
         #region Ajax
 
         /// <summary>
-        /// 
+        /// Get site by alias.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetSiteByAlias(int id)
@@ -868,8 +869,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Get connection by alias.
         /// </summary>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetConnectionByAlias(int id)
@@ -886,8 +888,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Update default connection.
         /// </summary>
+        /// <param name="aliasId">Connection string alias ID.</param>
+        /// <param name="conectionId"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UpdateDefaultConnection(int aliasId, int conectionId)
@@ -911,10 +915,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Update alias status.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
+        /// <param name="aliasId">Connection string alias ID.</param>
+        /// <param name="isActive">Is active or not.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UpdateStatusAlias(int aliasId, bool isActive)
@@ -937,9 +941,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Get secondary connection.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetSecondaryConnection(int id)
@@ -954,9 +958,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Get alias by site.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetAliasBySite(int id)
@@ -972,10 +976,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Update site status.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
+        /// <param name="siteId"></param>
+        /// <param name="isActive">Is active or not.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UpdateStatusSite(int siteId, bool isActive)
@@ -999,19 +1003,19 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Update database server status.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="value"></param>
+        /// <param name="databaseServerId">Database server ID.</param>
+        /// <param name="isActive">Is active or not.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UpdateStatusDbServer(int dbServerId, bool isActive)
+        public ActionResult UpdateStatusDbServer(int databaseServerId, bool isActive)
         {
             if (Request.IsAjaxRequest())
             {
                 var model = new DatabaseServerUpdateStatusCriteria
                 {
-                    DbServerId = dbServerId,
+                    DbServerId = databaseServerId,
                     IsActive = isActive,
                     Modifier = CurrentSession.UserId,
                     ModifiedDate = DateTime.Now
@@ -1026,9 +1030,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Get site by DB server.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id">Database server ID</param>
         /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetSiteByDbServer(int id)
@@ -1044,9 +1048,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Change connection from DB server to another DB server.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="aliasConnection"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult ChangeConnectionFromDbServerToDbServer(string aliasConnection)
@@ -1067,9 +1071,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Log detail page.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="id"></param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult LogDetail(int id)
@@ -1089,9 +1093,9 @@ namespace Fanex.Maintenance.Controller
         #region Partial view
 
         /// <summary>
-        /// 
+        /// Insert connection log alias.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="log"></param>
         /// <returns></returns>
         public PartialViewResult _ConnectionLog_Alias_Insert(LogExecSp log)
         {
@@ -1104,9 +1108,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Update connection log alias.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="log"></param>
         /// <returns></returns>
         public PartialViewResult _ConnectionLog_Alias_Update(LogExecSp log)
         {
@@ -1122,9 +1126,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// View log data.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="log"></param>
         /// <returns></returns>
         public PartialViewResult _ConnectionLog_LogData(LogExecSp log)
         {
@@ -1186,9 +1190,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Change connection.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="log"></param>
         /// <returns></returns>
         public PartialViewResult _ConnectionLog_LogData_ChangeConnection(LogExecSp log)
         {
@@ -1222,7 +1226,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get select list item of all site
+        /// Get select list item of all site.
         /// </summary>
         /// <param name="selectedId"></param>
         /// <returns></returns>

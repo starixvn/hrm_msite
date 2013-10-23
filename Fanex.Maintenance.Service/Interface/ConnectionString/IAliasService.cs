@@ -19,13 +19,13 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     /// </summary>
     public interface IAliasService
     {
-        IEnumerable<AliasConnectionString> GetAll(string alias = "", int? dbServerId = null, int? siteId = null);
+        IEnumerable<AliasConnectionString> GetAll(string alias = "", int? databaseServerId = null, int? siteId = null);
 
         IEnumerable<Alias> GetBySite(int siteId);
 
         IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(int fromDbServerId, int toDbServerId);
 
-        IEnumerable<AliasConnectionStringConnection> GetSwitchSecondConnection(int dbServerId);
+        IEnumerable<AliasConnectionStringConnection> GetSwitchSecondConnection(int databaseServerId);
 
         Alias Get(int aliasId);
 
