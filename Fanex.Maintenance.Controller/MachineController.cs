@@ -142,7 +142,7 @@ namespace Fanex.Maintenance.Controller
         /// Get machines.
         /// </summary>
         /// <param name="machineType">Machine type.</param>
-        /// <returns>Json result.</returns>
+        /// <returns>JSON result.</returns>
         [HttpGet]
         public JsonResult GetMachinesByType(bool? machineType)
         {

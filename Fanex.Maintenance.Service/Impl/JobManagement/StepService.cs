@@ -90,7 +90,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get step.
+        /// Get job step.
         /// </summary>
         /// <returns>List of step detail.</returns>
         public IEnumerable<StepDetail> GetSteps()

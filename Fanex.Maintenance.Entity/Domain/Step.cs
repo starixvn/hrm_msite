@@ -18,9 +18,6 @@ namespace Fanex.Maintenance.Entity.Domain
     {
         public Job Job { get; set; }
 
-        /// <summary>
-        /// Gets or sets name of the subsystem used by SQL Server Agent to execute the job step.
-        /// </summary>
         public string SubSystem { get; set; }
 
         public string Command { get; set; }
@@ -62,9 +59,6 @@ namespace Fanex.Maintenance.Entity.Domain
 
         public int RetryAttempts { get; set; }
 
-        /// <summary>
-        /// Gets or sets amount of time to wait between retry attempts. 
-        /// </summary>
         public int RetryInterval { get; set; }
 
         public int OsRunPriority { get; set; }
@@ -76,12 +70,14 @@ namespace Fanex.Maintenance.Entity.Domain
 
         /// <summary>
         /// Gets or sets outcome of the previous execution of the job step.
+        /// </summary>
+        /// <value>
         /// 0 = Failed
         /// 1 = Succeeded
         /// 2 = Retry
         /// 3 = Canceled
         /// 5 = Unknown.
-        /// </summary>
+        /// </value>
         public int LastRunOutCome { get; set; }
 
         /// <summary>

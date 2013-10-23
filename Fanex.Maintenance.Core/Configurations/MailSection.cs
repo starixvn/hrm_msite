@@ -100,7 +100,7 @@ namespace Fanex.Maintenance.Core.Configurations
         }
 
         /// <summary>
-        /// Base Add.
+        /// Base add configuration element.
         /// </summary>
         /// <param name="element">Configuration element.</param>
         protected override void BaseAdd(ConfigurationElement element)

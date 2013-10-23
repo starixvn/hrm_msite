@@ -466,7 +466,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="port">Pot number.</param>
         /// <param name="username">Current username.</param>
         /// <param name="password">Current password.</param>
-        /// <param name="isAutho">Is authorizedor not.</param>
+        /// <param name="isAutho">Is authorized or not.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailSettingPopUp(

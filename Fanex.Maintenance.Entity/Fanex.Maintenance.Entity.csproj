@@ -76,6 +76,7 @@
     <Compile Include="Model\NotifyInfo.cs" />
     <Compile Include="Model\ResourceInfo.cs" />
     <Compile Include="Model\ScheduleDetail.cs" />
+    <Compile Include="Model\ScheduleParamForTask.cs" />
     <Compile Include="Model\ServerFullInfo.cs" />
     <Compile Include="Model\ServerStatus.cs" />
     <Compile Include="Model\SqlServerLog.cs" />

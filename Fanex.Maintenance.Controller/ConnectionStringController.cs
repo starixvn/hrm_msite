@@ -776,7 +776,7 @@ namespace Fanex.Maintenance.Controller
         #region Log management
 
         /// <summary>
-        /// View log.
+        /// View log page.
         /// </summary>
         /// <param name="id">Page index.</param>
         /// <param name="size">Number of items per page.</param>

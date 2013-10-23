@@ -68,6 +68,10 @@
     </Compile>
     <Compile Include="Configurations\MailSection.cs" />
     <Compile Include="Configurations\DatabaseServersSection.cs" />
+    <Compile Include="Configurations\ServerCollection.cs" />
+    <Compile Include="Configurations\ServerElement.cs" />
+    <Compile Include="Configurations\SpNameCollection.cs" />
+    <Compile Include="Configurations\SpNameElement.cs" />
     <Compile Include="Configurations\SpNameSection.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\MailHelper.cs" />

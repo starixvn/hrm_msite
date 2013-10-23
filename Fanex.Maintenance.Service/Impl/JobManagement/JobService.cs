@@ -93,7 +93,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #endregion
 
         /// <summary>
-        /// Get job.
+        /// Get job schedule.
         /// </summary>
         /// <returns>List of job schedule.</returns>
         public IEnumerable<JobSchedule> GetJob()

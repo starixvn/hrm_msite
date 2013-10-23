@@ -345,7 +345,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         }
 
         /// <summary>
-        /// Sign out.
+        /// User sign out.
         /// </summary>
         private void DoSignOut()
         {

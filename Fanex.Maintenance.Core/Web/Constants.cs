@@ -168,7 +168,7 @@ namespace Fanex.Maintenance.Core.Web
         StartDate = 1,
 
         /// <summary>
-        /// End date.
+        /// End date value.
         /// </summary>
         EndDate = 2
     }

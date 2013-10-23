@@ -27,6 +27,8 @@ namespace Fanex.Maintenance.Entity.Domain
 
         /// <summary>
         /// Gets or sets how frequently a job runs for this schedule.
+        /// </summary>
+        /// <value>
         /// 1 = One time only
         /// 4 = Daily
         /// 8 = Weekly
@@ -34,12 +36,14 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 32 = Monthly, relative to freq_interval
         /// 64 = Runs when the SQL Server Agent service starts
         /// 128 = Runs when the computer is idle.
-        /// </summary>
+        /// </value>
         public int FreqType { get; set; }
 
         /// <summary>
         /// Gets or sets days that the job is executed. Depends on the value of freq_type.
         /// The default value is 0, which indicates that freq_interval is unused.
+        /// </summary>
+        /// <value>
         /// Value of freq_type              Effect on freq_interval
         /// 1 (once)                        freq_interval is unused (0)
         /// 4 (daily)                       Every freq_interval days
@@ -65,21 +69,24 @@ namespace Fanex.Maintenance.Entity.Domain
         ///                                 10 = Weekend day
         /// 64 (starts when SQL Server Agent service starts) freq_interval is unused (0)
         /// 128 (runs when computer is idle) freq_interval is unused (0).
-        /// </summary>
+        /// </value>
         public int FreqInterval { get; set; }
 
         /// <summary>
         /// Gets or sets units for the freq_subday_interval. Can be one of the following values:
+        /// </summary>
+        /// <value>
         /// 1 At the specified time
         /// 2 Seconds
         /// 4 Minutes
         /// 8 Hours.
-        /// </summary>
+        /// </value>
         public int FreqSubdayType { get; set; }
 
         /// <summary>
         /// Gets or sets number of freq_subday_type periods to occur between each execution of the job.
         /// </summary>
+        /// <value>Subday interval.</value>
         public int FreqSubdayInterval { get; set; }
 
         /// <summary>
@@ -92,6 +99,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// 8 = Fourth
         /// 16 = Last.
         /// </summary>
+        /// <value>Relative interval.</value>
         public int FreqRelativeInterval { get; set; }
 
         /// <summary>
@@ -99,30 +107,35 @@ namespace Fanex.Maintenance.Entity.Domain
         /// freq_recurrence_factor is used only if freq_type is 8, 16, or 32.
         /// If this column contains 0, freq_recurrence_factor is unused.
         /// </summary>
+        /// <value>Recurrence factor.</value>
         public int FreqRecurrenceFactor { get; set; }
 
         /// <summary>
         /// Gets or sets date on which execution of a job can begin.
         /// The date is formatted as YYYYMMDD. NULL indicates today's date.
         /// </summary>
+        /// <value>DateTime value.</value>
         public DateTime ActiveStartDate { get; set; }
 
         /// <summary>
         /// Gets or sets date on which execution of a job can stop.
         /// The date is formatted YYYYMMDD.
         /// </summary>
+        /// <value>DateTime value.</value>
         public DateTime ActiveEndDate { get; set; }
 
         /// <summary>
         /// Gets or sets time on any day between active_start_date and active_end_date that job begins executing.
         /// Time is formatted HHMMSS, using a 24-hour clock.
         /// </summary>
+        /// <value>Start time value.</value>
         public int ActiveStartTime { get; set; }
 
         /// <summary>
         /// Gets or sets time on any day between active_start_date and active_end_date that job stops executing.
         /// Time is formatted HHMMSS, using a 24-hour clock.
         /// </summary>
+        /// <value></value>
         public int ActiveEndTime { get; set; }
 
         public DateTime DateCreated { get; set; }
@@ -133,6 +146,7 @@ namespace Fanex.Maintenance.Entity.Domain
         /// Gets or sets current version number of the schedule. For example,
         /// if a schedule has been modified 10 times, the version_number is 10.
         /// </summary>
+        /// <value>Version number.</value>
         public int VersionNumber { get; set; }
 
         public int Id { get; set; }

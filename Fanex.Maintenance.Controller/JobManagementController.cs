@@ -208,7 +208,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="server">Server name.</param>
         /// <param name="jobName">Schedule job name.</param>
         /// <param name="stepName">Step name.</param>
-        /// <returns>Json result.</returns>
+        /// <returns>JSON result.</returns>
         [HttpPost]
         public JsonResult StartJob(string server, string jobName, string stepName)
         {
@@ -228,7 +228,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <param name="serverName">Server name.</param>
         /// <param name="jobName">Schedule job name.</param>
-        /// <returns>Json result.</returns>
+        /// <returns>JSON result.</returns>
         [HttpPost]
         public JsonResult StopJob(string serverName, string jobName)
         {
@@ -246,8 +246,8 @@ namespace Fanex.Maintenance.Controller
         /// Get Job Information after start or stop.
         /// </summary>
         /// <param name="serverName">Server name.</param>
-        /// <param name="jobName">Schdule job name.</param>
-        /// <returns>Json result.</returns>
+        /// <param name="jobName">Schedule job name.</param>
+        /// <returns>JSON result.</returns>
         [HttpPost]
         public JsonResult GetJob(string serverName, string jobName)
         {
@@ -282,7 +282,7 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Get step list.
         /// </summary>
-        /// <param name="jobName">Schduel job name.</param>
+        /// <param name="jobName">Schedule job name.</param>
         /// <param name="serverName">Server name.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
@@ -583,7 +583,7 @@ namespace Fanex.Maintenance.Controller
         /// Get server resource info.
         /// </summary>
         /// <param name="serverIp">Server IP address.</param>
-        /// <returns>Json result.</returns>
+        /// <returns>JSON result.</returns>
         [HttpPost]
         public JsonResult GetServerResourceInfo(string serverIp)
         {

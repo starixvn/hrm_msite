@@ -119,7 +119,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// To date.
+        /// Update to date.
         /// </summary>
         /// <param name="toDate">To date value.</param>
         /// <returns>Log service object.</returns>

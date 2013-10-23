@@ -58,9 +58,6 @@ namespace Fanex.Maintenance.Entity.Model
 
         public string DababaseUsername { get; set; }
 
-        /// <summary>
-        /// Gets or sets number of retry attempts made if the step fails.
-        /// </summary>
         public int RetryAttempts { get; set; }
 
         public int RetryInterval { get; set; }
