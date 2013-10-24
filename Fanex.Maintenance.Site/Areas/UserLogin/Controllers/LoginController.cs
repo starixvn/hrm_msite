@@ -113,9 +113,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                             if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
                             {
-                                // allows user login
-                                #region check-in user
-
+                                // check-in user
                                 var criteria = new UserCheckInUserCriteria
                                 {
                                     UserId = user.Id,
@@ -131,10 +129,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                                 _userService.UserCheckIn(ref criteria);
 
-                                #endregion check-in user
-
-                                #region saves user session
-
+                                // saves user session
                                 _currentSession.Level = _userService.GetUserSiteLevel(user.Id, this.SiteId);
                                 _currentSession.UserId = user.Id;
                                 _currentSession.Username = username;
@@ -149,15 +144,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                                 CreateAuthInfo(user);
 
-                                #endregion saves user session
-
-                                #region redirects user
-
                                 // if the user login directly, not through NAP Hub
                                 if (this.IsSiteLogin == 1)
                                 {
-                                    #region checks if logging-in user is active on this site
-
+                                    // checks if logging-in user is active on this site
                                     bool userIsActiveOnThisSite = false;
 
                                     foreach (var siteLevel in siteLevelList)
@@ -167,8 +157,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                             userIsActiveOnThisSite = true;
                                         }
                                     }
-
-                                    #endregion checks if logging-in user is active on this site
 
                                     if (userIsActiveOnThisSite)
                                     {
@@ -188,8 +176,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                         return RedirectToAction("Site", "UserSite");
                                     }
 
-                                    #region user has acces to one site
-
+                                    // user has acces to one site
                                     var site = siteLevelList.Where(s => s.IsActive).First().Site;
 
                                     var listSiteUrl = _siteService.GetSiteUrlBySiteId(site.Id, this.Environment).Where(u => u.IsActive).ToList();
@@ -200,11 +187,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                     }
 
                                     return RedirectToAction("Forward", "UserSite", new { id = listSiteUrl.First().SiteUrlId });
-
-                                    #endregion user has acces to one site
                                 }
-
-                                #endregion redirects user
                             }
                             else
                             {

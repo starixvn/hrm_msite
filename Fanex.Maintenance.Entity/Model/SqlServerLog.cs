@@ -25,26 +25,4 @@ namespace Fanex.Maintenance.Entity.Model
 
         public string ServerIp { get; set; }
     }
-
-    /// <summary>
-    /// SQL server log parameter for task.
-    /// </summary>
-    public class SqlLogServerParamForTask
-    {
-        public int LogType { get; set; }
-
-        public string ServerIp { get; set; }
-    }
-
-    /// <summary>
-    /// SQL server log SP parameter for task.
-    /// </summary>
-    public class SqlLogSpParamForTask
-    {
-        public int P1 { get; set; }
-
-        public int P2 { get; set; }
-
-        public string ServerIp { get; set; }
-    }
 }

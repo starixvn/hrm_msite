@@ -75,8 +75,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
             if (expiration.TotalSeconds <= _timeExipration)
             {
-                #region do SSO check-in
-
+                // SSO check-in
                 var criteria = new UserSSOCheckInUserCriteria
                 {
                     UserId = Convert.ToInt32(userId),
@@ -94,14 +93,11 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                 _userService.UserSSOCheckIn(ref criteria);
 
-                #endregion do SSO check-in
-
                 if (criteria.OnUserId != 0)
                 {
                     var user = _userService.GetById(criteria.UserId) as User;
 
-                    #region saves user session & auth info
-
+                    // saves user session & auth info
                     _currentSession.UserId = user.Id;
                     _currentSession.Username = user.Username;
                     _currentSession.OnUserId = criteria.OnUserId;
@@ -118,8 +114,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                     }
 
                     CreateAuthInfo(user);
-
-                    #endregion saves user session & auth info
 
                     return Redirect(FormsAuthentication.DefaultUrl);
                 }

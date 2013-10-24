@@ -76,6 +76,10 @@
     <Compile Include="ConnectionString\Site\SiteGetByIdCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteGetByAliasCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteGetAllCriteria.cs" />
+    <Compile Include="DatabaseReport\GetDepositDataToValidateSumWLCriteria.cs" />
+    <Compile Include="DatabaseReport\GetDepositDataToValidateSumWLOldCriteria.cs" />
+    <Compile Include="DatabaseReport\GetDepositDataToValidateDWCriteria.cs" />
+    <Compile Include="DatabaseReport\GetDepositDataToValidateBettingCriteria.cs" />
     <Compile Include="DatabaseReport\DataIntegrityViewModel.cs" />
     <Compile Include="DatabaseReport\GetCreditDataToValidateDWCriteria.cs" />
     <Compile Include="Job\GetCpuUtilizationCriteria.cs" />
@@ -96,7 +100,7 @@
     <Compile Include="Log\GetAllCategoryCriteria.cs" />
     <Compile Include="DatabaseReport\GetCreditDataToValidateBettingCriteria.cs" />
     <Compile Include="DatabaseReport\GetBalanceUpDayCriteria.cs" />
-    <Compile Include="DatabaseReport\GetDepositDataToValidateCriteria.cs" />
+    <Compile Include="DatabaseReport\GetDepositDataToValidateLicenseeWLCriteria.cs" />
     <Compile Include="Log\GetAllMachinesCriteria.cs" />
     <Compile Include="Log\GetLogCriteria.cs" />
     <Compile Include="Log\GetMachineByIdCriteria.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="Misc\LogExecSpCriteria.cs" />
     <Compile Include="Misc\ResultCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\GetUserOnlineDailyCriteria.cs" />
     <Compile Include="User\GetUserOnlineCriteria.cs" />
   </ItemGroup>
   <ItemGroup />

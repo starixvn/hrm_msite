@@ -87,7 +87,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Search Schedule with Freq Type.
+        /// Search Schedule with Frequency Type.
         /// </summary>
         /// <param name="freqType">Frequency type.</param>
         /// <returns>Schedule service.</returns>
@@ -99,7 +99,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Search Schedule with Freq Sub Type.
+        /// Search Schedule with Frequency Sub Type.
         /// </summary>
         /// <param name="freqSubType">Frequency sub type.</param>
         /// <returns>Schedule service.</returns>
@@ -272,8 +272,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Combine Freq and Interval to a string.
         /// </summary>
-        /// <param name="freq">Freq Value.</param>
-        /// <param name="freqInterval">Freq Interval Value.</param>
+        /// <param name="freq">Frequency Value.</param>
+        /// <param name="freqInterval">Frequency Interval Value.</param>
         /// <param name="activeStartTime">Active start time.</param>
         /// <returns>String combined.</returns>
         private string CombineFreqAndFreqInterval(int freq, int freqInterval, int activeStartTime)
@@ -318,10 +318,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Get Freq Interval string.
         /// </summary>
-        /// <param name="freq">Freq Value.</param>
-        /// <param name="freqInterval">Freq Interval Value.</param>
+        /// <param name="freq">Frequency Value.</param>
+        /// <param name="freqInterval">Frequency Interval Value.</param>
         /// <param name="activeStartTime">Active start time.</param>
-        /// <returns>String combine Schedule Freq.</returns>
+        /// <returns>String combine Schedule Frequency.</returns>
         private string GetFreqIntervalValue(int freq, int freqInterval, int activeStartTime)
         {
             string freqIntervalName = string.Empty;
@@ -368,8 +368,8 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// <summary>
         /// Combine FreqSub and Interval To String for showing in View.
         /// </summary>
-        /// <param name="freqSub">Freq Sub Value.</param>
-        /// <param name="freqSubInterval">Freq Sub Interval.</param>
+        /// <param name="freqSub">Frequency Sub Value.</param>
+        /// <param name="freqSubInterval">Frequency Sub Interval.</param>
         /// <param name="activeStartTime">Active start.</param>
         /// <returns>Combined Freq Name.</returns>
         private string CombineFreqSubAndFreqSubInterval(int freqSub, int freqSubInterval, int activeStartTime)

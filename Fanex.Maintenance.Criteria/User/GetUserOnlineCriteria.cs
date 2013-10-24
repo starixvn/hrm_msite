@@ -9,7 +9,6 @@
 
 namespace Fanex.Maintenance.Criteria.User
 {
-    using System;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -27,19 +26,6 @@ namespace Fanex.Maintenance.Criteria.User
         public override bool IsValid()
         {
             return true;
-        }
-    }
-
-    /// <summary>
-    /// Get user online daily criteria.
-    /// </summary>
-    public class GetUserOnlineDailyCriteria : CriteriaBase
-    {    
-        public DateTime Date { get; set; }
-
-        public override string GetSettingKey()
-        {
-            return "Is_OnlineReportDaily";
         }
     }
 }

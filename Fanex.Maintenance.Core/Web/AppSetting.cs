@@ -17,32 +17,6 @@ namespace Fanex.Maintenance.Core.Web
     using Fanex.Logging;
 
     /// <summary>
-    /// Site Name.
-    /// </summary>
-    public static class SiteName
-    {
-        /// <summary>
-        /// Agent Name.
-        /// </summary>
-        public static string _Agent = "Agent";
-
-        /// <summary>
-        /// Accounting Name.
-        /// </summary>
-        public static string _Accounting = "Accounting";
-
-        /// <summary>
-        /// Affiliate Name.
-        /// </summary>
-        public static string _Affiliate = "Affiliate";
-
-        /// <summary>
-        /// Array Site.
-        /// </summary>
-        public static string[] Arr = { _Agent, _Accounting, _Affiliate };
-    }
-
-    /// <summary>
     /// App setting.
     /// </summary>
     public class AppSetting
@@ -152,26 +126,5 @@ namespace Fanex.Maintenance.Core.Web
         {
             get { return _notifiServer; }
         }
-    }
-
-    /// <summary>
-    /// Result constants.
-    /// </summary>
-    public class RESULT
-    {
-        /// <summary>
-        /// Is Success.
-        /// </summary>
-        public bool IsSuccess = true;
-
-        /// <summary>
-        /// Is DataOk.
-        /// </summary>
-        public bool IsDataOK = false;
-
-        /// <summary>
-        /// Error Message.
-        /// </summary>
-        public string ErrMsg = string.Empty;
     }
 }

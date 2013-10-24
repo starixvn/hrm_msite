@@ -66,6 +66,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteFunctionKeys.tt</DependentUpon>
     </Compile>
+    <Compile Include="Configurations\MailElement.cs" />
+    <Compile Include="Configurations\MailCollection.cs" />
     <Compile Include="Configurations\MailSection.cs" />
     <Compile Include="Configurations\DatabaseServersSection.cs" />
     <Compile Include="Configurations\ServerCollection.cs" />

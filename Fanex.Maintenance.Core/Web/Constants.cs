@@ -279,7 +279,7 @@ namespace Fanex.Maintenance.Core.Web
         };
 
         /// <summary>
-        /// Freq Interval Values.
+        /// Frequency Interval Values.
         /// </summary>
         public static string[] FreqIntervalValues = new string[]
         {
