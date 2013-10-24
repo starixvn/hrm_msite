@@ -1,26 +1,28 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ILicenseeSetttingRepository.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ILicenseeSettingRepository.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Edward.Nguyen" date="2012.9.20">Created</change>
+//   <change who="Forrest.Nguyen" date="2013.10.23">Created</change>
 // </history>
 
 namespace Fanex.Maintenance.Repository.Interface
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using Fanex.Data;
     using Fanex.Maintenance.Criteria.LrfDomain;
     using Fanex.Maintenance.Entity.Model;
+    using Fanex.Maintenance.Repository.Interface;
 
     /// <summary>
-    /// Licensee Repository Interface.
+    /// Licensee Setting Repository Interface.
     /// </summary>
     public interface ILicenseeSettingRepository
     {
+        /// <summary>
+        /// Active Domain Up.
+        /// </summary>
+        /// <param name="criteria">Domain criteria.</param>
         void ActiveDomain(ActiveDomainCriteria criteria);
     }
 }

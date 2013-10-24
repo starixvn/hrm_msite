@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Lrf Domain";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var success = false;
+    if(ViewBag.success != null && ViewBag.success == true)
+    { success = true; }
 }
 @section Head {
     @Styles.Render("~/css/log")
@@ -11,6 +14,27 @@
     <h1>
         <span class="title">@ViewBag.Title</span> 
     </h1>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+                var result = confirm("Are you sure you want to active this domain??");
+                if (result)
+                    return true;
+                return false;
+            });
+        });
+    </script>
+
+    @if(success)
+    {
+        <script type="text/javascript">
+            alert("Active domain success");
+        </script>
+    }
+    
 }
 @using (Html.BeginForm())
 {
@@ -22,20 +46,20 @@
                     <ul>
                         <li><br /></li>
                         @{
-                            if (Model.Any())
-                            {
-                                foreach (var item in Model)
-                                { 
+    if (Model.Any())
+    {
+        foreach (var item in Model)
+        { 
                                     <li>
                                     @Html.RadioButton("Id", item.Id, item.IsActive, new { @id = "domain-" + item.Id })
                                     @item.DomainName
                                     <br />
                                     </li>  
-                                }
-                            }
+        }
+    }
                             <li>
                                 <div class="submit">
-                                    <input type="submit" value="Submit" />
+                                    <input id="btnSubmit" type="submit" value="Submit" />
                                 </div>
                             </li>
                          }

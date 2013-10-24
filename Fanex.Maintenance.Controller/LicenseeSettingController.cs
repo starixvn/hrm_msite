@@ -67,6 +67,7 @@ namespace Fanex.Maintenance.Controller
         {
             _licenseeSettingService.ActiveDomain(id);
             var domains = _licenseeSettingService.GetAll();
+            ViewBag.success = true;
             return View(domains);
         }
 
