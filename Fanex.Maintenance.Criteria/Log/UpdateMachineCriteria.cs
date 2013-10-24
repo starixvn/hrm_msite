@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Criteria.Log
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Update machine criteria.
+    /// </summary>
     public class UpdateMachineCriteria : CriteriaBase
     {
         public int MachineId { get; set; }

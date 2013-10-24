@@ -14,43 +14,18 @@ namespace Fanex.Maintenance.Service.Interface.JobManagement
     using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// SQL Server log service interface.
     /// </summary>
     public interface ISqlServerLogService
     {
-        /// <summary>
-        /// Filter from date
-        /// </summary>
-        /// <param name="from"></param>
-        /// <returns></returns>
         ISqlServerLogService FromDate(DateTime from);
 
-        /// <summary>
-        /// Filter to date
-        /// </summary>
-        /// <param name="to"></param>
-        /// <returns></returns>
         ISqlServerLogService ToDate(DateTime to);
 
-        /// <summary>
-        /// From server
-        /// </summary>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
         ISqlServerLogService WithServer(string serverIp);
 
-        /// <summary>
-        /// Filter by error level
-        /// </summary>
-        /// <param name="errorLevel"></param>
-        /// <returns></returns>
         ISqlServerLogService WithErrorLevel(int? errorLevel);
 
-        /// <summary>
-        /// Get sql server log by type
-        /// </summary>
-        /// <param name="logType"></param>
-        /// <returns></returns>
         IEnumerable<SqlServerLog> GetSqlServerLogs(int logType = 1);
     }
 }

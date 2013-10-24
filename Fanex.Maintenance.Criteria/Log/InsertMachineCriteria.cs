@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Criteria.Log
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Insert criteria.
+    /// </summary>
     public class InsertMachineCriteria : CriteriaBase
     {
         public string MachineName { get; set; }

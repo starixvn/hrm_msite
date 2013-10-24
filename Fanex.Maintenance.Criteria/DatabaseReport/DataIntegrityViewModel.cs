@@ -11,12 +11,10 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
 {
     using System;
     using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Data integrity view model.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class DataIntegrityViewModel
     {
         public int DrawFilter { get; set; }

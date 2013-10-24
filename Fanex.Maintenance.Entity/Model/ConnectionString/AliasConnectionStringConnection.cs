@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="AliasConnectionString.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="AliasConnectionStringConnection.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,10 +9,11 @@
 
 namespace Fanex.Maintenance.Entity.Model.ConnectionString
 {
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.ConnectionString.Domain;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Alias connection string connection.
+    /// </summary>
     public class AliasConnectionStringConnection
     {
         public Alias Alias { get; set; }

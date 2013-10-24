@@ -10,11 +10,12 @@
 namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 {
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Get all site criteria.
+    /// </summary>
     public class SiteGetAllCriteria : CriteriaBase
     {
         private string _name;
@@ -25,6 +26,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
             {
                 return _name;
             }
+
             set
             {
                 _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

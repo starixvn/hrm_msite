@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="AliasUpdateStatusCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="AliasUpdateCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,12 +11,13 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using System.Text;
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Alias update criteria.
+    /// </summary>
     public class AliasUpdateCriteria : CriteriaBase
     {
         private readonly string _formatXml = "<Sites SiteId='{0}'/>";
@@ -34,6 +35,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
             {
                 return _name;
             }
+
             set
             {
                 _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
@@ -46,6 +48,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
             {
                 return _description;
             }
+
             set
             {
                 _description = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

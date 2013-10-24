@@ -69,12 +69,14 @@
     <Compile Include="Impl\LogCategoryRepository.cs" />
     <Compile Include="Impl\DatabaseReportRepository.cs" />
     <Compile Include="Impl\LogRepository.cs" />
+    <Compile Include="Impl\LicenseeSettingRepository.cs" />
     <Compile Include="Impl\MachineRepository.cs" />
     <Compile Include="Interface\ConnectionString\IConnectionRepository.cs" />
     <Compile Include="Interface\ConnectionString\ILogRepository.cs" />
     <Compile Include="Interface\ConnectionString\ISiteRepository.cs" />
     <Compile Include="Interface\ConnectionString\IAliasRepository.cs" />
     <Compile Include="Interface\ConnectionString\IDatabaseServerRepository.cs" />
+    <Compile Include="Interface\ILicenseeSettingRepository.cs" />
     <Compile Include="Interface\JobManagement\IJobRepository.cs" />
     <Compile Include="Interface\ILogCategoryRepository.cs" />
     <Compile Include="Interface\IDatabaseReportRepository.cs" />

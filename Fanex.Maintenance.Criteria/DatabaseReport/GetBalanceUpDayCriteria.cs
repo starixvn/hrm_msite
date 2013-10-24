@@ -10,12 +10,10 @@
 namespace Fanex.Maintenance.Criteria.DatabaseReport
 {
     using Fanex.NAP.Framework.Data;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get balance up day.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetBalanceUpDayCriteria : CriteriaBase
     {
         public override string GetSettingKey()

@@ -19,14 +19,14 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Impl;
 
     /// <summary>
-    /// Machine Controller
+    /// Machine Controller.
     /// </summary>
     [Authorize]
     public class MachineController : BaseController
     {
         #region Member
         /// <summary>
-        /// Machine Service
+        /// Machine Service.
         /// </summary>
         private readonly MachineService _machineService;
 
@@ -34,18 +34,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Constructor
 
-        /// <summary>
-        /// Parameter less Controller
-        /// </summary>
         public MachineController()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Machine Controller with services defined
-        /// </summary>
-        /// <param name="machineService"></param>
         public MachineController(MachineService machineService)
         {
             _machineService = machineService ?? MachineService.Create();
@@ -53,10 +46,122 @@ namespace Fanex.Maintenance.Controller
 
         #endregion Constructor
 
+        #region Action
+
+        /// <summary>
+        /// Get machines.
+        /// </summary>
+        /// <param name="machineType">Machine type.</param>
+        /// <returns>Action result.</returns>
+        [HttpGet]
+        public ActionResult Index(bool? machineType = null)
+        {
+            var machines = _machineService.GetByType(machineType);
+            ViewBag.Machines = machines;
+            ViewBag.MachineType = machineType;
+            InitMachineTypes();
+
+            return View(machines);
+        }
+
+        /// <summary>
+        /// Get machines.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult Index(GetMachinesByTypeCriteria criteria)
+        {
+            return Index(criteria.MachineType);
+        }
+
+        /// <summary>
+        /// Edit machine.
+        /// </summary>
+        /// <param name="id">Machine ID.</param>
+        /// <returns>Action result.</returns>
+        [HttpGet]
+        public ActionResult EditMachine(int id)
+        {
+            var machine = _machineService.GetMachine(id);
+            return View(machine);
+        }
+
+        /// <summary>
+        /// Edit machine.
+        /// </summary>
+        /// <param name="machine">The machine.</param>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult EditMachine(Machine machine)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.Success = _machineService.UpdateMachine(machine.MachineId, machine.IsProduction, machine.TimeZone);
+            }
+
+            return View(machine);
+        }
+
+        /// <summary>
+        /// Insert machine.
+        /// </summary>
+        /// <returns>Action result.</returns>
+        [HttpGet]
+        public ActionResult InsertMachine()
+        {
+            var machine = new Machine
+            {
+                IsProduction = false,
+                TimeZone = 7
+            };
+            return View(machine);
+        }
+
+        /// <summary>
+        /// Insert machine.
+        /// </summary>
+        /// <param name="machine">The machine.</param>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult InsertMachine(Machine machine)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.Success = _machineService.InsertMachine(machine.MachineName, machine.IsProduction, machine.TimeZone);
+            }
+
+            return View(machine);
+        }
+
+        #endregion Action
+
+        #region Ajax
+
+        /// <summary>
+        /// Get machines.
+        /// </summary>
+        /// <param name="machineType">Machine type.</param>
+        /// <returns>JSON result.</returns>
+        [HttpGet]
+        public JsonResult GetMachinesByType(bool? machineType)
+        {
+            var machines = new List<Machine>();
+
+            if (Request.IsAjaxRequest())
+            {
+                machines = _machineService.GetByType(machineType).ToList();
+            }
+
+            return Json(machines, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion Ajax
+
         #region Private
 
         /// <summary>
-        /// Initialize Machine Types data
+        /// Initialize Machine Types data.
         /// </summary>
         private void InitMachineTypes()
         {
@@ -81,117 +186,5 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion Private
-
-        #region Action
-
-        /// <summary>
-        /// Get machines
-        /// </summary>
-        /// <param name="machineType"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult Index(bool? machineType = null)
-        {
-            var machines = _machineService.GetByType(machineType);
-            ViewBag.Machines = machines;
-            ViewBag.MachineType = machineType;
-            InitMachineTypes();
-
-            return View(machines);
-        }
-
-        /// <summary>
-        /// Get machines
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult Index(GetMachinesByTypeCriteria criteria)
-        {
-            return Index(criteria.MachineType);
-        }
-
-        /// <summary>
-        /// Edit machine
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult EditMachine(int id)
-        {
-            var machine = _machineService.GetMachine(id);
-            return View(machine);
-        }
-
-        /// <summary>
-        /// Edit machine
-        /// </summary>
-        /// <param name="machine"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult EditMachine(Machine machine)
-        {
-            if (ModelState.IsValid)
-            {
-                ViewBag.Success = _machineService.UpdateMachine(machine.MachineId, machine.IsProduction, machine.TimeZone);
-            }
-
-            return View(machine);
-        }
-
-        /// <summary>
-        /// Insert machine
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult InsertMachine()
-        {
-            var machine = new Machine
-            {
-                IsProduction = false,
-                TimeZone = 7
-            };
-            return View(machine);
-        }
-
-        /// <summary>
-        /// Insert machine
-        /// </summary>
-        /// <param name="machine"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult InsertMachine(Machine machine)
-        {
-            if (ModelState.IsValid)
-            {
-                ViewBag.Success = _machineService.InsertMachine(machine.MachineName, machine.IsProduction, machine.TimeZone);
-            }
-
-            return View(machine);
-        }
-
-        #endregion Action
-
-        #region Ajax
-
-        /// <summary>
-        /// Get machines
-        /// </summary>
-        /// <param name="machineType"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public JsonResult GetMachinesByType(bool? machineType)
-        {
-            var machines = new List<Machine>();
-
-            if (Request.IsAjaxRequest())
-            {
-                machines = _machineService.GetByType(machineType).ToList();
-            }
-
-            return Json(machines, JsonRequestBehavior.AllowGet);
-        }
-
-        #endregion Ajax
     }
 }

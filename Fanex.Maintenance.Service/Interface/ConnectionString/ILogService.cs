@@ -16,7 +16,7 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     using Fanex.Maintenance.Entity.Model.ConnectionString;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Log service interface.
     /// </summary>
     public interface ILogService
     {

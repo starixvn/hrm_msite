@@ -8,7 +8,7 @@
 <#    
     string connectionString = "data source=10.18.200.206;initial catalog=bodb_NAP;User Id=olympus; pwd=@tiger#;";    
 #>
-// <copyright file="FunctionKeys.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SiteFunctionKeys.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved. 
 // </copyright>
 //
@@ -21,7 +21,11 @@
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")] 
+/// <summary>
+/// Site function keys.
+/// </summary>
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification="Generated code")]
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification="Generated code")]
 public static class SiteFunctionKeys
 {
 <#

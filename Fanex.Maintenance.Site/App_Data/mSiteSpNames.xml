@@ -16,6 +16,7 @@
         <Setting Key="Lrf_GetSystemNameStatistic" SpName="Lrf_GetSystemNameStatistic" DbName="Licensee" />
         <Setting Key="Lrf_GetNonFunctionStatistic" SpName="Lrf_GetNonFunctionStatistic" DbName="Licensee" />
         
+        
         <!--<Setting Key="Acc_LoginAdmin" SpName="Acc_LoginAdmin" DbName="main" />-->
     </Function>
     <Function Name="Licensee">
@@ -29,6 +30,9 @@
         <Setting Key="GET_CreditDataToValidate_DW" SpName="GET_CreditDataToValidate_DW" DbName="licensee" />
         <Setting Key="Is_SelTotalOnlineUser" SpName="Is_SelTotalOnlineUser" DbName="on_user" />
         <Setting Key="Is_OnlineReportDaily" SpName="Is_OnlineReportDaily" DbName="on_user" />
+        <Setting Key="Lrf_DomainSel" SpName="Lrf_DomainSel" DbName="Licensee" />
+        <Setting Key="Lrf_ActiveDomainUpd" SpName="Lrf_ActiveDomainUpd" DbName="Licensee" />
+      
     </Function>
     <Function Name="DataValidation">
         <Setting Key="GET_DepositDataToValidate_SumWL" SpName="GET_DepositDataToValidate_SumWL" DbName="Licensee" />

@@ -65,17 +65,21 @@
     <Compile Include="Model\ConnectionString\LogData.cs" />
     <Compile Include="Model\ConnectionString\LogExecSp.cs" />
     <Compile Include="Model\ConnectionString\SiteAlias.cs" />
+    <Compile Include="Model\SqlLogSpParamForTask.cs" />
+    <Compile Include="Model\SqlLogServerParamForTask.cs" />
     <Compile Include="Model\CPUInfo.cs" />
     <Compile Include="Model\JobLog.cs" />
     <Compile Include="Model\JobSchedule.cs" />
     <Compile Include="Model\LogCategory.cs" />
     <Compile Include="Model\CommandResult.cs" />
     <Compile Include="Model\Log.cs" />
+    <Compile Include="Model\LrfDomain.cs" />
     <Compile Include="Model\Machine.cs" />
     <Compile Include="Model\MemoryInfo.cs" />
     <Compile Include="Model\NotifyInfo.cs" />
     <Compile Include="Model\ResourceInfo.cs" />
     <Compile Include="Model\ScheduleDetail.cs" />
+    <Compile Include="Model\ScheduleParamForTask.cs" />
     <Compile Include="Model\ServerFullInfo.cs" />
     <Compile Include="Model\ServerStatus.cs" />
     <Compile Include="Model\SqlServerLog.cs" />
@@ -87,9 +91,6 @@
       <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Domain\ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

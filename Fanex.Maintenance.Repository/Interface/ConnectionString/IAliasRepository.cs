@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IConnectionStringRepository.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="IAliasRepository.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -10,9 +10,9 @@
 namespace Fanex.Maintenance.Repository.Interface.ConnectionString
 {
     using System.Collections.Generic;
+    using Fanex.ConnectionString.Domain;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using Fanex.ConnectionString.Domain;
 
     public interface IAliasRepository
     {

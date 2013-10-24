@@ -9,12 +9,13 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 {
-    using System.Diagnostics.CodeAnalysis;
-    using Fanex.NAP.Framework.Data;
-    using System.Text;
     using System;
+    using System.Text;
+    using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Change connection from DB server criteria.
+    /// </summary>
     public class ConnectionChangeConnectionFromDbServerCriteria : CriteriaBase
     {
         private readonly string _formatXml = "<AliasConnection AliasId='{0}' ConnectionId='{1}'/>";
@@ -29,6 +30,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
             {
                 string[] arrayAliasConnection = AliasConnection.Split(';');
                 StringBuilder strXml = new StringBuilder("<ROOT>");
+
                 foreach (var itemAliasConnection in arrayAliasConnection)
                 {
                     if (!string.IsNullOrWhiteSpace(itemAliasConnection))
@@ -39,10 +41,12 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
                         strXml.Append(string.Format(_formatXml, aliasId, connectionId));
                     }
                 }
+
                 strXml.Append("</ROOT>");
 
                 return strXml.ToString();
             }
+
             set
             {
                 Value = value;

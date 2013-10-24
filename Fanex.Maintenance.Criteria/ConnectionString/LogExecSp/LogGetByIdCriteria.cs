@@ -9,10 +9,11 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
 {
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// Get log by ID criteria.
+    /// </summary>
     public class LogGetByIdCriteria : CriteriaBase
     {
         public int LogId { get; set; }

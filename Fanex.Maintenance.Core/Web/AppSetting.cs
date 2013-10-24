@@ -11,26 +11,21 @@ namespace Fanex.Maintenance.Core.Web
 {
     using System;
     using System.Configuration;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web;
     using Fanex.Common;
     using Fanex.Logging;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// App setting.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class AppSetting
     {
         /// <summary>
-        /// Is Virtual
+        /// Is Virtual.
         /// </summary>
         private static string _isVirtualDir = "false";
 
-        /// <summary>
-        /// Minute
-        /// </summary>
         private static int _minute = 10;
 
         private static long _getDataNotifyInterval = 60000;
@@ -39,17 +34,7 @@ namespace Fanex.Maintenance.Core.Web
 
         private static long _getCpuUtilizationInterval = 2000;
 
-        public static long GetCpuUtilizationInterval
-        {
-            get { return AppSetting._getCpuUtilizationInterval; }
-        }
-
         private static long _getMemoryUtilizationInterval = 2000;
-
-        public static long GetMemoryUtilizationInterval
-        {
-            get { return AppSetting._getMemoryUtilizationInterval; }
-        }
 
         private static bool _notifiServer = false;
 
@@ -74,9 +59,16 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Is Virtual Directory
-        /// </summary>
+        public static long GetCpuUtilizationInterval
+        {
+            get { return AppSetting._getCpuUtilizationInterval; }
+        }
+
+        public static long GetMemoryUtilizationInterval
+        {
+            get { return AppSetting._getMemoryUtilizationInterval; }
+        }
+
         public static bool IsVirtualDirectory
         {
             get
@@ -85,9 +77,6 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Minute
-        /// </summary>
         public static int Minute
         {
             get
@@ -112,9 +101,6 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Culture Info
-        /// </summary>
         public static CultureInfo Culture
         {
             get
@@ -123,9 +109,6 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Context
-        /// </summary>
         public static HttpContext Context
         {
             get
@@ -134,67 +117,14 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Notification job
-        /// </summary>
         public static bool NotifiJob
         {
             get { return _notifiJob; }
         }
 
-        /// <summary>
-        /// Notification server
-        /// </summary>
         public static bool NotifiServer
         {
             get { return _notifiServer; }
         }
-    }
-
-    /// <summary>
-    /// Site Name
-    /// </summary>
-    public static class SiteName
-    {
-        /// <summary>
-        /// Agent Name
-        /// </summary>
-        public static string _Agent = "Agent";
-
-        /// <summary>
-        /// Accounting Name
-        /// </summary>
-        public static string _Accounting = "Accounting";
-
-        /// <summary>
-        /// Affiliate Name
-        /// </summary>
-        public static string _Affiliate = "Affiliate";
-
-        /// <summary>
-        /// Array Site
-        /// </summary>
-        public static string[] Arr = { _Agent, _Accounting, _Affiliate };
-    }
-
-    /// <summary>
-    /// Result
-    /// </summary>
-    public class RESULT
-    {
-        /// <summary>
-        /// Is Success
-        /// </summary>
-        public bool IsSuccess = true;
-
-        /// <summary>
-        /// Is DataOk
-        /// </summary>
-        public bool IsDataOK = false;
-
-        /// <summary>
-        /// Error Message
-        /// </summary>
-        public string ErrMsg = string.Empty;
     }
 }

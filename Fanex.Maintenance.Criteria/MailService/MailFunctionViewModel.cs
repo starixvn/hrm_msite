@@ -10,16 +10,26 @@
 namespace Fanex.Maintenance.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
     using MailDeliver.Model;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class MailFunctionViewModel
     {
+        public MailFunctionViewModel()
+        {
+        }
+
+        public MailFunctionViewModel(MailFunction mailFunction)
+        {
+            this.ConfigId = mailFunction.Config.AppID;
+            this.SettingId = mailFunction.Setting.SettingID;
+            this.FunctionId = mailFunction.FuncID;
+            this.FunctionName = mailFunction.FuncName;
+        }
+
         public int FunctionId { get; set; }
 
         [Required]
@@ -40,18 +50,10 @@ namespace Fanex.Maintenance.Criteria.MailService
             ErrorMessageResourceType = typeof(ViewResource))]
         public string FunctionName { get; set; }
 
-        public MailFunctionViewModel()
-        {
-        }
-
-        public MailFunctionViewModel(MailFunction mailFunction)
-        {
-            this.ConfigId = mailFunction.Config.AppID;
-            this.SettingId = mailFunction.Setting.SettingID;
-            this.FunctionId = mailFunction.FuncID;
-            this.FunctionName = mailFunction.FuncName;
-        }
-
+        /// <summary>
+        /// Get mail function.
+        /// </summary>
+        /// <returns>Mail function.</returns>
         public MailFunction GetMailFunction()
         {
             MailFunction mailFunction = new MailFunction

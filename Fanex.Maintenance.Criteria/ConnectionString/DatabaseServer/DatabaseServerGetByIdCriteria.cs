@@ -9,10 +9,11 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
 {
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Get database server by ID criteria.
+    /// </summary>
     public class DatabaseServerGetByIdCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }

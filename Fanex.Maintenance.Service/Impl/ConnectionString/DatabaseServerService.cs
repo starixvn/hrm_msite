@@ -11,19 +11,19 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Entity.Model.ConnectionString;
+    using Fanex.Common.Helper;
     using Fanex.ConnectionString.Domain;
-    using Fanex.Logging;
     using Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer;
+    using Fanex.Maintenance.Criteria.Misc;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Common.Helper;
-    using Fanex.Maintenance.Criteria.Misc;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Database server service.
+    /// </summary>
     public class DatabaseServerService : BaseService, IDatabaseServerService
     {
         #region Member
@@ -46,6 +46,10 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #endregion
 
+        /// <summary>
+        /// Get all database server.
+        /// </summary>
+        /// <returns>List of database server.</returns>
         public IEnumerable<DatabaseServer> GetAll()
         {
             try
@@ -65,6 +69,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get database server with number of site.
+        /// </summary>
+        /// <param name="name">Database server name.</param>
+        /// <returns>List of database server site.</returns>
         public IEnumerable<DatabaseServerSite> GetWithNumOfSite(string name = "")
         {
             try
@@ -87,6 +96,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Insert or update database server.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
             // check parameters
@@ -109,6 +123,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Update database server status.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult UpdateStatus(ICriteria criteria)
         {
             // check parameters
@@ -131,6 +150,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get database server by ID.
+        /// </summary>
+        /// <param name="id">DB server ID.</param>
+        /// <returns>Database server.</returns>
         public DatabaseServer GetById(int id)
         {
             try

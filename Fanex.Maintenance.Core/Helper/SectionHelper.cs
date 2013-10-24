@@ -13,18 +13,19 @@ namespace Fanex.Maintenance.Core.Helper
     using Fanex.Maintenance.Core.Web;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Section helper.
     /// </summary>
     public class SectionHelper
     {
         /// <summary>
-        /// Get Connection String From Server Name
+        /// Get Connection String From Server Name.
         /// </summary>
-        /// <param name="serverName">Server Name</param>
-        /// <returns>Connection String maps with server name</returns>
+        /// <param name="serverName">Server Name.</param>
+        /// <returns>Connection String maps with server name.</returns>
         public static string GetConnectionStringFromServerName(string serverName)
         {
             string connectionString = string.Empty;
+
             foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
             {
                 if (server.ServerName == serverName)
@@ -46,56 +47,52 @@ namespace Fanex.Maintenance.Core.Helper
         }
 
         /// <summary>
-        /// Get Connection String From Server Name
+        /// Get Connection String From Server Name.
         /// </summary>
-        /// <param name="serverName">Server Name</param>
-        /// <param name="getType">Get Server Type</param>
-        /// <returns>Connection String maps with server name</returns>
-        public static string GetConnectionStringFromServerIp(
-            string serverIp = "",
-            int getType = 0)
+        /// <param name="serverIp">Server IP.</param>
+        /// <param name="getType">Get Server Type.</param>
+        /// <returns>Connection String maps with server name.</returns>
+        public static string GetConnectionStringFromServerIp(string serverIp = "", int getType = 0)
         {
             string connectionString = string.Empty;
+
             switch (getType)
             {
                 case (int)ServerType.Normal:
+                    foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
                     {
-                        foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
+                        if (server.ServerIp == serverIp)
                         {
-                            if (server.ServerIp == serverIp)
+                            if (server.Plain == "1")
                             {
-                                if (server.Plain == "1")
-                                {
-                                    connectionString = server.ConnectionString;
-                                }
-                                else
-                                {
-                                    connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
-                                }
-
-                                break;
+                                connectionString = server.ConnectionString;
                             }
+                            else
+                            {
+                                connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
+                            }
+
+                            break;
                         }
                     }
 
                     break;
-                case (int)ServerType.Resource:
-                    {
-                        foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
-                        {
-                            if (server.ServerIp == serverIp)
-                            {
-                                if (server.Plain == "1")
-                                {
-                                    connectionString = server.ConnectionString;
-                                }
-                                else
-                                {
-                                    connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
-                                }
 
-                                break;
+                case (int)ServerType.Resource:
+                    foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
+                    {
+                        if (server.ServerIp == serverIp)
+                        {
+                            if (server.Plain == "1")
+                            {
+                                connectionString = server.ConnectionString;
                             }
+                            else
+                            {
+                                connectionString = Fanex.Common.Cryptography.DeCryptConnectionString(server.ConnectionString);
+                            }
+
+                            break;
                         }
                     }
 
@@ -106,10 +103,10 @@ namespace Fanex.Maintenance.Core.Helper
         }
 
         /// <summary>
-        /// Get Server Ip From server Name
+        /// Get Server IP From server Name.
         /// </summary>
-        /// <param name="serverName"></param>
-        /// <returns></returns>
+        /// <param name="serverName">Server name.</param>
+        /// <returns>Server IP string.</returns>
         public static string GetServerIpFromServerName(string serverName)
         {
             foreach (ServerElement server in DatabaseServersSection.Instance.Servers)
@@ -124,13 +121,14 @@ namespace Fanex.Maintenance.Core.Helper
         }
 
         /// <summary>
-        /// Get Sp Name From SpKey
+        /// Get Sp Name From SpKey.
         /// </summary>
-        /// <param name="storeProcedureKey">Sp Key</param>
-        /// <returns>Sp Name Map with sp Key</returns>
+        /// <param name="storeProcedureKey">Store procedure key.</param>
+        /// <returns>Sp Name Map with sp Key.</returns>
         public static string GetSpNameFromSpKey(string storeProcedureKey)
         {
             string storeProcedureName = string.Empty;
+
             foreach (SpNameElement sp in SpNameSection.Instance.SpNames)
             {
                 if (sp.Key == storeProcedureKey)

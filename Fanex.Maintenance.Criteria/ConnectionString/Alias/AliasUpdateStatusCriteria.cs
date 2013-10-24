@@ -9,11 +9,12 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Alias
 {
-    using System.Diagnostics.CodeAnalysis;
-    using Fanex.NAP.Framework.Data;
     using System;
+    using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Alias update status criteria.
+    /// </summary>
     public class AliasUpdateStatusCriteria : CriteriaBase
     {
         public int AliasId { get; set; }

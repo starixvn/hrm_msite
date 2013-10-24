@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Criteria.Log
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get machine by type criteria.
+    /// </summary>
     public class GetMachinesByTypeCriteria : CriteriaBase
     {
         public bool? MachineType { get; set; }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetSqlServerLogCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetReadSQLLogCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -10,15 +10,13 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using System;
-    using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
     using Fanex.Maintenance.Core;
-    using System.Diagnostics.CodeAnalysis;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetReadSQLLogCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]

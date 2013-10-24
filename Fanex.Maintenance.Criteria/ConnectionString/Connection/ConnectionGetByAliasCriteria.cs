@@ -9,10 +9,11 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 {
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Get connection by alias criteria.
+    /// </summary>
     public class ConnectionGetByAliasCriteria : CriteriaBase
     {
         public int AliasId { get; set; }

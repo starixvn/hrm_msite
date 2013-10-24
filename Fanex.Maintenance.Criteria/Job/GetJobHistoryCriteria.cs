@@ -11,12 +11,10 @@ namespace Fanex.Maintenance.Criteria.Job
 {
     using System;
     using Fanex.NAP.Framework.Data;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetJobHistoryCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "Job_Id")]

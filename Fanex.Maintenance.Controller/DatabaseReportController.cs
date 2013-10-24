@@ -12,7 +12,6 @@ namespace Fanex.Maintenance.Controller
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web.Mvc;
     using Fanex.DataValidation.Service.Implement;
@@ -22,16 +21,15 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Interface;
 
     /// <summary>
-    /// Database report controller
+    /// Database report controller.
     /// </summary>
     [Authorize]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class DatabaseReportController : BaseController
     {
         #region Member
 
         /// <summary>
-        /// Database report service
+        /// Database report service.
         /// </summary>
         private readonly IDatabaseReportService _databaseReportService;
 
@@ -39,18 +37,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Ctor
 
-        /// <summary>
-        /// Parameter less constructor
-        /// </summary>
         public DatabaseReportController()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Constructor with service input
-        /// </summary>
-        /// <param name="databaseReportService"></param>
         public DatabaseReportController(IDatabaseReportService databaseReportService)
         {
             _databaseReportService = databaseReportService ?? new DatabaseReportService();
@@ -59,9 +50,9 @@ namespace Fanex.Maintenance.Controller
         #endregion Ctor
 
         /// <summary>
-        /// Data Integrity Return view
+        /// Data Integrity Return view.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult DataIntegrity()
         {
@@ -100,9 +91,9 @@ namespace Fanex.Maintenance.Controller
         }        
 
         /// <summary>
-        /// User Online Daily
+        /// User Online Daily.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult UserOnlineDaily()
         {
@@ -113,10 +104,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// User Online Daily by date
+        /// User Online Daily by date.
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="date">Date value.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UserOnlineDaily(string date)
         {
@@ -128,38 +119,38 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// User online
+        /// User online.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult UserOnline()
         {
             DataTable userOnlineTable = _databaseReportService.GetUserOnline(30);
-            ViewBag.UserOnlineData = _databaseReportService.GenerateTemplateUser(userOnlineTable, 30);
+            ViewBag.UserOnlineData = _databaseReportService.GenerateTemplateUser(userOnlineTable);
             return View();
         }
 
         /// <summary>
-        /// Get list of user online with size
+        /// Get list of user online with size.
         /// </summary>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="top">Number of users.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UserOnline(int size)
+        public ActionResult UserOnline(int top)
         {
             if (Request.IsAjaxRequest())
             {
-                DataTable userOnlineTable = _databaseReportService.GetUserOnline(size);
-                return Json(_databaseReportService.GenerateTemplateUser(userOnlineTable, size));
+                DataTable userOnlineTable = _databaseReportService.GetUserOnline(top);
+                return Json(_databaseReportService.GenerateTemplateUser(userOnlineTable));
             }
 
             return Json(null);
         }
 
         /// <summary>
-        /// User online chart report
+        /// User online chart report.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult UserOnlineChart()
         {
@@ -169,22 +160,28 @@ namespace Fanex.Maintenance.Controller
         #region Ajax
 
         /// <summary>
-        /// User online chart report with size
+        /// User online chart report with size.
         /// </summary>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="top">Number of users.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UserOnlineChart(int size)
+        public ActionResult UserOnlineChart(int top)
         {
             if (Request.IsAjaxRequest())
             {
-                DataTable userOnlineTable = _databaseReportService.GetUserOnline(size);
-                return Json(_databaseReportService.GenerateDataChart(userOnlineTable, size));
+                DataTable userOnlineTable = _databaseReportService.GetUserOnline(top);
+                return Json(_databaseReportService.GenerateDataChart(userOnlineTable, top));
             }
 
             return Json(null);
         }
 
+        /// <summary>
+        /// Get deposit integrity.
+        /// </summary>
+        /// <param name="filter">Draw filter.</param>
+        /// <param name="date">Date string.</param>
+        /// <returns>Result string.</returns>
         [HttpPost]
         public string GetDepositIntegrity(int filter = 1, string date = "")
         {
@@ -205,6 +202,12 @@ namespace Fanex.Maintenance.Controller
             return string.Empty;
         }
 
+        /// <summary>
+        /// Get credit integrity.
+        /// </summary>
+        /// <param name="filter">Draw filter.</param>
+        /// <param name="date">Date string.</param>
+        /// <returns>Result string.</returns>
         [HttpPost]
         public string GetCreditIntegrity(int filter = 1, string date = "")
         {

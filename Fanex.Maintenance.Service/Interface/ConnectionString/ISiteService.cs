@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IDatabaseServerService.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ISiteService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -18,17 +18,17 @@ namespace Fanex.Maintenance.Service.Interface.ConnectionString
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Site service interface.
     /// </summary>
     public interface ISiteService
     {
-        IEnumerable<Site> GetAll(string name = "", int? dbServerId = null);
+        IEnumerable<Site> GetAll(string name = "", int? databaseServerId = null);
 
-        IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? dbServerId = null);
+        IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? databaseServerId = null);
 
         IEnumerable<Site> GetByAlias(int aliasId);
 
-        IEnumerable<Site> GetByDbServer(int dbServerId);
+        IEnumerable<Site> GetByDbServer(int databaseServerId);
 
         Site GetById(int id);
 

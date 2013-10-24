@@ -13,35 +13,32 @@ namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.Maintenance.Core;
     using Fanex.Maintenance.Criteria.Log;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Service.Impl;
-    using System.Configuration;
 
     /// <summary>
-    /// Log Controller
+    /// Log controller.
     /// </summary>
     [Authorize]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class LogController : BaseController
     {
         #region Member
         /// <summary>
-        /// Log Service
+        /// Log Service.
         /// </summary>
         private readonly LogService _logService;
 
         /// <summary>
-        /// Log Category Service
+        /// Log Category Service.
         /// </summary>
         private readonly LogCategoryService _categoryService;
 
         /// <summary>
-        /// Machine Service
+        /// Machine Service.
         /// </summary>
         private readonly MachineService _machineService;
 
@@ -49,19 +46,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Ctor
 
-        /// <summary>
-        /// Parameter less Controller
-        /// </summary>
         public LogController()
             : this(null, null, null)
         {
         }
 
-        /// <summary>
-        /// Log Controller with services defined
-        /// </summary>
-        /// <param name="logService"></param>
-        /// <param name="categoryService"></param>
         public LogController(LogService logService, LogCategoryService categoryService, MachineService machineService)
         {
             _logService = logService ?? LogService.Create();
@@ -71,10 +60,131 @@ namespace Fanex.Maintenance.Controller
 
         #endregion Ctor
 
+        #region Action
+
+        /// <summary>
+        /// Log list page.
+        /// </summary>
+        /// <returns>Action result.</returns>
+        [HttpGet]
+        public ActionResult Index()
+        {
+            InitDataView();
+            InitPageSize();
+
+            ViewBag.ListLog = null;
+
+            GetLogCriteria criteria = new GetLogCriteria
+            {
+                CategoryId = 0,
+                MachineId = 0,
+                IsProduction = null,
+                IsMonitored = null,
+                From = DateTime.Now,
+                To = DateTime.Now,
+                Page = 0,
+                Size = 10,
+                Severity = "All"
+            };
+
+            return View(criteria);
+        }
+
+        /// <summary>
+        /// Get log page.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult Index(GetLogCriteria criteria)
+        {
+            InitDataView();
+            InitPageSize();
+
+            var totalRows = 0;
+
+            ////Get logs by date
+            IEnumerable<Log> listLogs = _logService.With(
+                criteria.CategoryId, 
+                criteria.MachineId,
+                criteria.IsProduction, 
+                criteria.IsMonitored, 
+                criteria.Severity)
+                .From(criteria.From)
+                .To(criteria.To)
+                .WithPagination(criteria.Page, criteria.Size)
+                .GetLogs(ref totalRows);
+
+            return Json(new
+            {
+                TotalRows = totalRows,
+                ListLog = listLogs
+            });
+        }
+
+        /// <summary>
+        /// Get details message.
+        /// </summary>
+        /// <param name="id">Log message ID.</param>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult GetLogMessage(int id)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return Json(_logService.GetMessage(id));
+            }
+
+            return Json(null);
+        }
+
+        #endregion Action
+
+        #region Ajax
+
+        /// <summary>
+        /// Remove Log.
+        /// </summary>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult RemoveLog()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return Json(_logService.From(DateTime.Now.AddDays(-5)).RemoveLogs());
+            }
+
+            return Json(0);
+        }
+
+        /// <summary>
+        /// Update log's monitored status.
+        /// </summary>
+        /// <param name="logId">Log object ID.</param>
+        /// <param name="isMonitored">Is monitored or not.</param>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult MonitorLog(string logId, bool isMonitored)
+        {
+            string updatedUsername = string.Empty;
+
+            if (Request.IsAjaxRequest())
+            {
+                int? userId = this.CurrentSession.UserId;
+                userId = isMonitored ? userId : null;
+                int affectedRows = _logService.MonitorLog(logId, userId, isMonitored);
+                updatedUsername = affectedRows != 0 ? this.CurrentSession.Username : string.Empty;
+            }
+
+            return Json(updatedUsername);
+        }
+
+        #endregion Ajax
+
         #region Private
 
         /// <summary>
-        /// Init Page Size
+        /// Initialize Page Size.
         /// </summary>
         private void InitPageSize()
         {
@@ -107,7 +217,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Machine Types data
+        /// Initialize Machine Types data.
         /// </summary>
         private void InitMachineTypes()
         {
@@ -132,7 +242,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Log Status data
+        /// Initialize Log Status data.
         /// </summary>
         private void InitLogStatus()
         {
@@ -157,7 +267,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Severities data
+        /// Initialize Severities data.
         /// </summary>
         private void InitSeverities()
         {
@@ -197,15 +307,14 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init data for View
+        /// Initialize data for View.
         /// </summary>
         private void InitDataView()
         {
             InitSeverities();
-            //InitMachineTypes();
             InitLogStatus();
 
-            ////Default selection for drop-down
+            // Default selection for drop-down
             SelectListItem defaultSelection = new SelectListItem
             {
                 Text = ViewResource.All,
@@ -213,7 +322,7 @@ namespace Fanex.Maintenance.Controller
                 Selected = true
             };
 
-            ////Get Category from DB
+            // Get Category from DB
             List<SelectListItem> listCategory = _categoryService.GetAll().Select(c => new SelectListItem
             {
                 Text = c.CategoryName,
@@ -224,163 +333,5 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion Private
-
-        #region Action
-
-        /// <summary>
-        /// Get log
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult Index()
-        {
-            InitDataView();
-
-            InitPageSize();
-
-            ViewBag.ListLog = null;
-
-            GetLogCriteria criteria = new GetLogCriteria
-            {
-                CategoryId = 0,
-                MachineId = 0,
-                IsProduction = null,
-                IsMonitored = null,
-                From = DateTime.Now,
-                To = DateTime.Now,
-                Page = 0,
-                Size = 10,
-                Severity = "All"
-            };
-
-            return View(criteria);
-        }
-
-        /// <summary>
-        /// Get log
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult Index(GetLogCriteria criteria)
-        {
-            InitDataView();
-
-            InitPageSize();
-
-            var totalRows = 0;
-
-            ////Get logs by date
-            IEnumerable<Log> listLogs = _logService.With(criteria.CategoryId, criteria.MachineId,
-                                                         criteria.IsProduction, criteria.IsMonitored, criteria.Severity)
-                .From(criteria.From)
-                .To(criteria.To)
-                .WithPagination(criteria.Page, criteria.Size)
-                .GetLogs(ref totalRows);
-
-            //if (criteria.GroupMessage)
-            //{
-            //    var listGroup = listLogs.GroupBy(m => new { m.Message, m.Severity, m.MachineName, m.TimeGroup, m.CategoryName });
-
-            //    var listLogGroup = new List<Log>();
-
-            //    foreach (var itemGroup in listGroup)
-            //    {
-            //        var countMonitored = 0;
-            //        var tempGroup = itemGroup.FirstOrDefault();
-            //        tempGroup.GroupMessageIds = tempGroup.LogId + ";";
-            //        tempGroup.CountGroupMessage = 1;
-            //        foreach (var item in itemGroup)
-            //        {
-            //            tempGroup.GroupMessageIds += item.LogId + ";";
-            //            tempGroup.CountGroupMessage += 1;
-
-            //            if (!item.IsMonitored)
-            //            {
-            //                countMonitored++;
-            //            }
-            //        }
-
-            //        tempGroup.IsMonitored = countMonitored > 0 ? false : tempGroup.IsMonitored;
-
-            //        listLogGroup.Add(tempGroup);
-            //    }
-
-            //    return Json(new
-            //    {
-            //        TotalRows = totalRows,
-            //        ListLog = listLogGroup
-            //    });
-            //}
-
-            return Json(new
-            {
-                TotalRows = totalRows,
-                ListLog = listLogs
-            });
-        }
-
-        /// <summary>
-        /// Get details message
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult GetLogMessage(int id)
-        {
-            if (Request.IsAjaxRequest())
-            {
-                string message = string.Empty;
-                message = _logService.GetMessage(id);
-                return Json(message);
-            }
-
-            return Json(null);
-        }
-
-        #endregion Action
-
-        #region Ajax
-
-        /// <summary>
-        /// Remove Log
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult RemoveLog()
-        {
-            if (Request.IsAjaxRequest())
-            {
-                return Json(_logService.From(DateTime.Now.AddDays(-5)).RemoveLogs());
-            }
-
-            return Json(0);
-        }
-
-        /// <summary>
-        /// Update log's monitored status
-        /// </summary>
-        /// <param name="logId"></param>
-        /// <param name="isMonitored"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult MonitorLog(string logId, bool isMonitored)
-        {
-            string updatedUsername = string.Empty;
-
-            if (Request.IsAjaxRequest())
-            {
-                int? userId = this.CurrentSession.UserId;
-                userId = isMonitored ? userId : null;
-                int affectedRows = _logService.MonitorLog(logId, userId, isMonitored);
-                updatedUsername = affectedRows != 0 ? this.CurrentSession.Username : string.Empty;
-            }
-
-            return Json(updatedUsername);
-        }
-
-        #endregion Ajax
     }
 }

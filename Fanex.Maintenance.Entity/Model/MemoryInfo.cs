@@ -7,14 +7,8 @@
 //   <change who="Ricky.Nguyen" date="2013.1.4">Created</change>
 // </history>
 
-
 namespace Fanex.Maintenance.Entity.Model
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

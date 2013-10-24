@@ -7,7 +7,7 @@ var Connection = function ($) {
 
         UpdateDefaultConnection: function (alaisId, conectionId) {
             $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/UpdateDefaultConenction"),
+                url: NAP.resolveClientUrl("ConnectionString/UpdateDefaultConnection"),
                 data: { aliasId: alaisId, conectionId: conectionId },
                 type: 'POST',
                 cache: false,
@@ -30,7 +30,7 @@ var Connection = function ($) {
 
          ShowConnectionString: function (conectionId) {
             $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/GetSecondaryConection/" + conectionId),
+                url: NAP.resolveClientUrl("ConnectionString/GetSecondaryConnection/" + conectionId),
                 type: 'GET',
                 cache: false,
                 beforeSend: function () {

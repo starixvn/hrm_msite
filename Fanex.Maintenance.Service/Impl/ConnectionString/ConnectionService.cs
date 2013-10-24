@@ -11,18 +11,19 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
+    using Fanex.Common.Helper;
     using Fanex.ConnectionString.Domain;
     using Fanex.Maintenance.Criteria.ConnectionString.Connection;
+    using Fanex.Maintenance.Criteria.Misc;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Repository.Impl.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Common.Helper;
-    using Fanex.Maintenance.Criteria.Misc;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Connection service.
+    /// </summary>
     public class ConnectionService : BaseService, IConnectionService
     {
         #region Member
@@ -45,6 +46,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #endregion Ctor
 
+        /// <summary>
+        /// Get connection by alias.
+        /// </summary>
+        /// <param name="aliasId">Connection string alias ID.</param>
+        /// <returns>List of connection of connection string.</returns>
         public IEnumerable<ConnectionStringConnection> GetByAlias(int aliasId)
         {
             Check.Argument.IsNotNegativeOrZero(aliasId, "aliasid");
@@ -58,7 +64,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
                 if (criteria.IsValid())
                 {
-                    return _connectionRepository.GetByAlais(criteria);
+                    return _connectionRepository.GetByAlias(criteria);
                 }
             }
             catch (Exception ex)
@@ -69,6 +75,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get connection by ID.
+        /// </summary>
+        /// <param name="id">Connection ID.</param>
+        /// <returns>Connection string.</returns>
         public ConnectionString GetById(int id)
         {
             Check.Argument.IsNotNegativeOrZero(id, "id");
@@ -93,20 +104,25 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-        public IEnumerable<ConnectionString> GetSecondaryConection(int id)
+        /// <summary>
+        /// Get secondary connection.
+        /// </summary>
+        /// <param name="id">Connection ID.</param>
+        /// <returns>List of connection string.</returns>
+        public IEnumerable<ConnectionString> GetSecondaryConnection(int id)
         {
             Check.Argument.IsNotNegativeOrZero(id, "id");
 
             try
             {
-                var criteria = new ConnectionGetSecondaryConectionCriteria
+                var criteria = new ConnectionGetSecondaryConnectionCriteria
                 {
                     ConnectionId = id
                 };
 
                 if (criteria.IsValid())
                 {
-                    return _connectionRepository.GetSecondaryConection(criteria);
+                    return _connectionRepository.GetSecondaryConnection(criteria);
                 }
             }
             catch (Exception ex)
@@ -117,6 +133,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Update default connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult UpdateDefaultConnection(ICriteria criteria)
         {
             // check parameters
@@ -139,6 +160,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Insert or update connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
             // check parameters

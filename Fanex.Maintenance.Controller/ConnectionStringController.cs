@@ -11,7 +11,6 @@ namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.ConnectionString.Domain;
@@ -25,8 +24,10 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Core.Helpers;
 
+    /// <summary>
+    /// Connection string controller.
+    /// </summary>
     [Authorize]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ConnectionStringController : BaseController
     {
         #region Member
@@ -66,50 +67,14 @@ namespace Fanex.Maintenance.Controller
 
         #endregion Ctor
 
-        #region Private
-
-        /// <summary>
-        /// Get select list item of all database server
-        /// </summary>
-        /// <param name="selectedId"></param>
-        /// <returns></returns>
-        private List<SelectListItem> GetSelectListDatabaseServer(int? selectedId = null)
-        {
-            // get all
-            var listDatabaseServer = _databaseServerService.GetAll();
-
-            return listDatabaseServer.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString(),
-                Selected = selectedId != null ? d.Id == selectedId : false
-            }).ToList();
-        }
-
-        /// <summary>
-        /// Get select list item of all site
-        /// </summary>
-        /// <param name="selectedId"></param>
-        /// <returns></returns>
-        private List<SelectListItem> GetSelectListSite(int? selectedId = null)
-        {
-            // get all
-            var listSite = _siteService.GetAll();
-
-            return listSite.Select(s => new SelectListItem
-            {
-                Text = s.Name,
-                Value = s.Id.ToString(),
-                Selected = selectedId != null ? s.Id == selectedId : false
-            }).ToList();
-        }
-
-        #endregion Private
-
         #region Manage Alias
 
         #region Mange
 
+        /// <summary>
+        /// Alias list.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Alias()
         {
@@ -126,26 +91,35 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Alias list.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult Alias(AliasGetAllCriteria model)
+        public ActionResult Alias(AliasGetAllCriteria criteria)
         {
             // get all database server with selected current database server
-            ViewBag.DatabaseServer = GetSelectListDatabaseServer(model.DbServerId);
+            ViewBag.DatabaseServer = GetSelectListDatabaseServer(criteria.DbServerId);
 
             // get all site with selected current site
-            ViewBag.Site = GetSelectListSite(model.SiteId);
+            ViewBag.Site = GetSelectListSite(criteria.SiteId);
 
             // get alias filter by site and database server
-            var listAlias = _aliasService.GetAll(model.Alias, model.DbServerId, model.SiteId);
+            var listAlias = _aliasService.GetAll(criteria.Alias, criteria.DbServerId, criteria.SiteId);
             ViewBag.ListAlias = listAlias;
 
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Mange
 
         #region Create
 
+        /// <summary>
+        /// Create alias.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult CreateAlias()
         {
@@ -156,33 +130,43 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Create alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult CreateAlias(AliasInsertCriteria model)
+        public ActionResult CreateAlias(AliasInsertCriteria criteria)
         {
             // get list site
             var listSite = _siteService.GetAll();
             ViewBag.Site = listSite.ToList();
 
-            model.Creator = CurrentSession.UserId;
-            model.CreatedDate = DateTime.Now;
+            criteria.Creator = CurrentSession.UserId;
+            criteria.CreatedDate = DateTime.Now;
 
             // insert new alias
-            var command = _aliasService.InsertOrUpdate(model);
+            var command = _aliasService.InsertOrUpdate(criteria);
 
             if (!command.IsSuccessful)
             {
-                return View(model);
+                return View(criteria);
             }
 
             ViewBag.Success = command.IsSuccessful;
 
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Create
 
         #region Edit
 
+        /// <summary>
+        /// Update alias.
+        /// </summary>
+        /// <param name="id">Alias object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditAlias(int id)
         {
@@ -206,30 +190,35 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Update alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult EditAlias(AliasUpdateCriteria model)
+        public ActionResult EditAlias(AliasUpdateCriteria criteria)
         {
             // get all site
             var listSite = _siteService.GetAll();
             ViewBag.Site = listSite.ToList();
 
-            model.Modifier = CurrentSession.UserId;
-            model.ModifiedDate = DateTime.Now;
+            criteria.Modifier = CurrentSession.UserId;
+            criteria.ModifiedDate = DateTime.Now;
 
             // update alias
-            var command = _aliasService.InsertOrUpdate(model);
+            var command = _aliasService.InsertOrUpdate(criteria);
 
             if (!command.IsSuccessful)
             {
-                return View(model);
+                return View(criteria);
             }
 
             ViewBag.Success = command.IsSuccessful;
 
-            var alias = _aliasService.Get(model.AliasId);
+            var alias = _aliasService.Get(criteria.AliasId);
             ViewBag.Alias = alias;
 
-            var listSiteAlias = _siteService.GetByAlias(model.AliasId);
+            var listSiteAlias = _siteService.GetByAlias(criteria.AliasId);
             ViewBag.SiteAlias = listSiteAlias;
 
             return View();
@@ -243,13 +232,18 @@ namespace Fanex.Maintenance.Controller
 
         #region Manage
 
+        /// <summary>
+        /// Connection list.
+        /// </summary>
+        /// <param name="aliasId">Alias object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult Connection(int id)
+        public ActionResult Connection(int aliasId)
         {
             // get all connection by alias id
-            var listConnection = _connectionService.GetByAlias(id);
+            var listConnection = _connectionService.GetByAlias(aliasId);
 
-            var alias = _aliasService.Get(id);
+            var alias = _aliasService.Get(aliasId);
             ViewBag.Alias = alias;
 
             return View(listConnection);
@@ -259,23 +253,27 @@ namespace Fanex.Maintenance.Controller
 
         #region Create
 
+        /// <summary>
+        /// Create connection.
+        /// </summary>
+        /// <param name="aliasId">Alias object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult CreateConnection(int id)
+        public ActionResult CreateConnection(int aliasId)
         {
             // get alias by id
-            var alias = _aliasService.Get(id);
+            var alias = _aliasService.Get(aliasId);
+
             if (ReferenceEquals(alias, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
             }
 
             ViewBag.Alias = alias;
-
-            // get database server
             ViewBag.DbServer = GetSelectListDatabaseServer();
 
             // get connection for select secondary connection string
-            var listConnection = _connectionService.GetByAlias(id);
+            var listConnection = _connectionService.GetByAlias(aliasId);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
                 Value = c.ConnectionString.Id.ToString(),
@@ -284,24 +282,28 @@ namespace Fanex.Maintenance.Controller
 
             return View(new ConnectionInsertCriteria
             {
-                AliasId = id
+                AliasId = aliasId
             });
         }
 
+        /// <summary>
+        /// Create connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult CreateConnection(ConnectionInsertCriteria model)
+        public ActionResult CreateConnection(ConnectionInsertCriteria criteria)
         {
-            var alias = _aliasService.Get(model.AliasId);
+            var alias = _aliasService.Get(criteria.AliasId);
             if (ReferenceEquals(alias, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
             }
 
-
             var connection = _connectionService.GetByAlias(alias.Id);
             if (!connection.Any())
             {
-                model.IsDefault = true;
+                criteria.IsDefault = true;
             }
 
             ViewBag.Alias = alias;
@@ -310,37 +312,43 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DbServer = GetSelectListDatabaseServer();
 
             // get list connection for select secondary connection string
-            var listConnection = _connectionService.GetByAlias(model.AliasId);
+            var listConnection = _connectionService.GetByAlias(criteria.AliasId);
             ViewBag.ListConnection = listConnection.Select(c => new SelectListItem
             {
                 Value = c.ConnectionString.Id.ToString(),
                 Text = c.ConnectionString.Connection
             }).ToList();
 
-            model.Creator = CurrentSession.UserId;
-            model.CreatedDate = DateTime.Now;
+            criteria.Creator = CurrentSession.UserId;
+            criteria.CreatedDate = DateTime.Now;
 
             // insert new alias
-            var command = _connectionService.InsertOrUpdate(model);
+            var command = _connectionService.InsertOrUpdate(criteria);
             if (!command.IsSuccessful)
             {
-                return View(model);
+                return View(criteria);
             }
 
             ViewBag.Success = command.IsSuccessful;
 
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Create
 
         #region Edit
 
+        /// <summary>
+        /// Edit connection.
+        /// </summary>
+        /// <param name="id">Connection ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditConnection(int id)
         {
             // get connection by id
             var connection = _connectionService.GetById(id);
+
             if (ReferenceEquals(connection, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
@@ -376,11 +384,16 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        /// <summary>
+        /// Edit connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult EditConnection(ConnectionUpdateCriteria model)
+        public ActionResult EditConnection(ConnectionUpdateCriteria criteria)
         {
             // get connection by id
-            var connection = _connectionService.GetById(model.ConnectionId);
+            var connection = _connectionService.GetById(criteria.ConnectionId);
             if (ReferenceEquals(connection, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
@@ -396,19 +409,19 @@ namespace Fanex.Maintenance.Controller
                 Selected = connection.PrimaryConnection != null ? c.ConnectionString.Id == connection.PrimaryConnection.Id : false
             }).ToList();
 
-            model.Modifier = CurrentSession.UserId;
-            model.ModifiedDate = DateTime.Now;
+            criteria.Modifier = CurrentSession.UserId;
+            criteria.ModifiedDate = DateTime.Now;
 
             // update connection string
-            var command = _connectionService.InsertOrUpdate(model);
+            var command = _connectionService.InsertOrUpdate(criteria);
             if (!command.IsSuccessful)
             {
-                return View(model);
+                return View(criteria);
             }
 
             ViewBag.Success = command.IsSuccessful;
 
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Edit
@@ -419,6 +432,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Mange
 
+        /// <summary>
+        /// Site list.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Site()
         {
@@ -433,57 +450,77 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Site list.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult Site(SiteGetAllCriteria model)
+        public ActionResult Site(SiteGetAllCriteria criteria)
         {
             // get all site by name and database server
-            var listSite = _siteService.GetSiteWithNumOfAlias(model.Name, model.DbServerId);
+            var listSite = _siteService.GetSiteWithNumOfAlias(criteria.Name, criteria.DbServerId);
 
             // get all database server
             ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
             ViewBag.ListSite = listSite;
 
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Mange
 
         #region Create
 
+        /// <summary>
+        /// Create site.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult CreateSite()
         {
             return View();
         }
 
+        /// <summary>
+        /// Create site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult CreateSite(SiteInsertCriteria model)
+        public ActionResult CreateSite(SiteInsertCriteria criteria)
         {
-            model.Creator = CurrentSession.UserId;
-            model.CreatedDate = DateTime.Now;
+            criteria.Creator = CurrentSession.UserId;
+            criteria.CreatedDate = DateTime.Now;
 
             // insert new site
-            var command = _siteService.InsertOrUpdate(model);
+            var command = _siteService.InsertOrUpdate(criteria);
             if (!command.IsSuccessful)
             {
-                return View(model);
+                return View(criteria);
             }
 
             ViewBag.Success = command.IsSuccessful;
 
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Create
 
         #region Edit
 
+        /// <summary>
+        /// Update site.
+        /// </summary>
+        /// <param name="id">Site object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditSite(int id)
         {
             // get site by id
             var site = _siteService.GetById(id);
+
             if (ReferenceEquals(site, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
@@ -500,28 +537,38 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        /// <summary>
+        /// Update site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult EditSite(SiteUpdateCriteria model)
+        public ActionResult EditSite(SiteUpdateCriteria criteria)
         {
-            model.Modifier = CurrentSession.UserId;
-            model.ModifiedDate = DateTime.Now;
+            criteria.Modifier = CurrentSession.UserId;
+            criteria.ModifiedDate = DateTime.Now;
 
             // update site
-            var command = _siteService.InsertOrUpdate(model);
+            var command = _siteService.InsertOrUpdate(criteria);
             if (!command.IsSuccessful)
             {
-                return View(model);
+                return View(criteria);
             }
 
             ViewBag.Success = command.IsSuccessful;
 
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Edit
 
         #region Connection
 
+        /// <summary>
+        /// View connection.
+        /// </summary>
+        /// <param name="siteId">Site object ID.</param>
+        /// <returns>View result.</returns>
         public ViewResult ViewConnection(int siteId)
         {
             var list = _aliasService.GetAll(string.Empty, null, siteId);
@@ -536,6 +583,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Manage
 
+        /// <summary>
+        /// Database server list.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult DatabaseServer()
         {
@@ -546,11 +597,16 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Database server list.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult DatabaseServer(DatabaseServerGetAllCriteria model)
+        public ActionResult DatabaseServer(DatabaseServerGetAllCriteria criteria)
         {
             // get all by name
-            var listDbServer = _databaseServerService.GetWithNumOfSite(model.Name);
+            var listDbServer = _databaseServerService.GetWithNumOfSite(criteria.Name);
             ViewBag.ListDbServer = listDbServer;
 
             return View();
@@ -560,73 +616,93 @@ namespace Fanex.Maintenance.Controller
 
         #region Create
 
+        /// <summary>
+        /// Create database server.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult CreateDbServer()
         {
             return View();
         }
 
+        /// <summary>
+        /// Create database server.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult CreateDbServer(DatabaseServerInsertCriteria model)
+        public ActionResult CreateDbServer(DatabaseServerInsertCriteria criteria)
         {
-            model.Creator = CurrentSession.UserId;
-            model.CreatedDate = DateTime.Now;
+            criteria.Creator = CurrentSession.UserId;
+            criteria.CreatedDate = DateTime.Now;
 
             // insert new
-            var command = _databaseServerService.InsertOrUpdate(model);
+            var command = _databaseServerService.InsertOrUpdate(criteria);
 
             if (!command.IsSuccessful)
             {
-                return View(model);
+                return View(criteria);
             }
 
             ViewBag.Success = command.IsSuccessful;
 
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Create
 
         #region Edit
 
+        /// <summary>
+        /// Edit database server.
+        /// </summary>
+        /// <param name="id">DB server ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditDbServer(int id)
         {
             // get by id
-            var dbServer = _databaseServerService.GetById(id);
-            if (ReferenceEquals(dbServer, null))
+            var databaseServer = _databaseServerService.GetById(id);
+
+            if (ReferenceEquals(databaseServer, null))
             {
                 return RedirectToAction("NotFound", "CommonError");
             }
 
             var model = new DatabaseServerUpdateCriteria
             {
-                DbServerId = dbServer.Id,
-                Description = dbServer.Description,
-                IsActive = dbServer.IsActive,
-                Name = dbServer.Name,
-                ServerIp = dbServer.ServerIP
+                DbServerId = databaseServer.Id,
+                Description = databaseServer.Description,
+                IsActive = databaseServer.IsActive,
+                Name = databaseServer.Name,
+                ServerIp = databaseServer.ServerIP
             };
 
             return View(model);
         }
 
+        /// <summary>
+        /// Edit database server.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult EditDbServer(DatabaseServerUpdateCriteria model)
+        public ActionResult EditDbServer(DatabaseServerUpdateCriteria criteria)
         {
-            model.Modifier = CurrentSession.UserId;
-            model.ModifiedDate = DateTime.Now;
+            criteria.Modifier = CurrentSession.UserId;
+            criteria.ModifiedDate = DateTime.Now;
 
-            var command = _databaseServerService.InsertOrUpdate(model);
+            var command = _databaseServerService.InsertOrUpdate(criteria);
 
             if (!command.IsSuccessful)
             {
-                return View(model);
+                return View(criteria);
             }
 
             ViewBag.Success = command.IsSuccessful;
 
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Edit
@@ -635,6 +711,10 @@ namespace Fanex.Maintenance.Controller
 
         #region Quick change connection from db server to other db server
 
+        /// <summary>
+        /// Change connection.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult ChangeConnection()
         {
@@ -643,20 +723,29 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Change connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult ChangeConnection(DatabaseServerGetConnectionFromDbServerCriteria model)
+        public ActionResult ChangeConnection(DatabaseServerGetConnectionFromDbServerCriteria criteria)
         {
             ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
-            var list = _aliasService.GetSwitchConnection(model.FromDbServerId, model.ToDbServerId);
+            var list = _aliasService.GetSwitchConnection(criteria.FromDbServerId, criteria.ToDbServerId);
             ViewBag.ListConnection = list;
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Quick change connection from db server to other db server
 
         #region Quick change second (backup) connection from db server
 
+        /// <summary>
+        /// Change second connection.
+        /// </summary>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult ChangeSecondConnection()
         {
@@ -666,21 +755,37 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Change second connection.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult ChangeSecondConnection(DatabaseServerGetSecondConnectionFromDbServerCriteria model)
+        public ActionResult ChangeSecondConnection(DatabaseServerGetSecondConnectionFromDbServerCriteria criteria)
         {
             var listDatabaseServer = _databaseServerService.GetAll();
             ViewBag.DatabaseServer = GetSelectListDatabaseServer();
 
-            var list = _aliasService.GetSwitchSecondConnection(model.DbServerId);
+            var list = _aliasService.GetSwitchSecondConnection(criteria.DbServerId);
             ViewBag.ListConnection = list;
-            return View(model);
+            return View(criteria);
         }
 
         #endregion Quick change second (backup) connection from db server
 
         #region Log management
 
+        /// <summary>
+        /// View log page.
+        /// </summary>
+        /// <param name="id">Page index.</param>
+        /// <param name="size">Number of items per page.</param>
+        /// <param name="q">Log name filter.</param>
+        /// <param name="username">Username filter.</param>
+        /// <param name="from">From DateTime.</param>
+        /// <param name="to">To DateTime.</param>
+        /// <param name="filterBy">Draw filter.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Log(
             int id = 1,
@@ -720,20 +825,25 @@ namespace Fanex.Maintenance.Controller
             return View(criteria);
         }
 
+        /// <summary>
+        /// Search log.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult Log(LogExecSpSearchCriteria model)
+        public ActionResult Log(LogExecSpSearchCriteria criteria)
         {
             return RedirectToAction(
              "Log",
              new
              {
-                 id = model.PageIndex,
-                 size = model.PageSize,
-                 q = model.Name,
-                 username = model.Username,
-                 from = model.From.ToString("MMM dd,yyyy"),
-                 to = model.To.ToString("MMM dd,yyyy"),
-                 filterBy = model.FilterType
+                 id = criteria.PageIndex,
+                 size = criteria.PageSize,
+                 q = criteria.Name,
+                 username = criteria.Username,
+                 from = criteria.From.ToString("MMM dd,yyyy"),
+                 to = criteria.To.ToString("MMM dd,yyyy"),
+                 filterBy = criteria.FilterType
              });
         }
 
@@ -741,26 +851,36 @@ namespace Fanex.Maintenance.Controller
 
         #region Ajax
 
+        /// <summary>
+        /// Get site by alias.
+        /// </summary>
+        /// <param name="aliasId">Alias object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult GetSiteByAlias(int id)
+        public ActionResult GetSiteByAlias(int aliasId)
         {
             var listSite = new List<Site>();
 
             if (Request.IsAjaxRequest())
             {
-                listSite = _siteService.GetByAlias(id).ToList();
+                listSite = _siteService.GetByAlias(aliasId).ToList();
             }
 
             return View(listSite);
         }
 
+        /// <summary>
+        /// Get connection by alias.
+        /// </summary>
+        /// <param name="aliasId">Alias object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult GetConnectionByAlias(int id)
+        public ActionResult GetConnectionByAlias(int aliasId)
         {
             if (Request.IsAjaxRequest())
             {
-                var listConnection = _connectionService.GetByAlias(id);
-                ViewBag.AliasId = id;
+                var listConnection = _connectionService.GetByAlias(aliasId);
+                ViewBag.AliasId = aliasId;
 
                 return View(listConnection);
             }
@@ -768,8 +888,14 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Update default connection.
+        /// </summary>
+        /// <param name="aliasId">Connection string alias ID.</param>
+        /// <param name="conectionId">Connection ID.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UpdateDefaultConenction(int aliasId, int conectionId)
+        public ActionResult UpdateDefaultConnection(int aliasId, int conectionId)
         {
             if (Request.IsAjaxRequest())
             {
@@ -789,6 +915,12 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// Update alias status.
+        /// </summary>
+        /// <param name="aliasId">Connection string alias ID.</param>
+        /// <param name="isActive">Is active or not.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UpdateStatusAlias(int aliasId, bool isActive)
         {
@@ -809,18 +941,29 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// Get secondary connection.
+        /// </summary>
+        /// <param name="id">Connection ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult GetSecondaryConection(int id)
+        public ActionResult GetSecondaryConnection(int id)
         {
-            var listConection = new List<ConnectionString>();
+            var listConnection = new List<ConnectionString>();
+
             if (Request.IsAjaxRequest())
             {
-                listConection = _connectionService.GetSecondaryConection(id).ToList();
+                listConnection = _connectionService.GetSecondaryConnection(id).ToList();
             }
 
-            return View(listConection);
+            return View(listConnection);
         }
 
+        /// <summary>
+        /// Get alias by site.
+        /// </summary>
+        /// <param name="id">Site object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetAliasBySite(int id)
         {
@@ -834,6 +977,12 @@ namespace Fanex.Maintenance.Controller
             return View(listAlias);
         }
 
+        /// <summary>
+        /// Update site status.
+        /// </summary>
+        /// <param name="siteId">Site object ID.</param>
+        /// <param name="isActive">Is active or not.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UpdateStatusSite(int siteId, bool isActive)
         {
@@ -855,14 +1004,20 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// Update database server status.
+        /// </summary>
+        /// <param name="databaseServerId">Database server ID.</param>
+        /// <param name="isActive">Is active or not.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UpdateStatusDbServer(int dbServerId, bool isActive)
+        public ActionResult UpdateStatusDbServer(int databaseServerId, bool isActive)
         {
             if (Request.IsAjaxRequest())
             {
                 var model = new DatabaseServerUpdateStatusCriteria
                 {
-                    DbServerId = dbServerId,
+                    DbServerId = databaseServerId,
                     IsActive = isActive,
                     Modifier = CurrentSession.UserId,
                     ModifiedDate = DateTime.Now
@@ -876,6 +1031,11 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// Get site by DB server.
+        /// </summary>
+        /// <param name="id">Database server ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult GetSiteByDbServer(int id)
         {
@@ -889,6 +1049,11 @@ namespace Fanex.Maintenance.Controller
             return View(listSite);
         }
 
+        /// <summary>
+        /// Change connection from DB server to another DB server.
+        /// </summary>
+        /// <param name="aliasConnection">Alias connection.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult ChangeConnectionFromDbServerToDbServer(string aliasConnection)
         {
@@ -907,6 +1072,11 @@ namespace Fanex.Maintenance.Controller
             return Json(false);
         }
 
+        /// <summary>
+        /// Log detail page.
+        /// </summary>
+        /// <param name="id">Log object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult LogDetail(int id)
         {
@@ -924,6 +1094,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Partial view
 
+        /// <summary>
+        /// Insert connection log alias.
+        /// </summary>
+        /// <param name="log">Log execute SP.</param>
+        /// <returns>Partial view result.</returns>
         public PartialViewResult _ConnectionLog_Alias_Insert(LogExecSp log)
         {
             var listSite = new List<LogData>();
@@ -934,6 +1109,11 @@ namespace Fanex.Maintenance.Controller
             return PartialView(listData);
         }
 
+        /// <summary>
+        /// Update connection log alias.
+        /// </summary>
+        /// <param name="log">Log execute SP.</param>
+        /// <returns>Partial view result.</returns>
         public PartialViewResult _ConnectionLog_Alias_Update(LogExecSp log)
         {
             var listSite = new List<LogData>();
@@ -947,6 +1127,11 @@ namespace Fanex.Maintenance.Controller
             return PartialView(listData);
         }
 
+        /// <summary>
+        /// View log data.
+        /// </summary>
+        /// <param name="log">Log execute SP.</param>
+        /// <returns>Partial view result.</returns>
         public PartialViewResult _ConnectionLog_LogData(LogExecSp log)
         {
             var listData = new List<LogData>();
@@ -954,7 +1139,6 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_Insert)
             {
                 listData = _logService.GetValueConnectionInsert(log);
-
                 ViewBag.IsNew = true;
 
                 return PartialView(listData);
@@ -964,7 +1148,6 @@ namespace Fanex.Maintenance.Controller
                 || log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_UpdateDefaultConnection)
             {
                 listData = _logService.GetValueConnectionUpdate(log);
-
                 ViewBag.IsNew = false;
 
                 return PartialView(listData);
@@ -973,7 +1156,6 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_DatabaseServer_Insert)
             {
                 listData = _logService.GetValueDatabaseServerInsert(log);
-
                 ViewBag.IsNew = true;
 
                 return PartialView(listData);
@@ -982,7 +1164,6 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_DatabaseServer_Update)
             {
                 listData = _logService.GetValueDatabaseServerUpdate(log);
-
                 ViewBag.IsNew = false;
 
                 return PartialView(listData);
@@ -991,7 +1172,6 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_Site_Insert)
             {
                 listData = _logService.GetValueSiteInsert(log);
-
                 ViewBag.IsNew = true;
 
                 return PartialView(listData);
@@ -1000,19 +1180,22 @@ namespace Fanex.Maintenance.Controller
             if (log.ActionId == (int)ConLogAction.ConnectionString_Site_Update)
             {
                 listData = _logService.GetValueSiteUpdate(log);
-
                 ViewBag.IsNew = false;
 
                 return PartialView(listData);
             }
 
             listData = _logService.GetValueUpdateStatus(log);
-
             ViewBag.IsNew = false;
 
             return PartialView(listData);
         }
 
+        /// <summary>
+        /// Change connection.
+        /// </summary>
+        /// <param name="log">Execute SP log.</param>
+        /// <returns>Partial view result.</returns>
         public PartialViewResult _ConnectionLog_LogData_ChangeConnection(LogExecSp log)
         {
             var listOld = new List<ConnectionString>();
@@ -1024,5 +1207,44 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion Partial view
+        #region Private
+
+        /// <summary>
+        /// Get select list item of all database server.
+        /// </summary>
+        /// <param name="selectedId">Selected ID.</param>
+        /// <returns>List of selected list item.</returns>
+        private List<SelectListItem> GetSelectListDatabaseServer(int? selectedId = null)
+        {
+            // get all
+            var listDatabaseServer = _databaseServerService.GetAll();
+
+            return listDatabaseServer.Select(d => new SelectListItem
+            {
+                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
+                Value = d.Id.ToString(),
+                Selected = selectedId != null ? d.Id == selectedId : false
+            }).ToList();
+        }
+
+        /// <summary>
+        /// Get select list item of all site.
+        /// </summary>
+        /// <param name="selectedId">Selected ID.</param>
+        /// <returns>List of selected list item.</returns>
+        private List<SelectListItem> GetSelectListSite(int? selectedId = null)
+        {
+            // get all
+            var listSite = _siteService.GetAll();
+
+            return listSite.Select(s => new SelectListItem
+            {
+                Text = s.Name,
+                Value = s.Id.ToString(),
+                Selected = selectedId != null ? s.Id == selectedId : false
+            }).ToList();
+        }
+
+        #endregion Private
     }
 }

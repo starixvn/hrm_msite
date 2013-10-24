@@ -10,178 +10,171 @@
 namespace Fanex.Maintenance.Repository.Impl.ConnectionString
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Fanex.Common.Extensions;
     using Fanex.ConnectionString.Domain;
     using Fanex.Data;
+    using Fanex.Maintenance.Criteria.Misc;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
-    using System.Collections;
-    using Fanex.Maintenance.Criteria.Misc;
-    using System.Linq;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Alias repository.
+    /// </summary>
     public class AliasRepository : BaseRepository<Alias>, IAliasRepository
     {
+        /// <summary>
+        /// Get all alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of alias connection string.</returns>
         public IEnumerable<AliasConnectionString> GetAll(ICriteria criteria)
         {
-            try
-            {
-                Func<IDataReader, AliasConnectionString> objMapFunc = (reader) =>
-                       {
-                           return new AliasConnectionString
-                           {
-                               Alias = new Alias
-                               {
-                                   Id = reader.ToInt("AliasId"),
-                                   Name = reader.ToString("Name"),
-                                   Description = reader.ToString("Description"),
-                                   IsActive = reader.ToBool("IsActive"),
-                                   Modifier = !reader.IsDBNull("ModifierUserId") ? new Users
-                                   {
-                                       Id = reader.ToInt("ModifierUserId"),
-                                       Name = reader.ToString("ModifierUsername")
-                                   } : new Users(),
-                                   ModifiedDate = !reader.IsDBNull("ModifiedDate") ? reader.ToDateTime("ModifiedDate") : DateTime.Now
-                               },
-                               ConnectionString = new ConnectionString
-                               {
-                                   Id = reader.ToInt("ConnectionStringId"),
-                                   Alias = new Alias
-                                   {
-                                       Id = reader.ToInt("AliasId"),
-                                       Name = reader.ToString("Name")
-                                   },
-                                   InitialCatalog = reader.ToString("InitialCatalog"),
-                                   IntegratedSecurity = reader.ToBool("IntegratedSecurity"),
-                                   UserID = reader.ToString("UserId"),
-                                   Password = reader.ToString("Password"),
-                                   FreeText = reader.ToString("FreeText"),
-                                   Server = new DatabaseServer
-                                   {
-                                       Id = reader.ToInt("DbServerId"),
-                                       ServerIP = reader.ToString("ServerIP")
-                                   }
-                               },
-                               NumOfSite = reader.ToInt("NumOfSite")
-                           };
-                       };
+            Func<IDataReader, AliasConnectionString> objMapFunc = (reader) =>
+                    {
+                        return new AliasConnectionString
+                        {
+                            Alias = new Alias
+                            {
+                                Id = reader.ToInt("AliasId"),
+                                Name = reader.ToString("Name"),
+                                Description = reader.ToString("Description"),
+                                IsActive = reader.ToBool("IsActive"),
+                                Modifier = !reader.IsDBNull("ModifierUserId") ? new Users
+                                {
+                                    Id = reader.ToInt("ModifierUserId"),
+                                    Name = reader.ToString("ModifierUsername")
+                                } 
+                                : new Users(),
+                                ModifiedDate = !reader.IsDBNull("ModifiedDate") ? reader.ToDateTime("ModifiedDate") : DateTime.Now
+                            },
+                            ConnectionString = new ConnectionString
+                            {
+                                Id = reader.ToInt("ConnectionStringId"),
+                                Alias = new Alias
+                                {
+                                    Id = reader.ToInt("AliasId"),
+                                    Name = reader.ToString("Name")
+                                },
+                                InitialCatalog = reader.ToString("InitialCatalog"),
+                                IntegratedSecurity = reader.ToBool("IntegratedSecurity"),
+                                UserID = reader.ToString("UserId"),
+                                Password = reader.ToString("Password"),
+                                FreeText = reader.ToString("FreeText"),
+                                Server = new DatabaseServer
+                                {
+                                    Id = reader.ToInt("DbServerId"),
+                                    ServerIP = reader.ToString("ServerIP")
+                                }
+                            },
+                            NumOfSite = reader.ToInt("NumOfSite")
+                        };
+                    };
 
-                return this.Fetch<AliasConnectionString>(criteria, objMapFunc).OrderBy(x => x.Alias.Name).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return this.Fetch<AliasConnectionString>(criteria, objMapFunc).OrderBy(x => x.Alias.Name).ToList();
         }
 
+        /// <summary>
+        /// Get alias by site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of alias.</returns>
         public IEnumerable<Alias> GetBySite(ICriteria criteria)
         {
-            try
-            {
-                return Fetch<Alias>(criteria).OrderBy(x => x.Name).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return Fetch<Alias>(criteria).OrderBy(x => x.Name).ToList();
         }
 
+        /// <summary>
+        /// Get switch connection alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of alias connection string connection.</returns>
         public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(ICriteria criteria)
         {
-            try
+            Func<IDataReader, AliasConnectionStringConnection> objMapFunc = (reader) =>
             {
-                Func<IDataReader, AliasConnectionStringConnection> objMapFunc = (reader) =>
+                return new AliasConnectionStringConnection
                 {
-                    return new AliasConnectionStringConnection
+                    Alias = new Alias
                     {
+                        Id = reader.ToInt("AliasId"),
+                        Name = reader.ToString("Name")
+                    },
+                    FromConnectionString = new ConnectionString
+                    {
+                        Id = reader.ToInt("ConnectionStringId"),
                         Alias = new Alias
                         {
                             Id = reader.ToInt("AliasId"),
                             Name = reader.ToString("Name")
                         },
-                        FromConnectionString = new ConnectionString
+                        InitialCatalog = reader.ToString("InitialCatalog"),
+                        IntegratedSecurity = reader.ToBool("IntegratedSecurity"),
+                        UserID = reader.ToString("UserId"),
+                        Password = reader.ToString("Password"),
+                        FreeText = reader.ToString("FreeText"),
+                        Server = new DatabaseServer
                         {
-                            Id = reader.ToInt("ConnectionStringId"),
-                            Alias = new Alias
-                            {
-                                Id = reader.ToInt("AliasId"),
-                                Name = reader.ToString("Name")
-                            },
-                            InitialCatalog = reader.ToString("InitialCatalog"),
-                            IntegratedSecurity = reader.ToBool("IntegratedSecurity"),
-                            UserID = reader.ToString("UserId"),
-                            Password = reader.ToString("Password"),
-                            FreeText = reader.ToString("FreeText"),
-                            Server = new DatabaseServer
-                            {
-                                Id = reader.ToInt("DbServerId"),
-                                ServerIP = reader.ToString("ServerIP")
-                            }
-                        },
-                        ToConnectionString = new ConnectionString
-                        {
-                            Id = reader.ToInt("ToConnectionStringId"),
-                            Alias = new Alias
-                            {
-                                Id = reader.ToInt("AliasId"),
-                                Name = reader.ToString("Name")
-                            },
-                            InitialCatalog = reader.ToString("ToInitialCatalog"),
-                            IntegratedSecurity = reader.ToBool("ToIntegratedSecurity"),
-                            UserID = reader.ToString("ToUserId"),
-                            Password = reader.ToString("ToPassword"),
-                            FreeText = reader.ToString("ToFreeText"),
-                            Server = new DatabaseServer
-                            {
-                                Id = reader.ToInt("ToDbServerId"),
-                                ServerIP = reader.ToString("ToServerIP")
-                            }
+                            Id = reader.ToInt("DbServerId"),
+                            ServerIP = reader.ToString("ServerIP")
                         }
-                    };
+                    },
+                    ToConnectionString = new ConnectionString
+                    {
+                        Id = reader.ToInt("ToConnectionStringId"),
+                        Alias = new Alias
+                        {
+                            Id = reader.ToInt("AliasId"),
+                            Name = reader.ToString("Name")
+                        },
+                        InitialCatalog = reader.ToString("ToInitialCatalog"),
+                        IntegratedSecurity = reader.ToBool("ToIntegratedSecurity"),
+                        UserID = reader.ToString("ToUserId"),
+                        Password = reader.ToString("ToPassword"),
+                        FreeText = reader.ToString("ToFreeText"),
+                        Server = new DatabaseServer
+                        {
+                            Id = reader.ToInt("ToDbServerId"),
+                            ServerIP = reader.ToString("ToServerIP")
+                        }
+                    }
                 };
+            };
 
-                return this.Fetch<AliasConnectionStringConnection>(criteria, objMapFunc).OrderBy(x => x.Alias.Name).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return this.Fetch<AliasConnectionStringConnection>(criteria, objMapFunc).OrderBy(x => x.Alias.Name).ToList();
         }
 
+        /// <summary>
+        /// Get alias by ID.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Alias object.</returns>
         public Alias GetById(ICriteria criteria)
         {
-            try
-            {
-                return Get<Alias>(criteria);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }    
+            return Get<Alias>(criteria);
+        }
 
+        /// <summary>
+        /// Insert or update alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="logCriteria">Log criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria, ICriteria logCriteria)
         {
-            try
-            {
-                Hashtable hash = criteria.GetSpParams();
-                hash = logCriteria.AddSpParams(hash);
-                hash = (new ResultCriteria()).AddSpParams(hash);
+            Hashtable hash = criteria.GetSpParams();
+            hash = logCriteria.AddSpParams(hash);
+            hash = (new ResultCriteria()).AddSpParams(hash);
 
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    db.ExecuteNonQuery(hash);
-
-                    return GetCommandResult(hash);
-                }
-            }
-            catch (Exception ex)
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                throw ex;
+                db.ExecuteNonQuery(hash);
+
+                return GetCommandResult(hash);
             }
         }
     }

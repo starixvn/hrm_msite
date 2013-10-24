@@ -6,9 +6,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Core", "Fanex.Maintenance.Core\Fanex.Maintenance.Core.csproj", "{60BC3FA8-DF7C-4024-B469-4ED110420143}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0CF3D4F1-7F6A-4D7E-936C-4991B2BF3451}"
-	ProjectSection(SolutionItems) = preProject
-		Settings.StyleCop = Settings.StyleCop
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Criteria", "Fanex.Maintenance.Criteria\Fanex.Maintenance.Criteria.csproj", "{4004F1EE-1FB8-486C-903E-326C360DBD81}"
 EndProject

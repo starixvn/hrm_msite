@@ -9,23 +9,25 @@
 
 namespace Fanex.Maintenance.Controller.Hubs
 {
+    using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core.Configurations;
+    using Fanex.Maintenance.Core.Helper;
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.Maintenance.Repository.Impl.JobManagement;
     using Microsoft.AspNet.SignalR.Hubs;
-    using Fanex.Maintenance.Core.Helper;
-    using System;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Server information hub.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ServerInfoHub : Hub
     {
-        public void SendData(string data)
+        /// <summary>
+        /// Send data.
+        /// </summary>
+        /// <param name="data">Mail data.</param>
+        public void Data(string data)
         {
             try
             {
@@ -43,7 +45,7 @@ namespace Fanex.Maintenance.Controller.Hubs
         }
 
         /// <summary>
-        /// Get List Server Resource info
+        /// Get list server information first time.
         /// </summary>
         public void GetListServerInfoFirstTime()
         {
@@ -51,14 +53,15 @@ namespace Fanex.Maintenance.Controller.Hubs
 
             foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
             {
-                ResourceInfo resourceInfo = (new ServerRepository()).GetServerResourceInfo(new GetResourceInfoCriteria(), server.ConnectionString);
+                ResourceInfo resourceInfo = 
+                    (new ServerRepository()).GetServerResourceInfo(new GetResourceInfoCriteria(), server.ConnectionString);
+
                 resourceInfo.ServerIp = server.ServerIp;
                 resourceInfo.ServerName = server.ServerIp.Replace(".", "_");
                 resourceInfoes.Add(resourceInfo);
             }
 
             Clients.All.firstMessage(resourceInfoes);
-            //Clients.firstMessage(resourceInfoes);
         }
     }
 }

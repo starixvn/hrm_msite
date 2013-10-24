@@ -9,13 +9,11 @@
 
 namespace Fanex.Maintenance.Service.Interface.JobManagement
 {
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Entity.Model;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Server service interface.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public interface IServerService
     {
         ServerFullInfo GetServerFullInformation(string serverIp);

@@ -1,4 +1,4 @@
-﻿// <copyright file="FunctionKeys.cs" company="Nexcel Solutions Vietnam">
+﻿// <copyright file="ConLogAction.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved. 
 // </copyright>
 //
@@ -7,38 +7,41 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 1/28/2013 6:18:35 PM
+// Lasted generated date: 10/23/2013 3:07:46 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")] 
+/// <summary>
+/// Connection log action.
+/// </summary>
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification="Generated code")]
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification="Generated code")]
 public enum ConLogAction
 {
-      
     ConnectionString_Alias_Insert = 1,       
-      
+
     ConnectionString_Alias_Update = 2,       
-      
+
     ConnectionString_Alias_UpdateStatus = 3,       
-      
+
     ConnectionString_ConnectionString_ChangeConnectionFromDbServer = 4,       
-      
+
     ConnectionString_ConnectionString_Insert = 5,       
-      
+
     ConnectionString_ConnectionString_Update = 6,       
-      
+
     ConnectionString_ConnectionString_UpdateDefaultConnection = 7,       
-      
+
     ConnectionString_DatabaseServer_Insert = 8,       
-      
+
     ConnectionString_DatabaseServer_Update = 9,       
-      
+
     ConnectionString_DatabaseServer_UpdateStatus = 10,       
-      
+
     ConnectionString_Site_Insert = 11,       
-      
+
     ConnectionString_Site_Update = 12,       
-      
+
     ConnectionString_Site_UpdateStatus = 13       
- 
+
 }

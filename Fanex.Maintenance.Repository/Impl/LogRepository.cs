@@ -12,103 +12,86 @@ namespace Fanex.Maintenance.Repository.Impl
     using System;
     using System.Collections.Generic;
     using Fanex.Data;
+    using Fanex.Maintenance.Criteria.Log;
     using Fanex.Maintenance.Entity.Model;
     using Fanex.NAP.Framework.Data;
-    using Fanex.Maintenance.Criteria.Log;
 
     /// <summary>
-    /// Log repository
+    /// Log repository.
     /// </summary>
     public class LogRepository : ReadonlyRepository<Log>
     {
         /// <summary>
-        /// Override return Logs
+        /// Override return Logs.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of log.</returns>
         public IEnumerable<Log> GetLog(ref GetLogCriteria criteria)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    var param = criteria.GetSpParams();
+                var param = criteria.GetSpParams();
 
-                    var list = db.Query<Log, LogCategory, Machine, Log>((l, c, m) =>
+                var list = db.Query<Log, LogCategory, Machine, Log>(
+                    (l, c, m) =>
                     {
                         l.Category = c;
                         l.Machine = m;
                         return l;
-                    }, "CategoryID,MachineId", param);
+                    }, 
+                    "CategoryID,MachineId", 
+                    param);
 
-                    criteria.TotalRows = Convert.ToInt32(param["totalrows"]);
+                criteria.TotalRows = Convert.ToInt32(param["totalrows"]);
 
-                    return list;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return list;
             }
         }
 
         /// <summary>
-        /// Get details message of log
+        /// Get details message of log.
         /// </summary>
-        /// <param name="logId"></param>
-        /// <returns></returns>
+        /// <param name="logId">Log object ID.</param>
+        /// <returns>Log message.</returns>
         public string GetLogMessage(long logId)
         {
             using (ObjectDb db = new ObjectDb("Logging_SelMessage"))
             {
-                string temp = db.ExecuteScalar(new { logid = logId }).ToString();
-                return temp;
+                return db.ExecuteScalar(new { logid = logId }).ToString();
             }
         }
 
         /// <summary>
-        /// Remove log
+        /// Remove log.
         /// </summary>
-        /// <param name="from"></param>
-        /// <returns></returns>
+        /// <param name="from">From DateTime.</param>
+        /// <returns>Number of deleted rows.</returns>
         public int DeleteLogs(DateTime from)
         {
             int row = 0;
-            try
+
+            using (ObjectDb db = new ObjectDb("Logging_Del"))
             {
-                using (ObjectDb db = new ObjectDb("Logging_Del"))
-                {
-                    row = db.ExecuteNonQuery(new { from = from });
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
+                row = db.ExecuteNonQuery(new { from = from });
             }
 
             return row;
         }
 
         /// <summary>
-        /// Update log's monitor status
+        /// Update log's monitor status.
         /// </summary>
-        /// <param name="logId"></param>
-        /// <param name="monitoringUserId"></param>
-        /// <param name="isMonitored"></param>
-        /// <returns></returns>
+        /// <param name="logIds">Log object IDs.</param>
+        /// <param name="monitoringUserId">Monitoring user ID.</param>
+        /// <param name="isMonitored">Is monitored or not.</param>
+        /// <returns>Number of rows.</returns>
         public int MonitorLog(string logIds, int? monitoringUserId, bool isMonitored)
         {
             int row = 0;
-            try
+
+            using (ObjectDb db = new ObjectDb("Logging_Monitor"))
             {
-                using (ObjectDb db = new ObjectDb("Logging_Monitor"))
-                {
-                    row = db.ExecuteNonQuery(new { LogIds = logIds, @MonitoringUserId = monitoringUserId, IsMonitored = isMonitored });
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
+                row = db.ExecuteNonQuery(new { LogIds = logIds, @MonitoringUserId = monitoringUserId, IsMonitored = isMonitored });
             }
 
             return row;

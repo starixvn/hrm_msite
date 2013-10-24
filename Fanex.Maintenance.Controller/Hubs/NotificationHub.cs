@@ -9,13 +9,11 @@
 
 namespace Fanex.Maintenance.Controller.Hubs
 {
-    using System.Diagnostics.CodeAnalysis;
     using Microsoft.AspNet.SignalR.Hubs;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Notification hub.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class NotificationHub : Hub
     {
         public void SendData(string data)

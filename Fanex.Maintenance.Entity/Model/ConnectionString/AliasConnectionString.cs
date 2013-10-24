@@ -9,10 +9,11 @@
 
 namespace Fanex.Maintenance.Entity.Model.ConnectionString
 {
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.ConnectionString.Domain;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Alias connection string.
+    /// </summary>
     public class AliasConnectionString
     {
         public int NumOfSite { get; set; }

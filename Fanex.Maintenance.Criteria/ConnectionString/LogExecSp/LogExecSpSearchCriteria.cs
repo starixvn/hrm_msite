@@ -11,11 +11,12 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Search execute SP log criteria.
+    /// </summary>
     public class LogExecSpSearchCriteria : CriteriaBase
     {
         private string _username;
@@ -28,6 +29,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
             {
                 return _username;
             }
+
             set
             {
                 _username = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
@@ -40,6 +42,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.LogExecSp
             {
                 return _name;
             }
+
             set
             {
                 _name = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

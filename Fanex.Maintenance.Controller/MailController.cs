@@ -19,13 +19,13 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Criteria.MailService;
     using Fanex.Maintenance.Service.Impl;
     using Fanex.Maintenance.Service.Interface;
+    using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Core.Business;
 
     /// <summary>
-    /// Mail Controller
+    /// Mail Controller.
     /// </summary>
     [Authorize]
     public class MailController : BaseController
@@ -33,7 +33,7 @@ namespace Fanex.Maintenance.Controller
         #region Member
 
         /// <summary>
-        /// Mail Service
+        /// Mail Service.
         /// </summary>
         private readonly IMailService _mailServer;
 
@@ -43,133 +43,15 @@ namespace Fanex.Maintenance.Controller
 
         #region Ctor
 
-        /// <summary>
-        /// Mail Service Parameter less controller
-        /// </summary>
         public MailController()
             : this(null, null)
         {
         }
 
-        /// <summary>
-        /// Mail Controller
-        /// </summary>
-        /// <param name="mailService"></param>
         public MailController(IMailService mailService, IUserService userService)
         {
             this._mailServer = mailService ?? MailService.Create();
             this._userService = userService ?? new UserService();
-        }
-
-        #endregion
-
-        #region InitData
-
-        /// <summary>
-        /// Init Page Size
-        /// </summary>
-        private void InitPageSize()
-        {
-            List<SelectListItem> listPageSize = new List<SelectListItem>();
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "10",
-                Value = "10"
-            });
-
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "30",
-                Value = "30"
-            });
-
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "50",
-                Value = "50"
-            });
-
-            listPageSize.Add(new SelectListItem
-            {
-                Text = "100",
-                Value = "100"
-            });
-
-            ViewBag.PageSize = listPageSize;
-        }
-
-        /// <summary>
-        /// Init list mail status for view
-        /// </summary>
-        private void InitMailStatus()
-        {
-            List<SelectListItem> listMailStatus = new List<SelectListItem>();
-            listMailStatus.Add(new SelectListItem
-            {
-                Text = MailStatus.All.ToString(),
-                Value = ((int)MailStatus.All).ToString()
-            });
-
-            listMailStatus.Add(new SelectListItem
-            {
-                Text = MailStatus.Fail.ToString(),
-                Value = ((int)MailStatus.Fail).ToString()
-            });
-
-            listMailStatus.Add(new SelectListItem
-            {
-                Text = MailStatus.Success.ToString(),
-                Value = ((int)MailStatus.Success).ToString()
-            });
-
-            ViewBag.MailStatus = listMailStatus;
-        }
-
-        /// <summary>
-        /// Init list mail config for view
-        /// </summary>
-        private void InitDataMailConfig(int appId = 0)
-        {
-            List<MailConfig> listConfig = new List<MailConfig>();
-            listConfig = _mailServer.GetListConfig(string.Empty);
-
-            ViewBag.ListMailConfig = listConfig.Select(c => new SelectListItem
-            {
-                Text = c.AppName,
-                Value = c.AppID.ToString(),
-                Selected = c.AppID == appId
-            }).ToList();
-        }
-
-        /// <summary>
-        /// Init list mail setting for view
-        /// </summary>
-        private void InitDataMailSetting()
-        {
-            List<MailSetting> listMailSetting = new List<MailSetting>();
-            listMailSetting = _mailServer.GetListSetting();
-            ViewBag.ListMailSetting = listMailSetting.Select(s => new SelectListItem
-            {
-                Text = s.SettingName,
-                Value = s.SettingID.ToString(),
-            }).ToList();
-        }
-
-        /// <summary>
-        /// Init list server ip for view
-        /// </summary>
-        private void InitDataIpServer(string serverIp = "")
-        {
-            List<MailSetting> listMailSetting = new List<MailSetting>();
-            listMailSetting = _mailServer.GetListSetting();
-            listMailSetting = listMailSetting.GroupBy(s => s.Server).Select(s => s.First()).ToList();
-
-            ViewBag.ListServerIp = listMailSetting.Select(s => new SelectListItem
-            {
-                Text = s.Server,
-                Value = s.Server,
-                Selected = s.Server == serverIp
-            }).ToList();
         }
 
         #endregion
@@ -179,16 +61,15 @@ namespace Fanex.Maintenance.Controller
         #region MailList
 
         /// <summary>
-        /// Get mail list
+        /// Get mail list.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="appId">Application ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult MailList(int id = 0)
+        public ActionResult MailList(int appId = 0)
         {
             InitPageSize();
-
-            InitDataMailConfig(id);
-
+            InitDataMailConfig(appId);
             InitMailStatus();
 
             var totalRows = 0;
@@ -197,7 +78,7 @@ namespace Fanex.Maintenance.Controller
             ViewBag.DateTo = DateTime.Now.ToString("dd/MM/yyyy");
 
             List<MailRecord> listMail = new List<MailRecord>();
-            listMail = this._mailServer.WithApp(id)
+            listMail = this._mailServer.WithApp(appId)
                 .FromDate(DateTime.Now.ToShortDateString())
                 .ToDate(DateTime.Now.ToShortDateString())
                 .WithStatus(0)
@@ -208,13 +89,14 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get mail list
+        /// Get mail list.
         /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="applicationID">if application id = 0 get all</param>
-        /// <param name="mailStatus"></param>
-        /// <returns></returns>
+        /// <param name="from">From DateTime string.</param>
+        /// <param name="to">To DateTime string.</param>
+        /// <param name="applicationID">If application id = 0 get all.</param>
+        /// <param name="mailStatus">Mail status.</param>
+        /// <param name="size">Number of items.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult MailList(string from, string to, int applicationID = 0, int mailStatus = 0, int size = 10)
         {
@@ -248,9 +130,9 @@ namespace Fanex.Maintenance.Controller
         #region MailSetting
 
         /// <summary>
-        /// Get all mail setting
+        /// Get all mail setting.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult MailSetting()
         {
@@ -260,9 +142,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Add mail setting
+        /// Add mail setting.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailSetting()
         {
@@ -270,10 +152,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Add mail setting
+        /// Add mail setting.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">Mail setting view model.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailSetting(MailSettingViewModel model)
         {
@@ -291,9 +173,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Add mail setting popup
+        /// Add mail setting popup.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailSettingPopUp()
         {
@@ -301,10 +183,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit mail setting
+        /// Edit mail setting.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Setting ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMailSetting(int id)
         {
@@ -316,10 +198,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit mail setting
+        /// Edit mail setting.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">Mail setting view model.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMailSetting(MailSettingViewModel model)
         {
@@ -341,9 +223,10 @@ namespace Fanex.Maintenance.Controller
         #region MailConfig
 
         /// <summary>
-        /// Get all mail config
+        /// Get all mail config.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="id">Setting ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(int id = 0)
@@ -362,10 +245,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get mail config filter by server ip
+        /// Get mail config filter by server IP.
         /// </summary>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(string serverIp = "")
@@ -382,9 +265,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Add new mail config
+        /// Add new mail config.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig()
@@ -395,10 +278,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Add new mail config
+        /// Add new mail config.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">Mail config view model.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig(MailConfigViewModel model)
@@ -418,9 +301,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Add new mail config popup
+        /// Add new mail config popup.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailConfigPopUp()
         {
@@ -430,10 +313,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit mail config by config id
+        /// Edit mail config by config id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Mail config ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(int id)
@@ -449,10 +332,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit mail config
+        /// Edit mail config.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">Mail config view model.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(MailConfigViewModel model)
@@ -476,9 +359,9 @@ namespace Fanex.Maintenance.Controller
         #region MailFunction
 
         /// <summary>
-        /// Get all mail function
+        /// Get all mail function.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult MailFunction()
         {
@@ -489,9 +372,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Add new mail function
+        /// Add new mail function.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult AddMailFunction()
         {
@@ -503,10 +386,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Add new mail function
+        /// Add new mail function.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">Mail function view model.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailFunction(MailFunctionViewModel model)
         {
@@ -527,10 +410,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit mail function
+        /// Edit mail function.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Mail function ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMailFunction(int id)
         {
@@ -547,10 +430,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit mail function
+        /// Edit mail function.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">Mail function view model.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMailFunction(MailFunctionViewModel model)
         {
@@ -577,16 +460,21 @@ namespace Fanex.Maintenance.Controller
         #region Ajax
 
         /// <summary>
-        /// Add mail setting for popup view
+        /// Add mail setting for popup view.
         /// </summary>
-        /// <param name="server"></param>
-        /// <param name="port"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="isAutho"></param>
-        /// <returns></returns>
+        /// <param name="server">Server IP address.</param>
+        /// <param name="port">Pot number.</param>
+        /// <param name="username">Current username.</param>
+        /// <param name="password">Current password.</param>
+        /// <param name="isAutho">Is authorized or not.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult AddMailSettingPopUp(string server, int port, string username, string password, bool isAutho)
+        public ActionResult AddMailSettingPopUp(
+            string server, 
+            int port, 
+            string username, 
+            string password, 
+            bool isAutho)
         {
             if (Request.IsAjaxRequest())
             {
@@ -608,12 +496,12 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Add mail config for popup view
+        /// Add mail config for popup view.
         /// </summary>
-        /// <param name="appName"></param>
-        /// <param name="description"></param>
-        /// <param name="settingId"></param>
-        /// <returns></returns>
+        /// <param name="appName">Application name.</param>
+        /// <param name="description">Mail config description.</param>
+        /// <param name="settingId">Setting ID.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailConfigPopUp(string appName, string description, int settingId)
         {
@@ -640,10 +528,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Resend mail
+        /// Resend mail.
         /// </summary>
-        /// <param name="mailId"></param>
-        /// <returns></returns>
+        /// <param name="mailId">Mail object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ResendMail, Policy = Constant.Policy.Host)]
         public ActionResult ResendMail(int mailId)
@@ -658,10 +546,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get message detail of mail
+        /// Get message detail of mail.
         /// </summary>
-        /// <param name="mailId"></param>
-        /// <returns></returns>
+        /// <param name="mailId">Mail object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailDetails, Policy = Constant.Policy.Read)]
         public ActionResult GetMessage(int mailId)
@@ -676,10 +564,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get mail error
+        /// Get mail error.
         /// </summary>
-        /// <param name="mailId"></param>
-        /// <returns></returns>
+        /// <param name="mailId">Mail object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetError(int mailId)
         {
@@ -693,16 +581,23 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get list mail pagination
+        /// Get list mail pagination.
         /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="page"></param>
-        /// <param name="size"></param>
-        /// <param name="applicationID"></param>
-        /// <returns></returns>
+        /// <param name="status">Mail status.</param>
+        /// <param name="from">From DateTime string.</param>
+        /// <param name="to">To DateTime string.</param>
+        /// <param name="page">Page index.</param>
+        /// <param name="size">Page size.</param>
+        /// <param name="applicationID">Application ID.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult MailListPagi(int status, string from, string to, int page = 0, int size = 50, int applicationID = 0)
+        public ActionResult MailListPagi(
+            int status, 
+            string from, 
+            string to, 
+            int page = 0, 
+            int size = 50, 
+            int applicationID = 0)
         {
             InitDataMailConfig();
 
@@ -732,9 +627,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get list mail setting
+        /// Get list mail setting.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetMailSetting()
         {
@@ -750,9 +645,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get list mail config
+        /// Get list mail config.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetMailConfig()
         {
@@ -766,6 +661,118 @@ namespace Fanex.Maintenance.Controller
 
             return Json(null);
         }
+        #endregion
+        #region InitData
+
+        /// <summary>
+        /// Initialize Page Size.
+        /// </summary>
+        private void InitPageSize()
+        {
+            List<SelectListItem> listPageSize = new List<SelectListItem>();
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "10",
+                Value = "10"
+            });
+
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "30",
+                Value = "30"
+            });
+
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "50",
+                Value = "50"
+            });
+
+            listPageSize.Add(new SelectListItem
+            {
+                Text = "100",
+                Value = "100"
+            });
+
+            ViewBag.PageSize = listPageSize;
+        }
+
+        /// <summary>
+        /// Initialize list mail status for view.
+        /// </summary>
+        private void InitMailStatus()
+        {
+            List<SelectListItem> listMailStatus = new List<SelectListItem>();
+            listMailStatus.Add(new SelectListItem
+            {
+                Text = MailStatus.All.ToString(),
+                Value = ((int)MailStatus.All).ToString()
+            });
+
+            listMailStatus.Add(new SelectListItem
+            {
+                Text = MailStatus.Fail.ToString(),
+                Value = ((int)MailStatus.Fail).ToString()
+            });
+
+            listMailStatus.Add(new SelectListItem
+            {
+                Text = MailStatus.Success.ToString(),
+                Value = ((int)MailStatus.Success).ToString()
+            });
+
+            ViewBag.MailStatus = listMailStatus;
+        }
+
+        /// <summary>
+        /// Initialize list mail config for view.
+        /// </summary>
+        /// <param name="appId">Application ID.</param>
+        private void InitDataMailConfig(int appId = 0)
+        {
+            List<MailConfig> listConfig = new List<MailConfig>();
+            listConfig = _mailServer.GetListConfig(string.Empty);
+
+            ViewBag.ListMailConfig = listConfig.Select(c => new SelectListItem
+            {
+                Text = c.AppName,
+                Value = c.AppID.ToString(),
+                Selected = c.AppID == appId
+            }).ToList();
+        }
+
+        /// <summary>
+        /// Initialize list mail setting for view.
+        /// </summary>
+        private void InitDataMailSetting()
+        {
+            List<MailSetting> listMailSetting = new List<MailSetting>();
+            listMailSetting = _mailServer.GetListSetting();
+            ViewBag.ListMailSetting = listMailSetting.Select(s => new SelectListItem
+            {
+                Text = s.SettingName,
+                Value = s.SettingID.ToString(),
+            }).ToList();
+        }
+
+        /// <summary>
+        /// Initialize list server IP for view.
+        /// </summary>
+        /// <param name="serverIp">Server IP address.</param>
+        private void InitDataIpServer(string serverIp = "")
+        {
+            List<MailSetting> listMailSetting = new List<MailSetting>();
+            listMailSetting = _mailServer.GetListSetting();
+            listMailSetting = listMailSetting.GroupBy(s => s.Server).Select(s => s.First()).ToList();
+
+            ViewBag.ListServerIp = listMailSetting.Select(s => new SelectListItem
+            {
+                Text = s.Server,
+                Value = s.Server,
+                Selected = s.Server == serverIp
+            }).ToList();
+        }
+
         #endregion
     }
 }

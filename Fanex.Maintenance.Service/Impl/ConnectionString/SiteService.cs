@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="DatabaseServiceService.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SiteService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -20,6 +20,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Repository.Interface.ConnectionString;
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -45,14 +46,20 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #endregion
 
-        public IEnumerable<Site> GetAll(string name = "", int? dbServerId = null)
+        /// <summary>
+        /// Get all sites.
+        /// </summary>
+        /// <param name="name">Site object name.</param>
+        /// <param name="databaseServerId">Database server ID.</param>
+        /// <returns>List of site.</returns>
+        public IEnumerable<Site> GetAll(string name = "", int? databaseServerId = null)
         {
             try
             {
                 var criteria = new SiteGetAllCriteria
                 {
                     Name = name,
-                    DbServerId = dbServerId
+                    DbServerId = databaseServerId
                 };
 
                 if (criteria.IsValid())
@@ -68,6 +75,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get site by alias.
+        /// </summary>
+        /// <param name="aliasId">Connection string alias ID.</param>]
+        /// <returns>List of site.</returns>
         public IEnumerable<Site> GetByAlias(int aliasId)
         {
             Check.Argument.IsNotNegativeOrZero(aliasId, "aliasid");
@@ -92,14 +104,20 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-        public IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? dbServerId = null)
+        /// <summary>
+        /// Get site with number of alias.
+        /// </summary>
+        /// <param name="name">Site object name.</param>
+        /// <param name="databaseServerId">Database server ID.</param>
+        /// <returns>List of site alias.</returns>
+        public IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? databaseServerId = null)
         {
             try
             {
                 var criteria = new SiteGetAllCriteria
                 {
                     Name = name,
-                    DbServerId = dbServerId
+                    DbServerId = databaseServerId
                 };
 
                 if (criteria.IsValid())
@@ -115,7 +133,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-
+        /// <summary>
+        /// Get site by ID.
+        /// </summary>
+        /// <param name="id">Site object ID.</param>
+        /// <returns>Site object.</returns>
         public Site GetById(int id)
         {
             try
@@ -138,7 +160,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-
+        /// <summary>
+        /// Insert or update site.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
             // check parameters
@@ -161,7 +187,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-
+        /// <summary>
+        /// Update site status.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult UpdateStatus(ICriteria criteria)
         {
             // check parameters
@@ -184,14 +214,18 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-
-        public IEnumerable<Site> GetByDbServer(int dbServerId)
+        /// <summary>
+        /// Get site by database server.
+        /// </summary>
+        /// <param name="databaseServerId">Database server ID.</param>
+        /// <returns>List of site.</returns>
+        public IEnumerable<Site> GetByDbServer(int databaseServerId)
         {
             try
             {
                 var criteria = new SiteGetByDbServerCriteria
                 {
-                    DbServerId = dbServerId
+                    DbServerId = databaseServerId
                 };
 
                 if (criteria.IsValid())

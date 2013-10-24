@@ -10,17 +10,18 @@
 namespace Fanex.Maintenance.Service.Interface.ConnectionString
 {
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.ConnectionString.Domain;
-    using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
+    using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Connection service interface.
+    /// </summary>
     public interface IConnectionService
     {
         IEnumerable<ConnectionStringConnection> GetByAlias(int aliasId);
 
-        IEnumerable<ConnectionString> GetSecondaryConection(int id);
+        IEnumerable<ConnectionString> GetSecondaryConnection(int id);
 
         ConnectionString GetById(int id);
 

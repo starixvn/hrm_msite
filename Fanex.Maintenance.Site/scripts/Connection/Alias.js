@@ -45,7 +45,7 @@ var Alias = function ($) {
 
         UpdateDefaultConnection: function (alaisId, conectionId) {
             $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/UpdateDefaultConenction"),
+            	url: NAP.resolveClientUrl("ConnectionString/UpdateDefaultConnection"),
                 data: { aliasId: alaisId, conectionId: conectionId },
                 type: 'POST',
                 cache: false,

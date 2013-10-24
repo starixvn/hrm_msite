@@ -12,11 +12,12 @@ namespace Fanex.Maintenance.Service.Impl
     using System;
     using Fanex.Common.Helper;
     using Fanex.Logging;
-    using System.Diagnostics.CodeAnalysis;
-    using Fanex.Maintenance.Service.Interface;
     using Fanex.Maintenance.Criteria.Misc;
+    using Fanex.Maintenance.Service.Interface;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// Base service.
+    /// </summary>
     public class BaseService : IBaseService
     {
         public IServiceContext ServiceContext { get; set; }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IJobs.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Job.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -10,9 +10,10 @@
 namespace Fanex.Maintenance.Entity.Domain
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// The job class.
+    /// </summary>
     public class Job : IEntity<int, string>
     {
         public Guid JobId { get; set; }
@@ -23,76 +24,87 @@ namespace Fanex.Maintenance.Entity.Domain
 
         public string Description { get; set; }
 
-        /// <summary>
-        /// ID of the step in the job where execution should begin.
-        /// </summary>
         public int StartStepId { get; set; }
 
         public JobCategory Category { get; set; }
 
         /// <summary>
-        /// Security identifier number (SID) of the job owner.
+        /// Gets or sets Security identifier number (SID) of the job owner.
         /// </summary>
+        /// <value>Byte array.</value>
         public byte[] OwerSid { get; set; }
 
         /// <summary>
-        ///  Bitmask indicating under what circumstances a notification event should be logged to the Microsoft Windows application log:
+        /// Gets or sets bitmask indicating under what circumstances a notification event should be logged to the Microsoft Windows application log.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
-        /// </summary>
+        /// 3 = Whenever the job completes (regardless of the job outcome).
+        /// </value>
         public int NotifyLevelEventLog { get; set; }
 
         /// <summary>
-        /// Bitmask indicating under what circumstances a notification e-mail should be sent when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances a notification e-mail should be sent when a job completes.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
-        /// </summary>
+        /// 3 = Whenever the job completes (regardless of the job outcome).
+        /// </value>
         public int NotifyLevelEmail { get; set; }
 
         /// <summary>
-        /// Bitmask indicating under what circumstances a network message should be sent when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances a network message should be sent when a job completes.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
-        /// </summary>
+        /// 3 = Whenever the job completes (regardless of the job outcome).
+        /// </value>
         public int NotifyLevelNetsend { get; set; }
 
         /// <summary>
-        /// Bitmask indicating under what circumstances a page should be sent when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances a page should be sent when a job completes.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
-        /// </summary>
+        /// 3 = Whenever the job completes (regardless of the job outcome).
+        /// </value>
         public int NotifyLevelPage { get; set; }
 
         /// <summary>
-        /// E-mail name of the operator to notify.
+        /// Gets or sets email name of the operator to notify.
         /// </summary>
+        /// <value>Operator object.</value>
         public Operator NotifyEmailOperator { get; set; }
 
         /// <summary>
-        /// ID of the computer or user used when sending network messages.
+        /// Gets or sets ID of the computer or user used when sending network messages.
         /// </summary>
+        /// <value>Operator object.</value>
         public Operator NotifyNetsendOperator { get; set; }
 
         /// <summary>
-        /// ID of the computer or user used when sending a page.
+        /// Gets or sets ID of the computer or user used when sending a page.
         /// </summary>
+        /// <value>Operator object.</value>
         public Operator NotifyPageOperator { get; set; }
 
         /// <summary>
-        ///  Bitmask indicating under what circumstances the job should be deleted when a job completes:
+        /// Gets or sets bitmask indicating under what circumstances the job should be deleted when a job completes.
+        /// </summary>
+        /// <value>
         /// 0 = Never
         /// 1 = When the job succeeds
         /// 2 = When the job fails
-        /// 3 = Whenever the job completes (regardless of the job outcome)
-        /// </summary>
+        /// 3 = Whenever the job completes (regardless of the job outcome).
+        /// </value>
         public int DeleteLevel { get; set; }
 
         public DateTime DateCreated { get; set; }

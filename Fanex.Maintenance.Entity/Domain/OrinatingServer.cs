@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IOrinatingServers.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="OrinatingServer.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,9 +9,9 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// Orinating server.
+    /// </summary>
     public class OrinatingServer : IEntity<int, string>
     {
         public int MasterServer { get; set; }

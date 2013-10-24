@@ -9,9 +9,9 @@
 
 namespace Fanex.Maintenance.Entity.Model.ConnectionString
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// Log data model.
+    /// </summary>
     public class LogData
     {
         public string FieldName { get; set; }

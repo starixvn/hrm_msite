@@ -9,17 +9,15 @@
 
 namespace Fanex.Maintenance.Entity.Model
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ServerStatus
     {
         public string ServerIp { get; set; }
 
         public bool SqlServerAgentRunning { get; set; }
+
         public bool SqlServerCanConnect { get; set; }
     }
 }

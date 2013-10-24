@@ -10,7 +10,6 @@
 namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Logging;
     using Fanex.Maintenance.Criteria.Job;
     using Fanex.Maintenance.Entity.Model;
@@ -21,7 +20,6 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class ServerService : IServerService
     {
         private IServerRepository _serverRepository;
@@ -37,10 +35,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Server Full information for showing in Detail Page
+        /// Get Server Full information for showing in Detail Page.
         /// </summary>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <returns>Server full info.</returns>
         public ServerFullInfo GetServerFullInformation(string serverIp)
         {
             try
@@ -58,10 +56,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Server Resource Info for Update User View through SignalR
+        /// Get Server Resource Info for Update User View through SignalR.
         /// </summary>
-        /// <param name="connectionString"></param>
-        /// <returns></returns>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Resource info.</returns>
         public ResourceInfo GetServerResourceInfo(string connectionString)
         {
             try
@@ -75,6 +73,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
         }
 
+        /// <summary>
+        /// Get CPU utilization.
+        /// </summary>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>CPU information.</returns>
         public CPUInfo GetCpuUtilization(string connectionString)
         {
             try
@@ -88,6 +91,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
         }
 
+        /// <summary>
+        /// Get memory utilization.
+        /// </summary>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Memory information.</returns>
         public MemoryInfo GetMemoryUtilization(string connectionString)
         {
             try
@@ -101,7 +109,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             }
         }
 
-
+        /// <summary>
+        /// Get server status.
+        /// </summary>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Server status.</returns>
         public ServerStatus GetServerStatus(string connectionString)
         {
             try
@@ -113,7 +125,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                 Logger.Log.Error(ex.Message, ex);
                 return new ServerStatus
                     {
-                        SqlServerCanConnect= false,
+                        SqlServerCanConnect = false,
                         SqlServerAgentRunning = false
                     };
             }

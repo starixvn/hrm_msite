@@ -9,10 +9,11 @@
 
 namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 {
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Get site by ID criteria.
+    /// </summary>
     public class SiteGetByIdCriteria : CriteriaBase
     {
         public int SiteId { get; set; }

@@ -9,10 +9,11 @@
 
 namespace Fanex.Maintenance.Criteria.Log
 {
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// Get machine by ID criteria.
+    /// </summary>
     public class GetMachineByIdCriteria : CriteriaBase
     {
         public int MachineId { get; set; }

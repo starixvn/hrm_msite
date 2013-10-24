@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GroupController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SSOController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,7 +11,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
@@ -23,7 +22,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// SSO controller.
+    /// </summary>
     public class SSOController : BaseController
     {
         #region members
@@ -54,6 +55,13 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         #endregion ctors
 
+        /// <summary>
+        /// Index page.
+        /// </summary>
+        /// <param name="userId">User object ID.</param>
+        /// <param name="onuserId">Online user object ID.</param>
+        /// <param name="time">Time value.</param>
+        /// <returns>Action result.</returns>
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Index(string userId, string onuserId, string time)
@@ -67,8 +75,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
             if (expiration.TotalSeconds <= _timeExipration)
             {
-                #region do SSO check-in
-
+                // SSO check-in
                 var criteria = new UserSSOCheckInUserCriteria
                 {
                     UserId = Convert.ToInt32(userId),
@@ -86,14 +93,11 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                 _userService.UserSSOCheckIn(ref criteria);
 
-                #endregion do SSO check-in
-
                 if (criteria.OnUserId != 0)
                 {
                     var user = _userService.GetById(criteria.UserId) as User;
 
-                    #region saves user session & auth info
-
+                    // saves user session & auth info
                     _currentSession.UserId = user.Id;
                     _currentSession.Username = user.Username;
                     _currentSession.OnUserId = criteria.OnUserId;
@@ -111,8 +115,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                     CreateAuthInfo(user);
 
-                    #endregion saves user session & auth info
-
                     return Redirect(FormsAuthentication.DefaultUrl);
                 }
             }
@@ -122,6 +124,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
         #region utilities
 
+        /// <summary>
+        /// Create authorize information.
+        /// </summary>
+        /// <param name="user">Current login user.</param>
         private void CreateAuthInfo(User user)
         {
             var currentDomain = CurrentContext.GetCurrentDomain();

@@ -15,40 +15,29 @@ namespace Fanex.Maintenance.Service.Impl
     using Fanex.Maintenance.Repository.Impl;
 
     /// <summary>
-    /// Machine Service
+    /// Machine Service.
     /// </summary>
     public class MachineService
     {
-        #region Member
-
         private readonly MachineRepository _machineRepository = new MachineRepository();
 
-        #endregion Member
-
-        #region Constructor
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
         private MachineService()
         {
         }
 
         /// <summary>
-        /// Create machine service
+        /// Create machine service.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Machine service.</returns>
         public static MachineService Create()
         {
             return new MachineService();
         }
 
-        #endregion Constructor
-
         /// <summary>
-        /// Get all machines
+        /// Get all machines.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of machine.</returns>
         public IEnumerable<Machine> GetAll()
         {
             GetAllMachinesCriteria criteria = new GetAllMachinesCriteria();
@@ -57,10 +46,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get machines by machine type
+        /// Get machines by machine type.
         /// </summary>
-        /// <param name="machineType"></param>
-        /// <returns></returns>
+        /// <param name="machineType">Machine type.</param>
+        /// <returns>List of machine.</returns>
         public IEnumerable<Machine> GetByType(bool? machineType)
         {
             GetMachinesByTypeCriteria criteria = new GetMachinesByTypeCriteria
@@ -72,10 +61,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get machine by machine id
+        /// Get machine by machine id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Machine ID.</param>
+        /// <returns>Machine object.</returns>
         public Machine GetMachine(int id)
         {
             GetMachineByIdCriteria criteria = new GetMachineByIdCriteria
@@ -87,12 +76,12 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Insert machine
+        /// Insert machine.
         /// </summary>
-        /// <param name="machineName"></param>
-        /// <param name="machineType"></param>
-        /// <param name="timeZone"></param>
-        /// <returns></returns>
+        /// <param name="machineName">Machine name.</param>
+        /// <param name="machineType">Machine type.</param>
+        /// <param name="timeZone">Machine time zone.</param>
+        /// <returns>Command result.</returns>
         public CommandResult InsertMachine(string machineName, bool machineType, short timeZone)
         {
             InsertMachineCriteria criteria = new InsertMachineCriteria
@@ -106,11 +95,12 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Update machine
+        /// Update machine.
         /// </summary>
-        /// <param name="machineType"></param>
-        /// <param name="timeZone"></param>
-        /// <returns></returns>
+        /// <param name="machineId">Machine ID.</param>
+        /// <param name="machineType">Machine type.</param>
+        /// <param name="timeZone">Machine time zone.</param>
+        /// <returns>Command result.</returns>
         public CommandResult UpdateMachine(int machineId, bool machineType, short timeZone)
         {
             UpdateMachineCriteria criteria = new UpdateMachineCriteria

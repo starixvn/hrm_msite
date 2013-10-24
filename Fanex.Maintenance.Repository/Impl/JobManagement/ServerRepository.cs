@@ -19,16 +19,16 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Server repository.
     /// </summary>
     public class ServerRepository : BaseRepository<ResourceInfo>, IServerRepository
     {
         /// <summary>
-        /// Get Resource information of database
+        /// Get Resource information of database.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Resource info.</returns>
         public ResourceInfo GetServerResourceInfo(ICriteria criteria, string connectionString)
         {
             ResourceInfo resourceInfo = new ResourceInfo
@@ -40,20 +40,20 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 EventTime = DateTime.Now
             };
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = connectionString,
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {
                     while (reader.Read())
                     {
-                        resourceInfo.MemoryUsage = (float)Math.Round((reader.ToFloat("MemoryUsage") / 1024), 2);
-                        resourceInfo.TotalMemory = (float)Math.Round((reader.ToFloat("TotalMemory") / 1024), 2);
+                        resourceInfo.MemoryUsage = (float)Math.Round(reader.ToFloat("MemoryUsage") / 1024, 2);
+                        resourceInfo.TotalMemory = (float)Math.Round(reader.ToFloat("TotalMemory") / 1024, 2);
                         resourceInfo.SystemCpuPercent = reader.ToFloat("system_cpu_utilization");
                         resourceInfo.SqlCpuPercent = reader.ToFloat("sql_cpu_utilization");
                         resourceInfo.EventTime = reader.ToDateTime("EventTime");
@@ -66,22 +66,22 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Server information, Cpu Core, Total ram
+        /// Get Server information, CPU Core, Total ram.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverIp">Server IP.</param>
+        /// <returns>Server full info.</returns>
         public ServerFullInfo GetServerFullInformation(ICriteria criteria, string serverIp)
         {
             ServerFullInfo serverFullInfo = new ServerFullInfo();
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = SectionHelper.GetConnectionStringFromServerIp(serverIp, (int)ServerType.Resource),
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {
@@ -100,22 +100,22 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get Server Status like SqlServerAgent Status
+        /// Get Server Status like SQL Server Agent Status.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverIp"></param>
-        /// <returns>Current Server Status</returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Current Server Status.</returns>
         public ServerStatus GetServerStatus(ICriteria criteria, string connectionString)
         {
             ServerStatus serverStatus = new ServerStatus();
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = connectionString,
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {
@@ -131,7 +131,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             return serverStatus;
         }
 
-
+        /// <summary>
+        /// Get server CPU utilization.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Current Server Status.</returns>
         public CPUInfo GetServerCpuUtilization(ICriteria criteria, string connectionString)
         {
             CPUInfo cpuInfo = new CPUInfo
@@ -141,13 +146,13 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 EventTime = DateTime.Now
             };
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = connectionString,
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {
@@ -164,7 +169,12 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
             return cpuInfo;
         }
 
-
+        /// <summary>
+        /// Get server memory utilization.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="connectionString">Connection string.</param>
+        /// <returns>Current Server Status.</returns>
         public MemoryInfo GetServerMemoryUtilization(ICriteria criteria, string connectionString)
         {
             MemoryInfo memoryInfo = new MemoryInfo
@@ -173,20 +183,20 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                 TotalMemory = 0
             };
 
-            DbSetting dbSetting = new DbSetting
+            DbSetting setting = new DbSetting
             {
                 ConnectionString = connectionString,
                 SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
             };
 
-            using (ObjectDb objectDb = new ObjectDb(dbSetting))
+            using (ObjectDb objectDb = new ObjectDb(setting))
             {
                 using (var reader = objectDb.ExecuteReader(criteria.GetSpParams()))
                 {
                     while (reader.Read())
                     {
-                        memoryInfo.MemoryUsage = (float)Math.Round((reader.ToFloat("MemoryUsage") / 1024), 2);
-                        memoryInfo.TotalMemory = (float)Math.Round((reader.ToFloat("TotalMemory") / 1024), 2);
+                        memoryInfo.MemoryUsage = (float)Math.Round(reader.ToFloat("MemoryUsage") / 1024, 2);
+                        memoryInfo.TotalMemory = (float)Math.Round(reader.ToFloat("TotalMemory") / 1024, 2);
                         break;
                     }
                 }

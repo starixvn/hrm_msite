@@ -24,11 +24,11 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
     public class StepRepository : BaseRepository<Step>, IStepRepository
     {
         /// <summary>
-        /// Get step by job name
+        /// Get step by job name.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverName"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverName">Server name.</param>
+        /// <returns>List of step detail.</returns>
         public IEnumerable<StepDetail> GetStepByJob(ICriteria criteria, string serverName)
         {
             if (criteria.IsValid())
@@ -47,12 +47,14 @@ namespace Fanex.Maintenance.Repository.Impl.JobManagement
                         OnSuccessStep = !reader.IsDBNull("on_success_step_id") ? new Step
                         {
                             Id = reader.ToInt("on_success_step_id")
-                        } : new Step(),
+                        } 
+                        : new Step(),
                         OnFailAction = reader.ToString("on_fail_action"),
                         OnFailStep = !reader.IsDBNull("on_fail_step_id") ? new Step
                         {
                             Id = reader.ToInt("on_fail_step_id")
-                        } : new Step(),
+                        } 
+                        : new Step(),
                         Server = reader.ToString("server"),
                         DatabaseName = reader.ToString("database_user_name"),
                         RetryAttempts = reader.ToInt("retry_attempts"),

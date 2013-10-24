@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IDatabaseServerRepository.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ISiteRepository.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,16 +9,13 @@
 
 namespace Fanex.Maintenance.Repository.Interface.ConnectionString
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.ConnectionString.Domain;
-    using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Entity.Model.ConnectionString;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Site repository interface.
     /// </summary>
     public interface ISiteRepository
     {

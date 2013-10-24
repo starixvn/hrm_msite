@@ -10,15 +10,13 @@
 namespace Fanex.Maintenance.Criteria.Job
 {
     using System;
-    using Fanex.NAP.Framework.Data;
     using System.ComponentModel.DataAnnotations;
     using Fanex.Maintenance.Core;
-    using System.Diagnostics.CodeAnalysis;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetListJobCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]

@@ -9,14 +9,11 @@
 
 namespace Fanex.Maintenance.Criteria.User
 {
-    using System;
     using Fanex.NAP.Framework.Data;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get user online criteria.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class GetUserOnlineCriteria : CriteriaBase
     {
         public int Top { get; set; }
@@ -29,17 +26,6 @@ namespace Fanex.Maintenance.Criteria.User
         public override bool IsValid()
         {
             return true;
-        }
-    }
-
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
-    public class GetUserOnlineDailyCriteria : CriteriaBase
-    {    
-        public DateTime Date { get; set; }
-
-        public override string GetSettingKey()
-        {
-            return "Is_OnlineReportDaily";
         }
     }
 }

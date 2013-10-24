@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="CategoryService.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="LogCategoryService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -15,43 +15,32 @@ namespace Fanex.Maintenance.Service.Impl
     using Fanex.Maintenance.Repository.Impl;
 
     /// <summary>
-    /// 
+    /// Log category service.
     /// </summary>
     public class LogCategoryService
     {
-        #region Member
-
         private readonly LogCategoryRepository _categoryRepository = new LogCategoryRepository();
 
-        #endregion Member
-
-        #region Ctor
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
         private LogCategoryService()
         {
         }
 
         /// <summary>
-        /// Create log category service
+        /// Create log category service.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Log category service.</returns>
         public static LogCategoryService Create()
         {
             return new LogCategoryService();
         }
 
-        #endregion Ctor
-
         /// <summary>
-        /// Get all category
+        /// Get all category.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of log category.</returns>
         public IEnumerable<LogCategory> GetAll()
         {
-            GetAllCategoryCritria criteria = new GetAllCategoryCritria();
+            GetAllCategoryCriteria criteria = new GetAllCategoryCriteria();
 
             return _categoryRepository.Fetch(criteria);
         }

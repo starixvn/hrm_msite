@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ICategories.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="JobCategory.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,9 +9,9 @@
 
 namespace Fanex.Maintenance.Entity.Domain
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// Job category.
+    /// </summary>
     public class JobCategory : IEntity<int, string>
     {
         public int Class { get; set; }

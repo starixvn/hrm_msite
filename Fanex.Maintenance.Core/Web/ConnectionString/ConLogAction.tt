@@ -8,7 +8,7 @@
 <#    
     string connectionString = "data source=10.18.200.206;initial catalog=bodb_ConnectionString;User Id=internalteam; pwd=p@$$w0rd";    
 #>
-// <copyright file="FunctionKeys.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConLogAction.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved. 
 // </copyright>
 //
@@ -21,7 +21,11 @@
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")] 
+/// <summary>
+/// Connection log action.
+/// </summary>
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification="Generated code")]
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification="Generated code")]
 public enum ConLogAction
 {
 <#
@@ -38,10 +42,10 @@ public enum ConLogAction
     bool loop = reader.Read();
 
     while(loop)
-    {#>      
+    {#>
     <#= reader["SpName"].ToString() #> = <#= reader["ActionId"].ToString() #><# loop = reader.Read(); #><#= loop ? "," : string.Empty #>       
-<#    
-    }#> 
+
+<#}#>
 }
 <#  
     reader.Close();

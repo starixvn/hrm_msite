@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SqlJobManagementController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="JobManagementController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,7 +12,6 @@ namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.Maintenance.Core;
@@ -25,29 +24,28 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Interface.JobManagement;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Job management controller.
     /// </summary>
     [Authorize]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class JobManagementController : BaseController
     {
         /// <summary>
-        /// Job Service
+        /// Job Service.
         /// </summary>
         private readonly IJobService _jobService = JobService.Create();
 
         /// <summary>
-        /// Schedule Service
+        /// Schedule Service.
         /// </summary>
         private readonly IScheduleService _scheduleService = ScheduleService.Create();
 
         /// <summary>
-        /// Step Service
+        /// Step Service.
         /// </summary>
         private readonly IStepService _stepService = StepService.Create();
 
         /// <summary>
-        /// Server Log Service
+        /// Server Log Service.
         /// </summary>
         private readonly ISqlServerLogService _sqlServerLogService = SqlServerLogService.Create();
 
@@ -55,9 +53,13 @@ namespace Fanex.Maintenance.Controller
         #region Pages
 
         /// <summary>
-        /// Main Content Page
+        /// Main Content Page.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="type">Schedule job type.</param>
+        /// <param name="server">Server name.</param>
+        /// <param name="jobname">Schedule job name.</param>
+        /// <param name="id">Job object ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Index(string type = "", string server = "", string jobname = "", string id = "")
         {
@@ -70,9 +72,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Left menu Page
+        /// Left menu Page.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         public ActionResult LeftMenuPage()
         {
             return View(DatabaseServersSection.Instance.Servers);
@@ -81,15 +83,15 @@ namespace Fanex.Maintenance.Controller
         #region ScheduleManagement
 
         /// <summary>
-        /// Schedule Management Page
+        /// Schedule Management Page.
         /// </summary>
-        /// <param name="server"></param>
-        /// <returns></returns>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult ScheduleManagement(string server)
+        public ActionResult ScheduleManagement(string serverIp)
         {
             ViewBag.ListServer = GetServer();
-            ViewBag.ListSchedule = _scheduleService.WithServer(server)
+            ViewBag.ListSchedule = _scheduleService.WithServer(serverIp)
                 .GetSchedules();
             ViewBag.DateFrom = DateTime.Now.ToString("MMM dd, yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MMM dd, yyyy");
@@ -102,44 +104,41 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get Schedule List With Filter
+        /// Get Schedule List With Filter.
         /// </summary>
-        /// <param name="getAllScheduleCriteria"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult ScheduleManagement(GetAllScheduleCriteria getAllScheduleCriteria)
+        public ActionResult ScheduleManagement(GetAllScheduleCriteria criteria)
         {
             ViewBag.ListServer = GetServer();
 
-            //DateTime fromDate = getAllScheduleCriteria.From == null ? DateTime.Now : getAllScheduleCriteria.From;
-            //DateTime toDate = string.IsNullOrEmpty(To) ? DateTime.Now : DateTime.ParseExact(To, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            criteria.From = criteria.From <= DateTime.MinValue ? DateTime.Now : criteria.From;
+            criteria.To = criteria.To <= DateTime.MinValue ? DateTime.Now : criteria.To;
 
-            getAllScheduleCriteria.From = getAllScheduleCriteria.From <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.From;
-            getAllScheduleCriteria.To = getAllScheduleCriteria.To <= DateTime.MinValue ? DateTime.Now : getAllScheduleCriteria.To;
+            ViewBag.DateFrom = criteria.From.ToString("MMM dd, yyyy");
+            ViewBag.DateTo = criteria.To.ToString("MMM dd, yyyy");
 
-            ViewBag.DateFrom = getAllScheduleCriteria.From.ToString("MMM dd, yyyy");
-            ViewBag.DateTo = getAllScheduleCriteria.To.ToString("MMM dd, yyyy");
-
-            ViewBag.ListSchedule = _scheduleService.WithScheduleName(getAllScheduleCriteria.ScheduleName)
-                .WithServer(getAllScheduleCriteria.Server)
-                .WithSearchDateType(getAllScheduleCriteria.SearchDateType)
-                .WithDateRange(getAllScheduleCriteria.From, getAllScheduleCriteria.To)
-                .WithFreqType(getAllScheduleCriteria.FreqType)
-                .WithFreqSubType(getAllScheduleCriteria.FreqSubType)
+            ViewBag.ListSchedule = _scheduleService.WithScheduleName(criteria.ScheduleName)
+                .WithServer(criteria.Server)
+                .WithSearchDateType(criteria.SearchDateType)
+                .WithDateRange(criteria.From, criteria.To)
+                .WithFreqType(criteria.FreqType)
+                .WithFreqSubType(criteria.FreqSubType)
                 .GetSchedules();
 
-            return View(getAllScheduleCriteria);
+            return View(criteria);
         }
         #endregion
 
         #region JobManagement
 
         /// <summary>
-        /// Job Management Page
+        /// Job Management Page.
         /// </summary>
-        /// <param name="server"></param>
-        /// <param name="schedule"></param>
-        /// <returns></returns>
+        /// <param name="scheduleId">Schedule ID.</param>
+        /// <param name="server">Server IP address.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult JobManagement(int? scheduleId, string server = "")
         {
@@ -172,10 +171,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get List Job with filter
+        /// Get List Job with filter.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult JobManagement(GetListJobCriteria criteria)
         {
@@ -204,15 +203,14 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Start a job
+        /// Start a job.
         /// </summary>
-        /// <param name="server"></param>
-        /// <param name="jobName"></param>
-        /// <returns></returns>
+        /// <param name="server">Server name.</param>
+        /// <param name="jobName">Schedule job name.</param>
+        /// <param name="stepName">Step name.</param>
+        /// <returns>JSON result.</returns>
         [HttpPost]
-        public JsonResult StartJob(string server,
-            string jobName,
-            string stepName)
+        public JsonResult StartJob(string server, string jobName, string stepName)
         {
             CommandResult commandResult = _jobService.FromServer(server)
                 .WithJob(jobName)
@@ -226,17 +224,18 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Stop a job
+        /// Stop a job.
         /// </summary>
-        /// <param name="server"></param>
-        /// <param name="jobName"></param>
-        /// <returns></returns>
+        /// <param name="serverName">Server name.</param>
+        /// <param name="jobName">Schedule job name.</param>
+        /// <returns>JSON result.</returns>
         [HttpPost]
-        public JsonResult StopJob(string server, string jobName)
+        public JsonResult StopJob(string serverName, string jobName)
         {
-            CommandResult commandResult = _jobService.FromServer(server)
+            CommandResult commandResult = _jobService.FromServer(serverName)
                 .WithJob(jobName)
                 .StopJob();
+
             return Json(new
             {
                 Status = commandResult
@@ -244,15 +243,15 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get Job Information after start or stop
+        /// Get Job Information after start or stop.
         /// </summary>
-        /// <param name="server"></param>
-        /// <param name="jobName"></param>
-        /// <returns></returns>
+        /// <param name="serverName">Server name.</param>
+        /// <param name="jobName">Schedule job name.</param>
+        /// <returns>JSON result.</returns>
         [HttpPost]
-        public JsonResult GetJob(string server, string jobName)
+        public JsonResult GetJob(string serverName, string jobName)
         {
-            JobSchedule jobSchedule = _jobService.FromServer(server)
+            JobSchedule jobSchedule = _jobService.FromServer(serverName)
                 .WithJob(jobName)
                 .GetJobs()
                 .FirstOrDefault();
@@ -281,20 +280,20 @@ namespace Fanex.Maintenance.Controller
         #region StepManagement
 
         /// <summary>
-        /// Get Step
+        /// Get step list.
         /// </summary>
-        /// <param name="job"></param>
-        /// <param name="server"></param>
-        /// <returns></returns>
+        /// <param name="jobName">Schedule job name.</param>
+        /// <param name="serverName">Server name.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult StepManagement(string job, string server)
+        public ActionResult StepManagement(string jobName, string serverName)
         {
             List<StepDetail> listStep = _stepService
-                                .WithJob(job)
-                                .FromServer(server)
+                                .WithJob(jobName)
+                                .FromServer(serverName)
                                 .GetSteps().ToList();
 
-            ViewBag.JobName = job;
+            ViewBag.JobName = jobName;
 
             return View(listStep);
         }
@@ -304,11 +303,12 @@ namespace Fanex.Maintenance.Controller
         #region Job Log
 
         /// <summary>
-        /// Get Job Log
+        /// Get Job Log.
         /// </summary>
-        /// <param name="job"></param>
-        /// <param name="server"></param>
-        /// <returns></returns>
+        /// <param name="top">Number of items.</param>
+        /// <param name="job">Schedule job name.</param>
+        /// <param name="server">Server name.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult JobLogManagement(int top = 0, string job = "", string server = "")
         {
@@ -356,10 +356,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get Job log with Filter
+        /// Get Job log with Filter.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult JobLogManagement(GetListJobCriteria criteria)
         {
@@ -412,16 +412,16 @@ namespace Fanex.Maintenance.Controller
 
         #region Sql Server Log Management
         /// <summary>
-        /// Get Server Log
+        /// Get Server Log.
         /// </summary>
-        /// <param name="server"></param>
-        /// <returns></returns>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult ServerLogManagement(string server)
+        public ActionResult ServerLogManagement(string serverIp)
         {
             InitPageSize();
             ViewBag.ListServer = GetServer();
-            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
                 .FromDate(DateTime.Now.Date)
                 .ToDate(DateTime.Now.AddDays(1))
                 .GetSqlServerLogs().Take(100);
@@ -432,15 +432,15 @@ namespace Fanex.Maintenance.Controller
                 {
                     PageIndex = 0,
                     PageSize = 100,
-                    Server = server
+                    Server = serverIp
                 });
         }
 
         /// <summary>
-        /// Get Server Log With Filter
+        /// Get Server Log With Filter.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult ServerLogManagement(GetSqlServerLogCriteria criteria)
         {
@@ -468,37 +468,38 @@ namespace Fanex.Maintenance.Controller
 
         #region Sql Agent Log Management
         /// <summary>
-        /// Get Sql Server Agent Log
+        /// Get SQL Server Agent Log.
         /// </summary>
-        /// <param name="server"></param>
-        /// <returns></returns>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <param name="top">Number of items.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult AgentLogManagement(string server, int top = 0)
+        public ActionResult AgentLogManagement(string serverIp, int top = 0)
         {
             InitPageSize();
+
             ViewBag.ListServer = GetServer();
-            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(server)
+            ViewBag.SqlServerLogs = _sqlServerLogService.WithServer(serverIp)
                 .FromDate(DateTime.Now.Date)
                 .ToDate(DateTime.Now.AddDays(1))
                 .GetSqlServerLogs((int)LogType.SqlAgentLog).Take(100);
             ViewBag.DateFrom = DateTime.Now.ToString("MMM dd, yyyy");
             ViewBag.DateTo = DateTime.Now.ToString("MMM dd, yyyy");
-
             ViewBag.Top = top;
 
             return View(new GetSqlServerLogCriteria
             {
                 PageIndex = 0,
                 PageSize = 100,
-                Server = server
+                Server = serverIp
             });
         }
 
         /// <summary>
-        /// Get Sql Server Agent Log With Filter
+        /// Get SQL Server Agent Log With Filter.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AgentLogManagement(GetSqlServerLogCriteria criteria)
         {
@@ -530,9 +531,9 @@ namespace Fanex.Maintenance.Controller
         #region Server Management
 
         /// <summary>
-        /// Server Management Page
+        /// Server Management Page.
         /// </summary>
-        /// <returns></returns>       
+        /// <returns>Action result.</returns>
         public ActionResult ServerManagement()
         {
             List<ResourceInfo> leftArray = new List<ResourceInfo>();
@@ -566,10 +567,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// 
+        /// Server detail.
         /// </summary>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <returns>Action result.</returns>
         public ActionResult ServerDetail(string serverIp)
         {
             ViewBag.ServerIp = serverIp;
@@ -578,6 +579,11 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Get server resource info.
+        /// </summary>
+        /// <param name="serverIp">Server IP address.</param>
+        /// <returns>JSON result.</returns>
         [HttpPost]
         public JsonResult GetServerResourceInfo(string serverIp)
         {
@@ -608,12 +614,61 @@ namespace Fanex.Maintenance.Controller
 
         #endregion
 
+        #region Ajax
+
+        /// <summary>
+        /// Get Schedule Ajax.
+        /// </summary>
+        /// <param name="server">Server IP address.</param>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult GetSchedule(string server)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                IEnumerable<Schedule> list = _scheduleService
+                    .WithServer(server)
+                    .GetSchedules();
+
+                return Json(list);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get Job Ajax.
+        /// </summary>
+        /// <param name="server">Server name.</param>
+        /// <returns>Action result.</returns>
+        [HttpPost]
+        public ActionResult GetJobByServer(string server)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                //// get list job
+                var listJob = new List<JobSchedule>();
+                if (!server.Equals(string.Empty))
+                {
+                    listJob = _jobService.WithJob(null)
+                                                 .FromServer(server)
+                                                 .GetJobs().ToList();
+                }
+
+                return Json(listJob);
+            }
+
+            return null;
+        }
+
+        #endregion
+
         #region Private
 
         /// <summary>
-        /// Get List Server From Config File
+        /// Get List Server From Config File.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of selected list item.</returns>
         private List<SelectListItem> GetServer()
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -630,7 +685,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init for Page size
+        /// Initialize for Page size.
         /// </summary>
         private void InitPageSize()
         {
@@ -660,55 +715,6 @@ namespace Fanex.Maintenance.Controller
             });
 
             ViewBag.PageSize = listPageSize;
-        }
-
-        #endregion
-
-        #region Ajax
-
-        /// <summary>
-        /// Get Schedule Ajax
-        /// </summary>
-        /// <param name="server"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult GetSchedule(string server)
-        {
-            if (Request.IsAjaxRequest())
-            {
-                IEnumerable<Schedule> list = _scheduleService
-                    .WithServer(server)
-                    .GetSchedules();
-
-                return Json(list);
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Get Job Ajax
-        /// </summary>
-        /// <param name="server"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult GetJobByServer(string server)
-        {
-            if (Request.IsAjaxRequest())
-            {
-                //// get list job
-                var listJob = new List<JobSchedule>();
-                if (!server.Equals(string.Empty))
-                {
-                    listJob = _jobService.WithJob(null)
-                                                 .FromServer(server)
-                                                 .GetJobs().ToList();
-                }
-
-                return Json(listJob);
-            }
-
-            return null;
         }
 
         #endregion

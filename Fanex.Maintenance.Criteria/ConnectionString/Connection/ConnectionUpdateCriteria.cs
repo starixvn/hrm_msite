@@ -11,11 +11,12 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    /// <summary>
+    /// Update connection criteria.
+    /// </summary>
     public class ConnectionUpdateCriteria : CriteriaBase
     {
         private string _initialCatalog;
@@ -40,6 +41,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
             {
                 return _initialCatalog;
             }
+
             set
             {
                 _initialCatalog = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
@@ -56,12 +58,12 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
             {
                 return _userId;
             }
+
             set
             {
                 _userId = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;
             }
         }
-
 
         public string Password { get; set; }
 
@@ -72,6 +74,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
             {
                 return _freeText;
             }
+
             set
             {
                 _freeText = !string.IsNullOrWhiteSpace(value) ? value.Trim() : string.Empty;

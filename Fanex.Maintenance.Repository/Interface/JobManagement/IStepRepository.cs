@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="IStep.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="IStepRepository.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -14,16 +14,10 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Step repository.
     /// </summary>
     public interface IStepRepository
     {
-        /// <summary>
-        /// Get all step by job
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverName"></param>
-        /// <returns></returns>
         IEnumerable<StepDetail> GetStepByJob(ICriteria criteria, string serverName);
     }
 }
