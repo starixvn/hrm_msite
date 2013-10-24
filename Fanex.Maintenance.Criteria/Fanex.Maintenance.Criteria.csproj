@@ -102,6 +102,8 @@
     <Compile Include="Log\GetMachinesByTypeCriteria.cs" />
     <Compile Include="Log\InsertMachineCriteria.cs" />
     <Compile Include="Log\UpdateMachineCriteria.cs" />
+    <Compile Include="LrfDomain\GetAllLrfDomainCriteria.cs" />
+    <Compile Include="LrfDomain\ActiveDomainCriteria.cs" />
     <Compile Include="MailService\MailConfigViewModel.cs" />
     <Compile Include="MailService\MailFunctionViewModel.cs" />
     <Compile Include="MailService\MailSettingViewModel.cs" />

@@ -102,6 +102,7 @@
     <Compile Include="HomeController.cs" />
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Hubs\ServerInfoHub.cs" />
+    <Compile Include="LicenseeSettingController.cs" />
     <Compile Include="LogController.cs" />
     <Compile Include="MachineController.cs" />
     <Compile Include="MailController.cs" />

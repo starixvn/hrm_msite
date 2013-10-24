@@ -71,6 +71,7 @@
     <Compile Include="Impl\LogCategoryService.cs" />
     <Compile Include="Impl\DatabaseReportService.cs" />
     <Compile Include="Impl\LogService.cs" />
+    <Compile Include="Impl\LicenseeSettingService.cs" />
     <Compile Include="Impl\MachineService.cs" />
     <Compile Include="Impl\MailService.cs" />
     <Compile Include="Impl\ServiceContext.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Interface\ConnectionString\IAliasService.cs" />
     <Compile Include="Interface\ConnectionString\IDatabaseServerService.cs" />
     <Compile Include="Interface\IBaseService.cs" />
+    <Compile Include="Interface\ILicenseeSettingService.cs" />
     <Compile Include="Interface\IServiceContext.cs" />
     <Compile Include="Interface\JobManagement\IJobService.cs" />
     <Compile Include="Interface\ILogCategoryService.cs" />

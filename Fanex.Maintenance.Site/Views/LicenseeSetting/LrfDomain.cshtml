@@ -1,0 +1,47 @@
+﻿@using Fanex.Maintenance.Criteria.LrfDomain
+@model IEnumerable<LrfDomain>
+@{
+    ViewBag.Title = "Lrf Domain";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/css/log")
+}
+@section Headline {
+    <h1>
+        <span class="title">@ViewBag.Title</span> 
+    </h1>
+}
+@using (Html.BeginForm())
+{
+<section id="filter-bar" style="width: 98%">
+        <div class="filter-form">
+            <div class="filter-row">
+                <div class="lbl-field width-auto">
+                    <span>Change current domain:</span>
+                    <ul>
+                        <li><br /></li>
+                        @{
+                            if (Model.Any())
+                            {
+                                foreach (var item in Model)
+                                { 
+                                    <li>
+                                    @Html.RadioButton("Id", item.Id, item.IsActive, new { @id = "domain-" + item.Id })
+                                    @item.DomainName
+                                    <br />
+                                    </li>  
+                                }
+                            }
+                            <li>
+                                <div class="submit">
+                                    <input type="submit" value="Submit" />
+                                </div>
+                            </li>
+                         }
+                     </ul>
+                 </div>
+            </div>
+        </div>
+</section>
+}
