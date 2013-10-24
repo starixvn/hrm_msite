@@ -1136,53 +1136,44 @@ namespace Fanex.Maintenance.Controller
         {
             var listData = new List<LogData>();
 
-            if (log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_Insert)
+            switch (log.ActionId)
             {
-                listData = _logService.GetValueConnectionInsert(log);
-                ViewBag.IsNew = true;
+                case (int)ConLogAction.ConnectionString_ConnectionString_Insert:
+                    listData = _logService.GetValueConnectionInsert(log);
+                    ViewBag.IsNew = true;
 
-                return PartialView(listData);
-            }
+                    return PartialView(listData);
 
-            if (log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_Update
-                || log.ActionId == (int)ConLogAction.ConnectionString_ConnectionString_UpdateDefaultConnection)
-            {
-                listData = _logService.GetValueConnectionUpdate(log);
-                ViewBag.IsNew = false;
+                case (int)ConLogAction.ConnectionString_ConnectionString_Update:
+                case (int)ConLogAction.ConnectionString_ConnectionString_UpdateDefaultConnection:
+                    listData = _logService.GetValueConnectionUpdate(log);
+                    ViewBag.IsNew = false;
 
-                return PartialView(listData);
-            }
+                    return PartialView(listData);
 
-            if (log.ActionId == (int)ConLogAction.ConnectionString_DatabaseServer_Insert)
-            {
-                listData = _logService.GetValueDatabaseServerInsert(log);
-                ViewBag.IsNew = true;
+                case (int)ConLogAction.ConnectionString_DatabaseServer_Insert:
+                    listData = _logService.GetValueDatabaseServerInsert(log);
+                    ViewBag.IsNew = true;
 
-                return PartialView(listData);
-            }
+                    return PartialView(listData);
 
-            if (log.ActionId == (int)ConLogAction.ConnectionString_DatabaseServer_Update)
-            {
-                listData = _logService.GetValueDatabaseServerUpdate(log);
-                ViewBag.IsNew = false;
+                case (int)ConLogAction.ConnectionString_DatabaseServer_Update:
+                    listData = _logService.GetValueDatabaseServerUpdate(log);
+                    ViewBag.IsNew = false;
 
-                return PartialView(listData);
-            }
+                    return PartialView(listData);
 
-            if (log.ActionId == (int)ConLogAction.ConnectionString_Site_Insert)
-            {
-                listData = _logService.GetValueSiteInsert(log);
-                ViewBag.IsNew = true;
+                case (int)ConLogAction.ConnectionString_Site_Insert:
+                    listData = _logService.GetValueSiteInsert(log);
+                    ViewBag.IsNew = true;
 
-                return PartialView(listData);
-            }
+                    return PartialView(listData);
 
-            if (log.ActionId == (int)ConLogAction.ConnectionString_Site_Update)
-            {
-                listData = _logService.GetValueSiteUpdate(log);
-                ViewBag.IsNew = false;
+                case (int)ConLogAction.ConnectionString_Site_Update:
+                    listData = _logService.GetValueSiteUpdate(log);
+                    ViewBag.IsNew = false;
 
-                return PartialView(listData);
+                    return PartialView(listData);
             }
 
             listData = _logService.GetValueUpdateStatus(log);

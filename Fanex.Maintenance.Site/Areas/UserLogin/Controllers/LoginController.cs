@@ -11,6 +11,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
@@ -99,6 +100,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <param name="username">Login username.</param>
         /// <param name="password">Login password.</param>
         /// <returns>Action result.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Index(string username, string password)
@@ -227,7 +229,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 catch (Exception ex)
                 {
                     LogService.Error(ex.Message, ex);
-                    throw ex;
+                    throw;
                 }
             }
             else

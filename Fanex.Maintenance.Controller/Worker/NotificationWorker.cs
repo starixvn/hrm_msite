@@ -11,6 +11,7 @@ namespace Fanex.Maintenance.Controller.Worker
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using Fanex.Logging;
     using Fanex.Maintenance.Controller.Hubs;
@@ -25,6 +26,7 @@ namespace Fanex.Maintenance.Controller.Worker
     /// <summary>
     /// Notification worker.
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2100:CodeLineMustNotBeLongerThan", Justification = "Reviewed. Suppression is OK here.")]
     public class NotificationWorker : BaseWorker
     {
         private int _getDataInterval;
@@ -195,6 +197,7 @@ namespace Fanex.Maintenance.Controller.Worker
         /// Get Job For notification.
         /// </summary>
         /// <returns>List of notify info.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         private IEnumerable<NotifyInfo> GetJobLogs()
         {
             //// Initial variables

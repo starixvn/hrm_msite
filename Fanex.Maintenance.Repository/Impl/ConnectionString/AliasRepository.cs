@@ -13,6 +13,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.Common.Extensions;
     using Fanex.ConnectionString.Domain;
@@ -93,6 +94,7 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>List of alias connection string connection.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(ICriteria criteria)
         {
             Func<IDataReader, AliasConnectionStringConnection> objMapFunc = (reader) =>

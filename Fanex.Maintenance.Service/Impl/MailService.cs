@@ -60,7 +60,7 @@ namespace Fanex.Maintenance.Service.Impl
                 var data = client.GetListConfig(ip);
                 if (data != null)
                 {
-                    configs = data.ToList();
+                    configs = data.OrderBy(x => x.AppName).ToList();
                 }
             }
 
