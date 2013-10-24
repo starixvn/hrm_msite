@@ -14,6 +14,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Insert connection criteria.
+    /// </summary>
     public class ConnectionInsertCriteria : CriteriaBase
     {
         private string _initialCatalog;

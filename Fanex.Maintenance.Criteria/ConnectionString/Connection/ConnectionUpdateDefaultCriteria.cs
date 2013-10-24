@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Update default connection criteria.
+    /// </summary>
     public class ConnectionUpdateDefaultCriteria : CriteriaBase
     {
         public int AliasId { get; set; }

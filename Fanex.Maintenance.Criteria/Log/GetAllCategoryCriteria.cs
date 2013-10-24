@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetAllCategoryCritria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetAllCategoryCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -11,7 +11,10 @@ namespace Fanex.Maintenance.Criteria.Log
 {
     using Fanex.NAP.Framework.Data;
 
-    public class GetAllCategoryCritria : CriteriaBase
+    /// <summary>
+    /// Get all log category criteria.
+    /// </summary>
+    public class GetAllCategoryCriteria : CriteriaBase
     {
         public override bool IsValid()
         {

@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Entity.Model.ConnectionString
 {
     using Fanex.ConnectionString.Domain;
 
+    /// <summary>
+    /// Connection string connection.
+    /// </summary>
     public class ConnectionStringConnection
     {
         public int NumOfConection { get; set; }

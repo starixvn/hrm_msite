@@ -14,6 +14,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Update database server criteria.
+    /// </summary>
     public class DatabaseServerUpdateCriteria : CriteriaBase
     {
         private string _name;

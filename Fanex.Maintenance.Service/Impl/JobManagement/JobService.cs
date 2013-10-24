@@ -23,7 +23,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
     using Fanex.Maintenance.Service.Interface.JobManagement;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Job service.
     /// </summary>
     public class JobService : IJobService
     {
@@ -63,18 +63,11 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 
         #region Ctor
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
         private JobService()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="jobRepository"></param>
         private JobService(IJobRepository jobRepository)
         {
             _jobRepository = jobRepository ?? new JobRepository();
@@ -89,9 +82,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Create job service
+        /// Create job service.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Job service.</returns>
         public static IJobService Create()
         {
             return new JobService();
@@ -100,19 +93,19 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         #endregion
 
         /// <summary>
-        /// Get job
+        /// Get job schedule.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of job schedule.</returns>
         public IEnumerable<JobSchedule> GetJob()
         {
             return null;
         }
 
         /// <summary>
-        /// filter by status of job
+        /// Filter by status of job.
         /// </summary>
-        /// <param name="status"></param>
-        /// <returns></returns>
+        /// <param name="status">Job status.</param>
+        /// <returns>Job service object.</returns>
         public IJobService WithStatus(int? status)
         {
             this._status = status;
@@ -121,10 +114,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// from server
+        /// From server.
         /// </summary>
-        /// <param name="serverName"></param>
-        /// <returns></returns>
+        /// <param name="serverName">Server name.</param>
+        /// <returns>Job service object.</returns>
         public IJobService FromServer(string serverName)
         {
             this._server = serverName;
@@ -133,10 +126,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter by job name
+        /// Filter by job name.
         /// </summary>
-        /// <param name="jobName"></param>
-        /// <returns></returns>
+        /// <param name="jobName">Job service name.</param>
+        /// <returns>Job service object.</returns>
         public IJobService WithJob(string jobName)
         {
             this._jobName = jobName;
@@ -145,10 +138,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter by schedule name
+        /// Filter by schedule name.
         /// </summary>
-        /// <param name="scheduleName"></param>
-        /// <returns></returns>
+        /// <param name="scheduleName">Schedule name.</param>
+        /// <returns>Job service object.</returns>
         public IJobService WithSchedule(string scheduleName)
         {
             this._schedule = scheduleName;
@@ -157,10 +150,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter by current execution status
+        /// Filter by current execution status.
         /// </summary>
-        /// <param name="executeStatus"></param>
-        /// <returns></returns>
+        /// <param name="executeStatus">Execute status.</param>
+        /// <returns>Job service object.</returns>
         public IJobService WithCurrentExecuteStatus(int? executeStatus)
         {
             this._currentExcuteStatus = executeStatus;
@@ -169,10 +162,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter by last run date
+        /// Filter by last run date.
         /// </summary>
-        /// <param name="lastRunDate"></param>
-        /// <returns></returns>
+        /// <param name="lastRunDate">Last run date.</param>
+        /// <returns>Job service.</returns>
         public IJobService WithLastRunDate(DateTime? lastRunDate)
         {
             this._lastRunDate = lastRunDate;
@@ -181,10 +174,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter buy next run date
+        /// Filter buy next run date.
         /// </summary>
-        /// <param name="nextRunDate"></param>
-        /// <returns></returns>
+        /// <param name="nextRunDate">Next run date.</param>
+        /// <returns>Job service object.</returns>
         public IJobService WithNextRunDate(DateTime? nextRunDate)
         {
             this._nextRunDate = nextRunDate;
@@ -193,10 +186,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter by start run date
+        /// Filter by start run date.
         /// </summary>
-        /// <param name="startRunDate"></param>
-        /// <returns></returns>
+        /// <param name="startRunDate">Start run date.</param>
+        /// <returns>Job service.</returns>
         public IJobService WithStartRunDate(DateTime? startRunDate)
         {
             if (ReferenceEquals(startRunDate, null))
@@ -211,10 +204,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter by end run date
+        /// Filter by end run date.
         /// </summary>
-        /// <param name="endRunDate"></param>
-        /// <returns></returns>
+        /// <param name="endRunDate">End run date.</param>
+        /// <returns>Job service object.</returns>
         public IJobService WithEndRunDate(DateTime? endRunDate)
         {
             if (ReferenceEquals(endRunDate, null))
@@ -229,10 +222,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter by job id
+        /// Filter by job ID.
         /// </summary>
-        /// <param name="guid"></param>
-        /// <returns></returns>
+        /// <param name="guid">Job GUID string.</param>
+        /// <returns>Job service object.</returns>
         public IJobService WithJobId(string guid)
         {
             this._jobId = new Guid(guid);
@@ -241,10 +234,10 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// filter by step name
+        /// Filter by step name.
         /// </summary>
-        /// <param name="stepName"></param>
-        /// <returns></returns>
+        /// <param name="stepName">Step name.</param>
+        /// <returns>Job service object.</returns>
         public IJobService WithStepName(string stepName)
         {
             if (!string.IsNullOrEmpty(stepName))
@@ -256,9 +249,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// get job
+        /// Get job schedule.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of job schedule.</returns>
         public IEnumerable<JobSchedule> GetJobs()
         {
             var criteria = new GetListJobCriteria
@@ -320,9 +313,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get job log
+        /// Get job logs.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of job log.</returns>
         public IEnumerable<JobLog> GetJobLogs()
         {
             //// create criteria get job history
@@ -349,12 +342,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
                         {
                             indexOutCome = i;
                         }
-                        else
+                        else if (itemLog.RunSatus == 0 || itemLog.RunSatus == 2)
                         {
-                            if (itemLog.RunSatus == 0 || itemLog.RunSatus == 2)
-                            {
-                                list[indexOutCome].RunSatus = 6;
-                            }
+                            list[indexOutCome].RunSatus = 6;
                         }
                     }
 
@@ -384,59 +374,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Get job buy schedule name
+        /// Start Job.
         /// </summary>
-        /// <param name="schedule"></param>
-        /// <param name="server"></param>
-        /// <returns></returns>
-        private IEnumerable<JobSchedule> GetJobBySchedule(string schedule, string server)
-        {
-            try
-            {
-                var criteria = new GetAllJobInScheduleCriteria
-                {
-                    ScheduleName = schedule
-                };
-
-                return _jobRepository.GetAllJob(criteria, server);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.Error(ex.Message, ex);
-            }
-
-            return new List<JobSchedule>();
-        }
-
-        /// <summary>
-        /// Get job buy schedule name
-        /// </summary>
-        /// <param name="schedule"></param>
-        /// <param name="server"></param>
-        /// <returns></returns>
-        private IEnumerable<JobSchedule> GetJobByScheduleId(int? scheduleId, string server)
-        {
-            try
-            {
-                var criteria = new GetAllJobInScheduleCriteria
-                {
-                    ScheduleId = scheduleId
-                };
-
-                return _jobRepository.GetAllJob(criteria, server);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log.Error(ex.Message, ex);
-            }
-
-            return new List<JobSchedule>();
-        }
-
-        /// <summary>
-        /// Start Job
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>Command result.</returns>
         public CommandResult StartJob()
         {
             StartJobCriteria startJobCriteria = new StartJobCriteria
@@ -465,9 +405,9 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         }
 
         /// <summary>
-        /// Stop Job
+        /// Stop schedule job.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Command result.</returns>
         public CommandResult StopJob()
         {
             StopJobCriteria stopJobCriteria = new StopJobCriteria
@@ -494,10 +434,65 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
             return commandResult;
         }
 
+        /// <summary>
+        /// Stop Job schedule.
+        /// </summary>
+        /// <param name="scheduleId">Schedule ID.</param>
+        /// <returns>Job service.</returns>
         public IJobService WithScheduleId(int? scheduleId)
         {
             this._scheduleId = scheduleId;
             return this;
+        }
+
+        /// <summary>
+        /// Get job buy schedule name.
+        /// </summary>
+        /// <param name="scheduleId">Schedule ID.</param>
+        /// <param name="server">Server name.</param>
+        /// <returns>List of job schedule.</returns>
+        private IEnumerable<JobSchedule> GetJobByScheduleId(int? scheduleId, string server)
+        {
+            try
+            {
+                var criteria = new GetAllJobInScheduleCriteria
+                {
+                    ScheduleId = scheduleId
+                };
+
+                return _jobRepository.GetAllJob(criteria, server);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return new List<JobSchedule>();
+        }
+
+        /// <summary>
+        /// Get job buy schedule name.
+        /// </summary>
+        /// <param name="schedule">Schedule name.</param>
+        /// <param name="server">Server name.</param>
+        /// <returns>List of job schedule.</returns>
+        private IEnumerable<JobSchedule> GetJobBySchedule(string schedule, string server)
+        {
+            try
+            {
+                var criteria = new GetAllJobInScheduleCriteria
+                {
+                    ScheduleName = schedule
+                };
+
+                return _jobRepository.GetAllJob(criteria, server);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log.Error(ex.Message, ex);
+            }
+
+            return new List<JobSchedule>();
         }
     }
 }

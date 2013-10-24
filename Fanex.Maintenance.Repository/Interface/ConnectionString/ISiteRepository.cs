@@ -15,7 +15,7 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Site repository interface.
     /// </summary>
     public interface ISiteRepository
     {

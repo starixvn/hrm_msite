@@ -18,6 +18,9 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
 
+    /// <summary>
+    /// Base controller.
+    /// </summary>
     public class BaseController : Controller
     {
         protected readonly string Environment = NapSettings.Settings.Environment;
@@ -51,6 +54,18 @@ namespace Fanex.Maintenance.Controller
             };
         }
 
+        /// <summary>
+        /// Gets whether the current site allows users login directly.
+        /// </summary>
+        /// <value>0 : login through NAP Hub.</value>
+        public int IsSiteLogin
+        {
+            get
+            {
+                return _issiteLogin;
+            }
+        }
+
         protected ViewFlags ViewFlags
         {
             get
@@ -64,18 +79,6 @@ namespace Fanex.Maintenance.Controller
             }
         }
 
-        /// <summary>
-        /// Indicates whether the current site allows users login directly.
-        /// If "0", users must login through NAP Hub
-        /// </summary>
-        public int IsSiteLogin
-        {
-            get
-            {
-                return _issiteLogin;
-            }
-        }
-
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
         {
             return new JsonResult()
@@ -84,7 +87,7 @@ namespace Fanex.Maintenance.Controller
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
                 JsonRequestBehavior = behavior,
-                MaxJsonLength = Int32.MaxValue
+                MaxJsonLength = int.MaxValue
             };
         }
     }

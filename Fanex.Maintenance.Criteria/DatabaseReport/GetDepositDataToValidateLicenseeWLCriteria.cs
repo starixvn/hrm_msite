@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetCreditDataToValidateCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetDepositDataToValidateLicenseeWLCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,7 +12,10 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
     using System;
     using Fanex.NAP.Framework.Data;
 
-    public class GetCreditDataToValidateBettingCriteria : CriteriaBase
+    /// <summary>
+    /// Get deposit data to validate licensee winloss criteria.
+    /// </summary>
+    public class GetDepositDataToValidateLicenseeWLCriteria : CriteriaBase
     {
         public DateTime Date { get; set; }
 
@@ -20,7 +23,7 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
 
         public override string GetSettingKey()
         {
-            return "GET_CreditDataToValidate_Betting";
+            return "GET_DepositDataToValidate_LicenseeWL";
         }
 
         public override bool IsValid()
@@ -28,12 +31,4 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
             return true;
         }
     }
-
-    public class GetCreditDataToValidateDWCriteria : GetCreditDataToValidateBettingCriteria
-    {      
-        public override string GetSettingKey()
-        {
-            return "GET_CreditDataToValidate_DW";
-        }       
-    }  
 }

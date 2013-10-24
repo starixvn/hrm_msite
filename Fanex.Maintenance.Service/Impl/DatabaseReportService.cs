@@ -25,14 +25,14 @@ namespace Fanex.Maintenance.Service.Impl
         private readonly DatabaseReportRepository _databaseReportRepository = new DatabaseReportRepository();
 
         /// <summary>
-        /// Change hour to minute
+        /// Change hour to minute.
         /// </summary>
-        /// <param name="_dateTime"></param>
-        /// <returns></returns>
-        public static string ChangeHourToMinute(string _dateTime)
+        /// <param name="dateTime">DateTime string.</param>
+        /// <returns>Minute string.</returns>
+        public static string ChangeHourToMinute(string dateTime)
         {
-            string ngay = _dateTime.Substring(0, _dateTime.IndexOf(" "));
-            string hour = _dateTime.Substring(_dateTime.IndexOf(" "), _dateTime.Length - _dateTime.IndexOf(" "));
+            string ngay = dateTime.Substring(0, dateTime.IndexOf(" "));
+            string hour = dateTime.Substring(dateTime.IndexOf(" "), dateTime.Length - dateTime.IndexOf(" "));
             string[] arrList = hour.Split(":".ToCharArray());
             int minute = (Convert.ToInt32(arrList[0]) * 60) + Convert.ToInt32(arrList[1]);
 
@@ -40,20 +40,20 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Split date to hour
+        /// Split date to hour.
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="date">Date string.</param>
+        /// <returns>Hour string.</returns>
         public static string SplitDateToHour(string date)
         {
             return date = date.Substring(date.Length - 5, 5);
         }
 
         /// <summary>
-        /// Change minute to hour
+        /// Change minute to hour.
         /// </summary>
-        /// <param name="minute"></param>
-        /// <returns></returns>
+        /// <param name="minute">Minute string.</param>
+        /// <returns>Hour string.</returns>
         public static string ChangeMinuteToHour(int minute)
         {
             int hour = minute / 60;
@@ -63,10 +63,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get user online daily
+        /// Get user online daily.
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="date">Date string.</param>
+        /// <returns>Data table.</returns>
         public DataTable GetUserOnlineDaily(DateTime date)
         {
             var criteria = new GetUserOnlineDailyCriteria
@@ -78,10 +78,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get list user online
+        /// Get list user online.
         /// </summary>
-        /// <param name="top"></param>
-        /// <returns></returns>
+        /// <param name="top">Number of users.</param>
+        /// <returns>Data table.</returns>
         public DataTable GetUserOnline(int top)
         {
             var criteria = new GetUserOnlineCriteria
@@ -94,10 +94,10 @@ namespace Fanex.Maintenance.Service.Impl
         #region Generate Template
 
         /// <summary>
-        /// Generate template user daily list
+        /// Generate template user daily list.
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="data">Template data.</param>
+        /// <returns>Template string.</returns>
         public string GenerateTemplateUserDaily(DataTable data)
         {
             StringBuilder _s = new StringBuilder();
@@ -123,12 +123,11 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Generate template user list
+        /// Generate template user list.
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="show"></param>
-        /// <returns></returns>
-        public string GenerateTemplateUser(DataTable data, int show)
+        /// <param name="data">Template data.</param>
+        /// <returns>Template string.</returns>
+        public string GenerateTemplateUser(DataTable data)
         {
             StringBuilder _s = new StringBuilder();
 
@@ -149,11 +148,11 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Generate chart
+        /// Generate chart.
         /// </summary>
-        /// <param name="dtb"></param>
-        /// <param name="show"></param>
-        /// <returns></returns>
+        /// <param name="dtb">Data table.</param>
+        /// <param name="show">Number of rows.</param>
+        /// <returns>Result string.</returns>
         public string GenerateDataChart(DataTable dtb, int show)
         {
             string data = string.Empty;
@@ -182,11 +181,11 @@ namespace Fanex.Maintenance.Service.Impl
         #endregion Generate Template
 
         /// <summary>
-        /// Generate data table
+        /// Generate data table.
         /// </summary>
-        /// <param name="dtb"></param>
-        /// <param name="rowNumber"></param>
-        /// <returns></returns>
+        /// <param name="dtb">Input data table.</param>
+        /// <param name="rowNumber">Row number.</param>
+        /// <returns>Return data table.</returns>
         private static DataTable GenerateDataTable(DataTable dtb, int rowNumber)
         {
             string _datetime = dtb.Rows[0]["logdate"].ToString();

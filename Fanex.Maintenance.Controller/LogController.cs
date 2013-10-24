@@ -21,24 +21,24 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Impl;
 
     /// <summary>
-    /// Log Controller
+    /// Log controller.
     /// </summary>
     [Authorize]
     public class LogController : BaseController
     {
         #region Member
         /// <summary>
-        /// Log Service
+        /// Log Service.
         /// </summary>
         private readonly LogService _logService;
 
         /// <summary>
-        /// Log Category Service
+        /// Log Category Service.
         /// </summary>
         private readonly LogCategoryService _categoryService;
 
         /// <summary>
-        /// Machine Service
+        /// Machine Service.
         /// </summary>
         private readonly MachineService _machineService;
 
@@ -46,19 +46,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Ctor
 
-        /// <summary>
-        /// Parameter less Controller
-        /// </summary>
         public LogController()
             : this(null, null, null)
         {
         }
 
-        /// <summary>
-        /// Log Controller with services defined
-        /// </summary>
-        /// <param name="logService"></param>
-        /// <param name="categoryService"></param>
         public LogController(LogService logService, LogCategoryService categoryService, MachineService machineService)
         {
             _logService = logService ?? LogService.Create();
@@ -71,14 +63,13 @@ namespace Fanex.Maintenance.Controller
         #region Action
 
         /// <summary>
-        /// Get log
+        /// Log list page.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Index()
         {
             InitDataView();
-
             InitPageSize();
 
             ViewBag.ListLog = null;
@@ -100,12 +91,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get log
+        /// Get log page.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Index(GetLogCriteria criteria)
         {
@@ -119,8 +108,7 @@ namespace Fanex.Maintenance.Controller
                 criteria.CategoryId, 
                 criteria.MachineId,
                 criteria.IsProduction, 
-                criteria.
-                IsMonitored, 
+                criteria.IsMonitored, 
                 criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)
@@ -135,18 +123,16 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get details message
+        /// Get details message.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Log message ID.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult GetLogMessage(int id)
         {
             if (Request.IsAjaxRequest())
             {
-                string message = string.Empty;
-                message = _logService.GetMessage(id);
-                return Json(message);
+                return Json(_logService.GetMessage(id));
             }
 
             return Json(null);
@@ -157,9 +143,9 @@ namespace Fanex.Maintenance.Controller
         #region Ajax
 
         /// <summary>
-        /// Remove Log
+        /// Remove Log.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult RemoveLog()
         {
@@ -172,11 +158,11 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Update log's monitored status
+        /// Update log's monitored status.
         /// </summary>
-        /// <param name="logId"></param>
-        /// <param name="isMonitored"></param>
-        /// <returns></returns>
+        /// <param name="logId">Log object ID.</param>
+        /// <param name="isMonitored">Is monitored or not.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult MonitorLog(string logId, bool isMonitored)
         {
@@ -198,7 +184,7 @@ namespace Fanex.Maintenance.Controller
         #region Private
 
         /// <summary>
-        /// Init Page Size
+        /// Initialize Page Size.
         /// </summary>
         private void InitPageSize()
         {
@@ -231,7 +217,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Machine Types data
+        /// Initialize Machine Types data.
         /// </summary>
         private void InitMachineTypes()
         {
@@ -256,7 +242,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Log Status data
+        /// Initialize Log Status data.
         /// </summary>
         private void InitLogStatus()
         {
@@ -281,7 +267,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init Severities data
+        /// Initialize Severities data.
         /// </summary>
         private void InitSeverities()
         {
@@ -321,15 +307,14 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Init data for View
+        /// Initialize data for View.
         /// </summary>
         private void InitDataView()
         {
             InitSeverities();
-            //InitMachineTypes();
             InitLogStatus();
 
-            ////Default selection for drop-down
+            // Default selection for drop-down
             SelectListItem defaultSelection = new SelectListItem
             {
                 Text = ViewResource.All,
@@ -337,7 +322,7 @@ namespace Fanex.Maintenance.Controller
                 Selected = true
             };
 
-            ////Get Category from DB
+            // Get Category from DB
             List<SelectListItem> listCategory = _categoryService.GetAll().Select(c => new SelectListItem
             {
                 Text = c.CategoryName,

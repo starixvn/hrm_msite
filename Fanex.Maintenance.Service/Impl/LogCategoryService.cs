@@ -15,35 +15,32 @@ namespace Fanex.Maintenance.Service.Impl
     using Fanex.Maintenance.Repository.Impl;
 
     /// <summary>
-    /// 
+    /// Log category service.
     /// </summary>
     public class LogCategoryService
     {
         private readonly LogCategoryRepository _categoryRepository = new LogCategoryRepository();
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
         private LogCategoryService()
         {
         }
 
         /// <summary>
-        /// Create log category service
+        /// Create log category service.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Log category service.</returns>
         public static LogCategoryService Create()
         {
             return new LogCategoryService();
         }
 
         /// <summary>
-        /// Get all category
+        /// Get all category.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of log category.</returns>
         public IEnumerable<LogCategory> GetAll()
         {
-            GetAllCategoryCritria criteria = new GetAllCategoryCritria();
+            GetAllCategoryCriteria criteria = new GetAllCategoryCriteria();
 
             return _categoryRepository.Fetch(criteria);
         }

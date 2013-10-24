@@ -15,7 +15,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Connection update criteria.
+    /// Update connection criteria.
     /// </summary>
     public class ConnectionUpdateCriteria : CriteriaBase
     {

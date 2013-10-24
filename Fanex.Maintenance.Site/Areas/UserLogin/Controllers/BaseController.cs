@@ -13,15 +13,18 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Web.Context;
 
+    /// <summary>
+    /// Base controller.
+    /// </summary>
     public class BaseController : Controller
     {
         protected readonly string Environment = NapSettings.Settings.Environment;
 
         protected readonly int SiteId = NapSettings.Settings.SiteId;
 
-        private int _issiteLogin = NapSettings.Settings.IsSiteLogin;
-
         protected readonly CurrentContext CurrentContext;
+
+        private int _issiteLogin = NapSettings.Settings.IsSiteLogin;
 
         public BaseController()
         {
@@ -29,9 +32,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         }
 
         /// <summary>
-        /// Indicates whether the current site allows users login directly.
-        /// If "0", users must login through NAP Hub
+        /// Gets whether the current site allows users login directly.
         /// </summary>
+        /// <value>If "0", users must login through NAP Hub.</value>
         public int IsSiteLogin
         {
             get

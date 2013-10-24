@@ -22,6 +22,9 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
     using Fanex.Maintenance.Service.Interface.ConnectionString;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Alias service.
+    /// </summary>
     public class AliasService : BaseService, IAliasService
     {
         private readonly IAliasRepository _aliasRepository;
@@ -40,14 +43,24 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 
         #endregion Ctor
 
-        public IEnumerable<AliasConnectionString> GetAll(string alias = "", int? dbServerId = null, int? siteId = null)
+        /// <summary>
+        /// Get all alias.
+        /// </summary>
+        /// <param name="alias">Alias string.</param>
+        /// <param name="databaseServerId">Database server ID.</param>
+        /// <param name="siteId">Site object ID.</param>
+        /// <returns>List of alias.</returns>
+        public IEnumerable<AliasConnectionString> GetAll(
+            string alias = "", 
+            int? databaseServerId = null, 
+            int? siteId = null)
         {
             try
             {
                 var criteria = new AliasGetAllCriteria
                 {
                     Alias = alias,
-                    DbServerId = dbServerId,
+                    DbServerId = databaseServerId,
                     SiteId = siteId
                 };
 
@@ -64,6 +77,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Insert or update alias.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult InsertOrUpdate(ICriteria criteria)
         {
             // check parameters
@@ -86,6 +104,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Update alias status.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Command result.</returns>
         public ICommandResult UpdateStatus(ICriteria criteria)
         {
             // check parameters
@@ -108,6 +131,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get alias.
+        /// </summary>
+        /// <param name="aliasId">Connection string alias ID.</param>
+        /// <returns>Alias object.</returns>
         public Alias Get(int aliasId)
         {
             // check parameters
@@ -133,6 +161,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get alias by site.
+        /// </summary>
+        /// <param name="siteId">Site object ID.</param>
+        /// <returns>List of alias.</returns>
         public IEnumerable<Alias> GetBySite(int siteId)
         {
             // check parameters
@@ -158,6 +191,12 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
+        /// <summary>
+        /// Get switch connection alias.
+        /// </summary>
+        /// <param name="fromDbServerId">From DB server ID.</param>
+        /// <param name="toDbServerId">To DB server ID.</param>
+        /// <returns>List of alias connection string.</returns>
         public IEnumerable<AliasConnectionStringConnection> GetSwitchConnection(int fromDbServerId, int toDbServerId)
         {
             // check parameters
@@ -185,16 +224,21 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             return null;
         }
 
-        public IEnumerable<AliasConnectionStringConnection> GetSwitchSecondConnection(int dbServerId)
+        /// <summary>
+        /// Get switch second connection alias.
+        /// </summary>
+        /// <param name="databaseServerId">Database server ID.</param>
+        /// <returns>List of alias connection string.</returns>
+        public IEnumerable<AliasConnectionStringConnection> GetSwitchSecondConnection(int databaseServerId)
         {
             // check parameters
-            Check.Argument.IsNotNegativeOrZero(dbServerId, "dbServerId");
+            Check.Argument.IsNotNegativeOrZero(databaseServerId, "dbServerId");
 
             try
             {
                 var criteria = new DatabaseServerGetSecondConnectionFromDbServerCriteria
                 {
-                    DbServerId = dbServerId
+                    DbServerId = databaseServerId
                 };
 
                 if (criteria.IsValid())

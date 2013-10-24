@@ -10,7 +10,7 @@
 namespace Fanex.Maintenance.Repository.Interface
 {
     /// <summary>
-    /// TODO: Update summary.
+    /// Database report repository.
     /// </summary>
     public interface IDatabaseReportRepository
     {

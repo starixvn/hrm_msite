@@ -9,11 +9,11 @@
 
 namespace Fanex.Maintenance.Service.Interface
 {
+    /// <summary>
+    /// Service context interface.
+    /// </summary>
     public interface IServiceContext
     {
-        /// <summary>
-        /// who perform a business action
-        /// </summary>
         int UserId { get; set; }
 
         string Ip { get; set; }

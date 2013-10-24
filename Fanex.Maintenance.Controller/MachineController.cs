@@ -19,14 +19,14 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Service.Impl;
 
     /// <summary>
-    /// Machine Controller
+    /// Machine Controller.
     /// </summary>
     [Authorize]
     public class MachineController : BaseController
     {
         #region Member
         /// <summary>
-        /// Machine Service
+        /// Machine Service.
         /// </summary>
         private readonly MachineService _machineService;
 
@@ -34,18 +34,11 @@ namespace Fanex.Maintenance.Controller
 
         #region Constructor
 
-        /// <summary>
-        /// Parameter less Controller
-        /// </summary>
         public MachineController()
             : this(null)
         {
         }
 
-        /// <summary>
-        /// Machine Controller with services defined
-        /// </summary>
-        /// <param name="machineService"></param>
         public MachineController(MachineService machineService)
         {
             _machineService = machineService ?? MachineService.Create();
@@ -56,10 +49,10 @@ namespace Fanex.Maintenance.Controller
         #region Action
 
         /// <summary>
-        /// Get machines
+        /// Get machines.
         /// </summary>
-        /// <param name="machineType"></param>
-        /// <returns></returns>
+        /// <param name="machineType">Machine type.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Index(bool? machineType = null)
         {
@@ -72,10 +65,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Get machines
+        /// Get machines.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult Index(GetMachinesByTypeCriteria criteria)
         {
@@ -83,10 +76,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit machine
+        /// Edit machine.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Machine ID.</param>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult EditMachine(int id)
         {
@@ -95,10 +88,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit machine
+        /// Edit machine.
         /// </summary>
-        /// <param name="machine"></param>
-        /// <returns></returns>
+        /// <param name="machine">The machine.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult EditMachine(Machine machine)
         {
@@ -111,9 +104,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Insert machine
+        /// Insert machine.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult InsertMachine()
         {
@@ -126,10 +119,10 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Insert machine
+        /// Insert machine.
         /// </summary>
-        /// <param name="machine"></param>
-        /// <returns></returns>
+        /// <param name="machine">The machine.</param>
+        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult InsertMachine(Machine machine)
         {
@@ -146,10 +139,10 @@ namespace Fanex.Maintenance.Controller
         #region Ajax
 
         /// <summary>
-        /// Get machines
+        /// Get machines.
         /// </summary>
-        /// <param name="machineType"></param>
-        /// <returns></returns>
+        /// <param name="machineType">Machine type.</param>
+        /// <returns>JSON result.</returns>
         [HttpGet]
         public JsonResult GetMachinesByType(bool? machineType)
         {
@@ -168,7 +161,7 @@ namespace Fanex.Maintenance.Controller
         #region Private
 
         /// <summary>
-        /// Initialize Machine Types data
+        /// Initialize Machine Types data.
         /// </summary>
         private void InitMachineTypes()
         {

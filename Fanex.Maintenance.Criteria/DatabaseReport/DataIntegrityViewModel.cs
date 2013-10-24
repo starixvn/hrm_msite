@@ -13,7 +13,7 @@ namespace Fanex.Maintenance.Criteria.DatabaseReport
     using System.Globalization;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Data integrity view model.
     /// </summary>
     public class DataIntegrityViewModel
     {

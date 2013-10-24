@@ -15,7 +15,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Service.Interface;
 
     /// <summary>
-    /// Common controller
+    /// Common controller.
     /// </summary>
     public class CommonController : Controller
     {
@@ -31,6 +31,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             _maintenanceService = maintenanceService ?? new MaintainanceService();
         }
 
+        /// <summary>
+        /// Offline page.
+        /// </summary>
+        /// <returns>Action result.</returns>
         public ActionResult Offline()
         {
             var downTime = _maintenanceService.GetDowntimeInfo();

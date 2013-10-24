@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ServerInfoWorker.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="MemoryUtilizationWorker.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -38,7 +38,7 @@ namespace Fanex.Maintenance.Controller.Worker
         private IServerService _serverService { get; set; }
 
         /// <summary>
-        /// Run main function
+        /// Run main function.
         /// </summary>
         protected override void Run()
         {
@@ -66,12 +66,12 @@ namespace Fanex.Maintenance.Controller.Worker
         }
 
         /// <summary>
-        /// Get List Server Resource info
+        /// Get List Server Resource info.
         /// </summary>
         private void GetListMemoryUtilization()
         {
-            //List<ResourceInfo> resourceInfoes = new List<ResourceInfo>();
             _hubContext = GlobalHost.ConnectionManager.GetHubContext<ServerInfoHub>();
+
             try
             {
                 foreach (ServerElement serverElement in DatabaseServersSection.Instance.ResourceServers)
@@ -80,8 +80,10 @@ namespace Fanex.Maintenance.Controller.Worker
                     {
                         //// Get Data
                         MemoryInfo memoryInfo = _serverService.GetMemoryUtilization(serverElement.ConnectionString);
+
                         memoryInfo.ServerIp = serverElement.ServerIp.ToString();
                         memoryInfo.ServerName = memoryInfo.ServerIp.Replace(".", "_");
+
                         if (_hubContext != null)
                         {
                             _hubContext.Clients.All.getMemoryInfo(memoryInfo);

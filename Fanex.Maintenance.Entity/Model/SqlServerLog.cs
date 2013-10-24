@@ -13,7 +13,7 @@ namespace Fanex.Maintenance.Entity.Model
     using System;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// SQL server log.
     /// </summary>
     public class SqlServerLog
     {
@@ -22,22 +22,6 @@ namespace Fanex.Maintenance.Entity.Model
         public string LogMessage { get; set; }
 
         public int ErrorLevel { get; set; }
-
-        public string ServerIp { get; set; }
-    }
-
-    public class SqlLogServerParamForTask
-    {
-        public int LogType { get; set; }
-
-        public string ServerIp { get; set; }
-    }
-
-    public class SqlLogSpParamForTask
-    {
-        public int P1 { get; set; }
-
-        public int P2 { get; set; }
 
         public string ServerIp { get; set; }
     }

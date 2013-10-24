@@ -20,15 +20,16 @@ namespace Fanex.Maintenance.Repository.Impl
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Base repository.
     /// </summary>
+    /// <typeparam name="T">The element type of the class.</typeparam>
     public class BaseRepository<T> : ReadonlyRepository<T>
     {
         /// <summary>
-        /// Get Data table from Criteria
+        /// Get Data table from Criteria.
         /// </summary>
-        /// <param name="criteria">A Criteria</param>
-        /// <returns>A table contains information</returns>
+        /// <param name="criteria">A Criteria.</param>
+        /// <returns>A table contains information.</returns>
         public virtual DataTable GetDataTable(ICriteria criteria)
         {
             using (var db = new ObjectDb(criteria.GetSettingKey()))
@@ -44,11 +45,11 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// Get Data table with server Name
+        /// Get Data table with server Name.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverName"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverName">Server name.</param>
+        /// <returns>Data table.</returns>
         public virtual DataTable GetDataTable(ICriteria criteria, string serverName)
         {
             DbSetting setting = new DbSetting
@@ -70,14 +71,19 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// Fetch Data from Criteria
+        /// Fetch Data from Criteria.
         /// </summary>
-        /// <typeparam name="S">Class</typeparam>
-        /// <param name="criteria">Criteria</param>
-        /// <param name="serverName">Server Name will be executed sp</param>
-        /// <param name="mapObjectFunction">Read data reader and pass object</param>
-        /// <returns>Collection of object</returns>
-        public virtual IEnumerable<S> Fetch<S>(ICriteria criteria, string serverIp, Func<IDataReader, S> mapObjectFunction, int? serverType = null) where S : class
+        /// <typeparam name="S">The class type.</typeparam>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverIp">Server Name will be executed sp.</param>
+        /// <param name="mapObjectFunction">Read data reader and pass object.</param>
+        /// <param name="serverType">Server type.</param>
+        /// <returns>Collection of object.</returns>
+        public virtual IEnumerable<S> Fetch<S>(
+            ICriteria criteria, 
+            string serverIp, 
+            Func<IDataReader, S> mapObjectFunction, 
+            int? serverType = null) where S : class
         {
             IList<S> listObject = new List<S>();
             //// new dbsetting from server name and setting key
@@ -102,7 +108,16 @@ namespace Fanex.Maintenance.Repository.Impl
             return listObject;
         }
 
-        public virtual IEnumerable<S> Fetch<S>(ICriteria criteria, Func<IDataReader, S> mapObjectFunction) where S : class
+        /// <summary>
+        /// Fetch item.
+        /// </summary>
+        /// <typeparam name="S">Object class.</typeparam>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="mapObjectFunction">Map object function.</param>
+        /// <returns>List of object.</returns>
+        public virtual IEnumerable<S> Fetch<S>(
+            ICriteria criteria, 
+            Func<IDataReader, S> mapObjectFunction) where S : class
         {
             IList<S> listObject = new List<S>();
 
@@ -121,11 +136,11 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// Execute command to Db
+        /// Execute command.
         /// </summary>
-        /// <param name="criteria"></param>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="serverIp">Server IP.</param>
+        /// <returns>Command result.</returns>
         public virtual Hashtable ExecuteCommand(ICriteria criteria, string serverIp)
         {
             //// new dbsetting from server name and setting key
@@ -144,10 +159,10 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// get command result
+        /// Get command result.
         /// </summary>
-        /// <param name="hash"></param>
-        /// <returns></returns>
+        /// <param name="hash">Hash command result.</param>
+        /// <returns>Command result.</returns>
         public CommandResult GetCommandResult(Hashtable hash)
         {
             var errCode = hash["errcode"];

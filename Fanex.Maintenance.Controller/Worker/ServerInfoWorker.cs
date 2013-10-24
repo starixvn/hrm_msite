@@ -42,7 +42,7 @@ namespace Fanex.Maintenance.Controller.Worker
         private IServerService _serverService { get; set; }
 
         /// <summary>
-        /// Run main function
+        /// Run main function.
         /// </summary>
         protected override void Run()
         {
@@ -77,12 +77,12 @@ namespace Fanex.Maintenance.Controller.Worker
         }
 
         /// <summary>
-        /// Get List Server Resource info
+        /// Get List Server Resource info.
         /// </summary>
         private void GetListResourceInfo()
         {
-            //List<ResourceInfo> resourceInfoes = new List<ResourceInfo>();
             _hubContext = GlobalHost.ConnectionManager.GetHubContext<ServerInfoHub>();
+
             foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
             {
                 Task.Factory.StartNew(UpdateResourceInfoToClient, server);
@@ -90,9 +90,9 @@ namespace Fanex.Maintenance.Controller.Worker
         }
 
         /// <summary>
-        /// Get Resource info and return to client
+        /// Get Resource info and return to client.
         /// </summary>
-        /// <param name="serverIp"></param>
+        /// <param name="server">Server element.</param>
         private void UpdateResourceInfoToClient(object server)
         {
             try
@@ -105,8 +105,10 @@ namespace Fanex.Maintenance.Controller.Worker
                     _checkingList[serverElement.ServerIp] = true;
                     //// Get Data
                     ResourceInfo resourceInfo = _serverService.GetServerResourceInfo(serverElement.ConnectionString);
+
                     resourceInfo.ServerIp = serverElement.ServerIp.ToString();
                     resourceInfo.ServerName = resourceInfo.ServerIp.Replace(".", "_");
+
                     if (_hubContext != null)
                     {
                         _hubContext.Clients.All.gotMessage(resourceInfo);

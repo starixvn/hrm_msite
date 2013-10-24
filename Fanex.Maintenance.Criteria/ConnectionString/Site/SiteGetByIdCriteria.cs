@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get site by ID criteria.
+    /// </summary>
     public class SiteGetByIdCriteria : CriteriaBase
     {
         public int SiteId { get; set; }

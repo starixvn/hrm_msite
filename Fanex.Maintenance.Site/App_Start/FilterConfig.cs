@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="LogController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="FilterConfig.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,14 +12,10 @@ namespace Fanex.Maintenance.Site
     using System.Web.Mvc;
 
     /// <summary>
-    ///
+    /// Filter configuration.
     /// </summary>
     public class FilterConfig
     {
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="filters"></param>
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());

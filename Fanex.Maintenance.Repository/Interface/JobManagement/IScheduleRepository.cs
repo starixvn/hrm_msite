@@ -14,16 +14,10 @@ namespace Fanex.Maintenance.Repository.Interface.JobManagement
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Schedule repository.
     /// </summary>
     public interface IScheduleRepository
     {
-        /// <summary>
-        /// Get all schedule
-        /// </summary>
-        /// <param name="scheduleCriteria"></param>
-        /// <param name="serverIp"></param>
-        /// <returns></returns>
         IEnumerable<ScheduleDetail> GetAllSchedule(ICriteria scheduleCriteria, string serverIp);
     }
 }

@@ -10,55 +10,60 @@
 namespace Fanex.Maintenance.Core.TemplateReport
 {
     /// <summary>
-    /// Block
+    /// Template block.
     /// </summary>
     public class Block
     {
         /// <summary>
-        /// BgSBBA
+        /// Gets or sets background Sportsbook BA.
         /// </summary>
+        /// <value>Background Sportsbook BA string.</value>
         public string BgSBBA { get; set; }
 
         /// <summary>
-        /// Bg Sports book
+        /// Gets or sets background Sportsbook.
         /// </summary>
+        /// <value>Background Sportsbook string.</value>
         public string BgSportsbook { get; set; }
 
         /// <summary>
-        /// BgBA
+        /// Gets or sets background BA.
         /// </summary>
+        /// <value>Background BA string.</value>
         public string BgBA { get; set; }
 
         /// <summary>
-        /// BgRacing
+        /// Gets or sets background Racing.
         /// </summary>
+        /// <value>Background Racing string.</value>
         public string BgRacing { get; set; }
 
         /// <summary>
-        /// BgNumberGame
+        /// Gets or sets background NumberGame.
         /// </summary>
+        /// <value>Background Number Game string.</value>
         public string BgNumberGame { get; set; }
 
         /// <summary>
-        /// SetBackgrounds
+        /// Set backgrounds.
         /// </summary>
-        /// <param name="bgSBBA"></param>
-        /// <param name="bgSportsbook"></param>
-        /// <param name="bgBA"></param>
-        /// <param name="bgRacing"></param>
-        /// <param name="bgNumberGame"></param>
+        /// <param name="backgroundSBBA">Background Sportsbook BA.</param>
+        /// <param name="backgroundSportsbook">Background Sportsbook.</param>
+        /// <param name="backgroundBA">Background BA.</param>
+        /// <param name="backgroundRacing">Background Racing.</param>
+        /// <param name="backgroundNumberGame">Background Number Game.</param>
         public void SetBackgrounds(
-            ref string bgSBBA,
-            ref string bgSportsbook,
-            ref string bgBA,
-            ref string bgRacing,
-            ref string bgNumberGame)
+            ref string backgroundSBBA,
+            ref string backgroundSportsbook,
+            ref string backgroundBA,
+            ref string backgroundRacing,
+            ref string backgroundNumberGame)
         {
-            bgSBBA = this.BgSBBA;
-            bgSportsbook = this.BgSportsbook;
-            bgBA = this.BgBA;
-            bgRacing = this.BgRacing;
-            bgNumberGame = this.BgNumberGame;
+            backgroundSBBA = this.BgSBBA;
+            backgroundSportsbook = this.BgSportsbook;
+            backgroundBA = this.BgBA;
+            backgroundRacing = this.BgRacing;
+            backgroundNumberGame = this.BgNumberGame;
         }
     }
 }

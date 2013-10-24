@@ -28,6 +28,21 @@ namespace Fanex.Maintenance.Controller.Worker
             _maintenceService = new MaintainanceService();
         }
 
+        public bool IsDownTime
+        {
+            get
+            {
+                var downtimeInfo = _maintenceService.GetDowntimeInfo();
+
+                return downtimeInfo.IsDowntime;
+            }
+        }
+
+        protected bool IsStop { get; set; }
+
+        /// <summary>
+        /// Start worker.
+        /// </summary>
         public void Start()
         {
             if (_workerThread != null)
@@ -46,20 +61,8 @@ namespace Fanex.Maintenance.Controller.Worker
             IsStop = true;
         }
 
-        public bool IsDownTime
-        {
-            get
-            {
-                var downtimeInfo = _maintenceService.GetDowntimeInfo();
-
-                return downtimeInfo.IsDowntime;
-            }
-        }
-
         protected virtual void Run()
         {
         }
-
-        protected bool IsStop { get; set; }
     }
 }

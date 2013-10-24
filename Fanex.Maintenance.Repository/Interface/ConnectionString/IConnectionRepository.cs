@@ -16,9 +16,9 @@ namespace Fanex.Maintenance.Repository.Interface.ConnectionString
 
     public interface IConnectionRepository
     {
-        IEnumerable<ConnectionString> GetSecondaryConection(ICriteria criteria);
+        IEnumerable<ConnectionString> GetSecondaryConnection(ICriteria criteria);
 
-        IEnumerable<ConnectionStringConnection> GetByAlais(ICriteria criteria);
+        IEnumerable<ConnectionStringConnection> GetByAlias(ICriteria criteria);
 
         ConnectionString GetById(ICriteria criteria);
 

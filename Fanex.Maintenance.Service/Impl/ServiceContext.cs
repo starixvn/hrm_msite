@@ -11,11 +11,11 @@ namespace Fanex.Maintenance.Service.Impl
 {
     using Fanex.Maintenance.Service.Interface;
 
+    /// <summary>
+    /// Service context.
+    /// </summary>
     public class ServiceContext : IServiceContext
     {
-        /// <summary>
-        /// who perform a business action
-        /// </summary>
         public int UserId { get; set; }
 
         public string Ip { get; set; }

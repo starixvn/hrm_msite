@@ -16,7 +16,7 @@ namespace Fanex.Maintenance.Service.Impl
     using Fanex.Maintenance.Repository.Impl;
 
     /// <summary>
-    /// Log service
+    /// Log service.
     /// </summary>
     public class LogService
     {
@@ -40,9 +40,6 @@ namespace Fanex.Maintenance.Service.Impl
 
         private int _size;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
         private LogService()
         {
             _categoryId = 0;
@@ -55,19 +52,19 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Create
+        /// Create log service.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Log service object.</returns>
         public static LogService Create()
         {
             return new LogService();
         }
 
         /// <summary>
-        /// By categoryId
+        /// By categoryId.
         /// </summary>
-        /// <param name="categoryId"></param>
-        /// <returns></returns>
+        /// <param name="categoryId">Category ID.</param>
+        /// <returns>Log service object.</returns>
         public LogService With(int categoryId)
         {
             this._categoryId = categoryId;
@@ -76,11 +73,11 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// By categoryId and Severity
+        /// By categoryId and Severity.
         /// </summary>
-        /// <param name="categoryId"></param>
-        /// <param name="severity"></param>
-        /// <returns></returns>
+        /// <param name="categoryId">Category ID.</param>
+        /// <param name="severity">Severity level.</param>
+        /// <returns>Log service object.</returns>
         public LogService With(int? categoryId, string severity)
         {
             this._categoryId = categoryId;
@@ -90,12 +87,14 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// By CategoryId, MachineId and Severity
+        /// By CategoryId, MachineId and Severity.
         /// </summary>
-        /// <param name="categoryId"></param>
-        /// <param name="machineId"></param>
-        /// <param name="severity"></param>
-        /// <returns></returns>
+        /// <param name="categoryId">Category ID.</param>
+        /// <param name="machineId">Machine ID.</param>
+        /// <param name="isProduction">Production or not.</param>
+        /// <param name="isMonitored">Monitored or not.</param>
+        /// <param name="severity">Severity level.</param>
+        /// <returns>Log service object.</returns>
         public LogService With(int? categoryId, int? machineId, bool? isProduction, bool? isMonitored, string severity)
         {
             this._categoryId = categoryId;
@@ -108,10 +107,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// From date
+        /// Update from date.
         /// </summary>
-        /// <param name="fromDate"></param>
-        /// <returns></returns>
+        /// <param name="fromDate">From date.</param>
+        /// <returns>Log service object.</returns>
         public LogService From(DateTime fromDate)
         {
             this._dateFrom = fromDate;
@@ -120,10 +119,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// To date
+        /// Update to date.
         /// </summary>
-        /// <param name="toDate"></param>
-        /// <returns></returns>
+        /// <param name="toDate">To date value.</param>
+        /// <returns>Log service object.</returns>
         public LogService To(DateTime toDate)
         {
             this._dateTo = toDate;
@@ -132,11 +131,11 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Pagination
+        /// Pagination items.
         /// </summary>
-        /// <param name="page"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="page">Page index.</param>
+        /// <param name="size">Page size.</param>
+        /// <returns>Log service object.</returns>
         public LogService WithPagination(int page, int size)
         {
             this._page = page;
@@ -146,10 +145,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
         
         /// <summary>
-        /// Get message detail
+        /// Get message detail.
         /// </summary>
-        /// <param name="logId"></param>
-        /// <returns></returns>
+        /// <param name="logId">Log object ID.</param>
+        /// <returns>Message string.</returns>
         public string GetMessage(long logId)
         {
             string message = string.Empty;
@@ -159,9 +158,10 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Get list logs
+        /// Get list logs.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="totalRows">Number of rows.</param>
+        /// <returns>List of log.</returns>
         public IEnumerable<Log> GetLogs(ref int totalRows)
         {
             GetLogCriteria criteria = new GetLogCriteria
@@ -185,21 +185,21 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// Remove log before date
+        /// Remove log before date.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Command result.</returns>
         public int RemoveLogs()
         {
             return _logRepository.DeleteLogs(this._dateFrom);
         }
 
         /// <summary>
-        /// Update log's monitored status
+        /// Update log's monitored status.
         /// </summary>
-        /// <param name="logId"></param>
-        /// <param name="monitoringUserId"></param>
-        /// <param name="isMonitored"></param>
-        /// <returns></returns>
+        /// <param name="logIds">Log object IDs.</param>
+        /// <param name="monitoringUserId">Monitoring user ID.</param>
+        /// <param name="isMonitored">Is monitored or not.</param>
+        /// <returns>Command result.</returns>
         public int MonitorLog(string logIds, int? monitoringUserId, bool isMonitored)
         {
             return _logRepository.MonitorLog(logIds, monitoringUserId, isMonitored);

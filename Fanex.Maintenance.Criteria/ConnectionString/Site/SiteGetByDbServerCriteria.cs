@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Site
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get site by DB server criteria.
+    /// </summary>
     public class SiteGetByDbServerCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }

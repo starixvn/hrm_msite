@@ -10,7 +10,23 @@
 namespace Fanex.Maintenance.Entity.Model
 {
     /// <summary>
-    /// TODO: Update summary.
+    /// Notify Type.
+    /// </summary>
+    public enum NotifyType : int
+    {
+        /// <summary>
+        /// Agent log notify.
+        /// </summary>
+        AgentLog = 1,
+
+        /// <summary>
+        /// Job notify.
+        /// </summary>
+        Job = 2
+    }
+    
+    /// <summary>
+    /// Notify info.
     /// </summary>
     public class NotifyInfo
     {
@@ -23,14 +39,5 @@ namespace Fanex.Maintenance.Entity.Model
         public string OccurTime { get; set; }
 
         public string JobName { get; set; }
-    }
-
-    /// <summary>
-    /// Notify Type
-    /// </summary>
-    public enum NotifyType : int
-    {
-        AgentLog = 1,
-        Job = 2
     }
 }

@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get all database server criteria.
+    /// </summary>
     public class DatabaseServerGetAllCriteria : CriteriaBase
     {
         private string _name;

@@ -11,6 +11,9 @@ namespace Fanex.Maintenance.Entity.Model.ConnectionString
 {
     using Fanex.ConnectionString.Domain;
 
+    /// <summary>
+    /// Alias connection string.
+    /// </summary>
     public class AliasConnectionString
     {
         public int NumOfSite { get; set; }

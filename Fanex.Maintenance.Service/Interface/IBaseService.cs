@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Service.Interface
     using System;
     using Fanex.Maintenance.Criteria.Misc;
 
+    /// <summary>
+    /// Base service interface.
+    /// </summary>
     public interface IBaseService
     {
         IServiceContext ServiceContext { get; set; }

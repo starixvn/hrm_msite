@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
     using System;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Update database server status criteria.
+    /// </summary>
     public class DatabaseServerUpdateStatusCriteria : CriteriaBase
     {
         public int DbServerId { get; set; }

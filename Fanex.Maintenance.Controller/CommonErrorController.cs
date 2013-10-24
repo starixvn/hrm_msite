@@ -11,8 +11,16 @@ namespace Fanex.Maintenance.Controller
 {
     using System.Web.Mvc;
 
+    /// <summary>
+    /// Common error controller.
+    /// </summary>
     public class CommonErrorController : Controller
     {
+        /// <summary>
+        /// Error page.
+        /// </summary>
+        /// <param name="aspxErrorPath">Error path.</param>
+        /// <returns>Action result.</returns>
         public ActionResult Error(string aspxErrorPath)
         {
             if (!string.IsNullOrEmpty(aspxErrorPath))
@@ -23,6 +31,12 @@ namespace Fanex.Maintenance.Controller
             return View();
         }
 
+        /// <summary>
+        /// Not found page.
+        /// </summary>
+        /// <param name="aspxErrorPath">Error path.</param>
+        /// <param name="url">Request URL.</param>
+        /// <returns>Action result.</returns>
         public ActionResult NotFound(string aspxErrorPath, string url)
         {
             if (!string.IsNullOrEmpty(aspxErrorPath))

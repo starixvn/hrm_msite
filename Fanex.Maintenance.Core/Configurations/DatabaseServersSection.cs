@@ -13,13 +13,14 @@ namespace Fanex.Maintenance.Core.Configurations
     using System.Configuration;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Database servers section.
     /// </summary>
     public class DatabaseServersSection : ConfigurationSection
     {
         /// <summary>
-        /// Gets create static instance for reference
+        /// Gets create static instance for reference.
         /// </summary>
+        /// <value>Database server section.</value>
         public static DatabaseServersSection Instance
         {
             get
@@ -28,24 +29,18 @@ namespace Fanex.Maintenance.Core.Configurations
                 return databaseServers;
             }
         }
-        
-        /// <summary>
-        /// Gets List Server
-        /// </summary>
+
         [ConfigurationProperty("servers", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(ServerCollection), AddItemName = "add")]
         public ServerCollection Servers
         {
             get
             {
-                var serverCollection = (ServerCollection)base["servers"];                
+                var serverCollection = (ServerCollection)base["servers"];
                 return serverCollection;
             }
         }
 
-        /// <summary>
-        /// Gets List Server ForGet Resource
-        /// </summary>
         [ConfigurationProperty("resourceservers", IsDefaultCollection = false)]
         [ConfigurationCollection(typeof(ServerCollection), AddItemName = "add")]
         public ServerCollection ResourceServers
@@ -57,169 +52,5 @@ namespace Fanex.Maintenance.Core.Configurations
                 return resourceServerCollection;
             }
         }
-    }
-
-    /// <summary>
-    /// Server Collection, map to collection in config file
-    /// </summary>
-    public class ServerCollection : ConfigurationElementCollection
-    {
-        /// <summary>
-        /// Controller
-        /// </summary>
-        public ServerCollection()
-        {
-        }
-
-        /// <summary>
-        /// Collection Type
-        /// </summary>
-        public override ConfigurationElementCollectionType CollectionType
-        {
-            get
-            {
-                return ConfigurationElementCollectionType.AddRemoveClearMap;
-            }
-        }
-
-        /// <summary>
-        /// Add Element
-        /// </summary>
-        /// <param name="mappingElement"></param>
-        public void Add(ServerElement mappingElement)
-        {
-            BaseAdd(mappingElement);
-        }
-
-        /// <summary>
-        /// Base Add
-        /// </summary>
-        /// <param name="element"></param>
-        protected override void BaseAdd(ConfigurationElement element)
-        {
-            BaseAdd(element, false);
-        }
-
-        /// <summary>
-        /// Create New Element
-        /// </summary>
-        /// <returns>Return Configuration Element</returns>
-        protected override ConfigurationElement CreateNewElement()
-        {
-            return new ServerElement();
-        }
-
-        /// <summary>
-        /// Get Element Key
-        /// </summary>
-        /// <param name="element"></param>
-        /// <returns>Return object</returns>
-        protected override object GetElementKey(ConfigurationElement element)
-        {
-            return ((ServerElement)element).ServerIp + ((ServerElement)element).ServerName + ((ServerElement)element).ConnectionString;
-        }
-
-        /// <summary>
-        /// Get Element
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public ServerElement this[int index]
-        {
-            get
-            {
-                return (ServerElement)BaseGet(index);
-            }
-
-            set
-            {
-                if (BaseGet(index) != null)
-                {
-                    BaseRemoveAt(index);
-                }
-
-                BaseAdd(index, value);
-            }
-        }
-    }
-
-    /// <summary>
-    /// Server Element
-    /// </summary>
-    public class ServerElement : ConfigurationElement
-    {
-        /// <summary>
-        /// Connection String attribute
-        /// </summary>
-        [ConfigurationProperty("ConnectionString", IsRequired = true, IsKey = true)]
-        public string ConnectionString
-        {
-            get
-            {
-                return (string)this["ConnectionString"];
-            }
-
-            set
-            {
-                this["ConnectionString"] = value;
-            }
-        }
-
-        /// <summary>
-        /// Server Name Attribute
-        /// </summary>
-        [ConfigurationProperty("ServerName", IsRequired = true)]
-        public string ServerName
-        {
-            get
-            {
-                return (string)this["ServerName"];
-            }
-
-            set
-            {
-                this["ServerName"] = value;
-            }
-        }
-
-        /// <summary>
-        /// Server Ip Attribute
-        /// </summary>
-        [ConfigurationProperty("ServerIp", IsRequired = true)]
-        public string ServerIp
-        {
-            get
-            {
-                return (string)this["ServerIp"];
-            }
-
-            set
-            {
-                this["ServerIp"] = value;
-            }
-        }
-
-        /// <summary>
-        /// Plain or Encrypted
-        /// </summary>
-        [ConfigurationProperty("Plain", IsRequired = true)]
-        public string Plain
-        {
-            get
-            {
-                return (string)this["Plain"];
-            }
-
-            set
-            {
-                this["Plain"] = value;
-            }
-        }
-
-        /// <summary>
-        /// Server Agent Status
-        /// </summary>
-        /// These property below not in config file
-        public int SqlServerAgentStatus { get; set; }
     }
 }

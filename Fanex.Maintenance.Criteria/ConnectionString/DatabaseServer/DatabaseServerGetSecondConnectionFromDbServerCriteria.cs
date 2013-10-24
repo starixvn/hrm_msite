@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="DatabaseServerGetSwitchSecondConnectionCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseServerGetSecondConnectionFromDbServerCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -13,6 +13,9 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.DatabaseServer
     using Fanex.Maintenance.Core;
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Get second connection from DB server criteria.
+    /// </summary>
     public class DatabaseServerGetSecondConnectionFromDbServerCriteria : CriteriaBase
     {
         [Display(Name = "Database_Server", ResourceType = typeof(ViewResource))]

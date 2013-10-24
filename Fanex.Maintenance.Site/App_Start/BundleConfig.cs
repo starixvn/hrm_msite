@@ -9,17 +9,18 @@
 
 namespace Fanex.Maintenance.Site.App_Start
 {
-    using System.Web;
     using System.Web.Optimization;
-    using BundleTransformer.Core.Orderers;
-    using BundleTransformer.Core.Transformers;
 
     /// <summary>
     /// Bundle config.
     /// </summary>
     public class BundleConfig
     {
-        // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
+        /// <summary>
+        /// Register bundles.
+        /// For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725.
+        /// </summary>
+        /// <param name="bundles">Bundle collection.</param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             // css
@@ -101,30 +102,6 @@ namespace Fanex.Maintenance.Site.App_Start
               "~/Areas/UserLogin/scripts/ReCheckIn.js"));
 
             bundles.FileSetOrderList.Clear();
-        }
-    }
-
-    /// <summary>
-    /// Bundle extensions
-    /// </summary>
-    internal static class BundleExtensions
-    {
-        public static void AddAndInclude(this BundleCollection bundles, string bundleVirtualPath, params string[] virtualPaths)
-        {
-            bundles.Add(new Bundle(bundleVirtualPath)
-            {
-                Transforms = { new CssTransformer(), new CssMinify() },
-                Orderer = new NullOrderer()
-            }.Include(virtualPaths));
-        }
-
-        public static string RelativeFromAbsolutePath(this HttpContextBase context, string path)
-        {
-            var request = context.Request;
-            var applicationPath = request.PhysicalApplicationPath;
-            var virtualDir = request.ApplicationPath;
-            virtualDir = virtualDir == "/" ? virtualDir : (virtualDir + "/");
-            return path.Replace(applicationPath, virtualDir).Replace(@"\", "/");
         }
     }
 }

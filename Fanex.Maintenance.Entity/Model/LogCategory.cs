@@ -9,6 +9,9 @@
 
 namespace Fanex.Maintenance.Entity.Model
 {
+    /// <summary>
+    /// Log category.
+    /// </summary>
     public class LogCategory
     {
         public int CategoryID { get; set; }

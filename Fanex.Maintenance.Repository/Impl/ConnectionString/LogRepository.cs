@@ -19,45 +19,42 @@ namespace Fanex.Maintenance.Repository.Impl.ConnectionString
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Log repository.
     /// </summary>
     public class LogRepository : BaseRepository<LogExecSp>, ILogRepository
     {
+        /// <summary>
+        /// Fetch log.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="totalRows">Number of rows.</param>
+        /// <returns>List of log execute SP.</returns>
         public IEnumerable<LogExecSp> Fetch(ICriteria criteria, out int totalRows)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    Hashtable hash = criteria.GetSpParams();
+                Hashtable hash = criteria.GetSpParams();
 
-                    var logList = db.Query<LogExecSp>(hash);
+                var logList = db.Query<LogExecSp>(hash);
 
-                    totalRows = Convert.ToInt32(hash["totalrows"]);
+                totalRows = Convert.ToInt32(hash["totalrows"]);
 
-                    return logList.AsQueryable();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return logList.AsQueryable();
             }
         }
 
+        /// <summary>
+        /// Get log by ID.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Log execute SP.</returns>
         public LogExecSp GetById(ICriteria criteria)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    Hashtable hash = criteria.GetSpParams();
+                Hashtable hash = criteria.GetSpParams();
 
-                    return db.QueryEntity<LogExecSp>(hash);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return db.QueryEntity<LogExecSp>(hash);
             }
         }
     }

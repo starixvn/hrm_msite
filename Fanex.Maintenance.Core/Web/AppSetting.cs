@@ -17,18 +17,15 @@ namespace Fanex.Maintenance.Core.Web
     using Fanex.Logging;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// App setting.
     /// </summary>
     public class AppSetting
     {
         /// <summary>
-        /// Is Virtual
+        /// Is Virtual.
         /// </summary>
         private static string _isVirtualDir = "false";
 
-        /// <summary>
-        /// Minute
-        /// </summary>
         private static int _minute = 10;
 
         private static long _getDataNotifyInterval = 60000;
@@ -72,9 +69,6 @@ namespace Fanex.Maintenance.Core.Web
             get { return AppSetting._getMemoryUtilizationInterval; }
         }
 
-        /// <summary>
-        /// Is Virtual Directory
-        /// </summary>
         public static bool IsVirtualDirectory
         {
             get
@@ -83,9 +77,6 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Minute
-        /// </summary>
         public static int Minute
         {
             get
@@ -110,9 +101,6 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Culture Info
-        /// </summary>
         public static CultureInfo Culture
         {
             get
@@ -121,9 +109,6 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Context
-        /// </summary>
         public static HttpContext Context
         {
             get
@@ -132,67 +117,14 @@ namespace Fanex.Maintenance.Core.Web
             }
         }
 
-        /// <summary>
-        /// Notification job
-        /// </summary>
         public static bool NotifiJob
         {
             get { return _notifiJob; }
         }
 
-        /// <summary>
-        /// Notification server
-        /// </summary>
         public static bool NotifiServer
         {
             get { return _notifiServer; }
         }
-    }
-
-    /// <summary>
-    /// Site Name
-    /// </summary>
-    public static class SiteName
-    {
-        /// <summary>
-        /// Agent Name
-        /// </summary>
-        public static string _Agent = "Agent";
-
-        /// <summary>
-        /// Accounting Name
-        /// </summary>
-        public static string _Accounting = "Accounting";
-
-        /// <summary>
-        /// Affiliate Name
-        /// </summary>
-        public static string _Affiliate = "Affiliate";
-
-        /// <summary>
-        /// Array Site
-        /// </summary>
-        public static string[] Arr = { _Agent, _Accounting, _Affiliate };
-    }
-
-    /// <summary>
-    /// Result
-    /// </summary>
-    public class RESULT
-    {
-        /// <summary>
-        /// Is Success
-        /// </summary>
-        public bool IsSuccess = true;
-
-        /// <summary>
-        /// Is DataOk
-        /// </summary>
-        public bool IsDataOK = false;
-
-        /// <summary>
-        /// Error Message
-        /// </summary>
-        public string ErrMsg = string.Empty;
     }
 }

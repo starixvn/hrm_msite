@@ -11,16 +11,19 @@ namespace Fanex.Maintenance.Criteria.Misc
 {
     using Fanex.NAP.Framework.Data;
 
+    /// <summary>
+    /// Result criteria.
+    /// </summary>
     public class ResultCriteria : CriteriaBase
     {
-        public int ErrCode { get; set; }
-
-        public string ErrMsg { get; set; }
-
         public ResultCriteria()
         {
             ErrCode = 0;
             ErrMsg = string.Empty;
         }
+
+        public int ErrCode { get; set; }
+
+        public string ErrMsg { get; set; }
     }
 }

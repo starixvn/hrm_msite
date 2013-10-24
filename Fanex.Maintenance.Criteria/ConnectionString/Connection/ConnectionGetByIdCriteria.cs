@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Criteria.ConnectionString.Connection
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// Alias get by ID.
+    /// Get connection by ID criteria.
     /// </summary>
     public class ConnectionGetByIdCriteria : CriteriaBase
     {
