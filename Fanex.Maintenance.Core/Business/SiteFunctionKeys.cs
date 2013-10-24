@@ -7,15 +7,15 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 10/23/2013 3:07:27 PM
+// Lasted generated date: 10/24/2013 12:34:46 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// Site function keys.
 /// </summary>
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification="Generated code")]
-[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification="Generated code")]
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Generated code")]
+[SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Generated code")]
 public static class SiteFunctionKeys
 {
     public const string Administration = "Administration";

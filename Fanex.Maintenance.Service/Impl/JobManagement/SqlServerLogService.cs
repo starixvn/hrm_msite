@@ -11,6 +11,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Logging;
@@ -105,6 +106,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// </summary>
         /// <param name="logType">SQL Server log type.</param>
         /// <returns>List of SQL Server log.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public IEnumerable<SqlServerLog> GetSqlServerLogs(int logType = 1)
         {
             List<SqlServerLog> sqlServerLogs = new List<SqlServerLog>();

@@ -68,8 +68,8 @@
                             { HeaderText: "Application", Width: 100, Name: "ApplicationName", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Mail To", Width: 250, Name: "MailTo", HeaderAlign: "center", CellAlign: "left" },
                         //                            { HeaderText: "Mail Cc", Width: 100, Name: "MailCc", HeaderAlign: "center", CellAlign: "left" },
-                            {HeaderText: "Created Date", Width: 130, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center" },
-                            { HeaderText: "Latest Send Date", Width: 130, Name: "LatestSendDate", HeaderAlign: "center", CellAlign: "center" },
+                            {HeaderText: "Created Date<br/> (GMT -4)", Width: 130, Name: "CreatedDate", HeaderAlign: "center", CellAlign: "center" },
+                            { HeaderText: "Latest Send Date<br/> (GMT -4)", Width: 130, Name: "LatestSendDate", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Success", Width: 50, Name: "SendSuccess", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Fail", Width: 40, Name: "SendFail", HeaderAlign: "center", CellAlign: "center" },
                             { HeaderText: "Resend", Width: 70, Name: "Resend", HeaderAlign: "center", CellAlign: "center" }
@@ -183,8 +183,10 @@
 $(document).ready(function () {
 
     $('.resendmail').live('click', function () {
-        var mailId = $(this).attr("data-mailid");
-        MailList.resend(mailId);
+        if (confirm("Resend this email ?")) {
+            var mailId = $(this).attr("data-mailid");
+            MailList.resend(mailId);
+        }
     });
 
     $('.emailMessage').live('click', function () {

@@ -11,6 +11,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
@@ -18,6 +19,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.Common;
     using Fanex.Common.Extensions;
     using Fanex.Logging;
+    using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Model;
     using Fanex.NAP.Core.Service.Impl;
@@ -78,6 +80,12 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         {
             var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
 
+            if (!NapSettings.Settings.IsNapHub && !this.IsSiteLogin)
+            {
+                // if login-directly feature is disabled then redirect users to NAP Hub
+                return Redirect(NapSettings.Settings.HubUrl);
+            }
+
             if (maintenanceInfo.IsDowntime)
             {
                 return RedirectToAction("Offline", "Common");
@@ -92,6 +100,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <param name="username">Login username.</param>
         /// <param name="password">Login password.</param>
         /// <returns>Action result.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Index(string username, string password)
@@ -144,8 +153,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                                 CreateAuthInfo(user);
 
+                                // redirects user
+
                                 // if the user login directly, not through NAP Hub
-                                if (this.IsSiteLogin == 1)
+                                if (this.IsSiteLogin)
                                 {
                                     // checks if logging-in user is active on this site
                                     bool userIsActiveOnThisSite = false;
@@ -234,7 +245,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         #region sign out
 
         /// <summary>
-        /// User logout.
+        /// User log out.
         /// </summary>
         /// <returns>Action result.</returns>
         public ActionResult LogOut()
@@ -249,7 +260,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         #region re check in
 
         /// <summary>
-        /// Recheck login.
+        /// User recheck login.
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpPost]
@@ -287,17 +298,20 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <summary>
         /// Create user menu.
         /// </summary>
-        /// <param name="user">Current login user.</param>
+        /// <param name="user">User object.</param>
         private void CreateUserMenu(User user)
         {
-            _currentSession.MenuItemList = 
-                (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(user.Id, SiteId, Environment, true);
+            _currentSession.Menu = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
+                                                                                    user.Id,
+                                                                                    SiteId,
+                                                                                    Environment,
+                                                                                    true);
         }
 
         /// <summary>
-        /// Create authorize information.
+        /// Create authorization info.
         /// </summary>
-        /// <param name="user">Current login user.</param>
+        /// <param name="user">User object.</param>
         private void CreateAuthInfo(User user)
         {
             var currentDomain = CurrentContext.GetCurrentDomain();
@@ -327,6 +341,8 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             Response.Cookies.Add(authCookie);
         }
 
+        #endregion helpers
+
         /// <summary>
         /// User sign out.
         /// </summary>
@@ -340,7 +356,5 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             Response.Cookies.Clear();
             _currentSession.ClearAll();
         }
-
-        #endregion helpers
     }
 }

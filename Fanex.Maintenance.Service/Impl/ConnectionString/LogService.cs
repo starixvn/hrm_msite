@@ -11,6 +11,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Xml.Linq;
     using Fanex.ConnectionString.Domain;
@@ -171,6 +172,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <param name="listSite">List of site log data.</param>
         /// <param name="listOldSite">List of site old log data.</param>
         /// <returns>List of log data.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public List<LogData> GetValueAliasUpdate(
             LogExecSp logExecSp, 
             ref List<LogData> listSite, 
@@ -323,6 +325,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// </summary>
         /// <param name="logExecSp">Execute SP log.</param>
         /// <returns>List of log data.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public List<LogData> GetValueConnectionUpdate(LogExecSp logExecSp)
         {
             var listLog = new List<LogData>();
@@ -563,6 +566,7 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <param name="logExecSp">Execute SP log.</param>
         /// <param name="listOld">Old list of connection string.</param>
         /// <returns>List of connection string.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public List<ConnectionString> GetValueChangeConnection(LogExecSp logExecSp, ref List<ConnectionString> listOld)
         {
             var listConnection = new List<ConnectionString>();

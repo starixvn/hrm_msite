@@ -9,6 +9,7 @@
 
 namespace Fanex.Maintenance.Site.App_Start
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Web.Optimization;
 
     /// <summary>
@@ -21,6 +22,7 @@ namespace Fanex.Maintenance.Site.App_Start
         /// For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725.
         /// </summary>
         /// <param name="bundles">Bundle collection.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public static void RegisterBundles(BundleCollection bundles)
         {
             // css

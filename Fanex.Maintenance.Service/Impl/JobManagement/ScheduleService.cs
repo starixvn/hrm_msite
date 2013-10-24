@@ -11,6 +11,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Logging;
@@ -155,6 +156,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// Get Schedule with filtered.
         /// </summary>
         /// <returns>List Schedule satisfy filter.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public IEnumerable<ScheduleDetail> GetSchedules()
         {
             List<ScheduleDetail> schedules = new List<ScheduleDetail>();

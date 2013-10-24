@@ -15,7 +15,7 @@ namespace Fanex.Maintenance.Criteria.Job
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get SQL Server log criteria.
     /// </summary>
     public class GetSqlServerLogCriteria : CriteriaBase
     {

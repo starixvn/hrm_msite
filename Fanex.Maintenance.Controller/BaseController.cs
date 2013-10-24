@@ -33,7 +33,7 @@ namespace Fanex.Maintenance.Controller
 
         protected readonly CurrentSession CurrentSession;
 
-        private int _issiteLogin = NapSettings.Settings.IsSiteLogin;
+        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
 
         private ViewFlags _viewFlags;
 
@@ -50,15 +50,15 @@ namespace Fanex.Maintenance.Controller
 
             ViewFlags = new ViewFlags
             {
-                IsReCheckin = NapSettings.Settings.ReCheckIn
+                IsReCheckin = NapSettings.Settings.EnableReCheckIn
             };
         }
 
         /// <summary>
-        /// Gets whether the current site allows users login directly.
+        /// Gets a value indicating whether the current site allows users login directly.
         /// </summary>
-        /// <value>0 : login through NAP Hub.</value>
-        public int IsSiteLogin
+        /// <value>0 : users must login through NAP Hub.</value>
+        public bool IsSiteLogin
         {
             get
             {

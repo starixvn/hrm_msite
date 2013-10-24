@@ -11,6 +11,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
@@ -62,6 +63,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <param name="onuserId">Online user object ID.</param>
         /// <param name="time">Time value.</param>
         /// <returns>Action result.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Index(string userId, string onuserId, string time)
@@ -106,7 +108,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                     if (this.SiteId != 0)
                     {
-                        _currentSession.MenuItemList = _menuItemService.GetByUserAndSiteIncludeGroup(
+                        _currentSession.Menu = _menuItemService.GetByUserAndSiteIncludeGroup(
                                                                                 user.Id,
                                                                                 SiteId,
                                                                                 Environment,

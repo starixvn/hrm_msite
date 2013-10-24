@@ -11,6 +11,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.Logging;
     using Fanex.Maintenance.Core.Configurations;
@@ -252,6 +253,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// Get job schedule.
         /// </summary>
         /// <returns>List of job schedule.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public IEnumerable<JobSchedule> GetJobs()
         {
             var criteria = new GetListJobCriteria
@@ -316,6 +318,7 @@ namespace Fanex.Maintenance.Service.Impl.JobManagement
         /// Get job logs.
         /// </summary>
         /// <returns>List of job log.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public IEnumerable<JobLog> GetJobLogs()
         {
             //// create criteria get job history
