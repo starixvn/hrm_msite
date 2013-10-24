@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GroupController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,21 +9,22 @@
 
 namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Web.Context;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// Base controller.
+    /// </summary>
     public class BaseController : Controller
     {
         protected readonly string Environment = NapSettings.Settings.Environment;
 
         protected readonly int SiteId = NapSettings.Settings.SiteId;
 
-        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
-
         protected readonly CurrentContext CurrentContext;
+
+        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
 
         public BaseController()
         {
@@ -31,9 +32,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         }
 
         /// <summary>
-        /// Indicates whether the current site allows users login directly.
-        /// If "0", users must login through NAP Hub
+        /// Gets a value indicating whether the current site allows users login directly.
         /// </summary>
+        /// <value>0 : users must login through NAP Hub.</value>
         public bool IsSiteLogin
         {
             get

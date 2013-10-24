@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Class1.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,24 +9,23 @@
 
 namespace Fanex.Maintenance.Controller
 {
-    using System.Diagnostics.CodeAnalysis;
+    using System;
     using System.Web.Mvc;
+    using Fanex.Maintenance.Service.Impl;
+    using Fanex.Maintenance.Service.Interface;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
-    using Fanex.Maintenance.Service.Interface;
-    using Fanex.Maintenance.Service.Impl;
-    using System;
 
-    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
+    /// <summary>
+    /// Base controller.
+    /// </summary>
     public class BaseController : Controller
     {
         protected readonly string Environment = NapSettings.Settings.Environment;
 
         protected readonly int SiteId = NapSettings.Settings.SiteId;
-
-        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
 
         protected readonly CurrentContext CurrentContext;
 
@@ -34,20 +33,9 @@ namespace Fanex.Maintenance.Controller
 
         protected readonly CurrentSession CurrentSession;
 
+        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
+
         private ViewFlags _viewFlags;
-
-        protected ViewFlags ViewFlags
-        {
-            get
-            {
-                return ViewBag.ViewFlags;
-            }
-
-            set
-            {
-                ViewBag.ViewFlags = _viewFlags = value;
-            }
-        }
 
         public BaseController()
         {
@@ -67,14 +55,27 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Indicates whether the current site allows users login directly.
-        /// If "0", users must login through NAP Hub
+        /// Gets a value indicating whether the current site allows users login directly.
         /// </summary>
+        /// <value>0 : users must login through NAP Hub.</value>
         public bool IsSiteLogin
         {
             get
             {
                 return _issiteLogin;
+            }
+        }
+
+        protected ViewFlags ViewFlags
+        {
+            get
+            {
+                return ViewBag.ViewFlags;
+            }
+
+            set
+            {
+                ViewBag.ViewFlags = _viewFlags = value;
             }
         }
 
@@ -86,7 +87,7 @@ namespace Fanex.Maintenance.Controller
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
                 JsonRequestBehavior = behavior,
-                MaxJsonLength = Int32.MaxValue
+                MaxJsonLength = int.MaxValue
             };
         }
     }
