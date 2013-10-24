@@ -183,9 +183,9 @@ namespace Fanex.Maintenance.Service.Impl
         /// <summary>
         /// Generate data table.
         /// </summary>
-        /// <param name="dtb">Data table.</param>
+        /// <param name="dtb">Input data table.</param>
         /// <param name="rowNumber">Row number.</param>
-        /// <returns>Data table.</returns>
+        /// <returns>Return data table.</returns>
         private static DataTable GenerateDataTable(DataTable dtb, int rowNumber)
         {
             string _datetime = dtb.Rows[0]["logdate"].ToString();

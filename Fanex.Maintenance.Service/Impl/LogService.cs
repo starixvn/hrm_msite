@@ -107,7 +107,7 @@ namespace Fanex.Maintenance.Service.Impl
         }
 
         /// <summary>
-        /// From date.
+        /// Update from date.
         /// </summary>
         /// <param name="fromDate">From date.</param>
         /// <returns>Log service object.</returns>
