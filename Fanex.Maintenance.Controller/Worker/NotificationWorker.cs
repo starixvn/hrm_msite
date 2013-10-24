@@ -272,6 +272,7 @@ namespace Fanex.Maintenance.Controller.Worker
             string mailHeader = _sqlAgentErrorMailFormat;
             string mailBody = string.Empty;
             int index = 1;
+
             foreach (SqlServerLog sqlServerLog in sqlServerLogs)
             {
                 //// if satisfy filter condition
