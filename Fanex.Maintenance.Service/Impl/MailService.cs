@@ -198,7 +198,7 @@ namespace Fanex.Maintenance.Service.Impl
                 var data = client.GetListSetting();
                 if (data != null)
                 {
-                    settings = data.ToList();
+                    settings = data.OrderBy(x => x.Server).ToList();
                 }
             }
 
