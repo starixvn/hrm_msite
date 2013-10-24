@@ -35,53 +35,55 @@ namespace Fanex.Maintenance.Controller.Worker
 
         private IServerService _serverService;
 
-        private string _sqlAgentErrorMailFormat = " <table cellspacing=\"0\" border=\"1\" style=\"border-color:DodgerBlue;border-style:Solid;border-collapse:collapse;font-size:8pt;font-family:Tahoma,Arial,Verdana,Sans-Serif\" rules=\"all\"> "
-                + " <thead>"
-                + "   <tr align=\"center\" valign=\"Middle\" style=\"background-color:#deedef;min-height:25px;font-weight:bold\">"
-                + "    <th  width=\"20\">"
-                + "         #"
-                + "     </th>"
-                + "     <th  width=\"80\">"
-                + "         Server"
-                + "    </th>"
-                + "     <th  width=\"120\">"
-                + "        Occured Date"
-                + "     </th>"
-                + "     <th>"
-                + "         Message"
-                + "     </th>"
-                + "  </tr>"
-                + " </thead>"
-                + "  <tbody> {0}"
-                + "  </tbody>"
-                + " </table>";
+        private string _sqlAgentErrorMailFormat = 
+            " <table cellspacing=\"0\" border=\"1\" style=\"border-color:DodgerBlue;border-style:Solid;border-collapse:collapse;font-size:8pt;font-family:Tahoma,Arial,Verdana,Sans-Serif\" rules=\"all\"> "
+            + " <thead>"
+            + "   <tr align=\"center\" valign=\"Middle\" style=\"background-color:#deedef;min-height:25px;font-weight:bold\">"
+            + "    <th  width=\"20\">"
+            + "         #"
+            + "     </th>"
+            + "     <th  width=\"80\">"
+            + "         Server"
+            + "    </th>"
+            + "     <th  width=\"120\">"
+            + "        Occured Date"
+            + "     </th>"
+            + "     <th>"
+            + "         Message"
+            + "     </th>"
+            + "  </tr>"
+            + " </thead>"
+            + "  <tbody> {0}"
+            + "  </tbody>"
+            + " </table>";
 
-        private string _jobErrorMailFormat = " <table cellspacing=\"0\" border=\"1\" style=\"border-color:DodgerBlue;border-style:Solid;border-collapse:collapse;font-size:8pt;font-family:Tahoma,Arial,Verdana,Sans-Serif\" rules=\"all\"> "
-                + " <thead>"
-                + "   <tr align=\"center\" valign=\"Middle\" style=\"background-color:#deedef;min-height:25px;font-weight:bold\">"
-                + "    <th width=\"20\">"
-                + "         #"
-                + "     </th>"
-                + "    <th width=\"80\">"
-                + "         Server"
-                + "     </th>"
-                + "     <th width=\"80\">"
-                + "         Job Name"
-                + "    </th>"
-                + "     <th width=\"80\">"
-                + "        Failed at Step"
-                + "     </th>"
-                + "     <th width=\"80\">"
-                + "         Occured Date"
-                + "     </th>"
-                + "     <th>"
-                + "         Message"
-                + "     </th>"
-                + "  </tr>"
-                + " </thead>"
-                + "  <tbody> {0}"
-                + "  </tbody>"
-                + " </table>";
+        private string _jobErrorMailFormat = 
+            " <table cellspacing=\"0\" border=\"1\" style=\"border-color:DodgerBlue;border-style:Solid;border-collapse:collapse;font-size:8pt;font-family:Tahoma,Arial,Verdana,Sans-Serif\" rules=\"all\"> "
+            + " <thead>"
+            + "   <tr align=\"center\" valign=\"Middle\" style=\"background-color:#deedef;min-height:25px;font-weight:bold\">"
+            + "    <th width=\"20\">"
+            + "         #"
+            + "     </th>"
+            + "    <th width=\"80\">"
+            + "         Server"
+            + "     </th>"
+            + "     <th width=\"80\">"
+            + "         Job Name"
+            + "    </th>"
+            + "     <th width=\"80\">"
+            + "        Failed at Step"
+            + "     </th>"
+            + "     <th width=\"80\">"
+            + "         Occured Date"
+            + "     </th>"
+            + "     <th>"
+            + "         Message"
+            + "     </th>"
+            + "  </tr>"
+            + " </thead>"
+            + "  <tbody> {0}"
+            + "  </tbody>"
+            + " </table>";
 
         private string _rowOddStyle = "align=\"center\" valign=\"Middle\" style=\"background-color:#fcfcfc;min-height:25px\"";
 
@@ -224,7 +226,7 @@ namespace Fanex.Maintenance.Controller.Worker
                             //// Get specific job satisfy filter contions, if yes then break out
                             DateTime jobLogDate = DateTimeHelper.GetFullDatetime(jobLog.RunDate, jobLog.RunTime);
                             if (jobLogDate > LastJobLogNotificationTime
-                                && Constants.NOTIFY_WHEN_JOB_STATUS.Contains(jobLog.RunSatus)
+                                && Constants.NotifyWhenJobStatus.Contains(jobLog.RunSatus)
                                 && SectionHelper.GetServerIpFromServerName(jobLog.Server) == server.ServerIp)
                             {
                                 notifyInformaitons.Add(new NotifyInfo
@@ -314,7 +316,7 @@ namespace Fanex.Maintenance.Controller.Worker
                 //// Get specific job satisfy filter contions, if yes then break out
                 DateTime jobLogDate = DateTimeHelper.GetFullDatetime(jobLog.RunDate, jobLog.RunTime);
                 if (jobLogDate > LastJobLogNotificationTime
-                    && Constants.NOTIFY_WHEN_JOB_STATUS.Contains(jobLog.RunSatus)
+                    && Constants.NotifyWhenJobStatus.Contains(jobLog.RunSatus)
                     && SectionHelper.GetServerIpFromServerName(jobLog.Server) == serverIp)
                 {
                     mailBody += "<tr " + ((index % 2 == 0) ? _rowOddStyle : _rowEvenStyle) + ">"
@@ -348,13 +350,17 @@ namespace Fanex.Maintenance.Controller.Worker
                 foreach (ServerElement server in DatabaseServersSection.Instance.ResourceServers)
                 {
                     ServerStatus serverStatus = _serverService.GetServerStatus(server.ConnectionString);
-                    if (serverStatus.SqlServerCanConnect == false)
+
+                    if (!serverStatus.SqlServerCanConnect)
                     {
                         mailBody += string.Format("<p>Sql Server of Server <span style='font-weight:bold;'>{0} </span> cannot connect</p>", server.ServerIp);
                     }
-                    else if (serverStatus.SqlServerAgentRunning == false)
+                    else if (!serverStatus.SqlServerAgentRunning)
                     {
-                        mailBody += string.Format("<p>Sql Server Agent of Server <span style='font-weight:bold;'>{0} </span> was <span style='font-weight:bold;'>stopped</span></p> on {1}", server.ServerIp, DateTime.Now.ToString());
+                        mailBody += string.Format(
+                            "<p>Sql Server Agent of Server <span style='font-weight:bold;'>{0} </span> was <span style='font-weight:bold;'>stopped</span></p> on {1}", 
+                            server.ServerIp, 
+                            DateTime.Now.ToString());
                     }
                 }
 

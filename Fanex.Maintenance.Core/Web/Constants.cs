@@ -272,7 +272,7 @@ namespace Fanex.Maintenance.Core.Web
         /// </summary>
         public const string FULL = "FULL";
 
-        public static readonly List<int> NOTIFY_WHEN_JOB_STATUS = new List<int>
+        public static readonly List<int> NotifyWhenJobStatus = new List<int>
         {
             0,
             3
@@ -281,7 +281,7 @@ namespace Fanex.Maintenance.Core.Web
         /// <summary>
         /// Frequency Interval Values.
         /// </summary>
-        public static string[] FreqIntervalValues = new string[]
+        public static readonly string[] FreqIntervalValues = new string[]
         {
             "Sunday",
             "Monday",
