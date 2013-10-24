@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="Class1.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,23 +9,24 @@
 
 namespace Fanex.Maintenance.Controller
 {
-    using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
-    using Fanex.Maintenance.Service.Impl;
-    using Fanex.Maintenance.Service.Interface;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
+    using Fanex.Maintenance.Service.Interface;
+    using Fanex.Maintenance.Service.Impl;
+    using System;
 
-    /// <summary>
-    /// Base controller.
-    /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented")]
     public class BaseController : Controller
     {
         protected readonly string Environment = NapSettings.Settings.Environment;
 
         protected readonly int SiteId = NapSettings.Settings.SiteId;
+
+        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
 
         protected readonly CurrentContext CurrentContext;
 
@@ -33,38 +34,7 @@ namespace Fanex.Maintenance.Controller
 
         protected readonly CurrentSession CurrentSession;
 
-        private int _issiteLogin = NapSettings.Settings.IsSiteLogin;
-
         private ViewFlags _viewFlags;
-
-        public BaseController()
-        {
-            CurrentContext = new CurrentContext();
-            CurrentSession = new CurrentSession();
-
-            ServiceContext = new ServiceContext
-            {
-                UserId = this.CurrentSession.UserId,
-                Ip = this.CurrentContext.IP
-            };
-
-            ViewFlags = new ViewFlags
-            {
-                IsReCheckin = NapSettings.Settings.ReCheckIn
-            };
-        }
-
-        /// <summary>
-        /// Gets whether the current site allows users login directly.
-        /// </summary>
-        /// <value>0 : login through NAP Hub.</value>
-        public int IsSiteLogin
-        {
-            get
-            {
-                return _issiteLogin;
-            }
-        }
 
         protected ViewFlags ViewFlags
         {
@@ -79,6 +49,35 @@ namespace Fanex.Maintenance.Controller
             }
         }
 
+        public BaseController()
+        {
+            CurrentContext = new CurrentContext();
+            CurrentSession = new CurrentSession();
+
+            ServiceContext = new ServiceContext
+            {
+                UserId = this.CurrentSession.UserId,
+                Ip = this.CurrentContext.IP
+            };
+
+            ViewFlags = new ViewFlags
+            {
+                IsReCheckin = NapSettings.Settings.EnableReCheckIn
+            };
+        }
+
+        /// <summary>
+        /// Indicates whether the current site allows users login directly.
+        /// If "0", users must login through NAP Hub
+        /// </summary>
+        public bool IsSiteLogin
+        {
+            get
+            {
+                return _issiteLogin;
+            }
+        }
+
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
         {
             return new JsonResult()
@@ -87,7 +86,7 @@ namespace Fanex.Maintenance.Controller
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
                 JsonRequestBehavior = behavior,
-                MaxJsonLength = int.MaxValue
+                MaxJsonLength = Int32.MaxValue
             };
         }
     }
