@@ -6,6 +6,7 @@
     var success = false;
     if(ViewBag.success != null && ViewBag.success == true)
     { success = true; }
+    
 }
 @section Head {
     @Styles.Render("~/css/log")
@@ -30,9 +31,12 @@
 
     @if(success)
     {
+        ViewBag.success = false;
+        success = false;
         <script type="text/javascript">
             alert("Active domain success");
         </script>
+        
     }
     
 }
@@ -58,6 +62,7 @@
         }
     }
                             <li>
+                            <br />
                                 <div class="submit">
                                     <input id="btnSubmit" type="submit" value="Submit" />
                                 </div>
