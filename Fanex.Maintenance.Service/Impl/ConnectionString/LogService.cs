@@ -64,27 +64,20 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             IQueryable<LogExecSp> logList = null;
             totalRows = 0;
 
-            try
+            var criteria = new LogExecSpSearchCriteria
             {
-                var criteria = new LogExecSpSearchCriteria
-                {
-                    Username = username,
-                    Name = name,
-                    From = from,
-                    To = to,
-                    FilterType = filterBy,
-                    PageIndex = pageIndex,
-                    PageSize = pageSize
-                };
+                Username = username,
+                Name = name,
+                From = from,
+                To = to,
+                FilterType = filterBy,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
 
-                if (criteria.IsValid())
-                {
-                    logList = _logRepository.Fetch(criteria, out totalRows).AsQueryable();
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                logList = _logRepository.Fetch(criteria, out totalRows).AsQueryable();
             }
 
             return logList;
@@ -97,23 +90,16 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <returns>Execute SP log.</returns>
         public LogExecSp GetById(int logId)
         {
-            try
+            var criteria = new LogGetByIdCriteria
             {
-                var criteria = new LogGetByIdCriteria
-                {
-                    LogId = logId
-                };
+                LogId = logId
+            };
 
-                if (criteria.IsValid())
-                {
-                    var logExec = _logRepository.GetById(criteria);
-
-                    return logExec;
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                var logExec = _logRepository.GetById(criteria);
+
+                return logExec;
             }
 
             return null;

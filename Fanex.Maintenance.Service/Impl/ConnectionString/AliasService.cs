@@ -55,23 +55,16 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             int? databaseServerId = null, 
             int? siteId = null)
         {
-            try
+            var criteria = new AliasGetAllCriteria
             {
-                var criteria = new AliasGetAllCriteria
-                {
-                    Alias = alias,
-                    DbServerId = databaseServerId,
-                    SiteId = siteId
-                };
+                Alias = alias,
+                DbServerId = databaseServerId,
+                SiteId = siteId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _aliasRepository.GetAll(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _aliasRepository.GetAll(criteria);
             }
 
             return null;
@@ -87,18 +80,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNull(criteria, "criteria");
 
-            try
-            {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                if (criteria.IsValid() && logCriteria.IsValid())
-                {
-                    return _aliasRepository.InsertOrUpdate(criteria, logCriteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid() && logCriteria.IsValid())
             {
-                HandleException(ex);
+                return _aliasRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
             return null;
@@ -114,18 +100,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNull(criteria, "criteria");
 
-            try
-            {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                if (criteria.IsValid() && logCriteria.IsValid())
-                {
-                    return _aliasRepository.InsertOrUpdate(criteria, logCriteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid() && logCriteria.IsValid())
             {
-                HandleException(ex);
+                return _aliasRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
             return null;
@@ -141,21 +120,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNegativeOrZero(aliasId, "aliasId");
 
-            try
+            var criteria = new AliasGetByIdCriteria
             {
-                var criteria = new AliasGetByIdCriteria
-                {
-                    AliasId = aliasId
-                };
+                AliasId = aliasId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _aliasRepository.GetById(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _aliasRepository.GetById(criteria);
             }
 
             return null;
@@ -171,21 +143,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNegativeOrZero(siteId, "siteId");
 
-            try
+            var criteria = new AliasGetBySiteCriteria
             {
-                var criteria = new AliasGetBySiteCriteria
-                {
-                    SiteId = siteId
-                };
+                SiteId = siteId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _aliasRepository.GetBySite(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _aliasRepository.GetBySite(criteria);
             }
 
             return null;
@@ -203,22 +168,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             Check.Argument.IsNotNegativeOrZero(fromDbServerId, "fromDbServerId");
             Check.Argument.IsNotNegativeOrZero(toDbServerId, "toDbServerId");
 
-            try
+            var criteria = new DatabaseServerGetConnectionFromDbServerCriteria
             {
-                var criteria = new DatabaseServerGetConnectionFromDbServerCriteria
-                {
-                    FromDbServerId = fromDbServerId,
-                    ToDbServerId = toDbServerId
-                };
+                FromDbServerId = fromDbServerId,
+                ToDbServerId = toDbServerId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _aliasRepository.GetSwitchConnection(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _aliasRepository.GetSwitchConnection(criteria);
             }
 
             return null;
@@ -234,21 +192,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNegativeOrZero(databaseServerId, "dbServerId");
 
-            try
+            var criteria = new DatabaseServerGetSecondConnectionFromDbServerCriteria
             {
-                var criteria = new DatabaseServerGetSecondConnectionFromDbServerCriteria
-                {
-                    DbServerId = databaseServerId
-                };
+                DbServerId = databaseServerId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _aliasRepository.GetSwitchConnection(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _aliasRepository.GetSwitchConnection(criteria);
             }
 
             return null;

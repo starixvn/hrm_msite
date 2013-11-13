@@ -9,10 +9,12 @@
 
 namespace Fanex.Maintenance.Site
 {
-    using System.Diagnostics.CodeAnalysis;
+    using System;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using Fanex.Logging;
     using Fanex.Maintenance.Site.App_Start;
     using Microsoft.AspNet.SignalR;
 
@@ -51,6 +53,30 @@ namespace Fanex.Maintenance.Site
             ////    MemoryUtilizationWorker memoryUtilizationWorker = new MemoryUtilizationWorker(AppSetting.GetMemoryUtilizationInterval);
             ////    memoryUtilizationWorker.Start();
             ////}
+        }
+
+        /// <summary>
+        /// Application error event handler.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event arguments.</param>
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            // Logging
+            Exception ex = Server.GetLastError().GetBaseException();
+
+            if (!Request.IsLocal)
+            {
+                string message = ex.Message +
+                    "\r\nSource: " + ex.Source +
+                    "\r\nDomain: " + HttpContext.Current.Request.Headers["Host"] +
+                    "\r\nForm: " + Request.Form.ToString() +
+                    "\r\nQueryString: " + Request.QueryString.ToString() +
+                    "\r\nTargetSite: " + ex.TargetSite +
+                    "\r\nStackTrace: " + ex.StackTrace;
+
+                LogService.Error(message);
+            }
         }
     }
 }

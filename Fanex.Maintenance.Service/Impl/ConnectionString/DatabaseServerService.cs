@@ -52,18 +52,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <returns>List of database server.</returns>
         public IEnumerable<DatabaseServer> GetAll()
         {
-            try
-            {
-                var criteria = new DatabaseServerGetAllCriteria();
+            var criteria = new DatabaseServerGetAllCriteria();
 
-                if (criteria.IsValid())
-                {
-                    return _databaseServerRepository.GetAll(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _databaseServerRepository.GetAll(criteria);
             }
 
             return null;
@@ -76,21 +69,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <returns>List of database server site.</returns>
         public IEnumerable<DatabaseServerSite> GetWithNumOfSite(string name = "")
         {
-            try
+            var criteria = new DatabaseServerGetAllCriteria
             {
-                var criteria = new DatabaseServerGetAllCriteria
-                {
-                    Name = name
-                };
+                Name = name
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _databaseServerRepository.GetWithNumOfSite(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _databaseServerRepository.GetWithNumOfSite(criteria);
             }
 
             return null;
@@ -106,18 +92,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNull(criteria, "criteria");
 
-            try
-            {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                if (criteria.IsValid() && logCriteria.IsValid())
-                {
-                    return _databaseServerRepository.InsertOrUpdate(criteria, logCriteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid() && logCriteria.IsValid())
             {
-                HandleException(ex);
+                return _databaseServerRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
             return null;
@@ -133,18 +112,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNull(criteria, "criteria");
 
-            try
-            {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                if (criteria.IsValid() && logCriteria.IsValid())
-                {
-                    return _databaseServerRepository.InsertOrUpdate(criteria, logCriteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid() && logCriteria.IsValid())
             {
-                HandleException(ex);
+                return _databaseServerRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
             return null;
@@ -157,21 +129,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <returns>Database server.</returns>
         public DatabaseServer GetById(int id)
         {
-            try
+            var criteria = new DatabaseServerGetByIdCriteria
             {
-                var criteria = new DatabaseServerGetByIdCriteria
-                {
-                    DbServerId = id
-                };
+                DbServerId = id
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _databaseServerRepository.Get(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _databaseServerRepository.Get(criteria);
             }
 
             return null;

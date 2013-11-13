@@ -54,22 +54,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <returns>List of site.</returns>
         public IEnumerable<Site> GetAll(string name = "", int? databaseServerId = null)
         {
-            try
+            var criteria = new SiteGetAllCriteria
             {
-                var criteria = new SiteGetAllCriteria
-                {
-                    Name = name,
-                    DbServerId = databaseServerId
-                };
+                Name = name,
+                DbServerId = databaseServerId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _siteRepository.Fetch(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _siteRepository.Fetch(criteria);
             }
 
             return null;
@@ -84,21 +77,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         {
             Check.Argument.IsNotNegativeOrZero(aliasId, "aliasid");
 
-            try
+            var criteria = new SiteGetByAliasCriteria
             {
-                var criteria = new SiteGetByAliasCriteria
-                {
-                    AliasId = aliasId
-                };
+                AliasId = aliasId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _siteRepository.Fetch(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _siteRepository.Fetch(criteria);
             }
 
             return null;
@@ -112,22 +98,15 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <returns>List of site alias.</returns>
         public IEnumerable<SiteAlias> GetSiteWithNumOfAlias(string name = "", int? databaseServerId = null)
         {
-            try
+            var criteria = new SiteGetAllCriteria
             {
-                var criteria = new SiteGetAllCriteria
-                {
-                    Name = name,
-                    DbServerId = databaseServerId
-                };
+                Name = name,
+                DbServerId = databaseServerId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _siteRepository.GetSiteAlias(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _siteRepository.GetSiteAlias(criteria);
             }
 
             return null;
@@ -140,21 +119,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <returns>Site object.</returns>
         public Site GetById(int id)
         {
-            try
+            var criteria = new SiteGetByIdCriteria
             {
-                var criteria = new SiteGetByIdCriteria
-                {
-                    SiteId = id
-                };
+                SiteId = id
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _siteRepository.Get(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _siteRepository.Get(criteria);
             }
 
             return null;
@@ -170,18 +142,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNull(criteria, "criteria");
 
-            try
-            {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                if (criteria.IsValid() && logCriteria.IsValid())
-                {
-                    return _siteRepository.InsertOrUpdate(criteria, logCriteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid() && logCriteria.IsValid())
             {
-                HandleException(ex);
+                return _siteRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
             return null;
@@ -197,18 +162,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNull(criteria, "criteria");
 
-            try
-            {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                if (criteria.IsValid() && logCriteria.IsValid())
-                {
-                    return _siteRepository.InsertOrUpdate(criteria, logCriteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid() && logCriteria.IsValid())
             {
-                HandleException(ex);
+                return _siteRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
             return null;
@@ -221,21 +179,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         /// <returns>List of site.</returns>
         public IEnumerable<Site> GetByDbServer(int databaseServerId)
         {
-            try
+            var criteria = new SiteGetByDbServerCriteria
             {
-                var criteria = new SiteGetByDbServerCriteria
-                {
-                    DbServerId = databaseServerId
-                };
+                DbServerId = databaseServerId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _siteRepository.Fetch(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _siteRepository.Fetch(criteria);
             }
 
             return null;

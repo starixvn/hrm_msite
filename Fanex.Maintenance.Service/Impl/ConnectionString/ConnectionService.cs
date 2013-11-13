@@ -55,21 +55,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         {
             Check.Argument.IsNotNegativeOrZero(aliasId, "aliasid");
 
-            try
+            var criteria = new ConnectionGetByAliasCriteria
             {
-                var criteria = new ConnectionGetByAliasCriteria
-                {
-                    AliasId = aliasId
-                };
+                AliasId = aliasId
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _connectionRepository.GetByAlias(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _connectionRepository.GetByAlias(criteria);
             }
 
             return null;
@@ -84,21 +77,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         {
             Check.Argument.IsNotNegativeOrZero(id, "id");
 
-            try
+            var criteria = new ConnectionGetByIdCriteria
             {
-                var criteria = new ConnectionGetByIdCriteria
-                {
-                    ConnectionId = id
-                };
+                ConnectionId = id
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _connectionRepository.GetById(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _connectionRepository.GetById(criteria);
             }
 
             return null;
@@ -113,21 +99,14 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
         {
             Check.Argument.IsNotNegativeOrZero(id, "id");
 
-            try
+            var criteria = new ConnectionGetSecondaryConnectionCriteria
             {
-                var criteria = new ConnectionGetSecondaryConnectionCriteria
-                {
-                    ConnectionId = id
-                };
+                ConnectionId = id
+            };
 
-                if (criteria.IsValid())
-                {
-                    return _connectionRepository.GetSecondaryConnection(criteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid())
             {
-                HandleException(ex);
+                return _connectionRepository.GetSecondaryConnection(criteria);
             }
 
             return null;
@@ -143,18 +122,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNull(criteria, "criteria");
 
-            try
-            {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                if (criteria.IsValid() && logCriteria.IsValid())
-                {
-                    return _connectionRepository.InsertOrUpdate(criteria, logCriteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid() && logCriteria.IsValid())
             {
-                HandleException(ex);
+                return _connectionRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
             return null;
@@ -170,18 +142,11 @@ namespace Fanex.Maintenance.Service.Impl.ConnectionString
             // check parameters
             Check.Argument.IsNotNull(criteria, "criteria");
 
-            try
-            {
-                LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
+            LogExecSpCriteria logCriteria = GetLogExecSpCriteria();
 
-                if (criteria.IsValid() && logCriteria.IsValid())
-                {
-                    return _connectionRepository.InsertOrUpdate(criteria, logCriteria);
-                }
-            }
-            catch (Exception ex)
+            if (criteria.IsValid() && logCriteria.IsValid())
             {
-                HandleException(ex);
+                return _connectionRepository.InsertOrUpdate(criteria, logCriteria);
             }
 
             return null;
