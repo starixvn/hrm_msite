@@ -15,9 +15,8 @@ namespace Fanex.Maintenance.Repository.Impl
     using System.Collections.Generic;
     using System.Data;
     using Fanex.Data;
-    using Fanex.Maintenance.Core.Helper;
-    using Fanex.Maintenance.Entity.Model;
     using Fanex.NAP.Framework.Data;
+    using Fanex.Maintenance.Core.Model;
 
     /// <summary>
     /// Base repository.
@@ -45,70 +44,6 @@ namespace Fanex.Maintenance.Repository.Impl
         }
 
         /// <summary>
-        /// Get Data table with server Name.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="serverName">Server name.</param>
-        /// <returns>Data table.</returns>
-        public virtual DataTable GetDataTable(ICriteria criteria, string serverName)
-        {
-            DbSetting setting = new DbSetting
-            {
-                ConnectionString = SectionHelper.GetConnectionStringFromServerName(serverName),
-                SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
-            };
-
-            using (var db = new ObjectDb(setting))
-            {
-                DataSet ds = db.ExecuteDataSet(criteria.GetSpParams());
-                if (!ReferenceEquals(ds, null) && ds.Tables.Count > 0)
-                {
-                    return ds.Tables[0];
-                }
-
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Fetch Data from Criteria.
-        /// </summary>
-        /// <typeparam name="S">The class type.</typeparam>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="serverIp">Server Name will be executed sp.</param>
-        /// <param name="mapObjectFunction">Read data reader and pass object.</param>
-        /// <param name="serverType">Server type.</param>
-        /// <returns>Collection of object.</returns>
-        public virtual IEnumerable<S> Fetch<S>(
-            ICriteria criteria, 
-            string serverIp, 
-            Func<IDataReader, S> mapObjectFunction, 
-            int? serverType = null) where S : class
-        {
-            IList<S> listObject = new List<S>();
-            //// new dbsetting from server name and setting key
-            DbSetting setting = new DbSetting
-            {
-                //// get connection string from servername
-                ConnectionString = SectionHelper.GetConnectionStringFromServerIp(serverIp, serverType != null ? (int)serverType : 0),
-                SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
-            };
-
-            using (var db = new ObjectDb(setting))
-            {
-                using (var reader = db.ExecuteReader(criteria.GetSpParams()))
-                {
-                    while (reader.Read())
-                    {
-                        listObject.Add(mapObjectFunction(reader));
-                    }
-                }
-            }
-
-            return listObject;
-        }
-
-        /// <summary>
         /// Fetch item.
         /// </summary>
         /// <typeparam name="S">Object class.</typeparam>
@@ -133,29 +68,6 @@ namespace Fanex.Maintenance.Repository.Impl
             }
 
             return listObject;
-        }
-
-        /// <summary>
-        /// Execute command.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="serverIp">Server IP.</param>
-        /// <returns>Command result.</returns>
-        public virtual Hashtable ExecuteCommand(ICriteria criteria, string serverIp)
-        {
-            //// new dbsetting from server name and setting key
-            DbSetting setting = new DbSetting
-            {
-                //// get connection string from servername
-                ConnectionString = SectionHelper.GetConnectionStringFromServerIp(serverIp),
-                SpName = SectionHelper.GetSpNameFromSpKey(criteria.GetSettingKey())
-            };
-
-            using (var db = new ObjectDb(setting))
-            {
-                db.ExecuteNonQuery(criteria.GetSpParams());
-                return db.GetOuputParams();
-            }
         }
 
         /// <summary>

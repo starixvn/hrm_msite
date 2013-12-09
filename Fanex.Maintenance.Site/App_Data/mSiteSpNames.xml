@@ -15,8 +15,7 @@
         <Setting Key="Lrf_BrowserStatistic" SpName="Lrf_BrowserStatistic" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
         <Setting Key="Lrf_GetSystemNameStatistic" SpName="Lrf_GetSystemNameStatistic" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
         <Setting Key="Lrf_GetNonFunctionStatistic" SpName="Lrf_GetNonFunctionStatistic" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
-        
-        
+
         <!--<Setting Key="Acc_LoginAdmin" SpName="Acc_LoginAdmin" DbName="main" />-->
     </Function>
     <Function Name="Licensee">
@@ -32,7 +31,6 @@
         <Setting Key="Is_OnlineReportDaily" SpName="Is_OnlineReportDaily" DbName="DBONUSER.ON_USER.bodbAdminNet" />
         <Setting Key="Lrf_DomainSel" SpName="Lrf_DomainSel" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
         <Setting Key="Lrf_ActiveDomainUpd" SpName="Lrf_ActiveDomainUpd" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />
-      
     </Function>
     <Function Name="DataValidation">
         <Setting Key="GET_DepositDataToValidate_SumWL" SpName="GET_DepositDataToValidate_SumWL" DbName="DBLIC.bodb_Licensee.bodbLicenseeNet" />

@@ -1,4 +1,5 @@
-﻿@model SiteInsertCriteria
+﻿@using Fanex.ConnectionString.Core.Criteria.Site
+@model SiteInsertCriteria
 @{  
     ViewBag.Title = ViewResource.Create + ViewResource.Site;
     Layout = "~/Views/Shared/_Layout.cshtml";    
@@ -74,7 +75,7 @@
 {
     @if (success)
     {
-        string dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Connection, 3);
+        string dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Site, 3);
 
         <script type="text/javascript">
             $(function () {

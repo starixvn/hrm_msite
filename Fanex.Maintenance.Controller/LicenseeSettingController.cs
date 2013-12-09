@@ -9,15 +9,8 @@
 
 namespace Fanex.Maintenance.Controller
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Web.Mvc;
-    using Fanex.Maintenance.Core;
-    using Fanex.Maintenance.Criteria;
-    using Fanex.Maintenance.Criteria.LrfDomain;
-    using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Service.Impl;
+    using Fanex.Maintenance.Service.Impl.LicenseeSetting;
 
     /// <summary>
     /// Licensee Setting Controller.
@@ -32,9 +25,10 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         private readonly LicenseeSettingService _licenseeSettingService;
 
-        #endregion
+        #endregion Member
 
         #region Ctor
+
         /// <summary>
         /// Initializes a new instance of the LicenseeSettingController class.
         /// </summary>
@@ -51,7 +45,8 @@ namespace Fanex.Maintenance.Controller
         {
             _licenseeSettingService = new LicenseeSettingService();
         }
-        #endregion
+
+        #endregion Ctor
 
         #region Action
 
@@ -71,14 +66,14 @@ namespace Fanex.Maintenance.Controller
             return View(domains);
         }
 
-        #endregion
+        #endregion Action
 
         #region Ajax
 
-        #endregion
+        #endregion Ajax
 
         #region Private
 
-        #endregion
+        #endregion Private
     }
 }

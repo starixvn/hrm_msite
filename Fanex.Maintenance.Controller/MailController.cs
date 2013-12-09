@@ -16,9 +16,9 @@ namespace Fanex.Maintenance.Controller
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.MailDeliver.Model;
-    using Fanex.Maintenance.Criteria.MailService;
-    using Fanex.Maintenance.Service.Impl;
-    using Fanex.Maintenance.Service.Interface;
+    using Fanex.Maintenance.Repository.Criteria.MailService;
+    using Fanex.Maintenance.Service.Impl.Mail;
+    using Fanex.Maintenance.Service.Interface.Mail;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
@@ -39,7 +39,7 @@ namespace Fanex.Maintenance.Controller
 
         private readonly IUserService _userService;
 
-        #endregion
+        #endregion Member
 
         #region Ctor
 
@@ -54,7 +54,7 @@ namespace Fanex.Maintenance.Controller
             this._userService = userService ?? new UserService();
         }
 
-        #endregion
+        #endregion Ctor
 
         #region Action
 
@@ -125,7 +125,7 @@ namespace Fanex.Maintenance.Controller
             return View(listMail);
         }
 
-        #endregion
+        #endregion MailList
 
         #region MailSetting
 
@@ -218,7 +218,7 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        #endregion
+        #endregion MailSetting
 
         #region MailConfig
 
@@ -354,7 +354,7 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        #endregion
+        #endregion MailConfig
 
         #region MailFunction
 
@@ -453,9 +453,9 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        #endregion
+        #endregion MailFunction
 
-        #endregion
+        #endregion Action
 
         #region Ajax
 
@@ -470,10 +470,10 @@ namespace Fanex.Maintenance.Controller
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult AddMailSettingPopUp(
-            string server, 
-            int port, 
-            string username, 
-            string password, 
+            string server,
+            int port,
+            string username,
+            string password,
             bool isAutho)
         {
             if (Request.IsAjaxRequest())
@@ -592,11 +592,11 @@ namespace Fanex.Maintenance.Controller
         /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult MailListPagi(
-            int status, 
-            string from, 
-            string to, 
-            int page = 0, 
-            int size = 50, 
+            int status,
+            string from,
+            string to,
+            int page = 0,
+            int size = 50,
             int applicationID = 0)
         {
             InitDataMailConfig();
@@ -661,7 +661,9 @@ namespace Fanex.Maintenance.Controller
 
             return Json(null);
         }
-        #endregion
+
+        #endregion Ajax
+
         #region InitData
 
         /// <summary>
@@ -773,6 +775,6 @@ namespace Fanex.Maintenance.Controller
             }).ToList();
         }
 
-        #endregion
+        #endregion InitData
     }
 }

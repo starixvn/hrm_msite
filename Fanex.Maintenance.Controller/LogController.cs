@@ -15,10 +15,10 @@ namespace Fanex.Maintenance.Controller
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.Maintenance.Core;
-    using Fanex.Maintenance.Criteria.Log;
-    using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Service.Impl;
+    using Fanex.Maintenance.Repository;
+    using Fanex.Maintenance.Repository.Criteria.Log;
+    using Fanex.Maintenance.Service.Impl.AppLog;
+    using Fanex.Maintenance.Core.Model;
 
     /// <summary>
     /// Log controller.
@@ -27,6 +27,7 @@ namespace Fanex.Maintenance.Controller
     public class LogController : BaseController
     {
         #region Member
+
         /// <summary>
         /// Log Service.
         /// </summary>
@@ -105,10 +106,10 @@ namespace Fanex.Maintenance.Controller
 
             ////Get logs by date
             IEnumerable<Log> listLogs = _logService.With(
-                criteria.CategoryId, 
+                criteria.CategoryId,
                 criteria.MachineId,
-                criteria.IsProduction, 
-                criteria.IsMonitored, 
+                criteria.IsProduction,
+                criteria.IsMonitored,
                 criteria.Severity)
                 .From(criteria.From)
                 .To(criteria.To)

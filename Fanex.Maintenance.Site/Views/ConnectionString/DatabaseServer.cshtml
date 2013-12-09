@@ -1,8 +1,8 @@
-﻿@model DatabaseServerGetAllCriteria
+﻿@using Fanex.Maintenance.ViewModel.Connection
+@model DatabaseServerViewModel
 @{
-    ViewBag.Title = ViewResource.Manage_Server;
+    ViewBag.Title = ViewResource.DatabaseServer;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var listDbServer = (List<DatabaseServerSite>)ViewBag.ListDbServer;
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
@@ -10,10 +10,10 @@
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
-        @Html.ActionLink("+ Create New", "CreateDbServer", "ConnectionString", null, new { @class = "lnk" })
+        @Html.ActionLink("+ Create New", "CreateDatabaseServer", "ConnectionString", null, new { @class = "lnk" })
     </h1>
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("DatabaseServer", "ConnectionString", FormMethod.Get))
 { 
     <section id="filter-bar">
         <div class="filter-form">
@@ -42,6 +42,9 @@
                 @ViewResource.Server_IP
             </th>
             <th>
+                @ViewResource.Description
+            </th>
+            <th>
                 @ViewResource.Modifier
             </th>
             <th>
@@ -51,18 +54,15 @@
                 @ViewResource.Active
             </th>
             <th>
-                @ViewResource.Sites
-            </th>
-            <th>
                 @ViewResource.Edit
             </th>
         </tr>
     </thead>
     <tbody>
-        @if (!ReferenceEquals(listDbServer, null))
+        @if (!ReferenceEquals(Model.DatabaseServers, null))
         {
             int i = 0;
-            foreach (var item in listDbServer)
+            foreach (var item in Model.DatabaseServers)
             {
                 string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
                 i++;
@@ -71,39 +71,32 @@
                     @i
                 </td>
                 <td>
-                    @item.DatabaseServer.Name
+                    @item.Name
                 </td>
                 <td>
-                    @item.DatabaseServer.ServerIP
+                    @item.ServerIP
                 </td>
                 <td>
-                    @item.DatabaseServer.Modifier.Name
+                    @item.Description
+                </td>
+                <td>
+                    @item.Modifier.Name
                 </td>
                 <td class="align-center">
-                    @item.DatabaseServer.ModifiedDate.ToFullDateString()
+                    @item.ModifiedDate.ToFullDateString()
                 </td>
                 <td class="align-center">
-                    @if (item.DatabaseServer.IsActive)
+                    @if (item.IsActive)
                     {
-                        <input type="checkbox" checked="checked" did="@item.DatabaseServer.Id" dname="@item.DatabaseServer.Name" class="update-status"/>
+                        <input type="checkbox" checked="checked" did="@item.Id" dname="@item.Name" class="update-status"/>
                     }
                     else
                     {
-                        <input type="checkbox"did="@item.DatabaseServer.Id" dname="@item.DatabaseServer.Name" class="update-status"/>
+                        <input type="checkbox"did="@item.Id" dname="@item.Name" class="update-status"/>
                     }
                 </td>
                 <td class="align-center">
-                    @if (item.NumOfSite > 0)
-                    {
-                        <a href="#" did="@item.DatabaseServer.Id" class="num-site" dname="@item.DatabaseServer.Name">@ViewResource.View</a>
-                    }
-                    else
-                    {
-                        <span>0</span>
-                    }
-                </td>
-                <td class="align-center">
-                    @Html.ActionLink("Edit", "EditDbServer", new { id = item.DatabaseServer.Id })
+                    @Html.ActionLink("Edit", "EditDatabaseServer", new { id = item.Id })
                 </td>
             </tr>
             }
@@ -118,4 +111,6 @@
         }
     </tbody>
 </table>
-<script src="~/scripts/Connection/DatabaseSever.js" type="text/javascript"></script>
+@section Foot {
+    @Scripts.Render("~/scripts/connectionstring-database")
+}

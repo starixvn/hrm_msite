@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Fanex.Maintenance.Core {
+namespace Fanex.Maintenance.Repository {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Fanex.Maintenance.Core {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Maintenance.Core.ViewResource", typeof(ViewResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.Maintenance.Repository.ViewResource", typeof(ViewResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -165,6 +165,15 @@ namespace Fanex.Maintenance.Core {
         public static string Alias {
             get {
                 return ResourceManager.GetString("Alias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alias Database Server.
+        /// </summary>
+        public static string AliasDatabaseServer {
+            get {
+                return ResourceManager.GetString("AliasDatabaseServer", resourceCulture);
             }
         }
         
@@ -475,6 +484,15 @@ namespace Fanex.Maintenance.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Database.
+        /// </summary>
+        public static string Database {
+            get {
+                return ResourceManager.GetString("Database", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database Name.
         /// </summary>
         public static string Database_Name {
@@ -486,9 +504,9 @@ namespace Fanex.Maintenance.Core {
         /// <summary>
         ///   Looks up a localized string similar to Database Server.
         /// </summary>
-        public static string Database_Server {
+        public static string DatabaseServer {
             get {
-                return ResourceManager.GetString("Database_Server", resourceCulture);
+                return ResourceManager.GetString("DatabaseServer", resourceCulture);
             }
         }
         

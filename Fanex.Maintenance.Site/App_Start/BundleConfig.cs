@@ -103,6 +103,21 @@ namespace Fanex.Maintenance.Site.App_Start
             bundles.Add(new ScriptBundle("~/scripts/recheckin").Include(
               "~/Areas/UserLogin/scripts/ReCheckIn.js"));
 
+            bundles.Add(new ScriptBundle("~/scripts/connectionstring-database").Include(
+              "~/scripts/Connection/Database.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/connectionstring-alias").Include(
+              "~/scripts/Connection/Alias.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/connectionstring-aliasdatabase").Include(
+              "~/scripts/Connection/AliasDatabase.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/connectionstring-site").Include(
+                "~/scripts/Connection/Site.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/connectionstring-connection").Include(
+                "~/scripts/Connection/Connection.js"));
+
             bundles.FileSetOrderList.Clear();
         }
     }

@@ -597,8 +597,8 @@
   <data name="Connection String" xml:space="preserve">
     <value>Connection String</value>
   </data>
-  <data name="Database_Server" xml:space="preserve">
-    <value>Database Server</value>
+  <data name="Database" xml:space="preserve">
+    <value>Database</value>
   </data>
   <data name="EditConnection" xml:space="preserve">
     <value>Edit Connection</value>
@@ -824,5 +824,11 @@
   </data>
   <data name="IsEncrypt" xml:space="preserve">
     <value>Is Encrypt</value>
+  </data>
+  <data name="AliasDatabaseServer" xml:space="preserve">
+    <value>Alias Database Server</value>
+  </data>
+  <data name="DatabaseServer" xml:space="preserve">
+    <value>Database Server</value>
   </data>
 </root>

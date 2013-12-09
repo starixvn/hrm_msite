@@ -1,4 +1,5 @@
-﻿@model SiteUpdateCriteria
+﻿@using Fanex.ConnectionString.Core.Criteria.Site
+@model SiteUpdateCriteria
 @{  
     ViewBag.Title = ViewResource.Update + ViewResource.Site;
     Layout = "~/Views/Shared/_Layout.cshtml";    
@@ -75,7 +76,7 @@
 {
     @if (success)
     {
-        string dialogMsg = string.Format(ViewResource.AddSuccessMsg, ViewResource.Connection, 3);
+        string dialogMsg = string.Format(ViewResource.UpSuccessMsg, ViewResource.Site, 3);
 
         <script type="text/javascript">
             $(function () {

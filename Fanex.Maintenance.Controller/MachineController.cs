@@ -13,10 +13,10 @@ namespace Fanex.Maintenance.Controller
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.Maintenance.Core;
-    using Fanex.Maintenance.Criteria.Log;
-    using Fanex.Maintenance.Entity.Model;
-    using Fanex.Maintenance.Service.Impl;
+    using Fanex.Maintenance.Repository;
+    using Fanex.Maintenance.Repository.Criteria.Log;
+    using Fanex.Maintenance.Service.Impl.AppLog;
+    using Fanex.Maintenance.Core.Model;
 
     /// <summary>
     /// Machine Controller.
@@ -25,6 +25,7 @@ namespace Fanex.Maintenance.Controller
     public class MachineController : BaseController
     {
         #region Member
+
         /// <summary>
         /// Machine Service.
         /// </summary>

@@ -76,31 +76,7 @@
     <Compile Include="ConnectionString\Site\SiteGetByIdCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteGetByAliasCriteria.cs" />
     <Compile Include="ConnectionString\Site\SiteGetAllCriteria.cs" />
-    <Compile Include="DatabaseReport\GetDepositDataToValidateSumWLCriteria.cs" />
-    <Compile Include="DatabaseReport\GetDepositDataToValidateSumWLOldCriteria.cs" />
-    <Compile Include="DatabaseReport\GetDepositDataToValidateDWCriteria.cs" />
-    <Compile Include="DatabaseReport\GetDepositDataToValidateBettingCriteria.cs" />
-    <Compile Include="DatabaseReport\DataIntegrityViewModel.cs" />
-    <Compile Include="DatabaseReport\GetCreditDataToValidateDWCriteria.cs" />
-    <Compile Include="Job\GetCpuUtilizationCriteria.cs" />
-    <Compile Include="Job\GetMemoryInfoCriteria.cs" />
-    <Compile Include="Job\GetReadSQLLogCriteria.cs" />
-    <Compile Include="Job\GetAllJobInScheduleCriteria.cs" />
-    <Compile Include="Job\GetAllScheduleCriteria.cs" />
-    <Compile Include="Job\GetCpuInfoCriteria.cs" />
-    <Compile Include="Job\GetCpuNameCriteria.cs" />
-    <Compile Include="Job\GetJobHistoryCriteria.cs" />
-    <Compile Include="Job\GetListJobCriteria.cs" />
-    <Compile Include="Job\GetResourceInfoCriteria.cs" />
-    <Compile Include="Job\GetServerStatusCriteria.cs" />
-    <Compile Include="Job\GetSqlServerLogCriteria.cs" />
-    <Compile Include="Job\ServiceControlCriteria.cs" />
-    <Compile Include="Job\StartJobCriteria.cs" />
-    <Compile Include="Job\StopJobCriteria.cs" />
     <Compile Include="Log\GetAllCategoryCriteria.cs" />
-    <Compile Include="DatabaseReport\GetCreditDataToValidateBettingCriteria.cs" />
-    <Compile Include="DatabaseReport\GetBalanceUpDayCriteria.cs" />
-    <Compile Include="DatabaseReport\GetDepositDataToValidateLicenseeWLCriteria.cs" />
     <Compile Include="Log\GetAllMachinesCriteria.cs" />
     <Compile Include="Log\GetLogCriteria.cs" />
     <Compile Include="Log\GetMachineByIdCriteria.cs" />
@@ -115,8 +91,6 @@
     <Compile Include="Misc\LogExecSpCriteria.cs" />
     <Compile Include="Misc\ResultCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User\GetUserOnlineDailyCriteria.cs" />
-    <Compile Include="User\GetUserOnlineCriteria.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

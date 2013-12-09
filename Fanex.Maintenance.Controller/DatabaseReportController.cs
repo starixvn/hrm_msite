@@ -11,14 +11,11 @@ namespace Fanex.Maintenance.Controller
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Globalization;
     using System.Web.Mvc;
     using Fanex.DataValidation.Service.Implement;
     using Fanex.DataValidation.Validation.Implement;
-    using Fanex.Maintenance.Criteria.DatabaseReport;
-    using Fanex.Maintenance.Service.Impl;
-    using Fanex.Maintenance.Service.Interface;
+    using Fanex.Maintenance.Repository.Criteria.DatabaseReport;
 
     /// <summary>
     /// Database report controller.
@@ -26,29 +23,6 @@ namespace Fanex.Maintenance.Controller
     [Authorize]
     public class DatabaseReportController : BaseController
     {
-        #region Member
-
-        /// <summary>
-        /// Database report service.
-        /// </summary>
-        private readonly IDatabaseReportService _databaseReportService;
-
-        #endregion Member
-
-        #region Ctor
-
-        public DatabaseReportController()
-            : this(null)
-        {
-        }
-
-        public DatabaseReportController(IDatabaseReportService databaseReportService)
-        {
-            _databaseReportService = databaseReportService ?? new DatabaseReportService();
-        }
-
-        #endregion Ctor
-
         /// <summary>
         /// Data Integrity Return view.
         /// </summary>
@@ -88,93 +62,9 @@ namespace Fanex.Maintenance.Controller
             {
                 Date = moveBetsDay.ToString("dd/MM/yyyy")
             });
-        }        
-
-        /// <summary>
-        /// User Online Daily.
-        /// </summary>
-        /// <returns>Action result.</returns>
-        [HttpGet]
-        public ActionResult UserOnlineDaily()
-        {
-            DataTable userDailyTable = _databaseReportService.GetUserOnlineDaily(DateTime.Now);
-            ViewBag.UserDailyData = _databaseReportService.GenerateTemplateUserDaily(userDailyTable);
-            ViewBag.DateNow = DateTime.Now.ToString("dd/MM/yyyy");
-            return View();
-        }
-
-        /// <summary>
-        /// User Online Daily by date.
-        /// </summary>
-        /// <param name="date">Date value.</param>
-        /// <returns>Action result.</returns>
-        [HttpPost]
-        public ActionResult UserOnlineDaily(string date)
-        {
-            DateTime dateTime = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            DataTable userDailyTable = _databaseReportService.GetUserOnlineDaily(dateTime);
-            ViewBag.UserDailyData = _databaseReportService.GenerateTemplateUserDaily(userDailyTable);
-            ViewBag.DateNow = DateTime.Now.ToString("dd/MM/yyyy");
-            return View();
-        }
-
-        /// <summary>
-        /// User online.
-        /// </summary>
-        /// <returns>Action result.</returns>
-        [HttpGet]
-        public ActionResult UserOnline()
-        {
-            DataTable userOnlineTable = _databaseReportService.GetUserOnline(30);
-            ViewBag.UserOnlineData = _databaseReportService.GenerateTemplateUser(userOnlineTable);
-            return View();
-        }
-
-        /// <summary>
-        /// Get list of user online with size.
-        /// </summary>
-        /// <param name="top">Number of users.</param>
-        /// <returns>Action result.</returns>
-        [HttpPost]
-        public ActionResult UserOnline(int top)
-        {
-            if (Request.IsAjaxRequest())
-            {
-                DataTable userOnlineTable = _databaseReportService.GetUserOnline(top);
-                return Json(_databaseReportService.GenerateTemplateUser(userOnlineTable));
-            }
-
-            return Json(null);
-        }
-
-        /// <summary>
-        /// User online chart report.
-        /// </summary>
-        /// <returns>Action result.</returns>
-        [HttpGet]
-        public ActionResult UserOnlineChart()
-        {
-            return View();
         }
 
         #region Ajax
-
-        /// <summary>
-        /// User online chart report with size.
-        /// </summary>
-        /// <param name="top">Number of users.</param>
-        /// <returns>Action result.</returns>
-        [HttpPost]
-        public ActionResult UserOnlineChart(int top)
-        {
-            if (Request.IsAjaxRequest())
-            {
-                DataTable userOnlineTable = _databaseReportService.GetUserOnline(top);
-                return Json(_databaseReportService.GenerateDataChart(userOnlineTable, top));
-            }
-
-            return Json(null);
-        }
 
         /// <summary>
         /// Get deposit integrity.
@@ -228,6 +118,6 @@ namespace Fanex.Maintenance.Controller
             return string.Empty;
         }
 
-        #endregion
+        #endregion Ajax
     }
 }

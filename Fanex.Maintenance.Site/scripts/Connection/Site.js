@@ -3,46 +3,6 @@ var Site = function ($) {
     return {
         grid: null,
 
-        ShowNumOfAlias: function (siteId, siteName) {
-            $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/GetAliasBySite/" + siteId),
-                type: 'GET',
-                cache: false,
-                beforeSend: function () {
-                    NAP.loadingBox.show();
-                },
-                complete: function () {
-                    NAP.loadingBox.close();
-                },
-                success: function (result) {
-                    NAP.popup("Alias of site '" + siteName + "'", result);
-                },
-                error: function (xhr, status, err) {
-                    NAP.handleAjaxError(xhr, status, err);
-                }
-            });
-        },
-
-        ShowSiteConnection: function (siteId, siteName) {
-            $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/ViewConnection?siteId=" + siteId),
-                type: 'GET',
-                cache: false,
-                beforeSend: function () {
-                    NAP.loadingBox.show();
-                },
-                complete: function () {
-                    NAP.loadingBox.close();
-                },
-                success: function (result) {
-                    NAP.popup("Connection of site '" + siteName + "'", result);
-                },
-                error: function (xhr, status, err) {
-                    NAP.handleAjaxError(xhr, status, err);
-                }
-            });
-        },
-
         UpdateStatusSite: function (siteId, isActive) {
             $.ajax({
                 url: NAP.resolveClientUrl("ConnectionString/UpdateStatusSite"),
@@ -73,29 +33,15 @@ var Site = function ($) {
 $(document).ready(function () {
     Site.grid = $('.grid');
 
-    $('.num-alias').click(function () {
+    Site.grid.on('click', 'input[type=checkbox][sid]', function (e) {
         var $this = $(this);
         var siteId = $this.attr('sid');
         var siteName = $this.attr('sname');
-
-        Site.ShowNumOfAlias(siteId, siteName);
-    });
-
-    $('.site-con').click(function () {
-        var $this = $(this);
-        var siteId = $this.attr('sid');
-        var siteName = $this.attr('sname');
-
-        Site.ShowSiteConnection(siteId, siteName);
-    });
-
-    Site.grid.on('mousedown', 'input[type=checkbox][sid]', function (e) {
-        var $this = $(this);
-        var siteId = $this.attr('sid');
-        var siteName = $this.attr('sname');
-        var active = !$this.is(':checked'),
+        var active = $this.is(':checked'),
 			action = active ? 'activate' : 'deactivate',
              msg = "Are you sure you want to " + action + " '" + siteName + "' ?";
+
+        $this.attr('checked', !active).change();
 
         NAP.headlineMsgBox.confirm(msg, function () {
 

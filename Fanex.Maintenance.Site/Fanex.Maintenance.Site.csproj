@@ -60,6 +60,9 @@
     <Reference Include="Fanex.ConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.ConnectionString.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Data">
       <HintPath>..\_Dependencies\Fanex\Fanex.Data.dll</HintPath>
     </Reference>
@@ -237,17 +240,13 @@
     <Content Include="Global.asax" />
     <Content Include="images\calendar.gif" />
     <Content Include="images\sprite_v.png" />
-    <Content Include="scripts\Connection\Alias.js" />
     <Content Include="scripts\Connection\Connection.js" />
     <Content Include="scripts\Connection\ChangeConnection.js" />
+    <Content Include="scripts\Connection\AliasDatabase.js" />
     <Content Include="scripts\Connection\Log.js" />
-    <Content Include="scripts\Connection\DatabaseSever.js" />
+    <Content Include="scripts\Connection\Database.js" />
     <Content Include="scripts\Connection\Site.js" />
     <Content Include="scripts\Connection\CreateAlias.js" />
-    <Content Include="scripts\Job\ServerDetail.js" />
-    <Content Include="scripts\Job\ServerManagement.js" />
-    <Content Include="scripts\Job\LeftMenuPage.js" />
-    <Content Include="scripts\Job\Index.js" />
     <Content Include="scripts\lib\custom-datepicker.js" />
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\jquery.qtip-1.0.0-rc3.min.js" />
@@ -256,10 +255,6 @@
     <Content Include="scripts\DatabaseReport\Chart.js" />
     <Content Include="scripts\DatabaseReport\Licenseedata.js" />
     <Content Include="scripts\DatabaseReport\RefreshTime.js" />
-    <Content Include="scripts\Job\SqlServerLogManagement.js" />
-    <Content Include="scripts\Job\ScheduleManagement.js" />
-    <Content Include="scripts\Job\JobLogManagement.js" />
-    <Content Include="scripts\Job\JobManagementPage.js" />
     <Content Include="scripts\lib\chosen\chosen-sprite.png" />
     <Content Include="scripts\lib\chosen\chosen.css" />
     <Content Include="scripts\lib\chosen\chosen.jquery.js" />
@@ -1381,7 +1376,6 @@
     <Content Include="scripts\Plugin\Select2\select2.css" />
     <Content Include="scripts\Plugin\Select2\select2.js" />
     <Content Include="scripts\Plugin\Select2\select2.png" />
-    <Content Include="scripts\SqlJobManagement\LeftMenuPage.js" />
     <Content Include="scripts\_Layout.js" />
     <Content Include="themes\assets\css\font-awesome-ie7.css" />
     <Content Include="themes\assets\css\font-awesome.css" />
@@ -1726,41 +1720,19 @@
     <Content Include="Views\Mail\AddMailSettingPopUp.cshtml" />
     <Content Include="Views\Mail\GetMessage.cshtml" />
     <Content Include="Views\DatabaseReport\DataIntegrity.cshtml" />
-    <Content Include="Views\DatabaseReport\UserOnlineDaily.cshtml" />
-    <Content Include="Views\DatabaseReport\UserOnline.cshtml" />
-    <Content Include="Views\DatabaseReport\UserOnlineChart.cshtml" />
-    <Content Include="Views\JobManagement\Index.cshtml" />
-    <Content Include="Views\JobManagement\LeftMenuPage.cshtml" />
-    <Content Include="Views\JobManagement\ScheduleManagement.cshtml" />
     <Content Include="Views\Shared\_SqlJobManagementLayout.cshtml" />
-    <Content Include="Views\JobManagement\JobManagement.cshtml" />
-    <Content Include="Views\JobManagement\StepManagement.cshtml" />
-    <Content Include="Views\JobManagement\JobLogManagement.cshtml" />
-    <Content Include="Views\JobManagement\ServerLogManagement.cshtml" />
-    <Content Include="Views\JobManagement\AgentLogManagement.cshtml" />
-    <Content Include="Views\JobManagement\ServerManagement.cshtml" />
-    <Content Include="Views\JobManagement\ServerDetail.cshtml" />
     <Content Include="WebConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\ConnectionString\Alias.cshtml" />
     <Content Include="themes\connectionstring\alias\createalias.less" />
-    <Content Include="Views\ConnectionString\GetSiteByAlias.cshtml" />
-    <Content Include="Views\ConnectionString\CreateAlias.cshtml" />
-    <Content Include="Views\ConnectionString\EditAlias.cshtml" />
-    <Content Include="Views\ConnectionString\GetConnectionByAlias.cshtml" />
     <Content Include="Views\ConnectionString\Connection.cshtml" />
     <Content Include="Views\ConnectionString\CreateConnection.cshtml" />
-    <Content Include="Views\ConnectionString\EditConnection.cshtml" />
-    <Content Include="Views\ConnectionString\GetSecondaryConection.cshtml" />
     <Content Include="Views\ConnectionString\Site.cshtml" />
     <Content Include="Views\ConnectionString\CreateSite.cshtml" />
     <Content Include="Views\ConnectionString\EditSite.cshtml" />
-    <Content Include="Views\ConnectionString\GetAliasBySite.cshtml" />
     <Content Include="Views\ConnectionString\DatabaseServer.cshtml" />
-    <Content Include="Views\ConnectionString\CreateDbServer.cshtml" />
-    <Content Include="Views\ConnectionString\EditDbServer.cshtml" />
-    <Content Include="Views\ConnectionString\GetSiteByDbServer.cshtml" />
+    <Content Include="Views\ConnectionString\CreateDatabaseServer.cshtml" />
+    <Content Include="Views\ConnectionString\EditDatabaseServer.cshtml" />
     <Content Include="Views\ConnectionString\ChangeConnection.cshtml" />
     <Content Include="Views\ConnectionString\ChangeSecondConnection.cshtml" />
     <Content Include="Views\CommonError\Error.cshtml" />
@@ -1771,7 +1743,6 @@
     <Content Include="Views\ConnectionString\_ConnectionLog_Alias_Update.cshtml" />
     <Content Include="Views\ConnectionString\_ConnectionLog_LogData.cshtml" />
     <Content Include="Views\ConnectionString\_ConnectionLog_LogData_ChangeConnection.cshtml" />
-    <Content Include="Views\ConnectionString\ViewConnection.cshtml" />
     <Content Include="Views\Mail\GetError.cshtml" />
     <Content Include="Views\Machine\Index.cshtml" />
     <Content Include="Views\Machine\EditMachine.cshtml" />
@@ -1779,6 +1750,10 @@
     <Content Include="themes\job\log\manage.less" />
     <None Include="themes\job\RefreshCountDown.less" />
     <Content Include="Views\LicenseeSetting\LrfDomain.cshtml" />
+    <Content Include="Views\ConnectionString\Database.cshtml" />
+    <Content Include="Views\ConnectionString\CreateDatabase.cshtml" />
+    <Content Include="Views\ConnectionString\EditDatabase.cshtml" />
+    <Content Include="Views\ConnectionString\EditConnection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
@@ -1789,9 +1764,9 @@
       <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.Maintenance.Criteria\Fanex.Maintenance.Criteria.csproj">
-      <Project>{4004F1EE-1FB8-486C-903E-326C360DBD81}</Project>
-      <Name>Fanex.Maintenance.Criteria</Name>
+    <ProjectReference Include="..\Fanex.Maintenance.ViewModel\Fanex.Maintenance.ViewModel.csproj">
+      <Project>{1D88837B-951F-4411-ABD9-69FCA5B52C5A}</Project>
+      <Name>Fanex.Maintenance.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

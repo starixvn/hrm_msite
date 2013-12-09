@@ -17,7 +17,7 @@ namespace Fanex.Maintenance.Controller
     /// </summary>
     [Authorize]
     public class HomeController : BaseController
-    {        
+    {
         /// <summary>
         /// Index Page.
         /// </summary>
