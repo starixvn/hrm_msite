@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection\ConnectionAssignSiteViewModel.cs" />
     <Compile Include="Connection\SearchConnectionViewModel.cs" />
     <Compile Include="Connection\DatabaseServerViewModel.cs" />
     <Compile Include="Connection\SiteViewModel.cs" />

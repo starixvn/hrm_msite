@@ -65,6 +65,8 @@ namespace Fanex.Maintenance.Controller
 
         #endregion Ctor
 
+        #region Connection String
+
         [HttpGet]
         public ActionResult Connection(SearchConnectionViewModel model)
         {
@@ -258,6 +260,49 @@ namespace Fanex.Maintenance.Controller
 
             return Json(null);
         }
+
+        [HttpGet]
+        public ActionResult ConnectionAssignSite(int id)
+        {
+            var model = new ConnectionAssignSiteViewModel();
+            var listSite = _siteService.GetAll(isActive: true);
+            var connection = _connectionService.GetById(id);
+            var listSiteConnection = _siteService.GetByConnectionId(id);
+
+            model.Id = connection.Id;
+            model.Name = connection.Name;
+            model.Sites = listSite.ToList();
+            model.SiteConnections = listSiteConnection.ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ConnectionAssignSite(int connectionId, int siteId)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var command = _connectionService.AssignSite(connectionId, siteId);
+
+                return Json(command.IsSuccessful.ToString().ToLower());
+            }
+
+            return Json(null);
+        }
+
+        [HttpPost]
+        public ActionResult ConnectionRemoveSite(int connectionId, int siteId)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var command = _connectionService.RemoveSite(connectionId, siteId);
+
+                return Json(command.IsSuccessful.ToString().ToLower());
+            }
+
+            return Json(null);
+        }
+        #endregion
 
         #region Manage Site
 

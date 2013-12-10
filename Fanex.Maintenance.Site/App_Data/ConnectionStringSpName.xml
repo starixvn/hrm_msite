@@ -11,6 +11,10 @@
         <Setting Key="ConnectionString_Site_Update" SpName="Site_Update" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Site_UpdateStatus" SpName="Site_UpdateStatus" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Site_GetByDbServer" SpName="Site_GetByDbServer" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Site_GetByConnection" SpName="Site_GetByConnection" DbName="connectionstring" Plain="1" >
+            <Mapping DataField="ModifierUserId" ObjectProperty="Id" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="Name" />
+        </Setting>
     </Function>
     <Function Name="ConnectionString">
         <Setting Key="ConnectionString_Connection_GetAll" SpName="Connection_GetAll" DbName="connectionstring" Plain="1" >
@@ -27,6 +31,8 @@
         <Setting Key="ConnectionString_Connection_Insert" SpName="Connection_Insert" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Connection_Update" SpName="Connection_Update" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Connection_SwitchDbServer" SpName="Connection_SwitchDbServer" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Connection_AssignSite" SpName="Connection_AssignSite" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Connection_RemoveSite" SpName="Connection_RemoveSite" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Connection_GetById" SpName="Connection_GetById" DbName="connectionstring" Plain="1">
             <Mapping DataField="CreatorId" ObjectProperty="Id" />
             <Mapping DataField="CreatorUsername" ObjectProperty="Name" />

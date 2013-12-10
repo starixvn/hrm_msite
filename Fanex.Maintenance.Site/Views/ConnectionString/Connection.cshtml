@@ -63,6 +63,9 @@
                 @ViewResource.IsActive
             </th>
             <th>
+                @ViewResource.Site
+            </th>
+            <th>
                 @ViewResource.Edit
             </th>
         </tr>
@@ -112,6 +115,9 @@
                     {
                         <input type="checkbox"did="@item.Id" dname="@item.Name" class="update-status"/>
                     }
+                </td>
+                <td class="align-center">
+                    @Html.ActionLink("Assign", "ConnectionAssignSite", new { id = item.Id })
                 </td>
                 <td class="align-center">
                     @Html.ActionLink("Edit", "EditConnection", new { id = item.Id })
