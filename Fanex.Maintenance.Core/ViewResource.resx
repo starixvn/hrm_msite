@@ -591,10 +591,10 @@
   <data name="Active" xml:space="preserve">
     <value>Active</value>
   </data>
-  <data name="Change Connection" xml:space="preserve">
+  <data name="ChangeConnection" xml:space="preserve">
     <value>Change Connection</value>
   </data>
-  <data name="Connection String" xml:space="preserve">
+  <data name="ConnectionString" xml:space="preserve">
     <value>Connection String</value>
   </data>
   <data name="Database" xml:space="preserve">
@@ -836,5 +836,8 @@
   </data>
   <data name="LoginName" xml:space="preserve">
     <value>Login Name</value>
+  </data>
+  <data name="RequiredMsg" xml:space="preserve">
+    <value>The {0} field is required.</value>
   </data>
 </root>

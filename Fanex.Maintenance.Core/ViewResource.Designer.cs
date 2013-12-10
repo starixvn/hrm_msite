@@ -313,20 +313,20 @@ namespace Fanex.Maintenance.Repository {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change Connection.
-        /// </summary>
-        public static string Change_Connection {
-            get {
-                return ResourceManager.GetString("Change Connection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Change Connection From Database Server.
         /// </summary>
         public static string Change_Connection_FromDb {
             get {
                 return ResourceManager.GetString("Change_Connection_FromDb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Connection.
+        /// </summary>
+        public static string ChangeConnection {
+            get {
+                return ResourceManager.GetString("ChangeConnection", resourceCulture);
             }
         }
         
@@ -360,9 +360,9 @@ namespace Fanex.Maintenance.Repository {
         /// <summary>
         ///   Looks up a localized string similar to Connection String.
         /// </summary>
-        public static string Connection_String {
+        public static string ConnectionString {
             get {
-                return ResourceManager.GetString("Connection String", resourceCulture);
+                return ResourceManager.GetString("ConnectionString", resourceCulture);
             }
         }
         
@@ -1533,6 +1533,15 @@ namespace Fanex.Maintenance.Repository {
         public static string Primary_Connection {
             get {
                 return ResourceManager.GetString("Primary_Connection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} field is required..
+        /// </summary>
+        public static string RequiredMsg {
+            get {
+                return ResourceManager.GetString("RequiredMsg", resourceCulture);
             }
         }
         

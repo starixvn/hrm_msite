@@ -277,7 +277,7 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
-        #region Site
+        #region Manage Site
 
         /// <summary>
         /// Site list.
@@ -290,6 +290,7 @@ namespace Fanex.Maintenance.Controller
             {
                 model = new SiteViewModel { Name = string.Empty };
             }
+
             // get all site with number of alias by site
             var listSite = _siteService.GetAll(model.Name);
             model.Sites = listSite.ToList();
@@ -318,12 +319,19 @@ namespace Fanex.Maintenance.Controller
             criteria.Creator = CurrentSession.UserId;
             criteria.CreatedDate = DateTime.Now;
 
-            // insert new site
-            var command = _siteService.InsertOrUpdate(criteria);
-            if (!command.IsSuccessful)
+            var listSite = _siteService.GetAll();
+            var site = listSite.Where(x => x.Name.ToLower() == criteria.Name.ToLower()).FirstOrDefault();
+
+            if (!ReferenceEquals(site, null))
             {
+                ModelState.AddModelError("Name",
+                        string.Format(ViewResources.DuplicateMsg, site.Name));
+
                 return View(criteria);
             }
+
+            // insert new site
+            var command = _siteService.InsertOrUpdate(criteria);
 
             ViewBag.Success = command.IsSuccessful;
 
@@ -363,6 +371,17 @@ namespace Fanex.Maintenance.Controller
             criteria.Modifier = CurrentSession.UserId;
             criteria.ModifiedDate = DateTime.Now;
 
+            var listSite = _siteService.GetAll();
+            var site = listSite.Where(x => x.Name.ToLower() == criteria.Name.ToLower() && x.Id != criteria.SiteId).FirstOrDefault();
+
+            if (!ReferenceEquals(site, null))
+            {
+                ModelState.AddModelError("Name",
+                        string.Format(ViewResources.DuplicateMsg, site.Name));
+
+                return View(criteria);
+            }
+
             // update site
             var command = _siteService.InsertOrUpdate(criteria);
             if (!command.IsSuccessful)
@@ -373,6 +392,27 @@ namespace Fanex.Maintenance.Controller
             ViewBag.Success = command.IsSuccessful;
 
             return View(criteria);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStatusSite(int siteId, bool isActive)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                var criteria = new SiteUpdateStatusCriteria
+                {
+                    SiteId = siteId,
+                    IsActive = isActive,
+                    ModifiedDate = DateTime.Now,
+                    Modifier = this.CurrentSession.UserId
+                };
+
+                var command = _siteService.InsertOrUpdate(criteria);
+
+                return Json(command.IsSuccessful);
+            }
+
+            return Json(null);
         }
 
         #endregion Site
@@ -476,6 +516,17 @@ namespace Fanex.Maintenance.Controller
             criteria.Modifier = CurrentSession.UserId;
             criteria.ModifiedDate = DateTime.Now;
 
+            var listDatabaseServer = _databaseServerService.GetAll();
+            var databaseServer = listDatabaseServer.Where(x => x.Name.ToLower() == criteria.Name.ToLower() && x.Id != criteria.DbServerId).FirstOrDefault();
+
+            if (!ReferenceEquals(databaseServer, null))
+            {
+                ModelState.AddModelError("Name",
+                          string.Format(ViewResources.DuplicateMsg, databaseServer.Name));
+
+                return View(criteria);
+            }
+
             var command = _databaseServerService.InsertOrUpdate(criteria);
 
             if (!command.IsSuccessful)
@@ -556,6 +607,14 @@ namespace Fanex.Maintenance.Controller
             var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
             model.DatabaseServers = listDatabaseServer.ToList();
 
+            //if (string.IsNullOrWhiteSpace(model.ServerAlias))
+            //{
+            //    ModelState.AddModelError("ServerAlias",
+            //              string.Format(ViewResources.Field_Required, "ServerAlias"));
+
+            //    return View(model);
+            //}
+
             var listDatabase = _databaseService.GetAll(model.DbServerId);
             var database = listDatabase.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
 
@@ -563,6 +622,8 @@ namespace Fanex.Maintenance.Controller
             {
                 ModelState.AddModelError("Name",
                           string.Format(ViewResources.DuplicateMsg, database.Name));
+                ModelState.AddModelError("DbServerId",
+                          string.Format(ViewResources.DuplicateMsg, database.DatabaseServer.Name));
 
                 return View(model);
             }

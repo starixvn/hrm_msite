@@ -72,7 +72,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteFunctionKeys.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IEntity.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Model\CommandResult.cs" />
     <Compile Include="Model\Log.cs" />

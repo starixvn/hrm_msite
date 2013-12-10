@@ -251,7 +251,6 @@
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\jquery.qtip-1.0.0-rc3.min.js" />
     <Content Include="scripts\lib\jquery.signalR-1.0.0-rc1.min.js" />
-    <Content Include="scripts\NotificationHub.js" />
     <Content Include="scripts\DatabaseReport\Chart.js" />
     <Content Include="scripts\DatabaseReport\Licenseedata.js" />
     <Content Include="scripts\DatabaseReport\RefreshTime.js" />
@@ -1565,9 +1564,7 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\Login\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -1578,11 +1575,6 @@
     <Content Include="Areas\UserLogin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
     <Content Include="Areas\UserLogin\Views\Web.config" />
-    <Content Include="Configurations\DatabaseServersSection.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Configurations\SpNameSection.config" />
-    <Content Include="Configurations\MailSection.config" />
     <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
     <Content Include="Areas\UserLogin\Views\Common\Offline.cshtml" />
     <None Include="scripts\Plugin\bootstrap-multiselect\less\bootstrap-multiselect.less" />
