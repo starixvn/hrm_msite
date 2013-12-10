@@ -215,6 +215,54 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        [HttpGet]
+        public ActionResult SwitchConnection(SwitchConnectionViewModel model)
+        {
+            var listDatabase = _databaseServerService.GetAll(isActive: true);
+
+            if (ReferenceEquals(model, null) || model.FromDbServerId == 0)
+            {
+                model = new SwitchConnectionViewModel
+                {
+                    FromDbServerId = 0,
+                    DatabaseServers = listDatabase.ToList()
+                };
+
+                return View(model);
+            }
+
+            var listConnection = _connectionService.GetAll(model.FromDbServerId);
+
+            model.DatabaseServers = listDatabase.ToList();
+            model.Connections = listConnection.ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult SwithConnectionDbServer(string connectionIds, int toDbServerId)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                if (!string.IsNullOrWhiteSpace(connectionIds)
+                    && toDbServerId != 0)
+                {
+                    var criteria = new ConnectionSwitchDbServerCriteria
+                    {
+                        ConnectionIds = connectionIds,
+                        ToDbServerId = toDbServerId,
+                        ModifiedDate = DateTime.Now,
+                        Modifier = this.CurrentSession.UserId
+                    };
+
+                    var command = _connectionService.InsertOrUpdate(criteria);
+
+                    return Json(command.IsSuccessful);
+                }
+            }
+
+            return Json(null);
+        }
 
         [HttpGet]
         public ActionResult GetDatabaseByDbServerId(int dbServerId)

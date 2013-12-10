@@ -56,6 +56,48 @@ var Connection = function ($) {
             var loginName = $('#LoginName').val();
             $('#Name').val("");
             $('#Name').val(aliasName + "." + databaseName + "." + loginName);
+        },
+
+        SwitchDbServer: function () {
+            var connectionIds = "";
+            var toDbServerId = $('#ToDbServerId').val();
+
+            $('.update-server').each(function (i, item) {
+                var $this = $(this);
+                var isCheck = $this.is(':checked');
+                var id = $this.attr('sid');
+
+                if (isCheck) {
+                    connectionIds += id + ",";
+                }
+            });
+
+            if (connectionIds == "") {
+                alert("Select connection");
+                return;
+            }
+
+            $.ajax({
+                url: NAP.resolveClientUrl("ConnectionString/SwithConnectionDbServer"),
+                data: { connectionIds: connectionIds, toDbServerId: toDbServerId },
+                type: 'POST',
+                cache: false,
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    NAP.loadingBox.close();
+                },
+                success: function (result) {
+                    if (result) {
+                        NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
+                        NAP.redirect('ConnectionString/Connection?DbServerId=' + toDbServerId);
+                    }
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
         }
     };
 
@@ -96,4 +138,20 @@ $(document).ready(function () {
     $('#LoginName').keypress(function () {
         Connection.GenerateConnectionName();
     });
+
+    Connection.grid.on('click', 'input[type=checkbox][name=checkall]', function (e) {
+        var $this = $(this);
+        var isCheck = $this.is(':checked');
+        if (isCheck) {
+            $('.update-server').attr('checked', 'checked');
+        }
+        else {
+            $('.update-server').removeAttr('checked');
+        }
+    });
+
+    $('#btnSwitchServer').click(function () {
+        Connection.SwitchDbServer();
+    });
+
 });

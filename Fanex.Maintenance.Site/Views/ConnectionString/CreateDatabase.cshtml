@@ -43,7 +43,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.DbServerId)
+                @Html.Label(ViewResource.DatabaseServer)
             </div>
             <div class="edit-field">
                 @Html.DropDownListFor(m => m.DbServerId, Model.SelectListDatabaseServer)
@@ -51,7 +51,7 @@
         </div>
         <div class="form-row required">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.ServerAlias)
+                @Html.Label(ViewResource.ServerAlias)
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.ServerAlias)

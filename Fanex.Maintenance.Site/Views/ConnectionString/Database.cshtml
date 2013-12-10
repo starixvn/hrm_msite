@@ -18,7 +18,7 @@
     <section id="filter-bar">
         <div class="filter-form">
             <div class="lbl-field width-auto">
-                @Html.LabelFor(m => m.DbServerId)
+                @Html.Label(ViewResource.DatabaseServer)
             </div>
             <div class="edit-field">
                 @Html.DropDownListFor(m => m.DbServerId, Model.SelectListDatabaseServer, ViewResource.All)
@@ -42,7 +42,7 @@
                 @ViewResource.DatabaseServer
             </th>
             <th>
-                @ViewResource.AliasDatabaseServer
+                @ViewResource.ServerAlias
             </th>
             <th>
                 @ViewResource.Server_IP

@@ -1754,6 +1754,7 @@
     <Content Include="Views\ConnectionString\CreateDatabase.cshtml" />
     <Content Include="Views\ConnectionString\EditDatabase.cshtml" />
     <Content Include="Views\ConnectionString\EditConnection.cshtml" />
+    <Content Include="Views\ConnectionString\SwitchConnection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

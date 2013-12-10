@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection\ConnectionViewModel.cs" />
+    <Compile Include="Connection\SwitchConnectionViewModel.cs" />
     <Compile Include="Connection\DatabaseServerViewModel.cs" />
     <Compile Include="Connection\InsertOrUpdateDatabaseViewModel.cs" />
     <Compile Include="Connection\DatabaseViewModel.cs" />

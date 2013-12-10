@@ -1096,6 +1096,15 @@ namespace Fanex.Maintenance.Repository {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login Name.
+        /// </summary>
+        public static string LoginName {
+            get {
+                return ResourceManager.GetString("LoginName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Handlded.
         /// </summary>
         public static string LogStatus_Monitored {
@@ -1731,6 +1740,15 @@ namespace Fanex.Maintenance.Repository {
         public static string Server_IP {
             get {
                 return ResourceManager.GetString("Server_IP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Alias.
+        /// </summary>
+        public static string ServerAlias {
+            get {
+                return ResourceManager.GetString("ServerAlias", resourceCulture);
             }
         }
         

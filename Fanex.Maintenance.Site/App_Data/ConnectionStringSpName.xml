@@ -25,7 +25,8 @@
         </Setting>
         <Setting Key="ConnectionString_Connection_UpdateStatus" SpName="Connection_UpdateStatus" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Connection_Insert" SpName="Connection_Insert" DbName="connectionstring" Plain="1" />
-        <Setting Key="ConnectionString_Connection_Update" SpName="Connection_Update" DbName="connectionstring" Plain="1" />        
+        <Setting Key="ConnectionString_Connection_Update" SpName="Connection_Update" DbName="connectionstring" Plain="1" />
+        <Setting Key="ConnectionString_Connection_SwitchDbServer" SpName="Connection_SwitchDbServer" DbName="connectionstring" Plain="1" />
         <Setting Key="ConnectionString_Connection_GetById" SpName="Connection_GetById" DbName="connectionstring" Plain="1">
             <Mapping DataField="CreatorId" ObjectProperty="Id" />
             <Mapping DataField="CreatorUsername" ObjectProperty="Name" />

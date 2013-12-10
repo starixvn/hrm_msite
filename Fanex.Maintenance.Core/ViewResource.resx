@@ -831,4 +831,10 @@
   <data name="DatabaseServer" xml:space="preserve">
     <value>Database Server</value>
   </data>
+  <data name="ServerAlias" xml:space="preserve">
+    <value>Server Alias</value>
+  </data>
+  <data name="LoginName" xml:space="preserve">
+    <value>Login Name</value>
+  </data>
 </root>

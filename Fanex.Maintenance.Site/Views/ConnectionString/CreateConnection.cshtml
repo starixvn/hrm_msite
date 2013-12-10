@@ -53,7 +53,7 @@
         </div>
         <div class="form-row required">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.DbServerId)
+                @Html.Label(ViewResource.DatabaseServer)
             </div>
             <div class="edit-field">
                 @Html.DropDownListFor(m => m.DbServerId, Model.SelectListDatabaseServer)
@@ -61,7 +61,7 @@
         </div>
         <div class="form-row required">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.DatabaseId)
+                @Html.Label(ViewResource.Database)
             </div>
             <div class="edit-field">
                 <select id="DatabaseId" name="DatabaseId">
@@ -74,7 +74,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.LabelFor(m => m.LoginName)
+                @Html.Label(ViewResource.LoginName)
             </div>
             <div class="edit-field">
                 @Html.TextBoxFor(m => m.LoginName)
@@ -98,7 +98,7 @@
         </div>
         <div class="form-row">
             <div class="lbl-field">
-                @Html.Label(ViewResource.IsActive)
+                @Html.Label(ViewResource.Status)
             </div>
             <div class="edit-field chk-field">
                 @Html.CheckBoxFor(m => m.IsActive)
