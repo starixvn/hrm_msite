@@ -16,7 +16,6 @@ namespace Fanex.Maintenance.Site
     using System.Web.Routing;
     using Fanex.Logging;
     using Fanex.Maintenance.Site.App_Start;
-    using Microsoft.AspNet.SignalR;
 
     /// <summary>
     /// Note: For instructions on enabling IIS6 or IIS7 classic mode, visit http://go.microsoft.com/?LinkId=9394801 .
@@ -28,31 +27,13 @@ namespace Fanex.Maintenance.Site
         /// </summary>
         protected void Application_Start()
         {
-            RouteTable.Routes.MapHubs();
-
             AreaRegistration.RegisterAllAreas();
-
-            ////WebApiConfig.Register(GlobalConfiguration.Configuration);
+            
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             Fanex.Data.Configuration.DbSettingProviderManager.Current.Start();
-
-            ////if (AppSetting.NotifiJob)
-            ////{
-            ////    NotificationWorker notificationWorker = new NotificationWorker(AppSetting.GetDataNotifyInterval);
-            ////    notificationWorker.Start();
-            ////}
-
-            ////if (AppSetting.NotifiServer)
-            ////{
-            ////    CpuUtilizationWorker cpuUtilizationWorker = new CpuUtilizationWorker(AppSetting.GetCpuUtilizationInterval);
-            ////    cpuUtilizationWorker.Start();
-
-            ////    MemoryUtilizationWorker memoryUtilizationWorker = new MemoryUtilizationWorker(AppSetting.GetMemoryUtilizationInterval);
-            ////    memoryUtilizationWorker.Start();
-            ////}
         }
 
         /// <summary>
