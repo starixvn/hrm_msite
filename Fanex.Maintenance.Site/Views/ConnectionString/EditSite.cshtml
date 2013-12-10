@@ -1,5 +1,5 @@
-﻿@using Fanex.ConnectionString.Core.Criteria.Site
-@model SiteUpdateCriteria
+﻿@using Fanex.Maintenance.ViewModel.Connection
+@model SiteViewModel
 @{  
     ViewBag.Title = ViewResource.Update + ViewResource.Site;
     Layout = "~/Views/Shared/_Layout.cshtml";    
@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>    
-    @Html.HiddenFor(m => m.SiteId)
+    @Html.HiddenFor(m => m.Id)
 }
 @section Foot
 {

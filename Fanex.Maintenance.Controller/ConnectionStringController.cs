@@ -13,11 +13,7 @@ namespace Fanex.Maintenance.Controller
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.ConnectionString.Core.Criteria.AliasDatabase;
-    using Fanex.ConnectionString.Core.Criteria.Connection;
-    using Fanex.ConnectionString.Core.Criteria.DatabaseServer;
     using Fanex.ConnectionString.Core.Criteria.LogExecSp;
-    using Fanex.ConnectionString.Core.Criteria.Site;
     using Fanex.ConnectionString.Core.Service.Impl;
     using Fanex.ConnectionString.Core.Service.Interface;
     using Fanex.ConnectionString.Domain;
@@ -70,11 +66,11 @@ namespace Fanex.Maintenance.Controller
         #endregion Ctor
 
         [HttpGet]
-        public ActionResult Connection(ConnectionViewModel model)
+        public ActionResult Connection(SearchConnectionViewModel model)
         {
             if (ReferenceEquals(model, null))
             {
-                model = new ConnectionViewModel
+                model = new SearchConnectionViewModel
                 {
                     DbServerId = 0
                 };
@@ -92,12 +88,12 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult CreateConnection()
         {
-            var listDatabaseServer = _databaseServerService.GetAllHasDatabase();
+            var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
             var databaseServer = listDatabaseServer.FirstOrDefault();
             var listDatabase = _databaseService.GetByDbServerId(databaseServer.Id);
             var database = listDatabaseServer.FirstOrDefault();
 
-            var model = new InsertOrUpdateConnectionViewModel
+            var model = new ConnectionViewModel
             {
                 DatabaseServers = listDatabaseServer.ToList(),
                 Databases = listDatabase.ToList(),
@@ -108,9 +104,9 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult CreateConnection(InsertOrUpdateConnectionViewModel model)
+        public ActionResult CreateConnection(ConnectionViewModel model)
         {
-            var listDatabaseServer = _databaseServerService.GetAllHasDatabase();
+            var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
             var database = _databaseService.GetById(model.DatabaseId);
             var listDatabase = _databaseService.GetByDbServerId(model.DbServerId);
 
@@ -118,22 +114,23 @@ namespace Fanex.Maintenance.Controller
             model.Databases = listDatabase.ToList();
             model.Name = database.ServerAlias + "." + database.Name + "." + model.LoginName;
 
-            var criteria = new ConnectionInsertCriteria
+            if (ModelState.IsValid)
             {
-                DbServerId = model.DbServerId,
-                CreatedDate = DateTime.Now,
-                Creator = this.CurrentSession.UserId,
-                DatabaseId = model.DatabaseId,
-                FreeText = model.FreeText,
-                IsActive = model.IsActive,
-                LoginName = model.LoginName,
-                Name = model.Name,
-                Password = model.Password
-            };
+                var connection = new Connection
+                {
+                    DatabaseServer = new DatabaseServer { Id = model.DbServerId },
+                    Database = new Database { Id = model.DatabaseId },
+                    FreeText = model.FreeText,
+                    IsActive = model.IsActive,
+                    LoginName = model.LoginName,
+                    Name = model.Name,
+                    Password = model.Password
+                };
 
-            var command = _connectionService.InsertOrUpdate(criteria);
+                var command = _connectionService.Insert(connection);
 
-            ViewBag.Success = command.IsSuccessful;
+                ViewBag.Success = command.IsSuccessful;
+            }
 
             return View(model);
         }
@@ -143,10 +140,10 @@ namespace Fanex.Maintenance.Controller
         {
             var connection = _connectionService.GetById(id);
 
-            var listDatabaseServer = _databaseServerService.GetAllHasDatabase();
+            var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
             var listDatabase = _databaseService.GetByDbServerId(connection.DatabaseServer.Id);
 
-            var model = new InsertOrUpdateConnectionViewModel
+            var model = new ConnectionViewModel
             {
                 DatabaseServers = listDatabaseServer.ToList(),
                 Databases = listDatabase.ToList(),
@@ -164,32 +161,33 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult EditConnection(InsertOrUpdateConnectionViewModel model)
+        public ActionResult EditConnection(ConnectionViewModel model)
         {
-            var listDatabaseServer = _databaseServerService.GetAllHasDatabase();
+            var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
             var listDatabase = _databaseService.GetByDbServerId(model.DbServerId);
             var database = _databaseService.GetById(model.DatabaseId);
 
             model.DatabaseServers = listDatabaseServer.ToList();
             model.Databases = listDatabase.ToList();
 
-            var criteria = new ConnectionUpdateCriteria
+            if (ModelState.IsValid)
             {
-                DbServerId = model.DbServerId,
-                ModifiedDate = DateTime.Now,
-                Modifier = this.CurrentSession.UserId,
-                DatabaseId = model.DatabaseId,
-                FreeText = model.FreeText,
-                IsActive = model.IsActive,
-                LoginName = model.LoginName,
-                Name = database.ServerAlias + "." + database.Name + "." + model.LoginName,
-                Password = model.Password,
-                Id = model.Id
-            };
+                var connection = new Connection
+                {
+                    DatabaseServer = new DatabaseServer { Id = model.DbServerId },
+                    Database = new Database { Id = model.DatabaseId },
+                    FreeText = model.FreeText,
+                    IsActive = model.IsActive,
+                    LoginName = model.LoginName,
+                    Name = database.ServerAlias + "." + database.Name + "." + model.LoginName,
+                    Password = model.Password,
+                    Id = model.Id
+                };
 
-            var command = _connectionService.InsertOrUpdate(criteria);
+                var command = _connectionService.Update(connection);
 
-            ViewBag.Success = command.IsSuccessful;
+                ViewBag.Success = command.IsSuccessful;
+            }
 
             return View(model);
         }
@@ -199,15 +197,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var model = new ConnectionUpdateStatusCriteria
-                {
-                    Id = id,
-                    IsActive = isActive,
-                    Modifier = CurrentSession.UserId,
-                    ModifiedDate = DateTime.Now
-                };
-
-                var command = _connectionService.InsertOrUpdate(model);
+                var command = _connectionService.UpdateStatus(id, isActive);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
@@ -247,15 +237,7 @@ namespace Fanex.Maintenance.Controller
                 if (!string.IsNullOrWhiteSpace(connectionIds)
                     && toDbServerId != 0)
                 {
-                    var criteria = new ConnectionSwitchDbServerCriteria
-                    {
-                        ConnectionIds = connectionIds,
-                        ToDbServerId = toDbServerId,
-                        ModifiedDate = DateTime.Now,
-                        Modifier = this.CurrentSession.UserId
-                    };
-
-                    var command = _connectionService.InsertOrUpdate(criteria);
+                    var command = _connectionService.SwitchDbServer(connectionIds, toDbServerId);
 
                     return Json(command.IsSuccessful);
                 }
@@ -284,11 +266,11 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult Site(SiteViewModel model)
+        public ActionResult Site(SearchSiteViewModel model)
         {
             if (ReferenceEquals(model, null))
             {
-                model = new SiteViewModel { Name = string.Empty };
+                model = new SearchSiteViewModel { Name = string.Empty };
             }
 
             // get all site with number of alias by site
@@ -311,31 +293,36 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Create site.
         /// </summary>
-        /// <param name="criteria">The criteria.</param>
+        /// <param name="model">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult CreateSite(SiteInsertCriteria criteria)
+        public ActionResult CreateSite(SiteViewModel model)
         {
-            criteria.Creator = CurrentSession.UserId;
-            criteria.CreatedDate = DateTime.Now;
-
-            var listSite = _siteService.GetAll();
-            var site = listSite.Where(x => x.Name.ToLower() == criteria.Name.ToLower()).FirstOrDefault();
-
-            if (!ReferenceEquals(site, null))
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Name",
-                        string.Format(ViewResources.DuplicateMsg, site.Name));
+                var listSite = _siteService.GetAll();
+                var site = listSite.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
 
-                return View(criteria);
+                if (!ReferenceEquals(site, null))
+                {
+                    ModelState.AddModelError("Name",
+                            string.Format(ViewResources.DuplicateMsg, site.Name));
+
+                    return View(model);
+                }
+
+                var command = _siteService.Insert(
+                    new Site
+                    {
+                        Name = model.Name,
+                        Description = model.Description,
+                        IsActive = model.IsActive
+                    });
+
+                ViewBag.Success = command.IsSuccessful;
             }
 
-            // insert new site
-            var command = _siteService.InsertOrUpdate(criteria);
-
-            ViewBag.Success = command.IsSuccessful;
-
-            return View(criteria);
+            return View(model);
         }
 
         /// <summary>
@@ -349,9 +336,9 @@ namespace Fanex.Maintenance.Controller
             // get site by id
             var site = _siteService.GetById(id);
 
-            var model = new SiteUpdateCriteria
+            var model = new SiteViewModel
             {
-                SiteId = site.Id,
+                Id = site.Id,
                 Name = site.Name,
                 Description = site.Description,
                 IsActive = site.IsActive
@@ -363,35 +350,37 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Update site.
         /// </summary>
-        /// <param name="criteria">The criteria.</param>
+        /// <param name="model">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult EditSite(SiteUpdateCriteria criteria)
+        public ActionResult EditSite(SiteViewModel model)
         {
-            criteria.Modifier = CurrentSession.UserId;
-            criteria.ModifiedDate = DateTime.Now;
-
-            var listSite = _siteService.GetAll();
-            var site = listSite.Where(x => x.Name.ToLower() == criteria.Name.ToLower() && x.Id != criteria.SiteId).FirstOrDefault();
-
-            if (!ReferenceEquals(site, null))
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Name",
-                        string.Format(ViewResources.DuplicateMsg, site.Name));
+                var listSite = _siteService.GetAll();
+                var site = listSite.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
 
-                return View(criteria);
+                if (!ReferenceEquals(site, null))
+                {
+                    ModelState.AddModelError("Name",
+                            string.Format(ViewResources.DuplicateMsg, site.Name));
+
+                    return View(model);
+                }
+
+                var command = _siteService.Update(
+                    new Site
+                    {
+                        Id = model.Id,
+                        Name = model.Name,
+                        Description = model.Description,
+                        IsActive = model.IsActive
+                    });
+
+                ViewBag.Success = command.IsSuccessful;
             }
 
-            // update site
-            var command = _siteService.InsertOrUpdate(criteria);
-            if (!command.IsSuccessful)
-            {
-                return View(criteria);
-            }
-
-            ViewBag.Success = command.IsSuccessful;
-
-            return View(criteria);
+            return View(model);
         }
 
         [HttpPost]
@@ -399,15 +388,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var criteria = new SiteUpdateStatusCriteria
-                {
-                    SiteId = siteId,
-                    IsActive = isActive,
-                    ModifiedDate = DateTime.Now,
-                    Modifier = this.CurrentSession.UserId
-                };
-
-                var command = _siteService.InsertOrUpdate(criteria);
+                var command = _siteService.UpdateStatus(siteId, isActive);
 
                 return Json(command.IsSuccessful);
             }
@@ -424,11 +405,11 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
-        public ActionResult DatabaseServer(DatabaseServerViewModel model)
+        public ActionResult DatabaseServer(SearchDatabaseServerViewModel model)
         {
             if (ReferenceEquals(model, null))
             {
-                model = new DatabaseServerViewModel();
+                model = new SearchDatabaseServerViewModel { Name = string.Empty };
             }
 
             var listDatabase = _databaseServerService.GetAll(model.Name);
@@ -450,36 +431,42 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Create database server.
         /// </summary>
-        /// <param name="criteria">The criteria.</param>
+        /// <param name="model">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult CreateDatabaseServer(DatabaseServerInsertCriteria criteria)
+        public ActionResult CreateDatabaseServer(DatabaseServerViewModel model)
         {
-            criteria.Creator = CurrentSession.UserId;
-            criteria.CreatedDate = DateTime.Now;
-
-            var listDatabaseServer = _databaseServerService.GetAll();
-            var databaseServer = listDatabaseServer.Where(x => x.Name.ToLower() == criteria.Name.ToLower()).FirstOrDefault();
-
-            if (!ReferenceEquals(databaseServer, null))
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Name",
-                          string.Format(ViewResources.DuplicateMsg, databaseServer.Name));
+                var listDatabaseServer = _databaseServerService.GetAll();
+                var databaseServer = listDatabaseServer.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
 
-                return View(criteria);
+                if (!ReferenceEquals(databaseServer, null))
+                {
+                    ModelState.AddModelError("Name",
+                              string.Format(ViewResources.DuplicateMsg, databaseServer.Name));
+
+                    return View(model);
+                }
+
+                var command = _databaseServerService.Insert(new DatabaseServer
+                {
+                    Description = model.Description,
+                    Id = model.Id,
+                    IsActive = model.IsActive,
+                    Name = model.Name,
+                    ServerIP = model.ServerIP
+                });
+
+                if (!command.IsSuccessful)
+                {
+                    return View(model);
+                }
+
+                ViewBag.Success = command.IsSuccessful;
             }
 
-            // insert new
-            var command = _databaseServerService.InsertOrUpdate(criteria);
-
-            if (!command.IsSuccessful)
-            {
-                return View(criteria);
-            }
-
-            ViewBag.Success = command.IsSuccessful;
-
-            return View(criteria);
+            return View(model);
         }
 
         /// <summary>
@@ -493,13 +480,13 @@ namespace Fanex.Maintenance.Controller
             // get by id
             var databaseServer = _databaseServerService.GetById(id);
 
-            var model = new DatabaseServerUpdateCriteria
+            var model = new DatabaseServerViewModel
             {
-                DbServerId = databaseServer.Id,
+                Id = databaseServer.Id,
                 Description = databaseServer.Description,
                 IsActive = databaseServer.IsActive,
                 Name = databaseServer.Name,
-                ServerIp = databaseServer.ServerIP
+                ServerIP = databaseServer.ServerIP
             };
 
             return View(model);
@@ -508,35 +495,42 @@ namespace Fanex.Maintenance.Controller
         /// <summary>
         /// Edit database server.
         /// </summary>
-        /// <param name="criteria">The criteria.</param>
+        /// <param name="model">The criteria.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult EditDatabaseServer(DatabaseServerUpdateCriteria criteria)
+        public ActionResult EditDatabaseServer(DatabaseServerViewModel model)
         {
-            criteria.Modifier = CurrentSession.UserId;
-            criteria.ModifiedDate = DateTime.Now;
-
-            var listDatabaseServer = _databaseServerService.GetAll();
-            var databaseServer = listDatabaseServer.Where(x => x.Name.ToLower() == criteria.Name.ToLower() && x.Id != criteria.DbServerId).FirstOrDefault();
-
-            if (!ReferenceEquals(databaseServer, null))
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Name",
-                          string.Format(ViewResources.DuplicateMsg, databaseServer.Name));
+                var listDatabaseServer = _databaseServerService.GetAll();
+                var databaseServer = listDatabaseServer.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
 
-                return View(criteria);
+                if (!ReferenceEquals(databaseServer, null))
+                {
+                    ModelState.AddModelError("Name",
+                              string.Format(ViewResources.DuplicateMsg, databaseServer.Name));
+
+                    return View(model);
+                }
+
+                var command = _databaseServerService.Update(new DatabaseServer
+                {
+                    Description = model.Description,
+                    Id = model.Id,
+                    IsActive = model.IsActive,
+                    Name = model.Name,
+                    ServerIP = model.ServerIP
+                });
+
+                if (!command.IsSuccessful)
+                {
+                    return View(model);
+                }
+
+                ViewBag.Success = command.IsSuccessful;
             }
 
-            var command = _databaseServerService.InsertOrUpdate(criteria);
-
-            if (!command.IsSuccessful)
-            {
-                return View(criteria);
-            }
-
-            ViewBag.Success = command.IsSuccessful;
-
-            return View(criteria);
+            return View(model);
         }
 
         /// <summary>
@@ -550,15 +544,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var model = new DatabaseServerUpdateStatusCriteria
-                {
-                    DbServerId = databaseId,
-                    IsActive = isActive,
-                    Modifier = CurrentSession.UserId,
-                    ModifiedDate = DateTime.Now
-                };
-
-                var command = _databaseServerService.InsertOrUpdate(model);
+                var command = _databaseServerService.UpdateStatus(databaseId, isActive);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
@@ -571,11 +557,11 @@ namespace Fanex.Maintenance.Controller
         #region Database
 
         [HttpGet]
-        public ActionResult Database(DatabaseViewModel model)
+        public ActionResult Database(SearchDatabaseViewModel model)
         {
             if (ReferenceEquals(model, null))
             {
-                model = new DatabaseViewModel { DbServerId = 0 };
+                model = new SearchDatabaseViewModel { DbServerId = 0 };
             }
 
             var listDatabase = _databaseService.GetAll(model.DbServerId);
@@ -592,7 +578,7 @@ namespace Fanex.Maintenance.Controller
         {
             var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
 
-            var model = new InsertOrUpdateDatabaseViewModel
+            var model = new DatabaseViewModel
             {
                 DbServerId = databaseId,
                 DatabaseServers = listDatabaseServer.ToList()
@@ -602,43 +588,36 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult CreateDatabase(InsertOrUpdateDatabaseViewModel model)
+        public ActionResult CreateDatabase(DatabaseViewModel model)
         {
             var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
             model.DatabaseServers = listDatabaseServer.ToList();
 
-            //if (string.IsNullOrWhiteSpace(model.ServerAlias))
-            //{
-            //    ModelState.AddModelError("ServerAlias",
-            //              string.Format(ViewResources.Field_Required, "ServerAlias"));
-
-            //    return View(model);
-            //}
-
-            var listDatabase = _databaseService.GetAll(model.DbServerId);
-            var database = listDatabase.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
-
-            if (!ReferenceEquals(database, null))
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Name",
-                          string.Format(ViewResources.DuplicateMsg, database.Name));
-                ModelState.AddModelError("DbServerId",
-                          string.Format(ViewResources.DuplicateMsg, database.DatabaseServer.Name));
+                var listDatabase = _databaseService.GetAll(model.DbServerId);
+                var database = listDatabase.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
 
-                return View(model);
+                if (!ReferenceEquals(database, null))
+                {
+                    ModelState.AddModelError("Name",
+                              string.Format(ViewResources.DuplicateMsg, database.Name));
+                    ModelState.AddModelError("DbServerId",
+                              string.Format(ViewResources.DuplicateMsg, database.DatabaseServer.Name));
+
+                    return View(model);
+                }
+
+                var command = _databaseService.Insert(new Database
+                                {
+                                    Name = model.Name,
+                                    ServerAlias = model.ServerAlias,
+                                    IsActive = model.IsActive,
+                                    DatabaseServer = new DatabaseServer { Id = model.DbServerId }
+                                });
+
+                ViewBag.Success = command.IsSuccessful;
             }
-
-            var command = _databaseService.InsertOrUpdate(new DatabaseInsertCriteria
-                            {
-                                Name = model.Name,
-                                ServerAlias = model.ServerAlias,
-                                IsActive = model.IsActive,
-                                DbServerId = model.DbServerId,
-                                CreatedDate = DateTime.Now,
-                                Creator = this.CurrentSession.UserId
-                            });
-
-            ViewBag.Success = command.IsSuccessful;
 
             return View(model);
         }
@@ -646,7 +625,7 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult EditDatabase(int id)
         {
-            var model = new InsertOrUpdateDatabaseViewModel();
+            var model = new DatabaseViewModel();
             var database = _databaseService.GetById(id);
             var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
             model.DatabaseServers = listDatabaseServer.ToList();
@@ -660,47 +639,45 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
-        public ActionResult EditDatabase(InsertOrUpdateDatabaseViewModel model)
+        public ActionResult EditDatabase(DatabaseViewModel model)
         {
             var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
             model.DatabaseServers = listDatabaseServer.ToList();
 
-            var listDatabase = _databaseService.GetAll(model.DbServerId);
-            var aliasDatabase = listDatabase.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
-
-            if (!ReferenceEquals(aliasDatabase, null))
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Name",
-                          string.Format(ViewResources.DuplicateMsg, aliasDatabase.Name));
+                var listDatabase = _databaseService.GetAll(model.DbServerId);
+                var aliasDatabase = listDatabase.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
 
-                return View(model);
+                if (!ReferenceEquals(aliasDatabase, null))
+                {
+                    ModelState.AddModelError("Name",
+                              string.Format(ViewResources.DuplicateMsg, aliasDatabase.Name));
+
+                    return View(model);
+                }
+
+                var command = _databaseService.Update(new Database
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    ServerAlias = model.ServerAlias,
+                    IsActive = model.IsActive,
+                    DatabaseServer = new DatabaseServer { Id = model.DbServerId }
+                });
+
+                ViewBag.Success = command.IsSuccessful;
             }
-
-            var command = _databaseService.InsertOrUpdate(new DatabaseUpdateCriteria
-            {
-                Id = model.Id,
-                Name = model.Name,
-                ServerAlias = model.ServerAlias,
-                IsActive = model.IsActive,
-                DbServerId = model.DbServerId,
-                ModifiedDate = DateTime.Now,
-                Modifier = this.CurrentSession.UserId
-            });
-
-            ViewBag.Success = command.IsSuccessful;
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult UpdateStatusDatabase(DatabaseUpdateStatusCriteria model)
+        public ActionResult UpdateStatusDatabase(int databaseId, bool isActive)
         {
             if (Request.IsAjaxRequest())
             {
-                model.ModifiedDate = DateTime.Now;
-                model.Modifier = this.CurrentSession.UserId;
-
-                var command = _databaseService.InsertOrUpdate(model);
+                var command = _databaseService.UpdateStatus(databaseId, isActive);
 
                 return Json(command.IsSuccessful);
             }

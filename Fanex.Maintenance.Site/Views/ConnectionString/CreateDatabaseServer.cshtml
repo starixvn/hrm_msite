@@ -1,5 +1,5 @@
-﻿@using Fanex.ConnectionString.Core.Criteria.DatabaseServer
-@model DatabaseServerInsertCriteria
+﻿@using Fanex.Maintenance.ViewModel.Connection
+@model DatabaseServerViewModel
 @{  
     ViewBag.Title = ViewResource.Create + ViewResource.DatabaseServer;
     Layout = "~/Views/Shared/_Layout.cshtml";    
@@ -46,7 +46,7 @@
                 @Html.Label(ViewResource.Server_IP)
             </div>
             <div class="edit-field">
-                @Html.TextBoxFor(m => m.ServerIp)
+                @Html.TextBoxFor(m => m.ServerIP)
             </div>
         </div>
         <div class="form-row">

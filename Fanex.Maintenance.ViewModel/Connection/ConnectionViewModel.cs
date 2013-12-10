@@ -1,40 +1,76 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConnectionViewModel.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="InsertOrUpdateConnectionViewModel.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Edward.Nguyen" date="2013.12.9">Created</change>
+//   <change who="Edward.Nguyen" date="2013.12.6">Created</change>
 // </history>
 
 namespace Fanex.Maintenance.ViewModel.Connection
 {
-    using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using System.Text;
-    using Fanex.ConnectionString.Domain;
     using System.Web.Mvc;
+    using Fanex.ConnectionString.Domain;
+    using Fanex.NAP.Core.Web;
 
     public class ConnectionViewModel
     {
+        public int Id { get; set; }
+        
+        [StringLength(150, MinimumLength = 5,
+           ErrorMessageResourceName = "InputLengthValidationMsg",
+           ErrorMessageResourceType = typeof(ViewResources))]
+        public string Name { get; set; }
+
+        [Required]
+        public int DatabaseId { get; set; }
+
+        [Required]
         public int DbServerId { get; set; }
 
+        [Required]
+        [StringLength(150, MinimumLength = 5,
+           ErrorMessageResourceName = "InputLengthValidationMsg",
+           ErrorMessageResourceType = typeof(ViewResources))]
+        public string LoginName { get; set; }
+
+        public string Password { get; set; }
+
+        public string FreeText { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public List<Database> Databases { get; set; }
+
         public List<DatabaseServer> DatabaseServers { get; set; }
+
+        public List<SelectListItem> SelectListDatabase
+        {
+            get
+            {
+                return Databases != null ? Databases.Select(x => new SelectListItem
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Name,
+                    Selected = x.Id == DatabaseId
+                }).ToList() : new List<SelectListItem>();
+            }
+        }
 
         public List<SelectListItem> SelectListDatabaseServer
         {
             get
             {
-                return DatabaseServers.Select(x => new SelectListItem
+                return DatabaseServers != null ? DatabaseServers.Select(x => new SelectListItem
                 {
                     Value = x.Id.ToString(),
                     Text = x.Name,
                     Selected = x.Id == DbServerId
-                }).ToList();
+                }).ToList() : new List<SelectListItem>();
             }
         }
-
-        public List<Connection> Connections { get; set; }
     }
 }
