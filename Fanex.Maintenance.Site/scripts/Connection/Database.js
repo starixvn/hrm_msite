@@ -5,8 +5,8 @@ var Database = function ($) {
 
         UpdateStatusDatabase: function (databaseId, isActive) {
             $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/UpdateStatusDatabase"),
-                data: { databaseId: databaseId, isActive: isActive },
+                url: NAP.resolveClientUrl("ConnectionString/UpdateStatusDatabaseServer"),
+                data: { databaseServerId: databaseId, isActive: isActive },
                 type: 'POST',
                 cache: false,
                 beforeSend: function () {
@@ -18,7 +18,7 @@ var Database = function ($) {
                 success: function (result) {
                     if (result == 'true') {
                         NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
-                        NAP.redirect('ConnectionString/Database');
+                        NAP.redirect('ConnectionString/DatabaseServer');
                     }
                 },
                 error: function (xhr, status, err) {

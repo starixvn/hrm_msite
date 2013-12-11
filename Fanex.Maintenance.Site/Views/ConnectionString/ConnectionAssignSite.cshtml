@@ -29,11 +29,11 @@
                 <td class="align-center">
                     @if (item.Selected)
                     { 
-                        <input type="checkbox" sid="@item.Value" class="select-site" checked="checked"/>
+                        <input type="checkbox" sid="@item.Value" class="select-site" checked="checked" name="@item.Text"/>
                     }
                     else
                     { 
-                        <input type="checkbox" sid="@item.Value" class="select-site"/>
+                        <input type="checkbox" sid="@item.Value" class="select-site" name="@item.Text"/>
                     }
                 </td>
                 <td>@item.Text
@@ -47,32 +47,44 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.select-site').click(function () {
+                var $this = $(this);
                 var connectionId = $('#ConnectionId').val();
                 var siteId = $(this).attr('sid');
                 var isCheck = $(this).is(':checked');
+                var name = $this.attr('name');
 
                 var url = isCheck ? "ConnectionString/ConnectionAssignSite" : "ConnectionString/ConnectionRemoveSite";
 
-                $.ajax({
-                    url: NAP.resolveClientUrl(url),
-                    data: { connectionId: connectionId, siteId: siteId },
-                    type: 'POST',
-                    cache: false,
-                    beforeSend: function () {
-                        NAP.loadingBox.show();
-                    },
-                    complete: function () {
-                        NAP.loadingBox.close();
-                    },
-                    success: function (result) {
-                        if (result == 'true') {
-                            NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
-                            NAP.redirect('ConnectionString/ConnectionAssignSite/' + connectionId);
+                var action = isCheck ? 'assign' : 'unassigned',
+                    msg = "Are you sure you want to " + action + " '" + name + "' ?";
+
+                $this.attr('checked', !isCheck).change();
+
+                NAP.headlineMsgBox.confirm(msg, function () {
+
+                    $this.attr('checked', isCheck).change();
+
+                    $.ajax({
+                        url: NAP.resolveClientUrl(url),
+                        data: { connectionId: connectionId, siteId: siteId },
+                        type: 'POST',
+                        cache: false,
+                        beforeSend: function () {
+                            NAP.loadingBox.show();
+                        },
+                        complete: function () {
+                            NAP.loadingBox.close();
+                        },
+                        success: function (result) {
+                            if (result == 'true') {
+                                NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
+                                NAP.redirect('ConnectionString/ConnectionAssignSite/' + connectionId);
+                            }
+                        },
+                        error: function (xhr, status, err) {
+                            NAP.handleAjaxError(xhr, status, err);
                         }
-                    },
-                    error: function (xhr, status, err) {
-                        NAP.handleAjaxError(xhr, status, err);
-                    }
+                    });
                 });
             });
         });

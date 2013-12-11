@@ -585,11 +585,11 @@ namespace Fanex.Maintenance.Controller
         /// <param name="isActive">Is active or not.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UpdateStatusDatabaseServer(int databaseId, bool isActive)
+        public ActionResult UpdateStatusDatabaseServer(int databaseServerId, bool isActive)
         {
             if (Request.IsAjaxRequest())
             {
-                var command = _databaseServerService.UpdateStatus(databaseId, isActive);
+                var command = _databaseServerService.UpdateStatus(databaseServerId, isActive);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
