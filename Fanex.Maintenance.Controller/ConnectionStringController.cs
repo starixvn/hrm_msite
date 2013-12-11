@@ -111,10 +111,21 @@ namespace Fanex.Maintenance.Controller
             var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
             var database = _databaseService.GetById(model.DatabaseId);
             var listDatabase = _databaseService.GetByDbServerId(model.DbServerId);
+            var listConnection = _connectionService.GetAll();
 
             model.DatabaseServers = listDatabaseServer.ToList();
             model.Databases = listDatabase.ToList();
             model.Name = database.ServerAlias + "." + database.Name + "." + model.LoginName;
+
+            var tempConnection = listConnection.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+
+            if (!ReferenceEquals(tempConnection, null))
+            {
+                ModelState.AddModelError("Name",
+                          string.Format(ViewResources.DuplicateMsg, tempConnection.Name));
+
+                return View(model);
+            }
 
             if (ModelState.IsValid)
             {
@@ -168,9 +179,21 @@ namespace Fanex.Maintenance.Controller
             var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
             var listDatabase = _databaseService.GetByDbServerId(model.DbServerId);
             var database = _databaseService.GetById(model.DatabaseId);
+            var listConnection = _connectionService.GetAll();
+            var name = database.ServerAlias + "." + database.Name + "." + model.LoginName;
 
             model.DatabaseServers = listDatabaseServer.ToList();
             model.Databases = listDatabase.ToList();
+
+            var tempConnection = listConnection.Where(x => x.Name.ToLower() == name.ToLower() && x.Id != model.Id).FirstOrDefault();
+
+            if (!ReferenceEquals(tempConnection, null))
+            {
+                ModelState.AddModelError("Name",
+                          string.Format(ViewResources.DuplicateMsg, tempConnection.Name));
+
+                return View(model);
+            }
 
             if (ModelState.IsValid)
             {
@@ -181,7 +204,7 @@ namespace Fanex.Maintenance.Controller
                     FreeText = model.FreeText,
                     IsActive = model.IsActive,
                     LoginName = model.LoginName,
-                    Name = database.ServerAlias + "." + database.Name + "." + model.LoginName,
+                    Name = name,
                     Password = model.Password,
                     Id = model.Id
                 };
