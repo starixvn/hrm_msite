@@ -37,8 +37,9 @@
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\_Dependencies\Others\Fanex.NAP.Core.dll</HintPath>
     </Reference>
-    <Reference Include="MvcPager">
-      <HintPath>..\packages\MvcPager.1.0.0\lib\MvcPager.dll</HintPath>
+    <Reference Include="MvcPager, Version=1.5.0.28157, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Others\MvcPager.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -63,9 +64,6 @@
     <Compile Include="Connection\ConnectionViewModel.cs" />
     <Compile Include="Connection\SearchSiteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
