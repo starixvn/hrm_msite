@@ -16,11 +16,12 @@ namespace Fanex.Maintenance.Controller
     using Fanex.DataValidation.Service.Implement;
     using Fanex.DataValidation.Validation.Implement;
     using Fanex.Maintenance.Repository.Criteria.DatabaseReport;
+    using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
     /// Database report controller.
     /// </summary>
-    [Authorize]
+    [NapSuperAuth]
     public class DatabaseReportController : BaseController
     {
         /// <summary>

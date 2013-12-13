@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 12/13/2013 11:05:27 AM
+// Lasted generated date: 12/13/2013 1:09:20 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -21,8 +21,6 @@ public static class SiteFunctionKeys
 {
     public const string Administration = "Administration";
 
-    public const string Alias = "Alias";
-
     public const string ApplicationManagement = "ApplicationManagement";
 
     public const string AssignFunctionToGroup = "AssignFunctionToGroup";
@@ -31,7 +29,7 @@ public static class SiteFunctionKeys
 
     public const string AssignSiteToUser = "AssignSiteToUser";
 
-    public const string ConnectionStringManagement = "ConnectionStringManagement";
+    public const string ConnectionManagement = "ConnectionManagement";
 
     public const string DatabaseReport = "DatabaseReport";
 
@@ -47,11 +45,19 @@ public static class SiteFunctionKeys
 
     public const string MailService = "MailService";
 
+    public const string ManageConnection = "ManageConnection";
+
+    public const string ManageDatabase = "ManageDatabase";
+
+    public const string ManageDatabaseServer = "ManageDatabaseServer";
+
     public const string ManageFunction = "ManageFunction";
 
     public const string ManageGroup = "ManageGroup";
 
     public const string ManageMenu = "ManageMenu";
+
+    public const string ManageSite = "ManageSite";
 
     public const string ManageUser = "ManageUser";
 
@@ -68,6 +74,8 @@ public static class SiteFunctionKeys
     public const string SqlLogs = "SqlLogs";
 
     public const string SqlSchedules = "SqlSchedules";
+
+    public const string SwitchConenction = "SwitchConenction";
 
     public const string SystemConfiguration = "SystemConfiguration";
 

@@ -37,8 +37,7 @@
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\_Dependencies\Others\Fanex.NAP.Core.dll</HintPath>
     </Reference>
-    <Reference Include="MvcPager, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MvcPager">
       <HintPath>..\packages\MvcPager.1.0.0\lib\MvcPager.dll</HintPath>
     </Reference>
     <Reference Include="System" />

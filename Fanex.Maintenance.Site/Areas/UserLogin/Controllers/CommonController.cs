@@ -49,5 +49,46 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
             return View();
         }
+
+        // GET: /UserControl/Common/
+        public ActionResult Unauthorize()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Error page.
+        /// </summary>
+        /// <param name="errorPath">The error path.</param>
+        /// <returns>Action result.</returns>
+        public ActionResult Error(string errorPath)
+        {
+            if (!string.IsNullOrEmpty(errorPath))
+            {
+                return RedirectToAction("Error");
+            }
+
+            return View();
+        }
+
+        /// <summary>
+        /// Not found page.
+        /// </summary>
+        /// <param name="errorPath">The error path.</param>
+        /// <param name="url">The request URL.</param>
+        /// <returns>Action result.</returns>
+        public ActionResult NotFound(string errorPath, string url)
+        {
+            if (!string.IsNullOrEmpty(errorPath))
+            {
+                ViewBag.RequestedUrl = errorPath;
+
+                return RedirectToAction("NotFound", new { url = errorPath });
+            }
+
+            ViewBag.RequestedUrl = url;
+
+            return View();
+        }
     }
 }

@@ -20,10 +20,13 @@ namespace Fanex.Maintenance.ViewModel.Connection
         public SearchSiteViewModel()
         {
             Name = string.Empty;
+            HasEditPermission = false;
         }
 
         public string Name { get; set; }
 
         public List<Site> Sites { get; set; }
+
+        public bool HasEditPermission { get; set; }
     }
 }

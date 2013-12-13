@@ -19,11 +19,12 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.Repository;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Service.Impl.AppLog;
+    using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
     /// Log controller.
     /// </summary>
-    [Authorize]
+    [NapSuperAuth]
     public class LogController : BaseController
     {
         #region Member

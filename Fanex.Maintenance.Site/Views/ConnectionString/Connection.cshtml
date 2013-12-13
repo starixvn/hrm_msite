@@ -10,7 +10,10 @@
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
-        @Html.ActionLink("+ Create New", "CreateConnection", "ConnectionString", null, new { @class = "lnk" })
+        @if (Model.HasEditPermission)
+        { 
+            @Html.ActionLink("+ Create New", "CreateConnection", "ConnectionString", null, new { @class = "lnk" })
+        }
     </h1>
 }
 @using (Html.BeginForm("Connection", "ConnectionString", FormMethod.Get))
@@ -65,15 +68,19 @@
             <th>
                 @ViewResource.Site
             </th>
-            <th>
-                @ViewResource.Edit
-            </th>
+            @if (Model.HasEditPermission)
+            { 
+                <th>
+                    @ViewResource.Edit
+                </th>
+            }
         </tr>
     </thead>
     <tbody>
         @if (!ReferenceEquals(Model.Connections, null))
         {
             int i = 0;
+            var disable = Model.HasEditPermission ? string.Empty : "disabled";
             foreach (var item in Model.Connections)
             {
                 string rowCss = i % 2 == 0 ? string.Empty : "class=\"alt\"";
@@ -109,19 +116,22 @@
                 <td class="align-center">
                     @if (item.IsActive)
                     {
-                        <input type="checkbox" checked="checked" did="@item.Id" dname="@item.Name" class="update-status"/>
+                        <input type="checkbox" checked="checked" did="@item.Id" dname="@item.Name" class="update-status" @disable/>
                     }
                     else
                     {
-                        <input type="checkbox"did="@item.Id" dname="@item.Name" class="update-status"/>
+                        <input type="checkbox"did="@item.Id" dname="@item.Name" class="update-status" @disable/>
                     }
                 </td>
                 <td class="align-center">
                     @Html.ActionLink("Assign", "ConnectionAssignSite", new { id = item.Id })
                 </td>
-                <td class="align-center">
-                    @Html.ActionLink("Edit", "EditConnection", new { id = item.Id })
-                </td>
+                @if (Model.HasEditPermission)
+                { 
+                    <td class="align-center">
+                        @Html.ActionLink("Edit", "EditConnection", new { id = item.Id })
+                    </td>
+                }
             </tr>
             }
             if (i == 0)

@@ -22,6 +22,7 @@ namespace Fanex.Maintenance.ViewModel.Connection
         public SearchDatabaseViewModel()
         {
             DbServerId = 0;
+            HasEditPermission = false;
         }
 
         public int DbServerId { get; set; }
@@ -37,5 +38,7 @@ namespace Fanex.Maintenance.ViewModel.Connection
         }
 
         public List<Database> Database { get; set; }
+
+        public bool HasEditPermission { get; set; }
     }
 }

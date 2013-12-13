@@ -11,12 +11,13 @@ namespace Fanex.Maintenance.Controller
 {
     using System.Web.Mvc;
     using Fanex.Maintenance.Service.Impl.LicenseeSetting;
+    using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
     /// Licensee Setting Controller.
     /// </summary>
-    [Authorize]
-    public class LicenseeSettingController : Controller
+    [NapSuperAuth]
+    public class LicenseeSettingController : BaseController
     {
         #region Member
 

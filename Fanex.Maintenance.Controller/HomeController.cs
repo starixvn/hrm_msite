@@ -11,11 +11,12 @@
 namespace Fanex.Maintenance.Controller
 {
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
     /// Home Controller.
     /// </summary>
-    [Authorize]
+    [NapSuperAuth]
     public class HomeController : BaseController
     {
         /// <summary>

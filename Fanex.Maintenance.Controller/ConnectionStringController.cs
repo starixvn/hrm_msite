@@ -17,14 +17,17 @@ namespace Fanex.Maintenance.Controller
     using Fanex.ConnectionString.Domain;
     using Fanex.ConnectionString.Model;
     using Fanex.Maintenance.ViewModel.Connection;
+    using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Helpers;
     using Fanex.NAP.Core.Web;
+    using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Framework.Data;
+    using NAPSERVICE = Fanex.NAP.Core.Service;
 
     /// <summary>
     /// Connection string controller.
     /// </summary>
-    [Authorize]
+    [NapSuperAuth]
     public class ConnectionStringController : BaseController
     {
         #region Member
@@ -34,13 +37,14 @@ namespace Fanex.Maintenance.Controller
         private readonly IConnectionService _connectionService;
         private readonly ILogService _logService;
         private readonly IDatabaseService _databaseService;
+        private readonly NAPSERVICE.Interface.IUserService _userService;
 
         #endregion Member
 
         #region Ctor
 
         public ConnectionStringController()
-            : this(null, null, null, null, null)
+            : this(null, null, null, null, null, null)
         {
         }
 
@@ -49,26 +53,35 @@ namespace Fanex.Maintenance.Controller
             ISiteService siteService,
             IConnectionService connectionService,
             ILogService logServer,
-            IDatabaseService aliasDatabaseService)
+            IDatabaseService aliasDatabaseService,
+            NAPSERVICE.Interface.IUserService userService)
         {
             _databaseServerService = databaseServerService ?? new DatabaseServerService { ServiceContext = ServiceContext };
             _siteService = siteService ?? new SiteService { ServiceContext = ServiceContext };
             _connectionService = connectionService ?? new ConnectionService { ServiceContext = ServiceContext };
             _logService = logServer ?? new LogService { ServiceContext = ServiceContext };
             _databaseService = aliasDatabaseService ?? new DatabaseService { ServiceContext = ServiceContext };
+            _userService = userService ?? new NAPSERVICE.Impl.UserService();
         }
 
         #endregion Ctor
 
         #region Connection String
 
+        /// <summary>
+        /// Connections view.
+        /// </summary>
+        /// <param name="model">The search connection view model.</param>
+        /// <returns>Connections list view.</returns>
         [HttpGet]
         public ActionResult Connection(SearchConnectionViewModel model)
         {
             model = model ?? new SearchConnectionViewModel();
             List<Connection> connections = _connectionService.GetAll(model.DbServerId).ToList();
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
+            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageConnection);
 
+            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
             model.DatabaseServers = databaseServers;
             model.Connections = connections;
 
@@ -80,6 +93,7 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Create the connection view with default value.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult CreateConnection()
         {
             List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
@@ -103,6 +117,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The connection view model.</param>
         /// <returns>Connection list view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult CreateConnection(ConnectionViewModel model)
         {
             List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
@@ -150,6 +165,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">The connection identifier.</param>
         /// <returns>Edit connection view with current value.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult EditConnection(int id)
         {
             Connection connection = _connectionService.GetById(id);
@@ -179,6 +195,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The connection view model.</param>
         /// <returns>Connection list view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult EditConnection(ConnectionViewModel model)
         {
             List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
@@ -222,6 +239,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult UpdateStatusConnection(int id, bool isActive)
         {
             if (Request.IsAjaxRequest())
@@ -240,6 +258,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The switch database server model.</param>
         /// <returns>Connection list view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.SwitchConenction, Policy = Constant.Policy.Host)]
         public ActionResult SwitchConnection(SwitchConnectionViewModel model)
         {
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
@@ -271,6 +290,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="toDbServerId">To database server identifier.</param>
         /// <returns>Connection list view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.SwitchConenction, Policy = Constant.Policy.Host)]
         public ActionResult SwitchConnectionDbServer(string connectionIds, int toDbServerId)
         {
             if (Request.IsAjaxRequest())
@@ -288,6 +308,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Read)]
         public ActionResult GetDatabaseByDbServerId(int databaseServerId)
         {
             if (Request.IsAjaxRequest())
@@ -312,7 +333,9 @@ namespace Fanex.Maintenance.Controller
             List<Site> sites = _siteService.GetAll(isActive: true).ToList();
             Connection connection = _connectionService.GetById(id);
             List<Site> sitesBelongConnection = _siteService.GetByConnectionId(id).ToList();
+            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageConnection);
 
+            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
             model.Id = connection.Id;
             model.Name = connection.Name;
             model.Sites = sites;
@@ -322,6 +345,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult ConnectionAssignSite(int connectionId, int siteId)
         {
             if (Request.IsAjaxRequest())
@@ -335,6 +359,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult ConnectionRemoveSite(int connectionId, int siteId)
         {
             if (Request.IsAjaxRequest())
@@ -355,13 +380,16 @@ namespace Fanex.Maintenance.Controller
         {
             model = model ?? new SearchSiteViewModel();
             List<Site> sites = _siteService.GetAll(model.Name).ToList();
+            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageSite);
 
+            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
             model.Sites = sites.ToList();
 
             return View(model);
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageSite, Policy = Constant.Policy.Host)]
         public ActionResult CreateSite()
         {
             return View();
@@ -373,6 +401,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The site view model.</param>
         /// <returns>Site list view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageSite, Policy = Constant.Policy.Host)]
         public ActionResult CreateSite(SiteViewModel model)
         {
             if (ModelState.IsValid)
@@ -407,6 +436,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">The site identifier.</param>
         /// <returns>Site edit view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageSite, Policy = Constant.Policy.Host)]
         public ActionResult EditSite(int id)
         {
             Site site = _siteService.GetById(id);
@@ -428,6 +458,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The site view model.</param>
         /// <returns>Site list view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageSite, Policy = Constant.Policy.Host)]
         public ActionResult EditSite(SiteViewModel model)
         {
             if (ModelState.IsValid)
@@ -458,6 +489,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageSite, Policy = Constant.Policy.Host)]
         public ActionResult UpdateStatusSite(int siteId, bool isActive)
         {
             if (Request.IsAjaxRequest())
@@ -479,13 +511,16 @@ namespace Fanex.Maintenance.Controller
         {
             model = model ?? new SearchDatabaseServerViewModel();
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(model.Name).ToList();
+            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageDatabaseServer);
 
+            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
             model.DatabaseServers = databaseServers;
 
             return View(model);
         }
 
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabaseServer, Policy = Constant.Policy.Host)]
         public ActionResult CreateDatabaseServer()
         {
             return View();
@@ -497,6 +532,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The database server model.</param>
         /// <returns>Database server list view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabaseServer, Policy = Constant.Policy.Host)]
         public ActionResult CreateDatabaseServer(DatabaseServerViewModel model)
         {
             if (ModelState.IsValid)
@@ -533,6 +569,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">The database server identifier.</param>
         /// <returns>Database server edit view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabaseServer, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabaseServer(int id)
         {
             DatabaseServer databaseServer = _databaseServerService.GetById(id);
@@ -555,6 +592,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The database server view model.</param>
         /// <returns>Database server list view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabaseServer, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabaseServer(DatabaseServerViewModel model)
         {
             if (ModelState.IsValid)
@@ -586,6 +624,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabaseServer, Policy = Constant.Policy.Host)]
         public ActionResult UpdateStatusDatabaseServer(int databaseServerId, bool isActive)
         {
             if (Request.IsAjaxRequest())
@@ -611,10 +650,11 @@ namespace Fanex.Maintenance.Controller
         public ActionResult Database(SearchDatabaseViewModel model)
         {
             model = model ?? new SearchDatabaseViewModel();
-
             List<Database> databases = _databaseService.GetAll(model.DbServerId).ToList();
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
+            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageDatabase);
 
+            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
             model.Database = databases;
             model.DatabaseServers = databaseServers;
 
@@ -627,6 +667,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="databaseId">The database identifier.</param>
         /// <returns>Database create new view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult CreateDatabase(int databaseId)
         {
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
@@ -646,6 +687,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The database view model.</param>
         /// <returns>Database list view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult CreateDatabase(DatabaseViewModel model)
         {
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
@@ -686,6 +728,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">The database identifier.</param>
         /// <returns>Database edit view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabase(int id)
         {
             var model = new DatabaseViewModel();
@@ -709,6 +752,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The database view model.</param>
         /// <returns>Database list view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabase(DatabaseViewModel model)
         {
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
@@ -744,6 +788,7 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult UpdateStatusDatabase(int databaseId, bool isActive)
         {
             if (Request.IsAjaxRequest())
@@ -766,6 +811,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The log view model.</param>
         /// <returns>The log view.</returns>
         [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ViewLog, Policy = Constant.Policy.Read)]
         public ActionResult Log(SearchLogViewModel model)
         {
             int totalLogs = 0;
@@ -786,33 +832,5 @@ namespace Fanex.Maintenance.Controller
         }
 
         #endregion Log management
-
-        #region Private
-
-        private List<SelectListItem> GetSelectListDatabaseServer(int? selectedId = null)
-        {
-            List<DatabaseServer> databaseServers = _databaseServerService.GetAll().ToList();
-
-            return databaseServers.Select(d => new SelectListItem
-            {
-                Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
-                Value = d.Id.ToString(),
-                Selected = selectedId != null ? d.Id == selectedId : false
-            }).ToList();
-        }
-
-        private List<SelectListItem> GetSelectListSite(int? selectedId = null)
-        {
-            List<Site> listSite = _siteService.GetAll().ToList();
-
-            return listSite.Select(s => new SelectListItem
-            {
-                Text = s.Name,
-                Value = s.Id.ToString(),
-                Selected = selectedId != null ? s.Id == selectedId : false
-            }).ToList();
-        }
-
-        #endregion Private
     }
 }

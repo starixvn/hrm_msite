@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = ViewResource.Manage_Connection;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var disable = Model.HasEditPermission ? string.Empty : "disabled";
 }
 @section Head {
     <link href="~/themes/job/user/manage.less" rel="stylesheet" type="text/css" />
@@ -29,11 +30,11 @@
                 <td class="align-center">
                     @if (item.Selected)
                     { 
-                        <input type="checkbox" sid="@item.Value" class="select-site" checked="checked" name="@item.Text"/>
+                        <input type="checkbox" sid="@item.Value" class="select-site" checked="checked" name="@item.Text" @disable/>
                     }
                     else
                     { 
-                        <input type="checkbox" sid="@item.Value" class="select-site" name="@item.Text"/>
+                        <input type="checkbox" sid="@item.Value" class="select-site" name="@item.Text" @disable/>
                     }
                 </td>
                 <td>@item.Text

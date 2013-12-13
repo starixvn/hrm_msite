@@ -49,5 +49,7 @@ namespace Fanex.Maintenance.ViewModel.Connection
                 return list;
             }
         }
+
+        public bool HasEditPermission { get; set; }
     }
 }
