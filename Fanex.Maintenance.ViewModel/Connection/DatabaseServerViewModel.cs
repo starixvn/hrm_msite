@@ -9,13 +9,12 @@
 
 namespace Fanex.Maintenance.ViewModel.Connection
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.ComponentModel.DataAnnotations;
     using Fanex.NAP.Core.Web;
 
+    /// <summary>
+    /// The database server view model.
+    /// </summary>
     public class DatabaseServerViewModel
     {
         public int Id { get; set; }

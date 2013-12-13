@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConnectionViewModel.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SearchConnectionViewModel.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,15 +9,21 @@
 
 namespace Fanex.Maintenance.ViewModel.Connection
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using Fanex.ConnectionString.Domain;
     using System.Web.Mvc;
+    using Fanex.ConnectionString.Domain;
 
+    /// <summary>
+    /// View model for search connection.
+    /// </summary>
     public class SearchConnectionViewModel
     {
+        public SearchConnectionViewModel()
+        {
+            DbServerId = 0;
+        }
+
         public int DbServerId { get; set; }
 
         public List<DatabaseServer> DatabaseServers { get; set; }
@@ -26,12 +32,12 @@ namespace Fanex.Maintenance.ViewModel.Connection
         {
             get
             {
-                return DatabaseServers.Select(x => new SelectListItem
+                return DatabaseServers != null ? DatabaseServers.Select(x => new SelectListItem
                 {
                     Value = x.Id.ToString(),
                     Text = x.Name,
                     Selected = x.Id == DbServerId
-                }).ToList();
+                }).ToList() : new List<SelectListItem>();
             }
         }
 

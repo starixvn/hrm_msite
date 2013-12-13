@@ -15,8 +15,8 @@ namespace Fanex.Maintenance.Repository.Impl
     using System.Collections.Generic;
     using System.Data;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
     using Fanex.Maintenance.Core.Model;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Base repository.

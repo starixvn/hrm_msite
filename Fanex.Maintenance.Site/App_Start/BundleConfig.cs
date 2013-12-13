@@ -19,7 +19,8 @@ namespace Fanex.Maintenance.Site.App_Start
     {
         /// <summary>
         /// Register bundles.
-        /// For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725.
+        /// For more information on Bundling
+        /// <see cref="http://go.microsoft.com/fwlink/?LinkId=254725"/>
         /// </summary>
         /// <param name="bundles">Bundle collection.</param>
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
@@ -30,7 +31,7 @@ namespace Fanex.Maintenance.Site.App_Start
                 "~/css/common",
                 "~/themes/reset.css",
                 "~/themes/fonts.css",
-                "~/scripts/Plugin/jquery-ui-1.9.1.custom/css/custom-theme/jquery-ui-1.9.1.custom.min.css",
+                "~/themes/jquery-ui/smoothness/jquery-ui-1.8.23.min.css",
                 "~/themes/assets/css/prettify.css",
                 "~/themes/assets/css/site.css",
                 "~/scripts/lib/tipsy/tipsy-1.0.0.min.css",

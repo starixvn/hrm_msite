@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="InsertOrUpdateConnectionViewModel.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ConnectionViewModel.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -16,6 +16,9 @@ namespace Fanex.Maintenance.ViewModel.Connection
     using Fanex.ConnectionString.Domain;
     using Fanex.NAP.Core.Web;
 
+    /// <summary>
+    /// The connection view model.
+    /// </summary>
     public class ConnectionViewModel
     {
         public int Id { get; set; }

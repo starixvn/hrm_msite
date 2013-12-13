@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="ConnectionViewModel.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SwitchConnectionViewModel.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,13 +9,14 @@
 
 namespace Fanex.Maintenance.ViewModel.Connection
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using Fanex.ConnectionString.Domain;
     using System.Web.Mvc;
+    using Fanex.ConnectionString.Domain;
 
+    /// <summary>
+    /// Switch connection view model.
+    /// </summary>
     public class SwitchConnectionViewModel
     {
         public int FromDbServerId { get; set; }

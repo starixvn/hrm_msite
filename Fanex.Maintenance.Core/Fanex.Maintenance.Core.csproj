@@ -84,7 +84,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConLogAction.tt</DependentUpon>
     </Compile>
-    <Compile Include="Web\Constants.cs" />
     <Compile Include="Web\HtmlHelperExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

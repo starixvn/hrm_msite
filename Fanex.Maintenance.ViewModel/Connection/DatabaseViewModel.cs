@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="InsertOrUpdateAliasDatabaseViewModel.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DatabaseViewModel.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -16,6 +16,9 @@ namespace Fanex.Maintenance.ViewModel.Connection
     using Fanex.ConnectionString.Domain;
     using Fanex.NAP.Core.Web;
 
+    /// <summary>
+    /// The database view model.
+    /// </summary>
     public class DatabaseViewModel
     {
         public int Id { get; set; }

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SiteViewModel.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SearchSiteViewModel.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,8 +12,16 @@ namespace Fanex.Maintenance.ViewModel.Connection
     using System.Collections.Generic;
     using Fanex.ConnectionString.Domain;
 
+    /// <summary>
+    /// The view model for search site.
+    /// </summary>
     public class SearchSiteViewModel
     {
+        public SearchSiteViewModel()
+        {
+            Name = string.Empty;
+        }
+
         public string Name { get; set; }
 
         public List<Site> Sites { get; set; }

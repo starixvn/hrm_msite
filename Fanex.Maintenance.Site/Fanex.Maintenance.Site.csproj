@@ -628,17 +628,13 @@
     <Content Include="Views\CommonError\Error.cshtml" />
     <Content Include="Views\CommonError\NotFound.cshtml" />
     <Content Include="Views\ConnectionString\Log.cshtml" />
-    <Content Include="Views\ConnectionString\_ConnectionLog_Alias_Insert.cshtml" />
     <Content Include="Views\ConnectionString\LogDetail.cshtml" />
-    <Content Include="Views\ConnectionString\_ConnectionLog_Alias_Update.cshtml" />
-    <Content Include="Views\ConnectionString\_ConnectionLog_LogData.cshtml" />
-    <Content Include="Views\ConnectionString\_ConnectionLog_LogData_ChangeConnection.cshtml" />
     <Content Include="Views\Mail\GetError.cshtml" />
     <Content Include="Views\Machine\Index.cshtml" />
     <Content Include="Views\Machine\EditMachine.cshtml" />
     <Content Include="Views\Machine\InsertMachine.cshtml" />
     <Content Include="themes\job\log\manage.less" />
-    <None Include="themes\job\RefreshCountDown.less" />
+    <Content Include="themes\job\RefreshCountDown.less" />
     <Content Include="Views\LicenseeSetting\LrfDomain.cshtml" />
     <Content Include="Views\ConnectionString\Database.cshtml" />
     <Content Include="Views\ConnectionString\CreateDatabase.cshtml" />
@@ -646,6 +642,21 @@
     <Content Include="Views\ConnectionString\EditConnection.cshtml" />
     <Content Include="Views\ConnectionString\SwitchConnection.cshtml" />
     <Content Include="Views\ConnectionString\ConnectionAssignSite.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction102.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction101.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction100.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction200.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction202.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction201.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction300.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction301.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction302.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction400.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction401.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction402.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction403.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction404.cshtml" />
+    <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">

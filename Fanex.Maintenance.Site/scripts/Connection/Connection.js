@@ -8,17 +8,20 @@ var Connection = function ($) {
         GetDatabaseByAliasName: function (id) {
             $.ajax({
                 url: NAP.resolveClientUrl("ConnectionString/GetDatabaseByDbServerId"),
-                data: { dbserverid: id },
+                data: { databaseServerId: id },
                 type: 'GET',
                 cache: false,
                 success: function (result) {
                     $('#DatabaseId').html("");
                     $.each(result, function (i, database) {
                         $('#DatabaseId').append("<option value='" + database.Id + "' data-serveralias='" + database.ServerAlias + "'>" + database.Name + "</option>");
+
                         if (database.id == id) {
                             $('#ServerAlias').val(database.ServerAlias);
                         }
                     });
+
+                    Connection.GenerateConnectionName();
                 },
                 error: function (xhr, status, err) {
                     NAP.handleAjaxError(xhr, status, err);
@@ -54,6 +57,7 @@ var Connection = function ($) {
             var aliasName = $('#DatabaseId option:selected').attr('data-serveralias');
             var databaseName = $("#DatabaseId option:selected").text();
             var loginName = $('#LoginName').val();
+
             $('#Name').val("");
             $('#Name').val(aliasName + "." + databaseName + "." + loginName);
         },
@@ -78,7 +82,7 @@ var Connection = function ($) {
             }
 
             $.ajax({
-                url: NAP.resolveClientUrl("ConnectionString/SwithConnectionDbServer"),
+                url: NAP.resolveClientUrl("ConnectionString/SwitchConnectionDbServer"),
                 data: { connectionIds: connectionIds, toDbServerId: toDbServerId },
                 type: 'POST',
                 cache: false,
@@ -128,14 +132,13 @@ $(document).ready(function () {
     $('#DbServerId').change(function () {
         var aliasName = $("#DbServerId").val();
         Connection.GetDatabaseByAliasName(aliasName);
-        Connection.GenerateConnectionName();
     });
 
     $('#DatabaseId').change(function () {
         Connection.GenerateConnectionName();
     });
 
-    $('#LoginName').keypress(function () {
+    $('#LoginName').keyup(function () {
         Connection.GenerateConnectionName();
     });
 

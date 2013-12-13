@@ -83,6 +83,5 @@
     </Function>
     <Function Name="LogExecSp">
         <Setting Key="ConnectionString_LogExecSp_Search" SpName="LogExecSp_Search" DbName="connectionstring" Plain="1" />
-        <Setting Key="ConnectionString_LogExecSp_GetById" SpName="LogExecSp_GetById" DbName="connectionstring" Plain="1" />
     </Function>
 </Functions>

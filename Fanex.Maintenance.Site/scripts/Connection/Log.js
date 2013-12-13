@@ -16,10 +16,6 @@ var Log = function ($) {
                 buttonText: "From",
                 buttonImageOnly: true,
                 onSelect: function (selectedDate) {
-                    $("#To").datepicker("option", "minDate", selectedDate);
-                    if ($("#To").val() == '') {
-                        $("#To").val($(this).val());
-                    }
                 }
             });
 
@@ -72,16 +68,6 @@ $(document).ready(function () {
         });
     });
 
-    $('#FilterType').change(function () {
-        var filter = $(this).val();
-        if (filter == "4") {
-            $('#Name').attr('disabled', 'disabled');
-        }
-        else {
-            $('#Name').removeAttr('disabled');
-        }
-    });
-
     // shows loading on change page
     Log.form.submit(function () {
         NAP.loadingBox.show();
@@ -98,12 +84,12 @@ $(document).ready(function () {
 			filter = $('#FilterType').val();
 
         var url = NAP.resolveClientUrl('ConnectionString/Log' +
-			'?q=' + name +
+			'?name=' + name +
 			'&username=' + username +
 			'&from=' + from +
 			'&to=' + to +
-			'&filterBy=' + filter +
-			'&size=' + pageSize);
+			'&FilterType=' + filter +
+			'&pageSize=' + pageSize);
 
         NAP.loadingBox.show();
         window.location.replace(url);

@@ -11,9 +11,9 @@
 namespace Fanex.Maintenance.Core.Web
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Web;
-    using System.Collections.Generic;
 
     /// <summary>
     /// HTML helper extension.
@@ -35,42 +35,6 @@ namespace Fanex.Maintenance.Core.Web
             string dateFormat = "MMM dd, yyyy",
             string timeFormat = "HH:mm")
         {
-            return new HtmlString(value.ToString(dateFormat) + " - " + value.ToString(timeFormat).Replace(':', 'h') + "'");
-        }
-
-        /// <summary>
-        /// Convert the Date value and combine with time(int) value to specific format for showing on view.
-        /// </summary>
-        /// <param name="value">DateTime value.</param>
-        /// <param name="time">Time value.</param>
-        /// <param name="dateFormat">Date format.</param>
-        /// <param name="timeFormat">Time format.</param>
-        /// <returns>HTML string.</returns>
-        public static IHtmlString ToFullDateWithTimeAdded(
-            this DateTime value,
-            int time = 0,
-            string dateFormat = "MMM dd, yyyy",
-            string timeFormat = "HH:mm")
-        {
-            //// check format time correct HHmmss
-            string strTime = time.ToString();
-
-            if (strTime.Length < 6)
-            {
-                int count = 6 - strTime.Length;
-
-                for (int i = 0; i < count; i++)
-                {
-                    strTime = strTime.Insert(0, "0");
-                }
-            }
-
-            DateTime date = DateTime.ParseExact(
-                strTime,
-                "HHmmss",
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None);
-
             return new HtmlString(value.ToString(dateFormat) + " - " + value.ToString(timeFormat).Replace(':', 'h') + "'");
         }
 
@@ -131,59 +95,7 @@ namespace Fanex.Maintenance.Core.Web
 
         #endregion DateTime
 
-        #region Execution Status
-
-        /// <summary>
-        /// Paste Execute Type to Html String.
-        /// </summary>
-        /// <param name="value">Execution status.</param>
-        /// <returns>HTML string.</returns>
-        public static IHtmlString ToExecutionString(this int value)
-        {
-            string htmlValue = string.Empty;
-
-            switch (value)
-            {
-                case (int)ExecutionStatus.BetweenRtries:
-                    htmlValue = string.Format("<span class='BetweenRtries'>{0}</span>", "BetweenRtries");
-                    break;
-
-                case (int)ExecutionStatus.Executing:
-                    htmlValue = string.Format("<span class='Executing'>{0}</span>", "Executing");
-                    break;
-
-                case (int)ExecutionStatus.Idle:
-                    htmlValue = string.Format("<span class='Idle'>{0}</span>", "Idle");
-                    break;
-
-                case (int)ExecutionStatus.Obsolete:
-                    htmlValue = string.Format("<span class='Obsolete'>{0}</span>", "Obsolete");
-                    break;
-
-                case (int)ExecutionStatus.PerformingCompletionActions:
-                    htmlValue = string.Format("<span class='PerformingCompletionActions'>{0}</span>", "Performing Completion Actions");
-                    break;
-
-                case (int)ExecutionStatus.Suspended:
-                    htmlValue = string.Format("<span class='Suspended'>{0}</span>", "Suspended");
-                    break;
-
-                case (int)ExecutionStatus.WaitingFoThread:
-                    htmlValue = string.Format("<span class='WaitingFoThread'>{0}</span>", "Waiting For Thread");
-                    break;
-
-                default:
-                    htmlValue = value.ToString();
-                    break;
-            }
-
-            return new HtmlString(htmlValue);
-        }
-
-        #endregion Execution Status
-
-        public static IEnumerable<TSource> DistinctBy<TSource, TKey>
-    (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
         {
             HashSet<TKey> seenKeys = new HashSet<TKey>();
             foreach (TSource element in source)

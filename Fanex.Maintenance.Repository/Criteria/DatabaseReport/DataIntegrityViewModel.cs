@@ -1,11 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Globalization;
+﻿// --------------------------------------------------------------------------
+// <copyright file="DataIntegrityViewModel.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Edward.Nguyen" date="2013.12.13">Created</change>
+// </history>
 
 namespace Fanex.Maintenance.Repository.Criteria.DatabaseReport
 {
+    using System;
+    using System.Globalization;
+
+    /// <summary>
+    /// The data integrity view model.
+    /// </summary>
     public class DataIntegrityViewModel
     {
         public int DrawFilter { get; set; }

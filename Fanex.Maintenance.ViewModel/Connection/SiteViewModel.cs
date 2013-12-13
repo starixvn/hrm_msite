@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.ViewModel.Connection
     using System.ComponentModel.DataAnnotations;
     using Fanex.NAP.Core.Web;
 
+    /// <summary>
+    /// The site view model.
+    /// </summary>
     public class SiteViewModel
     {
         public int Id { get; set; }

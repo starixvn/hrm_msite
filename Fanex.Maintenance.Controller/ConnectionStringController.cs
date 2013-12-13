@@ -9,11 +9,9 @@
 
 namespace Fanex.Maintenance.Controller
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Fanex.ConnectionString.Core.Criteria.LogExecSp;
     using Fanex.ConnectionString.Core.Service.Impl;
     using Fanex.ConnectionString.Core.Service.Interface;
     using Fanex.ConnectionString.Domain;
@@ -21,6 +19,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.Maintenance.ViewModel.Connection;
     using Fanex.NAP.Core.Helpers;
     using Fanex.NAP.Core.Web;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Connection string controller.
@@ -31,13 +30,9 @@ namespace Fanex.Maintenance.Controller
         #region Member
 
         private readonly IDatabaseServerService _databaseServerService;
-
         private readonly ISiteService _siteService;
-
         private readonly IConnectionService _connectionService;
-
         private readonly ILogService _logService;
-
         private readonly IDatabaseService _databaseService;
 
         #endregion Member
@@ -70,59 +65,60 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult Connection(SearchConnectionViewModel model)
         {
-            if (ReferenceEquals(model, null))
-            {
-                model = new SearchConnectionViewModel
-                {
-                    DbServerId = 0
-                };
-            }
+            model = model ?? new SearchConnectionViewModel();
+            List<Connection> connections = _connectionService.GetAll(model.DbServerId).ToList();
+            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
-            var listConnection = _connectionService.GetAll(model.DbServerId);
-            var listDatabase = _databaseServerService.GetAll(isActive: true);
-
-            model.DatabaseServers = listDatabase.ToList();
-            model.Connections = listConnection.ToList();
+            model.DatabaseServers = databaseServers;
+            model.Connections = connections;
 
             return View(model);
         }
 
+        /// <summary>
+        /// Creates the connection.
+        /// </summary>
+        /// <returns>Create the connection view with default value.</returns>
         [HttpGet]
         public ActionResult CreateConnection()
         {
-            var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
-            var databaseServer = listDatabaseServer.FirstOrDefault();
-            var listDatabase = _databaseService.GetByDbServerId(databaseServer.Id);
-            var database = listDatabaseServer.FirstOrDefault();
+            List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
+            DatabaseServer firstDatabaseServer = databaseServers.FirstOrDefault();
+            List<Database> databases = _databaseService.GetByDbServerId(firstDatabaseServer.Id).ToList();
+            Database firstDatabase = databases.FirstOrDefault();
 
             var model = new ConnectionViewModel
             {
-                DatabaseServers = listDatabaseServer.ToList(),
-                Databases = listDatabase.ToList(),
-                DatabaseId = database.Id
+                DatabaseServers = databaseServers,
+                Databases = databases,
+                DatabaseId = firstDatabase.Id
             };
 
             return View(model);
         }
 
+        /// <summary>
+        /// Creates the connection.
+        /// </summary>
+        /// <param name="model">The connection view model.</param>
+        /// <returns>Connection list view.</returns>
         [HttpPost]
         public ActionResult CreateConnection(ConnectionViewModel model)
         {
-            var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
-            var database = _databaseService.GetById(model.DatabaseId);
-            var listDatabase = _databaseService.GetByDbServerId(model.DbServerId);
-            var listConnection = _connectionService.GetAll();
+            List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
+            List<Database> databases = _databaseService.GetByDbServerId(model.DbServerId).ToList();
+            List<Connection> connections = _connectionService.GetAll().ToList();
+            Database database = _databaseService.GetById(model.DatabaseId);
 
-            model.DatabaseServers = listDatabaseServer.ToList();
-            model.Databases = listDatabase.ToList();
-            model.Name = database.ServerAlias + "." + database.Name + "." + model.LoginName;
+            model.DatabaseServers = databaseServers;
+            model.Databases = databases;
+            model.Name = string.Format("{0}.{1}.{2}", database.ServerAlias, database.Name, model.LoginName);
 
-            var tempConnection = listConnection.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+            Connection tempConnection = connections.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
 
             if (!ReferenceEquals(tempConnection, null))
             {
-                ModelState.AddModelError("Name",
-                          string.Format(ViewResources.DuplicateMsg, tempConnection.Name));
+                ModelState.AddModelError("Name", string.Format(ViewResources.DuplicateMsg, tempConnection.Name));
 
                 return View(model);
             }
@@ -140,7 +136,7 @@ namespace Fanex.Maintenance.Controller
                     Password = model.Password
                 };
 
-                var command = _connectionService.Insert(connection);
+                CommandResult command = (CommandResult)_connectionService.Insert(connection);
 
                 ViewBag.Success = command.IsSuccessful;
             }
@@ -148,18 +144,22 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        /// <summary>
+        /// Edits the connection.
+        /// </summary>
+        /// <param name="id">The connection identifier.</param>
+        /// <returns>Edit connection view with current value.</returns>
         [HttpGet]
         public ActionResult EditConnection(int id)
         {
-            var connection = _connectionService.GetById(id);
-
-            var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
-            var listDatabase = _databaseService.GetByDbServerId(connection.DatabaseServer.Id);
+            Connection connection = _connectionService.GetById(id);
+            List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
+            List<Database> databases = _databaseService.GetByDbServerId(connection.DatabaseServer.Id).ToList();
 
             var model = new ConnectionViewModel
             {
-                DatabaseServers = listDatabaseServer.ToList(),
-                Databases = listDatabase.ToList(),
+                DatabaseServers = databaseServers,
+                Databases = databases,
                 DatabaseId = connection.Database.Id,
                 DbServerId = connection.DatabaseServer.Id,
                 FreeText = connection.FreeText,
@@ -173,24 +173,28 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        /// <summary>
+        /// Edits the connection.
+        /// </summary>
+        /// <param name="model">The connection view model.</param>
+        /// <returns>Connection list view.</returns>
         [HttpPost]
         public ActionResult EditConnection(ConnectionViewModel model)
         {
-            var listDatabaseServer = _databaseServerService.GetDatabaseServerHasDatabases();
-            var listDatabase = _databaseService.GetByDbServerId(model.DbServerId);
-            var database = _databaseService.GetById(model.DatabaseId);
-            var listConnection = _connectionService.GetAll();
-            var name = database.ServerAlias + "." + database.Name + "." + model.LoginName;
+            List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
+            List<Database> databases = _databaseService.GetByDbServerId(model.DbServerId).ToList();
+            List<Connection> listConnection = _connectionService.GetAll().ToList();
+            Database database = _databaseService.GetById(model.DatabaseId);
+            var name = string.Format("{0}.{1}.{2}", database.ServerAlias, database.Name, model.LoginName);
 
-            model.DatabaseServers = listDatabaseServer.ToList();
-            model.Databases = listDatabase.ToList();
+            model.DatabaseServers = databaseServers;
+            model.Databases = databases;
 
             var tempConnection = listConnection.Where(x => x.Name.ToLower() == name.ToLower() && x.Id != model.Id).FirstOrDefault();
 
             if (!ReferenceEquals(tempConnection, null))
             {
-                ModelState.AddModelError("Name",
-                          string.Format(ViewResources.DuplicateMsg, tempConnection.Name));
+                ModelState.AddModelError("Name", string.Format(ViewResources.DuplicateMsg, tempConnection.Name));
 
                 return View(model);
             }
@@ -209,7 +213,7 @@ namespace Fanex.Maintenance.Controller
                     Id = model.Id
                 };
 
-                var command = _connectionService.Update(connection);
+                CommandResult command = (CommandResult)_connectionService.Update(connection);
 
                 ViewBag.Success = command.IsSuccessful;
             }
@@ -222,7 +226,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var command = _connectionService.UpdateStatus(id, isActive);
+                CommandResult command = (CommandResult)_connectionService.UpdateStatus(id, isActive);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
@@ -230,39 +234,51 @@ namespace Fanex.Maintenance.Controller
             return Json(null);
         }
 
+        /// <summary>
+        /// Switches the database server of list connection.
+        /// </summary>
+        /// <param name="model">The switch database server model.</param>
+        /// <returns>Connection list view.</returns>
         [HttpGet]
         public ActionResult SwitchConnection(SwitchConnectionViewModel model)
         {
-            var listDatabase = _databaseServerService.GetAll(isActive: true);
+            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
-            if (ReferenceEquals(model, null) || model.FromDbServerId == 0)
+            if (ReferenceEquals(model, null)
+                || model.FromDbServerId == 0)
             {
                 model = new SwitchConnectionViewModel
                 {
                     FromDbServerId = 0,
-                    DatabaseServers = listDatabase.ToList()
+                    DatabaseServers = databaseServers
                 };
 
                 return View(model);
             }
 
-            var listConnection = _connectionService.GetAll(model.FromDbServerId);
+            List<Connection> connections = _connectionService.GetAll(model.FromDbServerId).ToList();
 
-            model.DatabaseServers = listDatabase.ToList();
-            model.Connections = listConnection.ToList();
+            model.DatabaseServers = databaseServers;
+            model.Connections = connections;
 
             return View(model);
         }
 
+        /// <summary>
+        /// Switch the connection database server.
+        /// </summary>
+        /// <param name="connectionIds">The connection ids.</param>
+        /// <param name="toDbServerId">To database server identifier.</param>
+        /// <returns>Connection list view.</returns>
         [HttpPost]
-        public ActionResult SwithConnectionDbServer(string connectionIds, int toDbServerId)
+        public ActionResult SwitchConnectionDbServer(string connectionIds, int toDbServerId)
         {
             if (Request.IsAjaxRequest())
             {
                 if (!string.IsNullOrWhiteSpace(connectionIds)
                     && toDbServerId != 0)
                 {
-                    var command = _connectionService.SwitchDbServer(connectionIds, toDbServerId);
+                    CommandResult command = (CommandResult)_connectionService.SwitchDbServer(connectionIds, toDbServerId);
 
                     return Json(command.IsSuccessful);
                 }
@@ -272,30 +288,35 @@ namespace Fanex.Maintenance.Controller
         }
 
         [HttpGet]
-        public ActionResult GetDatabaseByDbServerId(int dbServerId)
+        public ActionResult GetDatabaseByDbServerId(int databaseServerId)
         {
             if (Request.IsAjaxRequest())
             {
-                var listDatabase = _databaseService.GetByDbServerId(dbServerId);
+                List<Database> databases = _databaseService.GetByDbServerId(databaseServerId).ToList();
 
-                return Json(listDatabase, JsonRequestBehavior.AllowGet);
+                return Json(databases, JsonRequestBehavior.AllowGet);
             }
 
             return Json(null);
         }
 
+        /// <summary>
+        /// Connections the assign site.
+        /// </summary>
+        /// <param name="id">The connection identifier.</param>
+        /// <returns>Site list view.</returns>
         [HttpGet]
         public ActionResult ConnectionAssignSite(int id)
         {
             var model = new ConnectionAssignSiteViewModel();
-            var listSite = _siteService.GetAll(isActive: true);
-            var connection = _connectionService.GetById(id);
-            var listSiteConnection = _siteService.GetByConnectionId(id);
+            List<Site> sites = _siteService.GetAll(isActive: true).ToList();
+            Connection connection = _connectionService.GetById(id);
+            List<Site> sitesBelongConnection = _siteService.GetByConnectionId(id).ToList();
 
             model.Id = connection.Id;
             model.Name = connection.Name;
-            model.Sites = listSite.ToList();
-            model.SiteConnections = listSiteConnection.ToList();
+            model.Sites = sites;
+            model.SiteConnections = sitesBelongConnection;
 
             return View(model);
         }
@@ -305,7 +326,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var command = _connectionService.AssignSite(connectionId, siteId);
+                CommandResult command = (CommandResult)_connectionService.AssignSite(connectionId, siteId);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
@@ -318,7 +339,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var command = _connectionService.RemoveSite(connectionId, siteId);
+                CommandResult command = (CommandResult)_connectionService.RemoveSite(connectionId, siteId);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
@@ -329,29 +350,17 @@ namespace Fanex.Maintenance.Controller
 
         #region Manage Site
 
-        /// <summary>
-        /// Site list.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult Site(SearchSiteViewModel model)
         {
-            if (ReferenceEquals(model, null))
-            {
-                model = new SearchSiteViewModel { Name = string.Empty };
-            }
+            model = model ?? new SearchSiteViewModel();
+            List<Site> sites = _siteService.GetAll(model.Name).ToList();
 
-            // get all site with number of alias by site
-            var listSite = _siteService.GetAll(model.Name);
-            model.Sites = listSite.ToList();
+            model.Sites = sites.ToList();
 
             return View(model);
         }
 
-        /// <summary>
-        /// Create site.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult CreateSite()
         {
@@ -359,27 +368,26 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Create site.
+        /// Creates the site.
         /// </summary>
-        /// <param name="model">The criteria.</param>
-        /// <returns>Action result.</returns>
+        /// <param name="model">The site view model.</param>
+        /// <returns>Site list view.</returns>
         [HttpPost]
         public ActionResult CreateSite(SiteViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var listSite = _siteService.GetAll();
-                var site = listSite.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+                List<Site> sites = _siteService.GetAll().ToList();
+                Site site = sites.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
 
                 if (!ReferenceEquals(site, null))
                 {
-                    ModelState.AddModelError("Name",
-                            string.Format(ViewResources.DuplicateMsg, site.Name));
+                    ModelState.AddModelError("Name", string.Format(ViewResources.DuplicateMsg, site.Name));
 
                     return View(model);
                 }
 
-                var command = _siteService.Insert(
+                CommandResult command = (CommandResult)_siteService.Insert(
                     new Site
                     {
                         Name = model.Name,
@@ -394,15 +402,14 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Update site.
+        /// Edits the site.
         /// </summary>
-        /// <param name="id">Site object ID.</param>
-        /// <returns>Action result.</returns>
+        /// <param name="id">The site identifier.</param>
+        /// <returns>Site edit view.</returns>
         [HttpGet]
         public ActionResult EditSite(int id)
         {
-            // get site by id
-            var site = _siteService.GetById(id);
+            Site site = _siteService.GetById(id);
 
             var model = new SiteViewModel
             {
@@ -416,27 +423,26 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Update site.
+        /// Edits the site.
         /// </summary>
-        /// <param name="model">The criteria.</param>
-        /// <returns>Action result.</returns>
+        /// <param name="model">The site view model.</param>
+        /// <returns>Site list view.</returns>
         [HttpPost]
         public ActionResult EditSite(SiteViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var listSite = _siteService.GetAll();
-                var site = listSite.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
+                List<Site> sites = _siteService.GetAll().ToList();
+                Site site = sites.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
 
                 if (!ReferenceEquals(site, null))
                 {
-                    ModelState.AddModelError("Name",
-                            string.Format(ViewResources.DuplicateMsg, site.Name));
+                    ModelState.AddModelError("Name", string.Format(ViewResources.DuplicateMsg, site.Name));
 
                     return View(model);
                 }
 
-                var command = _siteService.Update(
+                CommandResult command = (CommandResult)_siteService.Update(
                     new Site
                     {
                         Id = model.Id,
@@ -456,7 +462,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var command = _siteService.UpdateStatus(siteId, isActive);
+                CommandResult command = (CommandResult)_siteService.UpdateStatus(siteId, isActive);
 
                 return Json(command.IsSuccessful);
             }
@@ -468,28 +474,17 @@ namespace Fanex.Maintenance.Controller
 
         #region Database Server
 
-        /// <summary>
-        /// Database server list.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult DatabaseServer(SearchDatabaseServerViewModel model)
         {
-            if (ReferenceEquals(model, null))
-            {
-                model = new SearchDatabaseServerViewModel { Name = string.Empty };
-            }
+            model = model ?? new SearchDatabaseServerViewModel();
+            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(model.Name).ToList();
 
-            var listDatabase = _databaseServerService.GetAll(model.Name);
-            model.DatabaseServers = listDatabase.ToList();
+            model.DatabaseServers = databaseServers;
 
             return View(model);
         }
 
-        /// <summary>
-        /// Create database server.
-        /// </summary>
-        /// <returns>Action result.</returns>
         [HttpGet]
         public ActionResult CreateDatabaseServer()
         {
@@ -497,39 +492,34 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Create database server.
+        /// Creates the database server.
         /// </summary>
-        /// <param name="model">The criteria.</param>
-        /// <returns>Action result.</returns>
+        /// <param name="model">The database server model.</param>
+        /// <returns>Database server list view.</returns>
         [HttpPost]
         public ActionResult CreateDatabaseServer(DatabaseServerViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var listDatabaseServer = _databaseServerService.GetAll();
-                var databaseServer = listDatabaseServer.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+                List<DatabaseServer> databaseServers = _databaseServerService.GetAll().ToList();
+                DatabaseServer databaseServer = databaseServers.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
 
                 if (!ReferenceEquals(databaseServer, null))
                 {
-                    ModelState.AddModelError("Name",
-                              string.Format(ViewResources.DuplicateMsg, databaseServer.Name));
+                    ModelState.AddModelError("Name", string.Format(ViewResources.DuplicateMsg, databaseServer.Name));
 
                     return View(model);
                 }
 
-                var command = _databaseServerService.Insert(new DatabaseServer
-                {
-                    Description = model.Description,
-                    Id = model.Id,
-                    IsActive = model.IsActive,
-                    Name = model.Name,
-                    ServerIP = model.ServerIP
-                });
-
-                if (!command.IsSuccessful)
-                {
-                    return View(model);
-                }
+                CommandResult command = (CommandResult)_databaseServerService.Insert(
+                    new DatabaseServer
+                    {
+                        Description = model.Description,
+                        Id = model.Id,
+                        IsActive = model.IsActive,
+                        Name = model.Name,
+                        ServerIP = model.ServerIP
+                    });
 
                 ViewBag.Success = command.IsSuccessful;
             }
@@ -538,15 +528,14 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit database server.
+        /// Edits the database server.
         /// </summary>
-        /// <param name="id">DB server ID.</param>
-        /// <returns>Action result.</returns>
+        /// <param name="id">The database server identifier.</param>
+        /// <returns>Database server edit view.</returns>
         [HttpGet]
         public ActionResult EditDatabaseServer(int id)
         {
-            // get by id
-            var databaseServer = _databaseServerService.GetById(id);
+            DatabaseServer databaseServer = _databaseServerService.GetById(id);
 
             var model = new DatabaseServerViewModel
             {
@@ -561,39 +550,34 @@ namespace Fanex.Maintenance.Controller
         }
 
         /// <summary>
-        /// Edit database server.
+        /// Edits the database server.
         /// </summary>
-        /// <param name="model">The criteria.</param>
-        /// <returns>Action result.</returns>
+        /// <param name="model">The database server view model.</param>
+        /// <returns>Database server list view.</returns>
         [HttpPost]
         public ActionResult EditDatabaseServer(DatabaseServerViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var listDatabaseServer = _databaseServerService.GetAll();
-                var databaseServer = listDatabaseServer.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
+                List<DatabaseServer> databaseServers = _databaseServerService.GetAll().ToList();
+                DatabaseServer databaseServer = databaseServers.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
 
                 if (!ReferenceEquals(databaseServer, null))
                 {
-                    ModelState.AddModelError("Name",
-                              string.Format(ViewResources.DuplicateMsg, databaseServer.Name));
+                    ModelState.AddModelError("Name", string.Format(ViewResources.DuplicateMsg, databaseServer.Name));
 
                     return View(model);
                 }
 
-                var command = _databaseServerService.Update(new DatabaseServer
-                {
-                    Description = model.Description,
-                    Id = model.Id,
-                    IsActive = model.IsActive,
-                    Name = model.Name,
-                    ServerIP = model.ServerIP
-                });
-
-                if (!command.IsSuccessful)
-                {
-                    return View(model);
-                }
+                CommandResult command = (CommandResult)_databaseServerService.Update(
+                    new DatabaseServer
+                    {
+                        Description = model.Description,
+                        Id = model.Id,
+                        IsActive = model.IsActive,
+                        Name = model.Name,
+                        ServerIP = model.ServerIP
+                    });
 
                 ViewBag.Success = command.IsSuccessful;
             }
@@ -601,18 +585,12 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// Update database server status.
-        /// </summary>
-        /// <param name="databaseServerId">Database server ID.</param>
-        /// <param name="isActive">Is active or not.</param>
-        /// <returns>Action result.</returns>
         [HttpPost]
         public ActionResult UpdateStatusDatabaseServer(int databaseServerId, bool isActive)
         {
             if (Request.IsAjaxRequest())
             {
-                var command = _databaseServerService.UpdateStatus(databaseServerId, isActive);
+                CommandResult command = (CommandResult)_databaseServerService.UpdateStatus(databaseServerId, isActive);
 
                 return Json(command.IsSuccessful.ToString().ToLower());
             }
@@ -624,65 +602,77 @@ namespace Fanex.Maintenance.Controller
 
         #region Database
 
+        /// <summary>
+        /// The database list view.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Database list view.</returns>
         [HttpGet]
         public ActionResult Database(SearchDatabaseViewModel model)
         {
-            if (ReferenceEquals(model, null))
-            {
-                model = new SearchDatabaseViewModel { DbServerId = 0 };
-            }
+            model = model ?? new SearchDatabaseViewModel();
 
-            var listDatabase = _databaseService.GetAll(model.DbServerId);
-            var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
+            List<Database> databases = _databaseService.GetAll(model.DbServerId).ToList();
+            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
-            model.Database = listDatabase.ToList();
-            model.DatabaseServers = listDatabaseServer.ToList();
+            model.Database = databases;
+            model.DatabaseServers = databaseServers;
 
             return View(model);
         }
 
+        /// <summary>
+        /// Creates the database.
+        /// </summary>
+        /// <param name="databaseId">The database identifier.</param>
+        /// <returns>Database create new view.</returns>
         [HttpGet]
         public ActionResult CreateDatabase(int databaseId)
         {
-            var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
+            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
             var model = new DatabaseViewModel
             {
                 DbServerId = databaseId,
-                DatabaseServers = listDatabaseServer.ToList()
+                DatabaseServers = databaseServers
             };
 
             return View(model);
         }
 
+        /// <summary>
+        /// Creates the database.
+        /// </summary>
+        /// <param name="model">The database view model.</param>
+        /// <returns>Database list view.</returns>
         [HttpPost]
         public ActionResult CreateDatabase(DatabaseViewModel model)
         {
-            var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
-            model.DatabaseServers = listDatabaseServer.ToList();
+            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
+
+            model.DatabaseServers = databaseServers;
 
             if (ModelState.IsValid)
             {
-                var listDatabase = _databaseService.GetAll(model.DbServerId);
-                var database = listDatabase.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+                List<Database> databases = _databaseService.GetAll(model.DbServerId).ToList();
+                Database database = databases.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
 
                 if (!ReferenceEquals(database, null))
                 {
-                    ModelState.AddModelError("Name",
-                              string.Format(ViewResources.DuplicateMsg, database.Name));
-                    ModelState.AddModelError("DbServerId",
-                              string.Format(ViewResources.DuplicateMsg, database.DatabaseServer.Name));
+                    ModelState.AddModelError("Name", string.Format(ViewResources.DuplicateMsg, database.Name));
+                    ModelState.AddModelError("DbServerId", string.Format(ViewResources.DuplicateMsg, database.DatabaseServer.Name));
 
                     return View(model);
                 }
 
-                var command = _databaseService.Insert(new Database
-                                {
-                                    Name = model.Name,
-                                    ServerAlias = model.ServerAlias,
-                                    IsActive = model.IsActive,
-                                    DatabaseServer = new DatabaseServer { Id = model.DbServerId }
-                                });
+                CommandResult command = (CommandResult)_databaseService.Insert(
+                    new Database
+                    {
+                        Name = model.Name,
+                        ServerAlias = model.ServerAlias,
+                        IsActive = model.IsActive,
+                        DatabaseServer = new DatabaseServer { Id = model.DbServerId }
+                    });
 
                 ViewBag.Success = command.IsSuccessful;
             }
@@ -690,13 +680,20 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        /// <summary>
+        /// Edits the database.
+        /// </summary>
+        /// <param name="id">The database identifier.</param>
+        /// <returns>Database edit view.</returns>
         [HttpGet]
         public ActionResult EditDatabase(int id)
         {
             var model = new DatabaseViewModel();
-            var database = _databaseService.GetById(id);
-            var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
-            model.DatabaseServers = listDatabaseServer.ToList();
+
+            Database database = _databaseService.GetById(id);
+            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
+
+            model.DatabaseServers = databaseServers;
             model.Id = database.Id;
             model.Name = database.Name;
             model.ServerAlias = database.ServerAlias;
@@ -706,33 +703,39 @@ namespace Fanex.Maintenance.Controller
             return View(model);
         }
 
+        /// <summary>
+        /// Edits the database.
+        /// </summary>
+        /// <param name="model">The database view model.</param>
+        /// <returns>Database list view.</returns>
         [HttpPost]
         public ActionResult EditDatabase(DatabaseViewModel model)
         {
-            var listDatabaseServer = _databaseServerService.GetAll(isActive: true);
-            model.DatabaseServers = listDatabaseServer.ToList();
+            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
+
+            model.DatabaseServers = databaseServers;
 
             if (ModelState.IsValid)
             {
-                var listDatabase = _databaseService.GetAll(model.DbServerId);
-                var aliasDatabase = listDatabase.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
+                List<Database> databases = _databaseService.GetAll(model.DbServerId).ToList();
+                Database database = databases.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
 
-                if (!ReferenceEquals(aliasDatabase, null))
+                if (!ReferenceEquals(database, null))
                 {
-                    ModelState.AddModelError("Name",
-                              string.Format(ViewResources.DuplicateMsg, aliasDatabase.Name));
+                    ModelState.AddModelError("Name", string.Format(ViewResources.DuplicateMsg, database.Name));
 
                     return View(model);
                 }
 
-                var command = _databaseService.Update(new Database
-                {
-                    Id = model.Id,
-                    Name = model.Name,
-                    ServerAlias = model.ServerAlias,
-                    IsActive = model.IsActive,
-                    DatabaseServer = new DatabaseServer { Id = model.DbServerId }
-                });
+                CommandResult command = (CommandResult)_databaseService.Update(
+                    new Database
+                    {
+                        Id = model.Id,
+                        Name = model.Name,
+                        ServerAlias = model.ServerAlias,
+                        IsActive = model.IsActive,
+                        DatabaseServer = new DatabaseServer { Id = model.DbServerId }
+                    });
 
                 ViewBag.Success = command.IsSuccessful;
             }
@@ -745,7 +748,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                var command = _databaseService.UpdateStatus(databaseId, isActive);
+                CommandResult command = (CommandResult)_databaseService.UpdateStatus(databaseId, isActive);
 
                 return Json(command.IsSuccessful);
             }
@@ -758,199 +761,39 @@ namespace Fanex.Maintenance.Controller
         #region Log management
 
         /// <summary>
-        /// View log page.
+        /// The view execute stored procedure log.
         /// </summary>
-        /// <param name="id">Page index.</param>
-        /// <param name="size">Number of items per page.</param>
-        /// <param name="q">Log name filter.</param>
-        /// <param name="username">Username filter.</param>
-        /// <param name="from">From DateTime.</param>
-        /// <param name="to">To DateTime.</param>
-        /// <param name="filterBy">Draw filter.</param>
-        /// <returns>Action result.</returns>
+        /// <param name="model">The log view model.</param>
+        /// <returns>The log view.</returns>
         [HttpGet]
-        public ActionResult Log(
-            int id = 1,
-            int size = 20,
-            string q = "",
-            string username = "",
-            DateTime? from = null,
-            DateTime? to = null,
-            int filterBy = 1)
+        public ActionResult Log(SearchLogViewModel model)
         {
-            var criteria = new LogExecSpSearchCriteria
-            {
-                PageIndex = id,
-                PageSize = size,
-                Name = q,
-                Username = username,
-                From = from ?? DateTime.Now,
-                To = to ?? DateTime.Now.AddDays(1),
-                FilterType = filterBy
-            };
-
             int totalLogs = 0;
 
-            criteria.Name = criteria.Name ?? string.Empty;
+            IQueryable<LogExecSp> listLog = _logService.SearchLog(
+                                                model.PageIndex,
+                                                model.PageSize,
+                                                ref totalLogs,
+                                                model.Name,
+                                                model.Username,
+                                                model.From,
+                                                model.To,
+                                                model.FilterType);
 
-            IQueryable<LogExecSp> listLog = _logService.SearchExecSp(
-                                                criteria.PageIndex,
-                                                criteria.PageSize,
-                                                out totalLogs,
-                                                criteria.Name,
-                                                criteria.Username,
-                                                criteria.From,
-                                                criteria.To,
-                                                criteria.FilterType);
-            ViewBag.ListLog = new PagerList<LogExecSp>(criteria.PageIndex, criteria.PageSize, totalLogs, listLog);
+            model.LogDatas = new PagerList<LogExecSp>(model.PageIndex, model.PageSize, totalLogs, listLog);
 
-            return View(criteria);
-        }
-
-        /// <summary>
-        /// Search log.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Action result.</returns>
-        [HttpPost]
-        public ActionResult Log(LogExecSpSearchCriteria criteria)
-        {
-            return RedirectToAction(
-             "Log",
-             new
-             {
-                 id = criteria.PageIndex,
-                 size = criteria.PageSize,
-                 q = criteria.Name,
-                 username = criteria.Username,
-                 from = criteria.From.ToString("MMM dd,yyyy"),
-                 to = criteria.To.ToString("MMM dd,yyyy"),
-                 filterBy = criteria.FilterType
-             });
+            return View(model);
         }
 
         #endregion Log management
 
-        #region Partial view
-
-        /// <summary>
-        /// Insert connection log alias.
-        /// </summary>
-        /// <param name="log">Log execute SP.</param>
-        /// <returns>Partial view result.</returns>
-        public PartialViewResult _ConnectionLog_Alias_Insert(LogExecSp log)
-        {
-            var listSite = new List<LogData>();
-            var listData = _logService.GetValueAliasInsert(log, ref listSite);
-
-            ViewBag.ListSite = listSite;
-
-            return PartialView(listData);
-        }
-
-        /// <summary>
-        /// Update connection log alias.
-        /// </summary>
-        /// <param name="log">Log execute SP.</param>
-        /// <returns>Partial view result.</returns>
-        public PartialViewResult _ConnectionLog_Alias_Update(LogExecSp log)
-        {
-            var listSite = new List<LogData>();
-            var listOldSite = new List<LogData>();
-
-            var listData = _logService.GetValueAliasUpdate(log, ref listSite, ref listOldSite);
-
-            ViewBag.ListSite = listSite;
-            ViewBag.ListOldSite = listOldSite;
-
-            return PartialView(listData);
-        }
-
-        /// <summary>
-        /// View log data.
-        /// </summary>
-        /// <param name="log">Log execute SP.</param>
-        /// <returns>Partial view result.</returns>
-        public PartialViewResult _ConnectionLog_LogData(LogExecSp log)
-        {
-            var listData = new List<LogData>();
-
-            switch (log.ActionId)
-            {
-                case (int)ConLogAction.ConnectionString_ConnectionString_Insert:
-                    listData = _logService.GetValueConnectionInsert(log);
-                    ViewBag.IsNew = true;
-
-                    return PartialView(listData);
-
-                case (int)ConLogAction.ConnectionString_ConnectionString_Update:
-                case (int)ConLogAction.ConnectionString_ConnectionString_UpdateDefaultConnection:
-                    listData = _logService.GetValueConnectionUpdate(log);
-                    ViewBag.IsNew = false;
-
-                    return PartialView(listData);
-
-                case (int)ConLogAction.ConnectionString_DatabaseServer_Insert:
-                    listData = _logService.GetValueDatabaseServerInsert(log);
-                    ViewBag.IsNew = true;
-
-                    return PartialView(listData);
-
-                case (int)ConLogAction.ConnectionString_DatabaseServer_Update:
-                    listData = _logService.GetValueDatabaseServerUpdate(log);
-                    ViewBag.IsNew = false;
-
-                    return PartialView(listData);
-
-                case (int)ConLogAction.ConnectionString_Site_Insert:
-                    listData = _logService.GetValueSiteInsert(log);
-                    ViewBag.IsNew = true;
-
-                    return PartialView(listData);
-
-                case (int)ConLogAction.ConnectionString_Site_Update:
-                    listData = _logService.GetValueSiteUpdate(log);
-                    ViewBag.IsNew = false;
-
-                    return PartialView(listData);
-            }
-
-            listData = _logService.GetValueUpdateStatus(log);
-            ViewBag.IsNew = false;
-
-            return PartialView(listData);
-        }
-
-        /// <summary>
-        /// Change connection.
-        /// </summary>
-        /// <param name="log">Execute SP log.</param>
-        /// <returns>Partial view result.</returns>
-        public PartialViewResult _ConnectionLog_LogData_ChangeConnection(LogExecSp log)
-        {
-            var listOld = new List<Connection>();
-            var listConnection = _logService.GetValueChangeConnection(log, ref listOld);
-
-            ViewBag.ListOld = listOld;
-
-            return PartialView(listConnection);
-        }
-
-        #endregion Partial view
-
         #region Private
 
-        /// <summary>
-        /// Get select list item of all database server.
-        /// </summary>
-        /// <param name="selectedId">Selected ID.</param>
-        /// <returns>List of selected list item.</returns>
         private List<SelectListItem> GetSelectListDatabaseServer(int? selectedId = null)
         {
-            // get all
-            var listDatabaseServer = _databaseServerService.GetAll();
+            List<DatabaseServer> databaseServers = _databaseServerService.GetAll().ToList();
 
-            return listDatabaseServer.Select(d => new SelectListItem
+            return databaseServers.Select(d => new SelectListItem
             {
                 Text = string.Format("{0} ({1})", d.ServerIP, d.Name),
                 Value = d.Id.ToString(),
@@ -958,15 +801,9 @@ namespace Fanex.Maintenance.Controller
             }).ToList();
         }
 
-        /// <summary>
-        /// Get select list item of all site.
-        /// </summary>
-        /// <param name="selectedId">Selected ID.</param>
-        /// <returns>List of selected list item.</returns>
         private List<SelectListItem> GetSelectListSite(int? selectedId = null)
         {
-            // get all
-            var listSite = _siteService.GetAll();
+            List<Site> listSite = _siteService.GetAll().ToList();
 
             return listSite.Select(s => new SelectListItem
             {

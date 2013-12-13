@@ -9,13 +9,14 @@
 
 namespace Fanex.Maintenance.ViewModel.Connection
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using Fanex.ConnectionString.Domain;
     using System.Web.Mvc;
+    using Fanex.ConnectionString.Domain;
 
+    /// <summary>
+    /// The connection assign site view model.
+    /// </summary>
     public class ConnectionAssignSiteViewModel
     {
         public int Id { get; set; }

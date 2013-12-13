@@ -11,9 +11,9 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
 {
     using System;
     using System.Collections.Generic;
+    using Fanex.Maintenance.Core.Model;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Repository.Impl.AppLog;
-    using Fanex.Maintenance.Core.Model;
 
     /// <summary>
     /// Log service.

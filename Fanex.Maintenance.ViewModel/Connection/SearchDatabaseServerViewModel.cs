@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="DatabaseViewModel.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SearchDatabaseServerViewModel.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,6 +12,9 @@ namespace Fanex.Maintenance.ViewModel.Connection
     using System.Collections.Generic;
     using Fanex.ConnectionString.Domain;
 
+    /// <summary>
+    /// The search database server view model.
+    /// </summary>
     public class SearchDatabaseServerViewModel
     {
         public SearchDatabaseServerViewModel()

@@ -10,11 +10,11 @@
 namespace Fanex.Maintenance.Repository.Criteria.MailService
 {
     using System.ComponentModel.DataAnnotations;
-    using Fanex.Maintenance.Repository;
     using Fanex.MailDeliver.Model;
+    using Fanex.Maintenance.Repository;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// The mail setting view model.
     /// </summary>
     public class MailSettingViewModel
     {
