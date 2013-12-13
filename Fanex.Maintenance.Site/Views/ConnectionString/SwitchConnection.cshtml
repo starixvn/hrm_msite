@@ -1,7 +1,7 @@
 ﻿@using Fanex.Maintenance.ViewModel.Connection
 @model SwitchConnectionViewModel
 @{
-    ViewBag.Title = ViewResource.Manage_Connection;
+    ViewBag.Title = ViewResource.SwitchConnection;
     Layout = "~/Views/Shared/_Layout.cshtml";
     int i = 0;
 }
@@ -11,7 +11,7 @@
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
-        @Html.ActionLink("+ Create New", "CreateConnection", "ConnectionString", null, new { @class = "lnk" })
+        @Html.ActionLink("← " + ViewResource.Back_To_List, "Connection", "ConnectionString", null, new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm("SwitchConnection", "ConnectionString", FormMethod.Get))

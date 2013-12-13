@@ -30,7 +30,7 @@ namespace Fanex.Maintenance.Repository.Impl.AppLog
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 var param = criteria.GetSpParams();
-
+                
                 var list = db.Query<Log, LogCategory, Machine, Log>(
                     (l, c, m) =>
                     {

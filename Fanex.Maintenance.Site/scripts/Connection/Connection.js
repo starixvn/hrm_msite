@@ -65,6 +65,7 @@ var Connection = function ($) {
         SwitchDbServer: function () {
             var connectionIds = "";
             var toDbServerId = $('#ToDbServerId').val();
+            var dbServerName = $('#ToDbServerId option:selected').text();
 
             $('.update-server').each(function (i, item) {
                 var $this = $(this);
@@ -93,9 +94,12 @@ var Connection = function ($) {
                     NAP.loadingBox.close();
                 },
                 success: function (result) {
-                    if (result) {
+                    if (result.IsSuccessful) {
                         NAP.headlineMsgBox.showInfo('Your changes were saved!', { closeBtn: false });
                         NAP.redirect('ConnectionString/Connection?DbServerId=' + toDbServerId);
+                    }
+                    else {
+                        NAP.headlineMsgBox.showInfo("The database server " + dbServerName + " had no database : " + result.Message, { closeBtn: true });
                     }
                 },
                 error: function (xhr, status, err) {

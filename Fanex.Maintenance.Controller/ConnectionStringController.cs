@@ -79,9 +79,11 @@ namespace Fanex.Maintenance.Controller
             model = model ?? new SearchConnectionViewModel();
             List<Connection> connections = _connectionService.GetAll(model.DbServerId).ToList();
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
-            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageConnection);
+            int policyEdit = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageConnection);
+            int policySwitchConnection = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.SwitchConenction);
 
-            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
+            model.HasEditPermission = policyEdit >= (int)Constant.Policy.Host;
+            model.HasSwitchConnectionPermission = policySwitchConnection >= (int)Constant.Policy.Host;
             model.DatabaseServers = databaseServers;
             model.Connections = connections;
 
@@ -300,7 +302,7 @@ namespace Fanex.Maintenance.Controller
                 {
                     CommandResult command = (CommandResult)_connectionService.SwitchDbServer(connectionIds, toDbServerId);
 
-                    return Json(command.IsSuccessful);
+                    return Json(command);
                 }
             }
 
@@ -811,7 +813,6 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The log view model.</param>
         /// <returns>The log view.</returns>
         [HttpGet]
-        [NapAuth(FunctionKey = SiteFunctionKeys.ViewLog, Policy = Constant.Policy.Read)]
         public ActionResult Log(SearchLogViewModel model)
         {
             int totalLogs = 0;

@@ -78,6 +78,11 @@ namespace Fanex.Maintenance.Controller
             }
         }
 
+        public PartialViewResult _Menu()
+        {
+            return PartialView("~/Views/Shared/_Menu.cshtml");
+        }
+
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
         {
             return new JsonResult()

@@ -12,7 +12,11 @@
         <span class="title">@ViewBag.Title</span>
         @if (Model.HasEditPermission)
         { 
-            @Html.ActionLink("+ Create New", "CreateConnection", "ConnectionString", null, new { @class = "lnk" })
+            @Html.ActionLink("+ Create New", "CreateConnection", "ConnectionString", null, new { @class = "lnk" })            
+        }
+        @if (Model.HasSwitchConnectionPermission)
+        { 
+            @Html.ActionLink("+ Switch Connection", "SwitchConnection", "ConnectionString", null, new { @class = "lnk" })
         }
     </h1>
 }

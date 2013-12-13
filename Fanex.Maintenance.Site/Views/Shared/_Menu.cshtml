@@ -1,0 +1,37 @@
+﻿<nav>
+    <ul class="menu">
+        <li class="first"><a href="~/?ref=logo">Home</a></li>
+        <li class="has-kids"><a href="javascript:void(0);">@ViewResource.AppLogs</a>
+            <ul>
+                <li>@Html.ActionLink(ViewResource.AppLogs_ViewLog, string.Empty, "Log")</li>
+                <li>@Html.ActionLink(ViewResource.AppLogs_MangeMachines, string.Empty, "Machine")</li>
+            </ul>
+        </li>
+        <li class="has-kids"><a href="javascript:;">Mail Service</a>
+            <ul>
+                <li>@Html.ActionLink(@ViewResource.Mail_List, "MailList", "Mail")</li>
+                <li>@Html.ActionLink(@ViewResource.Mail_Setting, "MailSetting", "Mail")</li>
+                <li>@Html.ActionLink(@ViewResource.Mail_Config, "MailConfig", "Mail")</li>
+            </ul>
+        </li>
+        <li class="has-kids"><a href="javascript:;">Database Report</a>
+            <ul>
+                <li>@Html.ActionLink("Data Integrity", "DataIntegrity", "DatabaseReport")</li>
+            </ul>
+        </li>
+        <li class="has-kids"><a href="javascript:;">Licensee Setting</a>
+            <ul>
+                <li>@Html.ActionLink("Lrf Domain", "LrfDomain", "LicenseeSetting")</li>
+            </ul>
+        </li>
+        <li class="first"><a href="javascript:;">Connection String</a>
+            <ul>
+                <li>@Html.ActionLink(ViewResource.Site, "Site", "ConnectionString")</li>
+                <li>@Html.ActionLink(ViewResource.DatabaseServer, "DatabaseServer", "ConnectionString")</li>
+                <li>@Html.ActionLink(ViewResource.Database, "Database", "ConnectionString")</li>
+                <li>@Html.ActionLink(ViewResource.Connection, "Connection", "ConnectionString")</li>
+                <li>@Html.ActionLink(ViewResource.AppLogs_ViewLog, "Log", "ConnectionString")</li>
+            </ul>
+        </li>
+    </ul>
+</nav>

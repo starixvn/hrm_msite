@@ -840,4 +840,7 @@
   <data name="RequiredMsg" xml:space="preserve">
     <value>The {0} field is required.</value>
   </data>
+  <data name="SwitchConnection" xml:space="preserve">
+    <value>Switch Connection</value>
+  </data>
 </root>

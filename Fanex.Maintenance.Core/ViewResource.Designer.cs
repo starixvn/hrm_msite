@@ -2005,6 +2005,15 @@ namespace Fanex.Maintenance.Repository {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switch Connection.
+        /// </summary>
+        public static string SwitchConnection {
+            get {
+                return ResourceManager.GetString("SwitchConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time.
         /// </summary>
         public static string Time {
