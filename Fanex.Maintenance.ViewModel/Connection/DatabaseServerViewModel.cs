@@ -17,21 +17,37 @@ namespace Fanex.Maintenance.ViewModel.Connection
     /// </summary>
     public class DatabaseServerViewModel
     {
+        private string _name = string.Empty;
+        private string _serverIp = string.Empty;
+        private string _description = string.Empty;
+
         public int Id { get; set; }
 
         [Required]
         [StringLength(150, MinimumLength = 5,
            ErrorMessageResourceName = "InputLengthValidationMsg",
            ErrorMessageResourceType = typeof(ViewResources))]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name != null ? _name.Trim() : string.Empty; }
+            set { _name = value; }
+        }
 
         [Required]
         [StringLength(150, MinimumLength = 10,
            ErrorMessageResourceName = "InputLengthValidationMsg",
            ErrorMessageResourceType = typeof(ViewResources))]
-        public string ServerIP { get; set; }
+        public string ServerIP
+        {
+            get { return _serverIp != null ? _serverIp.Trim() : string.Empty; }
+            set { _serverIp = value; }
+        }
 
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return _description != null ? _description.Trim() : string.Empty; }
+            set { _description = value; }
+        }
 
         public bool IsActive { get; set; }
     }

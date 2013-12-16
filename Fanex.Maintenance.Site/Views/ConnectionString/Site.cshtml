@@ -53,6 +53,9 @@
             <th>
                 @ViewResource.Active
             </th>
+            <th>
+                @ViewResource.Connection
+            </th>
             @if (Model.HasEditPermission)
             { 
                 <th>
@@ -95,6 +98,9 @@
                     {
                         <input type="checkbox" sid="@item.Id" sname="@item.Name" class="update-status" @disable/>
                     }
+                </td>
+                <td class="align-center">
+                    <a href="#" class="connection" sid="@item.Id">@ViewResource.View</a>
                 </td>
                 @if (Model.HasEditPermission)
                 { 

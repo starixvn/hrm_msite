@@ -373,6 +373,16 @@ namespace Fanex.Maintenance.Controller
 
             return Json(null);
         }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Read)]
+        public ActionResult GetConnectionBySite(int siteId)
+        {
+            List<Connection> connections = _connectionService.GetBySiteId(siteId).ToList();
+
+            return View(connections);
+        }
+
         #endregion
 
         #region Manage Site
@@ -699,12 +709,13 @@ namespace Fanex.Maintenance.Controller
             if (ModelState.IsValid)
             {
                 List<Database> databases = _databaseService.GetAll(model.DbServerId).ToList();
-                Database database = databases.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+                Database database = databases.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.ServerAlias.ToLower() == model.ServerAlias.ToLower()).FirstOrDefault();
 
                 if (!ReferenceEquals(database, null))
                 {
                     ModelState.AddModelError("Name", string.Format(ViewResources.DuplicateMsg, database.Name));
                     ModelState.AddModelError("DbServerId", string.Format(ViewResources.DuplicateMsg, database.DatabaseServer.Name));
+                    ModelState.AddModelError("ServerAlias", string.Format(ViewResources.DuplicateMsg, database.ServerAlias));
 
                     return View(model);
                 }

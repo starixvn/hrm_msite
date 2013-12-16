@@ -19,9 +19,15 @@ namespace Fanex.Maintenance.ViewModel.Connection
     /// </summary>
     public class ConnectionAssignSiteViewModel
     {
+        private string _name = string.Empty;
+
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name != null ? _name.Trim() : string.Empty; }
+            set { _name = value; }
+        }
 
         public List<Site> Sites { get; set; }
 

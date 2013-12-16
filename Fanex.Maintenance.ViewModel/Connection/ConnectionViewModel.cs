@@ -21,12 +21,21 @@ namespace Fanex.Maintenance.ViewModel.Connection
     /// </summary>
     public class ConnectionViewModel
     {
+        private string _name = string.Empty;
+        private string _login = string.Empty;
+        private string _password = string.Empty;
+        private string _freeText = string.Empty;
+
         public int Id { get; set; }
-        
+
         [StringLength(150, MinimumLength = 5,
            ErrorMessageResourceName = "InputLengthValidationMsg",
            ErrorMessageResourceType = typeof(ViewResources))]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name != null ? _name.Trim() : string.Empty; }
+            set { _name = value; }
+        }
 
         [Required]
         public int DatabaseId { get; set; }
@@ -38,11 +47,23 @@ namespace Fanex.Maintenance.ViewModel.Connection
         [StringLength(150, MinimumLength = 5,
            ErrorMessageResourceName = "InputLengthValidationMsg",
            ErrorMessageResourceType = typeof(ViewResources))]
-        public string LoginName { get; set; }
+        public string LoginName
+        {
+            get { return _login != null ? _login.Trim() : string.Empty; }
+            set { _login = value; }
+        }
 
-        public string Password { get; set; }
+        public string Password
+        {
+            get { return _password != null ? _password.Trim() : string.Empty; }
+            set { _password = value; }
+        }
 
-        public string FreeText { get; set; }
+        public string FreeText
+        {
+            get { return _freeText != null ? _freeText.Trim() : string.Empty; }
+            set { _freeText = value; }
+        }
 
         public bool IsActive { get; set; }
 

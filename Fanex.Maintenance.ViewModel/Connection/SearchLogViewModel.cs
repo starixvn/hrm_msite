@@ -21,10 +21,13 @@ namespace Fanex.Maintenance.ViewModel.Connection
     /// </summary>
     public class SearchLogViewModel
     {
+        private string _name;
+        private string _username;
+
         public SearchLogViewModel()
         {
-            Name = string.Empty;
-            Username = string.Empty;
+            _name = string.Empty;
+            _username = string.Empty;
             From = DateTime.Now;
             To = DateTime.Now;
             PageIndex = 1;
@@ -35,9 +38,17 @@ namespace Fanex.Maintenance.ViewModel.Connection
 
         public int PageSize { get; set; }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name != null ? _name.Trim() : string.Empty; }
+            set { _name = value; }
+        }
 
-        public string Username { get; set; }
+        public string Username
+        {
+            get { return _username != null ? _username.Trim() : string.Empty; }
+            set { _username = value; }
+        }
 
         [DisplayFormat(DataFormatString = "{0:MMM dd,yyyy}",
                ApplyFormatInEditMode = true)]

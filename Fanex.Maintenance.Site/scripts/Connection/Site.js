@@ -25,6 +25,28 @@ var Site = function ($) {
                     NAP.handleAjaxError(xhr, status, err);
                 }
             });
+        },
+
+        GetConnection: function (siteId) {
+            $.ajax({
+                url: NAP.resolveClientUrl("ConnectionString/GetConnectionBySite"),
+                data: { siteId: siteId },
+                type: 'GET',
+                dataType: 'HTML',
+                cache: false,
+                beforeSend: function () {
+                    NAP.loadingBox.show();
+                },
+                complete: function () {
+                    NAP.loadingBox.close();
+                },
+                success: function (result) {
+                    NAP.popup("Details", result);
+                },
+                error: function (xhr, status, err) {
+                    NAP.handleAjaxError(xhr, status, err);
+                }
+            });
         }
     };
 
@@ -55,5 +77,11 @@ $(document).ready(function () {
         NAP.headlineMsgBox.confirm("This change will effect all application! Are you sure?", function () {
             document.forms[0].submit();
         });
+    });
+
+    $('.connection').click(function () {
+        var $this = $(this);
+        var siteId = $this.attr('sid');
+        Site.GetConnection(siteId);
     });
 });

@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Fanex.ConnectionString">
-      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
+      <HintPath>..\..\fanex\msite\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\_Dependencies\Others\Fanex.NAP.Core.dll</HintPath>

@@ -43,6 +43,16 @@
             <Mapping DataField="DatabaseId" ObjectProperty="Id" />
             <Mapping DataField="DatabaseName" ObjectProperty="Name" />
         </Setting>
+        <Setting Key="ConnectionString_Connection_GetBySiteId" SpName="Connection_GetBySiteId" DbName="connectionstring" Plain="1" >
+            <Mapping DataField="CreatorId" ObjectProperty="Id" />
+            <Mapping DataField="CreatorUsername" ObjectProperty="Name" />
+            <Mapping DataField="ModifierId" ObjectProperty="Id" />
+            <Mapping DataField="ModifierUsername" ObjectProperty="Name" />
+            <Mapping DataField="DbServerId" ObjectProperty="Id" />
+            <Mapping DataField="ServerName" ObjectProperty="Name" />
+            <Mapping DataField="DatabaseId" ObjectProperty="Id" />
+            <Mapping DataField="DatabaseName" ObjectProperty="Name" />
+        </Setting>
     </Function>
     <Function Name="DatabaseServer">
         <Setting Key="ConnectionString_DatabaseServer_GetAll" SpName="DatabaseServer_GetAll" DbName="connectionstring" Plain="1">

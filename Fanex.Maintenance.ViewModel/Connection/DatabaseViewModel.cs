@@ -21,19 +21,30 @@ namespace Fanex.Maintenance.ViewModel.Connection
     /// </summary>
     public class DatabaseViewModel
     {
+        private string _name = string.Empty;
+        private string _serverAlias = string.Empty;
+
         public int Id { get; set; }
 
         [Required]
         [StringLength(150, MinimumLength = 5,
            ErrorMessageResourceName = "InputLengthValidationMsg",
            ErrorMessageResourceType = typeof(ViewResources))]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name != null ? _name.Trim() : string.Empty; }
+            set { _name = value; }
+        }
 
         [Required]
         [StringLength(150, MinimumLength = 5,
            ErrorMessageResourceName = "InputLengthValidationMsg",
            ErrorMessageResourceType = typeof(ViewResources))]
-        public string ServerAlias { get; set; }
+        public string ServerAlias
+        {
+            get { return _serverAlias != null ? _serverAlias.Trim() : string.Empty; }
+            set { _serverAlias = value; }
+        }
 
         public bool IsActive { get; set; }
 

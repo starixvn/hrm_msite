@@ -17,13 +17,19 @@ namespace Fanex.Maintenance.ViewModel.Connection
     /// </summary>
     public class SearchDatabaseServerViewModel
     {
+        private string _name;
+
         public SearchDatabaseServerViewModel()
         {
-            Name = string.Empty;
+            _name = string.Empty;
             HasEditPermission = false;
         }
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name != null ? _name.Trim() : string.Empty; }
+            set { _name = value; }
+        }
 
         public bool IsActive { get; set; }
 
