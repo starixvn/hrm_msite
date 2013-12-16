@@ -64,7 +64,7 @@
             <div class="edit-field">
                 @if (!success)
                 {
-                    <input type="submit" value="@ViewResource.Save" />
+                    <input type="button" value="@ViewResource.Save" id="btnSave"/>
                     <button class="cancel" onclick="NAP.redirect('ConnectionString/Site', 0); return false;">@ViewResource.Cancel</button>
                 }
             </div>
@@ -74,6 +74,8 @@
 }
 @section Foot
 {
+    @Scripts.Render("~/scripts/connectionstring-site")
+
     @if (success)
     {
         string dialogMsg = string.Format(ViewResource.UpSuccessMsg, ViewResource.Site, 3);

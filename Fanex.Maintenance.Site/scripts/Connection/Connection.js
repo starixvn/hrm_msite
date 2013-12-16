@@ -158,7 +158,14 @@ $(document).ready(function () {
     });
 
     $('#btnSwitchServer').click(function () {
-        Connection.SwitchDbServer();
+        NAP.headlineMsgBox.confirm("This change will effect all application! Are you sure?", function () {
+            Connection.SwitchDbServer();
+        });
     });
 
+    $('#btnSave').click(function () {
+        NAP.headlineMsgBox.confirm("This change will effect all application! Are you sure?", function () {
+            document.forms[0].submit();
+        });
+    });
 });

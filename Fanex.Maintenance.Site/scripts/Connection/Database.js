@@ -50,4 +50,10 @@ $(document).ready(function () {
             Database.UpdateStatusDatabase(databaseId, active);
         });
     });
+
+    $('#btnSave').click(function () {
+        NAP.headlineMsgBox.confirm("This change will effect all application! Are you sure?", function () {
+            document.forms[0].submit();
+        });
+    });
 });

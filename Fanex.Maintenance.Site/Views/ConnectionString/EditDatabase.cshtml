@@ -49,7 +49,7 @@
                 @Html.DropDownListFor(m => m.DbServerId, Model.SelectListDatabaseServer)
             </div>
         </div>
-         <div class="form-row required">
+        <div class="form-row required">
             <div class="lbl-field">
                 @Html.Label(ViewResource.ServerAlias)
             </div>
@@ -72,7 +72,7 @@
             <div class="edit-field">
                 @if (!success)
                 {
-                    <input type="submit" value="@ViewResource.Save" />
+                    <input type="button" value="@ViewResource.Save" id="btnSave"/>
                     <button class="cancel" onclick="NAP.redirect('ConnectionString/Database?DbServerId=@Model.DbServerId', 0); return false;">@ViewResource.Cancel</button> 
                 }
             </div>
@@ -82,6 +82,7 @@
 }
 @section Foot
 {
+    @Scripts.Render("~/scripts/connectionstring-aliasdatabase")
     @if (success)
     {
         string dialogMsg = string.Format(ViewResource.UpSuccessMsg, ViewResource.Database, 3);
