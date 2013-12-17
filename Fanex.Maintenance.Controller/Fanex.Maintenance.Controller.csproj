@@ -32,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Fanex.ConnectionString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\fanex\msite\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
+      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.ConnectionString.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\fanex\msite\_Dependencies\Others\Fanex.ConnectionString.Core.dll</HintPath>
+      <HintPath>..\_Dependencies\Others\Fanex.ConnectionString.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.DataValidation">
       <HintPath>..\_Dependencies\Others\Fanex.DataValidation.dll</HintPath>
