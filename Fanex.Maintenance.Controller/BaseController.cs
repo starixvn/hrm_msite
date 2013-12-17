@@ -33,9 +33,9 @@ namespace Fanex.Maintenance.Controller
 
         protected readonly CurrentSession CurrentSession;
 
-        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
-
         private readonly IUserService _userService;
+
+        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
 
         private ViewFlags _viewFlags;
 
