@@ -75,7 +75,7 @@ namespace Fanex.Maintenance.Controller
         {
             model = model ?? new SearchConnectionViewModel();
             model.HasEditPermission = HasRight(SiteFunctionKeys.ManageConnection, Constant.Policy.Host);
-            model.HasSwitchConnectionPermission = HasRight(SiteFunctionKeys.SwitchConenction, Constant.Policy.Host);
+            model.HasSwitchConnectionPermission = HasRight(SiteFunctionKeys.SwitchConnection, Constant.Policy.Host);
             model.DatabaseServers = _databaseServerService.GetAll(isActive: true).ToList();
             model.Connections = _connectionService.GetAll(model.DbServerId).ToList();
 
@@ -246,7 +246,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">The switch database server model.</param>
         /// <returns>Connection list view.</returns>
         [HttpGet]
-        [NapAuth(FunctionKey = SiteFunctionKeys.SwitchConenction, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.SwitchConnection, Policy = Constant.Policy.Host)]
         public ActionResult SwitchConnection(SwitchConnectionViewModel model)
         {
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
@@ -276,7 +276,7 @@ namespace Fanex.Maintenance.Controller
         /// <param name="toDbServerId">To database server identifier.</param>
         /// <returns>Connection list view.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = SiteFunctionKeys.SwitchConenction, Policy = Constant.Policy.Host)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.SwitchConnection, Policy = Constant.Policy.Host)]
         public ActionResult SwitchConnectionDbServer(string connectionIds, int toDbServerId)
         {
             if (Request.IsAjaxRequest())

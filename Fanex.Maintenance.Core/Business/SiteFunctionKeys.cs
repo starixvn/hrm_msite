@@ -8,7 +8,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 12/13/2013 1:09:20 PM
+// Lasted generated date: 12/17/2013 5:27:13 PM
 // </history>
 using System.Diagnostics.CodeAnalysis;
 
@@ -75,7 +75,7 @@ public static class SiteFunctionKeys
 
     public const string SqlSchedules = "SqlSchedules";
 
-    public const string SwitchConenction = "SwitchConenction";
+    public const string SwitchConnection = "SwitchConnection";
 
     public const string SystemConfiguration = "SystemConfiguration";
 
