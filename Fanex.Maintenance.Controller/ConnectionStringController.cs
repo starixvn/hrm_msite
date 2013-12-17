@@ -74,13 +74,10 @@ namespace Fanex.Maintenance.Controller
         public ActionResult Connection(SearchConnectionViewModel model)
         {
             model = model ?? new SearchConnectionViewModel();
-            List<Connection> connections = _connectionService.GetAll(model.DbServerId).ToList();
-            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
-
             model.HasEditPermission = HasRight(SiteFunctionKeys.ManageConnection, Constant.Policy.Host);
             model.HasSwitchConnectionPermission = HasRight(SiteFunctionKeys.SwitchConenction, Constant.Policy.Host);
-            model.DatabaseServers = databaseServers;
-            model.Connections = connections;
+            model.DatabaseServers = _databaseServerService.GetAll(isActive: true).ToList();
+            model.Connections = _connectionService.GetAll(model.DbServerId).ToList();
 
             return View(model);
         }
@@ -117,13 +114,11 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult CreateConnection(ConnectionViewModel model)
         {
-            List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
-            List<Database> databases = _databaseService.GetByDbServerId(model.DbServerId).ToList();
             List<Connection> connections = _connectionService.GetAll().ToList();
             Database database = _databaseService.GetById(model.DatabaseId);
 
-            model.DatabaseServers = databaseServers;
-            model.Databases = databases;
+            model.DatabaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
+            model.Databases = _databaseService.GetByDbServerId(model.DbServerId).ToList();
             model.Name = string.Format("{0}.{1}.{2}", database.ServerAlias, database.Name, model.LoginName);
 
             Connection tempConnection = connections.Where(x => string.Equals(x.Name, model.Name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
@@ -166,13 +161,11 @@ namespace Fanex.Maintenance.Controller
         public ActionResult EditConnection(int id)
         {
             Connection connection = _connectionService.GetById(id);
-            List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
-            List<Database> databases = _databaseService.GetByDbServerId(connection.DatabaseServer.Id).ToList();
 
             var model = new ConnectionViewModel
             {
-                DatabaseServers = databaseServers,
-                Databases = databases,
+                DatabaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList(),
+                Databases = _databaseService.GetByDbServerId(connection.DatabaseServer.Id).ToList(),
                 DatabaseId = connection.Database.Id,
                 DbServerId = connection.DatabaseServer.Id,
                 FreeText = connection.FreeText,
@@ -195,14 +188,12 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageConnection, Policy = Constant.Policy.Host)]
         public ActionResult EditConnection(ConnectionViewModel model)
         {
-            List<DatabaseServer> databaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
-            List<Database> databases = _databaseService.GetByDbServerId(model.DbServerId).ToList();
             List<Connection> listConnection = _connectionService.GetAll().ToList();
             Database database = _databaseService.GetById(model.DatabaseId);
             var name = string.Format("{0}.{1}.{2}", database.ServerAlias, database.Name, model.LoginName);
 
-            model.DatabaseServers = databaseServers;
-            model.Databases = databases;
+            model.DatabaseServers = _databaseServerService.GetDatabaseServerHasDatabases().ToList();
+            model.Databases = _databaseService.GetByDbServerId(model.DbServerId).ToList();
 
             var tempConnection = listConnection.Where(x => string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase) && x.Id != model.Id).FirstOrDefault();
 
@@ -272,10 +263,8 @@ namespace Fanex.Maintenance.Controller
                 return View(model);
             }
 
-            List<Connection> connections = _connectionService.GetAll(model.FromDbServerId).ToList();
-
             model.DatabaseServers = databaseServers;
-            model.Connections = connections;
+            model.Connections = _connectionService.GetAll(model.FromDbServerId).ToList();
 
             return View(model);
         }
@@ -326,17 +315,15 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult ConnectionAssignSite(int id)
         {
-            List<Site> sites = _siteService.GetAll(isActive: true).ToList();
             Connection connection = _connectionService.GetById(id);
-            List<Site> sitesBelongConnection = _siteService.GetByConnectionId(id).ToList();
 
             var model = new ConnectionAssignSiteViewModel
             {
                 HasEditPermission = HasRight(SiteFunctionKeys.ManageConnection, Constant.Policy.Host),
                 Id = connection.Id,
                 Name = connection.Name,
-                Sites = sites,
-                SiteConnections = sitesBelongConnection
+                Sites = _siteService.GetAll(isActive: true).ToList(),
+                SiteConnections = _siteService.GetByConnectionId(id).ToList()
             };
 
             return View(model);
@@ -387,10 +374,8 @@ namespace Fanex.Maintenance.Controller
         public ActionResult Site(SearchSiteViewModel model)
         {
             model = model ?? new SearchSiteViewModel();
-            List<Site> sites = _siteService.GetAll(model.Name).ToList();
-
             model.HasEditPermission = HasRight(SiteFunctionKeys.ManageSite, Constant.Policy.Host);
-            model.Sites = sites;
+            model.Sites = _siteService.GetAll(model.Name).ToList();
 
             return View(model);
         }
@@ -517,10 +502,9 @@ namespace Fanex.Maintenance.Controller
         public ActionResult DatabaseServer(SearchDatabaseServerViewModel model)
         {
             model = model ?? new SearchDatabaseServerViewModel();
-            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(model.Name).ToList();
 
             model.HasEditPermission = HasRight(SiteFunctionKeys.ManageDatabaseServer, Constant.Policy.Host);
-            model.DatabaseServers = databaseServers;
+            model.DatabaseServers = _databaseServerService.GetAll(model.Name).ToList();
 
             return View(model);
         }
@@ -657,12 +641,9 @@ namespace Fanex.Maintenance.Controller
         public ActionResult Database(SearchDatabaseViewModel model)
         {
             model = model ?? new SearchDatabaseViewModel();
-            List<Database> databases = _databaseService.GetAll(model.DbServerId).ToList();
-            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
-
             model.HasEditPermission = HasRight(SiteFunctionKeys.ManageDatabase, Constant.Policy.Host);
-            model.Database = databases;
-            model.DatabaseServers = databaseServers;
+            model.Database = _databaseService.GetAll(model.DbServerId).ToList();
+            model.DatabaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
             return View(model);
         }
@@ -676,12 +657,10 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult CreateDatabase(int databaseId)
         {
-            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
-
             var model = new DatabaseViewModel
             {
                 DbServerId = databaseId,
-                DatabaseServers = databaseServers
+                DatabaseServers = _databaseServerService.GetAll(isActive: true).ToList()
             };
 
             return View(model);
@@ -696,9 +675,7 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult CreateDatabase(DatabaseViewModel model)
         {
-            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
-
-            model.DatabaseServers = databaseServers;
+            model.DatabaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
             if (ModelState.IsValid)
             {
@@ -740,11 +717,10 @@ namespace Fanex.Maintenance.Controller
         public ActionResult EditDatabase(int id)
         {
             Database database = _databaseService.GetById(id);
-            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
             var model = new DatabaseViewModel
             {
-                DatabaseServers = databaseServers,
+                DatabaseServers = _databaseServerService.GetAll(isActive: true).ToList(),
                 Id = database.Id,
                 Name = database.Name,
                 ServerAlias = database.ServerAlias,
@@ -764,9 +740,7 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabase(DatabaseViewModel model)
         {
-            List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
-
-            model.DatabaseServers = databaseServers;
+            model.DatabaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
             if (ModelState.IsValid)
             {
