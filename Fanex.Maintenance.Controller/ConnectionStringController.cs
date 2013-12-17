@@ -9,6 +9,7 @@
 
 namespace Fanex.Maintenance.Controller
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -22,7 +23,6 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Framework.Data;
-    using NAPSERVICE = Fanex.NAP.Core.Service;
 
     /// <summary>
     /// Connection string controller.
@@ -37,14 +37,13 @@ namespace Fanex.Maintenance.Controller
         private readonly IConnectionService _connectionService;
         private readonly ILogService _logService;
         private readonly IDatabaseService _databaseService;
-        private readonly NAPSERVICE.Interface.IUserService _userService;
 
         #endregion Member
 
         #region Ctor
 
         public ConnectionStringController()
-            : this(null, null, null, null, null, null)
+            : this(null, null, null, null, null)
         {
         }
 
@@ -53,15 +52,13 @@ namespace Fanex.Maintenance.Controller
             ISiteService siteService,
             IConnectionService connectionService,
             ILogService logServer,
-            IDatabaseService aliasDatabaseService,
-            NAPSERVICE.Interface.IUserService userService)
+            IDatabaseService aliasDatabaseService)
         {
             _databaseServerService = databaseServerService ?? new DatabaseServerService { ServiceContext = ServiceContext };
             _siteService = siteService ?? new SiteService { ServiceContext = ServiceContext };
             _connectionService = connectionService ?? new ConnectionService { ServiceContext = ServiceContext };
             _logService = logServer ?? new LogService { ServiceContext = ServiceContext };
             _databaseService = aliasDatabaseService ?? new DatabaseService { ServiceContext = ServiceContext };
-            _userService = userService ?? new NAPSERVICE.Impl.UserService();
         }
 
         #endregion Ctor
@@ -79,11 +76,9 @@ namespace Fanex.Maintenance.Controller
             model = model ?? new SearchConnectionViewModel();
             List<Connection> connections = _connectionService.GetAll(model.DbServerId).ToList();
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
-            int policyEdit = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageConnection);
-            int policySwitchConnection = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.SwitchConenction);
 
-            model.HasEditPermission = policyEdit >= (int)Constant.Policy.Host;
-            model.HasSwitchConnectionPermission = policySwitchConnection >= (int)Constant.Policy.Host;
+            model.HasEditPermission = HasRight(SiteFunctionKeys.ManageConnection, Constant.Policy.Host);
+            model.HasSwitchConnectionPermission = HasRight(SiteFunctionKeys.SwitchConenction, Constant.Policy.Host);
             model.DatabaseServers = databaseServers;
             model.Connections = connections;
 
@@ -131,7 +126,7 @@ namespace Fanex.Maintenance.Controller
             model.Databases = databases;
             model.Name = string.Format("{0}.{1}.{2}", database.ServerAlias, database.Name, model.LoginName);
 
-            Connection tempConnection = connections.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+            Connection tempConnection = connections.Where(x => string.Equals(x.Name, model.Name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
             if (!ReferenceEquals(tempConnection, null))
             {
@@ -209,7 +204,7 @@ namespace Fanex.Maintenance.Controller
             model.DatabaseServers = databaseServers;
             model.Databases = databases;
 
-            var tempConnection = listConnection.Where(x => x.Name.ToLower() == name.ToLower() && x.Id != model.Id).FirstOrDefault();
+            var tempConnection = listConnection.Where(x => string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase) && x.Id != model.Id).FirstOrDefault();
 
             if (!ReferenceEquals(tempConnection, null))
             {
@@ -331,17 +326,18 @@ namespace Fanex.Maintenance.Controller
         [HttpGet]
         public ActionResult ConnectionAssignSite(int id)
         {
-            var model = new ConnectionAssignSiteViewModel();
             List<Site> sites = _siteService.GetAll(isActive: true).ToList();
             Connection connection = _connectionService.GetById(id);
             List<Site> sitesBelongConnection = _siteService.GetByConnectionId(id).ToList();
-            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageConnection);
 
-            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
-            model.Id = connection.Id;
-            model.Name = connection.Name;
-            model.Sites = sites;
-            model.SiteConnections = sitesBelongConnection;
+            var model = new ConnectionAssignSiteViewModel
+            {
+                HasEditPermission = HasRight(SiteFunctionKeys.ManageConnection, Constant.Policy.Host),
+                Id = connection.Id,
+                Name = connection.Name,
+                Sites = sites,
+                SiteConnections = sitesBelongConnection
+            };
 
             return View(model);
         }
@@ -392,10 +388,9 @@ namespace Fanex.Maintenance.Controller
         {
             model = model ?? new SearchSiteViewModel();
             List<Site> sites = _siteService.GetAll(model.Name).ToList();
-            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageSite);
 
-            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
-            model.Sites = sites.ToList();
+            model.HasEditPermission = HasRight(SiteFunctionKeys.ManageSite, Constant.Policy.Host);
+            model.Sites = sites;
 
             return View(model);
         }
@@ -419,7 +414,7 @@ namespace Fanex.Maintenance.Controller
             if (ModelState.IsValid)
             {
                 List<Site> sites = _siteService.GetAll().ToList();
-                Site site = sites.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+                Site site = sites.Where(x => string.Equals(x.Name, model.Name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
                 if (!ReferenceEquals(site, null))
                 {
@@ -476,7 +471,7 @@ namespace Fanex.Maintenance.Controller
             if (ModelState.IsValid)
             {
                 List<Site> sites = _siteService.GetAll().ToList();
-                Site site = sites.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
+                Site site = sites.Where(x => string.Equals(x.Name, model.Name, StringComparison.OrdinalIgnoreCase) && x.Id != model.Id).FirstOrDefault();
 
                 if (!ReferenceEquals(site, null))
                 {
@@ -523,9 +518,8 @@ namespace Fanex.Maintenance.Controller
         {
             model = model ?? new SearchDatabaseServerViewModel();
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(model.Name).ToList();
-            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageDatabaseServer);
 
-            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
+            model.HasEditPermission = HasRight(SiteFunctionKeys.ManageDatabaseServer, Constant.Policy.Host);
             model.DatabaseServers = databaseServers;
 
             return View(model);
@@ -550,7 +544,7 @@ namespace Fanex.Maintenance.Controller
             if (ModelState.IsValid)
             {
                 List<DatabaseServer> databaseServers = _databaseServerService.GetAll().ToList();
-                DatabaseServer databaseServer = databaseServers.Where(x => x.Name.ToLower() == model.Name.ToLower()).FirstOrDefault();
+                DatabaseServer databaseServer = databaseServers.Where(x => string.Equals(x.Name, model.Name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
                 if (!ReferenceEquals(databaseServer, null))
                 {
@@ -610,7 +604,8 @@ namespace Fanex.Maintenance.Controller
             if (ModelState.IsValid)
             {
                 List<DatabaseServer> databaseServers = _databaseServerService.GetAll().ToList();
-                DatabaseServer databaseServer = databaseServers.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
+                DatabaseServer databaseServer = databaseServers.Where(x => string.Equals(x.Name, model.Name, StringComparison.OrdinalIgnoreCase)
+                                                                            && x.Id != model.Id).FirstOrDefault();
 
                 if (!ReferenceEquals(databaseServer, null))
                 {
@@ -664,9 +659,8 @@ namespace Fanex.Maintenance.Controller
             model = model ?? new SearchDatabaseViewModel();
             List<Database> databases = _databaseService.GetAll(model.DbServerId).ToList();
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
-            int policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, SiteId, SiteFunctionKeys.ManageDatabase);
 
-            model.HasEditPermission = policy >= (int)Constant.Policy.Host;
+            model.HasEditPermission = HasRight(SiteFunctionKeys.ManageDatabase, Constant.Policy.Host);
             model.Database = databases;
             model.DatabaseServers = databaseServers;
 
@@ -709,7 +703,8 @@ namespace Fanex.Maintenance.Controller
             if (ModelState.IsValid)
             {
                 List<Database> databases = _databaseService.GetAll(model.DbServerId).ToList();
-                Database database = databases.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.ServerAlias.ToLower() == model.ServerAlias.ToLower()).FirstOrDefault();
+                Database database = databases.Where(x => string.Equals(x.Name, model.Name, StringComparison.OrdinalIgnoreCase)
+                                                        && string.Equals(x.ServerAlias, model.ServerAlias, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
                 if (!ReferenceEquals(database, null))
                 {
@@ -744,17 +739,18 @@ namespace Fanex.Maintenance.Controller
         [NapAuth(FunctionKey = SiteFunctionKeys.ManageDatabase, Policy = Constant.Policy.Host)]
         public ActionResult EditDatabase(int id)
         {
-            var model = new DatabaseViewModel();
-
             Database database = _databaseService.GetById(id);
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
-            model.DatabaseServers = databaseServers;
-            model.Id = database.Id;
-            model.Name = database.Name;
-            model.ServerAlias = database.ServerAlias;
-            model.IsActive = database.IsActive;
-            model.DbServerId = database.DatabaseServer.Id;
+            var model = new DatabaseViewModel
+            {
+                DatabaseServers = databaseServers,
+                Id = database.Id,
+                Name = database.Name,
+                ServerAlias = database.ServerAlias,
+                IsActive = database.IsActive,
+                DbServerId = database.DatabaseServer.Id
+            };
 
             return View(model);
         }
@@ -775,7 +771,8 @@ namespace Fanex.Maintenance.Controller
             if (ModelState.IsValid)
             {
                 List<Database> databases = _databaseService.GetAll(model.DbServerId).ToList();
-                Database database = databases.Where(x => x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id).FirstOrDefault();
+                Database database = databases.Where(x => string.Equals(x.Name, model.Name, StringComparison.OrdinalIgnoreCase)
+                                                         && x.Id != model.Id).FirstOrDefault();
 
                 if (!ReferenceEquals(database, null))
                 {

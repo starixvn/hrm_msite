@@ -10,6 +10,7 @@
 namespace Fanex.Maintenance.Controller
 {
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
@@ -34,6 +35,8 @@ namespace Fanex.Maintenance.Controller
 
         private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
 
+        private readonly IUserService _userService;
+
         private ViewFlags _viewFlags;
 
         public BaseController()
@@ -51,6 +54,8 @@ namespace Fanex.Maintenance.Controller
             {
                 IsReCheckin = NapSettings.Settings.EnableReCheckIn
             };
+
+            _userService = new UserService { ServiceContext = ServiceContext };
         }
 
         /// <summary>
@@ -81,6 +86,13 @@ namespace Fanex.Maintenance.Controller
         public PartialViewResult _Menu()
         {
             return PartialView("~/Views/Shared/_Menu.cshtml");
+        }
+
+        public bool HasRight(string functionKey, Constant.Policy policy)
+        {
+            int functionPolicy = _userService.GetUserSiteFunctionKeyPolicy(CurrentSession.UserId, this.SiteId, functionKey);
+
+            return functionPolicy >= (int)policy;
         }
 
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
