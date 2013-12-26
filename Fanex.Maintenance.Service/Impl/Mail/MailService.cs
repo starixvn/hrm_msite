@@ -17,7 +17,7 @@ namespace Fanex.Maintenance.Service.Impl.Mail
     using Fanex.Maintenance.Service.Interface.Mail;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// The mail service class.
     /// </summary>
     public class MailService : IMailService
     {

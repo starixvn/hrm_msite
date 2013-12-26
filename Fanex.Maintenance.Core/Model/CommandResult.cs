@@ -12,7 +12,7 @@ namespace Fanex.Maintenance.Core.Model
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// The command result class.
     /// </summary>
     public class CommandResult : CommandResultBase
     {
