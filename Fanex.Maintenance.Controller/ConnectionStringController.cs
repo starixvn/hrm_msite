@@ -22,7 +22,7 @@ namespace Fanex.Maintenance.Controller
     using Fanex.NAP.Core.Helpers;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Connection string controller.

@@ -14,6 +14,7 @@ namespace Fanex.Maintenance.Repository.Impl.AppLog
     using Fanex.Maintenance.Core.Model;
     using Fanex.Maintenance.Repository.Criteria.Log;
     using Fanex.Maintenance.Repository.Criteria.Misc;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Machine Repository.
