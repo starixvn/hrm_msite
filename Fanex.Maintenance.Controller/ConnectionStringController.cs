@@ -251,8 +251,7 @@ namespace Fanex.Maintenance.Controller
         {
             List<DatabaseServer> databaseServers = _databaseServerService.GetAll(isActive: true).ToList();
 
-            if (ReferenceEquals(model, null)
-                || model.FromDbServerId == 0)
+            if (ReferenceEquals(model, null) || model.FromDbServerId == 0)
             {
                 model = new SwitchConnectionViewModel
                 {
@@ -281,8 +280,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                if (!string.IsNullOrWhiteSpace(connectionIds)
-                    && toDbServerId != 0)
+                if (!string.IsNullOrWhiteSpace(connectionIds) && toDbServerId != 0)
                 {
                     CommandResult command = (CommandResult)_connectionService.SwitchDbServer(connectionIds, toDbServerId);
 

@@ -37,8 +37,6 @@ namespace Fanex.Maintenance.Controller
 
         private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
 
-        private ViewFlags _viewFlags;
-
         public BaseController()
         {
             CurrentContext = new CurrentContext();
@@ -79,7 +77,7 @@ namespace Fanex.Maintenance.Controller
 
             set
             {
-                ViewBag.ViewFlags = _viewFlags = value;
+                ViewBag.ViewFlags = value;
             }
         }
 

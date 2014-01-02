@@ -19,7 +19,7 @@ namespace Fanex.Maintenance.Service.Impl.LicenseeSetting
     /// Licensee Service.
     /// </summary>
     public class LicenseeSettingService : ILicenseeSettingService
-    {                    
+    {
         private readonly LicenseeSettingRepository _licenseeSettingRepository = new LicenseeSettingRepository();
 
         /// <summary>

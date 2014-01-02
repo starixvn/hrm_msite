@@ -128,7 +128,7 @@ namespace Fanex.Maintenance.Service.Impl.Mail
             using (var client = new MailDeliver())
             {
                 var dateTime = DateTime.Parse(_fromDate);
-                var data = client.GetListMail(_appId, dateTime, _page, _counter);
+                IEnumerable<MailRecord> data = client.GetListMail(_appId, dateTime, _page, _counter);
                 if (data != null)
                 {
                     mails = data.ToList();
@@ -151,7 +151,7 @@ namespace Fanex.Maintenance.Service.Impl.Mail
             {
                 var dateTime = DateTime.Parse(_fromDate);
                 var dateTimeTo = DateTime.Parse(_toDate);
-                var data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, ref totalRows, _page, _counter, _mailStatus);
+                IEnumerable<MailRecord> data = client.GetListMailByDate(_appId, dateTime, dateTimeTo, ref totalRows, _page, _counter, _mailStatus);
 
                 if (data != null)
                 {
@@ -160,6 +160,7 @@ namespace Fanex.Maintenance.Service.Impl.Mail
                         mailRecord.MailTo = mailRecord.MailTo.Replace(";", "<br />");
                         mailRecord.MailBcc = mailRecord.MailBcc.Replace(";", "<br />");
                         mailRecord.MailCc = mailRecord.MailCc.Replace(";", "<br />");
+
                         return mailRecord;
                     }).ToList();
                 }
@@ -195,7 +196,7 @@ namespace Fanex.Maintenance.Service.Impl.Mail
 
             using (var client = new MailDeliver())
             {
-                var data = client.GetListSetting();
+                IEnumerable<MailSetting> data = client.GetListSetting();
                 if (data != null)
                 {
                     settings = data.OrderBy(x => x.Server).ToList();
@@ -215,7 +216,7 @@ namespace Fanex.Maintenance.Service.Impl.Mail
 
             using (var client = new MailDeliver())
             {
-                var data = client.GetListFuntion();
+                IEnumerable<MailFunction> data = client.GetListFuntion();
                 if (data != null)
                 {
                     functions = data.ToList();
