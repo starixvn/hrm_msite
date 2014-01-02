@@ -2,8 +2,7 @@
 @model List<Connection>  
 <pre>
 &lt;connectionstrings&gt;
-@if (!ReferenceEquals(Model, null)
-    && Model.Any())
+@if (!ReferenceEquals(Model, null) && Model.Any())
 {
     foreach (var item in Model)
     {
