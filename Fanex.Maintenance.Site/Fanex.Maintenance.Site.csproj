@@ -611,12 +611,9 @@
     <Content Include="Views\ConnectionString\DatabaseServer.cshtml" />
     <Content Include="Views\ConnectionString\CreateDatabaseServer.cshtml" />
     <Content Include="Views\ConnectionString\EditDatabaseServer.cshtml" />
-    <Content Include="Views\ConnectionString\ChangeConnection.cshtml" />
-    <Content Include="Views\ConnectionString\ChangeSecondConnection.cshtml" />
     <Content Include="Views\CommonError\Error.cshtml" />
     <Content Include="Views\CommonError\NotFound.cshtml" />
     <Content Include="Views\ConnectionString\Log.cshtml" />
-    <Content Include="Views\ConnectionString\LogDetail.cshtml" />
     <Content Include="Views\Mail\GetError.cshtml" />
     <Content Include="Views\Machine\Index.cshtml" />
     <Content Include="Views\Machine\EditMachine.cshtml" />
