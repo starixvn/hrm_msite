@@ -50,12 +50,10 @@ namespace Fanex.Maintenance.ViewModel.Connection
             set { _username = value; }
         }
 
-        [DisplayFormat(DataFormatString = "{0:MMM dd,yyyy}",
-               ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MMM dd,yyyy}", ApplyFormatInEditMode = true)]
         public DateTime From { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:MMM dd,yyyy}",
-               ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MMM dd,yyyy}", ApplyFormatInEditMode = true)]
         public DateTime To { get; set; }
 
         public int FilterType { get; set; }

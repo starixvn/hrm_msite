@@ -164,7 +164,7 @@ namespace Fanex.Maintenance.Service.Impl.AppLog
         /// <returns>List of log.</returns>
         public IEnumerable<Log> GetLogs(ref int totalRows)
         {
-            GetLogCriteria criteria = new GetLogCriteria
+            var criteria = new GetLogCriteria
             {
                 CategoryId = this._categoryId != null ? this._categoryId : 0,
                 From = this._dateFrom,

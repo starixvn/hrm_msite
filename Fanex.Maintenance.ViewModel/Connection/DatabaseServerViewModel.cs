@@ -25,8 +25,7 @@ namespace Fanex.Maintenance.ViewModel.Connection
 
         [Required]
         [StringLength(150, MinimumLength = 5,
-           ErrorMessageResourceName = "InputLengthValidationMsg",
-           ErrorMessageResourceType = typeof(ViewResources))]
+           ErrorMessageResourceName = "InputLengthValidationMsg", ErrorMessageResourceType = typeof(ViewResources))]
         public string Name
         {
             get { return _name != null ? _name.Trim() : string.Empty; }
@@ -35,8 +34,7 @@ namespace Fanex.Maintenance.ViewModel.Connection
 
         [Required]
         [StringLength(150, MinimumLength = 10,
-           ErrorMessageResourceName = "InputLengthValidationMsg",
-           ErrorMessageResourceType = typeof(ViewResources))]
+           ErrorMessageResourceName = "InputLengthValidationMsg", ErrorMessageResourceType = typeof(ViewResources))]
         public string ServerIP
         {
             get { return _serverIp != null ? _serverIp.Trim() : string.Empty; }

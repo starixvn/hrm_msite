@@ -86,9 +86,8 @@ namespace Fanex.Maintenance.Core.Web
 
                 return new HtmlString(date.ToString(dateFormat) + " - " + date.ToString("HH:mm").Replace(':', 'h') + "'");
             }
-            catch (Exception ex)
+            catch
             {
-                Logging.Logger.Log.Error(ex.Message);
                 return new HtmlString(value.ToString());
             }
         }

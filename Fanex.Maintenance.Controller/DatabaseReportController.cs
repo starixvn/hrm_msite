@@ -32,14 +32,14 @@ namespace Fanex.Maintenance.Controller
         public ActionResult DataIntegrity()
         {
             var validationService = new ValidationService();
-            var moveBetsDay = validationService.MoveBetsDay;
+            DateTime moveBetsDay = validationService.MoveBetsDay;
 
             ViewBag.MaxDate = string.Format("{0:dd/MM/yyyy}", moveBetsDay);
-
             ViewBag.BodyLicenseeData = string.Empty;
             ViewBag.BodyCreditData = string.Empty;
 
-            List<SelectListItem> listDrawFilter = new List<SelectListItem>();
+            var listDrawFilter = new List<SelectListItem>();
+
             listDrawFilter.Add(new SelectListItem
             {
                 Text = "Normal",
@@ -104,7 +104,7 @@ namespace Fanex.Maintenance.Controller
         {
             if (Request.IsAjaxRequest())
             {
-                DateTime fromData = DateTime.Now;
+                var fromData = DateTime.Now;
                 if (!string.IsNullOrEmpty(date))
                 {
                     fromData = DateTime.Parse(date, new CultureInfo("en-GB", false));

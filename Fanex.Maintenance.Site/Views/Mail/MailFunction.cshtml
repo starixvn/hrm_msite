@@ -41,7 +41,7 @@
                 foreach (MailFunction mailItem in Model)
                 {
                     string row_class = (i++) % 2 == 0 ? "alt" : string.Empty;
-					
+
             <tr class="@row_class">
                 <td class="align-center">
                     @mailItem.FuncID
@@ -60,7 +60,7 @@
                         @Html.ActionLink("Edit", "EditMailFunction", new { id = mailItem.FuncID }, new { @class = "btn-edit" })
                     </div>
                 </td>
-            </tr>               
+            </tr>
                 }
             }
             if (i == 1)

@@ -43,7 +43,7 @@
 <input type="hidden" value="@ViewBag.MinDate" id="minDate" />
 <input type="hidden" value="@ViewBag.MaxDate" id="maxDate" />
 @section Foot {
-    <script type="text/javascript">       
+    <script type="text/javascript">
         $(function () {
             var buttonFromImage = '@Url.Content("~/images/calendar.gif")';
             $("#Date").datepicker({
@@ -64,7 +64,7 @@
                 url: NAP.resolveClientUrl("DatabaseReport/GetDepositIntegrity"),
                 data: {
                     filter: $('#DrawFilter').val(),
-                    date: $('#Date').val(),                    
+                    date: $('#Date').val(),
                 },
                 type: 'POST',
                 dataType: 'html',
@@ -78,9 +78,9 @@
                         NAP.loadingBox.close();
                     }
                 },
-                success: function (result) {   
-                    $('#deposit').append('<h1><span class="titleSites">Deposit Sites</span></h1>');                
-                    $('#deposit').append(result);                    
+                success: function (result) {
+                    $('#deposit').append('<h1><span class="titleSites">Deposit Sites</span></h1>');
+                    $('#deposit').append(result);
                 },
                 error: function (xhr, status, err) {
                     NAP.handleAjaxError(xhr, status, err);
@@ -90,7 +90,7 @@
                 url: NAP.resolveClientUrl("DatabaseReport/GetCreditIntegrity"),
                 data: {
                     filter: $('#DrawFilter').val(),
-                    date: $('#Date').val(),                    
+                    date: $('#Date').val(),
                 },
                 type: 'POST',
                 dataType: 'html',
@@ -104,14 +104,14 @@
                         NAP.loadingBox.close();
                     }
                 },
-                success: function (result) {      
-                    $('#credit').append('<h1><span class="titleSites">Credit Sites</span></h1>');                
-                    $('#credit').append(result);                    
+                success: function (result) {
+                    $('#credit').append('<h1><span class="titleSites">Credit Sites</span></h1>');
+                    $('#credit').append(result);
                 },
                 error: function (xhr, status, err) {
                     NAP.handleAjaxError(xhr, status, err);
                 }
             });
-        });     
+        });
     </script>
 }

@@ -2,7 +2,7 @@
 @model List<MailSetting>
 @{
     ViewBag.Title = ViewResource.Mail_Setting;
-    Layout = "~/Views/Shared/_Layout.cshtml";    
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
     @Styles.Render("~/css/manage")
@@ -86,7 +86,7 @@
                         @Html.ActionLink("Edit", "EditMailSetting", new { id = mailItem.SettingID }, new { @class = "btn-edit" })
                     </div>
                 </td>
-            </tr>               
+            </tr>
                 }
             }
             else
