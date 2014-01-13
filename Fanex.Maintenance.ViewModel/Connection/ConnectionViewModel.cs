@@ -27,9 +27,7 @@ namespace Fanex.Maintenance.ViewModel.Connection
         private string _freeText = string.Empty;
 
         public int Id { get; set; }
-
-        [StringLength(150, MinimumLength = 5,
-           ErrorMessageResourceName = "InputLengthValidationMsg", ErrorMessageResourceType = typeof(ViewResources))]
+        
         public string Name
         {
             get { return _name != null ? _name.Trim() : string.Empty; }
