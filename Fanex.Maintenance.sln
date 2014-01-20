@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Service",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.Controller", "Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj", "{E7173CDD-8ECB-4FB6-B585-41BFE941745E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Maintenance.ViewModel", "Fanex.Maintenance.ViewModel\Fanex.Maintenance.ViewModel.csproj", "{1D88837B-951F-4411-ABD9-69FCA5B52C5A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysis", "{9295C957-AF58-481F-B1FB-A826E3F066E8}"
 	ProjectSection(SolutionItems) = preProject
 		CodeAnalysis\CodeAnalysisConfiguration.xml = CodeAnalysis\CodeAnalysisConfiguration.xml
@@ -80,16 +78,6 @@ Global
 		{E7173CDD-8ECB-4FB6-B585-41BFE941745E}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{E7173CDD-8ECB-4FB6-B585-41BFE941745E}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{E7173CDD-8ECB-4FB6-B585-41BFE941745E}.Release|x86.ActiveCfg = Release|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{1D88837B-951F-4411-ABD9-69FCA5B52C5A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,7 +27,7 @@ namespace Fanex.Maintenance.Controller
     /// <summary>
     /// Mail Controller.
     /// </summary>
-    [NapSuperAuth]
+    [Authorize]
     public class MailController : BaseController
     {
         #region Member
@@ -228,7 +228,6 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">Setting ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(int id = 0)
         {
             var mailSetting = _mailServer.GetSetting(id);
@@ -236,8 +235,6 @@ namespace Fanex.Maintenance.Controller
             InitDataIpServer(serverIp);
 
             List<MailConfig> listMailConfig = _mailServer.GetListConfig(serverIp);
-
-            ViewBag.Policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ApplicationManagement);
 
             return View(listMailConfig);
         }
@@ -248,14 +245,11 @@ namespace Fanex.Maintenance.Controller
         /// <param name="serverIp">Server IP address.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Read)]
         public ActionResult MailConfig(string serverIp = "")
         {
             InitDataIpServer(serverIp);
 
             List<MailConfig> listMailConfig = this._mailServer.GetListConfig(serverIp);
-
-            ViewBag.Policy = _userService.GetUserSiteFunctionKeyPolicy(this.CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ApplicationManagement);
 
             return View(listMailConfig);
         }
@@ -265,7 +259,6 @@ namespace Fanex.Maintenance.Controller
         /// </summary>
         /// <returns>Action result.</returns>
         [HttpGet]
-        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig()
         {
             InitDataMailSetting();
@@ -279,7 +272,6 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">Mail config view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult AddMailConfig(MailConfigViewModel model)
         {
             InitDataMailSetting();
@@ -314,7 +306,6 @@ namespace Fanex.Maintenance.Controller
         /// <param name="id">Mail config ID.</param>
         /// <returns>Action result.</returns>
         [HttpGet]
-        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(int id)
         {
             InitDataMailSetting();
@@ -333,7 +324,6 @@ namespace Fanex.Maintenance.Controller
         /// <param name="model">Mail config view model.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = SiteFunctionKeys.ApplicationManagement, Policy = Constant.Policy.Host)]
         public ActionResult EditMailConfig(MailConfigViewModel model)
         {
             InitDataMailSetting();
@@ -523,7 +513,6 @@ namespace Fanex.Maintenance.Controller
         /// <param name="mailId">Mail object ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = SiteFunctionKeys.ResendMail, Policy = Constant.Policy.Host)]
         public ActionResult ResendMail(int mailId)
         {
             if (Request.IsAjaxRequest())
@@ -541,7 +530,6 @@ namespace Fanex.Maintenance.Controller
         /// <param name="mailId">Mail object ID.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = SiteFunctionKeys.ViewMailDetails, Policy = Constant.Policy.Read)]
         public ActionResult GetMessage(int mailId)
         {
             if (Request.IsAjaxRequest())
@@ -604,14 +592,9 @@ namespace Fanex.Maintenance.Controller
                 .WithStatus(status)
                 .GetListMailByDate(ref totalRows);
 
-            var policyViewDetail = _userService.GetUserSiteFunctionKeyPolicy(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ViewMailDetails);
-            var policyResend = _userService.GetUserSiteFunctionKeyPolicy(CurrentSession.UserId, this.SiteId, SiteFunctionKeys.ResendMail);
-
             return Json(new
             {
                 TotalRows = totalRows,
-                HasViewDetail = policyViewDetail,
-                HasResend = policyResend,
                 ListMail = listMail
             });
         }

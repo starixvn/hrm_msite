@@ -64,12 +64,6 @@
   <ItemGroup>
     <Compile Include="BaseController.cs" />
     <Compile Include="CommonErrorController.cs" />
-    <Compile Include="ConnectionStringController.cs" />
-    <Compile Include="DatabaseReportController.cs" />
-    <Compile Include="HomeController.cs" />
-    <Compile Include="LicenseeSettingController.cs" />
-    <Compile Include="LogController.cs" />
-    <Compile Include="MachineController.cs" />
     <Compile Include="MailController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,10 +79,6 @@
     <ProjectReference Include="..\Fanex.Maintenance.Service\Fanex.Maintenance.Service.csproj">
       <Project>{6F5C23B0-7EB0-4020-9664-5F904BB99BBC}</Project>
       <Name>Fanex.Maintenance.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fanex.Maintenance.ViewModel\Fanex.Maintenance.ViewModel.csproj">
-      <Project>{1D88837B-951F-4411-ABD9-69FCA5B52C5A}</Project>
-      <Name>Fanex.Maintenance.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

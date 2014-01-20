@@ -197,8 +197,6 @@
     <Compile Include="Areas\UserLogin\Controllers\BaseController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
-    <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />
-    <Compile Include="Areas\UserLogin\Controllers\UserSiteController.cs" />
     <Compile Include="Areas\UserLogin\UserLogInAreaRegistration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -209,10 +207,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="App_Data\ConnectionStringSpName.xml" />
-    <Content Include="App_Data\mSiteSpNames.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="App_Data\NAPCommonSpNames.xml" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
     <Content Include="Areas\UserLogin\scripts\Plugin\jquery-1.6.2.js" />
@@ -229,13 +223,6 @@
     <Content Include="Global.asax" />
     <Content Include="images\calendar.gif" />
     <Content Include="images\sprite_v.png" />
-    <Content Include="scripts\Connection\Connection.js" />
-    <Content Include="scripts\Connection\ChangeConnection.js" />
-    <Content Include="scripts\Connection\AliasDatabase.js" />
-    <Content Include="scripts\Connection\Log.js" />
-    <Content Include="scripts\Connection\Database.js" />
-    <Content Include="scripts\Connection\Site.js" />
-    <Content Include="scripts\Connection\CreateAlias.js" />
     <Content Include="scripts\lib\custom-datepicker.js" />
     <Content Include="scripts\lib\jquery.blockUI.js" />
     <Content Include="scripts\lib\jquery.qtip-1.0.0-rc3.min.js" />
@@ -268,7 +255,6 @@
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.js" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.min.css" />
     <Content Include="scripts\lib\tipsy\tipsy-1.0.0.min.js" />
-    <Content Include="scripts\Logs\Index.js" />
     <Content Include="scripts\Mail\AddMailSettingPopUp.js" />
     <Content Include="scripts\Mail\AddMailFunction.js" />
     <Content Include="scripts\Mail\AddMailConfigPopUp.js" />
@@ -485,7 +471,6 @@
     <Content Include="themes\reset.css" />
     <Content Include="themes\style.css" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -510,9 +495,7 @@
     <Content Include="Areas\UserLogin\themes\select-site.less" />
     <Content Include="Areas\UserLogin\Views\Login\Index.cshtml" />
     <Content Include="Areas\UserLogin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
     <Content Include="Areas\UserLogin\Views\Web.config" />
-    <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
     <Content Include="Areas\UserLogin\Views\Common\Offline.cshtml" />
     <Content Include="themes\assets\font\fontawesome-webfont.eot" />
     <Content Include="themes\assets\font\fontawesome-webfont.ttf" />
@@ -589,7 +572,6 @@
     <Content Include="themes\job\user\manage.less" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="themes\select-site.less" />
-    <Content Include="Views\Log\Index.cshtml" />
     <Content Include="Views\Mail\MailList.cshtml" />
     <Content Include="Views\Mail\MailSetting.cshtml" />
     <Content Include="Views\Mail\AddMailSetting.cshtml" />
@@ -603,49 +585,14 @@
     <Content Include="Views\Mail\AddMailConfigPopUp.cshtml" />
     <Content Include="Views\Mail\AddMailSettingPopUp.cshtml" />
     <Content Include="Views\Mail\GetMessage.cshtml" />
-    <Content Include="Views\DatabaseReport\DataIntegrity.cshtml" />
     <Content Include="WebConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\ConnectionString\Connection.cshtml" />
-    <Content Include="Views\ConnectionString\CreateConnection.cshtml" />
-    <Content Include="Views\ConnectionString\Site.cshtml" />
-    <Content Include="Views\ConnectionString\CreateSite.cshtml" />
-    <Content Include="Views\ConnectionString\EditSite.cshtml" />
-    <Content Include="Views\ConnectionString\DatabaseServer.cshtml" />
-    <Content Include="Views\ConnectionString\CreateDatabaseServer.cshtml" />
-    <Content Include="Views\ConnectionString\EditDatabaseServer.cshtml" />
     <Content Include="Views\CommonError\Error.cshtml" />
     <Content Include="Views\CommonError\NotFound.cshtml" />
-    <Content Include="Views\ConnectionString\Log.cshtml" />
     <Content Include="Views\Mail\GetError.cshtml" />
-    <Content Include="Views\Machine\Index.cshtml" />
-    <Content Include="Views\Machine\EditMachine.cshtml" />
-    <Content Include="Views\Machine\InsertMachine.cshtml" />
     <Content Include="themes\job\log\manage.less" />
     <Content Include="themes\job\RefreshCountDown.less" />
-    <Content Include="Views\LicenseeSetting\LrfDomain.cshtml" />
-    <Content Include="Views\ConnectionString\Database.cshtml" />
-    <Content Include="Views\ConnectionString\CreateDatabase.cshtml" />
-    <Content Include="Views\ConnectionString\EditDatabase.cshtml" />
-    <Content Include="Views\ConnectionString\EditConnection.cshtml" />
-    <Content Include="Views\ConnectionString\SwitchConnection.cshtml" />
-    <Content Include="Views\ConnectionString\ConnectionAssignSite.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction102.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction101.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction100.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction200.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction202.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction201.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction300.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction301.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction302.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction400.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction401.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction402.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction403.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction404.cshtml" />
-    <Content Include="Views\ConnectionString\LogAction\LogAction405.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.Maintenance.Controller\Fanex.Maintenance.Controller.csproj">
@@ -656,16 +603,9 @@
       <Project>{60BC3FA8-DF7C-4024-B469-4ED110420143}</Project>
       <Name>Fanex.Maintenance.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.Maintenance.ViewModel\Fanex.Maintenance.ViewModel.csproj">
-      <Project>{1D88837B-951F-4411-ABD9-69FCA5B52C5A}</Project>
-      <Name>Fanex.Maintenance.ViewModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Menu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ConnectionString\GetConnectionBySite.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -4,7 +4,6 @@
 @{
     ViewBag.Title = ViewResource.Mail_Config;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var policy = (int)ViewBag.Policy;
 }
 @section Head {
     @Styles.Render("~/css/manage")
@@ -12,10 +11,7 @@
 @section Headline {
     <h1>
         <span class="title">@ViewBag.Title</span>
-        @if (policy == (int)Constant.Policy.Host)
-        { 
-            @Html.ActionLink("+ Create New", "AddMailConfig", "Mail", null, new { @class = "lnk" })
-        }
+        @Html.ActionLink("+ Create New", "AddMailConfig", "Mail", null, new { @class = "lnk" })
     </h1>
 }
 @using (Html.BeginForm())
@@ -58,12 +54,9 @@
             <th>
                 @ViewResource.View_Report
             </th>
-            @if (policy == (int)Constant.Policy.Host)
-            { 
-                <th>
-                    @ViewResource.Edit
-                </th>
-            }
+            <th>
+                @ViewResource.Edit
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -99,14 +92,11 @@
                         @Html.ActionLink(" ", "MailList", new { id = mailItem.AppID }, new { @class = "icon-link" })
                     </div>
                 </td>
-                @if (policy == (int)Constant.Policy.Host)
-                { 
-                    <td class="align-center">
-                        <div class="action-wrp">
-                            @Html.ActionLink("Edit", "EditMailConfig", new { id = mailItem.AppID }, new { @class = "btn-edit" })
-                        </div>
-                    </td>
-                }
+                <td class="align-center">
+                    <div class="action-wrp">
+                        @Html.ActionLink("Edit", "EditMailConfig", new { id = mailItem.AppID }, new { @class = "btn-edit" })
+                    </div>
+                </td>
             </tr>               
                 }
             }

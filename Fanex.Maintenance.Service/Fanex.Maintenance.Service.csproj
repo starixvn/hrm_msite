@@ -40,14 +40,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Impl\AppLog\LogCategoryService.cs" />
-    <Compile Include="Impl\AppLog\LogService.cs" />
-    <Compile Include="Impl\LicenseeSetting\LicenseeSettingService.cs" />
-    <Compile Include="Impl\AppLog\MachineService.cs" />
     <Compile Include="Impl\Mail\MailService.cs" />
-    <Compile Include="Interface\LicenseeSetting\ILicenseeSettingService.cs" />
-    <Compile Include="Interface\AppLog\ILogCategoryService.cs" />
-    <Compile Include="Interface\AppLog\ILogService.cs" />
     <Compile Include="Interface\Mail\IMailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

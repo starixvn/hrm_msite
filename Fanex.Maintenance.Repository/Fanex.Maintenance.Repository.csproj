@@ -50,26 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Criteria\DatabaseReport\DataIntegrityViewModel.cs" />
-    <Compile Include="Criteria\Log\GetAllCategoryCriteria.cs" />
-    <Compile Include="Criteria\Log\GetAllMachinesCriteria.cs" />
-    <Compile Include="Criteria\Log\GetLogCriteria.cs" />
-    <Compile Include="Criteria\Log\GetMachineByIdCriteria.cs" />
-    <Compile Include="Criteria\Log\GetMachinesByTypeCriteria.cs" />
-    <Compile Include="Criteria\Log\InsertMachineCriteria.cs" />
-    <Compile Include="Criteria\Log\UpdateMachineCriteria.cs" />
-    <Compile Include="Criteria\LrfDomain\ActiveDomainCriteria.cs" />
-    <Compile Include="Criteria\LrfDomain\GetAllLrfDomainCriteria.cs" />
     <Compile Include="Criteria\MailService\MailConfigViewModel.cs" />
     <Compile Include="Criteria\MailService\MailFunctionViewModel.cs" />
     <Compile Include="Criteria\MailService\MailSettingViewModel.cs" />
     <Compile Include="Criteria\Misc\LogExecSpCriteria.cs" />
     <Compile Include="Criteria\Misc\ResultCriteria.cs" />
-    <Compile Include="Impl\BaseRepository.cs" />
-    <Compile Include="Impl\AppLog\LogRepository.cs" />
-    <Compile Include="Impl\LicenseeSetting\LicenseeSettingRepository.cs" />
-    <Compile Include="Impl\AppLog\MachineRepository.cs" />
-    <Compile Include="Interface\LicenseeSetting\ILicenseeSettingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
